@@ -6,12 +6,8 @@
             </h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <welcome />
-                </div>
-            </div>
+        <div class="container mx-auto my-24 rounded p-4 bg-white min-h-screen flex flex-col space-y-8">
+            <JobCard :title="'Job title'" :excerpt="'Job excerpt'"></JobCard>
         </div>
     </app-layout>
 </template>
@@ -19,11 +15,21 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout.vue'
     import Welcome from '@/Jetstream/Welcome.vue'
+    import JobCard from "../Components/Jobs/JobCard";
 
     export default {
         components: {
+            JobCard,
             AppLayout,
             Welcome,
         },
+
+        updated() {
+            console.log(this.$page.props.flash.message);
+        },
+
+        created() {
+            console.log(this.$page.props.flash.message);
+        }
     }
 </script>
