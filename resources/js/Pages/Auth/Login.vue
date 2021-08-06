@@ -38,6 +38,12 @@
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
                 </jet-button>
+
+
+            </div>
+
+            <div class="flex block mt-4">
+                <a class="px-6 py-4 bg-gray-200 rounded shadow w-full text-center" :href="route('auth.pipedrive')">Login via Pipedrive</a>
             </div>
         </form>
     </jet-authentication-card>
@@ -52,9 +58,11 @@
     import JetLabel from '@/Jetstream/Label.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
+    import Button from "../../Jetstream/Button";
 
     export default {
         components: {
+            Button,
             Head,
             JetAuthenticationCard,
             JetAuthenticationCardLogo,

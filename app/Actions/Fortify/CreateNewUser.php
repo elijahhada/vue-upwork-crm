@@ -25,12 +25,18 @@ class CreateNewUser implements CreatesNewUsers
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
+            'pipedrive_token' => '',
+            'pipedrive_id' => '',
+            'pipedrive_domain' => '',
         ])->validate();
 
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'pipedrive_token' => $input['pipedrive_token'],
+            'pipedrive_domain' => $input['pipedrive_domain'],
+            'pipedrive_id' => $input['pipedrive_id'],
         ]);
     }
 }
