@@ -64,4 +64,24 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function timetables(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Timetable::class);
+    }
+
+    public function filters(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Filter::class);
+    }
+
+    public function jobs(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Job::class);
+    }
+
+    public function blockedJobs(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Job::class, 'blocked_user_id', 'id');
+    }
 }
