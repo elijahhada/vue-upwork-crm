@@ -16,7 +16,7 @@
         "laravel/tinker": "^2.5",
         "pipedrive/pipedrive": "^3.1",
         "tightenco/ziggy": "^1.0",
-        "upwork/php-upwork": "^1.4"
+        "upwork/php-upwork-oauth2": "^2.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "923d9b53bd6932eda33aabdbcc3a6632",
+    "content-hash": "7ea6aa81e6427e918fb9905f62c03d91",
     "packages": [
         {
             "name": "apimatic/jsonmapper",
@@ -1892,6 +1892,76 @@
             "time": "2021-01-18T20:58:21+00:00"
         },
         {
+            "name": "league/oauth2-client",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/oauth2-client.git",
+                "reference": "badb01e62383430706433191b82506b6df24ad98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/badb01e62383430706433191b82506b6df24ad98",
+                "reference": "badb01e62383430706433191b82506b6df24ad98",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0 || ^7.0",
+                "paragonie/random_compat": "^1 || ^2 || ^9.99",
+                "php": "^5.6 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpunit/phpunit": "^5.7 || ^6.0 || ^9.3",
+                "squizlabs/php_codesniffer": "^2.3 || ^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\OAuth2\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Bilbie",
+                    "email": "hello@alexbilbie.com",
+                    "homepage": "http://www.alexbilbie.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Woody Gilk",
+                    "homepage": "https://github.com/shadowhand",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "OAuth 2.0 Client Library",
+            "keywords": [
+                "Authentication",
+                "SSO",
+                "authorization",
+                "identity",
+                "idp",
+                "oauth",
+                "oauth2",
+                "single sign on"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/oauth2-client/issues",
+                "source": "https://github.com/thephpleague/oauth2-client/tree/2.6.0"
+            },
+            "time": "2020-10-28T02:03:40+00:00"
+        },
+        {
             "name": "mashape/unirest-php",
             "version": "v3.0.4",
             "source": {
@@ -2381,6 +2451,56 @@
                 "source": "https://github.com/paragonie/constant_time_encoding"
             },
             "time": "2020-12-06T15:14:20+00:00"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v9.99.100",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*",
+                "vimeo/psalm": "^1"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "polyfill",
+                "pseudorandom",
+                "random"
+            ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
+            "time": "2020-10-15T08:29:30+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -5661,31 +5781,27 @@
             "time": "2020-07-13T06:12:54+00:00"
         },
         {
-            "name": "upwork/php-upwork",
-            "version": "v1.4.0",
+            "name": "upwork/php-upwork-oauth2",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/upwork/php-upwork.git",
-                "reference": "b673581e3c0e9b29d409a2fb5539c09e9c47bf4b"
+                "url": "https://github.com/upwork/php-upwork-oauth2.git",
+                "reference": "1b0f41f9dd9498e1f75edc5620159780b5f56b1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/upwork/php-upwork/zipball/b673581e3c0e9b29d409a2fb5539c09e9c47bf4b",
-                "reference": "b673581e3c0e9b29d409a2fb5539c09e9c47bf4b",
+                "url": "https://api.github.com/repos/upwork/php-upwork-oauth2/zipball/1b0f41f9dd9498e1f75edc5620159780b5f56b1a",
+                "reference": "1b0f41f9dd9498e1f75edc5620159780b5f56b1a",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=5.3.3"
+                "league/oauth2-client": "^2.3",
+                "php": ">=5.6.0"
             },
             "require-dev": {
                 "phpunit/php-invoker": "*",
                 "phpunit/phpunit": "^9"
-            },
-            "suggest": {
-                "apigen/apigen": "dev-master",
-                "ext-oauth": "This extension from PECL provides OAuth consumer and provider bindings. See more under http://www.php.net/oauth",
-                "roave/better-reflection": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -5705,24 +5821,25 @@
                     "name": "Maksym Novozhylov",
                     "email": "mnovozhilov@upwork.com",
                     "homepage": "http://mnov.tel",
-                    "role": "Software Engineer, Platform/Integrity"
+                    "role": "Product Architect, Platform/Integrity"
                 }
             ],
-            "description": "PHP bindings for Upwork API",
+            "description": "PHP bindings for Upwork API (OAuth2)",
             "homepage": "http://www.upwork.com",
             "keywords": [
                 "api",
+                "oauth2",
                 "php",
                 "upwork"
             ],
             "support": {
                 "email": "apisupport@upwork.com",
-                "forum": "https://www.upwork.com/community/forum/49",
-                "issues": "https://github.com/upwork/php-upwork/issues",
-                "source": "https://github.com/upwork/php-upwork/releases",
+                "forum": "https://community.upwork.com/t5/API-Questions-Answers/bd-p/api_support",
+                "issues": "https://github.com/upwork/php-upwork-oauth2/issues",
+                "source": "https://github.com/upwork/php-upwork-oauth2/releases",
                 "wiki": "http://developers.upwork.com"
             },
-            "time": "2020-09-09T00:00:00+00:00"
+            "time": "2020-09-18T00:00:00+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
