@@ -40,6 +40,9 @@
             <div class="flex block mt-4">
                 <a class="px-6 py-4 bg-gray-200 rounded shadow w-full text-center" :href="route('auth.pipedrive')">Login via Pipedrive</a>
             </div>
+            <div class="flex block mt-4">
+                <a class="px-6 py-4 bg-gray-200 rounded shadow w-full text-center" :href="route('auth.upwork')">Login via Upwork</a>
+            </div>
         </form>
     </jet-authentication-card>
 </template>

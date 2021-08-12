@@ -17,12 +17,13 @@ class UpworkService
             'clientId' => \config('upwork.client_id'),
             'clientSecret' => \config('upwork.client_secret'),
             'redirectUri' => 'https://upwork.vasterra.com/auth/callback',
+            'debug' => true,
         ]);
         $this->client = new Client($config);
     }
 
-    public function buildAuthUrl()
+    public function buildAuthUrl(): string
     {
-        dd($this->client->auth());
+        return $this->client->getServer()->getInstance()->getAuthorizationUrl();
     }
 }

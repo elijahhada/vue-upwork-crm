@@ -4138,6 +4138,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -37365,6 +37368,18 @@ var render = function() {
                 attrs: { href: _vm.route("auth.pipedrive") }
               },
               [_vm._v("Login via Pipedrive")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex block mt-4" }, [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "px-6 py-4 bg-gray-200 rounded shadow w-full text-center",
+                attrs: { href: _vm.route("auth.upwork") }
+              },
+              [_vm._v("Login via Upwork")]
             )
           ])
         ]
