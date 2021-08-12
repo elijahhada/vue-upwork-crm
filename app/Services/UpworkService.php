@@ -5,10 +5,15 @@ namespace App\Services;
 
 
 use App\Contracts\OAuthable;
+use GuzzleHttp\Middleware;
+use Psr\Http\Message\RequestInterface;
+use Upwork\API\AuthTypes\AbstractOAuth;
 use Upwork\API\Client;
 use Upwork\API\Config;
+use Upwork\API\Config as ApiConfig;
+use Upwork\API\Debug as ApiDebug;
 
-class UpworkService implements OAuthable
+class UpworkService extends AbstractOAuth implements OAuthable
 {
     private $client;
 
@@ -29,7 +34,7 @@ class UpworkService implements OAuthable
 
     public function authorize($code)
     {
-        $this->setOAuthToken($this->client->getServer()->_setupTokens($code));
+        $this->setOAuthToken($this->_setupTokens($code));
         return $this;
     }
 
@@ -41,5 +46,40 @@ class UpworkService implements OAuthable
     public function getOAuthToken()
     {
         // TODO: Implement getOAuthToken() method.
+    }
+
+    protected function _setupTokens($authzCode)
+    {
+        return $this->_requestTokens('authorization_code', array('code' => $authzCode));
+    }
+
+    protected function _getOAuthInstance($authType)
+    {
+        // TODO: Implement _getOAuthInstance() method.
+    }
+
+    private function _requestTokens(string $type, array $options)
+    {
+        ApiDebug::p('requesting tokens');
+
+        $accessTokenInfo = array();
+
+        $accessToken = $this->client->getServer()->getInstance()->getHttpClient()->getConfig()['handler']->push(
+            Middleware::mapRequest(function (RequestInterface $request) {
+                return $request->withHeader('User-Agent', ApiConfig::UPWORK_LIBRARY_USER_AGENT);
+            }));
+        $accessToken = $this->client->getServer()->getInstance()->getAccessToken($type, $options);
+
+        $accessTokenInfo['access_token']  = $accessToken->getToken();
+        $accessTokenInfo['refresh_token'] = $accessToken->getRefreshToken();
+        $accessTokenInfo['expires_in']    = $accessToken->getExpires();
+
+        ApiDebug::p('got access token info', $accessTokenInfo);
+
+        self::$_accessToken  = $accessTokenInfo['access_token'];
+        self::$_refreshToken = $accessTokenInfo['refresh_token'];
+        self::$_expiresIn    = $accessTokenInfo['expires_in'];
+
+        return $accessTokenInfo;
     }
 }
