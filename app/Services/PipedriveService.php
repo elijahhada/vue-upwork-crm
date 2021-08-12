@@ -4,11 +4,12 @@
 namespace App\Services;
 
 
+use App\Contracts\OAuthable;
 use Illuminate\Support\Facades\Session;
 use Pipedrive\Client;
 use Pipedrive\Configuration;
 
-class PipedriveService
+class PipedriveService implements OAuthable
 {
     private $client;
 

@@ -3,8 +3,13 @@
 
 namespace App\Contracts;
 
-
 interface OAuthable
 {
-    public function callback();
+    public function buildAuthUrl();
+
+    public function authorize($code);
+
+    public function setOAuthToken($token);
+
+    public function getOAuthToken();
 }
