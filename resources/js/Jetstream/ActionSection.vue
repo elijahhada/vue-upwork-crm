@@ -14,7 +14,7 @@
 </template>
 
 <script>
-    import JetSectionTitle from './SectionTitle.vue'
+    import JetSectionTitle from './SectionTitle'
 
     export default {
         components: {

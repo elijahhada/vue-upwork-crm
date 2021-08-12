@@ -4,17 +4,16 @@
         <p>{{ excerpt }}</p>
 
         <div class="flex space-x-4">
-            <inertia-link :href="route('pipedrive.deal.add', {'title': title,})" class="px-6 py-4 bg-white shadow-lg rounded">Забрать</inertia-link>
+            <button @click="showModal" class="px-6 py-4 bg-white shadow-lg rounded">Забрать</button>
         </div>
     </div>
 </template>
 
 <script>
-import {InertiaLink} from '@inertiajs/inertia-vue3'
+import AddDeal from "../Modals/AddDeal";
 
 export default {
     components: {
-        InertiaLink
     },
     props: {
         title: {
@@ -25,6 +24,16 @@ export default {
             required: true,
             type: String,
         }
+    },
+    methods: {
+        showModal() {
+            console.log(this.$modal.show(
+                AddDeal
+            ))
+        }
+    },
+    mounted() {
+        console.log(this);
     }
 }
 </script>

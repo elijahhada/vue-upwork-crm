@@ -1,6 +1,4 @@
 <template>
-    <Head title="Two-factor Confirmation" />
-
     <jet-authentication-card>
         <template #logo>
             <jet-authentication-card-logo />
@@ -41,7 +39,7 @@
                 </button>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
+                    Login
                 </jet-button>
             </div>
         </form>
@@ -49,17 +47,15 @@
 </template>
 
 <script>
-    import { Head } from '@inertiajs/inertia-vue3';
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-    import JetButton from '@/Jetstream/Button.vue'
-    import JetInput from '@/Jetstream/Input.vue'
-    import JetLabel from '@/Jetstream/Label.vue'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
+    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
+    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
+    import JetButton from '@/Jetstream/Button'
+    import JetInput from '@/Jetstream/Input'
+    import JetLabel from '@/Jetstream/Label'
+    import JetValidationErrors from '@/Jetstream/ValidationErrors'
 
     export default {
         components: {
-            Head,
             JetAuthenticationCard,
             JetAuthenticationCardLogo,
             JetButton,
