@@ -28,7 +28,7 @@ class UpworkService implements OAuthable
             'refreshToken' => session()->get('upwork_refresh'),
             'expiresIn' => session()->get('upwork_expires_in'),
         ]);
-        $this->client = new Client($config);
+        $this->client = new \App\Services\Upwork\Client($config);
     }
 
     public function buildAuthUrl(): array
