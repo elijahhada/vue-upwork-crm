@@ -12,6 +12,7 @@ use Upwork\API\Config;
 use Upwork\API\Config as ApiConfig;
 use Upwork\API\Debug as ApiDebug;
 use Upwork\API\Routers\Auth;
+use Upwork\API\Routers\Organization\Users;
 
 class UpworkService implements OAuthable
 {
@@ -65,6 +66,6 @@ class UpworkService implements OAuthable
 
     public function getUserInfo()
     {
-        return (new Auth($this->client))->getUserInfo();
+        return (new Users($this->client))->getMyInfo();
     }
 }
