@@ -66,6 +66,7 @@ class UpworkService implements OAuthable
 
     public function getUserInfo()
     {
+        $this->client->auth();
         return (new Users($this->client))->getMyInfo();
     }
 }
