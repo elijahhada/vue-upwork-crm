@@ -102,7 +102,7 @@ class Client
         if (ApiConfig::get('mode') === 'web') {
             $aToken   = ApiConfig::get('accessToken');
             $rToken   = ApiConfig::get('refreshToken');
-            $authCode = ApiConfig::get('сode');
+            $authCode = ApiConfig::get('code');
 
             !$aToken   || $this->_server->option('accessToken', $aToken);
             !$rToken   || $this->_server->option('refreshToken', $rToken);

@@ -7,7 +7,6 @@ namespace App\Services;
 use App\Contracts\OAuthable;
 use GuzzleHttp\Middleware;
 use Psr\Http\Message\RequestInterface;
-use Upwork\API\AuthTypes\AbstractOAuth;
 use Upwork\API\Client;
 use Upwork\API\Config;
 use Upwork\API\Config as ApiConfig;
@@ -29,7 +28,7 @@ class UpworkService implements OAuthable
             'refreshToken' => session()->get('upwork_refresh'),
             'expiresIn' => session()->get('upwork_expires_in'),
         ]);
-        $this->client = new \App\Services\Upwork\Client($config);
+        $this->client = new Client($config);
     }
 
     public function buildAuthUrl(): array

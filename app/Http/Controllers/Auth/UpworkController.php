@@ -11,6 +11,7 @@ class UpworkController extends Controller
     public function index(UpworkService $upworkService)
     {
         $upworkService->buildAuthUrl();
+        exit();
     }
 
     public function callback(Request $request, UpworkService $upworkService)
