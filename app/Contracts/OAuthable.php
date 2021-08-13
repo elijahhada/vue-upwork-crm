@@ -12,4 +12,6 @@ interface OAuthable
     public function setOAuthToken($token);
 
     public function getOAuthToken();
+
+    public function getUserInfo();
 }

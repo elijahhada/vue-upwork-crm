@@ -19,7 +19,7 @@ use Upwork\API\Utils as ApiUtils;
 /**
  * Client
  */
-class Client
+class Client extends \Upwork\API\Client
 {
     // we will deal only with json inside library
     // and return already decoded data

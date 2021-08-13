@@ -11,6 +11,7 @@ use Upwork\API\Client;
 use Upwork\API\Config;
 use Upwork\API\Config as ApiConfig;
 use Upwork\API\Debug as ApiDebug;
+use Upwork\API\Routers\Auth;
 
 class UpworkService implements OAuthable
 {
@@ -24,9 +25,9 @@ class UpworkService implements OAuthable
             'redirectUri' => 'https://upwork.vasterra.com/auth/callback',
             'mode' => 'web',
             'code' => session()->get('upwork_code'),
-            'accessToken' => session()->get('upwork_token'),
-            'refreshToken' => session()->get('upwork_refresh'),
-            'expiresIn' => session()->get('upwork_expires_in'),
+            'accessToken' => $this->getOAuthToken()->access_token,
+            'refreshToken' => $this->getOAuthToken()->refresh_token,
+            'expiresIn' => $this->getOAuthToken()->expires_in,
         ]);
         $this->client = new \App\Services\Upwork\Client($config);
     }
@@ -45,46 +46,25 @@ class UpworkService implements OAuthable
 
     public function setOAuthToken($token)
     {
-        dd($token);
+        session()->put('upwork_token', (object) $token);
+        Config::set('accessToken', $token['access_token']);
+        Config::set('refreshToken', $token['refresh_token']);
+        Config::set('expiresIn', $token['expires_in']);
     }
 
     public function getOAuthToken()
     {
-        // TODO: Implement getOAuthToken() method.
+        return session()->has('upwork_token')
+            ? session()->get('upwork_token')
+            : (object) [
+                'access_token' => null,
+                'refresh_token' => null,
+                'expires_in' => null,
+            ];
     }
 
-    protected function _setupTokens($authzCode)
+    public function getUserInfo()
     {
-        return $this->_requestTokens('authorization_code', array('code' => $authzCode));
-    }
-
-    protected function _getOAuthInstance($authType)
-    {
-        // TODO: Implement _getOAuthInstance() method.
-    }
-
-    private function _requestTokens(string $type, array $options)
-    {
-        ApiDebug::p('requesting tokens');
-
-        $accessTokenInfo = array();
-
-        $accessToken = $this->client->getServer()->getInstance()->getHttpClient()->getConfig()['handler']->push(
-            Middleware::mapRequest(function (RequestInterface $request) {
-                return $request->withHeader('User-Agent', ApiConfig::UPWORK_LIBRARY_USER_AGENT);
-            }));
-        $accessToken = $this->client->getServer()->getInstance()->getAccessToken($type, $options);
-
-        $accessTokenInfo['access_token']  = $accessToken->getToken();
-        $accessTokenInfo['refresh_token'] = $accessToken->getRefreshToken();
-        $accessTokenInfo['expires_in']    = $accessToken->getExpires();
-
-        ApiDebug::p('got access token info', $accessTokenInfo);
-
-        self::$_accessToken  = $accessTokenInfo['access_token'];
-        self::$_refreshToken = $accessTokenInfo['refresh_token'];
-        self::$_expiresIn    = $accessTokenInfo['expires_in'];
-
-        return $accessTokenInfo;
+        return (new Auth($this->client))->getUserInfo();
     }
 }

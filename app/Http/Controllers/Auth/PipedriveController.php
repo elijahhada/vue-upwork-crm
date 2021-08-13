@@ -3,23 +3,29 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Contracts\OAuthable;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Services\PipedriveService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Pipedrive\Client;
 
 class PipedriveController extends Controller
 {
-    public function index()
+    private $service;
+
+    public function __construct(OAuthable $service)
     {
-        return redirect()->to((new PipedriveService())->buildAuthUrl());
+        $this->service = $service;
     }
 
-    public function callback(Request $request, PipedriveService $service)
+    public function index()
     {
-        $userInfo = $service->authorize($request->code)->userInfo();
+        return redirect()->to($this->service->buildAuthUrl());
+    }
+
+    public function callback(Request $request)
+    {
+        $userInfo = $this->service->authorize($request->code)->userInfo();
 
         abort_if(!$userInfo, 404, 'Whoops, we get an error!');
 
@@ -29,7 +35,7 @@ class PipedriveController extends Controller
             $user = (new CreateNewUser())->create([
                 'name' => $userInfo->data->name,
                 'email' => $userInfo->data->email,
-                'pipedrive_token' => $service->getOAuthToken()->accessToken,
+                'pipedrive_token' => $this->service->getOAuthToken()->accessToken,
                 'password' => '123123123',
                 'password_confirmation' => '123123123',
                 'pipedrive_id' => $userInfo->data->id,

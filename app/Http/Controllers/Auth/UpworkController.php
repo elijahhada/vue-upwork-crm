@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Contracts\OAuthable;
 use App\Http\Controllers\Controller;
-use App\Services\UpworkService;
 use Illuminate\Http\Request;
 
 class UpworkController extends Controller
 {
-    public function index(UpworkService $upworkService)
+    private $service;
+
+    public function __construct(OAuthable $service)
     {
-        $upworkService->buildAuthUrl();
+        $this->service = $service;
+    }
+
+    public function index()
+    {
+        $this->service->buildAuthUrl();
         exit();
     }
 
-    public function callback(Request $request, UpworkService $upworkService)
+    public function callback(Request $request)
     {
-        $upworkService->authorize($request->code);
+        $this->service->authorize($request->code);
     }
 }

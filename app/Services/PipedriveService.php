@@ -41,7 +41,7 @@ class PipedriveService implements OAuthable
         return Session::get('pipedrive_token');
     }
 
-    public function userInfo()
+    public function getUserInfo()
     {
         try {
             return $this->client->getUsers()->getCurrentUserData();
