@@ -9,6 +9,7 @@ use App\Services\PipedriveService;
 use App\Services\UpworkService;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Pipedrive\Configuration;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        URL::forceScheme('https');
+        if($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
+
+        Configuration::$oAuthTokenUpdateCallback = function($token) {
+            // use session or some other way to persist the $token
+            session()->put('pipedrive_token', $token);
+        };
     }
 }

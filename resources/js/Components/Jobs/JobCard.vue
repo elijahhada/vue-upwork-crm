@@ -27,6 +27,7 @@ export default {
     },
     methods: {
         showModal() {
+            this.$inertia.get(this.route('pipedrive.deal.add'));
             console.log(this.$modal.show(
                 AddDeal
             ))
