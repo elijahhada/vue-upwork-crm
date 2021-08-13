@@ -41,6 +41,7 @@ class UpworkService implements OAuthable
     public function authorize($code): OAuthable
     {
         session()->put('upwork_code', $code);
+        Config::set('code', $code);
         $this->setOAuthToken($this->client->auth());
         return $this;
     }
