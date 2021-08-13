@@ -10,7 +10,7 @@ class UpworkController extends Controller
 {
     public function index(UpworkService $upworkService)
     {
-        return redirect()->to($upworkService->buildAuthUrl());
+        $upworkService->buildAuthUrl();
     }
 
     public function callback(Request $request, UpworkService $upworkService)

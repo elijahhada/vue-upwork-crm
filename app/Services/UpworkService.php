@@ -13,7 +13,7 @@ use Upwork\API\Config;
 use Upwork\API\Config as ApiConfig;
 use Upwork\API\Debug as ApiDebug;
 
-class UpworkService extends AbstractOAuth implements OAuthable
+class UpworkService implements OAuthable
 {
     private $client;
 
@@ -23,18 +23,23 @@ class UpworkService extends AbstractOAuth implements OAuthable
             'clientId' => \config('upwork.client_id'),
             'clientSecret' => \config('upwork.client_secret'),
             'redirectUri' => 'https://upwork.vasterra.com/auth/callback',
+            'code' => session()->get('upwork_code'),
+            'accessToken' => session()->get('upwork_token'),
+            'refreshToken' => session()->get('upwork_refresh'),
+            'expiresIn' => session()->get('upwork_expires_in'),
         ]);
-        $this->client = new Client($config);
+        $this->client = new \App\Services\Upwork\Client($config);
     }
 
-    public function buildAuthUrl(): string
+    public function buildAuthUrl(): array
     {
-        return $this->client->getServer()->getInstance()->getAuthorizationUrl();
+        return $this->client->auth();
     }
 
     public function authorize($code)
     {
-        $this->setOAuthToken($this->_setupTokens($code));
+        session()->put('upwork_code', $code);
+        $this->setOAuthToken($this->client->auth());
         return $this;
     }
 
