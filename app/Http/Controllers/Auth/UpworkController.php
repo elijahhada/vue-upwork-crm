@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Contracts\OAuthable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UpworkController extends Controller
 {
@@ -23,6 +24,12 @@ class UpworkController extends Controller
 
     public function callback(Request $request)
     {
-        dd($this->service->authorize($request->code)->getUserInfo());
+        $upworkUserInfo = $this->service->authorize($request->code)->getUserInfo();
+
+        Auth::user()->update([
+            'upwork_id' => $upworkUserInfo->user->reference,
+        ]);
+
+        return redirect()->route('dashboard');
     }
 }

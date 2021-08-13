@@ -52,6 +52,9 @@ class UpworkService implements OAuthable
         Config::set('accessToken', $token['access_token']);
         Config::set('refreshToken', $token['refresh_token']);
         Config::set('expiresIn', $token['expires_in']);
+        \Illuminate\Support\Facades\Auth::user()->update([
+            'upwork_token' => $token['access_token'],
+        ]);
     }
 
     public function getOAuthToken()

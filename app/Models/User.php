@@ -30,6 +30,8 @@ class User extends Authenticatable
         'pipedrive_token',
         'pipedrive_id',
         'pipedrive_domain',
+        'upwork_id',
+        'upwork_token',
     ];
 
     /**
@@ -45,6 +47,8 @@ class User extends Authenticatable
         'pipedrive_id',
         'pipedrive_token',
         'pipedrive_domain',
+        'upwork_id',
+        'upwork_token',
     ];
 
     /**
