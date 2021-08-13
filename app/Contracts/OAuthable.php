@@ -7,7 +7,7 @@ interface OAuthable
 {
     public function buildAuthUrl();
 
-    public function authorize($code);
+    public function authorize($code): OAuthable;
 
     public function setOAuthToken($token);
 

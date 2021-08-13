@@ -24,7 +24,7 @@ class PipedriveService implements OAuthable
         return $this->client->auth()->buildAuthorizationUrl();
     }
 
-    public function authorize($code)
+    public function authorize($code): OAuthable
     {
         $this->setOAuthToken($this->client->auth()->authorize($code));
         return $this;

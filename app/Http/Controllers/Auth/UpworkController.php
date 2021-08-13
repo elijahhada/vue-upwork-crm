@@ -23,6 +23,6 @@ class UpworkController extends Controller
 
     public function callback(Request $request)
     {
-        $this->service->authorize($request->code);
+        dd($this->service->authorize($request->code)->getUserInfo());
     }
 }
