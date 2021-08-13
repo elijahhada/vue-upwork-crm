@@ -23,6 +23,7 @@ class UpworkService implements OAuthable
             'clientId' => \config('upwork.client_id'),
             'clientSecret' => \config('upwork.client_secret'),
             'redirectUri' => 'https://upwork.vasterra.com/auth/callback',
+            'mode' => 'web',
             'code' => session()->get('upwork_code'),
             'accessToken' => session()->get('upwork_token'),
             'refreshToken' => session()->get('upwork_refresh'),
