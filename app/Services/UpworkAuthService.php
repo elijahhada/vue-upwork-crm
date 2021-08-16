@@ -3,36 +3,12 @@
 
 namespace App\Services;
 
-
 use App\Contracts\OAuthable;
-use GuzzleHttp\Middleware;
-use Psr\Http\Message\RequestInterface;
-use Upwork\API\Client;
 use Upwork\API\Config;
-use Upwork\API\Config as ApiConfig;
-use Upwork\API\Debug as ApiDebug;
-use Upwork\API\Routers\Auth;
 use Upwork\API\Routers\Organization\Users;
 
-class UpworkAuthService implements OAuthable
+class UpworkAuthService extends Upwork implements OAuthable
 {
-    private $client;
-
-    public function __construct()
-    {
-        $config = new Config([
-            'clientId' => \config('upwork.client_id'),
-            'clientSecret' => \config('upwork.client_secret'),
-            'redirectUri' => 'https://upwork.vasterra.com/auth/callback',
-            'mode' => 'web',
-            'code' => session()->get('upwork_code'),
-            'accessToken' => $this->getOAuthToken()->access_token,
-            'refreshToken' => $this->getOAuthToken()->refresh_token,
-            'expiresIn' => $this->getOAuthToken()->expires_in,
-        ]);
-        $this->client = new \App\Services\Upwork\Client($config);
-    }
-
     public function buildAuthUrl(): array
     {
         return $this->client->auth();
