@@ -5,8 +5,8 @@ namespace App\Providers;
 use App\Contracts\OAuthable;
 use App\Http\Controllers\Auth\PipedriveController;
 use App\Http\Controllers\Auth\UpworkController;
-use App\Services\PipedriveService;
-use App\Services\UpworkService;
+use App\Services\PipedriveAuthService;
+use App\Services\UpworkAuthService;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Pipedrive\Configuration;
@@ -22,11 +22,11 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->when(UpworkController::class)
             ->needs(OAuthable::class)
-            ->give(UpworkService::class);
+            ->give(UpworkAuthService::class);
 
         $this->app->when(PipedriveController::class)
             ->needs(OAuthable::class)
-            ->give(PipedriveService::class);
+            ->give(PipedriveAuthService::class);
     }
 
     /**

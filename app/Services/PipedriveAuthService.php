@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Pipedrive\Client;
 use Pipedrive\Configuration;
 
-class PipedriveService implements OAuthable
+class PipedriveAuthService implements OAuthable
 {
     private $client;
 

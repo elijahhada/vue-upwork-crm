@@ -14,7 +14,7 @@ use Upwork\API\Debug as ApiDebug;
 use Upwork\API\Routers\Auth;
 use Upwork\API\Routers\Organization\Users;
 
-class UpworkService implements OAuthable
+class UpworkAuthService implements OAuthable
 {
     private $client;
 
@@ -70,7 +70,7 @@ class UpworkService implements OAuthable
 
     public function getUserInfo()
     {
-        $this->client->auth();
+        $token = $this->client->auth();
         return (new Users($this->client))->getMyInfo();
     }
 }
