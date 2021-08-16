@@ -24,24 +24,12 @@ class UpworkAuthService extends Upwork implements OAuthable
 
     public function setOAuthToken($token)
     {
-        session()->put('upwork_token', (object) $token);
-        Config::set('accessToken', $token['access_token']);
-        Config::set('refreshToken', $token['refresh_token']);
-        Config::set('expiresIn', $token['expires_in']);
-        \Illuminate\Support\Facades\Auth::user()->update([
-            'upwork_token' => $token['access_token'],
-        ]);
+        parent::setOAuthToken($token);
     }
 
     public function getOAuthToken()
     {
-        return session()->has('upwork_token')
-            ? session()->get('upwork_token')
-            : (object) [
-                'access_token' => null,
-                'refresh_token' => null,
-                'expires_in' => null,
-            ];
+        parent::getOAuthToken();
     }
 
     public function getUserInfo()
