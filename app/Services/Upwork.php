@@ -13,7 +13,7 @@ abstract class Upwork
         $config = new Config([
             'clientId' => config('upwork.client_id'),
             'clientSecret' => config('upwork.client_secret'),
-            'redirectUri' => 'https://upwork.vasterra.com/auth/callback',
+            'redirectUri' => url('/').'/auth/callback',
             'mode' => 'web',
             'code' => session()->get('upwork_code'),
             'accessToken' => $this->getOAuthToken()->access_token,
