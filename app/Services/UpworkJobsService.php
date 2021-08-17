@@ -8,9 +8,9 @@ use Upwork\API\Routers\Jobs\Search;
 
 class UpworkJobsService extends Upwork
 {
-    public function getJobs()
+    public function getJobs($q)
     {
         $this->client->auth();
-        return (new Search($this->client))->find(['q' => 'laravel']);
+        return (new Search($this->client))->find(['q' => $q]);
     }
 }

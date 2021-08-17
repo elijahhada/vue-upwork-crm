@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class UpworkController extends Controller
 {
-    public function search(UpworkJobsService $service)
+    public function search(Request $request, UpworkJobsService $service)
     {
-        dd($service->getJobs());
+        dd($service->getJobs($request->q));
     }
 }
