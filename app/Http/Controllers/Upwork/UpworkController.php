@@ -16,7 +16,7 @@ class UpworkController extends Controller
 
     public function filters()
     {
-        $categories = Category::with('topics')->all();
+        $categories = Category::with('topics')->get();
 
         return inertia('Pages/Filters', [
             'categories' => $categories,
