@@ -29,7 +29,7 @@ class UpworkAuthService extends Upwork implements OAuthable
 
     public function getOAuthToken()
     {
-        parent::getOAuthToken();
+        return parent::getOAuthToken();
     }
 
     public function getUserInfo()
