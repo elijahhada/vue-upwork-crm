@@ -19,8 +19,6 @@ class UpworkAccessTokenTest extends TestCase
             'expires_in' => '3',
         ]);
 
-        dd($service->getOAuthToken());
-
         $this->assertObjectHasAttribute('access_token', $service->getOAuthToken());
         $this->assertObjectHasAttribute('refresh_token', $service->getOAuthToken());
         $this->assertObjectHasAttribute('expires_in', $service->getOAuthToken());
