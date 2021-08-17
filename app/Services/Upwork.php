@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Auth;
 use Upwork\API\Config;
 
 abstract class Upwork 
@@ -11,8 +12,8 @@ abstract class Upwork
     public function __construct()
     {
         $config = new Config([
-            'clientId' => \config('upwork.client_id'),
-            'clientSecret' => \config('upwork.client_secret'),
+            'clientId' => config('upwork.client_id'),
+            'clientSecret' => config('upwork.client_secret'),
             'redirectUri' => 'https://upwork.vasterra.com/auth/callback',
             'mode' => 'web',
             'code' => session()->get('upwork_code'),
@@ -29,9 +30,11 @@ abstract class Upwork
         Config::set('accessToken', $token['access_token']);
         Config::set('refreshToken', $token['refresh_token']);
         Config::set('expiresIn', $token['expires_in']);
-        \Illuminate\Support\Facades\Auth::user()->update([
-            'upwork_token' => $token['access_token'],
-        ]);
+        if (Auth::user()->check()) {
+            \Illuminate\Support\Facades\Auth::user()->update([
+                'upwork_token' => $token['access_token'],
+            ]);
+        }
     }
 
     public function getOAuthToken()
