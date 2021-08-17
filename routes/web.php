@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/auth/upwork', [\App\Http\Controllers\Auth\UpworkController::class, 'index'])->name('auth.upwork');
     Route::get('/auth/callback', [\App\Http\Controllers\Auth\UpworkController::class, 'callback'])->name('auth.upwork.callback');
     Route::get('/upwork/jobs', [UpworkController::class, 'search'])->name('upwork.jobs.index');
+    Route::get('/filters', [UpworkController::class, 'filters'])->name('filters');
 });
 
 Route::get('/auth/pipedrive', [\App\Http\Controllers\Auth\PipedriveController::class, 'index'])->name('auth.pipedrive')->middleware('guest');
