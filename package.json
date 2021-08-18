@@ -30,6 +30,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "vue-js-modal": "^2.0.1"
+        "vue-js-modal": "^2.0.1",
+        "vue-multiselect": "^2.1.6"
     }
 }

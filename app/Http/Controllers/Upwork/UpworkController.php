@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Services\UpworkJobsService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class UpworkController extends Controller
 {
@@ -18,7 +19,7 @@ class UpworkController extends Controller
     {
         $categories = Category::with('topics')->get();
 
-        return inertia('Pages/Filters', [
+        return Inertia::render('Filters', [
             'categories' => $categories,
         ]);
     }
