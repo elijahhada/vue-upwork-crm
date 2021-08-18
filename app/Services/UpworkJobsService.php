@@ -37,13 +37,19 @@ class UpworkJobsService extends Upwork
 
     public function setCount($count)
     {
-        $this->count = $count;
+        if ($count) {
+            $this->count = $count;
+        }
+        
         return $this;
     }
 
     public function setOffset($offset)
     {
-        $this->offset = $offset;
+        if ($offset) {
+            $this->offset = $offset;
+        }
+
         return $this;
     }
 }

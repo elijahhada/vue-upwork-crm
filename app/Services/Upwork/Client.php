@@ -96,6 +96,7 @@ class Client extends \Upwork\API\Client
         ApiDebug::p('authing Client');
 
         $this->_server->option('mode', ApiConfig::get('mode'));
+        $this->_server->option('redirectUri', ApiConfig::get('redirectUri'));
 
         // setup request tokens for web-based app
         // they must be already obrained on the first step
