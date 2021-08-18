@@ -12,7 +12,12 @@ class UpworkController extends Controller
 {
     public function search(Request $request, UpworkJobsService $service)
     {
-        dd($service->getJobs($request->q));
+        dd($service
+            ->setQuery($request->q)
+            ->setOffset($request->offset)
+            ->setCount($request->count)
+            ->getJobs()
+        );
     }
 
     public function filters()
