@@ -41,6 +41,7 @@ class UpworkCategoriesCommand extends Command
      */
     public function handle()
     {
+        Config::set('redirectUri', url('/').'/auth/callback/console');
         $service = new UpworkMetadataService();
         Config::set('mode', 'nonweb');
         Config::set('redirectUri', url('/').'/auth/callback/console');
