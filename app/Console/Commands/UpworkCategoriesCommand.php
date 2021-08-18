@@ -43,7 +43,7 @@ class UpworkCategoriesCommand extends Command
     {
         $service = new UpworkMetadataService();
         Config::set('mode', 'nonweb');
-        Config::set('redirectUri', url('/').'/auth/callback');
+        Config::set('redirectUri', url('/').'/auth/callback/console');
 
         $categories = $service->getCategories(0, 50);
 

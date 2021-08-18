@@ -32,4 +32,10 @@ class UpworkController extends Controller
 
         return redirect()->route('dashboard')->with('code', $request->code);
     }
+
+    public function console(Request $request)
+    {
+        echo $request->code;
+        die;
+    }
 }
