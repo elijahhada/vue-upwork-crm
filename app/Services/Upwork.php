@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Auth;
 use Upwork\API\Config;
 
 abstract class Upwork 
@@ -29,6 +30,7 @@ abstract class Upwork
         Config::set('accessToken', $token['access_token']);
         Config::set('refreshToken', $token['refresh_token']);
         Config::set('expiresIn', $token['expires_in']);
+
         if (\Illuminate\Support\Facades\Auth::check()) {
             \Illuminate\Support\Facades\Auth::user()->update([
                 'upwork_token' => $token,
@@ -38,6 +40,10 @@ abstract class Upwork
 
     public function getOAuthToken()
     {
+        if (Auth::check() && !session()->has('upwork_token') && Auth::user()->upwork_token) {
+            $this->setOAuthToken(Auth::user()->upwork_token);   
+        } 
+
         return session()->has('upwork_token')
             ? session()->get('upwork_token')
             : (object) [
