@@ -35,7 +35,7 @@ class PipedriveController extends Controller
             $user = (new CreateNewUser())->create([
                 'name' => $userInfo->data->name,
                 'email' => $userInfo->data->email,
-                'pipedrive_token' => $this->service->getOAuthToken()->accessToken,
+                'pipedrive_token' => $this->service->getOAuthToken(),
                 'password' => '123123123',
                 'password_confirmation' => '123123123',
                 'pipedrive_id' => $userInfo->data->id,

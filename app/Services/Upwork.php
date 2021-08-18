@@ -31,7 +31,7 @@ abstract class Upwork
         Config::set('expiresIn', $token['expires_in']);
         if (\Illuminate\Support\Facades\Auth::check()) {
             \Illuminate\Support\Facades\Auth::user()->update([
-                'upwork_token' => $token['access_token'],
+                'upwork_token' => $token,
             ]);
         }
     }

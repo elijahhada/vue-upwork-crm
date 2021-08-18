@@ -58,6 +58,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'upwork_token' => 'array',
+        'pipedrive_token' => 'array',
     ];
 
     /**
