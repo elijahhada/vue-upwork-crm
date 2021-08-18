@@ -30,6 +30,6 @@ class UpworkController extends Controller
             'upwork_id' => $upworkUserInfo->user->reference,
         ]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('code', $request->code);
     }
 }

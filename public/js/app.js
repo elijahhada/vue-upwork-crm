@@ -4611,10 +4611,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    code: {
+      type: String,
+      required: true
+    }
+  },
   components: {
     JobCard: _Components_Jobs_JobCard__WEBPACK_IMPORTED_MODULE_2__.default,
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default,
@@ -38219,6 +38226,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("app-layout", [
+    _c("p", [_vm._v(_vm._s(_vm.code))]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "container mx-auto bg-white" },
