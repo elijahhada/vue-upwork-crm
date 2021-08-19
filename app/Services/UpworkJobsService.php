@@ -12,14 +12,19 @@ class UpworkJobsService extends Upwork
     private $title;
     private $count = 10;
     private $offset = 0;
+    private $category2;
+    private $subcategory2;
 
     public function getJobs()
     {
         $this->client->auth();
+        
         return (new Search($this->client))->find([
             'q' => $this->query,
             'title' => $this->title,
             'paging' => $this->offset.';'.$this->count,
+            'category2' => $this->category2,
+            'subcategory2' => $this->subcategory2,
         ]);
     }
 
@@ -48,6 +53,24 @@ class UpworkJobsService extends Upwork
     {
         if ($offset) {
             $this->offset = $offset;
+        }
+
+        return $this;
+    }
+
+    public function setCategory2($category2)
+    {
+        if ($category2) {
+            $this->category2 = $category2;
+        }
+
+        return $this;
+    }
+
+    public function setSubcategory2($subcategory2)
+    {
+        if ($subcategory2) {
+            $this->subcategory2 = $subcategory2;
         }
 
         return $this;

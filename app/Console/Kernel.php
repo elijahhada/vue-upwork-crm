@@ -2,8 +2,11 @@
 
 namespace App\Console;
 
+use App\Jobs\CreateJobsFromUpwork;
+use App\Models\User;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Auth;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,6 +28,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->job(new CreateJobsFromUpwork(User::find(2)))
+            ->everyFifteenMinutes()
+            ->timezone('Europe/Moscow')
+            ->between('09:00', '18:00');
     }
 
     /**
