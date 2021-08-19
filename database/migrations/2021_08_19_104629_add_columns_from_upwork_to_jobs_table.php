@@ -22,7 +22,7 @@ class AddColumnsFromUpworkToJobsTable extends Migration
             $table->string('duration')->nullable();
             $table->string('workload')->nullable();
             $table->string('status');
-            $table->timestamp('date_created');
+            $table->timestamp('date_created')->nullable();
             $table->string('client_country');
             $table->double('client_feedback');
             $table->double('client_reviews_count');
