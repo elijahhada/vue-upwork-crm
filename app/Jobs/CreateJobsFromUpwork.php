@@ -42,7 +42,7 @@ class CreateJobsFromUpwork implements ShouldQueue
     {
         Auth::login($this->user);
 
-        $service = new upworkJobsService();
+        $service = new UpworkJobsService();
 
         $jobs = $service
             ->setCount(100)
