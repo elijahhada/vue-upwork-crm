@@ -41,7 +41,7 @@ class CreateJobsFromUpwork implements ShouldQueue
 
         $service = new UpworkJobsService();
 
-        $jobs = $service
+        $jobsContainer = $service
             ->setCount(100)
             ->setOffset(0)
             ->getJobs();
@@ -49,7 +49,7 @@ class CreateJobsFromUpwork implements ShouldQueue
         $jobContents = [];
         $countries = [];
 
-        foreach ($jobs as $upworkJob) {
+        foreach ($jobsContainer->jobs as $upworkJob) {
             $upworkJob = new UpworkJob($upworkJob);
             $jobContents[] = [
                 'title' => $upworkJob->title,
