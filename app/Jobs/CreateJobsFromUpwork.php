@@ -72,9 +72,11 @@ class CreateJobsFromUpwork implements ShouldQueue
                 'client_payment_verification' => $upworkJob->client->payment_verification,
                 'client_score' => $upworkJob->client->score,
             ];
-            $countries[] = [
-                'title' => $upworkJob->client->country,
-            ];
+            if ($upworkJob->client->country) {
+                $countries[] = [
+                    'title' => $upworkJob->client->country,
+                ];
+            }
         }
 
         Job::upsert($jobContents, ['upwork_id']);
