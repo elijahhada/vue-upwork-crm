@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,6 +32,10 @@ class Job extends Model
         'client_score',
     ];
 
+    protected $appends = [
+        'human_date_created'
+    ];
+
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -39,5 +44,20 @@ class Job extends Model
     public function blockedUser(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'blocked_user_id', 'id');
+    }
+
+    public function getClientFeedbackAttribute($value)
+    {
+        return number_format($value, 2);
+    }
+
+    public function getClientPaymentVerificationAttribute($value)
+    {
+        return $value ?? 'NOT VERIFIED';
+    }
+
+    public function getHumanDateCreatedAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->date_created)->diffForHumans();
     }
 }
