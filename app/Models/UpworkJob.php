@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Actions\Upwork\CalculateClientScore;
+use Carbon\Carbon;
 
 class UpworkJob
 {
@@ -33,7 +34,7 @@ class UpworkJob
         $this->duration = $job->duration;
         $this->workload = $job->workload;
         $this->status = $job->job_status;
-        $this->date_created = $job->date_created;
+        $this->date_created = Carbon::createFromFormat('Y-m-d\TH:i:s+', $job->date_created);
 
         $this->client = new UpworkClient($job);
         $this->client->score = CalculateClientScore::calculate($this);
