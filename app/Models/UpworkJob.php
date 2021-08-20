@@ -25,7 +25,7 @@ class UpworkJob
     {
         $this->title = $job->title;
         $this->excerpt = $job->snippet;
-        $this->upwork_id = $job->id;
+        $this->id = $job->id;
         $this->url = $job->url;
         $this->category2 = $job->category2;
         $this->subcategory2 = $job->subcategory2;
