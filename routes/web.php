@@ -35,6 +35,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/auth/callback', [\App\Http\Controllers\Auth\UpworkController::class, 'callback'])->name('auth.upwork.callback');
     Route::get('/auth/callback/console', [\App\Http\Controllers\Auth\UpworkController::class, 'console'])->name('auth.upwork.callback.console');
     Route::get('/upwork/jobs', [UpworkController::class, 'search'])->name('upwork.jobs.index');
+    Route::get('/upwork/jobsprofile/{id}', function ($id) {
+        $service = new \App\Services\UpworkJobsProfileService();
+        dd($service->getJobProfiles($id));
+    })->name('upwork.jobs.profile');
     Route::get('/filters', [UpworkController::class, 'filters'])->name('filters');
 });
 
