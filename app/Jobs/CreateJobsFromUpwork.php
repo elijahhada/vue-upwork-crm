@@ -41,45 +41,62 @@ class CreateJobsFromUpwork implements ShouldQueue
 
         $service = new UpworkJobsService();
 
-        $jobsContainer = $service
-            ->setCount(100)
-            ->setOffset(0)
-            ->getJobs();
+        $flag = false;
+        $offset = 0;
 
-        $jobContents = [];
-        $countries = [];
+        while (!$flag) {
+            $jobsContainer = $service
+                ->setCount(100)
+                ->setOffset($offset)
+                ->getJobs();
 
-        foreach ($jobsContainer->jobs as $upworkJob) {
-            $upworkJob = new UpworkJob($upworkJob);
-            $jobContents[] = [
-                'title' => $upworkJob->title,
-                'excerpt' => $upworkJob->excerpt,
-                'upwork_id' => $upworkJob->id,
-                'url' => $upworkJob->url,
-                'category2' => $upworkJob->category2,
-                'subcategory2' => $upworkJob->subcategory2,
-                'job_type' => $upworkJob->job_type,
-                'budget' => $upworkJob->budget,
-                'duration' => $upworkJob->duration,
-                'workload' => $upworkJob->workload,
-                'status' => $upworkJob->job_status,
-                'date_created' => $upworkJob->date_created,
-                'client_country' => $upworkJob->client->country,
-                'client_feedback' => $upworkJob->client->feedback,
-                'client_reviews_count' => $upworkJob->client->reviews_count,
-                'client_jobs_posted' => $upworkJob->client->jobs_posted,
-                'client_past_hires' => $upworkJob->client->past_hires,
-                'client_payment_verification' => $upworkJob->client->payment_verification,
-                'client_score' => $upworkJob->client->score,
-            ];
-            if ($upworkJob->client->country) {
-                $countries[] = [
-                    'title' => $upworkJob->client->country,
+            $jobContents = [];
+            $countries = [];
+            $upworkIds = [];
+
+            foreach ($jobsContainer->jobs as $upworkJob) {
+                $upworkJob = new UpworkJob($upworkJob);
+                $jobContents[] = [
+                    'title' => $upworkJob->title,
+                    'excerpt' => $upworkJob->excerpt,
+                    'upwork_id' => $upworkJob->id,
+                    'url' => $upworkJob->url,
+                    'category2' => $upworkJob->category2,
+                    'subcategory2' => $upworkJob->subcategory2,
+                    'job_type' => $upworkJob->job_type,
+                    'budget' => $upworkJob->budget,
+                    'duration' => $upworkJob->duration,
+                    'workload' => $upworkJob->workload,
+                    'status' => $upworkJob->job_status,
+                    'date_created' => $upworkJob->date_created,
+                    'client_country' => $upworkJob->client->country,
+                    'client_feedback' => $upworkJob->client->feedback,
+                    'client_reviews_count' => $upworkJob->client->reviews_count,
+                    'client_jobs_posted' => $upworkJob->client->jobs_posted,
+                    'client_past_hires' => $upworkJob->client->past_hires,
+                    'client_payment_verification' => $upworkJob->client->payment_verification,
+                    'client_score' => $upworkJob->client->score,
                 ];
-            }
-        }
 
-        Job::upsert($jobContents, ['upwork_id']);
-        Country::upsert($countries, ['title']);
+                $upworkIds[] = $upworkJob->id;
+
+                if ($upworkJob->client->country) {
+                    $countries[] = [
+                        'title' => $upworkJob->client->country,
+                    ];
+                }
+            }
+
+            $jobsFromDB = Job::query()->whereIn('upwork_id', $upworkIds)->get();
+
+            if ($jobsFromDB->isEmpty()) {
+                $offset += 1;
+            } else {
+                $flag = true;
+            }
+
+            Job::upsert($jobContents, ['upwork_id']);
+            Country::upsert($countries, ['title']);
+        };
     }
 }
