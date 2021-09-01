@@ -29,10 +29,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->job(new CreateJobsFromUpwork(User::find(2)))
-            ->everyFifteenMinutes()
             ->timezone('Europe/Moscow')
-            ->weekdays()
-            ->between('09:00', '18:00');
+            ->everyFifteenMinutes()
+            ->weekdays();
     }
 
     /**
