@@ -30,6 +30,15 @@ class Job extends Model
         'client_past_hires',
         'client_payment_verification',
         'client_score',
+        'client_total_charge',
+        'client_assignments',
+        'client_avg_rate',
+        'client_avg_charge',
+        'client_bad_feedbacks_count',
+    ];
+
+    protected $casts = [
+        'client_assignments' => 'array',
     ];
 
     protected $appends = [

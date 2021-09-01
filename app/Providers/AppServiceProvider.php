@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Actions\Upwork\CalculateClientScore;
 use App\Contracts\OAuthable;
 use App\Http\Controllers\Auth\PipedriveController;
 use App\Http\Controllers\Auth\UpworkController;
