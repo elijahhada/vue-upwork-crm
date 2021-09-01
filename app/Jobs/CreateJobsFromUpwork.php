@@ -70,11 +70,13 @@ class CreateJobsFromUpwork implements ShouldQueue
                 }
             }
 
-            $jobProfiles = (new UpworkJobsProfileService())->getJobProfiles(implode(';', array_chunk($upworkIds, 20)));
+            foreach (array_chunk($upworkIds, 20) as $chunk) {
+                $jobProfiles = (new UpworkJobsProfileService())->getJobProfiles(implode(';', $chunk));
 
-            foreach ($jobProfiles->profiles->profile as $item) {
-                $jobContents[$item->ciphertext]->setExtraFields($item);
-                $jobContents[$item->ciphertext]->calculateClientScore();
+                foreach ($jobProfiles->profiles->profile as $item) {
+                    $jobContents[$item->ciphertext]->setExtraFields($item);
+                    $jobContents[$item->ciphertext]->calculateClientScore();
+                }
             }
 
             $jobsFromDB = Job::query()->whereIn('upwork_id', $upworkIds)->get();
