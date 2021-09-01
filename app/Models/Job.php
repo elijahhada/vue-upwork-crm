@@ -39,10 +39,12 @@ class Job extends Model
 
     protected $casts = [
         'client_assignments' => 'array',
+        'date_created' => 'datetime:d.m.Y H:i:s',
     ];
 
     protected $appends = [
-        'human_date_created'
+        'human_date_created',
+        'client_hire_rate',
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -62,11 +64,21 @@ class Job extends Model
 
     public function getClientPaymentVerificationAttribute($value)
     {
-        return $value ?? 'NOT VERIFIED';
+        return $value ? 'Yes' : 'No';
     }
 
     public function getHumanDateCreatedAttribute()
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->date_created)->diffForHumans();
+    }
+
+    public function getClientTotalChargeAttribute($value)
+    {
+        return '$'.number_format($value, 2) ?? '$0.00';
+    }
+
+    public function getClientHireRateAttribute()
+    {
+        return number_format($this->client_past_hires / ($this->client_jobs_posted + 1) * 100, 2) . '%';
     }
 }

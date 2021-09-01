@@ -1,11 +1,11 @@
 <template>
     <app-layout>
-        <div class="container p-4 mx-auto bg-gray-600">
+        <div class="p-4 mx-auto">
             <div class="flex flex-col space-y-4">
-                <job-card v-for="job in jobs.data"
-                    :key="job.id" 
-                    :title="job.title" 
-                    :excerpt="job.excerpt" 
+                <job-card class="w-8/12 py-7 px-8 border" v-for="job in jobs.data"
+                    :key="job.id"
+                    :title="job.title"
+                    :excerpt="job.excerpt"
                     :score="job.client_score"
                     :feedback="job.client_feedback"
                     :country="job.client_country"
@@ -17,6 +17,11 @@
                     :verification="job.client_payment_verification"
                     :budget="job.budget"
                     :url="job.url"
+                    :hires="job.client_past_hires"
+                    :totalCharge="job.client_total_charge"
+                    :hireRate="job.client_hire_rate"
+                    :feedbacksCount="job.client_reviews_count"
+                    :jobsPosted="job.client_jobs_posted"
                 ></job-card>
             </div>
         </div>

@@ -13,6 +13,14 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                green: {
+                    upwork: '#4EA52F'
+                },
+                gray: {
+                    button: '#CCCCCC',
+                }
+            }
         },
     },
 
