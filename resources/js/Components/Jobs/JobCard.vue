@@ -1,5 +1,5 @@
 <template>
-    <div class="flex-col rounded shadow-lg bg-white items-center">
+    <div v-if="jobStatus != 1" class="flex-col rounded shadow-lg items-center bg-white" :class="{'bg-yellow': isThinking}">
         <div class="flex justify-between w-full mb-7">
             <div class="flex items-end text-xl font-bold space-x-3">
                 <h2 class="text-green-upwork"><a :href="url" target="_blank">{{ title }}</a></h2>
@@ -7,7 +7,7 @@
             </div>
             <div class="flex items-end space-x-3">
                 <p class="opacity-50 text-sm">Posted: {{ dateCreated }}</p>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-current text-black w-8 h-8 cursor-pointer"><path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path></svg>
+                <svg @click="deleteJob" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-current text-black w-8 h-8 cursor-pointer"><path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path></svg>
             </div>
         </div>
 
@@ -40,10 +40,10 @@
         </div>
 
         <div class="flex justify-end space-x-4">
-            <div class="rounded-full cursor-pointer bg-gray-button py-3 px-8 hover:bg-gray-700 hover:text-white transition-all duration-300">
+            <div class="rounded-full cursor-pointer bg-gray-button py-3 px-8 hover:bg-gray-700 hover:text-white transition-all duration-300" @click="changeStatus(1)">
                 Забрать
             </div>
-            <div class="rounded-full cursor-pointer bg-gray-button py-3 px-8 hover:bg-gray-700 hover:text-white transition-all duration-300">
+            <div class="rounded-full cursor-pointer bg-gray-button py-3 px-8 hover:bg-gray-700 hover:text-white transition-all duration-300" @click="changeStatus(2)">
                 Подумать
             </div>
         </div>
@@ -62,6 +62,9 @@ export default {
         }
     },
     props: {
+        id: {
+            required: true,
+        },
         title: {
             required: true,
             type: String,
@@ -80,7 +83,6 @@ export default {
         },
         country: {
             required: true,
-            type: String,
         },
         dateCreated: {
             required: true,
@@ -134,11 +136,15 @@ export default {
             required: true,
             type: Number,
         },
+        jobStatus: {
+            required: true,
+        }
     },
     data() {
         return {
             truncatedLength: 300,
             truncated: true,
+            isThinking: false,
         }
     },
     methods: {
@@ -147,13 +153,39 @@ export default {
             console.log(this.$modal.show(
                 AddDeal
             ))
-        }
+        },
+        changeStatus(status_id){
+            console.log(this.id);
+            axios
+                .post('/jobs/change-status', {status: status_id, id: this.id})
+                .then(response => {
+                    var action;
+                    if(status_id == 1){
+                        action = 'book';
+                    }else{
+                        action = 'think';
+                    }
+                    socket.emit('jobEvent', {id: this.id, status: action});
+                });
+        },
+        deleteJob(){
+            axios
+                .post('/jobs/delete', {id: this.id})
+                .then(response => {
+                    socket.emit('jobEvent', {id: this.id, status: 'delete'})
+                });
+        },
     },
     mounted() {
+            if(this.jobStatus == 2){
+                this.isThinking = true
+            }
     }
 }
 </script>
 
 <style scoped>
-
+    .bg-yellow{
+        background-color: #d9c36c !important;
+    }
 </style>
