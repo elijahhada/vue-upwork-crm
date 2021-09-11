@@ -15,6 +15,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CreateJobsFromUpwork implements ShouldQueue
 {
@@ -71,7 +72,10 @@ class CreateJobsFromUpwork implements ShouldQueue
             }
 
             foreach (array_chunk($upworkIds, 20) as $chunk) {
+                sleep(10);
                 $jobProfiles = (new UpworkJobsProfileService())->getJobProfiles(implode(';', $chunk));
+
+                Log::info(json_encode($jobProfiles));
 
                 foreach ($jobProfiles->profiles->profile as $item) {
                     $jobContents[$item->ciphertext]->setExtraFields($item);
@@ -89,6 +93,7 @@ class CreateJobsFromUpwork implements ShouldQueue
 
             Job::upsert(json_decode(json_encode($jobContents), true), ['upwork_id']);
             Country::upsert($countries, ['title']);
+            sleep(10);
         };
     }
 }

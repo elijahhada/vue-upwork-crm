@@ -53,7 +53,7 @@ class UpworkClient
 
         if ($this->client_assignments) {
             foreach ($this->client_assignments as $client_assignment) {
-                if ((float) trim($client_assignment->as_rate, '$')) {
+                if (isset($client_assignment->as_rate) && (float) trim($client_assignment->as_rate, '$')) {
                     $avgCharges[] = trim($client_assignment->as_rate, '$');
                 }
             }
@@ -68,7 +68,7 @@ class UpworkClient
 
         if ($this->client_assignments) {
             foreach ($this->client_assignments as $client_assignment) {
-                if ((float) trim($client_assignment->as_total_charge)) {
+                if (isset($client_assignment->as_total_charge) && (float) trim($client_assignment->as_total_charge)) {
                     $avgCharges[] = trim($client_assignment->as_total_charge);
                 }
             }
@@ -101,7 +101,7 @@ class UpworkClient
     {
         if ($this->client_assignments) {
             foreach ($this->client_assignments as $client_assignment) {
-                if ($client_assignment->feedback && (float) $client_assignment->feedback->score <= 3.0) {
+                if (isset($client_assignment->feedback) && (float) $client_assignment->feedback->score <= 3.0) {
                     $this->client_bad_feedbacks_count++;
                 }
             }

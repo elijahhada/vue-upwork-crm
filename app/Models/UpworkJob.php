@@ -42,7 +42,9 @@ class UpworkJob
     public function setExtraFields($data)
     {
         $this->client
-            ->setClientAssignments($data->assignments->assignment)
+            ->setClientAssignments(isset($data->assignments->assignment)
+                ? is_array($data->assignments->assignment) ? $data->assignments->assignment : [$data->assignments->assignment]
+                : null)
             ->setClientTotalCharge($data->buyer->op_tot_charge)
             ->setClientAvgRate()
             ->setClientAvgCharge()
