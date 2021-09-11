@@ -92,6 +92,8 @@ class CreateJobsFromUpwork implements ShouldQueue
             $jsonJobs = json_encode($jobContents);
             $arrayJobs = json_decode($jsonJobs, true);
 
+            Log::info($arrayJobs);
+
             Job::upsert($arrayJobs, ['upwork_id']);
             Country::upsert($countries, ['title']);
             sleep(10);
