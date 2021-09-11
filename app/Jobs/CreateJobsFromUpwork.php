@@ -75,8 +75,6 @@ class CreateJobsFromUpwork implements ShouldQueue
                 sleep(10);
                 $jobProfiles = (new UpworkJobsProfileService())->getJobProfiles(implode(';', $chunk));
 
-                Log::info(json_encode($jobProfiles));
-
                 foreach ($jobProfiles->profiles->profile as $item) {
                     $jobContents[$item->ciphertext]->setExtraFields($item);
                     $jobContents[$item->ciphertext]->calculateClientScore();
@@ -91,7 +89,10 @@ class CreateJobsFromUpwork implements ShouldQueue
                 $flag = true;
             }
 
-            Job::upsert(json_decode(json_encode($jobContents), true), ['upwork_id']);
+            $jsonJobs = json_encode($jobContents);
+            $arrayJobs = json_decode($jsonJobs, true);
+
+            Job::upsert($arrayJobs, ['upwork_id']);
             Country::upsert($countries, ['title']);
             sleep(10);
         };
