@@ -99,14 +99,15 @@ class UpworkClient
 
     private function calculateBadFeedbacksCount()
     {
+        $client_bad_feedbacks_count = 0;
         if ($this->client_assignments) {
             foreach ($this->client_assignments as $client_assignment) {
                 if (isset($client_assignment->feedback) && (float) $client_assignment->feedback->score <= 3.0) {
-                    $this->client_bad_feedbacks_count++;
+                    $client_bad_feedbacks_count++;
                 }
             }
         }
 
-        return $this;
+        return $client_bad_feedbacks_count;
     }
 }
