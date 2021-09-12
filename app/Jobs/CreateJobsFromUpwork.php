@@ -75,9 +75,13 @@ class CreateJobsFromUpwork implements ShouldQueue
                 sleep(10);
                 $jobProfiles = (new UpworkJobsProfileService())->getJobProfiles(implode(';', $chunk));
 
-                foreach ($jobProfiles->profiles->profile as $item) {
-                    $jobContents[$item->ciphertext]->setExtraFields($item);
-                    $jobContents[$item->ciphertext]->calculateClientScore();
+                if (isset($jobProfiles->profiles->profile)) {
+                    foreach ($jobProfiles->profiles->profile as $item) {
+                        $jobContents[$item->ciphertext]->setExtraFields($item);
+                        $jobContents[$item->ciphertext]->calculateClientScore();
+                    }
+                } else {
+                    Log::info(json_encode($jobProfiles));
                 }
             }
 

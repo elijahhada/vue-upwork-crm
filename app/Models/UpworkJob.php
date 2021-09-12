@@ -4,8 +4,9 @@ namespace App\Models;
 
 use App\Actions\Upwork\CalculateClientScore;
 use Carbon\Carbon;
+use Illuminate\Contracts\Support\Arrayable;
 
-class UpworkJob
+class UpworkJob implements Arrayable
 {
     public $upwork_id;
     public $title;
@@ -54,5 +55,10 @@ class UpworkJob
     public function calculateClientScore()
     {
         $this->client->score = (new CalculateClientScore())->calculate($this);
+    }
+
+    public function toArray()
+    {
+        // TODO: Implement toArray() method.
     }
 }
