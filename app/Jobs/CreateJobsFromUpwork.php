@@ -84,8 +84,9 @@ class CreateJobsFromUpwork implements ShouldQueue
                 }
             }
 
-            foreach ($jobContents as $job) {
+            foreach ($jobContents as $index => $job) {
                 $job->calculateClientScore();
+                $jobContents[$index] = $job->toArray();
             }
 
             $jobsFromDB = Job::query()->whereIn('upwork_id', $upworkIds)->get();
@@ -96,12 +97,9 @@ class CreateJobsFromUpwork implements ShouldQueue
                 $flag = true;
             }
 
-            $jsonJobs = json_encode($jobContents);
-            $arrayJobs = json_decode($jsonJobs, true);
+            Log::info(json_encode($jobContents));
 
-            Log::info($arrayJobs);
-
-            Job::upsert($arrayJobs, ['upwork_id']);
+            Job::upsert($jobContents, ['upwork_id']);
             Country::upsert($countries, ['title']);
             sleep(10);
         };

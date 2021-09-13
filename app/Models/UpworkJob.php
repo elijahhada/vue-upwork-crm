@@ -10,7 +10,7 @@ class UpworkJob implements Arrayable
 {
     public $upwork_id;
     public $title;
-    public $snippet;
+    public $excerpt;
     public $url;
     public $category2;
     public $subcategory2;
@@ -19,8 +19,9 @@ class UpworkJob implements Arrayable
     public $duration;
     public $workload;
     public $job_status;
-    public $date_created;
+    public $status;
     public $client;
+    public $date_created;
 
     public function __construct($job)
     {
@@ -59,6 +60,14 @@ class UpworkJob implements Arrayable
 
     public function toArray()
     {
-        // TODO: Implement toArray() method.
+        $data = [];
+        foreach (get_object_vars($this) as $index => $item) {
+            $data[$index] = $item;
+        }
+        foreach (get_object_vars($this->client) as $index => $item) {
+            $data['client_'.$index] = $item;
+        }
+
+        return $data;
     }
 }
