@@ -78,11 +78,14 @@ class CreateJobsFromUpwork implements ShouldQueue
                 if (isset($jobProfiles->profiles->profile)) {
                     foreach ($jobProfiles->profiles->profile as $item) {
                         $jobContents[$item->ciphertext]->setExtraFields($item);
-                        $jobContents[$item->ciphertext]->calculateClientScore();
                     }
                 } else {
                     Log::info(json_encode($jobProfiles));
                 }
+            }
+
+            foreach ($jobContents as $job) {
+                $job->calculateClientScore();
             }
 
             $jobsFromDB = Job::query()->whereIn('upwork_id', $upworkIds)->get();
