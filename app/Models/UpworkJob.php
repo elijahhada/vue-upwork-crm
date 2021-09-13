@@ -61,9 +61,15 @@ class UpworkJob implements Arrayable
     public function toArray()
     {
         $data = [];
+
         foreach (get_object_vars($this) as $index => $item) {
+            if ($index === 'client') {
+                continue;
+            }
+
             $data[$index] = $item;
         }
+
         foreach (get_object_vars($this->client) as $index => $item) {
             $data['client_'.$index] = $item;
         }

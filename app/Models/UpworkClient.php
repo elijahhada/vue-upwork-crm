@@ -13,11 +13,11 @@ class UpworkClient
     public $past_hires;
     public $payment_verification;
     public $score;
-    public $client_total_charge;
-    public $client_assignments;
-    public $client_avg_rate;
-    public $client_avg_charge;
-    public $client_bad_feedbacks_count;
+    public $total_charge;
+    public $assignments;
+    public $avg_rate;
+    public $avg_charge;
+    public $bad_feedbacks_count;
 
     public function __construct($job)
     {
@@ -29,21 +29,21 @@ class UpworkClient
         $this->payment_verification = $job->client->payment_verification_status;
     }
 
-    public function setClientTotalCharge($client_total_charge)
+    public function setClientTotalCharge($total_charge)
     {
-        $this->client_total_charge = $client_total_charge;
+        $this->total_charge = $total_charge;
         return $this;
     }
 
-    public function setClientAssignments($client_assignments)
+    public function setClientAssignments($assignments)
     {
-        $this->client_assignments = $client_assignments;
+        $this->assignments = $assignments;
         return $this;
     }
 
     public function setClientAvgRate()
     {
-        $this->client_avg_rate = $this->calculateAvgRate();
+        $this->avg_rate = $this->calculateAvgRate();
         return $this;
     }
 
@@ -51,10 +51,10 @@ class UpworkClient
     {
         $avgCharges = [];
 
-        if ($this->client_assignments) {
-            foreach ($this->client_assignments as $client_assignment) {
-                if (isset($client_assignment->as_rate) && (float) trim($client_assignment->as_rate, '$')) {
-                    $avgCharges[] = trim($client_assignment->as_rate, '$');
+        if ($this->assignments) {
+            foreach ($this->assignments as $assignment) {
+                if (isset($assignment->as_rate) && (float) trim($assignment->as_rate, '$')) {
+                    $avgCharges[] = trim($assignment->as_rate, '$');
                 }
             }
         }
@@ -66,10 +66,10 @@ class UpworkClient
     {
         $avgCharges = [];
 
-        if ($this->client_assignments) {
-            foreach ($this->client_assignments as $client_assignment) {
-                if (isset($client_assignment->as_total_charge) && (float) trim($client_assignment->as_total_charge)) {
-                    $avgCharges[] = trim($client_assignment->as_total_charge);
+        if ($this->assignments) {
+            foreach ($this->assignments as $assignment) {
+                if (isset($assignment->as_total_charge) && (float) trim($assignment->as_total_charge)) {
+                    $avgCharges[] = trim($assignment->as_total_charge);
                 }
             }
         }
@@ -78,36 +78,36 @@ class UpworkClient
     }
 
     /**
-     * @param mixed $client_avg_charge
+     * @param mixed $avg_charge
      * @return UpworkClient
      */
     public function setClientAvgCharge()
     {
-        $this->client_avg_charge = $this->calculateAvgCharge();
+        $this->avg_charge = $this->calculateAvgCharge();
         return $this;
     }
 
     /**
-     * @param mixed $client_bad_feedbacks_count
+     * @param mixed $bad_feedbacks_count
      * @return UpworkClient
      */
     public function setClientBadFeedbacksCount()
     {
-        $this->client_bad_feedbacks_count = $this->calculateBadFeedbacksCount();
+        $this->bad_feedbacks_count = $this->calculateBadFeedbacksCount();
         return $this;
     }
 
     private function calculateBadFeedbacksCount()
     {
-        $client_bad_feedbacks_count = 0;
-        if ($this->client_assignments) {
-            foreach ($this->client_assignments as $client_assignment) {
-                if (isset($client_assignment->feedback) && (float) $client_assignment->feedback->score <= 3.0) {
-                    $client_bad_feedbacks_count++;
+        $bad_feedbacks_count = 0;
+        if ($this->assignments) {
+            foreach ($this->assignments as $assignment) {
+                if (isset($assignment->feedback) && (float) $assignment->feedback->score <= 3.0) {
+                    $bad_feedbacks_count++;
                 }
             }
         }
 
-        return $client_bad_feedbacks_count;
+        return $bad_feedbacks_count;
     }
 }
