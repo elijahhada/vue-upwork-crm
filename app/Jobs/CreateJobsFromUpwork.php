@@ -97,7 +97,7 @@ class CreateJobsFromUpwork implements ShouldQueue
                 $flag = true;
             }
 
-            Log::info(json_encode($jobContents));
+            Log::info($jobContents);
 
             Job::upsert($jobContents, ['upwork_id']);
             Country::upsert($countries, ['title']);
