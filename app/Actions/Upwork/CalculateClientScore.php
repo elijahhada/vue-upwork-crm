@@ -34,21 +34,21 @@ class CalculateClientScore
             $score += 5;
         }
 
-        if ($job->client->client_avg_rate && $job->client->client_avg_rate < 15) {
+        if ($job->client->avg_rate && $job->client->avg_rate < 15) {
             $score -= 5;
-        } elseif ($job->client->client_avg_rate && $job->client->client_avg_rate >= 15 ) {
+        } elseif ($job->client->avg_rate && $job->client->avg_rate >= 15 ) {
             $score += 10;
         }
 
-        if ($job->client->client_avg_charge && $job->client->client_avg_charge < 500) {
+        if ($job->client->avg_charge && $job->client->avg_charge < 500) {
             $score -= 5;
-        } elseif ($job->client->client_avg_charge && $job->client->client_avg_charge >= 500) {
+        } elseif ($job->client->avg_charge && $job->client->avg_charge >= 500) {
             $score += 5;
         }
 
-        if ($job->client->client_bad_feedbacks_count && $job->client->client_bad_feedbacks_count >= 5) {
+        if ($job->client->bad_feedbacks_count && $job->client->bad_feedbacks_count >= 5) {
             $score -= 5;
-        } elseif ($job->client->client_bad_feedbacks_count && $job->client->client_bad_feedbacks_count < 5) {
+        } elseif ($job->client->bad_feedbacks_count && $job->client->bad_feedbacks_count < 5) {
             $score += 5;
         }
 
