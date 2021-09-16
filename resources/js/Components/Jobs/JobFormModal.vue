@@ -152,3 +152,10 @@ Best regards, Artem
     </section>
 </template>
 
+<script>
+
+export default {
+
+}
+</script>
+
