@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobsController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\Upwork\UpworkController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('jobs', JobsController::class);
+    Route::post('/jobs/change-status', [JobController::class, 'changeStatus'])->name('jobs.change-status');
+    Route::post('/jobs/delete', [JobController::class, 'delete'])->name('jobs.delete');
     Route::get('/pipedrive/deal/add', [\App\Http\Controllers\Pipedrive\DealController::class, 'add'])->name('pipedrive.deal.add');
     Route::get('/auth/upwork', [\App\Http\Controllers\Auth\UpworkController::class, 'index'])->name('auth.upwork');
     Route::get('/auth/callback', [\App\Http\Controllers\Auth\UpworkController::class, 'callback'])->name('auth.upwork.callback');

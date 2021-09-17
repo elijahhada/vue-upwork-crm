@@ -1,0 +1,171 @@
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+.container-template {
+    /*max-width: 1980px;*/
+    max-width: 100vw;
+    margin: 0 auto;
+}
+
+button:hover {
+    transition: all .3s linear;
+}
+
+a:hover {
+    transition: all .3s linear;
+}
+
+html {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.day-to-day::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 0;
+    scrollbar-width: none;
+    /*IE10+*/
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    display: none;
+}
+
+.calendar::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 0;
+    scrollbar-width: none;
+    /*IE10+*/
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    display: none;
+}
+
+.topmenu-width {
+    /*max-width: 1980px;*/
+    max-width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+}
+
+#take {
+    width: 80vw;
+    max-width: 1200px;
+    max-height: 88vh;
+    height: 100%;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.textarea-form {
+    min-height: 405px;
+    overflow-y: auto;
+}
+
+.drop-menu-technologies {
+    max-height: 345px;
+}
+
+.parent-tech {
+    min-height: 45px;
+}
+
+@keyframes width0 {
+    0% {
+        width: content-box;
+
+    }
+    100% {
+        width: 0px;
+    }
+
+}
+
+@keyframes width100 {
+    0% {
+        width: 0px
+
+    }
+    100% {
+        width: content-box;
+    }
+
+}
+
+@media (min-width: 2000px) {
+    .calendar-date {
+        width: inherit;
+        margin-left: 6%;
+    }
+
+    .open-big-calendar {
+        margin-left: 5.7%;
+    }
+}
+
+@media (max-width: 1990px) {
+    .calendar-date {
+        width: inherit;
+        margin-left: 5%;
+    }
+
+    .open-big-calendar {
+        margin-left: 4.2%;
+    }
+}
+
+@media (max-width: 1535px) {
+    .calendar-date {
+        width: inherit;
+        margin-left: 7.7%;
+    }
+
+    .open-big-calendar {
+        margin-left: 7.2%;
+    }
+}
+
+@media (max-width: 1280px) {
+    .calendar-date {
+        width: inherit;
+        margin-left: 7.2%;
+    }
+
+    .open-big-calendar {
+        margin-left: 6.4%;
+    }
+}
+
+.green-500, .text-green-500 {
+    color: #4EA52F;
+}
+
+.bg-green-500 {
+    background: #4EA52F;
+}
+
+.hover\:bg-green-500:hover {
+    background: #4EA52F;
+}
+
+.hover\:bg-green-600:hover {
+    background: #2F7616;
+}
+
+.hover\:bg-red-700:hover {
+    background: #CE3737;
+}
+
+.bg-red-700 {
+    background: #FF4F4F;
+}
+
+.create-kid {
+    min-width: 120px;
+}
