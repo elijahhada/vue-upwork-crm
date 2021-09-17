@@ -2041,6 +2041,1779 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  methods: {
+    closeGlobalCalendar: function closeGlobalCalendar() {
+      this.$store.state.GlobalCalendarSwitched = !this.$store.state.GlobalCalendarSwitched;
+    }
+  },
+  computed: {
+    GlobalCalendarSwitched: function GlobalCalendarSwitched() {
+      return this.$store.state.GlobalCalendarSwitched;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=script&lang=js& ***!
@@ -2053,7 +3826,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Modals_AddDeal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Modals/AddDeal */ "./resources/js/Components/Modals/AddDeal.vue");
-/* harmony import */ var _JobFormModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JobFormModal */ "./resources/js/Components/Jobs/JobFormModal.vue");
 //
 //
 //
@@ -2122,60 +3894,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {},
   computed: {
     truncatedExcerpt: function truncatedExcerpt() {
       return this.excerpt.substring(0, this.truncatedLength);
@@ -2275,6 +3995,8 @@ __webpack_require__.r(__webpack_exports__);
     changeStatus: function changeStatus(status_id) {
       var _this = this;
 
+      var el = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      if (el) this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
       console.log(this.id);
       axios.post('/jobs/change-status', {
         status: status_id,
@@ -2476,12 +4198,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      techsList: [{
+        name: 'Laravel',
+        color: 'green'
+      }, {
+        name: 'Vue',
+        color: 'yellow'
+      }, {
+        name: 'Tailwind',
+        color: 'red'
+      }],
+      selectedTechsList: [{
+        name: 'PHP',
+        color: 'red'
+      }, {
+        name: 'JavaScript',
+        color: 'green'
+      }, {
+        name: 'Bootstarp',
+        color: 'yellow'
+      }]
+    };
+  },
+  methods: {
+    closeModalJob: function closeModalJob() {
+      this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
+    },
+    dropdownTechs: function dropdownTechs() {
+      document.querySelector(".open-drop-tech-menu").classList.toggle("rotate-180");
+      document.querySelector(".open-drop-tech-menu").classList.toggle("transform");
+      document.querySelector(".drop-menu-technologies").classList.toggle('hidden');
+    },
+    removeTech: function removeTech(i, el) {
+      this.techsList.push(el);
+      this.selectedTechsList.splice(i, 1);
+    },
+    addTech: function addTech(i, el) {
+      this.selectedTechsList.push(el);
+      this.techsList.splice(i, 1);
+    }
+  },
+  computed: {
+    ModalJobSwitched: function ModalJobSwitched() {
+      return this.$store.state.ModalJobSwitched;
+    }
+  }
+});
 
 /***/ }),
 
@@ -2735,6 +4500,339 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      switched: true
+    };
+  },
+  methods: {
+    switchSidebarCalendar: function switchSidebarCalendar() {
+      if (this.switched) {
+        document.querySelector('.calendar-block').style.cssText = 'animation: width0 .3s linear;';
+        setTimeout(function () {
+          document.querySelector('.calendar').classList.add('hidden');
+          document.querySelector('.calendar-switcher').classList.add('right-4');
+          document.querySelector('.calendar-switcher').style.cssText = 'transform: rotate(180deg)';
+        }, 280);
+        document.querySelector('.calendar-block').classList.toggle('z-40');
+        document.querySelector('.calendar-switcher').classList.remove('-ml-5');
+        document.querySelector('.calendar-date').classList.toggle('hidden');
+        document.querySelector('.calendar-button').classList.toggle('hidden'); // add to top menu full width
+
+        document.querySelector('.topmenu').classList.toggle('z-50');
+        document.querySelector('.topmenu').querySelector(".last-block").classList.remove('w-3/12');
+        document.querySelector('.topmenu').querySelector(".last-block").classList.add('w-0');
+        document.querySelector('.topmenu').querySelector(".user-block").classList.remove('w-5/12');
+        document.querySelector('.topmenu').querySelector(".user-block").classList.add('w-8/12');
+        this.switched = !this.switched;
+      } else {
+        document.querySelector('.calendar-block').style.cssText = 'animation: width100 .3s linear;';
+        document.querySelector('.calendar').classList.remove('hidden');
+        document.querySelector('.calendar-block').classList.toggle('z-40');
+        setTimeout(function () {
+          document.querySelector('.calendar-switcher').style.cssText = 'transform: rotate(0deg)';
+        }, 280);
+        document.querySelector('.calendar-switcher').classList.remove('right-4');
+        document.querySelector('.calendar-switcher').classList.add('-ml-5');
+        document.querySelector('.calendar-date').classList.toggle('hidden');
+        document.querySelector('.calendar-button').classList.toggle('hidden'); // delete from top menu full width
+
+        document.querySelector('.topmenu').classList.toggle('z-50');
+        document.querySelector('.topmenu').querySelector(".last-block").classList.add('w-3/12');
+        document.querySelector('.topmenu').querySelector(".last-block").classList.remove('w-0');
+        document.querySelector('.topmenu').querySelector(".user-block").classList.add('w-5/12');
+        document.querySelector('.topmenu').querySelector(".user-block").classList.remove('w-8/12');
+        this.switched = !this.switched;
+      }
+    },
+    overGreen: function overGreen() {
+      document.querySelector("#right-arrow-55").style.fill = "#4EA52F";
+    },
+    overNormal: function overNormal() {
+      document.querySelector("#right-arrow-55").style.fill = "black";
+    },
+    switchGlobal: function switchGlobal() {
+      this.$store.state.GlobalCalendarSwitched = !this.$store.state.GlobalCalendarSwitched;
+    }
+  }
+});
 
 /***/ }),
 
@@ -3719,6 +5817,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_DropdownLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/DropdownLink */ "./resources/js/Jetstream/DropdownLink.vue");
 /* harmony import */ var _Jetstream_NavLink__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/NavLink */ "./resources/js/Jetstream/NavLink.vue");
 /* harmony import */ var _Jetstream_ResponsiveNavLink__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/ResponsiveNavLink */ "./resources/js/Jetstream/ResponsiveNavLink.vue");
+/* harmony import */ var _Components_SidebarCalendar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/SidebarCalendar */ "./resources/js/Components/SidebarCalendar.vue");
+/* harmony import */ var _Components_GlobalCalendar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Components/GlobalCalendar */ "./resources/js/Components/GlobalCalendar.vue");
+/* harmony import */ var _Components_Jobs_JobFormModal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/Jobs/JobFormModal */ "./resources/js/Components/Jobs/JobFormModal.vue");
 //
 //
 //
@@ -3785,6 +5886,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 
 
@@ -3798,7 +5912,10 @@ __webpack_require__.r(__webpack_exports__);
     JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_2__.default,
     JetDropdownLink: _Jetstream_DropdownLink__WEBPACK_IMPORTED_MODULE_3__.default,
     JetNavLink: _Jetstream_NavLink__WEBPACK_IMPORTED_MODULE_4__.default,
-    JetResponsiveNavLink: _Jetstream_ResponsiveNavLink__WEBPACK_IMPORTED_MODULE_5__.default
+    JetResponsiveNavLink: _Jetstream_ResponsiveNavLink__WEBPACK_IMPORTED_MODULE_5__.default,
+    SidebarCalendar: _Components_SidebarCalendar__WEBPACK_IMPORTED_MODULE_6__.default,
+    GlobalCalendar: _Components_GlobalCalendar__WEBPACK_IMPORTED_MODULE_7__.default,
+    JobFormModal: _Components_Jobs_JobFormModal__WEBPACK_IMPORTED_MODULE_8__.default
   },
   data: function data() {
     return {
@@ -3818,6 +5935,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     showDropdown: function showDropdown() {
       this.$refs.dropdown.classList.toggle('hidden');
+    }
+  },
+  computed: {
+    ModalJobSwitched: function ModalJobSwitched() {
+      return this.$store.state.ModalJobSwitched;
     }
   }
 });
@@ -7186,11 +9308,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue */ "./node_modules/@inertiajs/inertia-vue/dist/index.js");
 /* harmony import */ var portal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! portal-vue */ "./node_modules/portal-vue/dist/portal-vue.common.js");
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import modules...
 
 
@@ -7198,16 +9321,17 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_3__.default.mixin({
+
+vue__WEBPACK_IMPORTED_MODULE_4__.default.mixin({
   methods: {
     route: route
   }
 });
-vue__WEBPACK_IMPORTED_MODULE_3__.default.use(_inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.plugin);
-vue__WEBPACK_IMPORTED_MODULE_3__.default.use(portal_vue__WEBPACK_IMPORTED_MODULE_1__.default);
-vue__WEBPACK_IMPORTED_MODULE_3__.default.use((vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default()));
+vue__WEBPACK_IMPORTED_MODULE_4__.default.use(_inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.plugin);
+vue__WEBPACK_IMPORTED_MODULE_4__.default.use(portal_vue__WEBPACK_IMPORTED_MODULE_1__.default);
+vue__WEBPACK_IMPORTED_MODULE_4__.default.use((vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default()));
 var app = document.getElementById('app');
-new vue__WEBPACK_IMPORTED_MODULE_3__.default({
+new vue__WEBPACK_IMPORTED_MODULE_4__.default({
   render: function render(h) {
     return h(_inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.App, {
       props: {
@@ -7217,7 +9341,8 @@ new vue__WEBPACK_IMPORTED_MODULE_3__.default({
         }
       }
     });
-  }
+  },
+  store: _store__WEBPACK_IMPORTED_MODULE_3__.default
 }).$mount(app);
 
 /***/ }),
@@ -7258,6 +9383,31 @@ window.socket = io("http://localhost:3000", {
   //avoid having user reconnect manually in order to prevent dead clients after a server restart
   "transports": ["websocket"]
 });
+
+/***/ }),
+
+/***/ "./resources/js/store/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/index.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vuex__WEBPACK_IMPORTED_MODULE_1__.default);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store({
+  state: {
+    ModalJobSwitched: false,
+    GlobalCalendarSwitched: true
+  }
+}));
 
 /***/ }),
 
@@ -9716,15 +11866,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../css/style.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/style.css");
 // Imports
 
-
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_style_css__WEBPACK_IMPORTED_MODULE_1__.default);
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*@import '../../css/style.css';*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9749,30 +11896,6 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-gray-100[data-v-317d1a6e] {\n    background-color: #f7fafc;\n    background-color: rgba(247, 250, 252, var(--tw-bg-opacity));\n}\n.border-gray-200[data-v-317d1a6e] {\n    border-color: #edf2f7;\n    border-color: rgba(237, 242, 247, var(--tw-border-opacity));\n}\n.text-gray-400[data-v-317d1a6e] {\n    color: #cbd5e0;\n    color: rgba(203, 213, 224, var(--tw-text-opacity));\n}\n.text-gray-500[data-v-317d1a6e] {\n    color: #a0aec0;\n    color: rgba(160, 174, 192, var(--tw-text-opacity));\n}\n.text-gray-600[data-v-317d1a6e] {\n    color: #718096;\n    color: rgba(113, 128, 150, var(--tw-text-opacity));\n}\n.text-gray-700[data-v-317d1a6e] {\n    color: #4a5568;\n    color: rgba(74, 85, 104, var(--tw-text-opacity));\n}\n.text-gray-900[data-v-317d1a6e] {\n    color: #1a202c;\n    color: rgba(26, 32, 44, var(--tw-text-opacity));\n}\n@media (prefers-color-scheme: dark) {\n.dark\\:bg-gray-800[data-v-317d1a6e] {\n        background-color: #2d3748;\n        background-color: rgba(45, 55, 72, var(--tw-bg-opacity));\n}\n.dark\\:bg-gray-900[data-v-317d1a6e] {\n        background-color: #1a202c;\n        background-color: rgba(26, 32, 44, var(--tw-bg-opacity));\n}\n.dark\\:border-gray-700[data-v-317d1a6e] {\n        border-color: #4a5568;\n        border-color: rgba(74, 85, 104, var(--tw-border-opacity));\n}\n.dark\\:text-white[data-v-317d1a6e] {\n        color: #fff;\n        color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n.dark\\:text-gray-400[data-v-317d1a6e] {\n        color: #cbd5e0;\n        color: rgba(203, 213, 224, var(--tw-text-opacity));\n}\n}\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/style.css":
-/*!***********************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/style.css ***!
-  \***********************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.container-template {\r\n    /*max-width: 1980px;*/\r\n    max-width: 100vw;\r\n    margin: 0 auto;\r\n}\r\n\r\nbutton:hover {\r\n    transition: all .3s linear;\r\n}\r\n\r\na:hover {\r\n    transition: all .3s linear;\r\n}\r\n\r\nhtml {\r\n    font-family: 'Inter';\r\n    font-style: normal;\r\n    font-weight: 500;\r\n    font-size: 16px;\r\n    line-height: 19px;\r\n}\r\n\r\n.day-to-day::-webkit-scrollbar {\r\n    -webkit-appearance: none;\r\n    width: 0;\r\n    scrollbar-width: none;\r\n    /*IE10+*/\r\n    -ms-overflow-style: -ms-autohiding-scrollbar;\r\n    display: none;\r\n}\r\n\r\n.calendar::-webkit-scrollbar {\r\n    -webkit-appearance: none;\r\n    width: 0;\r\n    scrollbar-width: none;\r\n    /*IE10+*/\r\n    -ms-overflow-style: -ms-autohiding-scrollbar;\r\n    display: none;\r\n}\r\n\r\n.topmenu-width {\r\n    /*max-width: 1980px;*/\r\n    max-width: 100vw;\r\n    left: 50%;\r\n    transform: translateX(-50%);\r\n    -webkit-transform: translateX(-50%);\r\n    -moz-transform: translateX(-50%);\r\n}\r\n\r\n#take {\r\n    width: 80vw;\r\n    max-width: 1200px;\r\n    max-height: 88vh;\r\n    height: 100%;\r\n    z-index: 999;\r\n    overflow-y: auto;\r\n}\r\n\r\n.textarea-form {\r\n    min-height: 405px;\r\n    overflow-y: auto;\r\n}\r\n\r\n.drop-menu-technologies {\r\n    max-height: 345px;\r\n}\r\n\r\n.parent-tech {\r\n    min-height: 45px;\r\n}\r\n\r\n@keyframes width0 {\r\n    0% {\r\n        width: content-box;\r\n\r\n    }\r\n    100% {\r\n        width: 0px;\r\n    }\r\n\r\n}\r\n\r\n@keyframes width100 {\r\n    0% {\r\n        width: 0px\r\n\r\n    }\r\n    100% {\r\n        width: content-box;\r\n    }\r\n\r\n}\r\n\r\n@media (min-width: 2000px) {\r\n    .calendar-date {\r\n        width: inherit;\r\n        margin-left: 6%;\r\n    }\r\n\r\n    .open-big-calendar {\r\n        margin-left: 5.7%;\r\n    }\r\n}\r\n\r\n@media (max-width: 1990px) {\r\n    .calendar-date {\r\n        width: inherit;\r\n        margin-left: 5%;\r\n    }\r\n\r\n    .open-big-calendar {\r\n        margin-left: 4.2%;\r\n    }\r\n}\r\n\r\n@media (max-width: 1535px) {\r\n    .calendar-date {\r\n        width: inherit;\r\n        margin-left: 7.7%;\r\n    }\r\n\r\n    .open-big-calendar {\r\n        margin-left: 7.2%;\r\n    }\r\n}\r\n\r\n@media (max-width: 1280px) {\r\n    .calendar-date {\r\n        width: inherit;\r\n        margin-left: 7.2%;\r\n    }\r\n\r\n    .open-big-calendar {\r\n        margin-left: 6.4%;\r\n    }\r\n}\r\n\r\n.green-500, .text-green-500 {\r\n    color: #4EA52F;\r\n}\r\n\r\n.bg-green-500 {\r\n    background: #4EA52F;\r\n}\r\n\r\n.hover\\:bg-green-500:hover {\r\n    background: #4EA52F;\r\n}\r\n\r\n.hover\\:bg-green-600:hover {\r\n    background: #2F7616;\r\n}\r\n\r\n.hover\\:bg-red-700:hover {\r\n    background: #CE3737;\r\n}\r\n\r\n.bg-red-700 {\r\n    background: #FF4F4F;\r\n}\r\n\r\n.create-kid {\r\n    min-width: 120px;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35990,6 +38113,45 @@ component.options.__file = "resources/js/Components/DashboardHeader.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Components/GlobalCalendar.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/Components/GlobalCalendar.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true& */ "./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true&");
+/* harmony import */ var _GlobalCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GlobalCalendar.vue?vue&type=script&lang=js& */ "./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _GlobalCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "7854028c",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/GlobalCalendar.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Components/Jobs/JobCard.vue":
 /*!**************************************************!*\
   !*** ./resources/js/Components/Jobs/JobCard.vue ***!
@@ -36183,6 +38345,45 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/Components/Modals/FiltersModal.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Components/SidebarCalendar.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/Components/SidebarCalendar.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true& */ "./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true&");
+/* harmony import */ var _SidebarCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SidebarCalendar.vue?vue&type=script&lang=js& */ "./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _SidebarCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "444cfa3f",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/SidebarCalendar.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -38225,6 +40426,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GlobalCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GlobalCalendar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GlobalCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/Components/Jobs/JobCard.vue?vue&type=script&lang=js&":
 /*!***************************************************************************!*\
   !*** ./resources/js/Components/Jobs/JobCard.vue?vue&type=script&lang=js& ***!
@@ -38302,6 +40519,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FiltersModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FiltersModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/FiltersModal.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FiltersModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SidebarCalendar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -39113,6 +41346,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/Components/Jobs/JobCard.vue?vue&type=template&id=5e15d15f&scoped=true&":
 /*!*********************************************************************************************!*\
   !*** ./resources/js/Components/Jobs/JobCard.vue?vue&type=template&id=5e15d15f&scoped=true& ***!
@@ -39194,6 +41444,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FiltersModal_vue_vue_type_template_id_20b9a020___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FiltersModal_vue_vue_type_template_id_20b9a020___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FiltersModal.vue?vue&type=template&id=20b9a020& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/FiltersModal.vue?vue&type=template&id=20b9a020&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true& ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true&");
 
 
 /***/ }),
@@ -40482,6 +42749,4967 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    {
+      staticClass: "z-50",
+      class: { hidden: _vm.GlobalCalendarSwitched },
+      attrs: { id: "big-calendar" }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "w-full bg-gray-200 py-6 px-12 text-black z-50 min-h-screen  fixed top-0 left-0 right-0 "
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-200 w-12/12 h-12/12 flex flex-col justify-start items-center px-2  relative ",
+              staticStyle: { "max-height": "98vh" }
+            },
+            [
+              _c(
+                "p",
+                {
+                  staticClass:
+                    "text-black text-5xl  cursor-pointer hover:text-red-500 absolute right-3 -top-3 cursor-pointer close-big-calendar",
+                  on: { click: _vm.closeGlobalCalendar }
+                },
+                [_vm._v("\n                ×")]
+              ),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2)
+            ]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "flex flex-row items-center justify-center" },
+      [
+        _c("img", {
+          staticClass: "prev mx-6 cursor-pointer",
+          attrs: { src: "images/calendar-arrow-left.svg", alt: "prev" }
+        }),
+        _vm._v(" "),
+        _c("p", [_vm._v("Неделя 16.08—24.08 ")]),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "next mx-6 cursor-pointer",
+          attrs: { src: "images/calendar-arrow-right.svg", alt: "next" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-8 w-full grid grid-cols-7 gap-4 " }, [
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("18.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("19.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("20.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("21.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("22.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("23.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("24.08")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          " day-to-day mt-2 w-full grid grid-cols-7 gap-4  max-h-full overflow-y-auto"
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-1" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-2" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-3" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-4" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-5" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-6" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-7" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        )
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=template&id=5e15d15f&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=template&id=5e15d15f&scoped=true& ***!
@@ -40519,14 +47747,16 @@ var render = function() {
         { staticClass: "w-11/12 mb-7 flex justify-between items-center" },
         [
           _c("p", [
-            _c(
-              "span",
-              {
-                staticClass:
-                  "text-green-500 font-bold text-2xl mr-4  border-b border-gray-300"
-              },
-              [_vm._v(_vm._s(_vm.title))]
-            ),
+            _c("a", { attrs: { href: _vm.url } }, [
+              _c(
+                "span",
+                {
+                  staticClass:
+                    "text-green-500 font-bold text-2xl mr-4  border-b border-gray-300"
+                },
+                [_vm._v(_vm._s(_vm.title))]
+              )
+            ]),
             _vm._v(" "),
             _c("span", { staticClass: "text-black font-bold text-2xl" }, [
               _vm._v("Score: " + _vm._s(_vm.score) + "%")
@@ -40543,11 +47773,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "w-11/12 mb-5" }, [
         _c("p", { staticClass: "leading-7 text-base font-normal " }, [
-          _vm._v(
-            "\n                       " +
-              _vm._s(_vm.truncatedExcerpt) +
-              "\n                    "
-          )
+          _vm._v("\n           " + _vm._s(_vm.truncatedExcerpt) + "\n        ")
         ])
       ]),
       _vm._v(" "),
@@ -40652,11 +47878,11 @@ var render = function() {
             attrs: { href: "#" },
             on: {
               click: function($event) {
-                return _vm.changeStatus(1)
+                return _vm.changeStatus(1, true)
               }
             }
           },
-          [_vm._v("\n                        Take\n                    ")]
+          [_vm._v("\n            Take\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -40671,7 +47897,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\n                        Think\n                    ")]
+          [_vm._v("\n            Think\n        ")]
         )
       ])
     ]
@@ -40788,611 +48014,436 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "section",
+    {
+      staticClass:
+        "fixed bg-white py-5 px-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-300 flex flex-col justify-between ",
+      class: { hidden: !_vm.ModalJobSwitched },
+      attrs: { id: "take" }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "f-full space-x-6 flex flex-nowrap justify-between items-start "
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-full h-full flex flex-col justify-start items-start"
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-full mb-3 relative" }, [
+                _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+                  _vm._v("Technologies")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "relative parent-tech p-1 w-full border border-gray-300 rounded-md focus:outline-none  text-white flex flex-wrap justify-start items-start wrap "
+                  },
+                  [
+                    _vm._l(_vm.selectedTechsList, function(item, index) {
+                      return _c(
+                        "p",
+                        {
+                          staticClass:
+                            "parent-button p-1 rounded-sm cursor-pointer m-1",
+                          class: "bg-" + item.color + "-500",
+                          on: {
+                            click: function($event) {
+                              return _vm.removeTech(index, item)
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(item.name) + " ×")]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("img", {
+                      staticClass:
+                        "open-drop-tech-menu ml-1 mt-1 cursor-pointer absolute right-2 top-4 ",
+                      attrs: {
+                        src: "images/arrow-down.svg",
+                        alt: "arrow down"
+                      },
+                      on: { click: _vm.dropdownTechs }
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass:
+                      "absolute mt-4 overflow-y-auto hidden drop-menu-technologies  bg-white  w-full border border-gray-300 rounded-md focus:outline-none  text-white flex flex-col justify-start items-start wrap space-y-2 "
+                  },
+                  _vm._l(_vm.techsList, function(item, index) {
+                    return _c(
+                      "li",
+                      {
+                        staticClass:
+                          "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1",
+                        on: {
+                          click: function($event) {
+                            return _vm.addTech(index, item)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "span",
+                          {
+                            staticClass: "p-1 rounded-sm cursor-pointer ",
+                            class: "bg-" + item.color + "-500"
+                          },
+                          [_vm._v(_vm._s(item.name))]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4),
+              _vm._v(" "),
+              _vm._m(5),
+              _vm._v(" "),
+              _vm._m(6)
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(7)
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "w-full h-full mt-4 flex justify-end items-start " },
+        [
+          _c("div", { staticClass: "flex space-x-4" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "close-take rounded-full border border-gray-300 px-12 py-3 text-black hover:bg-green-500 hover:text-white hover:border-green-500",
+                on: { click: _vm.closeModalJob }
+              },
+              [_vm._v("\n                    Cancel\n                ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "rounded-full border border-green-500 bg-green-500 px-12 py-3 text-white hover:bg-white hover:text-black"
+              },
+              [_vm._v("\n                    Save\n                ")]
+            )
+          ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Organization")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none"
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Vasterra")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Company name")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Company name")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Title")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none"
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Mobile Desktop responsive UI UX redes")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Owner")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+          attrs: { name: "", id: "" }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Artem M (You)")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Name2")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Name3")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Time of bid")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+          attrs: { name: "", id: "" }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("15:15")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("15:16")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("15:17")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Time after job creation")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+          attrs: { name: "", id: "" }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("15:45")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("15:55")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("17:45")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Bid profile")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+          attrs: { name: "", id: "" }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Artem Mazurchak")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Job posting")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+          attrs: { name: "", id: "" }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("https://docs.google.com/document/d/1xxs")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
-      "section",
-      {
-        staticClass:
-          "hidden fixed bg-white py-5 px-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-300 flex flex-col justify-between ",
-        attrs: { id: "take" }
-      },
+      "div",
+      { staticClass: "w-full h-full flex flex-col justify-start items-start" },
       [
-        _c(
-          "div",
-          {
-            staticClass:
-              "f-full space-x-6 flex flex-nowrap justify-between items-start "
-          },
-          [
+        _c("div", { staticClass: "w-full mb-3" }, [
+          _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+            _vm._v("Task link")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass:
+                "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+              attrs: { name: "", id: "" }
+            },
+            [
+              _c("option", { attrs: { value: "", selected: "" } }, [
+                _vm._v("https://ac.vasterra.com/projects/663?modal=Taskс")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "" } }, [_vm._v("link 2")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "" } }, [_vm._v("link3")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-full mb-3" }, [
+          _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+            _vm._v("Invite")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "space-x-3" }, [
             _c(
-              "div",
+              "button",
               {
                 staticClass:
-                  "w-full h-full flex flex-col justify-start items-start"
+                  "px-3 py-2 bg-gray-200 rounded-sm text-base text-black hover:bg-green-500 hover:text-white"
               },
               [
-                _c("div", { staticClass: "w-full mb-3" }, [
-                  _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                    _vm._v("Organization")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      staticClass:
-                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-                      attrs: { name: "", id: "" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("Vasterra")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Company name")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Company name")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full mb-3" }, [
-                  _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                    _vm._v("Title")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      staticClass:
-                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-                      attrs: { name: "", id: "" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("Mobile Desktop responsive UI UX redes")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Title2")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full mb-3 relative" }, [
-                  _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                    _vm._v("Technologies")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "relative parent-tech p-1 w-full border border-gray-300 rounded-md focus:outline-none  text-white flex flex-wrap justify-start items-start wrap "
-                    },
-                    [
-                      _c(
-                        "p",
-                        {
-                          staticClass:
-                            "parent-button bg-green-500 p-1 rounded-sm cursor-pointer m-1"
-                        },
-                        [_vm._v("Laravel ×")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "p",
-                        {
-                          staticClass:
-                            "parent-button bg-yellow-400 p-1 rounded-sm cursor-pointer m-1"
-                        },
-                        [_vm._v("Vue ×")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "p",
-                        {
-                          staticClass:
-                            "parent-button  bg-red-700 p-1 rounded-sm cursor-pointer m-1"
-                        },
-                        [_vm._v("PHP ×")]
-                      ),
-                      _vm._v(" "),
-                      _c("img", {
-                        staticClass:
-                          "open-drop-tech-menu ml-1 mt-1 cursor-pointer absolute right-2 top-4 ",
-                        attrs: {
-                          src: "images/arrow-down.svg",
-                          alt: "arrow down"
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "ul",
-                    {
-                      staticClass:
-                        "absolute mt-4 overflow-y-auto hidden drop-menu-technologies  bg-white  w-full border border-gray-300 rounded-md focus:outline-none  text-white flex flex-col justify-start items-start wrap space-y-2 "
-                    },
-                    [
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-green-500 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("Laravel")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-yellow-400 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("Vue")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-red-700 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("PHP")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-green-500 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("JavaScript")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-yellow-400 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("Bootstrap")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-red-700 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("TailWind")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-green-500 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("Laravel")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-yellow-400 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("Vue")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-red-700 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("PHP")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-green-500 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("JavaScript")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-yellow-400 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("Bootstrap")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "bg-red-700 p-1 rounded-sm cursor-pointer "
-                            },
-                            [_vm._v("TailWind")]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full mb-3" }, [
-                  _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                    _vm._v("Owner")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      staticClass:
-                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-                      attrs: { name: "", id: "" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("Artem M (You)")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [_vm._v("Name2")]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [_vm._v("Name3")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full mb-3" }, [
-                  _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                    _vm._v("Time of bid")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      staticClass:
-                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-                      attrs: { name: "", id: "" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("15:15")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [_vm._v("15:16")]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [_vm._v("15:17")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full mb-3" }, [
-                  _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                    _vm._v("Time after job creation")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      staticClass:
-                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-                      attrs: { name: "", id: "" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("15:45")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [_vm._v("15:55")]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [_vm._v("17:45")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full mb-3" }, [
-                  _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                    _vm._v("Bid profile")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      staticClass:
-                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-                      attrs: { name: "", id: "" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("Artem Mazurchak")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Title2")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full mb-3" }, [
-                  _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                    _vm._v("Job posting")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      staticClass:
-                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-                      attrs: { name: "", id: "" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("https://docs.google.com/document/d/1xxs")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Title2")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
-                    ]
-                  )
-                ])
+                _vm._v(
+                  "\n                            None\n                        "
+                )
               ]
             ),
             _vm._v(" "),
             _c(
-              "div",
+              "button",
               {
                 staticClass:
-                  "w-full h-full flex flex-col justify-start items-start"
+                  "px-3 py-2 bg-green-500 rounded-sm text-base text-white hover:bg-gray-200 hover:text-black"
               },
               [
-                _c("div", { staticClass: "w-full mb-3" }, [
-                  _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                    _vm._v("Task link")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      staticClass:
-                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-                      attrs: { name: "", id: "" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v(
-                          "https://ac.vasterra.com/projects/663?modal=Taskс"
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("link 2")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "" } }, [_vm._v("link3")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full mb-3" }, [
-                  _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                    _vm._v("Invite")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "space-x-3" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "px-3 py-2 bg-gray-200 rounded-sm text-base text-black hover:bg-green-500 hover:text-white"
-                      },
-                      [
-                        _vm._v(
-                          "\n                            None\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "px-3 py-2 bg-green-500 rounded-sm text-base text-white hover:bg-gray-200 hover:text-black"
-                      },
-                      [
-                        _vm._v(
-                          "\n                            Yes, invite\n                        "
-                        )
-                      ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full mb-3" }, [
-                  _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                    _vm._v("Bid")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "space-x-3" }, [
-                    _c(
-                      "textarea",
-                      {
-                        staticClass:
-                          "textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non",
-                        attrs: { name: "", id: "" }
-                      },
-                      [
-                        _vm._v(
-                          "Hi! I’d hope to create an Airbnb-like mobile app, as I built a counterpart of the Airbnb website and it was an amazing experience that I want to repeat with you.\nHere you can check this project we built with my team https://www.biz-cen.ru/. This platform is specifically designed for the office segment of commercial real estate.\nVisitors to the site can view a city’s commercial districts with a list of vacant premises including floor plans, and register for a preview directly online.\nYou can see more information here https://vasterra.com/biz-cen.\nYes, it was a web project, but of course I have strong expertise in mobile development. For example, here I worked on a Booking app for workplaces designed for Colliers International real estate company - https://play.google.com/store/apps/details?id=com.calcey.colliers&hl=en\nI’d like to go to the next stage and give you an estimation of your project, are there any other details that you can share?\n\nBest regards, Artem\n                    "
-                        )
-                      ]
-                    )
-                  ])
-                ])
+                _vm._v(
+                  "\n                            Yes, invite\n                        "
+                )
               ]
             )
-          ]
-        ),
+          ])
+        ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "w-full h-full mt-4 flex justify-end items-start " },
-          [
-            _c("div", { staticClass: "flex space-x-4" }, [
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "close-take rounded-full border border-gray-300 px-12 py-3 text-black hover:bg-green-500 hover:text-white hover:border-green-500"
-                },
-                [_vm._v("\n                    Cancel\n                ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "rounded-full border border-green-500 bg-green-500 px-12 py-3 text-white hover:bg-white hover:text-black"
-                },
-                [_vm._v("\n                    Save\n                ")]
-              )
-            ])
-          ]
-        )
+        _c("div", { staticClass: "w-full mb-3" }, [
+          _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+            _vm._v("Bid")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "space-x-3" }, [
+            _c(
+              "textarea",
+              {
+                staticClass:
+                  "textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non",
+                attrs: { name: "", id: "" }
+              },
+              [
+                _vm._v(
+                  "Hi! I’d hope to create an Airbnb-like mobile app, as I built a counterpart of the Airbnb website and it was an amazing experience that I want to repeat with you.\nHere you can check this project we built with my team https://www.biz-cen.ru/. This platform is specifically designed for the office segment of commercial real estate.\nVisitors to the site can view a city’s commercial districts with a list of vacant premises including floor plans, and register for a preview directly online.\nYou can see more information here https://vasterra.com/biz-cen.\nYes, it was a web project, but of course I have strong expertise in mobile development. For example, here I worked on a Booking app for workplaces designed for Colliers International real estate company - https://play.google.com/store/apps/details?id=com.calcey.colliers&hl=en\nI’d like to go to the next stage and give you an estimation of your project, are there any other details that you can share?\n\nBest regards, Artem\n                    "
+                )
+              ]
+            )
+          ])
+        ])
       ]
     )
   }
@@ -42028,6 +49079,686 @@ var staticRenderFns = [
         )
       ])
     ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30"
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "svg",
+        {
+          staticClass:
+            "cursor-pointer calendar-switcher fixed -ml-6 2xl:-ml-5 bottom-1/2 z-40",
+          attrs: {
+            width: "14",
+            height: "22",
+            viewBox: "0 0 14 22",
+            fill: "none",
+            xmlns: "http://www.w3.org/2000/svg"
+          },
+          on: {
+            click: _vm.switchSidebarCalendar,
+            mouseover: _vm.overGreen,
+            mouseout: _vm.overNormal
+          }
+        },
+        [
+          _c("path", {
+            attrs: {
+              d:
+                "M2.08834 21.0515C2.59101 21.0467 3.07408 20.8559 3.44438 20.5159L12.696 12.0406C12.9035 11.8501 13.0692 11.6185 13.1826 11.3606C13.296 11.1026 13.3545 10.8239 13.3545 10.5422C13.3545 10.2604 13.296 9.98176 13.1826 9.72382C13.0692 9.46587 12.9035 9.2343 12.696 9.04376L3.44438 0.568499C3.24897 0.380429 3.01793 0.233334 2.76483 0.13587C2.51174 0.0384068 2.24172 -0.00745915 1.97064 0.000969431C1.69956 0.00939992 1.4329 0.0719552 1.18636 0.184956C0.939809 0.297957 0.718349 0.45912 0.535004 0.65897C0.351659 0.858819 0.210132 1.09331 0.118746 1.34866C0.027361 1.60401 -0.0120372 1.87506 0.00287069 2.14586C0.0177785 2.41666 0.0866911 2.68174 0.205554 2.92552C0.324416 3.16929 0.49083 3.38684 0.695004 3.56535L8.32613 10.5422L0.711955 17.519C0.410086 17.7961 0.198954 18.158 0.106215 18.5571C0.0134763 18.9563 0.0434551 19.3741 0.192224 19.7559C0.340994 20.1377 0.601616 20.4657 0.939952 20.6969C1.27829 20.9281 1.67856 21.0517 2.08834 21.0515Z",
+              id: "right-arrow-55",
+              fill: "black"
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "fixed bottom-2 ml-1 w-full text-black  z-50 calendar-button"
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass:
+                "hover:bg-opacity-100 open-big-calendar rounded rounded-full text-white text-lg py-3 px-6 bg-gray-500 bg-opacity-80",
+              on: { click: _vm.switchGlobal }
+            },
+            [_vm._v("\n            All calendar\n        ")]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "w-3/12 2xl:w-2/12  calendar  bg-gray-200 text-white fixed top-0  overflow-y-scroll  max-h-screen  ",
+        staticStyle: { width: "inherit" }
+      },
+      [
+        _c("div", { staticClass: "slick-slider34 " }, [
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "fixed top-2 ml-1  w-full z-50 calendar-date" },
+      [
+        _c(
+          "button",
+          {
+            staticClass:
+              "rounded rounded-full text-white text-lg py-3 px-6 bg-black bg-opacity-50"
+          },
+          [_vm._v("18 August\n        ")]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -43750,6 +51481,16 @@ var render = function() {
                 _vm._v(" "),
                 _c("main", [_vm._t("default")], 2)
               ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30"
+              },
+              [_c("SidebarCalendar")],
+              1
             )
           ]
         )
@@ -43766,7 +51507,16 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("portal-target", { attrs: { name: "modal", multiple: "" } })
+      _c("portal-target", { attrs: { name: "modal", multiple: "" } }),
+      _vm._v(" "),
+      _c("JobFormModal"),
+      _vm._v(" "),
+      _c("GlobalCalendar"),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "modalShadow",
+        class: { hidden: !_vm.ModalJobSwitched }
+      })
     ],
     1
   )
@@ -61487,6 +69237,1272 @@ function getOuterHTML (el) {
 Vue.compile = compileToFunctions;
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Vue);
+
+
+/***/ }),
+
+/***/ "./node_modules/vuex/dist/vuex.esm.js":
+/*!********************************************!*\
+  !*** ./node_modules/vuex/dist/vuex.esm.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "Store": () => (/* binding */ Store),
+/* harmony export */   "createLogger": () => (/* binding */ createLogger),
+/* harmony export */   "createNamespacedHelpers": () => (/* binding */ createNamespacedHelpers),
+/* harmony export */   "install": () => (/* binding */ install),
+/* harmony export */   "mapActions": () => (/* binding */ mapActions),
+/* harmony export */   "mapGetters": () => (/* binding */ mapGetters),
+/* harmony export */   "mapMutations": () => (/* binding */ mapMutations),
+/* harmony export */   "mapState": () => (/* binding */ mapState)
+/* harmony export */ });
+/*!
+ * vuex v3.6.2
+ * (c) 2021 Evan You
+ * @license MIT
+ */
+function applyMixin (Vue) {
+  var version = Number(Vue.version.split('.')[0]);
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit });
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    var _init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      if ( options === void 0 ) options = {};
+
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit;
+      _init.call(this, options);
+    };
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    var options = this.$options;
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store;
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store;
+    }
+  }
+}
+
+var target = typeof window !== 'undefined'
+  ? window
+  : typeof __webpack_require__.g !== 'undefined'
+    ? __webpack_require__.g
+    : {};
+var devtoolHook = target.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+function devtoolPlugin (store) {
+  if (!devtoolHook) { return }
+
+  store._devtoolHook = devtoolHook;
+
+  devtoolHook.emit('vuex:init', store);
+
+  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+    store.replaceState(targetState);
+  });
+
+  store.subscribe(function (mutation, state) {
+    devtoolHook.emit('vuex:mutation', mutation, state);
+  }, { prepend: true });
+
+  store.subscribeAction(function (action, state) {
+    devtoolHook.emit('vuex:action', action, state);
+  }, { prepend: true });
+}
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+function find (list, f) {
+  return list.filter(f)[0]
+}
+
+/**
+ * Deep copy the given object considering circular structure.
+ * This function caches all nested objects and its copies.
+ * If it detects circular structure, use cached copy to avoid infinite loop.
+ *
+ * @param {*} obj
+ * @param {Array<Object>} cache
+ * @return {*}
+ */
+function deepCopy (obj, cache) {
+  if ( cache === void 0 ) cache = [];
+
+  // just return if obj is immutable value
+  if (obj === null || typeof obj !== 'object') {
+    return obj
+  }
+
+  // if obj is hit, it is in circular structure
+  var hit = find(cache, function (c) { return c.original === obj; });
+  if (hit) {
+    return hit.copy
+  }
+
+  var copy = Array.isArray(obj) ? [] : {};
+  // put the copy into cache at first
+  // because we want to refer it in recursive deepCopy
+  cache.push({
+    original: obj,
+    copy: copy
+  });
+
+  Object.keys(obj).forEach(function (key) {
+    copy[key] = deepCopy(obj[key], cache);
+  });
+
+  return copy
+}
+
+/**
+ * forEach for object
+ */
+function forEachValue (obj, fn) {
+  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+function isPromise (val) {
+  return val && typeof val.then === 'function'
+}
+
+function assert (condition, msg) {
+  if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+function partial (fn, arg) {
+  return function () {
+    return fn(arg)
+  }
+}
+
+// Base data struct for store's module, package with some attribute and method
+var Module = function Module (rawModule, runtime) {
+  this.runtime = runtime;
+  // Store some children item
+  this._children = Object.create(null);
+  // Store the origin module object which passed by programmer
+  this._rawModule = rawModule;
+  var rawState = rawModule.state;
+
+  // Store the origin module's state
+  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
+};
+
+var prototypeAccessors = { namespaced: { configurable: true } };
+
+prototypeAccessors.namespaced.get = function () {
+  return !!this._rawModule.namespaced
+};
+
+Module.prototype.addChild = function addChild (key, module) {
+  this._children[key] = module;
+};
+
+Module.prototype.removeChild = function removeChild (key) {
+  delete this._children[key];
+};
+
+Module.prototype.getChild = function getChild (key) {
+  return this._children[key]
+};
+
+Module.prototype.hasChild = function hasChild (key) {
+  return key in this._children
+};
+
+Module.prototype.update = function update (rawModule) {
+  this._rawModule.namespaced = rawModule.namespaced;
+  if (rawModule.actions) {
+    this._rawModule.actions = rawModule.actions;
+  }
+  if (rawModule.mutations) {
+    this._rawModule.mutations = rawModule.mutations;
+  }
+  if (rawModule.getters) {
+    this._rawModule.getters = rawModule.getters;
+  }
+};
+
+Module.prototype.forEachChild = function forEachChild (fn) {
+  forEachValue(this._children, fn);
+};
+
+Module.prototype.forEachGetter = function forEachGetter (fn) {
+  if (this._rawModule.getters) {
+    forEachValue(this._rawModule.getters, fn);
+  }
+};
+
+Module.prototype.forEachAction = function forEachAction (fn) {
+  if (this._rawModule.actions) {
+    forEachValue(this._rawModule.actions, fn);
+  }
+};
+
+Module.prototype.forEachMutation = function forEachMutation (fn) {
+  if (this._rawModule.mutations) {
+    forEachValue(this._rawModule.mutations, fn);
+  }
+};
+
+Object.defineProperties( Module.prototype, prototypeAccessors );
+
+var ModuleCollection = function ModuleCollection (rawRootModule) {
+  // register root module (Vuex.Store options)
+  this.register([], rawRootModule, false);
+};
+
+ModuleCollection.prototype.get = function get (path) {
+  return path.reduce(function (module, key) {
+    return module.getChild(key)
+  }, this.root)
+};
+
+ModuleCollection.prototype.getNamespace = function getNamespace (path) {
+  var module = this.root;
+  return path.reduce(function (namespace, key) {
+    module = module.getChild(key);
+    return namespace + (module.namespaced ? key + '/' : '')
+  }, '')
+};
+
+ModuleCollection.prototype.update = function update$1 (rawRootModule) {
+  update([], this.root, rawRootModule);
+};
+
+ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
+    var this$1 = this;
+    if ( runtime === void 0 ) runtime = true;
+
+  if ((true)) {
+    assertRawModule(path, rawModule);
+  }
+
+  var newModule = new Module(rawModule, runtime);
+  if (path.length === 0) {
+    this.root = newModule;
+  } else {
+    var parent = this.get(path.slice(0, -1));
+    parent.addChild(path[path.length - 1], newModule);
+  }
+
+  // register nested modules
+  if (rawModule.modules) {
+    forEachValue(rawModule.modules, function (rawChildModule, key) {
+      this$1.register(path.concat(key), rawChildModule, runtime);
+    });
+  }
+};
+
+ModuleCollection.prototype.unregister = function unregister (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+  var child = parent.getChild(key);
+
+  if (!child) {
+    if ((true)) {
+      console.warn(
+        "[vuex] trying to unregister module '" + key + "', which is " +
+        "not registered"
+      );
+    }
+    return
+  }
+
+  if (!child.runtime) {
+    return
+  }
+
+  parent.removeChild(key);
+};
+
+ModuleCollection.prototype.isRegistered = function isRegistered (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+
+  if (parent) {
+    return parent.hasChild(key)
+  }
+
+  return false
+};
+
+function update (path, targetModule, newModule) {
+  if ((true)) {
+    assertRawModule(path, newModule);
+  }
+
+  // update target module
+  targetModule.update(newModule);
+
+  // update nested modules
+  if (newModule.modules) {
+    for (var key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if ((true)) {
+          console.warn(
+            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
+            'manual reload is needed'
+          );
+        }
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      );
+    }
+  }
+}
+
+var functionAssert = {
+  assert: function (value) { return typeof value === 'function'; },
+  expected: 'function'
+};
+
+var objectAssert = {
+  assert: function (value) { return typeof value === 'function' ||
+    (typeof value === 'object' && typeof value.handler === 'function'); },
+  expected: 'function or object with "handler" function'
+};
+
+var assertTypes = {
+  getters: functionAssert,
+  mutations: functionAssert,
+  actions: objectAssert
+};
+
+function assertRawModule (path, rawModule) {
+  Object.keys(assertTypes).forEach(function (key) {
+    if (!rawModule[key]) { return }
+
+    var assertOptions = assertTypes[key];
+
+    forEachValue(rawModule[key], function (value, type) {
+      assert(
+        assertOptions.assert(value),
+        makeAssertionMessage(path, key, type, value, assertOptions.expected)
+      );
+    });
+  });
+}
+
+function makeAssertionMessage (path, key, type, value, expected) {
+  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
+  if (path.length > 0) {
+    buf += " in module \"" + (path.join('.')) + "\"";
+  }
+  buf += " is " + (JSON.stringify(value)) + ".";
+  return buf
+}
+
+var Vue; // bind on install
+
+var Store = function Store (options) {
+  var this$1 = this;
+  if ( options === void 0 ) options = {};
+
+  // Auto install if it is not done yet and `window` has `Vue`.
+  // To allow users to avoid auto-installation in some cases,
+  // this code should be placed here. See #731
+  if (!Vue && typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+  if ((true)) {
+    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
+    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
+    assert(this instanceof Store, "store must be called with the new operator.");
+  }
+
+  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+  // store internal state
+  this._committing = false;
+  this._actions = Object.create(null);
+  this._actionSubscribers = [];
+  this._mutations = Object.create(null);
+  this._wrappedGetters = Object.create(null);
+  this._modules = new ModuleCollection(options);
+  this._modulesNamespaceMap = Object.create(null);
+  this._subscribers = [];
+  this._watcherVM = new Vue();
+  this._makeLocalGettersCache = Object.create(null);
+
+  // bind commit and dispatch to self
+  var store = this;
+  var ref = this;
+  var dispatch = ref.dispatch;
+  var commit = ref.commit;
+  this.dispatch = function boundDispatch (type, payload) {
+    return dispatch.call(store, type, payload)
+  };
+  this.commit = function boundCommit (type, payload, options) {
+    return commit.call(store, type, payload, options)
+  };
+
+  // strict mode
+  this.strict = strict;
+
+  var state = this._modules.root.state;
+
+  // init root module.
+  // this also recursively registers all sub-modules
+  // and collects all module getters inside this._wrappedGetters
+  installModule(this, state, [], this._modules.root);
+
+  // initialize the store vm, which is responsible for the reactivity
+  // (also registers _wrappedGetters as computed properties)
+  resetStoreVM(this, state);
+
+  // apply plugins
+  plugins.forEach(function (plugin) { return plugin(this$1); });
+
+  var useDevtools = options.devtools !== undefined ? options.devtools : Vue.config.devtools;
+  if (useDevtools) {
+    devtoolPlugin(this);
+  }
+};
+
+var prototypeAccessors$1 = { state: { configurable: true } };
+
+prototypeAccessors$1.state.get = function () {
+  return this._vm._data.$$state
+};
+
+prototypeAccessors$1.state.set = function (v) {
+  if ((true)) {
+    assert(false, "use store.replaceState() to explicit replace store state.");
+  }
+};
+
+Store.prototype.commit = function commit (_type, _payload, _options) {
+    var this$1 = this;
+
+  // check object-style commit
+  var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+
+  var mutation = { type: type, payload: payload };
+  var entry = this._mutations[type];
+  if (!entry) {
+    if ((true)) {
+      console.error(("[vuex] unknown mutation type: " + type));
+    }
+    return
+  }
+  this._withCommit(function () {
+    entry.forEach(function commitIterator (handler) {
+      handler(payload);
+    });
+  });
+
+  this._subscribers
+    .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+    .forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  if (
+    ( true) &&
+    options && options.silent
+  ) {
+    console.warn(
+      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
+      'Use the filter functionality in the vue-devtools'
+    );
+  }
+};
+
+Store.prototype.dispatch = function dispatch (_type, _payload) {
+    var this$1 = this;
+
+  // check object-style dispatch
+  var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+
+  var action = { type: type, payload: payload };
+  var entry = this._actions[type];
+  if (!entry) {
+    if ((true)) {
+      console.error(("[vuex] unknown action type: " + type));
+    }
+    return
+  }
+
+  try {
+    this._actionSubscribers
+      .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+      .filter(function (sub) { return sub.before; })
+      .forEach(function (sub) { return sub.before(action, this$1.state); });
+  } catch (e) {
+    if ((true)) {
+      console.warn("[vuex] error in before action subscribers: ");
+      console.error(e);
+    }
+  }
+
+  var result = entry.length > 1
+    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+    : entry[0](payload);
+
+  return new Promise(function (resolve, reject) {
+    result.then(function (res) {
+      try {
+        this$1._actionSubscribers
+          .filter(function (sub) { return sub.after; })
+          .forEach(function (sub) { return sub.after(action, this$1.state); });
+      } catch (e) {
+        if ((true)) {
+          console.warn("[vuex] error in after action subscribers: ");
+          console.error(e);
+        }
+      }
+      resolve(res);
+    }, function (error) {
+      try {
+        this$1._actionSubscribers
+          .filter(function (sub) { return sub.error; })
+          .forEach(function (sub) { return sub.error(action, this$1.state, error); });
+      } catch (e) {
+        if ((true)) {
+          console.warn("[vuex] error in error action subscribers: ");
+          console.error(e);
+        }
+      }
+      reject(error);
+    });
+  })
+};
+
+Store.prototype.subscribe = function subscribe (fn, options) {
+  return genericSubscribe(fn, this._subscribers, options)
+};
+
+Store.prototype.subscribeAction = function subscribeAction (fn, options) {
+  var subs = typeof fn === 'function' ? { before: fn } : fn;
+  return genericSubscribe(subs, this._actionSubscribers, options)
+};
+
+Store.prototype.watch = function watch (getter, cb, options) {
+    var this$1 = this;
+
+  if ((true)) {
+    assert(typeof getter === 'function', "store.watch only accepts a function.");
+  }
+  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
+};
+
+Store.prototype.replaceState = function replaceState (state) {
+    var this$1 = this;
+
+  this._withCommit(function () {
+    this$1._vm._data.$$state = state;
+  });
+};
+
+Store.prototype.registerModule = function registerModule (path, rawModule, options) {
+    if ( options === void 0 ) options = {};
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+    assert(path.length > 0, 'cannot register the root module by using registerModule.');
+  }
+
+  this._modules.register(path, rawModule);
+  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+  // reset store to update getters...
+  resetStoreVM(this, this.state);
+};
+
+Store.prototype.unregisterModule = function unregisterModule (path) {
+    var this$1 = this;
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  this._modules.unregister(path);
+  this._withCommit(function () {
+    var parentState = getNestedState(this$1.state, path.slice(0, -1));
+    Vue.delete(parentState, path[path.length - 1]);
+  });
+  resetStore(this);
+};
+
+Store.prototype.hasModule = function hasModule (path) {
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  return this._modules.isRegistered(path)
+};
+
+Store.prototype.hotUpdate = function hotUpdate (newOptions) {
+  this._modules.update(newOptions);
+  resetStore(this, true);
+};
+
+Store.prototype._withCommit = function _withCommit (fn) {
+  var committing = this._committing;
+  this._committing = true;
+  fn();
+  this._committing = committing;
+};
+
+Object.defineProperties( Store.prototype, prototypeAccessors$1 );
+
+function genericSubscribe (fn, subs, options) {
+  if (subs.indexOf(fn) < 0) {
+    options && options.prepend
+      ? subs.unshift(fn)
+      : subs.push(fn);
+  }
+  return function () {
+    var i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  }
+}
+
+function resetStore (store, hot) {
+  store._actions = Object.create(null);
+  store._mutations = Object.create(null);
+  store._wrappedGetters = Object.create(null);
+  store._modulesNamespaceMap = Object.create(null);
+  var state = store.state;
+  // init all modules
+  installModule(store, state, [], store._modules.root, true);
+  // reset vm
+  resetStoreVM(store, state, hot);
+}
+
+function resetStoreVM (store, state, hot) {
+  var oldVm = store._vm;
+
+  // bind store public getters
+  store.getters = {};
+  // reset local getters cache
+  store._makeLocalGettersCache = Object.create(null);
+  var wrappedGetters = store._wrappedGetters;
+  var computed = {};
+  forEachValue(wrappedGetters, function (fn, key) {
+    // use computed to leverage its lazy-caching mechanism
+    // direct inline function use will lead to closure preserving oldVm.
+    // using partial to return function with only arguments preserved in closure environment.
+    computed[key] = partial(fn, store);
+    Object.defineProperty(store.getters, key, {
+      get: function () { return store._vm[key]; },
+      enumerable: true // for local getters
+    });
+  });
+
+  // use a Vue instance to store the state tree
+  // suppress warnings just in case the user has added
+  // some funky global mixins
+  var silent = Vue.config.silent;
+  Vue.config.silent = true;
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed: computed
+  });
+  Vue.config.silent = silent;
+
+  // enable strict mode for new vm
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      // dispatch changes in all subscribed watchers
+      // to force getter re-evaluation for hot reloading.
+      store._withCommit(function () {
+        oldVm._data.$$state = null;
+      });
+    }
+    Vue.nextTick(function () { return oldVm.$destroy(); });
+  }
+}
+
+function installModule (store, rootState, path, module, hot) {
+  var isRoot = !path.length;
+  var namespace = store._modules.getNamespace(path);
+
+  // register in namespace map
+  if (module.namespaced) {
+    if (store._modulesNamespaceMap[namespace] && ("development" !== 'production')) {
+      console.error(("[vuex] duplicate namespace " + namespace + " for the namespaced module " + (path.join('/'))));
+    }
+    store._modulesNamespaceMap[namespace] = module;
+  }
+
+  // set state
+  if (!isRoot && !hot) {
+    var parentState = getNestedState(rootState, path.slice(0, -1));
+    var moduleName = path[path.length - 1];
+    store._withCommit(function () {
+      if ((true)) {
+        if (moduleName in parentState) {
+          console.warn(
+            ("[vuex] state field \"" + moduleName + "\" was overridden by a module with the same name at \"" + (path.join('.')) + "\"")
+          );
+        }
+      }
+      Vue.set(parentState, moduleName, module.state);
+    });
+  }
+
+  var local = module.context = makeLocalContext(store, namespace, path);
+
+  module.forEachMutation(function (mutation, key) {
+    var namespacedType = namespace + key;
+    registerMutation(store, namespacedType, mutation, local);
+  });
+
+  module.forEachAction(function (action, key) {
+    var type = action.root ? key : namespace + key;
+    var handler = action.handler || action;
+    registerAction(store, type, handler, local);
+  });
+
+  module.forEachGetter(function (getter, key) {
+    var namespacedType = namespace + key;
+    registerGetter(store, namespacedType, getter, local);
+  });
+
+  module.forEachChild(function (child, key) {
+    installModule(store, rootState, path.concat(key), child, hot);
+  });
+}
+
+/**
+ * make localized dispatch, commit, getters and state
+ * if there is no namespace, just use root ones
+ */
+function makeLocalContext (store, namespace, path) {
+  var noNamespace = namespace === '';
+
+  var local = {
+    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if (( true) && !store._actions[type]) {
+          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      return store.dispatch(type, payload)
+    },
+
+    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if (( true) && !store._mutations[type]) {
+          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      store.commit(type, payload, options);
+    }
+  };
+
+  // getters and state object must be gotten lazily
+  // because they will be changed by vm update
+  Object.defineProperties(local, {
+    getters: {
+      get: noNamespace
+        ? function () { return store.getters; }
+        : function () { return makeLocalGetters(store, namespace); }
+    },
+    state: {
+      get: function () { return getNestedState(store.state, path); }
+    }
+  });
+
+  return local
+}
+
+function makeLocalGetters (store, namespace) {
+  if (!store._makeLocalGettersCache[namespace]) {
+    var gettersProxy = {};
+    var splitPos = namespace.length;
+    Object.keys(store.getters).forEach(function (type) {
+      // skip if the target getter is not match this namespace
+      if (type.slice(0, splitPos) !== namespace) { return }
+
+      // extract local getter type
+      var localType = type.slice(splitPos);
+
+      // Add a port to the getters proxy.
+      // Define as getter property because
+      // we do not want to evaluate the getters in this time.
+      Object.defineProperty(gettersProxy, localType, {
+        get: function () { return store.getters[type]; },
+        enumerable: true
+      });
+    });
+    store._makeLocalGettersCache[namespace] = gettersProxy;
+  }
+
+  return store._makeLocalGettersCache[namespace]
+}
+
+function registerMutation (store, type, handler, local) {
+  var entry = store._mutations[type] || (store._mutations[type] = []);
+  entry.push(function wrappedMutationHandler (payload) {
+    handler.call(store, local.state, payload);
+  });
+}
+
+function registerAction (store, type, handler, local) {
+  var entry = store._actions[type] || (store._actions[type] = []);
+  entry.push(function wrappedActionHandler (payload) {
+    var res = handler.call(store, {
+      dispatch: local.dispatch,
+      commit: local.commit,
+      getters: local.getters,
+      state: local.state,
+      rootGetters: store.getters,
+      rootState: store.state
+    }, payload);
+    if (!isPromise(res)) {
+      res = Promise.resolve(res);
+    }
+    if (store._devtoolHook) {
+      return res.catch(function (err) {
+        store._devtoolHook.emit('vuex:error', err);
+        throw err
+      })
+    } else {
+      return res
+    }
+  });
+}
+
+function registerGetter (store, type, rawGetter, local) {
+  if (store._wrappedGetters[type]) {
+    if ((true)) {
+      console.error(("[vuex] duplicate getter key: " + type));
+    }
+    return
+  }
+  store._wrappedGetters[type] = function wrappedGetter (store) {
+    return rawGetter(
+      local.state, // local state
+      local.getters, // local getters
+      store.state, // root state
+      store.getters // root getters
+    )
+  };
+}
+
+function enableStrictMode (store) {
+  store._vm.$watch(function () { return this._data.$$state }, function () {
+    if ((true)) {
+      assert(store._committing, "do not mutate vuex store state outside mutation handlers.");
+    }
+  }, { deep: true, sync: true });
+}
+
+function getNestedState (state, path) {
+  return path.reduce(function (state, key) { return state[key]; }, state)
+}
+
+function unifyObjectStyle (type, payload, options) {
+  if (isObject(type) && type.type) {
+    options = payload;
+    payload = type;
+    type = type.type;
+  }
+
+  if ((true)) {
+    assert(typeof type === 'string', ("expects string as the type, but found " + (typeof type) + "."));
+  }
+
+  return { type: type, payload: payload, options: options }
+}
+
+function install (_Vue) {
+  if (Vue && _Vue === Vue) {
+    if ((true)) {
+      console.error(
+        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+      );
+    }
+    return
+  }
+  Vue = _Vue;
+  applyMixin(Vue);
+}
+
+/**
+ * Reduce the code which written in Vue.js for getting the state.
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} states # Object's item can be a function which accept state and getters for param, you can do something for state and getters in it.
+ * @param {Object}
+ */
+var mapState = normalizeNamespace(function (namespace, states) {
+  var res = {};
+  if (( true) && !isValidMap(states)) {
+    console.error('[vuex] mapState: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(states).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedState () {
+      var state = this.$store.state;
+      var getters = this.$store.getters;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
+        if (!module) {
+          return
+        }
+        state = module.context.state;
+        getters = module.context.getters;
+      }
+      return typeof val === 'function'
+        ? val.call(this, state, getters)
+        : state[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for committing the mutation
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} mutations # Object's item can be a function which accept `commit` function as the first param, it can accept another params. You can commit mutation and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapMutations = normalizeNamespace(function (namespace, mutations) {
+  var res = {};
+  if (( true) && !isValidMap(mutations)) {
+    console.error('[vuex] mapMutations: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(mutations).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedMutation () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // Get the commit method from store
+      var commit = this.$store.commit;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
+        if (!module) {
+          return
+        }
+        commit = module.context.commit;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [commit].concat(args))
+        : commit.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for getting the getters
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} getters
+ * @return {Object}
+ */
+var mapGetters = normalizeNamespace(function (namespace, getters) {
+  var res = {};
+  if (( true) && !isValidMap(getters)) {
+    console.error('[vuex] mapGetters: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(getters).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    // The namespace has been mutated by normalizeNamespace
+    val = namespace + val;
+    res[key] = function mappedGetter () {
+      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
+        return
+      }
+      if (( true) && !(val in this.$store.getters)) {
+        console.error(("[vuex] unknown getter: " + val));
+        return
+      }
+      return this.$store.getters[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for dispatch the action
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} actions # Object's item can be a function which accept `dispatch` function as the first param, it can accept anthor params. You can dispatch action and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapActions = normalizeNamespace(function (namespace, actions) {
+  var res = {};
+  if (( true) && !isValidMap(actions)) {
+    console.error('[vuex] mapActions: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(actions).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedAction () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // get dispatch function from store
+      var dispatch = this.$store.dispatch;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
+        if (!module) {
+          return
+        }
+        dispatch = module.context.dispatch;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [dispatch].concat(args))
+        : dispatch.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Rebinding namespace param for mapXXX function in special scoped, and return them by simple object
+ * @param {String} namespace
+ * @return {Object}
+ */
+var createNamespacedHelpers = function (namespace) { return ({
+  mapState: mapState.bind(null, namespace),
+  mapGetters: mapGetters.bind(null, namespace),
+  mapMutations: mapMutations.bind(null, namespace),
+  mapActions: mapActions.bind(null, namespace)
+}); };
+
+/**
+ * Normalize the map
+ * normalizeMap([1, 2, 3]) => [ { key: 1, val: 1 }, { key: 2, val: 2 }, { key: 3, val: 3 } ]
+ * normalizeMap({a: 1, b: 2, c: 3}) => [ { key: 'a', val: 1 }, { key: 'b', val: 2 }, { key: 'c', val: 3 } ]
+ * @param {Array|Object} map
+ * @return {Object}
+ */
+function normalizeMap (map) {
+  if (!isValidMap(map)) {
+    return []
+  }
+  return Array.isArray(map)
+    ? map.map(function (key) { return ({ key: key, val: key }); })
+    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+}
+
+/**
+ * Validate whether given map is valid or not
+ * @param {*} map
+ * @return {Boolean}
+ */
+function isValidMap (map) {
+  return Array.isArray(map) || isObject(map)
+}
+
+/**
+ * Return a function expect two param contains namespace and map. it will normalize the namespace and then the param's function will handle the new namespace and the map.
+ * @param {Function} fn
+ * @return {Function}
+ */
+function normalizeNamespace (fn) {
+  return function (namespace, map) {
+    if (typeof namespace !== 'string') {
+      map = namespace;
+      namespace = '';
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/';
+    }
+    return fn(namespace, map)
+  }
+}
+
+/**
+ * Search a special module from store by namespace. if module not exist, print error message.
+ * @param {Object} store
+ * @param {String} helper
+ * @param {String} namespace
+ * @return {Object}
+ */
+function getModuleByNamespace (store, helper, namespace) {
+  var module = store._modulesNamespaceMap[namespace];
+  if (( true) && !module) {
+    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
+  }
+  return module
+}
+
+// Credits: borrowed code from fcomb/redux-logger
+
+function createLogger (ref) {
+  if ( ref === void 0 ) ref = {};
+  var collapsed = ref.collapsed; if ( collapsed === void 0 ) collapsed = true;
+  var filter = ref.filter; if ( filter === void 0 ) filter = function (mutation, stateBefore, stateAfter) { return true; };
+  var transformer = ref.transformer; if ( transformer === void 0 ) transformer = function (state) { return state; };
+  var mutationTransformer = ref.mutationTransformer; if ( mutationTransformer === void 0 ) mutationTransformer = function (mut) { return mut; };
+  var actionFilter = ref.actionFilter; if ( actionFilter === void 0 ) actionFilter = function (action, state) { return true; };
+  var actionTransformer = ref.actionTransformer; if ( actionTransformer === void 0 ) actionTransformer = function (act) { return act; };
+  var logMutations = ref.logMutations; if ( logMutations === void 0 ) logMutations = true;
+  var logActions = ref.logActions; if ( logActions === void 0 ) logActions = true;
+  var logger = ref.logger; if ( logger === void 0 ) logger = console;
+
+  return function (store) {
+    var prevState = deepCopy(store.state);
+
+    if (typeof logger === 'undefined') {
+      return
+    }
+
+    if (logMutations) {
+      store.subscribe(function (mutation, state) {
+        var nextState = deepCopy(state);
+
+        if (filter(mutation, prevState, nextState)) {
+          var formattedTime = getFormattedTime();
+          var formattedMutation = mutationTransformer(mutation);
+          var message = "mutation " + (mutation.type) + formattedTime;
+
+          startMessage(logger, message, collapsed);
+          logger.log('%c prev state', 'color: #9E9E9E; font-weight: bold', transformer(prevState));
+          logger.log('%c mutation', 'color: #03A9F4; font-weight: bold', formattedMutation);
+          logger.log('%c next state', 'color: #4CAF50; font-weight: bold', transformer(nextState));
+          endMessage(logger);
+        }
+
+        prevState = nextState;
+      });
+    }
+
+    if (logActions) {
+      store.subscribeAction(function (action, state) {
+        if (actionFilter(action, state)) {
+          var formattedTime = getFormattedTime();
+          var formattedAction = actionTransformer(action);
+          var message = "action " + (action.type) + formattedTime;
+
+          startMessage(logger, message, collapsed);
+          logger.log('%c action', 'color: #03A9F4; font-weight: bold', formattedAction);
+          endMessage(logger);
+        }
+      });
+    }
+  }
+}
+
+function startMessage (logger, message, collapsed) {
+  var startMessage = collapsed
+    ? logger.groupCollapsed
+    : logger.group;
+
+  // render
+  try {
+    startMessage.call(logger, message);
+  } catch (e) {
+    logger.log(message);
+  }
+}
+
+function endMessage (logger) {
+  try {
+    logger.groupEnd();
+  } catch (e) {
+    logger.log('—— log end ——');
+  }
+}
+
+function getFormattedTime () {
+  var time = new Date();
+  return (" @ " + (pad(time.getHours(), 2)) + ":" + (pad(time.getMinutes(), 2)) + ":" + (pad(time.getSeconds(), 2)) + "." + (pad(time.getMilliseconds(), 3)))
+}
+
+function repeat (str, times) {
+  return (new Array(times + 1)).join(str)
+}
+
+function pad (num, maxLength) {
+  return repeat('0', maxLength - num.toString().length) + num
+}
+
+var index = {
+  Store: Store,
+  install: install,
+  version: '3.6.2',
+  mapState: mapState,
+  mapMutations: mapMutations,
+  mapGetters: mapGetters,
+  mapActions: mapActions,
+  createNamespacedHelpers: createNamespacedHelpers,
+  createLogger: createLogger
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (index);
+
 
 
 /***/ }),

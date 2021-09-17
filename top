@@ -1,0 +1,289 @@
+[33mcommit dd8df1f8c2d3bea00eb80ad240095feda6b86a67[m[33m ([m[1;36mHEAD -> [m[1;32map_fixes[m[33m, [m[1;31morigin/ap_fixes[m[33m)[m
+Author: Kuznec-Vsevolodov <andrei.pechurevitch@yandex.ru>
+Date:   Thu Sep 16 07:24:50 2021 +0600
+
+    jobFormConflict-fix
+
+[33mcommit 5db956da3bb096f95015208d10e7dc669140efe5[m
+Author: Kuznec-Vsevolodov <andrei.pechurevitch@yandex.ru>
+Date:   Thu Sep 16 07:19:30 2021 +0600
+
+    murkup_fixes
+
+[33mcommit 57c10509b655120e39525b7acb1eab79439ec3cd[m
+Author: Kuznec-Vsevolodov <andrei.pechurevitch@yandex.ru>
+Date:   Tue Sep 7 03:32:42 2021 +0600
+
+    06.09.21 commit
+
+[33mcommit 27da453177a5562a44f024550a5c8fcfb3f0837d[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Wed Sep 1 11:23:04 2021 +0300
+
+    Update CreateJobsFromUpwork.php
+
+[33mcommit b3f4ffc9374294374ee35c10ccfcd3e0068b2038[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Wed Sep 1 10:41:38 2021 +0300
+
+    Update Kernel.php
+
+[33mcommit 2934391d896bda0d43761afb116c372957b0812b[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Wed Sep 1 10:35:46 2021 +0300
+
+    new cards and log viewer
+
+[33mcommit 734bbf49dda32265be299f64784abef437bc3119[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Wed Sep 1 03:14:07 2021 +0300
+
+    ADD: job additional info
+
+[33mcommit cfe48da91e68e3009e9141dc4d11c8f07a73bd98[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 27 01:27:25 2021 +0300
+
+    job profile service and debug
+
+[33mcommit 5a909024aacc4fc8e085e8b8afea5966d875a5d2[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 27 01:12:41 2021 +0300
+
+    increasing offset if no updates
+
+[33mcommit 13286d0a790b89b461b99d3aa86418ad63e257ec[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 20 17:35:15 2021 +0600
+
+    job cards
+
+[33mcommit 02b29ea085a6811e1b2649c6e056c8bef9e3b71e[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 20 13:44:09 2021 +0600
+
+    Update Kernel.php
+
+[33mcommit 7b4eb8f2e25217a75a8e6adade43321baad9627e[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 20 12:45:30 2021 +0600
+
+    add unique columns
+
+[33mcommit 9e94633cf4fd940dc53fdb917781c4b20328659b[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 20 12:26:01 2021 +0600
+
+    Update CreateJobsFromUpwork.php
+
+[33mcommit 8df3a983604eb85122de9352fbd94c86826ed156[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 20 12:19:53 2021 +0600
+
+    Update UpworkJob.php
+
+[33mcommit 49b642529d1e70bd82f6c0a4a2717e2cb3f0f780[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 20 12:09:11 2021 +0600
+
+    Create 2021_08_20_060705_change_to_nullable_status_column_to_jobs_table.php
+
+[33mcommit c04643d44ddbd102496da2fd3c66193c654af703[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 20 12:05:36 2021 +0600
+
+    Update UpworkJob.php
+
+[33mcommit d66603f81a17c587cfa0432d7fa271a8b8a7dd3e[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 20 11:58:54 2021 +0600
+
+    Update CreateJobsFromUpwork.php
+
+[33mcommit 65119c75456436e9c4b8d1cbebe0d04b00716ff1[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 20 11:57:20 2021 +0600
+
+    Update CreateJobsFromUpwork.php
+
+[33mcommit 6459c84a4a8ecca2f7c9a850a0c7ccb45eb1a900[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Thu Aug 19 19:51:30 2021 +0600
+
+    Update CreateJobsFromUpwork.php
+
+[33mcommit 51378f1a66e74a3e1d0e5a62e3041dad7bb3ea91[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Thu Aug 19 19:49:58 2021 +0600
+
+    Update 2021_08_19_104629_add_columns_from_upwork_to_jobs_table.php
+
+[33mcommit 4e7a163c3c6c25db3922d8de478e2c9d7896e534[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Thu Aug 19 19:47:26 2021 +0600
+
+    redis dependency
+
+[33mcommit 94d16a0939c55325cf974a945ad1d11d07c76132[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Thu Aug 19 19:40:39 2021 +0600
+
+    upwork jobs creation job with countries
+
+[33mcommit 4009cd91a0660763da6a4a203e9930afec32573c[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Thu Aug 19 02:09:09 2021 +0600
+
+    Update Upwork.php
+
+[33mcommit 28f74735df0370b4dd39153bad5ad00aaee127d8[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Thu Aug 19 00:58:27 2021 +0600
+
+    token column for users
+
+[33mcommit cadf5264ea0f0db060bee6d0e6418a42f701996f[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Thu Aug 19 00:37:38 2021 +0600
+
+    fix on jobs service
+
+[33mcommit 2865003408e08acd8e5451200bd28c0e276595bd[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Wed Aug 18 23:40:13 2021 +0600
+
+    fix on jobs service
+
+[33mcommit 7398b918921ec5ca193a6b33ef1cc66125527520[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Wed Aug 18 20:43:15 2021 +0600
+
+    filters page
+
+[33mcommit 5d21110de0191e285305111cc655ed362d74be7c[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Wed Aug 18 18:48:39 2021 +0600
+
+    Update UpworkCategoriesCommand.php
+
+[33mcommit c9bf871e8cfeaf5e8b93a1085d050ad89fecc8ab[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Wed Aug 18 18:40:18 2021 +0600
+
+    console command
+
+[33mcommit ff5017d18758861f4773ea911de0e0a00e4c1c84[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Wed Aug 18 18:32:09 2021 +0600
+
+    code on dashboard
+
+[33mcommit 2215c97121c15fb262b3bfc2d467a6774e683c8b[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Wed Aug 18 00:40:29 2021 +0600
+
+    categories seed command
+
+[33mcommit 8989d5cd873df591d6d4d106dfe242435c94fa08[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Tue Aug 17 19:40:00 2021 +0600
+
+    Update UpworkController.php
+
+[33mcommit 6b3260ce1bbcf27100db504c9716a4cb9b3f2f94[m
+Author: Vasterra <61587726+Vasterra@users.noreply.github.com>
+Date:   Tue Aug 17 19:34:27 2021 +0600
+
+    Delete services.php
+
+[33mcommit 1bf45876fb6de71a9a8d6d13615fd4e72869a171[m
+Author: Vasterra <61587726+Vasterra@users.noreply.github.com>
+Date:   Tue Aug 17 19:33:59 2021 +0600
+
+    Delete routes-v7.php
+
+[33mcommit cb6c80fa37d88015caff04cd59515495f5bdabde[m
+Author: Vasterra <61587726+Vasterra@users.noreply.github.com>
+Date:   Tue Aug 17 19:33:54 2021 +0600
+
+    Delete packages.php
+
+[33mcommit e62ef9744b29ec6b400cbc39a006d79dcfb48542[m
+Author: Vasterra <61587726+Vasterra@users.noreply.github.com>
+Date:   Tue Aug 17 19:33:44 2021 +0600
+
+    Delete config.php
+
+[33mcommit 9949d1ea3bd05ddd1afd3fbfc249ba9feae89d01[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Tue Aug 17 19:32:59 2021 +0600
+
+    Create .gitignore
+
+[33mcommit ddd1a042d38220632fa9699a433ba18dab2faac6[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Tue Aug 17 19:31:00 2021 +0600
+
+    filters init
+
+[33mcommit 6af2345806c5ec0237442ff81967941a5c1e482e[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Tue Aug 17 18:31:10 2021 +0600
+
+    tests
+
+[33mcommit b83173e4fe71f8085a2db9228586a2a6b1def587[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Tue Aug 17 18:12:36 2021 +0600
+
+    query search
+
+[33mcommit a75458e15212ead4a93984d40b14155aebc07287[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Tue Aug 17 18:08:46 2021 +0600
+
+    Update Upwork.php
+
+[33mcommit a539bd69a52317c7871c77304ed194b94e21d50d[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Tue Aug 17 18:02:21 2021 +0600
+
+    Update UpworkAuthService.php
+
+[33mcommit 5d08c29c6caa797461f57677d5df8303b91e151d[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Tue Aug 17 16:37:22 2021 +0600
+
+    tests
+
+[33mcommit 3e9d9c606d93c3455899479f246a3cde20442550[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Mon Aug 16 19:08:25 2021 +0600
+
+    fix
+
+[33mcommit 43aedc656578ac9b48140799092481e45f6e8573[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Mon Aug 16 18:42:12 2021 +0600
+
+    Upwork jobs list
+
+[33mcommit 70d4a58710822d1e25c3b432e62a67200855fa64[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Mon Aug 16 18:18:11 2021 +0600
+
+    refactor service names
+
+[33mcommit 581cf30a8c22f533dfb5d411ac02fa68d78399f2[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 13 18:47:41 2021 +0600
+
+    fix
+
+[33mcommit fb10eeb6faec35272cb3485f693f907d4f74999c[m
+Author: Uki7991 <tilek.kubanov@gmail.com>
+Date:   Fri Aug 13 18:16:24 2021 +0600
+
+    Update web.php
+
+[33mcommit cc8707cc195bdc0

@@ -44,6 +44,9 @@
                     <slot></slot>
                 </main>
                 </div>
+                <div class="w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30">
+                    <SidebarCalendar></SidebarCalendar>
+                </div>
             </div>
         </section>
 
@@ -56,12 +59,19 @@
             </header>
 
             <!-- Page Content -->
-            
+
 
             <!-- Modal Portal -->
             <portal-target name="modal" multiple>
             </portal-target>
-    </div>    
+
+            <JobFormModal></JobFormModal>
+            <GlobalCalendar></GlobalCalendar>
+        <div
+            class="modalShadow"
+            :class="{hidden: !ModalJobSwitched}"
+        ></div>
+    </div>
 </template>
 
 <script>
@@ -71,6 +81,9 @@
     import JetDropdownLink from '@/Jetstream/DropdownLink'
     import JetNavLink from '@/Jetstream/NavLink'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
+    import SidebarCalendar from "@/Components/SidebarCalendar";
+    import GlobalCalendar from "@/Components/GlobalCalendar";
+    import JobFormModal from '@/Components/Jobs/JobFormModal'
 
     export default {
         components: {
@@ -80,6 +93,9 @@
             JetDropdownLink,
             JetNavLink,
             JetResponsiveNavLink,
+            SidebarCalendar,
+            GlobalCalendar,
+            JobFormModal
         },
 
         data() {
@@ -102,14 +118,18 @@
             showDropdown(){
                 this.$refs.dropdown.classList.toggle('hidden')
             }
+        },
+        computed: {
+            ModalJobSwitched(){
+                return this.$store.state.ModalJobSwitched
+            }
         }
     }
 
-    
+
 </script>
 
 <style scoped>
-    @import '../../css/style.css';
+    /*@import '../../css/style.css';*/
     @import 'https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap';
 </style>
-
