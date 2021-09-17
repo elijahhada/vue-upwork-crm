@@ -7,6 +7,7 @@ import PortalVue from 'portal-vue';
 import VueJSModal from "vue-js-modal";
 import store from './store'
 
+//
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaPlugin);
 Vue.use(PortalVue);
