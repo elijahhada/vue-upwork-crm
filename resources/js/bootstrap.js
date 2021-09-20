@@ -26,3 +26,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+window.io = require('socket.io-client');
+window.socket = io("http://localhost:3000", {
+    "force new connection" : true,
+    "reconnectionAttempts": "Infinity", //avoid having user reconnect manually in order to prevent dead clients after a server restart
+    "transports" : ["websocket"]
+})

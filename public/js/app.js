@@ -1858,6 +1858,1962 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/DashboardHeader.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/DashboardHeader.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Modals_CreateKit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modals/CreateKit */ "./resources/js/Components/Modals/CreateKit.vue");
+/* harmony import */ var _Modals_FiltersModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modals/FiltersModal */ "./resources/js/Components/Modals/FiltersModal.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      showKit: false,
+      FiltersVisibility: false
+    };
+  },
+  components: {
+    kitModal: _Modals_CreateKit__WEBPACK_IMPORTED_MODULE_0__.default,
+    filterModal: _Modals_FiltersModal__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  methods: {
+    showSearch: function showSearch() {
+      var _this = this;
+
+      this.$refs.search_block.classList.remove('w-0');
+      this.$refs.search_block.classList.add('w-full');
+      this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
+      setTimeout(function () {
+        _this.$refs.search_block.classList.add('w-full');
+      }, 280);
+      this.$refs.parent_search_block.classList.remove('w-6/12');
+      this.$refs.parent_search_block.classList.add('w-full');
+      this.$refs.block_kit.classList.remove('w-6/12');
+      this.$refs.block_kit.classList.add('w-0', 'overflow-hidden');
+      this.$refs.search.classList.add('hidden');
+    },
+    closeSearch: function closeSearch() {
+      var _this2 = this;
+
+      this.$refs.search_block.cssText = 'animation: width0 .3s linear';
+      setTimeout(function () {
+        _this2.$refs.search_block.classList.remove('w-full');
+
+        _this2.$refs.search_block.classList.add('w-0');
+
+        _this2.$refs.search.classList.remove('hidden');
+
+        _this2.$refs.parent_search_block.classList.remove('w-full');
+
+        _this2.$refs.parent_search_block.classList.add('w-6/12');
+
+        _this2.$refs.block_kit.classList.remove('w-0', 'overflow-hidden');
+
+        _this2.$refs.block_kit.classList.add('w-6/12');
+      }, 10);
+    },
+    showKitForm: function showKitForm() {
+      this.showKit = !this.showKit;
+    },
+    showFilterFrom: function showFilterFrom() {
+      this.FiltersVisibility = !this.FiltersVisibility;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  methods: {
+    closeGlobalCalendar: function closeGlobalCalendar() {
+      this.$store.state.GlobalCalendarSwitched = !this.$store.state.GlobalCalendarSwitched;
+    }
+  },
+  computed: {
+    GlobalCalendarSwitched: function GlobalCalendarSwitched() {
+      return this.$store.state.GlobalCalendarSwitched;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=script&lang=js& ***!
@@ -1922,15 +3878,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {},
   computed: {
     truncatedExcerpt: function truncatedExcerpt() {
       return this.excerpt.substring(0, this.truncatedLength);
     }
   },
   props: {
+    id: {
+      required: true
+    },
     title: {
       required: true,
       type: String
@@ -1948,8 +3922,7 @@ __webpack_require__.r(__webpack_exports__);
       type: String
     },
     country: {
-      required: true,
-      type: String
+      required: true
     },
     dateCreated: {
       required: true,
@@ -2002,21 +3975,277 @@ __webpack_require__.r(__webpack_exports__);
     jobsPosted: {
       required: true,
       type: Number
+    },
+    jobStatus: {
+      required: true
     }
   },
   data: function data() {
     return {
       truncatedLength: 300,
-      truncated: true
+      truncated: true,
+      isThinking: false
     };
   },
   methods: {
     showModal: function showModal() {
       this.$inertia.get(this.route('pipedrive.deal.add'));
       console.log(this.$modal.show(_Modals_AddDeal__WEBPACK_IMPORTED_MODULE_0__.default));
+    },
+    changeStatus: function changeStatus(status_id) {
+      var _this = this;
+
+      var el = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      if (el) this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
+      console.log(this.id);
+      axios.post('/jobs/change-status', {
+        status: status_id,
+        id: this.id
+      }).then(function (response) {
+        var action;
+
+        if (status_id == 1) {
+          action = 'book';
+        } else {
+          action = 'think';
+        }
+
+        socket.emit('jobEvent', {
+          id: _this.id,
+          action: action
+        });
+      });
+    },
+    deleteJob: function deleteJob() {
+      var _this2 = this;
+
+      axios.post('/jobs/delete', {
+        id: this.id
+      }).then(function (response) {
+        socket.emit('jobEvent', {
+          id: _this2.id,
+          action: 'delete'
+        });
+      });
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    if (this.jobStatus == 2) {
+      this.isThinking = true;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      techsList: [{
+        name: 'Laravel',
+        color: 'green'
+      }, {
+        name: 'Vue',
+        color: 'yellow'
+      }, {
+        name: 'Tailwind',
+        color: 'red'
+      }],
+      selectedTechsList: [{
+        name: 'PHP',
+        color: 'red'
+      }, {
+        name: 'JavaScript',
+        color: 'green'
+      }, {
+        name: 'Bootstarp',
+        color: 'yellow'
+      }]
+    };
+  },
+  methods: {
+    closeModalJob: function closeModalJob() {
+      this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
+    },
+    dropdownTechs: function dropdownTechs() {
+      document.querySelector(".open-drop-tech-menu").classList.toggle("rotate-180");
+      document.querySelector(".open-drop-tech-menu").classList.toggle("transform");
+      document.querySelector(".drop-menu-technologies").classList.toggle('hidden');
+    },
+    removeTech: function removeTech(i, el) {
+      this.techsList.push(el);
+      this.selectedTechsList.splice(i, 1);
+    },
+    addTech: function addTech(i, el) {
+      this.selectedTechsList.push(el);
+      this.techsList.splice(i, 1);
+    }
+  },
+  computed: {
+    ModalJobSwitched: function ModalJobSwitched() {
+      return this.$store.state.ModalJobSwitched;
+    }
+  }
 });
 
 /***/ }),
@@ -2042,6 +4271,566 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     show: function show() {},
     hide: function hide() {}
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/CreateKit.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/CreateKit.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {};
+  },
+  methods: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/FiltersModal.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/FiltersModal.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      switched: true
+    };
+  },
+  methods: {
+    switchSidebarCalendar: function switchSidebarCalendar() {
+      if (this.switched) {
+        document.querySelector('.calendar-block').style.cssText = 'animation: width0 .3s linear;';
+        setTimeout(function () {
+          document.querySelector('.calendar').classList.add('hidden');
+          document.querySelector('.calendar-switcher').classList.add('right-4');
+          document.querySelector('.calendar-switcher').style.cssText = 'transform: rotate(180deg)';
+        }, 280);
+        document.querySelector('.calendar-block').classList.toggle('z-40');
+        document.querySelector('.calendar-switcher').classList.remove('-ml-5');
+        document.querySelector('.calendar-date').classList.toggle('hidden');
+        document.querySelector('.calendar-button').classList.toggle('hidden'); // add to top menu full width
+
+        document.querySelector('.topmenu').classList.toggle('z-50');
+        document.querySelector('.topmenu').querySelector(".last-block").classList.remove('w-3/12');
+        document.querySelector('.topmenu').querySelector(".last-block").classList.add('w-0');
+        document.querySelector('.topmenu').querySelector(".user-block").classList.remove('w-5/12');
+        document.querySelector('.topmenu').querySelector(".user-block").classList.add('w-8/12');
+        this.switched = !this.switched;
+      } else {
+        document.querySelector('.calendar-block').style.cssText = 'animation: width100 .3s linear;';
+        document.querySelector('.calendar').classList.remove('hidden');
+        document.querySelector('.calendar-block').classList.toggle('z-40');
+        setTimeout(function () {
+          document.querySelector('.calendar-switcher').style.cssText = 'transform: rotate(0deg)';
+        }, 280);
+        document.querySelector('.calendar-switcher').classList.remove('right-4');
+        document.querySelector('.calendar-switcher').classList.add('-ml-5');
+        document.querySelector('.calendar-date').classList.toggle('hidden');
+        document.querySelector('.calendar-button').classList.toggle('hidden'); // delete from top menu full width
+
+        document.querySelector('.topmenu').classList.toggle('z-50');
+        document.querySelector('.topmenu').querySelector(".last-block").classList.add('w-3/12');
+        document.querySelector('.topmenu').querySelector(".last-block").classList.remove('w-0');
+        document.querySelector('.topmenu').querySelector(".user-block").classList.add('w-5/12');
+        document.querySelector('.topmenu').querySelector(".user-block").classList.remove('w-8/12');
+        this.switched = !this.switched;
+      }
+    },
+    overGreen: function overGreen() {
+      document.querySelector("#right-arrow-55").style.fill = "#4EA52F";
+    },
+    overNormal: function overNormal() {
+      document.querySelector("#right-arrow-55").style.fill = "black";
+    },
+    switchGlobal: function switchGlobal() {
+      this.$store.state.GlobalCalendarSwitched = !this.$store.state.GlobalCalendarSwitched;
+    }
   }
 });
 
@@ -3028,6 +5817,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_DropdownLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/DropdownLink */ "./resources/js/Jetstream/DropdownLink.vue");
 /* harmony import */ var _Jetstream_NavLink__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/NavLink */ "./resources/js/Jetstream/NavLink.vue");
 /* harmony import */ var _Jetstream_ResponsiveNavLink__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/ResponsiveNavLink */ "./resources/js/Jetstream/ResponsiveNavLink.vue");
+/* harmony import */ var _Components_SidebarCalendar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/SidebarCalendar */ "./resources/js/Components/SidebarCalendar.vue");
+/* harmony import */ var _Components_GlobalCalendar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Components/GlobalCalendar */ "./resources/js/Components/GlobalCalendar.vue");
+/* harmony import */ var _Components_Jobs_JobFormModal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/Jobs/JobFormModal */ "./resources/js/Components/Jobs/JobFormModal.vue");
 //
 //
 //
@@ -3104,169 +5896,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
 
 
 
@@ -3280,7 +5912,10 @@ __webpack_require__.r(__webpack_exports__);
     JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_2__.default,
     JetDropdownLink: _Jetstream_DropdownLink__WEBPACK_IMPORTED_MODULE_3__.default,
     JetNavLink: _Jetstream_NavLink__WEBPACK_IMPORTED_MODULE_4__.default,
-    JetResponsiveNavLink: _Jetstream_ResponsiveNavLink__WEBPACK_IMPORTED_MODULE_5__.default
+    JetResponsiveNavLink: _Jetstream_ResponsiveNavLink__WEBPACK_IMPORTED_MODULE_5__.default,
+    SidebarCalendar: _Components_SidebarCalendar__WEBPACK_IMPORTED_MODULE_6__.default,
+    GlobalCalendar: _Components_GlobalCalendar__WEBPACK_IMPORTED_MODULE_7__.default,
+    JobFormModal: _Components_Jobs_JobFormModal__WEBPACK_IMPORTED_MODULE_8__.default
   },
   data: function data() {
     return {
@@ -3297,6 +5932,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     logout: function logout() {
       this.$inertia.post(route('logout'));
+    },
+    showDropdown: function showDropdown() {
+      this.$refs.dropdown.classList.toggle('hidden');
+    }
+  },
+  computed: {
+    ModalJobSwitched: function ModalJobSwitched() {
+      return this.$store.state.ModalJobSwitched;
     }
   }
 });
@@ -4600,6 +7243,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Components_Jobs_JobCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/Jobs/JobCard */ "./resources/js/Components/Jobs/JobCard.vue");
+/* harmony import */ var _Components_DashboardHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Components/DashboardHeader */ "./resources/js/Components/DashboardHeader.vue");
 //
 //
 //
@@ -4630,6 +7274,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4639,9 +7287,89 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
+  data: function data() {
+    return {
+      data: [],
+      isReloading: false
+    };
+  },
   components: {
     JobCard: _Components_Jobs_JobCard__WEBPACK_IMPORTED_MODULE_1__.default,
-    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default,
+    DashHeader: _Components_DashboardHeader__WEBPACK_IMPORTED_MODULE_2__.default
+  },
+  mounted: function mounted() {
+    console.log(this.jobs);
+    this.data = this.jobs.data;
+    socket.emit('test', 'FFFFFFF');
+    this.jobEventListener();
+  },
+  methods: {
+    jobEventListener: function jobEventListener() {
+      var _this = this;
+
+      socket.on('jobEventMessage', function (_ref) {
+        var id = _ref.id,
+            action = _ref.action;
+        console.log('Данные получены');
+        _this.isReloading = true; // this.data.forEach(function(item, i, arr) {
+        //     if(item.id == id){
+        //         console.log('aboba');
+        //         switch (action){
+        //             case 'delete':
+        //             case 'book':
+        //                 unset(this.data[item]);
+        //                 break;
+        //             case 'think':
+        //                 item.status = 2;
+        //         }
+        //     };
+        // })
+        // const currentItem = this.data.filter((obj) => {
+        //     const [item] = Object.entries(obj);
+        //     return item.id === id;
+        // });
+
+        var index = _this.data.findIndex(function (p) {
+          return p.id == id;
+        });
+
+        console.log(index);
+        console.log(_this.data[index]);
+        console.log(action); // setTimeout(() =>{
+        //     switch(action){
+        //         case 'delete':
+        //         case 'book':
+        //             this.data.splice(index, 1);
+        //             break;
+        //         case 'think':
+        //             this.data[index].status = 2;
+        //             break;
+        //     }
+        //     this.isReloading = false;
+        // }, 30);
+
+        switch (action) {
+          case 'delete':
+          case 'book':
+            _this.data.splice(index, 1);
+
+            break;
+
+          case 'think':
+            var currentItem = _this.data[index];
+            currentItem.status = 2;
+
+            _this.$set(_this.data, index, currentItem);
+
+            break;
+        }
+
+        setTimeout(function () {
+          _this.isReloading = false;
+        }, 10);
+      });
+    }
   }
 });
 
@@ -6580,11 +9308,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue */ "./node_modules/@inertiajs/inertia-vue/dist/index.js");
 /* harmony import */ var portal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! portal-vue */ "./node_modules/portal-vue/dist/portal-vue.common.js");
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import modules...
 
 
@@ -6592,16 +9321,17 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_3__.default.mixin({
+
+vue__WEBPACK_IMPORTED_MODULE_4__.default.mixin({
   methods: {
     route: route
   }
 });
-vue__WEBPACK_IMPORTED_MODULE_3__.default.use(_inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.plugin);
-vue__WEBPACK_IMPORTED_MODULE_3__.default.use(portal_vue__WEBPACK_IMPORTED_MODULE_1__.default);
-vue__WEBPACK_IMPORTED_MODULE_3__.default.use((vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default()));
+vue__WEBPACK_IMPORTED_MODULE_4__.default.use(_inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.plugin);
+vue__WEBPACK_IMPORTED_MODULE_4__.default.use(portal_vue__WEBPACK_IMPORTED_MODULE_1__.default);
+vue__WEBPACK_IMPORTED_MODULE_4__.default.use((vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default()));
 var app = document.getElementById('app');
-new vue__WEBPACK_IMPORTED_MODULE_3__.default({
+new vue__WEBPACK_IMPORTED_MODULE_4__.default({
   render: function render(h) {
     return h(_inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.App, {
       props: {
@@ -6611,7 +9341,8 @@ new vue__WEBPACK_IMPORTED_MODULE_3__.default({
         }
       }
     });
-  }
+  },
+  store: _store__WEBPACK_IMPORTED_MODULE_3__.default
 }).$mount(app);
 
 /***/ }),
@@ -6644,6 +9375,2164 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/build/index.js");
+window.socket = io("http://localhost:3000", {
+  "force new connection": true,
+  "reconnectionAttempts": "Infinity",
+  //avoid having user reconnect manually in order to prevent dead clients after a server restart
+  "transports": ["websocket"]
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/index.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vuex__WEBPACK_IMPORTED_MODULE_1__.default);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store({
+  state: {
+    ModalJobSwitched: false,
+    GlobalCalendarSwitched: true
+  }
+}));
+
+/***/ }),
+
+/***/ "./node_modules/backo2/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/backo2/index.js ***!
+  \**************************************/
+/***/ ((module) => {
+
+
+/**
+ * Expose `Backoff`.
+ */
+
+module.exports = Backoff;
+
+/**
+ * Initialize backoff timer with `opts`.
+ *
+ * - `min` initial timeout in milliseconds [100]
+ * - `max` max timeout [10000]
+ * - `jitter` [0]
+ * - `factor` [2]
+ *
+ * @param {Object} opts
+ * @api public
+ */
+
+function Backoff(opts) {
+  opts = opts || {};
+  this.ms = opts.min || 100;
+  this.max = opts.max || 10000;
+  this.factor = opts.factor || 2;
+  this.jitter = opts.jitter > 0 && opts.jitter <= 1 ? opts.jitter : 0;
+  this.attempts = 0;
+}
+
+/**
+ * Return the backoff duration.
+ *
+ * @return {Number}
+ * @api public
+ */
+
+Backoff.prototype.duration = function(){
+  var ms = this.ms * Math.pow(this.factor, this.attempts++);
+  if (this.jitter) {
+    var rand =  Math.random();
+    var deviation = Math.floor(rand * this.jitter * ms);
+    ms = (Math.floor(rand * 10) & 1) == 0  ? ms - deviation : ms + deviation;
+  }
+  return Math.min(ms, this.max) | 0;
+};
+
+/**
+ * Reset the number of attempts.
+ *
+ * @api public
+ */
+
+Backoff.prototype.reset = function(){
+  this.attempts = 0;
+};
+
+/**
+ * Set the minimum duration
+ *
+ * @api public
+ */
+
+Backoff.prototype.setMin = function(min){
+  this.ms = min;
+};
+
+/**
+ * Set the maximum duration
+ *
+ * @api public
+ */
+
+Backoff.prototype.setMax = function(max){
+  this.max = max;
+};
+
+/**
+ * Set the jitter
+ *
+ * @api public
+ */
+
+Backoff.prototype.setJitter = function(jitter){
+  this.jitter = jitter;
+};
+
+
+
+/***/ }),
+
+/***/ "./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+/*
+ * base64-arraybuffer
+ * https://github.com/niklasvh/base64-arraybuffer
+ *
+ * Copyright (c) 2012 Niklas von Hertzen
+ * Licensed under the MIT license.
+ */
+(function(chars){
+  "use strict";
+
+  exports.encode = function(arraybuffer) {
+    var bytes = new Uint8Array(arraybuffer),
+    i, len = bytes.length, base64 = "";
+
+    for (i = 0; i < len; i+=3) {
+      base64 += chars[bytes[i] >> 2];
+      base64 += chars[((bytes[i] & 3) << 4) | (bytes[i + 1] >> 4)];
+      base64 += chars[((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6)];
+      base64 += chars[bytes[i + 2] & 63];
+    }
+
+    if ((len % 3) === 2) {
+      base64 = base64.substring(0, base64.length - 1) + "=";
+    } else if (len % 3 === 1) {
+      base64 = base64.substring(0, base64.length - 2) + "==";
+    }
+
+    return base64;
+  };
+
+  exports.decode =  function(base64) {
+    var bufferLength = base64.length * 0.75,
+    len = base64.length, i, p = 0,
+    encoded1, encoded2, encoded3, encoded4;
+
+    if (base64[base64.length - 1] === "=") {
+      bufferLength--;
+      if (base64[base64.length - 2] === "=") {
+        bufferLength--;
+      }
+    }
+
+    var arraybuffer = new ArrayBuffer(bufferLength),
+    bytes = new Uint8Array(arraybuffer);
+
+    for (i = 0; i < len; i+=4) {
+      encoded1 = chars.indexOf(base64[i]);
+      encoded2 = chars.indexOf(base64[i+1]);
+      encoded3 = chars.indexOf(base64[i+2]);
+      encoded4 = chars.indexOf(base64[i+3]);
+
+      bytes[p++] = (encoded1 << 2) | (encoded2 >> 4);
+      bytes[p++] = ((encoded2 & 15) << 4) | (encoded3 >> 2);
+      bytes[p++] = ((encoded3 & 3) << 6) | (encoded4 & 63);
+    }
+
+    return arraybuffer;
+  };
+})("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
+
+
+/***/ }),
+
+/***/ "./node_modules/base64-js/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/base64-js/index.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+exports.byteLength = byteLength
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
+}
+
+// Support decoding URL-safe base64 strings, as Node.js does.
+// See: https://en.wikipedia.org/wiki/Base64#URL_applications
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
+
+function getLens (b64) {
+  var len = b64.length
+
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // Trim off extra bytes after placeholder bytes are found
+  // See: https://github.com/beatgammit/base64-js/issues/42
+  var validLen = b64.indexOf('=')
+  if (validLen === -1) validLen = len
+
+  var placeHoldersLen = validLen === len
+    ? 0
+    : 4 - (validLen % 4)
+
+  return [validLen, placeHoldersLen]
+}
+
+// base64 is 4/3 + up to two characters of the original data
+function byteLength (b64) {
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function _byteLength (b64, validLen, placeHoldersLen) {
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function toByteArray (b64) {
+  var tmp
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+
+  var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen))
+
+  var curByte = 0
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  var len = placeHoldersLen > 0
+    ? validLen - 4
+    : validLen
+
+  var i
+  for (i = 0; i < len; i += 4) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 18) |
+      (revLookup[b64.charCodeAt(i + 1)] << 12) |
+      (revLookup[b64.charCodeAt(i + 2)] << 6) |
+      revLookup[b64.charCodeAt(i + 3)]
+    arr[curByte++] = (tmp >> 16) & 0xFF
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 2) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 2) |
+      (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 1) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 10) |
+      (revLookup[b64.charCodeAt(i + 1)] << 4) |
+      (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] +
+    lookup[num >> 12 & 0x3F] +
+    lookup[num >> 6 & 0x3F] +
+    lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp =
+      ((uint8[i] << 16) & 0xFF0000) +
+      ((uint8[i + 1] << 8) & 0xFF00) +
+      (uint8[i + 2] & 0xFF)
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 2] +
+      lookup[(tmp << 4) & 0x3F] +
+      '=='
+    )
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 10] +
+      lookup[(tmp >> 4) & 0x3F] +
+      lookup[(tmp << 2) & 0x3F] +
+      '='
+    )
+  }
+
+  return parts.join('')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/buffer/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/buffer/index.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <http://feross.org>
+ * @license  MIT
+ */
+/* eslint-disable no-proto */
+
+
+
+var base64 = __webpack_require__(/*! base64-js */ "./node_modules/base64-js/index.js")
+var ieee754 = __webpack_require__(/*! ieee754 */ "./node_modules/ieee754/index.js")
+var isArray = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js")
+
+exports.Buffer = Buffer
+exports.SlowBuffer = SlowBuffer
+exports.INSPECT_MAX_BYTES = 50
+
+/**
+ * If `Buffer.TYPED_ARRAY_SUPPORT`:
+ *   === true    Use Uint8Array implementation (fastest)
+ *   === false   Use Object implementation (most compatible, even IE6)
+ *
+ * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
+ * Opera 11.6+, iOS 4.2+.
+ *
+ * Due to various browser bugs, sometimes the Object implementation will be used even
+ * when the browser supports typed arrays.
+ *
+ * Note:
+ *
+ *   - Firefox 4-29 lacks support for adding new properties to `Uint8Array` instances,
+ *     See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
+ *
+ *   - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
+ *
+ *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
+ *     incorrect length in some situations.
+
+ * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
+ * get the Object implementation, which is slower but behaves correctly.
+ */
+Buffer.TYPED_ARRAY_SUPPORT = __webpack_require__.g.TYPED_ARRAY_SUPPORT !== undefined
+  ? __webpack_require__.g.TYPED_ARRAY_SUPPORT
+  : typedArraySupport()
+
+/*
+ * Export kMaxLength after typed array support is determined.
+ */
+exports.kMaxLength = kMaxLength()
+
+function typedArraySupport () {
+  try {
+    var arr = new Uint8Array(1)
+    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
+    return arr.foo() === 42 && // typed array instances can be augmented
+        typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
+        arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+  } catch (e) {
+    return false
+  }
+}
+
+function kMaxLength () {
+  return Buffer.TYPED_ARRAY_SUPPORT
+    ? 0x7fffffff
+    : 0x3fffffff
+}
+
+function createBuffer (that, length) {
+  if (kMaxLength() < length) {
+    throw new RangeError('Invalid typed array length')
+  }
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = new Uint8Array(length)
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    if (that === null) {
+      that = new Buffer(length)
+    }
+    that.length = length
+  }
+
+  return that
+}
+
+/**
+ * The Buffer constructor returns instances of `Uint8Array` that have their
+ * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
+ * `Uint8Array`, so the returned instances will have all the node `Buffer` methods
+ * and the `Uint8Array` methods. Square bracket notation works as expected -- it
+ * returns a single octet.
+ *
+ * The `Uint8Array` prototype remains unmodified.
+ */
+
+function Buffer (arg, encodingOrOffset, length) {
+  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
+    return new Buffer(arg, encodingOrOffset, length)
+  }
+
+  // Common case.
+  if (typeof arg === 'number') {
+    if (typeof encodingOrOffset === 'string') {
+      throw new Error(
+        'If encoding is specified then the first argument must be a string'
+      )
+    }
+    return allocUnsafe(this, arg)
+  }
+  return from(this, arg, encodingOrOffset, length)
+}
+
+Buffer.poolSize = 8192 // not used by this implementation
+
+// TODO: Legacy, not needed anymore. Remove in next major version.
+Buffer._augment = function (arr) {
+  arr.__proto__ = Buffer.prototype
+  return arr
+}
+
+function from (that, value, encodingOrOffset, length) {
+  if (typeof value === 'number') {
+    throw new TypeError('"value" argument must not be a number')
+  }
+
+  if (typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer) {
+    return fromArrayBuffer(that, value, encodingOrOffset, length)
+  }
+
+  if (typeof value === 'string') {
+    return fromString(that, value, encodingOrOffset)
+  }
+
+  return fromObject(that, value)
+}
+
+/**
+ * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
+ * if value is a number.
+ * Buffer.from(str[, encoding])
+ * Buffer.from(array)
+ * Buffer.from(buffer)
+ * Buffer.from(arrayBuffer[, byteOffset[, length]])
+ **/
+Buffer.from = function (value, encodingOrOffset, length) {
+  return from(null, value, encodingOrOffset, length)
+}
+
+if (Buffer.TYPED_ARRAY_SUPPORT) {
+  Buffer.prototype.__proto__ = Uint8Array.prototype
+  Buffer.__proto__ = Uint8Array
+  if (typeof Symbol !== 'undefined' && Symbol.species &&
+      Buffer[Symbol.species] === Buffer) {
+    // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
+    Object.defineProperty(Buffer, Symbol.species, {
+      value: null,
+      configurable: true
+    })
+  }
+}
+
+function assertSize (size) {
+  if (typeof size !== 'number') {
+    throw new TypeError('"size" argument must be a number')
+  } else if (size < 0) {
+    throw new RangeError('"size" argument must not be negative')
+  }
+}
+
+function alloc (that, size, fill, encoding) {
+  assertSize(size)
+  if (size <= 0) {
+    return createBuffer(that, size)
+  }
+  if (fill !== undefined) {
+    // Only pay attention to encoding if it's a string. This
+    // prevents accidentally sending in a number that would
+    // be interpretted as a start offset.
+    return typeof encoding === 'string'
+      ? createBuffer(that, size).fill(fill, encoding)
+      : createBuffer(that, size).fill(fill)
+  }
+  return createBuffer(that, size)
+}
+
+/**
+ * Creates a new filled Buffer instance.
+ * alloc(size[, fill[, encoding]])
+ **/
+Buffer.alloc = function (size, fill, encoding) {
+  return alloc(null, size, fill, encoding)
+}
+
+function allocUnsafe (that, size) {
+  assertSize(size)
+  that = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) {
+    for (var i = 0; i < size; ++i) {
+      that[i] = 0
+    }
+  }
+  return that
+}
+
+/**
+ * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
+ * */
+Buffer.allocUnsafe = function (size) {
+  return allocUnsafe(null, size)
+}
+/**
+ * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
+ */
+Buffer.allocUnsafeSlow = function (size) {
+  return allocUnsafe(null, size)
+}
+
+function fromString (that, string, encoding) {
+  if (typeof encoding !== 'string' || encoding === '') {
+    encoding = 'utf8'
+  }
+
+  if (!Buffer.isEncoding(encoding)) {
+    throw new TypeError('"encoding" must be a valid string encoding')
+  }
+
+  var length = byteLength(string, encoding) | 0
+  that = createBuffer(that, length)
+
+  var actual = that.write(string, encoding)
+
+  if (actual !== length) {
+    // Writing a hex string, for example, that contains invalid characters will
+    // cause everything after the first invalid character to be ignored. (e.g.
+    // 'abxxcd' will be treated as 'ab')
+    that = that.slice(0, actual)
+  }
+
+  return that
+}
+
+function fromArrayLike (that, array) {
+  var length = array.length < 0 ? 0 : checked(array.length) | 0
+  that = createBuffer(that, length)
+  for (var i = 0; i < length; i += 1) {
+    that[i] = array[i] & 255
+  }
+  return that
+}
+
+function fromArrayBuffer (that, array, byteOffset, length) {
+  array.byteLength // this throws if `array` is not a valid ArrayBuffer
+
+  if (byteOffset < 0 || array.byteLength < byteOffset) {
+    throw new RangeError('\'offset\' is out of bounds')
+  }
+
+  if (array.byteLength < byteOffset + (length || 0)) {
+    throw new RangeError('\'length\' is out of bounds')
+  }
+
+  if (byteOffset === undefined && length === undefined) {
+    array = new Uint8Array(array)
+  } else if (length === undefined) {
+    array = new Uint8Array(array, byteOffset)
+  } else {
+    array = new Uint8Array(array, byteOffset, length)
+  }
+
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = array
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    that = fromArrayLike(that, array)
+  }
+  return that
+}
+
+function fromObject (that, obj) {
+  if (Buffer.isBuffer(obj)) {
+    var len = checked(obj.length) | 0
+    that = createBuffer(that, len)
+
+    if (that.length === 0) {
+      return that
+    }
+
+    obj.copy(that, 0, 0, len)
+    return that
+  }
+
+  if (obj) {
+    if ((typeof ArrayBuffer !== 'undefined' &&
+        obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
+      if (typeof obj.length !== 'number' || isnan(obj.length)) {
+        return createBuffer(that, 0)
+      }
+      return fromArrayLike(that, obj)
+    }
+
+    if (obj.type === 'Buffer' && isArray(obj.data)) {
+      return fromArrayLike(that, obj.data)
+    }
+  }
+
+  throw new TypeError('First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.')
+}
+
+function checked (length) {
+  // Note: cannot use `length < kMaxLength()` here because that fails when
+  // length is NaN (which is otherwise coerced to zero.)
+  if (length >= kMaxLength()) {
+    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
+                         'size: 0x' + kMaxLength().toString(16) + ' bytes')
+  }
+  return length | 0
+}
+
+function SlowBuffer (length) {
+  if (+length != length) { // eslint-disable-line eqeqeq
+    length = 0
+  }
+  return Buffer.alloc(+length)
+}
+
+Buffer.isBuffer = function isBuffer (b) {
+  return !!(b != null && b._isBuffer)
+}
+
+Buffer.compare = function compare (a, b) {
+  if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
+    throw new TypeError('Arguments must be Buffers')
+  }
+
+  if (a === b) return 0
+
+  var x = a.length
+  var y = b.length
+
+  for (var i = 0, len = Math.min(x, y); i < len; ++i) {
+    if (a[i] !== b[i]) {
+      x = a[i]
+      y = b[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+Buffer.isEncoding = function isEncoding (encoding) {
+  switch (String(encoding).toLowerCase()) {
+    case 'hex':
+    case 'utf8':
+    case 'utf-8':
+    case 'ascii':
+    case 'latin1':
+    case 'binary':
+    case 'base64':
+    case 'ucs2':
+    case 'ucs-2':
+    case 'utf16le':
+    case 'utf-16le':
+      return true
+    default:
+      return false
+  }
+}
+
+Buffer.concat = function concat (list, length) {
+  if (!isArray(list)) {
+    throw new TypeError('"list" argument must be an Array of Buffers')
+  }
+
+  if (list.length === 0) {
+    return Buffer.alloc(0)
+  }
+
+  var i
+  if (length === undefined) {
+    length = 0
+    for (i = 0; i < list.length; ++i) {
+      length += list[i].length
+    }
+  }
+
+  var buffer = Buffer.allocUnsafe(length)
+  var pos = 0
+  for (i = 0; i < list.length; ++i) {
+    var buf = list[i]
+    if (!Buffer.isBuffer(buf)) {
+      throw new TypeError('"list" argument must be an Array of Buffers')
+    }
+    buf.copy(buffer, pos)
+    pos += buf.length
+  }
+  return buffer
+}
+
+function byteLength (string, encoding) {
+  if (Buffer.isBuffer(string)) {
+    return string.length
+  }
+  if (typeof ArrayBuffer !== 'undefined' && typeof ArrayBuffer.isView === 'function' &&
+      (ArrayBuffer.isView(string) || string instanceof ArrayBuffer)) {
+    return string.byteLength
+  }
+  if (typeof string !== 'string') {
+    string = '' + string
+  }
+
+  var len = string.length
+  if (len === 0) return 0
+
+  // Use a for loop to avoid recursion
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'ascii':
+      case 'latin1':
+      case 'binary':
+        return len
+      case 'utf8':
+      case 'utf-8':
+      case undefined:
+        return utf8ToBytes(string).length
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return len * 2
+      case 'hex':
+        return len >>> 1
+      case 'base64':
+        return base64ToBytes(string).length
+      default:
+        if (loweredCase) return utf8ToBytes(string).length // assume utf8
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+Buffer.byteLength = byteLength
+
+function slowToString (encoding, start, end) {
+  var loweredCase = false
+
+  // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
+  // property of a typed array.
+
+  // This behaves neither like String nor Uint8Array in that we set start/end
+  // to their upper/lower bounds if the value passed is out of range.
+  // undefined is handled specially as per ECMA-262 6th Edition,
+  // Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
+  if (start === undefined || start < 0) {
+    start = 0
+  }
+  // Return early if start > this.length. Done here to prevent potential uint32
+  // coercion fail below.
+  if (start > this.length) {
+    return ''
+  }
+
+  if (end === undefined || end > this.length) {
+    end = this.length
+  }
+
+  if (end <= 0) {
+    return ''
+  }
+
+  // Force coersion to uint32. This will also coerce falsey/NaN values to 0.
+  end >>>= 0
+  start >>>= 0
+
+  if (end <= start) {
+    return ''
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  while (true) {
+    switch (encoding) {
+      case 'hex':
+        return hexSlice(this, start, end)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Slice(this, start, end)
+
+      case 'ascii':
+        return asciiSlice(this, start, end)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Slice(this, start, end)
+
+      case 'base64':
+        return base64Slice(this, start, end)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return utf16leSlice(this, start, end)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = (encoding + '').toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+// The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
+// Buffer instances.
+Buffer.prototype._isBuffer = true
+
+function swap (b, n, m) {
+  var i = b[n]
+  b[n] = b[m]
+  b[m] = i
+}
+
+Buffer.prototype.swap16 = function swap16 () {
+  var len = this.length
+  if (len % 2 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 16-bits')
+  }
+  for (var i = 0; i < len; i += 2) {
+    swap(this, i, i + 1)
+  }
+  return this
+}
+
+Buffer.prototype.swap32 = function swap32 () {
+  var len = this.length
+  if (len % 4 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 32-bits')
+  }
+  for (var i = 0; i < len; i += 4) {
+    swap(this, i, i + 3)
+    swap(this, i + 1, i + 2)
+  }
+  return this
+}
+
+Buffer.prototype.swap64 = function swap64 () {
+  var len = this.length
+  if (len % 8 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 64-bits')
+  }
+  for (var i = 0; i < len; i += 8) {
+    swap(this, i, i + 7)
+    swap(this, i + 1, i + 6)
+    swap(this, i + 2, i + 5)
+    swap(this, i + 3, i + 4)
+  }
+  return this
+}
+
+Buffer.prototype.toString = function toString () {
+  var length = this.length | 0
+  if (length === 0) return ''
+  if (arguments.length === 0) return utf8Slice(this, 0, length)
+  return slowToString.apply(this, arguments)
+}
+
+Buffer.prototype.equals = function equals (b) {
+  if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
+  if (this === b) return true
+  return Buffer.compare(this, b) === 0
+}
+
+Buffer.prototype.inspect = function inspect () {
+  var str = ''
+  var max = exports.INSPECT_MAX_BYTES
+  if (this.length > 0) {
+    str = this.toString('hex', 0, max).match(/.{2}/g).join(' ')
+    if (this.length > max) str += ' ... '
+  }
+  return '<Buffer ' + str + '>'
+}
+
+Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
+  if (!Buffer.isBuffer(target)) {
+    throw new TypeError('Argument must be a Buffer')
+  }
+
+  if (start === undefined) {
+    start = 0
+  }
+  if (end === undefined) {
+    end = target ? target.length : 0
+  }
+  if (thisStart === undefined) {
+    thisStart = 0
+  }
+  if (thisEnd === undefined) {
+    thisEnd = this.length
+  }
+
+  if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) {
+    throw new RangeError('out of range index')
+  }
+
+  if (thisStart >= thisEnd && start >= end) {
+    return 0
+  }
+  if (thisStart >= thisEnd) {
+    return -1
+  }
+  if (start >= end) {
+    return 1
+  }
+
+  start >>>= 0
+  end >>>= 0
+  thisStart >>>= 0
+  thisEnd >>>= 0
+
+  if (this === target) return 0
+
+  var x = thisEnd - thisStart
+  var y = end - start
+  var len = Math.min(x, y)
+
+  var thisCopy = this.slice(thisStart, thisEnd)
+  var targetCopy = target.slice(start, end)
+
+  for (var i = 0; i < len; ++i) {
+    if (thisCopy[i] !== targetCopy[i]) {
+      x = thisCopy[i]
+      y = targetCopy[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
+//
+// Arguments:
+// - buffer - a Buffer to search
+// - val - a string, Buffer, or number
+// - byteOffset - an index into `buffer`; will be clamped to an int32
+// - encoding - an optional encoding, relevant is val is a string
+// - dir - true for indexOf, false for lastIndexOf
+function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
+  // Empty buffer means no match
+  if (buffer.length === 0) return -1
+
+  // Normalize byteOffset
+  if (typeof byteOffset === 'string') {
+    encoding = byteOffset
+    byteOffset = 0
+  } else if (byteOffset > 0x7fffffff) {
+    byteOffset = 0x7fffffff
+  } else if (byteOffset < -0x80000000) {
+    byteOffset = -0x80000000
+  }
+  byteOffset = +byteOffset  // Coerce to Number.
+  if (isNaN(byteOffset)) {
+    // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
+    byteOffset = dir ? 0 : (buffer.length - 1)
+  }
+
+  // Normalize byteOffset: negative offsets start from the end of the buffer
+  if (byteOffset < 0) byteOffset = buffer.length + byteOffset
+  if (byteOffset >= buffer.length) {
+    if (dir) return -1
+    else byteOffset = buffer.length - 1
+  } else if (byteOffset < 0) {
+    if (dir) byteOffset = 0
+    else return -1
+  }
+
+  // Normalize val
+  if (typeof val === 'string') {
+    val = Buffer.from(val, encoding)
+  }
+
+  // Finally, search either indexOf (if dir is true) or lastIndexOf
+  if (Buffer.isBuffer(val)) {
+    // Special case: looking for empty string/buffer always fails
+    if (val.length === 0) {
+      return -1
+    }
+    return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
+  } else if (typeof val === 'number') {
+    val = val & 0xFF // Search for a byte value [0-255]
+    if (Buffer.TYPED_ARRAY_SUPPORT &&
+        typeof Uint8Array.prototype.indexOf === 'function') {
+      if (dir) {
+        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
+      } else {
+        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+      }
+    }
+    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
+  }
+
+  throw new TypeError('val must be string, number or Buffer')
+}
+
+function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
+  var indexSize = 1
+  var arrLength = arr.length
+  var valLength = val.length
+
+  if (encoding !== undefined) {
+    encoding = String(encoding).toLowerCase()
+    if (encoding === 'ucs2' || encoding === 'ucs-2' ||
+        encoding === 'utf16le' || encoding === 'utf-16le') {
+      if (arr.length < 2 || val.length < 2) {
+        return -1
+      }
+      indexSize = 2
+      arrLength /= 2
+      valLength /= 2
+      byteOffset /= 2
+    }
+  }
+
+  function read (buf, i) {
+    if (indexSize === 1) {
+      return buf[i]
+    } else {
+      return buf.readUInt16BE(i * indexSize)
+    }
+  }
+
+  var i
+  if (dir) {
+    var foundIndex = -1
+    for (i = byteOffset; i < arrLength; i++) {
+      if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+        if (foundIndex === -1) foundIndex = i
+        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
+      } else {
+        if (foundIndex !== -1) i -= i - foundIndex
+        foundIndex = -1
+      }
+    }
+  } else {
+    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength
+    for (i = byteOffset; i >= 0; i--) {
+      var found = true
+      for (var j = 0; j < valLength; j++) {
+        if (read(arr, i + j) !== read(val, j)) {
+          found = false
+          break
+        }
+      }
+      if (found) return i
+    }
+  }
+
+  return -1
+}
+
+Buffer.prototype.includes = function includes (val, byteOffset, encoding) {
+  return this.indexOf(val, byteOffset, encoding) !== -1
+}
+
+Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, true)
+}
+
+Buffer.prototype.lastIndexOf = function lastIndexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, false)
+}
+
+function hexWrite (buf, string, offset, length) {
+  offset = Number(offset) || 0
+  var remaining = buf.length - offset
+  if (!length) {
+    length = remaining
+  } else {
+    length = Number(length)
+    if (length > remaining) {
+      length = remaining
+    }
+  }
+
+  // must be an even number of digits
+  var strLen = string.length
+  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
+
+  if (length > strLen / 2) {
+    length = strLen / 2
+  }
+  for (var i = 0; i < length; ++i) {
+    var parsed = parseInt(string.substr(i * 2, 2), 16)
+    if (isNaN(parsed)) return i
+    buf[offset + i] = parsed
+  }
+  return i
+}
+
+function utf8Write (buf, string, offset, length) {
+  return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+function asciiWrite (buf, string, offset, length) {
+  return blitBuffer(asciiToBytes(string), buf, offset, length)
+}
+
+function latin1Write (buf, string, offset, length) {
+  return asciiWrite(buf, string, offset, length)
+}
+
+function base64Write (buf, string, offset, length) {
+  return blitBuffer(base64ToBytes(string), buf, offset, length)
+}
+
+function ucs2Write (buf, string, offset, length) {
+  return blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+Buffer.prototype.write = function write (string, offset, length, encoding) {
+  // Buffer#write(string)
+  if (offset === undefined) {
+    encoding = 'utf8'
+    length = this.length
+    offset = 0
+  // Buffer#write(string, encoding)
+  } else if (length === undefined && typeof offset === 'string') {
+    encoding = offset
+    length = this.length
+    offset = 0
+  // Buffer#write(string, offset[, length][, encoding])
+  } else if (isFinite(offset)) {
+    offset = offset | 0
+    if (isFinite(length)) {
+      length = length | 0
+      if (encoding === undefined) encoding = 'utf8'
+    } else {
+      encoding = length
+      length = undefined
+    }
+  // legacy write(string, encoding, offset, length) - remove in v0.13
+  } else {
+    throw new Error(
+      'Buffer.write(string, encoding, offset[, length]) is no longer supported'
+    )
+  }
+
+  var remaining = this.length - offset
+  if (length === undefined || length > remaining) length = remaining
+
+  if ((string.length > 0 && (length < 0 || offset < 0)) || offset > this.length) {
+    throw new RangeError('Attempt to write outside buffer bounds')
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'hex':
+        return hexWrite(this, string, offset, length)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Write(this, string, offset, length)
+
+      case 'ascii':
+        return asciiWrite(this, string, offset, length)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Write(this, string, offset, length)
+
+      case 'base64':
+        // Warning: maxLength not taken into account in base64Write
+        return base64Write(this, string, offset, length)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return ucs2Write(this, string, offset, length)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+Buffer.prototype.toJSON = function toJSON () {
+  return {
+    type: 'Buffer',
+    data: Array.prototype.slice.call(this._arr || this, 0)
+  }
+}
+
+function base64Slice (buf, start, end) {
+  if (start === 0 && end === buf.length) {
+    return base64.fromByteArray(buf)
+  } else {
+    return base64.fromByteArray(buf.slice(start, end))
+  }
+}
+
+function utf8Slice (buf, start, end) {
+  end = Math.min(buf.length, end)
+  var res = []
+
+  var i = start
+  while (i < end) {
+    var firstByte = buf[i]
+    var codePoint = null
+    var bytesPerSequence = (firstByte > 0xEF) ? 4
+      : (firstByte > 0xDF) ? 3
+      : (firstByte > 0xBF) ? 2
+      : 1
+
+    if (i + bytesPerSequence <= end) {
+      var secondByte, thirdByte, fourthByte, tempCodePoint
+
+      switch (bytesPerSequence) {
+        case 1:
+          if (firstByte < 0x80) {
+            codePoint = firstByte
+          }
+          break
+        case 2:
+          secondByte = buf[i + 1]
+          if ((secondByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
+            if (tempCodePoint > 0x7F) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 3:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
+            if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 4:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          fourthByte = buf[i + 3]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
+            if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
+              codePoint = tempCodePoint
+            }
+          }
+      }
+    }
+
+    if (codePoint === null) {
+      // we did not generate a valid codePoint so insert a
+      // replacement char (U+FFFD) and advance only 1 byte
+      codePoint = 0xFFFD
+      bytesPerSequence = 1
+    } else if (codePoint > 0xFFFF) {
+      // encode to utf16 (surrogate pair dance)
+      codePoint -= 0x10000
+      res.push(codePoint >>> 10 & 0x3FF | 0xD800)
+      codePoint = 0xDC00 | codePoint & 0x3FF
+    }
+
+    res.push(codePoint)
+    i += bytesPerSequence
+  }
+
+  return decodeCodePointsArray(res)
+}
+
+// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+// the lowest limit is Chrome, with 0x10000 args.
+// We go 1 magnitude less, for safety
+var MAX_ARGUMENTS_LENGTH = 0x1000
+
+function decodeCodePointsArray (codePoints) {
+  var len = codePoints.length
+  if (len <= MAX_ARGUMENTS_LENGTH) {
+    return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
+  }
+
+  // Decode in chunks to avoid "call stack size exceeded".
+  var res = ''
+  var i = 0
+  while (i < len) {
+    res += String.fromCharCode.apply(
+      String,
+      codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
+    )
+  }
+  return res
+}
+
+function asciiSlice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i] & 0x7F)
+  }
+  return ret
+}
+
+function latin1Slice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i])
+  }
+  return ret
+}
+
+function hexSlice (buf, start, end) {
+  var len = buf.length
+
+  if (!start || start < 0) start = 0
+  if (!end || end < 0 || end > len) end = len
+
+  var out = ''
+  for (var i = start; i < end; ++i) {
+    out += toHex(buf[i])
+  }
+  return out
+}
+
+function utf16leSlice (buf, start, end) {
+  var bytes = buf.slice(start, end)
+  var res = ''
+  for (var i = 0; i < bytes.length; i += 2) {
+    res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256)
+  }
+  return res
+}
+
+Buffer.prototype.slice = function slice (start, end) {
+  var len = this.length
+  start = ~~start
+  end = end === undefined ? len : ~~end
+
+  if (start < 0) {
+    start += len
+    if (start < 0) start = 0
+  } else if (start > len) {
+    start = len
+  }
+
+  if (end < 0) {
+    end += len
+    if (end < 0) end = 0
+  } else if (end > len) {
+    end = len
+  }
+
+  if (end < start) end = start
+
+  var newBuf
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    newBuf = this.subarray(start, end)
+    newBuf.__proto__ = Buffer.prototype
+  } else {
+    var sliceLen = end - start
+    newBuf = new Buffer(sliceLen, undefined)
+    for (var i = 0; i < sliceLen; ++i) {
+      newBuf[i] = this[i + start]
+    }
+  }
+
+  return newBuf
+}
+
+/*
+ * Need to make sure that buffer isn't trying to write out of bounds.
+ */
+function checkOffset (offset, ext, length) {
+  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
+  if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
+}
+
+Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    checkOffset(offset, byteLength, this.length)
+  }
+
+  var val = this[offset + --byteLength]
+  var mul = 1
+  while (byteLength > 0 && (mul *= 0x100)) {
+    val += this[offset + --byteLength] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUInt8 = function readUInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  return this[offset]
+}
+
+Buffer.prototype.readUInt16LE = function readUInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return this[offset] | (this[offset + 1] << 8)
+}
+
+Buffer.prototype.readUInt16BE = function readUInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return (this[offset] << 8) | this[offset + 1]
+}
+
+Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return ((this[offset]) |
+      (this[offset + 1] << 8) |
+      (this[offset + 2] << 16)) +
+      (this[offset + 3] * 0x1000000)
+}
+
+Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] * 0x1000000) +
+    ((this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    this[offset + 3])
+}
+
+Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var i = byteLength
+  var mul = 1
+  var val = this[offset + --i]
+  while (i > 0 && (mul *= 0x100)) {
+    val += this[offset + --i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  if (!(this[offset] & 0x80)) return (this[offset])
+  return ((0xff - this[offset] + 1) * -1)
+}
+
+Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset] | (this[offset + 1] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset + 1] | (this[offset] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset]) |
+    (this[offset + 1] << 8) |
+    (this[offset + 2] << 16) |
+    (this[offset + 3] << 24)
+}
+
+Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] << 24) |
+    (this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    (this[offset + 3])
+}
+
+Buffer.prototype.readFloatLE = function readFloatLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, true, 23, 4)
+}
+
+Buffer.prototype.readFloatBE = function readFloatBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, false, 23, 4)
+}
+
+Buffer.prototype.readDoubleLE = function readDoubleLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, true, 52, 8)
+}
+
+Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, false, 52, 8)
+}
+
+function checkInt (buf, value, offset, ext, max, min) {
+  if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance')
+  if (value > max || value < min) throw new RangeError('"value" argument is out of bounds')
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+}
+
+Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var mul = 1
+  var i = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+function objectWriteUInt16 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; ++i) {
+    buf[offset + i] = (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
+      (littleEndian ? i : 1 - i) * 8
+  }
+}
+
+Buffer.prototype.writeUInt16LE = function writeUInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+function objectWriteUInt32 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffffffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; ++i) {
+    buf[offset + i] = (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
+  }
+}
+
+Buffer.prototype.writeUInt32LE = function writeUInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset + 3] = (value >>> 24)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 1] = (value >>> 8)
+    this[offset] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeUInt32BE = function writeUInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = 0
+  var mul = 1
+  var sub = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  var sub = 0
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  if (value < 0) value = 0xff + value + 1
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+Buffer.prototype.writeInt16LE = function writeInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 3] = (value >>> 24)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (value < 0) value = 0xffffffff + value + 1
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+function checkIEEE754 (buf, value, offset, ext, max, min) {
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+  if (offset < 0) throw new RangeError('Index out of range')
+}
+
+function writeFloat (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 23, 4)
+  return offset + 4
+}
+
+Buffer.prototype.writeFloatLE = function writeFloatLE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeFloatBE = function writeFloatBE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, false, noAssert)
+}
+
+function writeDouble (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 52, 8)
+  return offset + 8
+}
+
+Buffer.prototype.writeDoubleLE = function writeDoubleLE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, false, noAssert)
+}
+
+// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
+Buffer.prototype.copy = function copy (target, targetStart, start, end) {
+  if (!start) start = 0
+  if (!end && end !== 0) end = this.length
+  if (targetStart >= target.length) targetStart = target.length
+  if (!targetStart) targetStart = 0
+  if (end > 0 && end < start) end = start
+
+  // Copy 0 bytes; we're done
+  if (end === start) return 0
+  if (target.length === 0 || this.length === 0) return 0
+
+  // Fatal error conditions
+  if (targetStart < 0) {
+    throw new RangeError('targetStart out of bounds')
+  }
+  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
+  if (end < 0) throw new RangeError('sourceEnd out of bounds')
+
+  // Are we oob?
+  if (end > this.length) end = this.length
+  if (target.length - targetStart < end - start) {
+    end = target.length - targetStart + start
+  }
+
+  var len = end - start
+  var i
+
+  if (this === target && start < targetStart && targetStart < end) {
+    // descending copy from end
+    for (i = len - 1; i >= 0; --i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
+    // ascending copy from start
+    for (i = 0; i < len; ++i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else {
+    Uint8Array.prototype.set.call(
+      target,
+      this.subarray(start, start + len),
+      targetStart
+    )
+  }
+
+  return len
+}
+
+// Usage:
+//    buffer.fill(number[, offset[, end]])
+//    buffer.fill(buffer[, offset[, end]])
+//    buffer.fill(string[, offset[, end]][, encoding])
+Buffer.prototype.fill = function fill (val, start, end, encoding) {
+  // Handle string cases:
+  if (typeof val === 'string') {
+    if (typeof start === 'string') {
+      encoding = start
+      start = 0
+      end = this.length
+    } else if (typeof end === 'string') {
+      encoding = end
+      end = this.length
+    }
+    if (val.length === 1) {
+      var code = val.charCodeAt(0)
+      if (code < 256) {
+        val = code
+      }
+    }
+    if (encoding !== undefined && typeof encoding !== 'string') {
+      throw new TypeError('encoding must be a string')
+    }
+    if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
+      throw new TypeError('Unknown encoding: ' + encoding)
+    }
+  } else if (typeof val === 'number') {
+    val = val & 255
+  }
+
+  // Invalid ranges are not set to a default, so can range check early.
+  if (start < 0 || this.length < start || this.length < end) {
+    throw new RangeError('Out of range index')
+  }
+
+  if (end <= start) {
+    return this
+  }
+
+  start = start >>> 0
+  end = end === undefined ? this.length : end >>> 0
+
+  if (!val) val = 0
+
+  var i
+  if (typeof val === 'number') {
+    for (i = start; i < end; ++i) {
+      this[i] = val
+    }
+  } else {
+    var bytes = Buffer.isBuffer(val)
+      ? val
+      : utf8ToBytes(new Buffer(val, encoding).toString())
+    var len = bytes.length
+    for (i = 0; i < end - start; ++i) {
+      this[i + start] = bytes[i % len]
+    }
+  }
+
+  return this
+}
+
+// HELPER FUNCTIONS
+// ================
+
+var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g
+
+function base64clean (str) {
+  // Node strips out invalid characters like \n and \t from the string, base64-js does not
+  str = stringtrim(str).replace(INVALID_BASE64_RE, '')
+  // Node converts strings with length < 2 to ''
+  if (str.length < 2) return ''
+  // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
+  while (str.length % 4 !== 0) {
+    str = str + '='
+  }
+  return str
+}
+
+function stringtrim (str) {
+  if (str.trim) return str.trim()
+  return str.replace(/^\s+|\s+$/g, '')
+}
+
+function toHex (n) {
+  if (n < 16) return '0' + n.toString(16)
+  return n.toString(16)
+}
+
+function utf8ToBytes (string, units) {
+  units = units || Infinity
+  var codePoint
+  var length = string.length
+  var leadSurrogate = null
+  var bytes = []
+
+  for (var i = 0; i < length; ++i) {
+    codePoint = string.charCodeAt(i)
+
+    // is surrogate component
+    if (codePoint > 0xD7FF && codePoint < 0xE000) {
+      // last char was a lead
+      if (!leadSurrogate) {
+        // no lead yet
+        if (codePoint > 0xDBFF) {
+          // unexpected trail
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        } else if (i + 1 === length) {
+          // unpaired lead
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        }
+
+        // valid lead
+        leadSurrogate = codePoint
+
+        continue
+      }
+
+      // 2 leads in a row
+      if (codePoint < 0xDC00) {
+        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+        leadSurrogate = codePoint
+        continue
+      }
+
+      // valid surrogate pair
+      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
+    } else if (leadSurrogate) {
+      // valid bmp char, but last char was a lead
+      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+    }
+
+    leadSurrogate = null
+
+    // encode utf8
+    if (codePoint < 0x80) {
+      if ((units -= 1) < 0) break
+      bytes.push(codePoint)
+    } else if (codePoint < 0x800) {
+      if ((units -= 2) < 0) break
+      bytes.push(
+        codePoint >> 0x6 | 0xC0,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x10000) {
+      if ((units -= 3) < 0) break
+      bytes.push(
+        codePoint >> 0xC | 0xE0,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x110000) {
+      if ((units -= 4) < 0) break
+      bytes.push(
+        codePoint >> 0x12 | 0xF0,
+        codePoint >> 0xC & 0x3F | 0x80,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else {
+      throw new Error('Invalid code point')
+    }
+  }
+
+  return bytes
+}
+
+function asciiToBytes (str) {
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    // Node's code seems to be doing this and not & 0x7F..
+    byteArray.push(str.charCodeAt(i) & 0xFF)
+  }
+  return byteArray
+}
+
+function utf16leToBytes (str, units) {
+  var c, hi, lo
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    if ((units -= 2) < 0) break
+
+    c = str.charCodeAt(i)
+    hi = c >> 8
+    lo = c % 256
+    byteArray.push(lo)
+    byteArray.push(hi)
+  }
+
+  return byteArray
+}
+
+function base64ToBytes (str) {
+  return base64.toByteArray(base64clean(str))
+}
+
+function blitBuffer (src, dst, offset, length) {
+  for (var i = 0; i < length; ++i) {
+    if ((i + offset >= dst.length) || (i >= src.length)) break
+    dst[i + offset] = src[i]
+  }
+  return i
+}
+
+function isnan (val) {
+  return val !== val // eslint-disable-line no-self-compare
+}
+
 
 /***/ }),
 
@@ -6731,6 +11620,191 @@ if ($defineProperty) {
 
 /***/ }),
 
+/***/ "./node_modules/component-emitter/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/component-emitter/index.js ***!
+  \*************************************************/
+/***/ ((module) => {
+
+
+/**
+ * Expose `Emitter`.
+ */
+
+if (true) {
+  module.exports = Emitter;
+}
+
+/**
+ * Initialize a new `Emitter`.
+ *
+ * @api public
+ */
+
+function Emitter(obj) {
+  if (obj) return mixin(obj);
+};
+
+/**
+ * Mixin the emitter properties.
+ *
+ * @param {Object} obj
+ * @return {Object}
+ * @api private
+ */
+
+function mixin(obj) {
+  for (var key in Emitter.prototype) {
+    obj[key] = Emitter.prototype[key];
+  }
+  return obj;
+}
+
+/**
+ * Listen on the given `event` with `fn`.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.on =
+Emitter.prototype.addEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
+    .push(fn);
+  return this;
+};
+
+/**
+ * Adds an `event` listener that will be invoked a single
+ * time then automatically removed.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.once = function(event, fn){
+  function on() {
+    this.off(event, on);
+    fn.apply(this, arguments);
+  }
+
+  on.fn = fn;
+  this.on(event, on);
+  return this;
+};
+
+/**
+ * Remove the given callback for `event` or all
+ * registered callbacks.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.off =
+Emitter.prototype.removeListener =
+Emitter.prototype.removeAllListeners =
+Emitter.prototype.removeEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+
+  // all
+  if (0 == arguments.length) {
+    this._callbacks = {};
+    return this;
+  }
+
+  // specific event
+  var callbacks = this._callbacks['$' + event];
+  if (!callbacks) return this;
+
+  // remove all handlers
+  if (1 == arguments.length) {
+    delete this._callbacks['$' + event];
+    return this;
+  }
+
+  // remove specific handler
+  var cb;
+  for (var i = 0; i < callbacks.length; i++) {
+    cb = callbacks[i];
+    if (cb === fn || cb.fn === fn) {
+      callbacks.splice(i, 1);
+      break;
+    }
+  }
+
+  // Remove event specific arrays for event types that no
+  // one is subscribed for to avoid memory leak.
+  if (callbacks.length === 0) {
+    delete this._callbacks['$' + event];
+  }
+
+  return this;
+};
+
+/**
+ * Emit `event` with the given args.
+ *
+ * @param {String} event
+ * @param {Mixed} ...
+ * @return {Emitter}
+ */
+
+Emitter.prototype.emit = function(event){
+  this._callbacks = this._callbacks || {};
+
+  var args = new Array(arguments.length - 1)
+    , callbacks = this._callbacks['$' + event];
+
+  for (var i = 1; i < arguments.length; i++) {
+    args[i - 1] = arguments[i];
+  }
+
+  if (callbacks) {
+    callbacks = callbacks.slice(0);
+    for (var i = 0, len = callbacks.length; i < len; ++i) {
+      callbacks[i].apply(this, args);
+    }
+  }
+
+  return this;
+};
+
+/**
+ * Return array of callbacks for `event`.
+ *
+ * @param {String} event
+ * @return {Array}
+ * @api public
+ */
+
+Emitter.prototype.listeners = function(event){
+  this._callbacks = this._callbacks || {};
+  return this._callbacks['$' + event] || [];
+};
+
+/**
+ * Check if this emitter has `event` handlers.
+ *
+ * @param {String} event
+ * @return {Boolean}
+ * @api public
+ */
+
+Emitter.prototype.hasListeners = function(event){
+  return !! this.listeners(event).length;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-multiselect/dist/vue-multiselect.min.css":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-multiselect/dist/vue-multiselect.min.css ***!
@@ -6749,6 +11823,55 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "fieldset[disabled] .multiselect{pointer-events:none}.multiselect__spinner{position:absolute;right:1px;top:1px;width:48px;height:35px;background:#fff;display:block}.multiselect__spinner:after,.multiselect__spinner:before{position:absolute;content:\"\";top:50%;left:50%;margin:-8px 0 0 -8px;width:16px;height:16px;border-radius:100%;border:2px solid transparent;border-top-color:#41b883;box-shadow:0 0 0 1px transparent}.multiselect__spinner:before{-webkit-animation:spinning 2.4s cubic-bezier(.41,.26,.2,.62);animation:spinning 2.4s cubic-bezier(.41,.26,.2,.62);-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite}.multiselect__spinner:after{-webkit-animation:spinning 2.4s cubic-bezier(.51,.09,.21,.8);animation:spinning 2.4s cubic-bezier(.51,.09,.21,.8);-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite}.multiselect__loading-enter-active,.multiselect__loading-leave-active{transition:opacity .4s ease-in-out;opacity:1}.multiselect__loading-enter,.multiselect__loading-leave-active{opacity:0}.multiselect,.multiselect__input,.multiselect__single{font-family:inherit;font-size:16px;touch-action:manipulation}.multiselect{box-sizing:content-box;display:block;position:relative;width:100%;min-height:40px;text-align:left;color:#35495e}.multiselect *{box-sizing:border-box}.multiselect:focus{outline:none}.multiselect--disabled{background:#ededed;pointer-events:none;opacity:.6}.multiselect--active{z-index:50}.multiselect--active:not(.multiselect--above) .multiselect__current,.multiselect--active:not(.multiselect--above) .multiselect__input,.multiselect--active:not(.multiselect--above) .multiselect__tags{border-bottom-left-radius:0;border-bottom-right-radius:0}.multiselect--active .multiselect__select{transform:rotate(180deg)}.multiselect--above.multiselect--active .multiselect__current,.multiselect--above.multiselect--active .multiselect__input,.multiselect--above.multiselect--active .multiselect__tags{border-top-left-radius:0;border-top-right-radius:0}.multiselect__input,.multiselect__single{position:relative;display:inline-block;min-height:20px;line-height:20px;border:none;border-radius:5px;background:#fff;padding:0 0 0 5px;width:100%;transition:border .1s ease;box-sizing:border-box;margin-bottom:8px;vertical-align:top}.multiselect__input:-ms-input-placeholder{color:#35495e}.multiselect__input::-moz-placeholder{color:#35495e}.multiselect__input::placeholder{color:#35495e}.multiselect__tag~.multiselect__input,.multiselect__tag~.multiselect__single{width:auto}.multiselect__input:hover,.multiselect__single:hover{border-color:#cfcfcf}.multiselect__input:focus,.multiselect__single:focus{border-color:#a8a8a8;outline:none}.multiselect__single{padding-left:5px;margin-bottom:8px}.multiselect__tags-wrap{display:inline}.multiselect__tags{min-height:40px;display:block;padding:8px 40px 0 8px;border-radius:5px;border:1px solid #e8e8e8;background:#fff;font-size:14px}.multiselect__tag{position:relative;display:inline-block;padding:4px 26px 4px 10px;border-radius:5px;margin-right:10px;color:#fff;line-height:1;background:#41b883;margin-bottom:5px;white-space:nowrap;overflow:hidden;max-width:100%;text-overflow:ellipsis}.multiselect__tag-icon{cursor:pointer;margin-left:7px;position:absolute;right:0;top:0;bottom:0;font-weight:700;font-style:normal;width:22px;text-align:center;line-height:22px;transition:all .2s ease;border-radius:5px}.multiselect__tag-icon:after{content:\"\\D7\";color:#266d4d;font-size:14px}.multiselect__tag-icon:focus,.multiselect__tag-icon:hover{background:#369a6e}.multiselect__tag-icon:focus:after,.multiselect__tag-icon:hover:after{color:#fff}.multiselect__current{min-height:40px;overflow:hidden;padding:8px 30px 0 12px;white-space:nowrap;border-radius:5px;border:1px solid #e8e8e8}.multiselect__current,.multiselect__select{line-height:16px;box-sizing:border-box;display:block;margin:0;text-decoration:none;cursor:pointer}.multiselect__select{position:absolute;width:40px;height:38px;right:1px;top:1px;padding:4px 8px;text-align:center;transition:transform .2s ease}.multiselect__select:before{position:relative;right:0;top:65%;color:#999;margin-top:4px;border-color:#999 transparent transparent;border-style:solid;border-width:5px 5px 0;content:\"\"}.multiselect__placeholder{color:#adadad;display:inline-block;margin-bottom:10px;padding-top:2px}.multiselect--active .multiselect__placeholder{display:none}.multiselect__content-wrapper{position:absolute;display:block;background:#fff;width:100%;max-height:240px;overflow:auto;border:1px solid #e8e8e8;border-top:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;z-index:50;-webkit-overflow-scrolling:touch}.multiselect__content{list-style:none;display:inline-block;padding:0;margin:0;min-width:100%;vertical-align:top}.multiselect--above .multiselect__content-wrapper{bottom:100%;border-bottom-left-radius:0;border-bottom-right-radius:0;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom:none;border-top:1px solid #e8e8e8}.multiselect__content::webkit-scrollbar{display:none}.multiselect__element{display:block}.multiselect__option{display:block;padding:12px;min-height:40px;line-height:16px;text-decoration:none;text-transform:none;vertical-align:middle;position:relative;cursor:pointer;white-space:nowrap}.multiselect__option:after{top:0;right:0;position:absolute;line-height:40px;padding-right:12px;padding-left:20px;font-size:13px}.multiselect__option--highlight{background:#41b883;outline:none;color:#fff}.multiselect__option--highlight:after{content:attr(data-select);background:#41b883;color:#fff}.multiselect__option--selected{background:#f3f3f3;color:#35495e;font-weight:700}.multiselect__option--selected:after{content:attr(data-selected);color:silver}.multiselect__option--selected.multiselect__option--highlight{background:#ff6a6a;color:#fff}.multiselect__option--selected.multiselect__option--highlight:after{background:#ff6a6a;content:attr(data-deselect);color:#fff}.multiselect--disabled .multiselect__current,.multiselect--disabled .multiselect__select{background:#ededed;color:#a6a6a6}.multiselect__option--disabled{background:#ededed!important;color:#a6a6a6!important;cursor:text;pointer-events:none}.multiselect__option--group{background:#ededed;color:#35495e}.multiselect__option--group.multiselect__option--highlight{background:#35495e;color:#fff}.multiselect__option--group.multiselect__option--highlight:after{background:#35495e}.multiselect__option--disabled.multiselect__option--highlight{background:#dedede}.multiselect__option--group-selected.multiselect__option--highlight{background:#ff6a6a;color:#fff}.multiselect__option--group-selected.multiselect__option--highlight:after{background:#ff6a6a;content:attr(data-deselect);color:#fff}.multiselect-enter-active,.multiselect-leave-active{transition:all .15s ease}.multiselect-enter,.multiselect-leave-active{opacity:0}.multiselect__strong{margin-bottom:8px;line-height:20px;display:inline-block;vertical-align:top}[dir=rtl] .multiselect{text-align:right}[dir=rtl] .multiselect__select{right:auto;left:1px}[dir=rtl] .multiselect__tags{padding:8px 8px 0 40px}[dir=rtl] .multiselect__content{text-align:right}[dir=rtl] .multiselect__option:after{right:auto;left:0}[dir=rtl] .multiselect__clear{right:auto;left:12px}[dir=rtl] .multiselect__spinner{right:auto;left:1px}@-webkit-keyframes spinning{0%{transform:rotate(0)}to{transform:rotate(2turn)}}@keyframes spinning{0%{transform:rotate(0)}to{transform:rotate(2turn)}}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f]{\n    background-color: #d9c36c !important;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap);"]);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*@import '../../css/style.css';*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6852,6 +11975,570 @@ module.exports = function (cssWithMappingToString) {
 
   return list;
 };
+
+/***/ }),
+
+/***/ "./node_modules/debug/src/browser.js":
+/*!*******************************************!*\
+  !*** ./node_modules/debug/src/browser.js ***!
+  \*******************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
+/* eslint-env browser */
+
+/**
+ * This is the web browser implementation of `debug()`.
+ */
+
+exports.formatArgs = formatArgs;
+exports.save = save;
+exports.load = load;
+exports.useColors = useColors;
+exports.storage = localstorage();
+exports.destroy = (() => {
+	let warned = false;
+
+	return () => {
+		if (!warned) {
+			warned = true;
+			console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+		}
+	};
+})();
+
+/**
+ * Colors.
+ */
+
+exports.colors = [
+	'#0000CC',
+	'#0000FF',
+	'#0033CC',
+	'#0033FF',
+	'#0066CC',
+	'#0066FF',
+	'#0099CC',
+	'#0099FF',
+	'#00CC00',
+	'#00CC33',
+	'#00CC66',
+	'#00CC99',
+	'#00CCCC',
+	'#00CCFF',
+	'#3300CC',
+	'#3300FF',
+	'#3333CC',
+	'#3333FF',
+	'#3366CC',
+	'#3366FF',
+	'#3399CC',
+	'#3399FF',
+	'#33CC00',
+	'#33CC33',
+	'#33CC66',
+	'#33CC99',
+	'#33CCCC',
+	'#33CCFF',
+	'#6600CC',
+	'#6600FF',
+	'#6633CC',
+	'#6633FF',
+	'#66CC00',
+	'#66CC33',
+	'#9900CC',
+	'#9900FF',
+	'#9933CC',
+	'#9933FF',
+	'#99CC00',
+	'#99CC33',
+	'#CC0000',
+	'#CC0033',
+	'#CC0066',
+	'#CC0099',
+	'#CC00CC',
+	'#CC00FF',
+	'#CC3300',
+	'#CC3333',
+	'#CC3366',
+	'#CC3399',
+	'#CC33CC',
+	'#CC33FF',
+	'#CC6600',
+	'#CC6633',
+	'#CC9900',
+	'#CC9933',
+	'#CCCC00',
+	'#CCCC33',
+	'#FF0000',
+	'#FF0033',
+	'#FF0066',
+	'#FF0099',
+	'#FF00CC',
+	'#FF00FF',
+	'#FF3300',
+	'#FF3333',
+	'#FF3366',
+	'#FF3399',
+	'#FF33CC',
+	'#FF33FF',
+	'#FF6600',
+	'#FF6633',
+	'#FF9900',
+	'#FF9933',
+	'#FFCC00',
+	'#FFCC33'
+];
+
+/**
+ * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+ * and the Firebug extension (any Firefox version) are known
+ * to support "%c" CSS customizations.
+ *
+ * TODO: add a `localStorage` variable to explicitly enable/disable colors
+ */
+
+// eslint-disable-next-line complexity
+function useColors() {
+	// NB: In an Electron preload script, document will be defined but not fully
+	// initialized. Since we know we're in Chrome, we'll just detect this case
+	// explicitly
+	if (typeof window !== 'undefined' && window.process && (window.process.type === 'renderer' || window.process.__nwjs)) {
+		return true;
+	}
+
+	// Internet Explorer and Edge do not support colors.
+	if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+		return false;
+	}
+
+	// Is webkit? http://stackoverflow.com/a/16459606/376773
+	// document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+	return (typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance) ||
+		// Is firebug? http://stackoverflow.com/a/398120/376773
+		(typeof window !== 'undefined' && window.console && (window.console.firebug || (window.console.exception && window.console.table))) ||
+		// Is firefox >= v31?
+		// https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
+		// Double check webkit in userAgent just in case we are in a worker
+		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
+}
+
+/**
+ * Colorize log arguments if enabled.
+ *
+ * @api public
+ */
+
+function formatArgs(args) {
+	args[0] = (this.useColors ? '%c' : '') +
+		this.namespace +
+		(this.useColors ? ' %c' : ' ') +
+		args[0] +
+		(this.useColors ? '%c ' : ' ') +
+		'+' + module.exports.humanize(this.diff);
+
+	if (!this.useColors) {
+		return;
+	}
+
+	const c = 'color: ' + this.color;
+	args.splice(1, 0, c, 'color: inherit');
+
+	// The final "%c" is somewhat tricky, because there could be other
+	// arguments passed either before or after the %c, so we need to
+	// figure out the correct index to insert the CSS into
+	let index = 0;
+	let lastC = 0;
+	args[0].replace(/%[a-zA-Z%]/g, match => {
+		if (match === '%%') {
+			return;
+		}
+		index++;
+		if (match === '%c') {
+			// We only are interested in the *last* %c
+			// (the user may have provided their own)
+			lastC = index;
+		}
+	});
+
+	args.splice(lastC, 0, c);
+}
+
+/**
+ * Invokes `console.debug()` when available.
+ * No-op when `console.debug` is not a "function".
+ * If `console.debug` is not available, falls back
+ * to `console.log`.
+ *
+ * @api public
+ */
+exports.log = console.debug || console.log || (() => {});
+
+/**
+ * Save `namespaces`.
+ *
+ * @param {String} namespaces
+ * @api private
+ */
+function save(namespaces) {
+	try {
+		if (namespaces) {
+			exports.storage.setItem('debug', namespaces);
+		} else {
+			exports.storage.removeItem('debug');
+		}
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+}
+
+/**
+ * Load `namespaces`.
+ *
+ * @return {String} returns the previously persisted debug modes
+ * @api private
+ */
+function load() {
+	let r;
+	try {
+		r = exports.storage.getItem('debug');
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+
+	// If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+	if (!r && typeof process !== 'undefined' && 'env' in process) {
+		r = process.env.DEBUG;
+	}
+
+	return r;
+}
+
+/**
+ * Localstorage attempts to return the localstorage.
+ *
+ * This is necessary because safari throws
+ * when a user disables cookies/localstorage
+ * and you attempt to access it.
+ *
+ * @return {LocalStorage}
+ * @api private
+ */
+
+function localstorage() {
+	try {
+		// TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
+		// The Browser also has localStorage in the global context.
+		return localStorage;
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+}
+
+module.exports = __webpack_require__(/*! ./common */ "./node_modules/debug/src/common.js")(exports);
+
+const {formatters} = module.exports;
+
+/**
+ * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+ */
+
+formatters.j = function (v) {
+	try {
+		return JSON.stringify(v);
+	} catch (error) {
+		return '[UnexpectedJSONParseError]: ' + error.message;
+	}
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/debug/src/common.js":
+/*!******************************************!*\
+  !*** ./node_modules/debug/src/common.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+/**
+ * This is the common logic for both the Node.js and web browser
+ * implementations of `debug()`.
+ */
+
+function setup(env) {
+	createDebug.debug = createDebug;
+	createDebug.default = createDebug;
+	createDebug.coerce = coerce;
+	createDebug.disable = disable;
+	createDebug.enable = enable;
+	createDebug.enabled = enabled;
+	createDebug.humanize = __webpack_require__(/*! ms */ "./node_modules/ms/index.js");
+	createDebug.destroy = destroy;
+
+	Object.keys(env).forEach(key => {
+		createDebug[key] = env[key];
+	});
+
+	/**
+	* The currently active debug mode names, and names to skip.
+	*/
+
+	createDebug.names = [];
+	createDebug.skips = [];
+
+	/**
+	* Map of special "%n" handling functions, for the debug "format" argument.
+	*
+	* Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+	*/
+	createDebug.formatters = {};
+
+	/**
+	* Selects a color for a debug namespace
+	* @param {String} namespace The namespace string for the for the debug instance to be colored
+	* @return {Number|String} An ANSI color code for the given namespace
+	* @api private
+	*/
+	function selectColor(namespace) {
+		let hash = 0;
+
+		for (let i = 0; i < namespace.length; i++) {
+			hash = ((hash << 5) - hash) + namespace.charCodeAt(i);
+			hash |= 0; // Convert to 32bit integer
+		}
+
+		return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+	}
+	createDebug.selectColor = selectColor;
+
+	/**
+	* Create a debugger with the given `namespace`.
+	*
+	* @param {String} namespace
+	* @return {Function}
+	* @api public
+	*/
+	function createDebug(namespace) {
+		let prevTime;
+		let enableOverride = null;
+		let namespacesCache;
+		let enabledCache;
+
+		function debug(...args) {
+			// Disabled?
+			if (!debug.enabled) {
+				return;
+			}
+
+			const self = debug;
+
+			// Set `diff` timestamp
+			const curr = Number(new Date());
+			const ms = curr - (prevTime || curr);
+			self.diff = ms;
+			self.prev = prevTime;
+			self.curr = curr;
+			prevTime = curr;
+
+			args[0] = createDebug.coerce(args[0]);
+
+			if (typeof args[0] !== 'string') {
+				// Anything else let's inspect with %O
+				args.unshift('%O');
+			}
+
+			// Apply any `formatters` transformations
+			let index = 0;
+			args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
+				// If we encounter an escaped % then don't increase the array index
+				if (match === '%%') {
+					return '%';
+				}
+				index++;
+				const formatter = createDebug.formatters[format];
+				if (typeof formatter === 'function') {
+					const val = args[index];
+					match = formatter.call(self, val);
+
+					// Now we need to remove `args[index]` since it's inlined in the `format`
+					args.splice(index, 1);
+					index--;
+				}
+				return match;
+			});
+
+			// Apply env-specific formatting (colors, etc.)
+			createDebug.formatArgs.call(self, args);
+
+			const logFn = self.log || createDebug.log;
+			logFn.apply(self, args);
+		}
+
+		debug.namespace = namespace;
+		debug.useColors = createDebug.useColors();
+		debug.color = createDebug.selectColor(namespace);
+		debug.extend = extend;
+		debug.destroy = createDebug.destroy; // XXX Temporary. Will be removed in the next major release.
+
+		Object.defineProperty(debug, 'enabled', {
+			enumerable: true,
+			configurable: false,
+			get: () => {
+				if (enableOverride !== null) {
+					return enableOverride;
+				}
+				if (namespacesCache !== createDebug.namespaces) {
+					namespacesCache = createDebug.namespaces;
+					enabledCache = createDebug.enabled(namespace);
+				}
+
+				return enabledCache;
+			},
+			set: v => {
+				enableOverride = v;
+			}
+		});
+
+		// Env-specific initialization logic for debug instances
+		if (typeof createDebug.init === 'function') {
+			createDebug.init(debug);
+		}
+
+		return debug;
+	}
+
+	function extend(namespace, delimiter) {
+		const newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
+		newDebug.log = this.log;
+		return newDebug;
+	}
+
+	/**
+	* Enables a debug mode by namespaces. This can include modes
+	* separated by a colon and wildcards.
+	*
+	* @param {String} namespaces
+	* @api public
+	*/
+	function enable(namespaces) {
+		createDebug.save(namespaces);
+		createDebug.namespaces = namespaces;
+
+		createDebug.names = [];
+		createDebug.skips = [];
+
+		let i;
+		const split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+		const len = split.length;
+
+		for (i = 0; i < len; i++) {
+			if (!split[i]) {
+				// ignore empty strings
+				continue;
+			}
+
+			namespaces = split[i].replace(/\*/g, '.*?');
+
+			if (namespaces[0] === '-') {
+				createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+			} else {
+				createDebug.names.push(new RegExp('^' + namespaces + '$'));
+			}
+		}
+	}
+
+	/**
+	* Disable debug output.
+	*
+	* @return {String} namespaces
+	* @api public
+	*/
+	function disable() {
+		const namespaces = [
+			...createDebug.names.map(toNamespace),
+			...createDebug.skips.map(toNamespace).map(namespace => '-' + namespace)
+		].join(',');
+		createDebug.enable('');
+		return namespaces;
+	}
+
+	/**
+	* Returns true if the given mode name is enabled, false otherwise.
+	*
+	* @param {String} name
+	* @return {Boolean}
+	* @api public
+	*/
+	function enabled(name) {
+		if (name[name.length - 1] === '*') {
+			return true;
+		}
+
+		let i;
+		let len;
+
+		for (i = 0, len = createDebug.skips.length; i < len; i++) {
+			if (createDebug.skips[i].test(name)) {
+				return false;
+			}
+		}
+
+		for (i = 0, len = createDebug.names.length; i < len; i++) {
+			if (createDebug.names[i].test(name)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	* Convert regexp to namespace
+	*
+	* @param {RegExp} regxep
+	* @return {String} namespace
+	* @api private
+	*/
+	function toNamespace(regexp) {
+		return regexp.toString()
+			.substring(2, regexp.toString().length - 2)
+			.replace(/\.\*\?$/, '*');
+	}
+
+	/**
+	* Coerce `val`.
+	*
+	* @param {Mixed} val
+	* @return {Mixed}
+	* @api private
+	*/
+	function coerce(val) {
+		if (val instanceof Error) {
+			return val.stack || val.message;
+		}
+		return val;
+	}
+
+	/**
+	* XXX DO NOT USE. This is a temporary stub function.
+	* XXX It WILL be removed in the next major release.
+	*/
+	function destroy() {
+		console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+	}
+
+	createDebug.enable(createDebug.load());
+
+	return createDebug;
+}
+
+module.exports = setup;
+
 
 /***/ }),
 
@@ -6995,6 +12682,2278 @@ deepmerge.all = function deepmergeAll(array, options) {
 var deepmerge_1 = deepmerge;
 
 module.exports = deepmerge_1;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/globalThis.browser.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/globalThis.browser.js ***!
+  \*****************************************************************/
+/***/ ((module) => {
+
+module.exports = (() => {
+  if (typeof self !== "undefined") {
+    return self;
+  } else if (typeof window !== "undefined") {
+    return window;
+  } else {
+    return Function("return this")();
+  }
+})();
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/index.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const Socket = __webpack_require__(/*! ./socket */ "./node_modules/engine.io-client/lib/socket.js");
+
+module.exports = (uri, opts) => new Socket(uri, opts);
+
+/**
+ * Expose deps for legacy compatibility
+ * and standalone browser access.
+ */
+
+module.exports.Socket = Socket;
+module.exports.protocol = Socket.protocol; // this is an int
+module.exports.Transport = __webpack_require__(/*! ./transport */ "./node_modules/engine.io-client/lib/transport.js");
+module.exports.transports = __webpack_require__(/*! ./transports/index */ "./node_modules/engine.io-client/lib/transports/index.js");
+module.exports.parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/socket.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/socket.js ***!
+  \*****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const transports = __webpack_require__(/*! ./transports/index */ "./node_modules/engine.io-client/lib/transports/index.js");
+const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("engine.io-client:socket");
+const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
+const parseuri = __webpack_require__(/*! parseuri */ "./node_modules/parseuri/index.js");
+const parseqs = __webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js");
+const { installTimerFunctions } = __webpack_require__(/*! ./util */ "./node_modules/engine.io-client/lib/util.js");
+
+class Socket extends Emitter {
+  /**
+   * Socket constructor.
+   *
+   * @param {String|Object} uri or options
+   * @param {Object} options
+   * @api public
+   */
+  constructor(uri, opts = {}) {
+    super();
+
+    if (uri && "object" === typeof uri) {
+      opts = uri;
+      uri = null;
+    }
+
+    if (uri) {
+      uri = parseuri(uri);
+      opts.hostname = uri.host;
+      opts.secure = uri.protocol === "https" || uri.protocol === "wss";
+      opts.port = uri.port;
+      if (uri.query) opts.query = uri.query;
+    } else if (opts.host) {
+      opts.hostname = parseuri(opts.host).host;
+    }
+
+    installTimerFunctions(this, opts);
+
+    this.secure =
+      null != opts.secure
+        ? opts.secure
+        : typeof location !== "undefined" && "https:" === location.protocol;
+
+    if (opts.hostname && !opts.port) {
+      // if no port is specified manually, use the protocol default
+      opts.port = this.secure ? "443" : "80";
+    }
+
+    this.hostname =
+      opts.hostname ||
+      (typeof location !== "undefined" ? location.hostname : "localhost");
+    this.port =
+      opts.port ||
+      (typeof location !== "undefined" && location.port
+        ? location.port
+        : this.secure
+        ? 443
+        : 80);
+
+    this.transports = opts.transports || ["polling", "websocket"];
+    this.readyState = "";
+    this.writeBuffer = [];
+    this.prevBufferLen = 0;
+
+    this.opts = Object.assign(
+      {
+        path: "/engine.io",
+        agent: false,
+        withCredentials: false,
+        upgrade: true,
+        jsonp: true,
+        timestampParam: "t",
+        rememberUpgrade: false,
+        rejectUnauthorized: true,
+        perMessageDeflate: {
+          threshold: 1024
+        },
+        transportOptions: {},
+        closeOnBeforeunload: true
+      },
+      opts
+    );
+
+    this.opts.path = this.opts.path.replace(/\/$/, "") + "/";
+
+    if (typeof this.opts.query === "string") {
+      this.opts.query = parseqs.decode(this.opts.query);
+    }
+
+    // set on handshake
+    this.id = null;
+    this.upgrades = null;
+    this.pingInterval = null;
+    this.pingTimeout = null;
+
+    // set on heartbeat
+    this.pingTimeoutTimer = null;
+
+    if (typeof addEventListener === "function") {
+      if (this.opts.closeOnBeforeunload) {
+        // Firefox closes the connection when the "beforeunload" event is emitted but not Chrome. This event listener
+        // ensures every browser behaves the same (no "disconnect" event at the Socket.IO level when the page is
+        // closed/reloaded)
+        addEventListener(
+          "beforeunload",
+          () => {
+            if (this.transport) {
+              // silently close the transport
+              this.transport.removeAllListeners();
+              this.transport.close();
+            }
+          },
+          false
+        );
+      }
+      if (this.hostname !== "localhost") {
+        this.offlineEventListener = () => {
+          this.onClose("transport close");
+        };
+        addEventListener("offline", this.offlineEventListener, false);
+      }
+    }
+
+    this.open();
+  }
+
+  /**
+   * Creates transport of the given type.
+   *
+   * @param {String} transport name
+   * @return {Transport}
+   * @api private
+   */
+  createTransport(name) {
+    debug('creating transport "%s"', name);
+    const query = clone(this.opts.query);
+
+    // append engine.io protocol identifier
+    query.EIO = parser.protocol;
+
+    // transport name
+    query.transport = name;
+
+    // session id if we already have one
+    if (this.id) query.sid = this.id;
+
+    const opts = Object.assign(
+      {},
+      this.opts.transportOptions[name],
+      this.opts,
+      {
+        query,
+        socket: this,
+        hostname: this.hostname,
+        secure: this.secure,
+        port: this.port
+      }
+    );
+
+    debug("options: %j", opts);
+
+    return new transports[name](opts);
+  }
+
+  /**
+   * Initializes transport to use and starts probe.
+   *
+   * @api private
+   */
+  open() {
+    let transport;
+    if (
+      this.opts.rememberUpgrade &&
+      Socket.priorWebsocketSuccess &&
+      this.transports.indexOf("websocket") !== -1
+    ) {
+      transport = "websocket";
+    } else if (0 === this.transports.length) {
+      // Emit error on next tick so it can be listened to
+      this.setTimeoutFn(() => {
+        this.emit("error", "No transports available");
+      }, 0);
+      return;
+    } else {
+      transport = this.transports[0];
+    }
+    this.readyState = "opening";
+
+    // Retry with the next transport if the transport is disabled (jsonp: false)
+    try {
+      transport = this.createTransport(transport);
+    } catch (e) {
+      debug("error while creating transport: %s", e);
+      this.transports.shift();
+      this.open();
+      return;
+    }
+
+    transport.open();
+    this.setTransport(transport);
+  }
+
+  /**
+   * Sets the current transport. Disables the existing one (if any).
+   *
+   * @api private
+   */
+  setTransport(transport) {
+    debug("setting transport %s", transport.name);
+
+    if (this.transport) {
+      debug("clearing existing transport %s", this.transport.name);
+      this.transport.removeAllListeners();
+    }
+
+    // set up transport
+    this.transport = transport;
+
+    // set up transport listeners
+    transport
+      .on("drain", this.onDrain.bind(this))
+      .on("packet", this.onPacket.bind(this))
+      .on("error", this.onError.bind(this))
+      .on("close", () => {
+        this.onClose("transport close");
+      });
+  }
+
+  /**
+   * Probes a transport.
+   *
+   * @param {String} transport name
+   * @api private
+   */
+  probe(name) {
+    debug('probing transport "%s"', name);
+    let transport = this.createTransport(name, { probe: 1 });
+    let failed = false;
+
+    Socket.priorWebsocketSuccess = false;
+
+    const onTransportOpen = () => {
+      if (failed) return;
+
+      debug('probe transport "%s" opened', name);
+      transport.send([{ type: "ping", data: "probe" }]);
+      transport.once("packet", msg => {
+        if (failed) return;
+        if ("pong" === msg.type && "probe" === msg.data) {
+          debug('probe transport "%s" pong', name);
+          this.upgrading = true;
+          this.emit("upgrading", transport);
+          if (!transport) return;
+          Socket.priorWebsocketSuccess = "websocket" === transport.name;
+
+          debug('pausing current transport "%s"', this.transport.name);
+          this.transport.pause(() => {
+            if (failed) return;
+            if ("closed" === this.readyState) return;
+            debug("changing transport and sending upgrade packet");
+
+            cleanup();
+
+            this.setTransport(transport);
+            transport.send([{ type: "upgrade" }]);
+            this.emit("upgrade", transport);
+            transport = null;
+            this.upgrading = false;
+            this.flush();
+          });
+        } else {
+          debug('probe transport "%s" failed', name);
+          const err = new Error("probe error");
+          err.transport = transport.name;
+          this.emit("upgradeError", err);
+        }
+      });
+    };
+
+    function freezeTransport() {
+      if (failed) return;
+
+      // Any callback called by transport should be ignored since now
+      failed = true;
+
+      cleanup();
+
+      transport.close();
+      transport = null;
+    }
+
+    // Handle any error that happens while probing
+    const onerror = err => {
+      const error = new Error("probe error: " + err);
+      error.transport = transport.name;
+
+      freezeTransport();
+
+      debug('probe transport "%s" failed because of error: %s', name, err);
+
+      this.emit("upgradeError", error);
+    };
+
+    function onTransportClose() {
+      onerror("transport closed");
+    }
+
+    // When the socket is closed while we're probing
+    function onclose() {
+      onerror("socket closed");
+    }
+
+    // When the socket is upgraded while we're probing
+    function onupgrade(to) {
+      if (transport && to.name !== transport.name) {
+        debug('"%s" works - aborting "%s"', to.name, transport.name);
+        freezeTransport();
+      }
+    }
+
+    // Remove all listeners on the transport and on self
+    const cleanup = () => {
+      transport.removeListener("open", onTransportOpen);
+      transport.removeListener("error", onerror);
+      transport.removeListener("close", onTransportClose);
+      this.removeListener("close", onclose);
+      this.removeListener("upgrading", onupgrade);
+    };
+
+    transport.once("open", onTransportOpen);
+    transport.once("error", onerror);
+    transport.once("close", onTransportClose);
+
+    this.once("close", onclose);
+    this.once("upgrading", onupgrade);
+
+    transport.open();
+  }
+
+  /**
+   * Called when connection is deemed open.
+   *
+   * @api public
+   */
+  onOpen() {
+    debug("socket open");
+    this.readyState = "open";
+    Socket.priorWebsocketSuccess = "websocket" === this.transport.name;
+    this.emit("open");
+    this.flush();
+
+    // we check for `readyState` in case an `open`
+    // listener already closed the socket
+    if (
+      "open" === this.readyState &&
+      this.opts.upgrade &&
+      this.transport.pause
+    ) {
+      debug("starting upgrade probes");
+      let i = 0;
+      const l = this.upgrades.length;
+      for (; i < l; i++) {
+        this.probe(this.upgrades[i]);
+      }
+    }
+  }
+
+  /**
+   * Handles a packet.
+   *
+   * @api private
+   */
+  onPacket(packet) {
+    if (
+      "opening" === this.readyState ||
+      "open" === this.readyState ||
+      "closing" === this.readyState
+    ) {
+      debug('socket receive: type "%s", data "%s"', packet.type, packet.data);
+
+      this.emit("packet", packet);
+
+      // Socket is live - any packet counts
+      this.emit("heartbeat");
+
+      switch (packet.type) {
+        case "open":
+          this.onHandshake(JSON.parse(packet.data));
+          break;
+
+        case "ping":
+          this.resetPingTimeout();
+          this.sendPacket("pong");
+          this.emit("ping");
+          this.emit("pong");
+          break;
+
+        case "error":
+          const err = new Error("server error");
+          err.code = packet.data;
+          this.onError(err);
+          break;
+
+        case "message":
+          this.emit("data", packet.data);
+          this.emit("message", packet.data);
+          break;
+      }
+    } else {
+      debug('packet received with socket readyState "%s"', this.readyState);
+    }
+  }
+
+  /**
+   * Called upon handshake completion.
+   *
+   * @param {Object} handshake obj
+   * @api private
+   */
+  onHandshake(data) {
+    this.emit("handshake", data);
+    this.id = data.sid;
+    this.transport.query.sid = data.sid;
+    this.upgrades = this.filterUpgrades(data.upgrades);
+    this.pingInterval = data.pingInterval;
+    this.pingTimeout = data.pingTimeout;
+    this.onOpen();
+    // In case open handler closes socket
+    if ("closed" === this.readyState) return;
+    this.resetPingTimeout();
+  }
+
+  /**
+   * Sets and resets ping timeout timer based on server pings.
+   *
+   * @api private
+   */
+  resetPingTimeout() {
+    this.clearTimeoutFn(this.pingTimeoutTimer);
+    this.pingTimeoutTimer = this.setTimeoutFn(() => {
+      this.onClose("ping timeout");
+    }, this.pingInterval + this.pingTimeout);
+    if (this.opts.autoUnref) {
+      this.pingTimeoutTimer.unref();
+    }
+  }
+
+  /**
+   * Called on `drain` event
+   *
+   * @api private
+   */
+  onDrain() {
+    this.writeBuffer.splice(0, this.prevBufferLen);
+
+    // setting prevBufferLen = 0 is very important
+    // for example, when upgrading, upgrade packet is sent over,
+    // and a nonzero prevBufferLen could cause problems on `drain`
+    this.prevBufferLen = 0;
+
+    if (0 === this.writeBuffer.length) {
+      this.emit("drain");
+    } else {
+      this.flush();
+    }
+  }
+
+  /**
+   * Flush write buffers.
+   *
+   * @api private
+   */
+  flush() {
+    if (
+      "closed" !== this.readyState &&
+      this.transport.writable &&
+      !this.upgrading &&
+      this.writeBuffer.length
+    ) {
+      debug("flushing %d packets in socket", this.writeBuffer.length);
+      this.transport.send(this.writeBuffer);
+      // keep track of current length of writeBuffer
+      // splice writeBuffer and callbackBuffer on `drain`
+      this.prevBufferLen = this.writeBuffer.length;
+      this.emit("flush");
+    }
+  }
+
+  /**
+   * Sends a message.
+   *
+   * @param {String} message.
+   * @param {Function} callback function.
+   * @param {Object} options.
+   * @return {Socket} for chaining.
+   * @api public
+   */
+  write(msg, options, fn) {
+    this.sendPacket("message", msg, options, fn);
+    return this;
+  }
+
+  send(msg, options, fn) {
+    this.sendPacket("message", msg, options, fn);
+    return this;
+  }
+
+  /**
+   * Sends a packet.
+   *
+   * @param {String} packet type.
+   * @param {String} data.
+   * @param {Object} options.
+   * @param {Function} callback function.
+   * @api private
+   */
+  sendPacket(type, data, options, fn) {
+    if ("function" === typeof data) {
+      fn = data;
+      data = undefined;
+    }
+
+    if ("function" === typeof options) {
+      fn = options;
+      options = null;
+    }
+
+    if ("closing" === this.readyState || "closed" === this.readyState) {
+      return;
+    }
+
+    options = options || {};
+    options.compress = false !== options.compress;
+
+    const packet = {
+      type: type,
+      data: data,
+      options: options
+    };
+    this.emit("packetCreate", packet);
+    this.writeBuffer.push(packet);
+    if (fn) this.once("flush", fn);
+    this.flush();
+  }
+
+  /**
+   * Closes the connection.
+   *
+   * @api private
+   */
+  close() {
+    const close = () => {
+      this.onClose("forced close");
+      debug("socket closing - telling transport to close");
+      this.transport.close();
+    };
+
+    const cleanupAndClose = () => {
+      this.removeListener("upgrade", cleanupAndClose);
+      this.removeListener("upgradeError", cleanupAndClose);
+      close();
+    };
+
+    const waitForUpgrade = () => {
+      // wait for upgrade to finish since we can't send packets while pausing a transport
+      this.once("upgrade", cleanupAndClose);
+      this.once("upgradeError", cleanupAndClose);
+    };
+
+    if ("opening" === this.readyState || "open" === this.readyState) {
+      this.readyState = "closing";
+
+      if (this.writeBuffer.length) {
+        this.once("drain", () => {
+          if (this.upgrading) {
+            waitForUpgrade();
+          } else {
+            close();
+          }
+        });
+      } else if (this.upgrading) {
+        waitForUpgrade();
+      } else {
+        close();
+      }
+    }
+
+    return this;
+  }
+
+  /**
+   * Called upon transport error
+   *
+   * @api private
+   */
+  onError(err) {
+    debug("socket error %j", err);
+    Socket.priorWebsocketSuccess = false;
+    this.emit("error", err);
+    this.onClose("transport error", err);
+  }
+
+  /**
+   * Called upon transport close.
+   *
+   * @api private
+   */
+  onClose(reason, desc) {
+    if (
+      "opening" === this.readyState ||
+      "open" === this.readyState ||
+      "closing" === this.readyState
+    ) {
+      debug('socket close with reason: "%s"', reason);
+
+      // clear timers
+      this.clearTimeoutFn(this.pingIntervalTimer);
+      this.clearTimeoutFn(this.pingTimeoutTimer);
+
+      // stop event from firing again for transport
+      this.transport.removeAllListeners("close");
+
+      // ensure transport won't stay open
+      this.transport.close();
+
+      // ignore further transport communication
+      this.transport.removeAllListeners();
+
+      if (typeof removeEventListener === "function") {
+        removeEventListener("offline", this.offlineEventListener, false);
+      }
+
+      // set ready state
+      this.readyState = "closed";
+
+      // clear session id
+      this.id = null;
+
+      // emit close event
+      this.emit("close", reason, desc);
+
+      // clean buffers after, so users can still
+      // grab the buffers on `close` event
+      this.writeBuffer = [];
+      this.prevBufferLen = 0;
+    }
+  }
+
+  /**
+   * Filters upgrades, returning only those matching client transports.
+   *
+   * @param {Array} server upgrades
+   * @api private
+   *
+   */
+  filterUpgrades(upgrades) {
+    const filteredUpgrades = [];
+    let i = 0;
+    const j = upgrades.length;
+    for (; i < j; i++) {
+      if (~this.transports.indexOf(upgrades[i]))
+        filteredUpgrades.push(upgrades[i]);
+    }
+    return filteredUpgrades;
+  }
+}
+
+Socket.priorWebsocketSuccess = false;
+
+/**
+ * Protocol version.
+ *
+ * @api public
+ */
+
+Socket.protocol = parser.protocol; // this is an int
+
+function clone(obj) {
+  const o = {};
+  for (let i in obj) {
+    if (obj.hasOwnProperty(i)) {
+      o[i] = obj[i];
+    }
+  }
+  return o;
+}
+
+module.exports = Socket;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transport.js":
+/*!********************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transport.js ***!
+  \********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
+const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
+const { installTimerFunctions } = __webpack_require__(/*! ./util */ "./node_modules/engine.io-client/lib/util.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("engine.io-client:transport");
+
+class Transport extends Emitter {
+  /**
+   * Transport abstract constructor.
+   *
+   * @param {Object} options.
+   * @api private
+   */
+  constructor(opts) {
+    super();
+    installTimerFunctions(this, opts);
+
+    this.opts = opts;
+    this.query = opts.query;
+    this.readyState = "";
+    this.socket = opts.socket;
+  }
+
+  /**
+   * Emits an error.
+   *
+   * @param {String} str
+   * @return {Transport} for chaining
+   * @api public
+   */
+  onError(msg, desc) {
+    const err = new Error(msg);
+    err.type = "TransportError";
+    err.description = desc;
+    this.emit("error", err);
+    return this;
+  }
+
+  /**
+   * Opens the transport.
+   *
+   * @api public
+   */
+  open() {
+    if ("closed" === this.readyState || "" === this.readyState) {
+      this.readyState = "opening";
+      this.doOpen();
+    }
+
+    return this;
+  }
+
+  /**
+   * Closes the transport.
+   *
+   * @api private
+   */
+  close() {
+    if ("opening" === this.readyState || "open" === this.readyState) {
+      this.doClose();
+      this.onClose();
+    }
+
+    return this;
+  }
+
+  /**
+   * Sends multiple packets.
+   *
+   * @param {Array} packets
+   * @api private
+   */
+  send(packets) {
+    if ("open" === this.readyState) {
+      this.write(packets);
+    } else {
+      // this might happen if the transport was silently closed in the beforeunload event handler
+      debug("transport is not open, discarding packets");
+    }
+  }
+
+  /**
+   * Called upon open
+   *
+   * @api private
+   */
+  onOpen() {
+    this.readyState = "open";
+    this.writable = true;
+    this.emit("open");
+  }
+
+  /**
+   * Called with data.
+   *
+   * @param {String} data
+   * @api private
+   */
+  onData(data) {
+    const packet = parser.decodePacket(data, this.socket.binaryType);
+    this.onPacket(packet);
+  }
+
+  /**
+   * Called with a decoded packet.
+   */
+  onPacket(packet) {
+    this.emit("packet", packet);
+  }
+
+  /**
+   * Called upon close.
+   *
+   * @api private
+   */
+  onClose() {
+    this.readyState = "closed";
+    this.emit("close");
+  }
+}
+
+module.exports = Transport;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/index.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+const XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ "./node_modules/engine.io-client/lib/xmlhttprequest.js");
+const XHR = __webpack_require__(/*! ./polling-xhr */ "./node_modules/engine.io-client/lib/transports/polling-xhr.js");
+const JSONP = __webpack_require__(/*! ./polling-jsonp */ "./node_modules/engine.io-client/lib/transports/polling-jsonp.js");
+const websocket = __webpack_require__(/*! ./websocket */ "./node_modules/engine.io-client/lib/transports/websocket.js");
+
+exports.polling = polling;
+exports.websocket = websocket;
+
+/**
+ * Polling transport polymorphic constructor.
+ * Decides on xhr vs jsonp based on feature detection.
+ *
+ * @api private
+ */
+
+function polling(opts) {
+  let xhr;
+  let xd = false;
+  let xs = false;
+  const jsonp = false !== opts.jsonp;
+
+  if (typeof location !== "undefined") {
+    const isSSL = "https:" === location.protocol;
+    let port = location.port;
+
+    // some user agents have empty `location.port`
+    if (!port) {
+      port = isSSL ? 443 : 80;
+    }
+
+    xd = opts.hostname !== location.hostname || port !== opts.port;
+    xs = opts.secure !== isSSL;
+  }
+
+  opts.xdomain = xd;
+  opts.xscheme = xs;
+  xhr = new XMLHttpRequest(opts);
+
+  if ("open" in xhr && !opts.forceJSONP) {
+    return new XHR(opts);
+  } else {
+    if (!jsonp) throw new Error("JSONP disabled");
+    return new JSONP(opts);
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/polling-jsonp.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/polling-jsonp.js ***!
+  \***********************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const Polling = __webpack_require__(/*! ./polling */ "./node_modules/engine.io-client/lib/transports/polling.js");
+const globalThis = __webpack_require__(/*! ../globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
+
+const rNewline = /\n/g;
+const rEscapedNewline = /\\n/g;
+
+/**
+ * Global JSONP callbacks.
+ */
+
+let callbacks;
+
+class JSONPPolling extends Polling {
+  /**
+   * JSONP Polling constructor.
+   *
+   * @param {Object} opts.
+   * @api public
+   */
+  constructor(opts) {
+    super(opts);
+
+    this.query = this.query || {};
+
+    // define global callbacks array if not present
+    // we do this here (lazily) to avoid unneeded global pollution
+    if (!callbacks) {
+      // we need to consider multiple engines in the same page
+      callbacks = globalThis.___eio = globalThis.___eio || [];
+    }
+
+    // callback identifier
+    this.index = callbacks.length;
+
+    // add callback to jsonp global
+    callbacks.push(this.onData.bind(this));
+
+    // append to query string
+    this.query.j = this.index;
+  }
+
+  /**
+   * JSONP only supports binary as base64 encoded strings
+   */
+  get supportsBinary() {
+    return false;
+  }
+
+  /**
+   * Closes the socket.
+   *
+   * @api private
+   */
+  doClose() {
+    if (this.script) {
+      // prevent spurious errors from being emitted when the window is unloaded
+      this.script.onerror = () => {};
+      this.script.parentNode.removeChild(this.script);
+      this.script = null;
+    }
+
+    if (this.form) {
+      this.form.parentNode.removeChild(this.form);
+      this.form = null;
+      this.iframe = null;
+    }
+
+    super.doClose();
+  }
+
+  /**
+   * Starts a poll cycle.
+   *
+   * @api private
+   */
+  doPoll() {
+    const script = document.createElement("script");
+
+    if (this.script) {
+      this.script.parentNode.removeChild(this.script);
+      this.script = null;
+    }
+
+    script.async = true;
+    script.src = this.uri();
+    script.onerror = e => {
+      this.onError("jsonp poll error", e);
+    };
+
+    const insertAt = document.getElementsByTagName("script")[0];
+    if (insertAt) {
+      insertAt.parentNode.insertBefore(script, insertAt);
+    } else {
+      (document.head || document.body).appendChild(script);
+    }
+    this.script = script;
+
+    const isUAgecko =
+      "undefined" !== typeof navigator && /gecko/i.test(navigator.userAgent);
+
+    if (isUAgecko) {
+      this.setTimeoutFn(function() {
+        const iframe = document.createElement("iframe");
+        document.body.appendChild(iframe);
+        document.body.removeChild(iframe);
+      }, 100);
+    }
+  }
+
+  /**
+   * Writes with a hidden iframe.
+   *
+   * @param {String} data to send
+   * @param {Function} called upon flush.
+   * @api private
+   */
+  doWrite(data, fn) {
+    let iframe;
+
+    if (!this.form) {
+      const form = document.createElement("form");
+      const area = document.createElement("textarea");
+      const id = (this.iframeId = "eio_iframe_" + this.index);
+
+      form.className = "socketio";
+      form.style.position = "absolute";
+      form.style.top = "-1000px";
+      form.style.left = "-1000px";
+      form.target = id;
+      form.method = "POST";
+      form.setAttribute("accept-charset", "utf-8");
+      area.name = "d";
+      form.appendChild(area);
+      document.body.appendChild(form);
+
+      this.form = form;
+      this.area = area;
+    }
+
+    this.form.action = this.uri();
+
+    function complete() {
+      initIframe();
+      fn();
+    }
+
+    const initIframe = () => {
+      if (this.iframe) {
+        try {
+          this.form.removeChild(this.iframe);
+        } catch (e) {
+          this.onError("jsonp polling iframe removal error", e);
+        }
+      }
+
+      try {
+        // ie6 dynamic iframes with target="" support (thanks Chris Lambacher)
+        const html = '<iframe src="javascript:0" name="' + this.iframeId + '">';
+        iframe = document.createElement(html);
+      } catch (e) {
+        iframe = document.createElement("iframe");
+        iframe.name = this.iframeId;
+        iframe.src = "javascript:0";
+      }
+
+      iframe.id = this.iframeId;
+
+      this.form.appendChild(iframe);
+      this.iframe = iframe;
+    };
+
+    initIframe();
+
+    // escape \n to prevent it from being converted into \r\n by some UAs
+    // double escaping is required for escaped new lines because unescaping of new lines can be done safely on server-side
+    data = data.replace(rEscapedNewline, "\\\n");
+    this.area.value = data.replace(rNewline, "\\n");
+
+    try {
+      this.form.submit();
+    } catch (e) {}
+
+    if (this.iframe.attachEvent) {
+      this.iframe.onreadystatechange = () => {
+        if (this.iframe.readyState === "complete") {
+          complete();
+        }
+      };
+    } else {
+      this.iframe.onload = complete;
+    }
+  }
+}
+
+module.exports = JSONPPolling;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/polling-xhr.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/polling-xhr.js ***!
+  \*********************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/* global attachEvent */
+
+const XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ "./node_modules/engine.io-client/lib/xmlhttprequest.js");
+const Polling = __webpack_require__(/*! ./polling */ "./node_modules/engine.io-client/lib/transports/polling.js");
+const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
+const { pick, installTimerFunctions } = __webpack_require__(/*! ../util */ "./node_modules/engine.io-client/lib/util.js");
+const globalThis = __webpack_require__(/*! ../globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
+
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("engine.io-client:polling-xhr");
+
+/**
+ * Empty function
+ */
+
+function empty() {}
+
+const hasXHR2 = (function() {
+  const xhr = new XMLHttpRequest({ xdomain: false });
+  return null != xhr.responseType;
+})();
+
+class XHR extends Polling {
+  /**
+   * XHR Polling constructor.
+   *
+   * @param {Object} opts
+   * @api public
+   */
+  constructor(opts) {
+    super(opts);
+
+    if (typeof location !== "undefined") {
+      const isSSL = "https:" === location.protocol;
+      let port = location.port;
+
+      // some user agents have empty `location.port`
+      if (!port) {
+        port = isSSL ? 443 : 80;
+      }
+
+      this.xd =
+        (typeof location !== "undefined" &&
+          opts.hostname !== location.hostname) ||
+        port !== opts.port;
+      this.xs = opts.secure !== isSSL;
+    }
+    /**
+     * XHR supports binary
+     */
+    const forceBase64 = opts && opts.forceBase64;
+    this.supportsBinary = hasXHR2 && !forceBase64;
+  }
+
+  /**
+   * Creates a request.
+   *
+   * @param {String} method
+   * @api private
+   */
+  request(opts = {}) {
+    Object.assign(opts, { xd: this.xd, xs: this.xs }, this.opts);
+    return new Request(this.uri(), opts);
+  }
+
+  /**
+   * Sends data.
+   *
+   * @param {String} data to send.
+   * @param {Function} called upon flush.
+   * @api private
+   */
+  doWrite(data, fn) {
+    const req = this.request({
+      method: "POST",
+      data: data
+    });
+    req.on("success", fn);
+    req.on("error", err => {
+      this.onError("xhr post error", err);
+    });
+  }
+
+  /**
+   * Starts a poll cycle.
+   *
+   * @api private
+   */
+  doPoll() {
+    debug("xhr poll");
+    const req = this.request();
+    req.on("data", this.onData.bind(this));
+    req.on("error", err => {
+      this.onError("xhr poll error", err);
+    });
+    this.pollXhr = req;
+  }
+}
+
+class Request extends Emitter {
+  /**
+   * Request constructor
+   *
+   * @param {Object} options
+   * @api public
+   */
+  constructor(uri, opts) {
+    super();
+    installTimerFunctions(this, opts);
+    this.opts = opts;
+
+    this.method = opts.method || "GET";
+    this.uri = uri;
+    this.async = false !== opts.async;
+    this.data = undefined !== opts.data ? opts.data : null;
+
+    this.create();
+  }
+
+  /**
+   * Creates the XHR object and sends the request.
+   *
+   * @api private
+   */
+  create() {
+    const opts = pick(
+      this.opts,
+      "agent",
+      "enablesXDR",
+      "pfx",
+      "key",
+      "passphrase",
+      "cert",
+      "ca",
+      "ciphers",
+      "rejectUnauthorized",
+      "autoUnref"
+    );
+    opts.xdomain = !!this.opts.xd;
+    opts.xscheme = !!this.opts.xs;
+
+    const xhr = (this.xhr = new XMLHttpRequest(opts));
+
+    try {
+      debug("xhr open %s: %s", this.method, this.uri);
+      xhr.open(this.method, this.uri, this.async);
+      try {
+        if (this.opts.extraHeaders) {
+          xhr.setDisableHeaderCheck && xhr.setDisableHeaderCheck(true);
+          for (let i in this.opts.extraHeaders) {
+            if (this.opts.extraHeaders.hasOwnProperty(i)) {
+              xhr.setRequestHeader(i, this.opts.extraHeaders[i]);
+            }
+          }
+        }
+      } catch (e) {}
+
+      if ("POST" === this.method) {
+        try {
+          xhr.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
+        } catch (e) {}
+      }
+
+      try {
+        xhr.setRequestHeader("Accept", "*/*");
+      } catch (e) {}
+
+      // ie6 check
+      if ("withCredentials" in xhr) {
+        xhr.withCredentials = this.opts.withCredentials;
+      }
+
+      if (this.opts.requestTimeout) {
+        xhr.timeout = this.opts.requestTimeout;
+      }
+
+      if (this.hasXDR()) {
+        xhr.onload = () => {
+          this.onLoad();
+        };
+        xhr.onerror = () => {
+          this.onError(xhr.responseText);
+        };
+      } else {
+        xhr.onreadystatechange = () => {
+          if (4 !== xhr.readyState) return;
+          if (200 === xhr.status || 1223 === xhr.status) {
+            this.onLoad();
+          } else {
+            // make sure the `error` event handler that's user-set
+            // does not throw in the same tick and gets caught here
+            this.setTimeoutFn(() => {
+              this.onError(typeof xhr.status === "number" ? xhr.status : 0);
+            }, 0);
+          }
+        };
+      }
+
+      debug("xhr data %s", this.data);
+      xhr.send(this.data);
+    } catch (e) {
+      // Need to defer since .create() is called directly from the constructor
+      // and thus the 'error' event can only be only bound *after* this exception
+      // occurs.  Therefore, also, we cannot throw here at all.
+      this.setTimeoutFn(() => {
+        this.onError(e);
+      }, 0);
+      return;
+    }
+
+    if (typeof document !== "undefined") {
+      this.index = Request.requestsCount++;
+      Request.requests[this.index] = this;
+    }
+  }
+
+  /**
+   * Called upon successful response.
+   *
+   * @api private
+   */
+  onSuccess() {
+    this.emit("success");
+    this.cleanup();
+  }
+
+  /**
+   * Called if we have data.
+   *
+   * @api private
+   */
+  onData(data) {
+    this.emit("data", data);
+    this.onSuccess();
+  }
+
+  /**
+   * Called upon error.
+   *
+   * @api private
+   */
+  onError(err) {
+    this.emit("error", err);
+    this.cleanup(true);
+  }
+
+  /**
+   * Cleans up house.
+   *
+   * @api private
+   */
+  cleanup(fromError) {
+    if ("undefined" === typeof this.xhr || null === this.xhr) {
+      return;
+    }
+    // xmlhttprequest
+    if (this.hasXDR()) {
+      this.xhr.onload = this.xhr.onerror = empty;
+    } else {
+      this.xhr.onreadystatechange = empty;
+    }
+
+    if (fromError) {
+      try {
+        this.xhr.abort();
+      } catch (e) {}
+    }
+
+    if (typeof document !== "undefined") {
+      delete Request.requests[this.index];
+    }
+
+    this.xhr = null;
+  }
+
+  /**
+   * Called upon load.
+   *
+   * @api private
+   */
+  onLoad() {
+    const data = this.xhr.responseText;
+    if (data !== null) {
+      this.onData(data);
+    }
+  }
+
+  /**
+   * Check if it has XDomainRequest.
+   *
+   * @api private
+   */
+  hasXDR() {
+    return typeof XDomainRequest !== "undefined" && !this.xs && this.enablesXDR;
+  }
+
+  /**
+   * Aborts the request.
+   *
+   * @api public
+   */
+  abort() {
+    this.cleanup();
+  }
+}
+
+/**
+ * Aborts pending requests when unloading the window. This is needed to prevent
+ * memory leaks (e.g. when using IE) and to ensure that no spurious error is
+ * emitted.
+ */
+
+Request.requestsCount = 0;
+Request.requests = {};
+
+if (typeof document !== "undefined") {
+  if (typeof attachEvent === "function") {
+    attachEvent("onunload", unloadHandler);
+  } else if (typeof addEventListener === "function") {
+    const terminationEvent = "onpagehide" in globalThis ? "pagehide" : "unload";
+    addEventListener(terminationEvent, unloadHandler, false);
+  }
+}
+
+function unloadHandler() {
+  for (let i in Request.requests) {
+    if (Request.requests.hasOwnProperty(i)) {
+      Request.requests[i].abort();
+    }
+  }
+}
+
+module.exports = XHR;
+module.exports.Request = Request;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/polling.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/polling.js ***!
+  \*****************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const Transport = __webpack_require__(/*! ../transport */ "./node_modules/engine.io-client/lib/transport.js");
+const parseqs = __webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js");
+const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
+const yeast = __webpack_require__(/*! yeast */ "./node_modules/yeast/index.js");
+
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("engine.io-client:polling");
+
+class Polling extends Transport {
+  /**
+   * Transport name.
+   */
+  get name() {
+    return "polling";
+  }
+
+  /**
+   * Opens the socket (triggers polling). We write a PING message to determine
+   * when the transport is open.
+   *
+   * @api private
+   */
+  doOpen() {
+    this.poll();
+  }
+
+  /**
+   * Pauses polling.
+   *
+   * @param {Function} callback upon buffers are flushed and transport is paused
+   * @api private
+   */
+  pause(onPause) {
+    this.readyState = "pausing";
+
+    const pause = () => {
+      debug("paused");
+      this.readyState = "paused";
+      onPause();
+    };
+
+    if (this.polling || !this.writable) {
+      let total = 0;
+
+      if (this.polling) {
+        debug("we are currently polling - waiting to pause");
+        total++;
+        this.once("pollComplete", function() {
+          debug("pre-pause polling complete");
+          --total || pause();
+        });
+      }
+
+      if (!this.writable) {
+        debug("we are currently writing - waiting to pause");
+        total++;
+        this.once("drain", function() {
+          debug("pre-pause writing complete");
+          --total || pause();
+        });
+      }
+    } else {
+      pause();
+    }
+  }
+
+  /**
+   * Starts polling cycle.
+   *
+   * @api public
+   */
+  poll() {
+    debug("polling");
+    this.polling = true;
+    this.doPoll();
+    this.emit("poll");
+  }
+
+  /**
+   * Overloads onData to detect payloads.
+   *
+   * @api private
+   */
+  onData(data) {
+    debug("polling got data %s", data);
+    const callback = packet => {
+      // if its the first message we consider the transport open
+      if ("opening" === this.readyState && packet.type === "open") {
+        this.onOpen();
+      }
+
+      // if its a close packet, we close the ongoing requests
+      if ("close" === packet.type) {
+        this.onClose();
+        return false;
+      }
+
+      // otherwise bypass onData and handle the message
+      this.onPacket(packet);
+    };
+
+    // decode payload
+    parser.decodePayload(data, this.socket.binaryType).forEach(callback);
+
+    // if an event did not trigger closing
+    if ("closed" !== this.readyState) {
+      // if we got data we're not polling
+      this.polling = false;
+      this.emit("pollComplete");
+
+      if ("open" === this.readyState) {
+        this.poll();
+      } else {
+        debug('ignoring poll - transport state "%s"', this.readyState);
+      }
+    }
+  }
+
+  /**
+   * For polling, send a close packet.
+   *
+   * @api private
+   */
+  doClose() {
+    const close = () => {
+      debug("writing close packet");
+      this.write([{ type: "close" }]);
+    };
+
+    if ("open" === this.readyState) {
+      debug("transport open - closing");
+      close();
+    } else {
+      // in case we're trying to close while
+      // handshaking is in progress (GH-164)
+      debug("transport not open - deferring close");
+      this.once("open", close);
+    }
+  }
+
+  /**
+   * Writes a packets payload.
+   *
+   * @param {Array} data packets
+   * @param {Function} drain callback
+   * @api private
+   */
+  write(packets) {
+    this.writable = false;
+
+    parser.encodePayload(packets, data => {
+      this.doWrite(data, () => {
+        this.writable = true;
+        this.emit("drain");
+      });
+    });
+  }
+
+  /**
+   * Generates uri for connection.
+   *
+   * @api private
+   */
+  uri() {
+    let query = this.query || {};
+    const schema = this.opts.secure ? "https" : "http";
+    let port = "";
+
+    // cache busting is forced
+    if (false !== this.opts.timestampRequests) {
+      query[this.opts.timestampParam] = yeast();
+    }
+
+    if (!this.supportsBinary && !query.sid) {
+      query.b64 = 1;
+    }
+
+    query = parseqs.encode(query);
+
+    // avoid port if default for schema
+    if (
+      this.opts.port &&
+      (("https" === schema && Number(this.opts.port) !== 443) ||
+        ("http" === schema && Number(this.opts.port) !== 80))
+    ) {
+      port = ":" + this.opts.port;
+    }
+
+    // prepend ? to query
+    if (query.length) {
+      query = "?" + query;
+    }
+
+    const ipv6 = this.opts.hostname.indexOf(":") !== -1;
+    return (
+      schema +
+      "://" +
+      (ipv6 ? "[" + this.opts.hostname + "]" : this.opts.hostname) +
+      port +
+      this.opts.path +
+      query
+    );
+  }
+}
+
+module.exports = Polling;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/websocket-constructor.browser.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/websocket-constructor.browser.js ***!
+  \***************************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const globalThis = __webpack_require__(/*! ../globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
+const nextTick = (() => {
+  const isPromiseAvailable =
+    typeof Promise === "function" && typeof Promise.resolve === "function";
+  if (isPromiseAvailable) {
+    return cb => Promise.resolve().then(cb);
+  } else {
+    return (cb, setTimeoutFn) => setTimeoutFn(cb, 0);
+  }
+})();
+
+module.exports = {
+  WebSocket: globalThis.WebSocket || globalThis.MozWebSocket,
+  usingBrowserWebSocket: true,
+  defaultBinaryType: "arraybuffer",
+  nextTick
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/websocket.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/websocket.js ***!
+  \*******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(/*! buffer */ "./node_modules/buffer/index.js")["Buffer"];
+const Transport = __webpack_require__(/*! ../transport */ "./node_modules/engine.io-client/lib/transport.js");
+const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
+const parseqs = __webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js");
+const yeast = __webpack_require__(/*! yeast */ "./node_modules/yeast/index.js");
+const { pick } = __webpack_require__(/*! ../util */ "./node_modules/engine.io-client/lib/util.js");
+const {
+  WebSocket,
+  usingBrowserWebSocket,
+  defaultBinaryType,
+  nextTick
+} = __webpack_require__(/*! ./websocket-constructor */ "./node_modules/engine.io-client/lib/transports/websocket-constructor.browser.js");
+
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("engine.io-client:websocket");
+
+// detect ReactNative environment
+const isReactNative =
+  typeof navigator !== "undefined" &&
+  typeof navigator.product === "string" &&
+  navigator.product.toLowerCase() === "reactnative";
+
+class WS extends Transport {
+  /**
+   * WebSocket transport constructor.
+   *
+   * @api {Object} connection options
+   * @api public
+   */
+  constructor(opts) {
+    super(opts);
+
+    this.supportsBinary = !opts.forceBase64;
+  }
+
+  /**
+   * Transport name.
+   *
+   * @api public
+   */
+  get name() {
+    return "websocket";
+  }
+
+  /**
+   * Opens socket.
+   *
+   * @api private
+   */
+  doOpen() {
+    if (!this.check()) {
+      // let probe timeout
+      return;
+    }
+
+    const uri = this.uri();
+    const protocols = this.opts.protocols;
+
+    // React Native only supports the 'headers' option, and will print a warning if anything else is passed
+    const opts = isReactNative
+      ? {}
+      : pick(
+          this.opts,
+          "agent",
+          "perMessageDeflate",
+          "pfx",
+          "key",
+          "passphrase",
+          "cert",
+          "ca",
+          "ciphers",
+          "rejectUnauthorized",
+          "localAddress",
+          "protocolVersion",
+          "origin",
+          "maxPayload",
+          "family",
+          "checkServerIdentity"
+        );
+
+    if (this.opts.extraHeaders) {
+      opts.headers = this.opts.extraHeaders;
+    }
+
+    try {
+      this.ws =
+        usingBrowserWebSocket && !isReactNative
+          ? protocols
+            ? new WebSocket(uri, protocols)
+            : new WebSocket(uri)
+          : new WebSocket(uri, protocols, opts);
+    } catch (err) {
+      return this.emit("error", err);
+    }
+
+    this.ws.binaryType = this.socket.binaryType || defaultBinaryType;
+
+    this.addEventListeners();
+  }
+
+  /**
+   * Adds event listeners to the socket
+   *
+   * @api private
+   */
+  addEventListeners() {
+    this.ws.onopen = () => {
+      if (this.opts.autoUnref) {
+        this.ws._socket.unref();
+      }
+      this.onOpen();
+    };
+    this.ws.onclose = this.onClose.bind(this);
+    this.ws.onmessage = ev => this.onData(ev.data);
+    this.ws.onerror = e => this.onError("websocket error", e);
+  }
+
+  /**
+   * Writes data to socket.
+   *
+   * @param {Array} array of packets.
+   * @api private
+   */
+  write(packets) {
+    this.writable = false;
+
+    // encodePacket efficient as it uses WS framing
+    // no need for encodePayload
+    for (let i = 0; i < packets.length; i++) {
+      const packet = packets[i];
+      const lastPacket = i === packets.length - 1;
+
+      parser.encodePacket(packet, this.supportsBinary, data => {
+        // always create a new object (GH-437)
+        const opts = {};
+        if (!usingBrowserWebSocket) {
+          if (packet.options) {
+            opts.compress = packet.options.compress;
+          }
+
+          if (this.opts.perMessageDeflate) {
+            const len =
+              "string" === typeof data ? Buffer.byteLength(data) : data.length;
+            if (len < this.opts.perMessageDeflate.threshold) {
+              opts.compress = false;
+            }
+          }
+        }
+
+        // Sometimes the websocket has already been closed but the browser didn't
+        // have a chance of informing us about it yet, in that case send will
+        // throw an error
+        try {
+          if (usingBrowserWebSocket) {
+            // TypeError is thrown when passing the second argument on Safari
+            this.ws.send(data);
+          } else {
+            this.ws.send(data, opts);
+          }
+        } catch (e) {
+          debug("websocket closed before onclose event");
+        }
+
+        if (lastPacket) {
+          // fake drain
+          // defer to next tick to allow Socket to clear writeBuffer
+          nextTick(() => {
+            this.writable = true;
+            this.emit("drain");
+          }, this.setTimeoutFn);
+        }
+      });
+    }
+  }
+
+  /**
+   * Called upon close
+   *
+   * @api private
+   */
+  onClose() {
+    Transport.prototype.onClose.call(this);
+  }
+
+  /**
+   * Closes socket.
+   *
+   * @api private
+   */
+  doClose() {
+    if (typeof this.ws !== "undefined") {
+      this.ws.close();
+      this.ws = null;
+    }
+  }
+
+  /**
+   * Generates uri for connection.
+   *
+   * @api private
+   */
+  uri() {
+    let query = this.query || {};
+    const schema = this.opts.secure ? "wss" : "ws";
+    let port = "";
+
+    // avoid port if default for schema
+    if (
+      this.opts.port &&
+      (("wss" === schema && Number(this.opts.port) !== 443) ||
+        ("ws" === schema && Number(this.opts.port) !== 80))
+    ) {
+      port = ":" + this.opts.port;
+    }
+
+    // append timestamp to URI
+    if (this.opts.timestampRequests) {
+      query[this.opts.timestampParam] = yeast();
+    }
+
+    // communicate binary support capabilities
+    if (!this.supportsBinary) {
+      query.b64 = 1;
+    }
+
+    query = parseqs.encode(query);
+
+    // prepend ? to query
+    if (query.length) {
+      query = "?" + query;
+    }
+
+    const ipv6 = this.opts.hostname.indexOf(":") !== -1;
+    return (
+      schema +
+      "://" +
+      (ipv6 ? "[" + this.opts.hostname + "]" : this.opts.hostname) +
+      port +
+      this.opts.path +
+      query
+    );
+  }
+
+  /**
+   * Feature detection for WebSocket.
+   *
+   * @return {Boolean} whether this transport is available.
+   * @api public
+   */
+  check() {
+    return (
+      !!WebSocket &&
+      !("__initialize" in WebSocket && this.name === WS.prototype.name)
+    );
+  }
+}
+
+module.exports = WS;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/util.js":
+/*!***************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/util.js ***!
+  \***************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const globalThis = __webpack_require__(/*! ./globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
+
+module.exports.pick = (obj, ...attr) => {
+  return attr.reduce((acc, k) => {
+    if (obj.hasOwnProperty(k)) {
+      acc[k] = obj[k];
+    }
+    return acc;
+  }, {});
+};
+
+// Keep a reference to the real timeout functions so they can be used when overridden
+const NATIVE_SET_TIMEOUT = setTimeout;
+const NATIVE_CLEAR_TIMEOUT = clearTimeout;
+
+module.exports.installTimerFunctions = (obj, opts) => {
+  if (opts.useNativeTimers) {
+    obj.setTimeoutFn = NATIVE_SET_TIMEOUT.bind(globalThis);
+    obj.clearTimeoutFn = NATIVE_CLEAR_TIMEOUT.bind(globalThis);
+  } else {
+    obj.setTimeoutFn = setTimeout.bind(globalThis);
+    obj.clearTimeoutFn = clearTimeout.bind(globalThis);
+  }
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/xmlhttprequest.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/xmlhttprequest.js ***!
+  \*************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// browser shim for xmlhttprequest module
+
+const hasCORS = __webpack_require__(/*! has-cors */ "./node_modules/has-cors/index.js");
+const globalThis = __webpack_require__(/*! ./globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
+
+module.exports = function(opts) {
+  const xdomain = opts.xdomain;
+
+  // scheme must be same when usign XDomainRequest
+  // http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx
+  const xscheme = opts.xscheme;
+
+  // XDomainRequest has a flow of not sending cookie, therefore it should be disabled as a default.
+  // https://github.com/Automattic/engine.io-client/pull/217
+  const enablesXDR = opts.enablesXDR;
+
+  // XMLHttpRequest can be disabled on IE
+  try {
+    if ("undefined" !== typeof XMLHttpRequest && (!xdomain || hasCORS)) {
+      return new XMLHttpRequest();
+    }
+  } catch (e) {}
+
+  // Use XDomainRequest for IE8 if enablesXDR is true
+  // because loading bar keeps flashing when using jsonp-polling
+  // https://github.com/yujiosaka/socke.io-ie8-loading-example
+  try {
+    if ("undefined" !== typeof XDomainRequest && !xscheme && enablesXDR) {
+      return new XDomainRequest();
+    }
+  } catch (e) {}
+
+  if (!xdomain) {
+    try {
+      return new globalThis[["Active"].concat("Object").join("X")](
+        "Microsoft.XMLHTTP"
+      );
+    } catch (e) {}
+  }
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/lib/commons.js":
+/*!******************************************************!*\
+  !*** ./node_modules/engine.io-parser/lib/commons.js ***!
+  \******************************************************/
+/***/ ((module) => {
+
+const PACKET_TYPES = Object.create(null); // no Map = no polyfill
+PACKET_TYPES["open"] = "0";
+PACKET_TYPES["close"] = "1";
+PACKET_TYPES["ping"] = "2";
+PACKET_TYPES["pong"] = "3";
+PACKET_TYPES["message"] = "4";
+PACKET_TYPES["upgrade"] = "5";
+PACKET_TYPES["noop"] = "6";
+
+const PACKET_TYPES_REVERSE = Object.create(null);
+Object.keys(PACKET_TYPES).forEach(key => {
+  PACKET_TYPES_REVERSE[PACKET_TYPES[key]] = key;
+});
+
+const ERROR_PACKET = { type: "error", data: "parser error" };
+
+module.exports = {
+  PACKET_TYPES,
+  PACKET_TYPES_REVERSE,
+  ERROR_PACKET
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/lib/decodePacket.browser.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/engine.io-parser/lib/decodePacket.browser.js ***!
+  \*******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const { PACKET_TYPES_REVERSE, ERROR_PACKET } = __webpack_require__(/*! ./commons */ "./node_modules/engine.io-parser/lib/commons.js");
+
+const withNativeArrayBuffer = typeof ArrayBuffer === "function";
+
+let base64decoder;
+if (withNativeArrayBuffer) {
+  base64decoder = __webpack_require__(/*! base64-arraybuffer */ "./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js");
+}
+
+const decodePacket = (encodedPacket, binaryType) => {
+  if (typeof encodedPacket !== "string") {
+    return {
+      type: "message",
+      data: mapBinary(encodedPacket, binaryType)
+    };
+  }
+  const type = encodedPacket.charAt(0);
+  if (type === "b") {
+    return {
+      type: "message",
+      data: decodeBase64Packet(encodedPacket.substring(1), binaryType)
+    };
+  }
+  const packetType = PACKET_TYPES_REVERSE[type];
+  if (!packetType) {
+    return ERROR_PACKET;
+  }
+  return encodedPacket.length > 1
+    ? {
+        type: PACKET_TYPES_REVERSE[type],
+        data: encodedPacket.substring(1)
+      }
+    : {
+        type: PACKET_TYPES_REVERSE[type]
+      };
+};
+
+const decodeBase64Packet = (data, binaryType) => {
+  if (base64decoder) {
+    const decoded = base64decoder.decode(data);
+    return mapBinary(decoded, binaryType);
+  } else {
+    return { base64: true, data }; // fallback for old browsers
+  }
+};
+
+const mapBinary = (data, binaryType) => {
+  switch (binaryType) {
+    case "blob":
+      return data instanceof ArrayBuffer ? new Blob([data]) : data;
+    case "arraybuffer":
+    default:
+      return data; // assuming the data is already an ArrayBuffer
+  }
+};
+
+module.exports = decodePacket;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/lib/encodePacket.browser.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/engine.io-parser/lib/encodePacket.browser.js ***!
+  \*******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const { PACKET_TYPES } = __webpack_require__(/*! ./commons */ "./node_modules/engine.io-parser/lib/commons.js");
+
+const withNativeBlob =
+  typeof Blob === "function" ||
+  (typeof Blob !== "undefined" &&
+    Object.prototype.toString.call(Blob) === "[object BlobConstructor]");
+const withNativeArrayBuffer = typeof ArrayBuffer === "function";
+
+// ArrayBuffer.isView method is not defined in IE10
+const isView = obj => {
+  return typeof ArrayBuffer.isView === "function"
+    ? ArrayBuffer.isView(obj)
+    : obj && obj.buffer instanceof ArrayBuffer;
+};
+
+const encodePacket = ({ type, data }, supportsBinary, callback) => {
+  if (withNativeBlob && data instanceof Blob) {
+    if (supportsBinary) {
+      return callback(data);
+    } else {
+      return encodeBlobAsBase64(data, callback);
+    }
+  } else if (
+    withNativeArrayBuffer &&
+    (data instanceof ArrayBuffer || isView(data))
+  ) {
+    if (supportsBinary) {
+      return callback(data);
+    } else {
+      return encodeBlobAsBase64(new Blob([data]), callback);
+    }
+  }
+  // plain string
+  return callback(PACKET_TYPES[type] + (data || ""));
+};
+
+const encodeBlobAsBase64 = (data, callback) => {
+  const fileReader = new FileReader();
+  fileReader.onload = function() {
+    const content = fileReader.result.split(",")[1];
+    callback("b" + content);
+  };
+  return fileReader.readAsDataURL(data);
+};
+
+module.exports = encodePacket;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/lib/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/engine.io-parser/lib/index.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const encodePacket = __webpack_require__(/*! ./encodePacket */ "./node_modules/engine.io-parser/lib/encodePacket.browser.js");
+const decodePacket = __webpack_require__(/*! ./decodePacket */ "./node_modules/engine.io-parser/lib/decodePacket.browser.js");
+
+const SEPARATOR = String.fromCharCode(30); // see https://en.wikipedia.org/wiki/Delimiter#ASCII_delimited_text
+
+const encodePayload = (packets, callback) => {
+  // some packets may be added to the array while encoding, so the initial length must be saved
+  const length = packets.length;
+  const encodedPackets = new Array(length);
+  let count = 0;
+
+  packets.forEach((packet, i) => {
+    // force base64 encoding for binary packets
+    encodePacket(packet, false, encodedPacket => {
+      encodedPackets[i] = encodedPacket;
+      if (++count === length) {
+        callback(encodedPackets.join(SEPARATOR));
+      }
+    });
+  });
+};
+
+const decodePayload = (encodedPayload, binaryType) => {
+  const encodedPackets = encodedPayload.split(SEPARATOR);
+  const packets = [];
+  for (let i = 0; i < encodedPackets.length; i++) {
+    const decodedPacket = decodePacket(encodedPackets[i], binaryType);
+    packets.push(decodedPacket);
+    if (decodedPacket.type === "error") {
+      break;
+    }
+  }
+  return packets;
+};
+
+module.exports = {
+  protocol: 4,
+  encodePacket,
+  encodePayload,
+  decodePacket,
+  decodePayload
+};
 
 
 /***/ }),
@@ -7419,6 +15378,33 @@ module.exports = function GetIntrinsic(name, allowMissing) {
 
 /***/ }),
 
+/***/ "./node_modules/has-cors/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/has-cors/index.js ***!
+  \****************************************/
+/***/ ((module) => {
+
+
+/**
+ * Module exports.
+ *
+ * Logic borrowed from Modernizr:
+ *
+ *   - https://github.com/Modernizr/Modernizr/blob/master/feature-detects/cors.js
+ */
+
+try {
+  module.exports = typeof XMLHttpRequest !== 'undefined' &&
+    'withCredentials' in new XMLHttpRequest();
+} catch (err) {
+  // if XMLHttp support is disabled in IE then it will throw
+  // when trying to create
+  module.exports = false;
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/has-symbols/index.js":
 /*!*******************************************!*\
   !*** ./node_modules/has-symbols/index.js ***!
@@ -7508,6 +15494,116 @@ module.exports = function hasSymbols() {
 var bind = __webpack_require__(/*! function-bind */ "./node_modules/function-bind/index.js");
 
 module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
+
+
+/***/ }),
+
+/***/ "./node_modules/ieee754/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/ieee754/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+  var e, m
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
+
+  i += d
+
+  e = s & ((1 << (-nBits)) - 1)
+  s >>= (-nBits)
+  nBits += eLen
+  for (; nBits > 0; e = (e * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  m = e & ((1 << (-nBits)) - 1)
+  e >>= (-nBits)
+  nBits += mLen
+  for (; nBits > 0; m = (m * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  if (e === 0) {
+    e = 1 - eBias
+  } else if (e === eMax) {
+    return m ? NaN : ((s ? -1 : 1) * Infinity)
+  } else {
+    m = m + Math.pow(2, mLen)
+    e = e - eBias
+  }
+  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+}
+
+exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+  var e, m, c
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+  value = Math.abs(value)
+
+  if (isNaN(value) || value === Infinity) {
+    m = isNaN(value) ? 1 : 0
+    e = eMax
+  } else {
+    e = Math.floor(Math.log(value) / Math.LN2)
+    if (value * (c = Math.pow(2, -e)) < 1) {
+      e--
+      c *= 2
+    }
+    if (e + eBias >= 1) {
+      value += rt / c
+    } else {
+      value += rt * Math.pow(2, 1 - eBias)
+    }
+    if (value * c >= 2) {
+      e++
+      c /= 2
+    }
+
+    if (e + eBias >= eMax) {
+      m = 0
+      e = eMax
+    } else if (e + eBias >= 1) {
+      m = ((value * c) - 1) * Math.pow(2, mLen)
+      e = e + eBias
+    } else {
+      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+      e = 0
+    }
+  }
+
+  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+  e = (e << mLen) | m
+  eLen += mLen
+  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+  buffer[offset + i - d] |= s * 128
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/isarray/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/isarray/index.js ***!
+  \***************************************/
+/***/ ((module) => {
+
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
 
 
 /***/ }),
@@ -26496,6 +34592,178 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/ms/index.js":
+/*!**********************************!*\
+  !*** ./node_modules/ms/index.js ***!
+  \**********************************/
+/***/ ((module) => {
+
+/**
+ * Helpers.
+ */
+
+var s = 1000;
+var m = s * 60;
+var h = m * 60;
+var d = h * 24;
+var w = d * 7;
+var y = d * 365.25;
+
+/**
+ * Parse or format the given `val`.
+ *
+ * Options:
+ *
+ *  - `long` verbose formatting [false]
+ *
+ * @param {String|Number} val
+ * @param {Object} [options]
+ * @throws {Error} throw an error if val is not a non-empty string or a number
+ * @return {String|Number}
+ * @api public
+ */
+
+module.exports = function(val, options) {
+  options = options || {};
+  var type = typeof val;
+  if (type === 'string' && val.length > 0) {
+    return parse(val);
+  } else if (type === 'number' && isFinite(val)) {
+    return options.long ? fmtLong(val) : fmtShort(val);
+  }
+  throw new Error(
+    'val is not a non-empty string or a valid number. val=' +
+      JSON.stringify(val)
+  );
+};
+
+/**
+ * Parse the given `str` and return milliseconds.
+ *
+ * @param {String} str
+ * @return {Number}
+ * @api private
+ */
+
+function parse(str) {
+  str = String(str);
+  if (str.length > 100) {
+    return;
+  }
+  var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
+    str
+  );
+  if (!match) {
+    return;
+  }
+  var n = parseFloat(match[1]);
+  var type = (match[2] || 'ms').toLowerCase();
+  switch (type) {
+    case 'years':
+    case 'year':
+    case 'yrs':
+    case 'yr':
+    case 'y':
+      return n * y;
+    case 'weeks':
+    case 'week':
+    case 'w':
+      return n * w;
+    case 'days':
+    case 'day':
+    case 'd':
+      return n * d;
+    case 'hours':
+    case 'hour':
+    case 'hrs':
+    case 'hr':
+    case 'h':
+      return n * h;
+    case 'minutes':
+    case 'minute':
+    case 'mins':
+    case 'min':
+    case 'm':
+      return n * m;
+    case 'seconds':
+    case 'second':
+    case 'secs':
+    case 'sec':
+    case 's':
+      return n * s;
+    case 'milliseconds':
+    case 'millisecond':
+    case 'msecs':
+    case 'msec':
+    case 'ms':
+      return n;
+    default:
+      return undefined;
+  }
+}
+
+/**
+ * Short format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtShort(ms) {
+  var msAbs = Math.abs(ms);
+  if (msAbs >= d) {
+    return Math.round(ms / d) + 'd';
+  }
+  if (msAbs >= h) {
+    return Math.round(ms / h) + 'h';
+  }
+  if (msAbs >= m) {
+    return Math.round(ms / m) + 'm';
+  }
+  if (msAbs >= s) {
+    return Math.round(ms / s) + 's';
+  }
+  return ms + 'ms';
+}
+
+/**
+ * Long format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtLong(ms) {
+  var msAbs = Math.abs(ms);
+  if (msAbs >= d) {
+    return plural(ms, msAbs, d, 'day');
+  }
+  if (msAbs >= h) {
+    return plural(ms, msAbs, h, 'hour');
+  }
+  if (msAbs >= m) {
+    return plural(ms, msAbs, m, 'minute');
+  }
+  if (msAbs >= s) {
+    return plural(ms, msAbs, s, 'second');
+  }
+  return ms + ' ms';
+}
+
+/**
+ * Pluralization helper.
+ */
+
+function plural(ms, msAbs, n, name) {
+  var isPlural = msAbs >= n * 1.5;
+  return Math.round(ms / n) + ' ' + name + (isPlural ? 's' : '');
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/object-inspect/index.js":
 /*!**********************************************!*\
   !*** ./node_modules/object-inspect/index.js ***!
@@ -26969,6 +35237,131 @@ function arrObjKeys(obj, inspect) {
         }
     }
     return xs;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/parseqs/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/parseqs/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+/**
+ * Compiles a querystring
+ * Returns string representation of the object
+ *
+ * @param {Object}
+ * @api private
+ */
+
+exports.encode = function (obj) {
+  var str = '';
+
+  for (var i in obj) {
+    if (obj.hasOwnProperty(i)) {
+      if (str.length) str += '&';
+      str += encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]);
+    }
+  }
+
+  return str;
+};
+
+/**
+ * Parses a simple querystring into an object
+ *
+ * @param {String} qs
+ * @api private
+ */
+
+exports.decode = function(qs){
+  var qry = {};
+  var pairs = qs.split('&');
+  for (var i = 0, l = pairs.length; i < l; i++) {
+    var pair = pairs[i].split('=');
+    qry[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+  }
+  return qry;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/parseuri/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/parseuri/index.js ***!
+  \****************************************/
+/***/ ((module) => {
+
+/**
+ * Parses an URI
+ *
+ * @author Steven Levithan <stevenlevithan.com> (MIT license)
+ * @api private
+ */
+
+var re = /^(?:(?![^:@]+:[^:@\/]*@)(http|https|ws|wss):\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?((?:[a-f0-9]{0,4}:){2,7}[a-f0-9]{0,4}|[^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/;
+
+var parts = [
+    'source', 'protocol', 'authority', 'userInfo', 'user', 'password', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'anchor'
+];
+
+module.exports = function parseuri(str) {
+    var src = str,
+        b = str.indexOf('['),
+        e = str.indexOf(']');
+
+    if (b != -1 && e != -1) {
+        str = str.substring(0, b) + str.substring(b, e).replace(/:/g, ';') + str.substring(e, str.length);
+    }
+
+    var m = re.exec(str || ''),
+        uri = {},
+        i = 14;
+
+    while (i--) {
+        uri[parts[i]] = m[i] || '';
+    }
+
+    if (b != -1 && e != -1) {
+        uri.source = src;
+        uri.host = uri.host.substring(1, uri.host.length - 1).replace(/;/g, ':');
+        uri.authority = uri.authority.replace('[', '').replace(']', '').replace(/;/g, ':');
+        uri.ipv6uri = true;
+    }
+
+    uri.pathNames = pathNames(uri, uri['path']);
+    uri.queryKey = queryKey(uri, uri['query']);
+
+    return uri;
+};
+
+function pathNames(obj, path) {
+    var regx = /\/{2,9}/g,
+        names = path.replace(regx, "/").split("/");
+
+    if (path.substr(0, 1) == '/' || path.length === 0) {
+        names.splice(0, 1);
+    }
+    if (path.substr(path.length - 1, 1) == '/') {
+        names.splice(names.length - 1, 1);
+    }
+
+    return names;
+}
+
+function queryKey(uri, query) {
+    var data = {};
+
+    query.replace(/(?:^|&)([^&=]*)=?([^&]*)/g, function ($0, $1, $2) {
+        if ($1) {
+            data[$1] = $2;
+        }
+    });
+
+    return data;
 }
 
 
@@ -28823,6 +37216,454 @@ module.exports = function getSideChannel() {
 
 /***/ }),
 
+/***/ "./node_modules/socket.io-parser/dist/binary.js":
+/*!******************************************************!*\
+  !*** ./node_modules/socket.io-parser/dist/binary.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.reconstructPacket = exports.deconstructPacket = void 0;
+const is_binary_1 = __webpack_require__(/*! ./is-binary */ "./node_modules/socket.io-parser/dist/is-binary.js");
+/**
+ * Replaces every Buffer | ArrayBuffer | Blob | File in packet with a numbered placeholder.
+ *
+ * @param {Object} packet - socket.io event packet
+ * @return {Object} with deconstructed packet and list of buffers
+ * @public
+ */
+function deconstructPacket(packet) {
+    const buffers = [];
+    const packetData = packet.data;
+    const pack = packet;
+    pack.data = _deconstructPacket(packetData, buffers);
+    pack.attachments = buffers.length; // number of binary 'attachments'
+    return { packet: pack, buffers: buffers };
+}
+exports.deconstructPacket = deconstructPacket;
+function _deconstructPacket(data, buffers) {
+    if (!data)
+        return data;
+    if (is_binary_1.isBinary(data)) {
+        const placeholder = { _placeholder: true, num: buffers.length };
+        buffers.push(data);
+        return placeholder;
+    }
+    else if (Array.isArray(data)) {
+        const newData = new Array(data.length);
+        for (let i = 0; i < data.length; i++) {
+            newData[i] = _deconstructPacket(data[i], buffers);
+        }
+        return newData;
+    }
+    else if (typeof data === "object" && !(data instanceof Date)) {
+        const newData = {};
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                newData[key] = _deconstructPacket(data[key], buffers);
+            }
+        }
+        return newData;
+    }
+    return data;
+}
+/**
+ * Reconstructs a binary packet from its placeholder packet and buffers
+ *
+ * @param {Object} packet - event packet with placeholders
+ * @param {Array} buffers - binary buffers to put in placeholder positions
+ * @return {Object} reconstructed packet
+ * @public
+ */
+function reconstructPacket(packet, buffers) {
+    packet.data = _reconstructPacket(packet.data, buffers);
+    packet.attachments = undefined; // no longer useful
+    return packet;
+}
+exports.reconstructPacket = reconstructPacket;
+function _reconstructPacket(data, buffers) {
+    if (!data)
+        return data;
+    if (data && data._placeholder) {
+        return buffers[data.num]; // appropriate buffer (should be natural order anyway)
+    }
+    else if (Array.isArray(data)) {
+        for (let i = 0; i < data.length; i++) {
+            data[i] = _reconstructPacket(data[i], buffers);
+        }
+    }
+    else if (typeof data === "object") {
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                data[key] = _reconstructPacket(data[key], buffers);
+            }
+        }
+    }
+    return data;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-parser/dist/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/socket.io-parser/dist/index.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Decoder = exports.Encoder = exports.PacketType = exports.protocol = void 0;
+const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
+const binary_1 = __webpack_require__(/*! ./binary */ "./node_modules/socket.io-parser/dist/binary.js");
+const is_binary_1 = __webpack_require__(/*! ./is-binary */ "./node_modules/socket.io-parser/dist/is-binary.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("socket.io-parser");
+/**
+ * Protocol version.
+ *
+ * @public
+ */
+exports.protocol = 5;
+var PacketType;
+(function (PacketType) {
+    PacketType[PacketType["CONNECT"] = 0] = "CONNECT";
+    PacketType[PacketType["DISCONNECT"] = 1] = "DISCONNECT";
+    PacketType[PacketType["EVENT"] = 2] = "EVENT";
+    PacketType[PacketType["ACK"] = 3] = "ACK";
+    PacketType[PacketType["CONNECT_ERROR"] = 4] = "CONNECT_ERROR";
+    PacketType[PacketType["BINARY_EVENT"] = 5] = "BINARY_EVENT";
+    PacketType[PacketType["BINARY_ACK"] = 6] = "BINARY_ACK";
+})(PacketType = exports.PacketType || (exports.PacketType = {}));
+/**
+ * A socket.io Encoder instance
+ */
+class Encoder {
+    /**
+     * Encode a packet as a single string if non-binary, or as a
+     * buffer sequence, depending on packet type.
+     *
+     * @param {Object} obj - packet object
+     */
+    encode(obj) {
+        debug("encoding packet %j", obj);
+        if (obj.type === PacketType.EVENT || obj.type === PacketType.ACK) {
+            if (is_binary_1.hasBinary(obj)) {
+                obj.type =
+                    obj.type === PacketType.EVENT
+                        ? PacketType.BINARY_EVENT
+                        : PacketType.BINARY_ACK;
+                return this.encodeAsBinary(obj);
+            }
+        }
+        return [this.encodeAsString(obj)];
+    }
+    /**
+     * Encode packet as string.
+     */
+    encodeAsString(obj) {
+        // first is type
+        let str = "" + obj.type;
+        // attachments if we have them
+        if (obj.type === PacketType.BINARY_EVENT ||
+            obj.type === PacketType.BINARY_ACK) {
+            str += obj.attachments + "-";
+        }
+        // if we have a namespace other than `/`
+        // we append it followed by a comma `,`
+        if (obj.nsp && "/" !== obj.nsp) {
+            str += obj.nsp + ",";
+        }
+        // immediately followed by the id
+        if (null != obj.id) {
+            str += obj.id;
+        }
+        // json data
+        if (null != obj.data) {
+            str += JSON.stringify(obj.data);
+        }
+        debug("encoded %j as %s", obj, str);
+        return str;
+    }
+    /**
+     * Encode packet as 'buffer sequence' by removing blobs, and
+     * deconstructing packet into object with placeholders and
+     * a list of buffers.
+     */
+    encodeAsBinary(obj) {
+        const deconstruction = binary_1.deconstructPacket(obj);
+        const pack = this.encodeAsString(deconstruction.packet);
+        const buffers = deconstruction.buffers;
+        buffers.unshift(pack); // add packet info to beginning of data list
+        return buffers; // write all the buffers
+    }
+}
+exports.Encoder = Encoder;
+/**
+ * A socket.io Decoder instance
+ *
+ * @return {Object} decoder
+ */
+class Decoder extends Emitter {
+    constructor() {
+        super();
+    }
+    /**
+     * Decodes an encoded packet string into packet JSON.
+     *
+     * @param {String} obj - encoded packet
+     */
+    add(obj) {
+        let packet;
+        if (typeof obj === "string") {
+            packet = this.decodeString(obj);
+            if (packet.type === PacketType.BINARY_EVENT ||
+                packet.type === PacketType.BINARY_ACK) {
+                // binary packet's json
+                this.reconstructor = new BinaryReconstructor(packet);
+                // no attachments, labeled binary but no binary data to follow
+                if (packet.attachments === 0) {
+                    super.emit("decoded", packet);
+                }
+            }
+            else {
+                // non-binary full packet
+                super.emit("decoded", packet);
+            }
+        }
+        else if (is_binary_1.isBinary(obj) || obj.base64) {
+            // raw binary data
+            if (!this.reconstructor) {
+                throw new Error("got binary data when not reconstructing a packet");
+            }
+            else {
+                packet = this.reconstructor.takeBinaryData(obj);
+                if (packet) {
+                    // received final buffer
+                    this.reconstructor = null;
+                    super.emit("decoded", packet);
+                }
+            }
+        }
+        else {
+            throw new Error("Unknown type: " + obj);
+        }
+    }
+    /**
+     * Decode a packet String (JSON data)
+     *
+     * @param {String} str
+     * @return {Object} packet
+     */
+    decodeString(str) {
+        let i = 0;
+        // look up type
+        const p = {
+            type: Number(str.charAt(0)),
+        };
+        if (PacketType[p.type] === undefined) {
+            throw new Error("unknown packet type " + p.type);
+        }
+        // look up attachments if type binary
+        if (p.type === PacketType.BINARY_EVENT ||
+            p.type === PacketType.BINARY_ACK) {
+            const start = i + 1;
+            while (str.charAt(++i) !== "-" && i != str.length) { }
+            const buf = str.substring(start, i);
+            if (buf != Number(buf) || str.charAt(i) !== "-") {
+                throw new Error("Illegal attachments");
+            }
+            p.attachments = Number(buf);
+        }
+        // look up namespace (if any)
+        if ("/" === str.charAt(i + 1)) {
+            const start = i + 1;
+            while (++i) {
+                const c = str.charAt(i);
+                if ("," === c)
+                    break;
+                if (i === str.length)
+                    break;
+            }
+            p.nsp = str.substring(start, i);
+        }
+        else {
+            p.nsp = "/";
+        }
+        // look up id
+        const next = str.charAt(i + 1);
+        if ("" !== next && Number(next) == next) {
+            const start = i + 1;
+            while (++i) {
+                const c = str.charAt(i);
+                if (null == c || Number(c) != c) {
+                    --i;
+                    break;
+                }
+                if (i === str.length)
+                    break;
+            }
+            p.id = Number(str.substring(start, i + 1));
+        }
+        // look up json data
+        if (str.charAt(++i)) {
+            const payload = tryParse(str.substr(i));
+            if (Decoder.isPayloadValid(p.type, payload)) {
+                p.data = payload;
+            }
+            else {
+                throw new Error("invalid payload");
+            }
+        }
+        debug("decoded %s as %j", str, p);
+        return p;
+    }
+    static isPayloadValid(type, payload) {
+        switch (type) {
+            case PacketType.CONNECT:
+                return typeof payload === "object";
+            case PacketType.DISCONNECT:
+                return payload === undefined;
+            case PacketType.CONNECT_ERROR:
+                return typeof payload === "string" || typeof payload === "object";
+            case PacketType.EVENT:
+            case PacketType.BINARY_EVENT:
+                return Array.isArray(payload) && payload.length > 0;
+            case PacketType.ACK:
+            case PacketType.BINARY_ACK:
+                return Array.isArray(payload);
+        }
+    }
+    /**
+     * Deallocates a parser's resources
+     */
+    destroy() {
+        if (this.reconstructor) {
+            this.reconstructor.finishedReconstruction();
+        }
+    }
+}
+exports.Decoder = Decoder;
+function tryParse(str) {
+    try {
+        return JSON.parse(str);
+    }
+    catch (e) {
+        return false;
+    }
+}
+/**
+ * A manager of a binary event's 'buffer sequence'. Should
+ * be constructed whenever a packet of type BINARY_EVENT is
+ * decoded.
+ *
+ * @param {Object} packet
+ * @return {BinaryReconstructor} initialized reconstructor
+ */
+class BinaryReconstructor {
+    constructor(packet) {
+        this.packet = packet;
+        this.buffers = [];
+        this.reconPack = packet;
+    }
+    /**
+     * Method to be called when binary data received from connection
+     * after a BINARY_EVENT packet.
+     *
+     * @param {Buffer | ArrayBuffer} binData - the raw binary data received
+     * @return {null | Object} returns null if more binary data is expected or
+     *   a reconstructed packet object if all buffers have been received.
+     */
+    takeBinaryData(binData) {
+        this.buffers.push(binData);
+        if (this.buffers.length === this.reconPack.attachments) {
+            // done with buffer list
+            const packet = binary_1.reconstructPacket(this.reconPack, this.buffers);
+            this.finishedReconstruction();
+            return packet;
+        }
+        return null;
+    }
+    /**
+     * Cleans up binary packet reconstruction variables.
+     */
+    finishedReconstruction() {
+        this.reconPack = null;
+        this.buffers = [];
+    }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-parser/dist/is-binary.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/socket.io-parser/dist/is-binary.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.hasBinary = exports.isBinary = void 0;
+const withNativeArrayBuffer = typeof ArrayBuffer === "function";
+const isView = (obj) => {
+    return typeof ArrayBuffer.isView === "function"
+        ? ArrayBuffer.isView(obj)
+        : obj.buffer instanceof ArrayBuffer;
+};
+const toString = Object.prototype.toString;
+const withNativeBlob = typeof Blob === "function" ||
+    (typeof Blob !== "undefined" &&
+        toString.call(Blob) === "[object BlobConstructor]");
+const withNativeFile = typeof File === "function" ||
+    (typeof File !== "undefined" &&
+        toString.call(File) === "[object FileConstructor]");
+/**
+ * Returns true if obj is a Buffer, an ArrayBuffer, a Blob or a File.
+ *
+ * @private
+ */
+function isBinary(obj) {
+    return ((withNativeArrayBuffer && (obj instanceof ArrayBuffer || isView(obj))) ||
+        (withNativeBlob && obj instanceof Blob) ||
+        (withNativeFile && obj instanceof File));
+}
+exports.isBinary = isBinary;
+function hasBinary(obj, toJSON) {
+    if (!obj || typeof obj !== "object") {
+        return false;
+    }
+    if (Array.isArray(obj)) {
+        for (let i = 0, l = obj.length; i < l; i++) {
+            if (hasBinary(obj[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+    if (isBinary(obj)) {
+        return true;
+    }
+    if (obj.toJSON &&
+        typeof obj.toJSON === "function" &&
+        arguments.length === 1) {
+        return hasBinary(obj.toJSON(), true);
+    }
+    for (const key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key) && hasBinary(obj[key])) {
+            return true;
+        }
+    }
+    return false;
+}
+exports.hasBinary = hasBinary;
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-multiselect/dist/vue-multiselect.min.css":
 /*!*******************************************************************!*\
   !*** ./node_modules/vue-multiselect/dist/vue-multiselect.min.css ***!
@@ -28850,6 +37691,66 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_vue_multiselect_min_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_JobCard_vue_vue_type_style_index_0_id_5e15d15f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_JobCard_vue_vue_type_style_index_0_id_5e15d15f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_JobCard_vue_vue_type_style_index_0_id_5e15d15f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_style_index_0_id_5663af57_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_style_index_0_id_5663af57_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_style_index_0_id_5663af57_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -29173,6 +38074,84 @@ module.exports = function (list, options) {
 
 /***/ }),
 
+/***/ "./resources/js/Components/DashboardHeader.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/Components/DashboardHeader.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DashboardHeader_vue_vue_type_template_id_f995eb74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DashboardHeader.vue?vue&type=template&id=f995eb74& */ "./resources/js/Components/DashboardHeader.vue?vue&type=template&id=f995eb74&");
+/* harmony import */ var _DashboardHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DashboardHeader.vue?vue&type=script&lang=js& */ "./resources/js/Components/DashboardHeader.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _DashboardHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _DashboardHeader_vue_vue_type_template_id_f995eb74___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DashboardHeader_vue_vue_type_template_id_f995eb74___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/DashboardHeader.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Components/GlobalCalendar.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/Components/GlobalCalendar.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true& */ "./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true&");
+/* harmony import */ var _GlobalCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GlobalCalendar.vue?vue&type=script&lang=js& */ "./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _GlobalCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "7854028c",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/GlobalCalendar.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Components/Jobs/JobCard.vue":
 /*!**************************************************!*\
   !*** ./resources/js/Components/Jobs/JobCard.vue ***!
@@ -29186,15 +38165,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _JobCard_vue_vue_type_template_id_5e15d15f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JobCard.vue?vue&type=template&id=5e15d15f&scoped=true& */ "./resources/js/Components/Jobs/JobCard.vue?vue&type=template&id=5e15d15f&scoped=true&");
 /* harmony import */ var _JobCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JobCard.vue?vue&type=script&lang=js& */ "./resources/js/Components/Jobs/JobCard.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _JobCard_vue_vue_type_style_index_0_id_5e15d15f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css& */ "./resources/js/Components/Jobs/JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _JobCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _JobCard_vue_vue_type_template_id_5e15d15f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _JobCard_vue_vue_type_template_id_5e15d15f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -29208,6 +38189,45 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/Components/Jobs/JobCard.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Components/Jobs/JobFormModal.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/Components/Jobs/JobFormModal.vue ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JobFormModal.vue?vue&type=template&id=563a65ec& */ "./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&");
+/* harmony import */ var _JobFormModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JobFormModal.vue?vue&type=script&lang=js& */ "./resources/js/Components/Jobs/JobFormModal.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _JobFormModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__.render,
+  _JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Jobs/JobFormModal.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -29247,6 +38267,123 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/Components/Modals/AddDeal.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Components/Modals/CreateKit.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/Components/Modals/CreateKit.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CreateKit_vue_vue_type_template_id_5468967c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateKit.vue?vue&type=template&id=5468967c& */ "./resources/js/Components/Modals/CreateKit.vue?vue&type=template&id=5468967c&");
+/* harmony import */ var _CreateKit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateKit.vue?vue&type=script&lang=js& */ "./resources/js/Components/Modals/CreateKit.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _CreateKit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _CreateKit_vue_vue_type_template_id_5468967c___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CreateKit_vue_vue_type_template_id_5468967c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Modals/CreateKit.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Components/Modals/FiltersModal.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/Components/Modals/FiltersModal.vue ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FiltersModal_vue_vue_type_template_id_20b9a020___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FiltersModal.vue?vue&type=template&id=20b9a020& */ "./resources/js/Components/Modals/FiltersModal.vue?vue&type=template&id=20b9a020&");
+/* harmony import */ var _FiltersModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FiltersModal.vue?vue&type=script&lang=js& */ "./resources/js/Components/Modals/FiltersModal.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _FiltersModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _FiltersModal_vue_vue_type_template_id_20b9a020___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FiltersModal_vue_vue_type_template_id_20b9a020___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Modals/FiltersModal.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Components/SidebarCalendar.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/Components/SidebarCalendar.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true& */ "./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true&");
+/* harmony import */ var _SidebarCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SidebarCalendar.vue?vue&type=script&lang=js& */ "./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _SidebarCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "444cfa3f",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/SidebarCalendar.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -30227,23 +39364,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AppLayout_vue_vue_type_template_id_5663af57___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppLayout.vue?vue&type=template&id=5663af57& */ "./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57&");
+/* harmony import */ var _AppLayout_vue_vue_type_template_id_5663af57_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppLayout.vue?vue&type=template&id=5663af57&scoped=true& */ "./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57&scoped=true&");
 /* harmony import */ var _AppLayout_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppLayout.vue?vue&type=script&lang=js& */ "./resources/js/Layouts/AppLayout.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _AppLayout_vue_vue_type_style_index_0_id_5663af57_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css& */ "./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _AppLayout_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _AppLayout_vue_vue_type_template_id_5663af57___WEBPACK_IMPORTED_MODULE_0__.render,
-  _AppLayout_vue_vue_type_template_id_5663af57___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _AppLayout_vue_vue_type_template_id_5663af57_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AppLayout_vue_vue_type_template_id_5663af57_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "5663af57",
   null
   
 )
@@ -31271,6 +40410,38 @@ component.options.__file = "resources/js/Pages/Welcome.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Components/DashboardHeader.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/Components/DashboardHeader.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DashboardHeader.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/DashboardHeader.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GlobalCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GlobalCalendar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GlobalCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/Components/Jobs/JobCard.vue?vue&type=script&lang=js&":
 /*!***************************************************************************!*\
   !*** ./resources/js/Components/Jobs/JobCard.vue?vue&type=script&lang=js& ***!
@@ -31287,6 +40458,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Jobs/JobFormModal.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Components/Jobs/JobFormModal.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobFormModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/Components/Modals/AddDeal.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************!*\
   !*** ./resources/js/Components/Modals/AddDeal.vue?vue&type=script&lang=js& ***!
@@ -31300,6 +40487,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDeal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddDeal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/AddDeal.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDeal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/Components/Modals/CreateKit.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/Components/Modals/CreateKit.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateKit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/CreateKit.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/Components/Modals/FiltersModal.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/Components/Modals/FiltersModal.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FiltersModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FiltersModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/FiltersModal.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FiltersModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SidebarCalendar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -32055,6 +41290,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Jobs/JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/Components/Jobs/JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css& ***!
+  \***********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_JobCard_vue_vue_type_style_index_0_id_5e15d15f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=style&index=0&id=5e15d15f&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css& ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_style_index_0_id_5663af57_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Welcome.vue?vue&type=style&index=0&id=317d1a6e&scoped=true&lang=css&":
 /*!*************************************************************************************************!*\
   !*** ./resources/js/Pages/Welcome.vue?vue&type=style&index=0&id=317d1a6e&scoped=true&lang=css& ***!
@@ -32064,6 +41325,40 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_style_index_0_id_317d1a6e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Welcome.vue?vue&type=style&index=0&id=317d1a6e&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Welcome.vue?vue&type=style&index=0&id=317d1a6e&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/DashboardHeader.vue?vue&type=template&id=f995eb74&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/Components/DashboardHeader.vue?vue&type=template&id=f995eb74& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardHeader_vue_vue_type_template_id_f995eb74___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardHeader_vue_vue_type_template_id_f995eb74___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashboardHeader_vue_vue_type_template_id_f995eb74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DashboardHeader.vue?vue&type=template&id=f995eb74& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/DashboardHeader.vue?vue&type=template&id=f995eb74&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GlobalCalendar_vue_vue_type_template_id_7854028c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true&");
 
 
 /***/ }),
@@ -32085,6 +41380,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec& ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobFormModal.vue?vue&type=template&id=563a65ec& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&");
+
+
+/***/ }),
+
 /***/ "./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true&":
 /*!***********************************************************************************************!*\
   !*** ./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true& ***!
@@ -32098,6 +41410,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDeal_vue_vue_type_template_id_1d5a3822_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDeal_vue_vue_type_template_id_1d5a3822_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Modals/CreateKit.vue?vue&type=template&id=5468967c&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/Components/Modals/CreateKit.vue?vue&type=template&id=5468967c& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKit_vue_vue_type_template_id_5468967c___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKit_vue_vue_type_template_id_5468967c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKit_vue_vue_type_template_id_5468967c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateKit.vue?vue&type=template&id=5468967c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/CreateKit.vue?vue&type=template&id=5468967c&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Modals/FiltersModal.vue?vue&type=template&id=20b9a020&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/Components/Modals/FiltersModal.vue?vue&type=template&id=20b9a020& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FiltersModal_vue_vue_type_template_id_20b9a020___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FiltersModal_vue_vue_type_template_id_20b9a020___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FiltersModal_vue_vue_type_template_id_20b9a020___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FiltersModal.vue?vue&type=template&id=20b9a020& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/FiltersModal.vue?vue&type=template&id=20b9a020&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true& ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SidebarCalendar_vue_vue_type_template_id_444cfa3f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true&");
 
 
 /***/ }),
@@ -32527,19 +41890,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57& ***!
-  \***************************************************************************/
+/***/ "./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57&scoped=true&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57&scoped=true& ***!
+  \***************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_template_id_5663af57___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_template_id_5663af57___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_template_id_5663af57_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_template_id_5663af57_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_template_id_5663af57___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AppLayout.vue?vue&type=template&id=5663af57& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_template_id_5663af57_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AppLayout.vue?vue&type=template&id=5663af57&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57&scoped=true&");
 
 
 /***/ }),
@@ -32986,6 +42349,5367 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/DashboardHeader.vue?vue&type=template&id=f995eb74&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/DashboardHeader.vue?vue&type=template&id=f995eb74& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "w-full my-12 flex justify-between items-center nowrap"
+        },
+        [
+          _c(
+            "div",
+            {
+              ref: "block_kit",
+              staticClass:
+                "block-kit flex justify-start items-center nowrap w-6/12 flex-shrink "
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "create-kid rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7",
+                  on: {
+                    click: function($event) {
+                      return _vm.showKitForm()
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\r\n                            Create\r\n                            Kit\r\n                        "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "relative" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      " bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center "
+                  },
+                  [
+                    _c("p", { staticClass: "mr-2" }, [_vm._v("Artem")]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer",
+                        on: { click: _vm.showFilterFrom }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                                    ...\r\n                                "
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "relative" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      " bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center "
+                  },
+                  [
+                    _c("p", { staticClass: "mr-2" }, [_vm._v("Boris")]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "open-filters py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer",
+                        on: { click: _vm.showFilterFrom }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                                    ...\r\n                                "
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "relative" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      " bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center "
+                  },
+                  [
+                    _c("p", { staticClass: "mr-2" }, [_vm._v("Olga")]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer",
+                        on: { click: _vm.showFilterFrom }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                                    ...\r\n                                "
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "relative" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center "
+                  },
+                  [
+                    _c("p", { staticClass: "mr-2" }, [_vm._v("Petr")]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "open-filters   py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer ",
+                        on: { click: _vm.showFilterFrom }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                                    ...\r\n                                "
+                        )
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(1)
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              ref: "parent_search_block",
+              staticClass:
+                "parent-search-block flex nowrap w-6/12 flex justify-end flex-grow items-center"
+            },
+            [
+              _c(
+                "div",
+                {
+                  ref: "search_block",
+                  staticClass:
+                    "w-0 overflow-hidden flex justify-between  search-block "
+                },
+                [
+                  _c("input", {
+                    staticClass:
+                      "w-11/12 search-input  border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300",
+                    attrs: {
+                      type: "text",
+                      placeholder: "Job id, URL,Title or key word"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        " rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white"
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                                Search\r\n                            "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass:
+                        "ml-4 search-button text-black text-5xl  cursor-pointer hover:text-red-500",
+                      attrs: { title: "Close search panel" },
+                      on: {
+                        click: function($event) {
+                          return _vm.closeSearch()
+                        }
+                      }
+                    },
+                    [_vm._v("×")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "svg",
+                {
+                  ref: "search",
+                  staticClass: "cursor-pointer search",
+                  attrs: {
+                    width: "24",
+                    height: "24",
+                    viewBox: "0 0 24 24",
+                    fill: "none",
+                    xmlns: "http://www.w3.org/2000/svg",
+                    title: "Open search panel"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.showSearch()
+                    }
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      id: "search-svg",
+                      "fill-rule": "evenodd",
+                      "clip-rule": "evenodd",
+                      d:
+                        "M14.618 16.032C13.0243 17.309 11.0422 18.0033 9 18C6.61305 18 4.32387 17.0518 2.63604 15.364C0.948211 13.6761 0 11.3869 0 9C0 6.61305 0.948211 4.32387 2.63604 2.63604C4.32387 0.948211 6.61305 0 9 0C11.3869 0 13.6761 0.948211 15.364 2.63604C17.0518 4.32387 18 6.61305 18 9C18.0033 11.0422 17.309 13.0243 16.032 14.618L24 22.586L22.586 24L14.618 16.032ZM9 2C12.86 2 16 5.14 16 9C16 12.86 12.86 16 9 16C5.14 16 2 12.86 2 9C2 5.14 5.14 2 9 2Z",
+                      fill: "black"
+                    }
+                  })
+                ]
+              )
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _vm.showKit
+        ? _c("kit-modal", {
+            on: {
+              "disable-kit": function($event) {
+                _vm.showKit = !_vm.showKit
+              }
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.FiltersVisibility
+        ? _c("filter-modal", {
+            on: {
+              "disable-filter": function($event) {
+                _vm.FiltersVisibility = !_vm.FiltersVisibility
+              }
+            }
+          })
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full flex nowrap mb-8 mt-20" }, [
+      _c("div", { staticClass: "w-4/12 xl:w-3/12" }, [
+        _c("div", { staticClass: "flex justify-start items-start" }, [
+          _c("img", { attrs: { src: "images/star-gold.svg", alt: "gold" } }),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col items-start" }, [
+            _c("p", { staticClass: "ml-2 font-bold mt-1 " }, [
+              _vm._v("Artem ")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "ml-2 mt-2 text-sm flex items-center" }, [
+              _c("span", [_vm._v("112")]),
+              _c("span", [_vm._v(" → ")]),
+              _vm._v(" "),
+              _c("span", [_vm._v("75%")]),
+              _c("span", [_vm._v(" → ")]),
+              _c("span", [_vm._v("84")])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-4/12 xl:w-3/12" }, [
+        _c("div", { staticClass: "flex justify-start items-start" }, [
+          _c("img", {
+            attrs: { src: "images/star-silver.svg", alt: "silver" }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col items-start" }, [
+            _c("p", { staticClass: "ml-2 font-bold mt-1 " }, [_vm._v("Olga ")]),
+            _vm._v(" "),
+            _c("p", { staticClass: "ml-2 mt-2 text-sm flex items-center" }, [
+              _c("span", [_vm._v("87")]),
+              _c("span", [_vm._v(" → ")]),
+              _vm._v(" "),
+              _c("span", [_vm._v("66,7%")]),
+              _c("span", [_vm._v(" → ")]),
+              _c("span", [_vm._v("58")])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-4/12 xl:w-3/12" }, [
+        _c("div", { staticClass: "flex justify-start items-start" }, [
+          _c("img", {
+            attrs: { src: "images/star-bronze.svg", alt: "bronze" }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col items-start" }, [
+            _c("p", { staticClass: "ml-2 font-bold mt-1 " }, [
+              _vm._v("Stepan ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "p",
+              { staticClass: "ml-2 mt-2 text-sm flex items-center p-0" },
+              [
+                _c("span", [_vm._v("57")]),
+                _c("span", [_vm._v(" → ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v("56,1%")]),
+                _c("span", [_vm._v(" → ")]),
+                _c("span", [_vm._v("32")])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "absolute top-10 -left-2 w-28 bg-white rounded-2xl shadow-2xl  dropdown text-right hidden"
+      },
+      [
+        _c("ul", { staticClass: "p-4" }, [
+          _c("li", { staticClass: "my-2" }, [
+            _c(
+              "a",
+              {
+                staticClass: "border-b-4 border-white  hover:border-green-500",
+                attrs: { href: "#" }
+              },
+              [_vm._v("Edit")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c(
+              "a",
+              {
+                staticClass: "border-b-4 border-white  hover:border-green-500",
+                attrs: { href: "#" }
+              },
+              [_vm._v("Show")]
+            )
+          ])
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/GlobalCalendar.vue?vue&type=template&id=7854028c&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    {
+      staticClass: "z-50",
+      class: { hidden: _vm.GlobalCalendarSwitched },
+      attrs: { id: "big-calendar" }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "w-full bg-gray-200 py-6 px-12 text-black z-50 min-h-screen  fixed top-0 left-0 right-0 "
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-200 w-12/12 h-12/12 flex flex-col justify-start items-center px-2  relative ",
+              staticStyle: { "max-height": "98vh" }
+            },
+            [
+              _c(
+                "p",
+                {
+                  staticClass:
+                    "text-black text-5xl  cursor-pointer hover:text-red-500 absolute right-3 -top-3 cursor-pointer close-big-calendar",
+                  on: { click: _vm.closeGlobalCalendar }
+                },
+                [_vm._v("\n                ×")]
+              ),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2)
+            ]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "flex flex-row items-center justify-center" },
+      [
+        _c("img", {
+          staticClass: "prev mx-6 cursor-pointer",
+          attrs: { src: "images/calendar-arrow-left.svg", alt: "prev" }
+        }),
+        _vm._v(" "),
+        _c("p", [_vm._v("Неделя 16.08—24.08 ")]),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "next mx-6 cursor-pointer",
+          attrs: { src: "images/calendar-arrow-right.svg", alt: "next" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-8 w-full grid grid-cols-7 gap-4 " }, [
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("18.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("19.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("20.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("21.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("22.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("23.08")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-center items-center " }, [
+        _vm._v("24.08")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          " day-to-day mt-2 w-full grid grid-cols-7 gap-4  max-h-full overflow-y-auto"
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-1" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-2" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-3" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-4" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-5" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-6" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "overflow-y-visible max-h-full",
+            attrs: { "data-name": "day-7" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Delete me\n                        "
+                    )
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Book me\n                        "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        )
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=template&id=5e15d15f&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobCard.vue?vue&type=template&id=5e15d15f&scoped=true& ***!
@@ -33004,166 +47728,178 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "flex-col rounded shadow-lg bg-white items-center" },
+    {
+      staticClass: "w-full p-7 border border-gray-300 rounded-md my-6 relative"
+    },
     [
-      _c("div", { staticClass: "flex justify-between w-full mb-7" }, [
-        _c(
-          "div",
-          { staticClass: "flex items-end text-xl font-bold space-x-3" },
-          [
-            _c("h2", { staticClass: "text-green-upwork" }, [
-              _c("a", { attrs: { href: _vm.url, target: "_blank" } }, [
-                _vm._v(_vm._s(_vm.title))
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", {}, [_vm._v("Score: " + _vm._s(_vm.score))])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex items-end space-x-3" }, [
-          _c("p", { staticClass: "opacity-50 text-sm" }, [
-            _vm._v("Posted: " + _vm._s(_vm.dateCreated))
-          ]),
-          _vm._v(" "),
-          _c(
-            "svg",
-            {
-              staticClass: "text-current text-black w-8 h-8 cursor-pointer",
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                viewBox: "0 0 24 24"
-              }
-            },
-            [
-              _c("path", {
-                attrs: {
-                  d:
-                    "m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"
-                }
-              })
-            ]
-          )
-        ])
-      ]),
+      _c(
+        "p",
+        {
+          staticClass:
+            "text-black text-3xl  cursor-pointer hover:text-red-500 absolute top-6 right-6",
+          on: { click: _vm.deleteJob }
+        },
+        [_vm._v("×")]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "pr-12 text-sm" }, [
-        _vm.truncated && _vm.excerpt.length > _vm.truncatedLength
-          ? _c("p", { staticClass: "pb-5" }, [
-              _vm._v(_vm._s(_vm.truncatedExcerpt) + " "),
+      _c(
+        "div",
+        { staticClass: "w-11/12 mb-7 flex justify-between items-center" },
+        [
+          _c("p", [
+            _c("a", { attrs: { href: _vm.url } }, [
               _c(
                 "span",
                 {
-                  staticClass: "cursor-pointer underline",
-                  on: {
-                    click: function($event) {
-                      _vm.truncated = false
-                    }
-                  }
+                  staticClass:
+                    "text-green-500 font-bold text-2xl mr-4  border-b border-gray-300"
                 },
-                [_vm._v("...")]
+                [_vm._v(_vm._s(_vm.title))]
               )
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-black font-bold text-2xl" }, [
+              _vm._v("Score: " + _vm._s(_vm.score) + "%")
             ])
-          : _c("p", { staticClass: "pb-5" }, [
-              _vm._v(_vm._s(_vm.excerpt) + " "),
-              !_vm.truncated && _vm.excerpt.length > _vm.truncatedLength
-                ? _c(
-                    "span",
-                    {
-                      staticClass: "cursor-pointer underline",
-                      on: {
-                        click: function($event) {
-                          _vm.truncated = true
-                        }
-                      }
-                    },
-                    [_vm._v("hide")]
-                  )
-                : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _c("span", { staticClass: "text-gray-400 font-normal" }, [
+              _vm._v("Posted: " + _vm._s(_vm.dateCreated))
             ])
-      ]),
+          ])
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "text-sm flex space-x-20 mb-10" }, [
-        _c("ul", [
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [_vm._v("Country:")]),
-            _vm._v(" " + _vm._s(_vm.country))
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [_vm._v("Category:")]),
-            _vm._v(" " + _vm._s(_vm.category))
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [
-              _vm._v("Payment verified:")
-            ]),
-            _vm._v(" " + _vm._s(_vm.verification))
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [
-              _vm._v("Jobs posted:")
-            ]),
-            _vm._v(" " + _vm._s(_vm.jobsPosted))
-          ])
-        ]),
-        _vm._v(" "),
-        _c("ul", [
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [_vm._v("Hires:")]),
-            _vm._v(" " + _vm._s(_vm.hires))
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [
-              _vm._v("Hire rate:")
-            ]),
-            _vm._v(" " + _vm._s(_vm.hireRate))
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [
-              _vm._v("Total feedbacks:")
-            ]),
-            _vm._v(" " + _vm._s(_vm.feedbacksCount))
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [
-              _vm._v("Feedbacks score:")
-            ]),
-            _vm._v(" " + _vm._s(_vm.feedback))
-          ])
-        ]),
-        _vm._v(" "),
-        _c("ul", [
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [_vm._v("Spent:")]),
-            _vm._v(" " + _vm._s(_vm.totalCharge))
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [_vm._v("Hours:")]),
-            _vm._v(" " + _vm._s(_vm.category))
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [_vm._v("Avg Rate:")]),
-            _vm._v(" " + _vm._s(_vm.verification))
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("span", { staticClass: "font-semibold" }, [
-              _vm._v("Member since:")
-            ]),
-            _vm._v(" " + _vm._s(_vm.verification))
-          ])
+      _c("div", { staticClass: "w-11/12 mb-5" }, [
+        _c("p", { staticClass: "leading-7 text-base font-normal " }, [
+          _vm._v("\n           " + _vm._s(_vm.truncatedExcerpt) + "\n        ")
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "w-11/12 mb-8 flex nowrap justify-start items-start text-md leading-6 "
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "w-4/12 flex flex-col justify-start items-start" },
+            [
+              _c("p", [
+                _c("span", { staticClass: "font-bold" }, [_vm._v("Country:")]),
+                _vm._v(" " + _vm._s(_vm.country))
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("span", { staticClass: "font-bold" }, [_vm._v("Category:")]),
+                _vm._v(" " + _vm._s(_vm.category))
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("span", { staticClass: "font-bold" }, [
+                  _vm._v("Payment Verified:")
+                ]),
+                _vm._v(" " + _vm._s(_vm.verification))
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("span", { staticClass: "font-bold" }, [
+                  _vm._v("Jobs posted:")
+                ]),
+                _vm._v(" " + _vm._s(_vm.jobsPosted))
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "w-4/12 flex flex-col justify-start items-start" },
+            [
+              _c("p", [
+                _c("span", { staticClass: "font-bold" }, [_vm._v("Hires:")]),
+                _vm._v(" " + _vm._s(_vm.hires))
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("span", { staticClass: "font-bold" }, [
+                  _vm._v("Hire Rate:")
+                ]),
+                _vm._v(" " + _vm._s(_vm.hireRate))
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("span", { staticClass: "font-bold" }, [
+                  _vm._v("Total feedbacks:")
+                ]),
+                _vm._v(" " + _vm._s(_vm.feedbacksCount))
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("span", { staticClass: "font-bold" }, [
+                  _vm._v("Feedbacks score:")
+                ]),
+                _vm._v(" " + _vm._s(_vm.feedback))
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "w-4/12 flex flex-col justify-start items-start" },
+            [
+              _c("p", [
+                _c("span", { staticClass: "font-bold" }, [_vm._v("Spent:")]),
+                _vm._v(" " + _vm._s(_vm.totalCharge))
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3)
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _vm._m(4),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-full flex justify-end items-center" }, [
+        _c(
+          "a",
+          {
+            staticClass:
+              "open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7",
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                return _vm.changeStatus(1, true)
+              }
+            }
+          },
+          [_vm._v("\n            Take\n        ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white ",
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                return _vm.changeStatus(2)
+              }
+            }
+          },
+          [_vm._v("\n            Think\n        ")]
+        )
+      ])
     ]
   )
 }
@@ -33172,25 +47908,544 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex justify-end space-x-4" }, [
+    return _c(
+      "div",
+      { staticClass: "w-11/12 mb-8 flex justify-start items-center" },
+      [
+        _c(
+          "p",
+          {
+            staticClass:
+              " bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4"
+          },
+          [
+            _c("span", { staticClass: "py-2 px-3" }, [
+              _vm._v("Project Management")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "p",
+          {
+            staticClass:
+              "  bg-gray-200 text-black rounded py-3 px-2 font-normal mx-4"
+          },
+          [_c("span", { staticClass: "py-2 px-3" }, [_vm._v("Bandits")])]
+        ),
+        _vm._v(" "),
+        _c(
+          "p",
+          {
+            staticClass:
+              " bg-gray-200 text-black rounded py-3 px-2 font-normal mx-4"
+          },
+          [_c("span", { staticClass: "py-2 px-3" }, [_vm._v("Data Analytics")])]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c("span", { staticClass: "font-bold" }, [_vm._v("Hours:")]),
+      _vm._v(" 1031")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c("span", { staticClass: "font-bold" }, [
+        _vm._v("Avg Rate (based on last 6 month):")
+      ]),
+      _vm._v(" $22.86/h")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c("span", { staticClass: "font-bold" }, [_vm._v("Member since:")]),
+      _vm._v(" April 24, 2015")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-11/12 mb-12" }, [
+      _c("p", [
+        _c(
+          "span",
+          {
+            staticClass:
+              "text-green-500 text-lg border-b-2  border-green-500 border-dotted cursor-pointer whitespace-nowrap"
+          },
+          [_vm._v("Show Feedbacks (3)")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    {
+      staticClass:
+        "fixed bg-white py-5 px-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-300 flex flex-col justify-between ",
+      class: { hidden: !_vm.ModalJobSwitched },
+      attrs: { id: "take" }
+    },
+    [
       _c(
         "div",
         {
           staticClass:
-            "rounded-full cursor-pointer bg-gray-button py-3 px-8 hover:bg-gray-700 hover:text-white transition-all duration-300"
+            "f-full space-x-6 flex flex-nowrap justify-between items-start "
         },
-        [_vm._v("\n            Забрать\n        ")]
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-full h-full flex flex-col justify-start items-start"
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-full mb-3 relative" }, [
+                _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+                  _vm._v("Technologies")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "relative parent-tech p-1 w-full border border-gray-300 rounded-md focus:outline-none  text-white flex flex-wrap justify-start items-start wrap "
+                  },
+                  [
+                    _vm._l(_vm.selectedTechsList, function(item, index) {
+                      return _c(
+                        "p",
+                        {
+                          staticClass:
+                            "parent-button p-1 rounded-sm cursor-pointer m-1",
+                          class: "bg-" + item.color + "-500",
+                          on: {
+                            click: function($event) {
+                              return _vm.removeTech(index, item)
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(item.name) + " ×")]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("img", {
+                      staticClass:
+                        "open-drop-tech-menu ml-1 mt-1 cursor-pointer absolute right-2 top-4 ",
+                      attrs: {
+                        src: "images/arrow-down.svg",
+                        alt: "arrow down"
+                      },
+                      on: { click: _vm.dropdownTechs }
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass:
+                      "absolute mt-4 overflow-y-auto hidden drop-menu-technologies  bg-white  w-full border border-gray-300 rounded-md focus:outline-none  text-white flex flex-col justify-start items-start wrap space-y-2 "
+                  },
+                  _vm._l(_vm.techsList, function(item, index) {
+                    return _c(
+                      "li",
+                      {
+                        staticClass:
+                          "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1",
+                        on: {
+                          click: function($event) {
+                            return _vm.addTech(index, item)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "span",
+                          {
+                            staticClass: "p-1 rounded-sm cursor-pointer ",
+                            class: "bg-" + item.color + "-500"
+                          },
+                          [_vm._v(_vm._s(item.name))]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4),
+              _vm._v(" "),
+              _vm._m(5),
+              _vm._v(" "),
+              _vm._m(6)
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(7)
+        ]
       ),
       _vm._v(" "),
       _c(
         "div",
+        { staticClass: "w-full h-full mt-4 flex justify-end items-start " },
+        [
+          _c("div", { staticClass: "flex space-x-4" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "close-take rounded-full border border-gray-300 px-12 py-3 text-black hover:bg-green-500 hover:text-white hover:border-green-500",
+                on: { click: _vm.closeModalJob }
+              },
+              [_vm._v("\n                    Cancel\n                ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "rounded-full border border-green-500 bg-green-500 px-12 py-3 text-white hover:bg-white hover:text-black"
+              },
+              [_vm._v("\n                    Save\n                ")]
+            )
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Organization")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
         {
           staticClass:
-            "rounded-full cursor-pointer bg-gray-button py-3 px-8 hover:bg-gray-700 hover:text-white transition-all duration-300"
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none"
         },
-        [_vm._v("\n            Подумать\n        ")]
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Vasterra")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Company name")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Company name")])
+        ]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Title")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none"
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Mobile Desktop responsive UI UX redes")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Owner")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+          attrs: { name: "", id: "" }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Artem M (You)")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Name2")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Name3")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Time of bid")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+          attrs: { name: "", id: "" }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("15:15")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("15:16")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("15:17")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Time after job creation")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+          attrs: { name: "", id: "" }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("15:45")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("15:55")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("17:45")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Bid profile")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+          attrs: { name: "", id: "" }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Artem Mazurchak")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Job posting")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+          attrs: { name: "", id: "" }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("https://docs.google.com/document/d/1xxs")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "w-full h-full flex flex-col justify-start items-start" },
+      [
+        _c("div", { staticClass: "w-full mb-3" }, [
+          _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+            _vm._v("Task link")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass:
+                "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+              attrs: { name: "", id: "" }
+            },
+            [
+              _c("option", { attrs: { value: "", selected: "" } }, [
+                _vm._v("https://ac.vasterra.com/projects/663?modal=Taskс")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "" } }, [_vm._v("link 2")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "" } }, [_vm._v("link3")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-full mb-3" }, [
+          _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+            _vm._v("Invite")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "space-x-3" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "px-3 py-2 bg-gray-200 rounded-sm text-base text-black hover:bg-green-500 hover:text-white"
+              },
+              [
+                _vm._v(
+                  "\n                            None\n                        "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "px-3 py-2 bg-green-500 rounded-sm text-base text-white hover:bg-gray-200 hover:text-black"
+              },
+              [
+                _vm._v(
+                  "\n                            Yes, invite\n                        "
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-full mb-3" }, [
+          _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+            _vm._v("Bid")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "space-x-3" }, [
+            _c(
+              "textarea",
+              {
+                staticClass:
+                  "textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non",
+                attrs: { name: "", id: "" }
+              },
+              [
+                _vm._v(
+                  "Hi! I’d hope to create an Airbnb-like mobile app, as I built a counterpart of the Airbnb website and it was an amazing experience that I want to repeat with you.\nHere you can check this project we built with my team https://www.biz-cen.ru/. This platform is specifically designed for the office segment of commercial real estate.\nVisitors to the site can view a city’s commercial districts with a list of vacant premises including floor plans, and register for a preview directly online.\nYou can see more information here https://vasterra.com/biz-cen.\nYes, it was a web project, but of course I have strong expertise in mobile development. For example, here I worked on a Booking app for workplaces designed for Colliers International real estate company - https://play.google.com/store/apps/details?id=com.calcey.colliers&hl=en\nI’d like to go to the next stage and give you an estimation of your project, are there any other details that you can share?\n\nBest regards, Artem\n                    "
+                )
+              ]
+            )
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -33220,6 +48475,1292 @@ var render = function() {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/CreateKit.vue?vue&type=template&id=5468967c&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/CreateKit.vue?vue&type=template&id=5468967c& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "section",
+      {
+        staticClass:
+          "w-full bg-white p-8 min-h-screen z-50 absolute top-0 left-0 right-0",
+        attrs: { id: "create-kit" }
+      },
+      [
+        _c("div", { staticClass: "flex justify-between items-center mb-8" }, [
+          _c("p", { staticClass: "text-2xl text-black font-bold" }, [
+            _vm._v("Create Kit")
+          ]),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              staticClass:
+                "text-black text-5xl close-kit cursor-pointer hover:text-red-500",
+              on: {
+                click: function($event) {
+                  return _vm.$emit("disable-kit")
+                }
+              }
+            },
+            [_vm._v("×")]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _vm._m(3),
+        _vm._v(" "),
+        _vm._m(4),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-12 flex nowrap" }, [
+          _c("input", {
+            staticClass:
+              " input-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+            attrs: { type: "text", placeholder: "New word" }
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-word"
+            },
+            [_vm._v("+ Add word\r\n            ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-word-input hidden mr-4"
+            },
+            [_vm._v("\r\n                Save\r\n            ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 close-word-input hidden",
+              on: {
+                click: function($event) {
+                  return _vm.$emit("disable-kit")
+                }
+              }
+            },
+            [_vm._v("\r\n                Close\r\n            ")]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(5)
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-10" }, [
+      _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+        _vm._v("Countries")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex wrap justify-start items-start" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\r\n                    All country\r\n                ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\r\n                    USA\r\n                ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [
+            _vm._v(
+              "\r\n                    United Arab Emirates\r\n                "
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 ",
+            attrs: { title: "Show more" }
+          },
+          [_vm._v("\r\n                    ...\r\n                ")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-10" }, [
+      _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+        _vm._v("Categories")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex wrap justify-start items-start" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\r\n                    All categories\r\n                ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [
+            _vm._v(
+              "\r\n                    Project Management\r\n                "
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [
+            _vm._v(
+              "\r\n                    CMS Customization\r\n                "
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 ",
+            attrs: { title: "Show more" }
+          },
+          [_vm._v("\r\n                    ...\r\n                ")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-10" }, [
+      _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+        _vm._v("Filters")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex wrap justify-start items-start" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\r\n                    All filters\r\n                ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [
+            _vm._v(
+              "\r\n                    Project Management\r\n                "
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [
+            _vm._v(
+              "\r\n                    CMS Customization\r\n                "
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 ",
+            attrs: { title: "Show more" }
+          },
+          [_vm._v("\r\n                    ...\r\n                ")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-10" }, [
+      _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+        _vm._v("Technologies")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex wrap justify-start items-start" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button font-bold"
+          },
+          [_vm._v("\r\n                    PHP\r\n                ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\r\n                    Laravel\r\n                ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\r\n                    Zend\r\n                ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 ",
+            attrs: { title: "Show more" }
+          },
+          [_vm._v("\r\n                    ...\r\n                ")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-7" }, [
+      _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+        _vm._v("Exception words")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex wrap justify-start items-start" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
+          },
+          [
+            _c("p", { staticClass: "mr-2" }, [_vm._v("Word1")]),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass:
+                  "  py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
+                attrs: { title: "Delete word" }
+              },
+              [_vm._v("\r\n                        ×")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white  flex items-center active-button"
+          },
+          [
+            _c("p", { staticClass: "mr-2" }, [_vm._v("Word2")]),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass:
+                  "  py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
+                attrs: { title: "Delete word" }
+              },
+              [_vm._v("\r\n                        ×")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white  flex items-center active-button"
+          },
+          [
+            _c("p", { staticClass: "mr-2" }, [_vm._v("Word3")]),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass:
+                  " py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
+                attrs: { title: "Delete word" }
+              },
+              [_vm._v("\r\n                        ×")]
+            )
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex nowrap mb-12" }, [
+      _c("input", {
+        staticClass:
+          "input-kit border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+        attrs: { type: "text", placeholder: "Name kit" }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass:
+            "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 "
+        },
+        [_vm._v("Save Kit")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/FiltersModal.vue?vue&type=template&id=20b9a020&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/FiltersModal.vue?vue&type=template&id=20b9a020& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    {
+      staticClass:
+        "w-full bg-white p-8  min-h-screen z-50 absolute top-0 left-0 right-0",
+      attrs: { id: "manager-filters" }
+    },
+    [
+      _c("div", { staticClass: "flex justify-between items-center mb-8" }, [
+        _c("p", { staticClass: "text-2xl text-black font-bold" }, [
+          _vm._v("Artem's filters")
+        ]),
+        _vm._v(" "),
+        _c(
+          "p",
+          {
+            staticClass:
+              "text-black text-5xl close-manager-filters cursor-pointer hover:text-red-500",
+            on: {
+              click: function($event) {
+                return _vm.$emit("disable-filter")
+              }
+            }
+          },
+          [_vm._v("×")]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-10" }, [
+      _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+        _vm._v("Filters")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex wrap justify-start items-start" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                All filters\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                Project Management\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                A/B Testing\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                Bandits\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                Data Analytics\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                Deep Learning\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                Scrum\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                Prototyping\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                CMS Development\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                CMS Customization\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                Back-End Development\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
+          },
+          [_vm._v("\n                Design\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 ",
+            attrs: { title: "Show more" }
+          },
+          [_vm._v("\n                ...\n            ")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/SidebarCalendar.vue?vue&type=template&id=444cfa3f&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30"
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "svg",
+        {
+          staticClass:
+            "cursor-pointer calendar-switcher fixed -ml-6 2xl:-ml-5 bottom-1/2 z-40",
+          attrs: {
+            width: "14",
+            height: "22",
+            viewBox: "0 0 14 22",
+            fill: "none",
+            xmlns: "http://www.w3.org/2000/svg"
+          },
+          on: {
+            click: _vm.switchSidebarCalendar,
+            mouseover: _vm.overGreen,
+            mouseout: _vm.overNormal
+          }
+        },
+        [
+          _c("path", {
+            attrs: {
+              d:
+                "M2.08834 21.0515C2.59101 21.0467 3.07408 20.8559 3.44438 20.5159L12.696 12.0406C12.9035 11.8501 13.0692 11.6185 13.1826 11.3606C13.296 11.1026 13.3545 10.8239 13.3545 10.5422C13.3545 10.2604 13.296 9.98176 13.1826 9.72382C13.0692 9.46587 12.9035 9.2343 12.696 9.04376L3.44438 0.568499C3.24897 0.380429 3.01793 0.233334 2.76483 0.13587C2.51174 0.0384068 2.24172 -0.00745915 1.97064 0.000969431C1.69956 0.00939992 1.4329 0.0719552 1.18636 0.184956C0.939809 0.297957 0.718349 0.45912 0.535004 0.65897C0.351659 0.858819 0.210132 1.09331 0.118746 1.34866C0.027361 1.60401 -0.0120372 1.87506 0.00287069 2.14586C0.0177785 2.41666 0.0866911 2.68174 0.205554 2.92552C0.324416 3.16929 0.49083 3.38684 0.695004 3.56535L8.32613 10.5422L0.711955 17.519C0.410086 17.7961 0.198954 18.158 0.106215 18.5571C0.0134763 18.9563 0.0434551 19.3741 0.192224 19.7559C0.340994 20.1377 0.601616 20.4657 0.939952 20.6969C1.27829 20.9281 1.67856 21.0517 2.08834 21.0515Z",
+              id: "right-arrow-55",
+              fill: "black"
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "fixed bottom-2 ml-1 w-full text-black  z-50 calendar-button"
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass:
+                "hover:bg-opacity-100 open-big-calendar rounded rounded-full text-white text-lg py-3 px-6 bg-gray-500 bg-opacity-80",
+              on: { click: _vm.switchGlobal }
+            },
+            [_vm._v("\n            All calendar\n        ")]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "w-3/12 2xl:w-2/12  calendar  bg-gray-200 text-white fixed top-0  overflow-y-scroll  max-h-screen  ",
+        staticStyle: { width: "inherit" }
+      },
+      [
+        _c("div", { staticClass: "slick-slider34 " }, [
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v(" 10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sveta")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete me\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 "
+              },
+              [
+                _c("div", [_vm._v("10:00")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col" }, [
+                  _c("p", [_vm._v("Nikolay")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Elena")])
+                ]),
+                _vm._v(" "),
+                _c("div", [_vm._v("0/67")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        To book\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "fixed top-2 ml-1  w-full z-50 calendar-date" },
+      [
+        _c(
+          "button",
+          {
+            staticClass:
+              "rounded rounded-full text-white text-lg py-3 px-6 bg-black bg-opacity-50"
+          },
+          [_vm._v("18 August\n        ")]
+        )
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -34805,10 +51346,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=template&id=5663af57&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -34824,868 +51365,229 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("jet-banner"),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "min-h-screen bg-gray-100" },
-        [
-          _c("nav", { staticClass: "bg-white border-b border-gray-100" }, [
-            _c("div", { staticClass: "mx-auto px-4 sm:px-6 lg:px-8" }, [
-              _c("div", { staticClass: "flex justify-between h-16" }, [
-                _c("div", { staticClass: "flex" }, [
-                  _c(
-                    "div",
-                    { staticClass: "flex-shrink-0 flex items-center" },
-                    [
-                      _c(
-                        "inertia-link",
-                        { attrs: { href: _vm.route("dashboard") } },
-                        [
-                          _c("img", {
-                            attrs: { src: "/svg/vasterra.svg", alt: "" }
-                          })
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
-                    },
-                    [
-                      _c(
-                        "jet-nav-link",
-                        {
-                          attrs: {
-                            href: _vm.route("dashboard"),
-                            active: _vm.route().current("dashboard")
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                Dashboard\n                            "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "jet-nav-link",
-                        {
-                          attrs: {
-                            href: _vm.route("filters"),
-                            active: _vm.route().current("filters")
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                Filters\n                            "
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "hidden sm:flex sm:items-center sm:ml-6" },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "ml-3 relative" },
-                      [
-                        _vm.$page.props.jetstream.hasTeamFeatures
-                          ? _c("jet-dropdown", {
-                              attrs: { align: "right", width: "60" },
-                              scopedSlots: _vm._u(
-                                [
-                                  {
-                                    key: "trigger",
-                                    fn: function() {
-                                      return [
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "inline-flex rounded-md"
-                                          },
-                                          [
-                                            _c(
-                                              "button",
-                                              {
-                                                staticClass:
-                                                  "inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150",
-                                                attrs: { type: "button" }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                            " +
-                                                    _vm._s(
-                                                      _vm.$page.props.user
-                                                        .current_team.name
-                                                    ) +
-                                                    "\n\n                                            "
-                                                ),
-                                                _c(
-                                                  "svg",
-                                                  {
-                                                    staticClass:
-                                                      "ml-2 -mr-0.5 h-4 w-4",
-                                                    attrs: {
-                                                      xmlns:
-                                                        "http://www.w3.org/2000/svg",
-                                                      viewBox: "0 0 20 20",
-                                                      fill: "currentColor"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("path", {
-                                                      attrs: {
-                                                        "fill-rule": "evenodd",
-                                                        d:
-                                                          "M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z",
-                                                        "clip-rule": "evenodd"
-                                                      }
-                                                    })
-                                                  ]
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    },
-                                    proxy: true
-                                  },
-                                  {
-                                    key: "content",
-                                    fn: function() {
-                                      return [
-                                        _c(
-                                          "div",
-                                          { staticClass: "w-60" },
-                                          [
-                                            _vm.$page.props.jetstream
-                                              .hasTeamFeatures
-                                              ? [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "block px-4 py-2 text-xs text-gray-400"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                                Manage Team\n                                            "
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "jet-dropdown-link",
-                                                    {
-                                                      attrs: {
-                                                        href: _vm.route(
-                                                          "teams.show",
-                                                          _vm.$page.props.user
-                                                            .current_team
-                                                        )
-                                                      }
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                                Team Settings\n                                            "
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _vm.$page.props.jetstream
-                                                    .canCreateTeams
-                                                    ? _c(
-                                                        "jet-dropdown-link",
-                                                        {
-                                                          attrs: {
-                                                            href: _vm.route(
-                                                              "teams.create"
-                                                            )
-                                                          }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "\n                                                Create New Team\n                                            "
-                                                          )
-                                                        ]
-                                                      )
-                                                    : _vm._e(),
-                                                  _vm._v(" "),
-                                                  _c("div", {
-                                                    staticClass:
-                                                      "border-t border-gray-100"
-                                                  }),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "block px-4 py-2 text-xs text-gray-400"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                                Switch Teams\n                                            "
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _vm._l(
-                                                    _vm.$page.props.user
-                                                      .all_teams,
-                                                    function(team) {
-                                                      return [
-                                                        _c(
-                                                          "form",
-                                                          {
-                                                            key: team.id,
-                                                            on: {
-                                                              submit: function(
-                                                                $event
-                                                              ) {
-                                                                $event.preventDefault()
-                                                                return _vm.switchToTeam(
-                                                                  team
-                                                                )
-                                                              }
-                                                            }
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "jet-dropdown-link",
-                                                              {
-                                                                attrs: {
-                                                                  as: "button"
-                                                                }
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "div",
-                                                                  {
-                                                                    staticClass:
-                                                                      "flex items-center"
-                                                                  },
-                                                                  [
-                                                                    team.id ==
-                                                                    _vm.$page
-                                                                      .props
-                                                                      .user
-                                                                      .current_team_id
-                                                                      ? _c(
-                                                                          "svg",
-                                                                          {
-                                                                            staticClass:
-                                                                              "mr-2 h-5 w-5 text-green-400",
-                                                                            attrs: {
-                                                                              fill:
-                                                                                "none",
-                                                                              "stroke-linecap":
-                                                                                "round",
-                                                                              "stroke-linejoin":
-                                                                                "round",
-                                                                              "stroke-width":
-                                                                                "2",
-                                                                              stroke:
-                                                                                "currentColor",
-                                                                              viewBox:
-                                                                                "0 0 24 24"
-                                                                            }
-                                                                          },
-                                                                          [
-                                                                            _c(
-                                                                              "path",
-                                                                              {
-                                                                                attrs: {
-                                                                                  d:
-                                                                                    "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                                                                }
-                                                                              }
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e(),
-                                                                    _vm._v(" "),
-                                                                    _c("div", [
-                                                                      _vm._v(
-                                                                        _vm._s(
-                                                                          team.name
-                                                                        )
-                                                                      )
-                                                                    ])
-                                                                  ]
-                                                                )
-                                                              ]
-                                                            )
-                                                          ],
-                                                          1
-                                                        )
-                                                      ]
-                                                    }
-                                                  )
-                                                ]
-                                              : _vm._e()
-                                          ],
-                                          2
-                                        )
-                                      ]
-                                    },
-                                    proxy: true
-                                  }
-                                ],
-                                null,
-                                false,
-                                373511154
-                              )
-                            })
-                          : _vm._e()
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "ml-3 relative" },
-                      [
-                        _c("jet-dropdown", {
-                          attrs: { align: "right", width: "48" },
-                          scopedSlots: _vm._u([
-                            {
-                              key: "trigger",
-                              fn: function() {
-                                return [
-                                  _vm.$page.props.jetstream.managesProfilePhotos
-                                    ? _c(
-                                        "button",
-                                        {
-                                          staticClass:
-                                            "flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
-                                        },
-                                        [
-                                          _c("img", {
-                                            staticClass:
-                                              "h-8 w-8 rounded-full object-cover",
-                                            attrs: {
-                                              src:
-                                                _vm.$page.props.user
-                                                  .profile_photo_url,
-                                              alt: _vm.$page.props.user.name
-                                            }
-                                          })
-                                        ]
-                                      )
-                                    : _c(
-                                        "span",
-                                        {
-                                          staticClass: "inline-flex rounded-md"
-                                        },
-                                        [
-                                          _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150",
-                                              attrs: { type: "button" }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                            " +
-                                                  _vm._s(
-                                                    _vm.$page.props.user.name
-                                                  ) +
-                                                  "\n\n                                            "
-                                              ),
-                                              _c(
-                                                "svg",
-                                                {
-                                                  staticClass:
-                                                    "ml-2 -mr-0.5 h-4 w-4",
-                                                  attrs: {
-                                                    xmlns:
-                                                      "http://www.w3.org/2000/svg",
-                                                    viewBox: "0 0 20 20",
-                                                    fill: "currentColor"
-                                                  }
-                                                },
-                                                [
-                                                  _c("path", {
-                                                    attrs: {
-                                                      "fill-rule": "evenodd",
-                                                      d:
-                                                        "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z",
-                                                      "clip-rule": "evenodd"
-                                                    }
-                                                  })
-                                                ]
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                ]
-                              },
-                              proxy: true
-                            },
-                            {
-                              key: "content",
-                              fn: function() {
-                                return [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "block px-4 py-2 text-xs text-gray-400"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                        Manage Account\n                                    "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "jet-dropdown-link",
-                                    {
-                                      attrs: { href: _vm.route("profile.show") }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                        Profile\n                                    "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.$page.props.jetstream.hasApiFeatures
-                                    ? _c(
-                                        "jet-dropdown-link",
-                                        {
-                                          attrs: {
-                                            href: _vm.route("api-tokens.index")
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                        API Tokens\n                                    "
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c("div", {
-                                    staticClass: "border-t border-gray-100"
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "form",
-                                    {
-                                      on: {
-                                        submit: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.logout.apply(
-                                            null,
-                                            arguments
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "jet-dropdown-link",
-                                        { attrs: { as: "button" } },
-                                        [
-                                          _vm._v(
-                                            "\n                                            Logout\n                                        "
-                                          )
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ]
-                              },
-                              proxy: true
-                            }
-                          ])
-                        })
-                      ],
-                      1
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "-mr-2 flex items-center sm:hidden" },
-                  [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out",
-                        on: {
-                          click: function($event) {
-                            _vm.showingNavigationDropdown = !_vm.showingNavigationDropdown
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            staticClass: "h-6 w-6",
-                            attrs: {
-                              stroke: "currentColor",
-                              fill: "none",
-                              viewBox: "0 0 24 24"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              class: {
-                                hidden: _vm.showingNavigationDropdown,
-                                "inline-flex": !_vm.showingNavigationDropdown
-                              },
-                              attrs: {
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round",
-                                "stroke-width": "2",
-                                d: "M4 6h16M4 12h16M4 18h16"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              class: {
-                                hidden: !_vm.showingNavigationDropdown,
-                                "inline-flex": _vm.showingNavigationDropdown
-                              },
-                              attrs: {
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round",
-                                "stroke-width": "2",
-                                d: "M6 18L18 6M6 6l12 12"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ]
-                )
-              ])
-            ]),
-            _vm._v(" "),
+      _c("section", { staticClass: "container min-w-full mx-auto" }, [
+        _c(
+          "div",
+          { staticClass: "container min-w-full flex justify-between" },
+          [
             _c(
               "div",
               {
-                staticClass: "sm:hidden",
-                class: {
-                  block: _vm.showingNavigationDropdown,
-                  hidden: !_vm.showingNavigationDropdown
-                }
+                staticClass: "w-9/12 py-4 pl-6 pr-4 2xl:mr-0 mr-8 ",
+                staticStyle: { "padding-left": "5vw" }
               },
               [
                 _c(
                   "div",
-                  { staticClass: "pt-2 pb-3 space-y-1" },
+                  {
+                    staticClass:
+                      "w-full flex justify-between fixed top-0 left-0  z-30 bg-white pb-2 topmenu topmenu-width",
+                    staticStyle: { "padding-left": "5vw" }
+                  },
                   [
-                    _c(
-                      "jet-responsive-nav-link",
-                      {
-                        attrs: {
-                          href: _vm.route("dashboard"),
-                          active: _vm.route().current("dashboard")
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        Dashboard\n                    "
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "pt-4 pb-1 border-t border-gray-200" },
-                  [
-                    _c("div", { staticClass: "flex items-center px-4" }, [
-                      _vm.$page.props.jetstream.managesProfilePhotos
-                        ? _c("div", { staticClass: "flex-shrink-0 mr-3" }, [
-                            _c("img", {
-                              staticClass:
-                                "h-10 w-10 rounded-full object-cover",
-                              attrs: {
-                                src: _vm.$page.props.user.profile_photo_url,
-                                alt: _vm.$page.props.user.name
-                              }
-                            })
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("div", [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "font-medium text-base text-gray-800"
-                          },
-                          [_vm._v(_vm._s(_vm.$page.props.user.name))]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "font-medium text-sm text-gray-500" },
-                          [_vm._v(_vm._s(_vm.$page.props.user.email))]
-                        )
-                      ])
-                    ]),
+                    _vm._m(0),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "mt-3 space-y-1" },
+                      {
+                        staticClass:
+                          "w-5/12 flex justify-end items-center mr-9 user-block"
+                      },
                       [
                         _c(
-                          "jet-responsive-nav-link",
+                          "div",
                           {
-                            attrs: {
-                              href: _vm.route("profile.show"),
-                              active: _vm.route().current("profile.show")
-                            }
+                            staticClass:
+                              "flex justify-end items-center relative"
                           },
                           [
-                            _vm._v(
-                              "\n                            Profile\n                        "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm.$page.props.jetstream.hasApiFeatures
-                          ? _c(
-                              "jet-responsive-nav-link",
+                            _c("img", {
+                              staticClass: "w-12",
+                              attrs: {
+                                src: _vm.$page.props.user.profile_photo_url,
+                                alt: "user"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "p",
                               {
-                                attrs: {
-                                  href: _vm.route("api-tokens.index"),
-                                  active: _vm
-                                    .route()
-                                    .current("api-tokens.index")
+                                staticClass:
+                                  "flex justify-center items-center cursor-pointer link-image",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.showDropdown()
+                                  }
                                 }
                               },
                               [
-                                _vm._v(
-                                  "\n                            API Tokens\n                        "
-                                )
+                                _c(
+                                  "span",
+                                  { staticClass: "ml-2", attrs: { href: "#" } },
+                                  [_vm._v(_vm._s(_vm.$page.props.user.name))]
+                                ),
+                                _vm._v(" "),
+                                _c("img", {
+                                  staticClass: "ml-1 mt-1 cursor-pointer ",
+                                  attrs: {
+                                    src: "images/arrow-down.svg",
+                                    alt: "arrow down"
+                                  }
+                                })
                               ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c(
-                          "form",
-                          {
-                            attrs: { method: "POST" },
-                            on: {
-                              submit: function($event) {
-                                $event.preventDefault()
-                                return _vm.logout.apply(null, arguments)
-                              }
-                            }
-                          },
-                          [
+                            ),
+                            _vm._v(" "),
                             _c(
-                              "jet-responsive-nav-link",
-                              { attrs: { as: "button" } },
+                              "div",
+                              {
+                                ref: "dropdown",
+                                staticClass:
+                                  "absolute top-10 left-6 w-40 bg-white rounded-2xl shadow-2xl hidden dropdown"
+                              },
                               [
-                                _vm._v(
-                                  "\n                                Logout\n                            "
-                                )
+                                _c("ul", { staticClass: "p-4" }, [
+                                  _c("li", { staticClass: "my-4" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "border-b-4  border-white hover:border-green-500",
+                                        attrs: {
+                                          href: _vm.route("profile.show")
+                                        }
+                                      },
+                                      [_vm._v("Profile")]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(1),
+                                  _vm._v(" "),
+                                  _c("hr", {
+                                    staticClass: "mt-6 mb-2 min-w-full"
+                                  }),
+                                  _vm._v(" "),
+                                  _vm._m(2)
+                                ])
                               ]
                             )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm.$page.props.jetstream.hasTeamFeatures
-                          ? [
-                              _c("div", {
-                                staticClass: "border-t border-gray-200"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "block px-4 py-2 text-xs text-gray-400"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Manage Team\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "jet-responsive-nav-link",
-                                {
-                                  attrs: {
-                                    href: _vm.route(
-                                      "teams.show",
-                                      _vm.$page.props.user.current_team
-                                    ),
-                                    active: _vm.route().current("teams.show")
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Team Settings\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "jet-responsive-nav-link",
-                                {
-                                  attrs: {
-                                    href: _vm.route("teams.create"),
-                                    active: _vm.route().current("teams.create")
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Create New Team\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", {
-                                staticClass: "border-t border-gray-200"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "block px-4 py-2 text-xs text-gray-400"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Switch Teams\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(_vm.$page.props.user.all_teams, function(
-                                team
-                              ) {
-                                return [
-                                  _c(
-                                    "form",
-                                    {
-                                      key: team.id,
-                                      on: {
-                                        submit: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.switchToTeam(team)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "jet-responsive-nav-link",
-                                        { attrs: { as: "button" } },
-                                        [
-                                          _c(
-                                            "div",
-                                            {
-                                              staticClass: "flex items-center"
-                                            },
-                                            [
-                                              team.id ==
-                                              _vm.$page.props.user
-                                                .current_team_id
-                                                ? _c(
-                                                    "svg",
-                                                    {
-                                                      staticClass:
-                                                        "mr-2 h-5 w-5 text-green-400",
-                                                      attrs: {
-                                                        fill: "none",
-                                                        "stroke-linecap":
-                                                          "round",
-                                                        "stroke-linejoin":
-                                                          "round",
-                                                        "stroke-width": "2",
-                                                        stroke: "currentColor",
-                                                        viewBox: "0 0 24 24"
-                                                      }
-                                                    },
-                                                    [
-                                                      _c("path", {
-                                                        attrs: {
-                                                          d:
-                                                            "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                                        }
-                                                      })
-                                                    ]
-                                                  )
-                                                : _vm._e(),
-                                              _vm._v(" "),
-                                              _c("div", [
-                                                _vm._v(_vm._s(team.name))
-                                              ])
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ]
-                              })
-                            ]
-                          : _vm._e()
-                      ],
-                      2
-                    )
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-3/12 last-block" })
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c("main", [_vm._t("default")], 2)
               ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30"
+              },
+              [_c("SidebarCalendar")],
+              1
             )
-          ]),
-          _vm._v(" "),
-          _vm.$slots.header
-            ? _c("header", { staticClass: "bg-white shadow" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8"
-                  },
-                  [_vm._t("header")],
-                  2
-                )
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("main", [_vm._t("default")], 2),
-          _vm._v(" "),
-          _c("portal-target", { attrs: { name: "modal", multiple: "" } })
-        ],
-        1
-      )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm.$slots.header
+        ? _c("header", { staticClass: "bg-white shadow" }, [
+            _c(
+              "div",
+              { staticClass: "max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8" },
+              [_vm._t("header")],
+              2
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("portal-target", { attrs: { name: "modal", multiple: "" } }),
+      _vm._v(" "),
+      _c("JobFormModal"),
+      _vm._v(" "),
+      _c("GlobalCalendar"),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "modalShadow",
+        class: { hidden: !_vm.ModalJobSwitched }
+      })
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "w-4/12 flex justify-start items-start " },
+      [
+        _c("img", {
+          staticClass: "relative mt-2 fill-current text-green-500",
+          attrs: { src: "images/vasterra-logo.svg", alt: "vasterra-logo" }
+        }),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500",
+            attrs: { href: "#" }
+          },
+          [_vm._v("Jobs")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "pt-1 mt-2  text-black border-white border-b-4 hover:border-green-500",
+            attrs: { href: "#" }
+          },
+          [_vm._v("Lidgens")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass: "border-b-4 border-white hover:border-green-500",
+          attrs: { href: "#" }
+        },
+        [_vm._v("Setting\n                                        filteres")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass: "border-b-4  border-white hover:border-green-500",
+          attrs: { href: "#" }
+        },
+        [_vm._v("Log out")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -37955,41 +53857,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("app-layout", [
-    _c("div", { staticClass: "p-4 mx-auto" }, [
-      _c(
-        "div",
-        { staticClass: "flex flex-col space-y-4" },
-        _vm._l(_vm.jobs.data, function(job) {
-          return _c("job-card", {
-            key: job.id,
-            staticClass: "w-8/12 py-7 px-8 border",
-            attrs: {
-              title: job.title,
-              excerpt: job.excerpt,
-              score: job.client_score,
-              feedback: job.client_feedback,
-              country: job.client_country,
-              dateCreated: job.date_created,
-              diffHuman: job.human_date_created,
-              category: job.category2,
-              subCategory: job.subcategory2,
-              jobType: job.job_type,
-              verification: job.client_payment_verification,
-              budget: job.budget,
-              url: job.url,
-              hires: job.client_past_hires,
-              totalCharge: job.client_total_charge,
-              hireRate: job.client_hire_rate,
-              feedbacksCount: job.client_reviews_count,
-              jobsPosted: job.client_jobs_posted
-            }
-          })
-        }),
-        1
-      )
-    ])
-  ])
+  return _c(
+    "app-layout",
+    [
+      _c("dash-header"),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-full " }, [
+        _c("p", { staticClass: "text-2xl font-bold" }, [
+          _vm._v("Find " + _vm._s(_vm.data.length) + " jobs")
+        ])
+      ]),
+      _vm._v(" "),
+      !_vm.isReloading
+        ? _c(
+            "div",
+            { staticClass: "flex flex-col space-y-4" },
+            _vm._l(_vm.data, function(job) {
+              return _c("job-card", {
+                key: job.id,
+                staticClass: "w-8/12 py-7 px-8 border",
+                attrs: {
+                  id: job.id,
+                  title: job.title,
+                  excerpt: job.excerpt,
+                  score: job.client_score,
+                  feedback: job.client_feedback,
+                  country: job.client_country,
+                  dateCreated: job.date_created,
+                  diffHuman: job.human_date_created,
+                  category: job.category2,
+                  subCategory: job.subcategory2,
+                  jobType: job.job_type,
+                  verification: job.client_payment_verification,
+                  budget: job.budget,
+                  url: job.url,
+                  hires: job.client_past_hires,
+                  totalCharge: job.client_total_charge,
+                  hireRate: job.client_hire_rate,
+                  feedbacksCount: job.client_reviews_count,
+                  jobsPosted: job.client_jobs_posted,
+                  jobStatus: job.status
+                }
+              })
+            }),
+            1
+          )
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -53325,6 +69241,1351 @@ Vue.compile = compileToFunctions;
 
 /***/ }),
 
+/***/ "./node_modules/vuex/dist/vuex.esm.js":
+/*!********************************************!*\
+  !*** ./node_modules/vuex/dist/vuex.esm.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "Store": () => (/* binding */ Store),
+/* harmony export */   "createLogger": () => (/* binding */ createLogger),
+/* harmony export */   "createNamespacedHelpers": () => (/* binding */ createNamespacedHelpers),
+/* harmony export */   "install": () => (/* binding */ install),
+/* harmony export */   "mapActions": () => (/* binding */ mapActions),
+/* harmony export */   "mapGetters": () => (/* binding */ mapGetters),
+/* harmony export */   "mapMutations": () => (/* binding */ mapMutations),
+/* harmony export */   "mapState": () => (/* binding */ mapState)
+/* harmony export */ });
+/*!
+ * vuex v3.6.2
+ * (c) 2021 Evan You
+ * @license MIT
+ */
+function applyMixin (Vue) {
+  var version = Number(Vue.version.split('.')[0]);
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit });
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    var _init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      if ( options === void 0 ) options = {};
+
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit;
+      _init.call(this, options);
+    };
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    var options = this.$options;
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store;
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store;
+    }
+  }
+}
+
+var target = typeof window !== 'undefined'
+  ? window
+  : typeof __webpack_require__.g !== 'undefined'
+    ? __webpack_require__.g
+    : {};
+var devtoolHook = target.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+function devtoolPlugin (store) {
+  if (!devtoolHook) { return }
+
+  store._devtoolHook = devtoolHook;
+
+  devtoolHook.emit('vuex:init', store);
+
+  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+    store.replaceState(targetState);
+  });
+
+  store.subscribe(function (mutation, state) {
+    devtoolHook.emit('vuex:mutation', mutation, state);
+  }, { prepend: true });
+
+  store.subscribeAction(function (action, state) {
+    devtoolHook.emit('vuex:action', action, state);
+  }, { prepend: true });
+}
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+function find (list, f) {
+  return list.filter(f)[0]
+}
+
+/**
+ * Deep copy the given object considering circular structure.
+ * This function caches all nested objects and its copies.
+ * If it detects circular structure, use cached copy to avoid infinite loop.
+ *
+ * @param {*} obj
+ * @param {Array<Object>} cache
+ * @return {*}
+ */
+function deepCopy (obj, cache) {
+  if ( cache === void 0 ) cache = [];
+
+  // just return if obj is immutable value
+  if (obj === null || typeof obj !== 'object') {
+    return obj
+  }
+
+  // if obj is hit, it is in circular structure
+  var hit = find(cache, function (c) { return c.original === obj; });
+  if (hit) {
+    return hit.copy
+  }
+
+  var copy = Array.isArray(obj) ? [] : {};
+  // put the copy into cache at first
+  // because we want to refer it in recursive deepCopy
+  cache.push({
+    original: obj,
+    copy: copy
+  });
+
+  Object.keys(obj).forEach(function (key) {
+    copy[key] = deepCopy(obj[key], cache);
+  });
+
+  return copy
+}
+
+/**
+ * forEach for object
+ */
+function forEachValue (obj, fn) {
+  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+function isPromise (val) {
+  return val && typeof val.then === 'function'
+}
+
+function assert (condition, msg) {
+  if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+function partial (fn, arg) {
+  return function () {
+    return fn(arg)
+  }
+}
+
+// Base data struct for store's module, package with some attribute and method
+var Module = function Module (rawModule, runtime) {
+  this.runtime = runtime;
+  // Store some children item
+  this._children = Object.create(null);
+  // Store the origin module object which passed by programmer
+  this._rawModule = rawModule;
+  var rawState = rawModule.state;
+
+  // Store the origin module's state
+  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
+};
+
+var prototypeAccessors = { namespaced: { configurable: true } };
+
+prototypeAccessors.namespaced.get = function () {
+  return !!this._rawModule.namespaced
+};
+
+Module.prototype.addChild = function addChild (key, module) {
+  this._children[key] = module;
+};
+
+Module.prototype.removeChild = function removeChild (key) {
+  delete this._children[key];
+};
+
+Module.prototype.getChild = function getChild (key) {
+  return this._children[key]
+};
+
+Module.prototype.hasChild = function hasChild (key) {
+  return key in this._children
+};
+
+Module.prototype.update = function update (rawModule) {
+  this._rawModule.namespaced = rawModule.namespaced;
+  if (rawModule.actions) {
+    this._rawModule.actions = rawModule.actions;
+  }
+  if (rawModule.mutations) {
+    this._rawModule.mutations = rawModule.mutations;
+  }
+  if (rawModule.getters) {
+    this._rawModule.getters = rawModule.getters;
+  }
+};
+
+Module.prototype.forEachChild = function forEachChild (fn) {
+  forEachValue(this._children, fn);
+};
+
+Module.prototype.forEachGetter = function forEachGetter (fn) {
+  if (this._rawModule.getters) {
+    forEachValue(this._rawModule.getters, fn);
+  }
+};
+
+Module.prototype.forEachAction = function forEachAction (fn) {
+  if (this._rawModule.actions) {
+    forEachValue(this._rawModule.actions, fn);
+  }
+};
+
+Module.prototype.forEachMutation = function forEachMutation (fn) {
+  if (this._rawModule.mutations) {
+    forEachValue(this._rawModule.mutations, fn);
+  }
+};
+
+Object.defineProperties( Module.prototype, prototypeAccessors );
+
+var ModuleCollection = function ModuleCollection (rawRootModule) {
+  // register root module (Vuex.Store options)
+  this.register([], rawRootModule, false);
+};
+
+ModuleCollection.prototype.get = function get (path) {
+  return path.reduce(function (module, key) {
+    return module.getChild(key)
+  }, this.root)
+};
+
+ModuleCollection.prototype.getNamespace = function getNamespace (path) {
+  var module = this.root;
+  return path.reduce(function (namespace, key) {
+    module = module.getChild(key);
+    return namespace + (module.namespaced ? key + '/' : '')
+  }, '')
+};
+
+ModuleCollection.prototype.update = function update$1 (rawRootModule) {
+  update([], this.root, rawRootModule);
+};
+
+ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
+    var this$1 = this;
+    if ( runtime === void 0 ) runtime = true;
+
+  if ((true)) {
+    assertRawModule(path, rawModule);
+  }
+
+  var newModule = new Module(rawModule, runtime);
+  if (path.length === 0) {
+    this.root = newModule;
+  } else {
+    var parent = this.get(path.slice(0, -1));
+    parent.addChild(path[path.length - 1], newModule);
+  }
+
+  // register nested modules
+  if (rawModule.modules) {
+    forEachValue(rawModule.modules, function (rawChildModule, key) {
+      this$1.register(path.concat(key), rawChildModule, runtime);
+    });
+  }
+};
+
+ModuleCollection.prototype.unregister = function unregister (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+  var child = parent.getChild(key);
+
+  if (!child) {
+    if ((true)) {
+      console.warn(
+        "[vuex] trying to unregister module '" + key + "', which is " +
+        "not registered"
+      );
+    }
+    return
+  }
+
+  if (!child.runtime) {
+    return
+  }
+
+  parent.removeChild(key);
+};
+
+ModuleCollection.prototype.isRegistered = function isRegistered (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+
+  if (parent) {
+    return parent.hasChild(key)
+  }
+
+  return false
+};
+
+function update (path, targetModule, newModule) {
+  if ((true)) {
+    assertRawModule(path, newModule);
+  }
+
+  // update target module
+  targetModule.update(newModule);
+
+  // update nested modules
+  if (newModule.modules) {
+    for (var key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if ((true)) {
+          console.warn(
+            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
+            'manual reload is needed'
+          );
+        }
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      );
+    }
+  }
+}
+
+var functionAssert = {
+  assert: function (value) { return typeof value === 'function'; },
+  expected: 'function'
+};
+
+var objectAssert = {
+  assert: function (value) { return typeof value === 'function' ||
+    (typeof value === 'object' && typeof value.handler === 'function'); },
+  expected: 'function or object with "handler" function'
+};
+
+var assertTypes = {
+  getters: functionAssert,
+  mutations: functionAssert,
+  actions: objectAssert
+};
+
+function assertRawModule (path, rawModule) {
+  Object.keys(assertTypes).forEach(function (key) {
+    if (!rawModule[key]) { return }
+
+    var assertOptions = assertTypes[key];
+
+    forEachValue(rawModule[key], function (value, type) {
+      assert(
+        assertOptions.assert(value),
+        makeAssertionMessage(path, key, type, value, assertOptions.expected)
+      );
+    });
+  });
+}
+
+function makeAssertionMessage (path, key, type, value, expected) {
+  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
+  if (path.length > 0) {
+    buf += " in module \"" + (path.join('.')) + "\"";
+  }
+  buf += " is " + (JSON.stringify(value)) + ".";
+  return buf
+}
+
+var Vue; // bind on install
+
+var Store = function Store (options) {
+  var this$1 = this;
+  if ( options === void 0 ) options = {};
+
+  // Auto install if it is not done yet and `window` has `Vue`.
+  // To allow users to avoid auto-installation in some cases,
+  // this code should be placed here. See #731
+  if (!Vue && typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+  if ((true)) {
+    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
+    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
+    assert(this instanceof Store, "store must be called with the new operator.");
+  }
+
+  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+  // store internal state
+  this._committing = false;
+  this._actions = Object.create(null);
+  this._actionSubscribers = [];
+  this._mutations = Object.create(null);
+  this._wrappedGetters = Object.create(null);
+  this._modules = new ModuleCollection(options);
+  this._modulesNamespaceMap = Object.create(null);
+  this._subscribers = [];
+  this._watcherVM = new Vue();
+  this._makeLocalGettersCache = Object.create(null);
+
+  // bind commit and dispatch to self
+  var store = this;
+  var ref = this;
+  var dispatch = ref.dispatch;
+  var commit = ref.commit;
+  this.dispatch = function boundDispatch (type, payload) {
+    return dispatch.call(store, type, payload)
+  };
+  this.commit = function boundCommit (type, payload, options) {
+    return commit.call(store, type, payload, options)
+  };
+
+  // strict mode
+  this.strict = strict;
+
+  var state = this._modules.root.state;
+
+  // init root module.
+  // this also recursively registers all sub-modules
+  // and collects all module getters inside this._wrappedGetters
+  installModule(this, state, [], this._modules.root);
+
+  // initialize the store vm, which is responsible for the reactivity
+  // (also registers _wrappedGetters as computed properties)
+  resetStoreVM(this, state);
+
+  // apply plugins
+  plugins.forEach(function (plugin) { return plugin(this$1); });
+
+  var useDevtools = options.devtools !== undefined ? options.devtools : Vue.config.devtools;
+  if (useDevtools) {
+    devtoolPlugin(this);
+  }
+};
+
+var prototypeAccessors$1 = { state: { configurable: true } };
+
+prototypeAccessors$1.state.get = function () {
+  return this._vm._data.$$state
+};
+
+prototypeAccessors$1.state.set = function (v) {
+  if ((true)) {
+    assert(false, "use store.replaceState() to explicit replace store state.");
+  }
+};
+
+Store.prototype.commit = function commit (_type, _payload, _options) {
+    var this$1 = this;
+
+  // check object-style commit
+  var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+
+  var mutation = { type: type, payload: payload };
+  var entry = this._mutations[type];
+  if (!entry) {
+    if ((true)) {
+      console.error(("[vuex] unknown mutation type: " + type));
+    }
+    return
+  }
+  this._withCommit(function () {
+    entry.forEach(function commitIterator (handler) {
+      handler(payload);
+    });
+  });
+
+  this._subscribers
+    .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+    .forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  if (
+    ( true) &&
+    options && options.silent
+  ) {
+    console.warn(
+      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
+      'Use the filter functionality in the vue-devtools'
+    );
+  }
+};
+
+Store.prototype.dispatch = function dispatch (_type, _payload) {
+    var this$1 = this;
+
+  // check object-style dispatch
+  var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+
+  var action = { type: type, payload: payload };
+  var entry = this._actions[type];
+  if (!entry) {
+    if ((true)) {
+      console.error(("[vuex] unknown action type: " + type));
+    }
+    return
+  }
+
+  try {
+    this._actionSubscribers
+      .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+      .filter(function (sub) { return sub.before; })
+      .forEach(function (sub) { return sub.before(action, this$1.state); });
+  } catch (e) {
+    if ((true)) {
+      console.warn("[vuex] error in before action subscribers: ");
+      console.error(e);
+    }
+  }
+
+  var result = entry.length > 1
+    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+    : entry[0](payload);
+
+  return new Promise(function (resolve, reject) {
+    result.then(function (res) {
+      try {
+        this$1._actionSubscribers
+          .filter(function (sub) { return sub.after; })
+          .forEach(function (sub) { return sub.after(action, this$1.state); });
+      } catch (e) {
+        if ((true)) {
+          console.warn("[vuex] error in after action subscribers: ");
+          console.error(e);
+        }
+      }
+      resolve(res);
+    }, function (error) {
+      try {
+        this$1._actionSubscribers
+          .filter(function (sub) { return sub.error; })
+          .forEach(function (sub) { return sub.error(action, this$1.state, error); });
+      } catch (e) {
+        if ((true)) {
+          console.warn("[vuex] error in error action subscribers: ");
+          console.error(e);
+        }
+      }
+      reject(error);
+    });
+  })
+};
+
+Store.prototype.subscribe = function subscribe (fn, options) {
+  return genericSubscribe(fn, this._subscribers, options)
+};
+
+Store.prototype.subscribeAction = function subscribeAction (fn, options) {
+  var subs = typeof fn === 'function' ? { before: fn } : fn;
+  return genericSubscribe(subs, this._actionSubscribers, options)
+};
+
+Store.prototype.watch = function watch (getter, cb, options) {
+    var this$1 = this;
+
+  if ((true)) {
+    assert(typeof getter === 'function', "store.watch only accepts a function.");
+  }
+  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
+};
+
+Store.prototype.replaceState = function replaceState (state) {
+    var this$1 = this;
+
+  this._withCommit(function () {
+    this$1._vm._data.$$state = state;
+  });
+};
+
+Store.prototype.registerModule = function registerModule (path, rawModule, options) {
+    if ( options === void 0 ) options = {};
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+    assert(path.length > 0, 'cannot register the root module by using registerModule.');
+  }
+
+  this._modules.register(path, rawModule);
+  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+  // reset store to update getters...
+  resetStoreVM(this, this.state);
+};
+
+Store.prototype.unregisterModule = function unregisterModule (path) {
+    var this$1 = this;
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  this._modules.unregister(path);
+  this._withCommit(function () {
+    var parentState = getNestedState(this$1.state, path.slice(0, -1));
+    Vue.delete(parentState, path[path.length - 1]);
+  });
+  resetStore(this);
+};
+
+Store.prototype.hasModule = function hasModule (path) {
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  return this._modules.isRegistered(path)
+};
+
+Store.prototype.hotUpdate = function hotUpdate (newOptions) {
+  this._modules.update(newOptions);
+  resetStore(this, true);
+};
+
+Store.prototype._withCommit = function _withCommit (fn) {
+  var committing = this._committing;
+  this._committing = true;
+  fn();
+  this._committing = committing;
+};
+
+Object.defineProperties( Store.prototype, prototypeAccessors$1 );
+
+function genericSubscribe (fn, subs, options) {
+  if (subs.indexOf(fn) < 0) {
+    options && options.prepend
+      ? subs.unshift(fn)
+      : subs.push(fn);
+  }
+  return function () {
+    var i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  }
+}
+
+function resetStore (store, hot) {
+  store._actions = Object.create(null);
+  store._mutations = Object.create(null);
+  store._wrappedGetters = Object.create(null);
+  store._modulesNamespaceMap = Object.create(null);
+  var state = store.state;
+  // init all modules
+  installModule(store, state, [], store._modules.root, true);
+  // reset vm
+  resetStoreVM(store, state, hot);
+}
+
+function resetStoreVM (store, state, hot) {
+  var oldVm = store._vm;
+
+  // bind store public getters
+  store.getters = {};
+  // reset local getters cache
+  store._makeLocalGettersCache = Object.create(null);
+  var wrappedGetters = store._wrappedGetters;
+  var computed = {};
+  forEachValue(wrappedGetters, function (fn, key) {
+    // use computed to leverage its lazy-caching mechanism
+    // direct inline function use will lead to closure preserving oldVm.
+    // using partial to return function with only arguments preserved in closure environment.
+    computed[key] = partial(fn, store);
+    Object.defineProperty(store.getters, key, {
+      get: function () { return store._vm[key]; },
+      enumerable: true // for local getters
+    });
+  });
+
+  // use a Vue instance to store the state tree
+  // suppress warnings just in case the user has added
+  // some funky global mixins
+  var silent = Vue.config.silent;
+  Vue.config.silent = true;
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed: computed
+  });
+  Vue.config.silent = silent;
+
+  // enable strict mode for new vm
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      // dispatch changes in all subscribed watchers
+      // to force getter re-evaluation for hot reloading.
+      store._withCommit(function () {
+        oldVm._data.$$state = null;
+      });
+    }
+    Vue.nextTick(function () { return oldVm.$destroy(); });
+  }
+}
+
+function installModule (store, rootState, path, module, hot) {
+  var isRoot = !path.length;
+  var namespace = store._modules.getNamespace(path);
+
+  // register in namespace map
+  if (module.namespaced) {
+    if (store._modulesNamespaceMap[namespace] && ("development" !== 'production')) {
+      console.error(("[vuex] duplicate namespace " + namespace + " for the namespaced module " + (path.join('/'))));
+    }
+    store._modulesNamespaceMap[namespace] = module;
+  }
+
+  // set state
+  if (!isRoot && !hot) {
+    var parentState = getNestedState(rootState, path.slice(0, -1));
+    var moduleName = path[path.length - 1];
+    store._withCommit(function () {
+      if ((true)) {
+        if (moduleName in parentState) {
+          console.warn(
+            ("[vuex] state field \"" + moduleName + "\" was overridden by a module with the same name at \"" + (path.join('.')) + "\"")
+          );
+        }
+      }
+      Vue.set(parentState, moduleName, module.state);
+    });
+  }
+
+  var local = module.context = makeLocalContext(store, namespace, path);
+
+  module.forEachMutation(function (mutation, key) {
+    var namespacedType = namespace + key;
+    registerMutation(store, namespacedType, mutation, local);
+  });
+
+  module.forEachAction(function (action, key) {
+    var type = action.root ? key : namespace + key;
+    var handler = action.handler || action;
+    registerAction(store, type, handler, local);
+  });
+
+  module.forEachGetter(function (getter, key) {
+    var namespacedType = namespace + key;
+    registerGetter(store, namespacedType, getter, local);
+  });
+
+  module.forEachChild(function (child, key) {
+    installModule(store, rootState, path.concat(key), child, hot);
+  });
+}
+
+/**
+ * make localized dispatch, commit, getters and state
+ * if there is no namespace, just use root ones
+ */
+function makeLocalContext (store, namespace, path) {
+  var noNamespace = namespace === '';
+
+  var local = {
+    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if (( true) && !store._actions[type]) {
+          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      return store.dispatch(type, payload)
+    },
+
+    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if (( true) && !store._mutations[type]) {
+          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      store.commit(type, payload, options);
+    }
+  };
+
+  // getters and state object must be gotten lazily
+  // because they will be changed by vm update
+  Object.defineProperties(local, {
+    getters: {
+      get: noNamespace
+        ? function () { return store.getters; }
+        : function () { return makeLocalGetters(store, namespace); }
+    },
+    state: {
+      get: function () { return getNestedState(store.state, path); }
+    }
+  });
+
+  return local
+}
+
+function makeLocalGetters (store, namespace) {
+  if (!store._makeLocalGettersCache[namespace]) {
+    var gettersProxy = {};
+    var splitPos = namespace.length;
+    Object.keys(store.getters).forEach(function (type) {
+      // skip if the target getter is not match this namespace
+      if (type.slice(0, splitPos) !== namespace) { return }
+
+      // extract local getter type
+      var localType = type.slice(splitPos);
+
+      // Add a port to the getters proxy.
+      // Define as getter property because
+      // we do not want to evaluate the getters in this time.
+      Object.defineProperty(gettersProxy, localType, {
+        get: function () { return store.getters[type]; },
+        enumerable: true
+      });
+    });
+    store._makeLocalGettersCache[namespace] = gettersProxy;
+  }
+
+  return store._makeLocalGettersCache[namespace]
+}
+
+function registerMutation (store, type, handler, local) {
+  var entry = store._mutations[type] || (store._mutations[type] = []);
+  entry.push(function wrappedMutationHandler (payload) {
+    handler.call(store, local.state, payload);
+  });
+}
+
+function registerAction (store, type, handler, local) {
+  var entry = store._actions[type] || (store._actions[type] = []);
+  entry.push(function wrappedActionHandler (payload) {
+    var res = handler.call(store, {
+      dispatch: local.dispatch,
+      commit: local.commit,
+      getters: local.getters,
+      state: local.state,
+      rootGetters: store.getters,
+      rootState: store.state
+    }, payload);
+    if (!isPromise(res)) {
+      res = Promise.resolve(res);
+    }
+    if (store._devtoolHook) {
+      return res.catch(function (err) {
+        store._devtoolHook.emit('vuex:error', err);
+        throw err
+      })
+    } else {
+      return res
+    }
+  });
+}
+
+function registerGetter (store, type, rawGetter, local) {
+  if (store._wrappedGetters[type]) {
+    if ((true)) {
+      console.error(("[vuex] duplicate getter key: " + type));
+    }
+    return
+  }
+  store._wrappedGetters[type] = function wrappedGetter (store) {
+    return rawGetter(
+      local.state, // local state
+      local.getters, // local getters
+      store.state, // root state
+      store.getters // root getters
+    )
+  };
+}
+
+function enableStrictMode (store) {
+  store._vm.$watch(function () { return this._data.$$state }, function () {
+    if ((true)) {
+      assert(store._committing, "do not mutate vuex store state outside mutation handlers.");
+    }
+  }, { deep: true, sync: true });
+}
+
+function getNestedState (state, path) {
+  return path.reduce(function (state, key) { return state[key]; }, state)
+}
+
+function unifyObjectStyle (type, payload, options) {
+  if (isObject(type) && type.type) {
+    options = payload;
+    payload = type;
+    type = type.type;
+  }
+
+  if ((true)) {
+    assert(typeof type === 'string', ("expects string as the type, but found " + (typeof type) + "."));
+  }
+
+  return { type: type, payload: payload, options: options }
+}
+
+function install (_Vue) {
+  if (Vue && _Vue === Vue) {
+    if ((true)) {
+      console.error(
+        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+      );
+    }
+    return
+  }
+  Vue = _Vue;
+  applyMixin(Vue);
+}
+
+/**
+ * Reduce the code which written in Vue.js for getting the state.
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} states # Object's item can be a function which accept state and getters for param, you can do something for state and getters in it.
+ * @param {Object}
+ */
+var mapState = normalizeNamespace(function (namespace, states) {
+  var res = {};
+  if (( true) && !isValidMap(states)) {
+    console.error('[vuex] mapState: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(states).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedState () {
+      var state = this.$store.state;
+      var getters = this.$store.getters;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
+        if (!module) {
+          return
+        }
+        state = module.context.state;
+        getters = module.context.getters;
+      }
+      return typeof val === 'function'
+        ? val.call(this, state, getters)
+        : state[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for committing the mutation
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} mutations # Object's item can be a function which accept `commit` function as the first param, it can accept another params. You can commit mutation and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapMutations = normalizeNamespace(function (namespace, mutations) {
+  var res = {};
+  if (( true) && !isValidMap(mutations)) {
+    console.error('[vuex] mapMutations: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(mutations).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedMutation () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // Get the commit method from store
+      var commit = this.$store.commit;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
+        if (!module) {
+          return
+        }
+        commit = module.context.commit;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [commit].concat(args))
+        : commit.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for getting the getters
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} getters
+ * @return {Object}
+ */
+var mapGetters = normalizeNamespace(function (namespace, getters) {
+  var res = {};
+  if (( true) && !isValidMap(getters)) {
+    console.error('[vuex] mapGetters: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(getters).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    // The namespace has been mutated by normalizeNamespace
+    val = namespace + val;
+    res[key] = function mappedGetter () {
+      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
+        return
+      }
+      if (( true) && !(val in this.$store.getters)) {
+        console.error(("[vuex] unknown getter: " + val));
+        return
+      }
+      return this.$store.getters[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for dispatch the action
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} actions # Object's item can be a function which accept `dispatch` function as the first param, it can accept anthor params. You can dispatch action and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapActions = normalizeNamespace(function (namespace, actions) {
+  var res = {};
+  if (( true) && !isValidMap(actions)) {
+    console.error('[vuex] mapActions: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(actions).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedAction () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // get dispatch function from store
+      var dispatch = this.$store.dispatch;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
+        if (!module) {
+          return
+        }
+        dispatch = module.context.dispatch;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [dispatch].concat(args))
+        : dispatch.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Rebinding namespace param for mapXXX function in special scoped, and return them by simple object
+ * @param {String} namespace
+ * @return {Object}
+ */
+var createNamespacedHelpers = function (namespace) { return ({
+  mapState: mapState.bind(null, namespace),
+  mapGetters: mapGetters.bind(null, namespace),
+  mapMutations: mapMutations.bind(null, namespace),
+  mapActions: mapActions.bind(null, namespace)
+}); };
+
+/**
+ * Normalize the map
+ * normalizeMap([1, 2, 3]) => [ { key: 1, val: 1 }, { key: 2, val: 2 }, { key: 3, val: 3 } ]
+ * normalizeMap({a: 1, b: 2, c: 3}) => [ { key: 'a', val: 1 }, { key: 'b', val: 2 }, { key: 'c', val: 3 } ]
+ * @param {Array|Object} map
+ * @return {Object}
+ */
+function normalizeMap (map) {
+  if (!isValidMap(map)) {
+    return []
+  }
+  return Array.isArray(map)
+    ? map.map(function (key) { return ({ key: key, val: key }); })
+    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+}
+
+/**
+ * Validate whether given map is valid or not
+ * @param {*} map
+ * @return {Boolean}
+ */
+function isValidMap (map) {
+  return Array.isArray(map) || isObject(map)
+}
+
+/**
+ * Return a function expect two param contains namespace and map. it will normalize the namespace and then the param's function will handle the new namespace and the map.
+ * @param {Function} fn
+ * @return {Function}
+ */
+function normalizeNamespace (fn) {
+  return function (namespace, map) {
+    if (typeof namespace !== 'string') {
+      map = namespace;
+      namespace = '';
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/';
+    }
+    return fn(namespace, map)
+  }
+}
+
+/**
+ * Search a special module from store by namespace. if module not exist, print error message.
+ * @param {Object} store
+ * @param {String} helper
+ * @param {String} namespace
+ * @return {Object}
+ */
+function getModuleByNamespace (store, helper, namespace) {
+  var module = store._modulesNamespaceMap[namespace];
+  if (( true) && !module) {
+    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
+  }
+  return module
+}
+
+// Credits: borrowed code from fcomb/redux-logger
+
+function createLogger (ref) {
+  if ( ref === void 0 ) ref = {};
+  var collapsed = ref.collapsed; if ( collapsed === void 0 ) collapsed = true;
+  var filter = ref.filter; if ( filter === void 0 ) filter = function (mutation, stateBefore, stateAfter) { return true; };
+  var transformer = ref.transformer; if ( transformer === void 0 ) transformer = function (state) { return state; };
+  var mutationTransformer = ref.mutationTransformer; if ( mutationTransformer === void 0 ) mutationTransformer = function (mut) { return mut; };
+  var actionFilter = ref.actionFilter; if ( actionFilter === void 0 ) actionFilter = function (action, state) { return true; };
+  var actionTransformer = ref.actionTransformer; if ( actionTransformer === void 0 ) actionTransformer = function (act) { return act; };
+  var logMutations = ref.logMutations; if ( logMutations === void 0 ) logMutations = true;
+  var logActions = ref.logActions; if ( logActions === void 0 ) logActions = true;
+  var logger = ref.logger; if ( logger === void 0 ) logger = console;
+
+  return function (store) {
+    var prevState = deepCopy(store.state);
+
+    if (typeof logger === 'undefined') {
+      return
+    }
+
+    if (logMutations) {
+      store.subscribe(function (mutation, state) {
+        var nextState = deepCopy(state);
+
+        if (filter(mutation, prevState, nextState)) {
+          var formattedTime = getFormattedTime();
+          var formattedMutation = mutationTransformer(mutation);
+          var message = "mutation " + (mutation.type) + formattedTime;
+
+          startMessage(logger, message, collapsed);
+          logger.log('%c prev state', 'color: #9E9E9E; font-weight: bold', transformer(prevState));
+          logger.log('%c mutation', 'color: #03A9F4; font-weight: bold', formattedMutation);
+          logger.log('%c next state', 'color: #4CAF50; font-weight: bold', transformer(nextState));
+          endMessage(logger);
+        }
+
+        prevState = nextState;
+      });
+    }
+
+    if (logActions) {
+      store.subscribeAction(function (action, state) {
+        if (actionFilter(action, state)) {
+          var formattedTime = getFormattedTime();
+          var formattedAction = actionTransformer(action);
+          var message = "action " + (action.type) + formattedTime;
+
+          startMessage(logger, message, collapsed);
+          logger.log('%c action', 'color: #03A9F4; font-weight: bold', formattedAction);
+          endMessage(logger);
+        }
+      });
+    }
+  }
+}
+
+function startMessage (logger, message, collapsed) {
+  var startMessage = collapsed
+    ? logger.groupCollapsed
+    : logger.group;
+
+  // render
+  try {
+    startMessage.call(logger, message);
+  } catch (e) {
+    logger.log(message);
+  }
+}
+
+function endMessage (logger) {
+  try {
+    logger.groupEnd();
+  } catch (e) {
+    logger.log('—— log end ——');
+  }
+}
+
+function getFormattedTime () {
+  var time = new Date();
+  return (" @ " + (pad(time.getHours(), 2)) + ":" + (pad(time.getMinutes(), 2)) + ":" + (pad(time.getSeconds(), 2)) + "." + (pad(time.getMilliseconds(), 3)))
+}
+
+function repeat (str, times) {
+  return (new Array(times + 1)).join(str)
+}
+
+function pad (num, maxLength) {
+  return repeat('0', maxLength - num.toString().length) + num
+}
+
+var index = {
+  Store: Store,
+  install: install,
+  version: '3.6.2',
+  mapState: mapState,
+  mapMutations: mapMutations,
+  mapGetters: mapGetters,
+  mapActions: mapActions,
+  createNamespacedHelpers: createNamespacedHelpers,
+  createLogger: createLogger
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (index);
+
+
+
+/***/ }),
+
+/***/ "./node_modules/yeast/index.js":
+/*!*************************************!*\
+  !*** ./node_modules/yeast/index.js ***!
+  \*************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+var alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'.split('')
+  , length = 64
+  , map = {}
+  , seed = 0
+  , i = 0
+  , prev;
+
+/**
+ * Return a string representing the specified number.
+ *
+ * @param {Number} num The number to convert.
+ * @returns {String} The string representation of the number.
+ * @api public
+ */
+function encode(num) {
+  var encoded = '';
+
+  do {
+    encoded = alphabet[num % length] + encoded;
+    num = Math.floor(num / length);
+  } while (num > 0);
+
+  return encoded;
+}
+
+/**
+ * Return the integer value specified by the given string.
+ *
+ * @param {String} str The string to convert.
+ * @returns {Number} The integer value represented by the string.
+ * @api public
+ */
+function decode(str) {
+  var decoded = 0;
+
+  for (i = 0; i < str.length; i++) {
+    decoded = decoded * length + map[str.charAt(i)];
+  }
+
+  return decoded;
+}
+
+/**
+ * Yeast: A tiny growing id generator.
+ *
+ * @returns {String} A unique id.
+ * @api public
+ */
+function yeast() {
+  var now = encode(+new Date());
+
+  if (now !== prev) return seed = 0, prev = now;
+  return now +'.'+ encode(seed++);
+}
+
+//
+// Map each character to its index.
+//
+for (; i < length; i++) map[alphabet[i]] = i;
+
+//
+// Expose the `yeast`, `encode` and `decode` functions.
+//
+yeast.encode = encode;
+yeast.decode = decode;
+module.exports = yeast;
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages sync recursive ^\\.\\/.*$":
 /*!*******************************************!*\
   !*** ./resources/js/Pages/ sync ^\.\/.*$ ***!
@@ -53415,6 +70676,1124 @@ webpackContext.id = "./resources/js/Pages sync recursive ^\\.\\/.*$";
 /***/ (() => {
 
 /* (ignored) */
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/socket.io-client/build/index.js ***!
+  \******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.io = exports.Socket = exports.Manager = exports.protocol = void 0;
+const url_1 = __webpack_require__(/*! ./url */ "./node_modules/socket.io-client/build/url.js");
+const manager_1 = __webpack_require__(/*! ./manager */ "./node_modules/socket.io-client/build/manager.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("socket.io-client");
+/**
+ * Module exports.
+ */
+module.exports = exports = lookup;
+/**
+ * Managers cache.
+ */
+const cache = (exports.managers = {});
+function lookup(uri, opts) {
+    if (typeof uri === "object") {
+        opts = uri;
+        uri = undefined;
+    }
+    opts = opts || {};
+    const parsed = (0, url_1.url)(uri, opts.path || "/socket.io");
+    const source = parsed.source;
+    const id = parsed.id;
+    const path = parsed.path;
+    const sameNamespace = cache[id] && path in cache[id]["nsps"];
+    const newConnection = opts.forceNew ||
+        opts["force new connection"] ||
+        false === opts.multiplex ||
+        sameNamespace;
+    let io;
+    if (newConnection) {
+        debug("ignoring socket cache for %s", source);
+        io = new manager_1.Manager(source, opts);
+    }
+    else {
+        if (!cache[id]) {
+            debug("new io instance for %s", source);
+            cache[id] = new manager_1.Manager(source, opts);
+        }
+        io = cache[id];
+    }
+    if (parsed.query && !opts.query) {
+        opts.query = parsed.queryKey;
+    }
+    return io.socket(parsed.path, opts);
+}
+exports.io = lookup;
+/**
+ * Protocol version.
+ *
+ * @public
+ */
+var socket_io_parser_1 = __webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-parser/dist/index.js");
+Object.defineProperty(exports, "protocol", ({ enumerable: true, get: function () { return socket_io_parser_1.protocol; } }));
+/**
+ * `connect`.
+ *
+ * @param {String} uri
+ * @public
+ */
+exports.connect = lookup;
+/**
+ * Expose constructors for standalone build.
+ *
+ * @public
+ */
+var manager_2 = __webpack_require__(/*! ./manager */ "./node_modules/socket.io-client/build/manager.js");
+Object.defineProperty(exports, "Manager", ({ enumerable: true, get: function () { return manager_2.Manager; } }));
+var socket_1 = __webpack_require__(/*! ./socket */ "./node_modules/socket.io-client/build/socket.js");
+Object.defineProperty(exports, "Socket", ({ enumerable: true, get: function () { return socket_1.Socket; } }));
+exports.default = lookup;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/manager.js":
+/*!********************************************************!*\
+  !*** ./node_modules/socket.io-client/build/manager.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Manager = void 0;
+const eio = __webpack_require__(/*! engine.io-client */ "./node_modules/engine.io-client/lib/index.js");
+const util_1 = __webpack_require__(/*! engine.io-client/lib/util */ "./node_modules/engine.io-client/lib/util.js");
+const socket_1 = __webpack_require__(/*! ./socket */ "./node_modules/socket.io-client/build/socket.js");
+const parser = __webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-parser/dist/index.js");
+const on_1 = __webpack_require__(/*! ./on */ "./node_modules/socket.io-client/build/on.js");
+const Backoff = __webpack_require__(/*! backo2 */ "./node_modules/backo2/index.js");
+const typed_events_1 = __webpack_require__(/*! ./typed-events */ "./node_modules/socket.io-client/build/typed-events.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("socket.io-client:manager");
+class Manager extends typed_events_1.StrictEventEmitter {
+    constructor(uri, opts) {
+        var _a;
+        super();
+        this.nsps = {};
+        this.subs = [];
+        if (uri && "object" === typeof uri) {
+            opts = uri;
+            uri = undefined;
+        }
+        opts = opts || {};
+        opts.path = opts.path || "/socket.io";
+        this.opts = opts;
+        (0, util_1.installTimerFunctions)(this, opts);
+        this.reconnection(opts.reconnection !== false);
+        this.reconnectionAttempts(opts.reconnectionAttempts || Infinity);
+        this.reconnectionDelay(opts.reconnectionDelay || 1000);
+        this.reconnectionDelayMax(opts.reconnectionDelayMax || 5000);
+        this.randomizationFactor((_a = opts.randomizationFactor) !== null && _a !== void 0 ? _a : 0.5);
+        this.backoff = new Backoff({
+            min: this.reconnectionDelay(),
+            max: this.reconnectionDelayMax(),
+            jitter: this.randomizationFactor(),
+        });
+        this.timeout(null == opts.timeout ? 20000 : opts.timeout);
+        this._readyState = "closed";
+        this.uri = uri;
+        const _parser = opts.parser || parser;
+        this.encoder = new _parser.Encoder();
+        this.decoder = new _parser.Decoder();
+        this._autoConnect = opts.autoConnect !== false;
+        if (this._autoConnect)
+            this.open();
+    }
+    reconnection(v) {
+        if (!arguments.length)
+            return this._reconnection;
+        this._reconnection = !!v;
+        return this;
+    }
+    reconnectionAttempts(v) {
+        if (v === undefined)
+            return this._reconnectionAttempts;
+        this._reconnectionAttempts = v;
+        return this;
+    }
+    reconnectionDelay(v) {
+        var _a;
+        if (v === undefined)
+            return this._reconnectionDelay;
+        this._reconnectionDelay = v;
+        (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setMin(v);
+        return this;
+    }
+    randomizationFactor(v) {
+        var _a;
+        if (v === undefined)
+            return this._randomizationFactor;
+        this._randomizationFactor = v;
+        (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setJitter(v);
+        return this;
+    }
+    reconnectionDelayMax(v) {
+        var _a;
+        if (v === undefined)
+            return this._reconnectionDelayMax;
+        this._reconnectionDelayMax = v;
+        (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setMax(v);
+        return this;
+    }
+    timeout(v) {
+        if (!arguments.length)
+            return this._timeout;
+        this._timeout = v;
+        return this;
+    }
+    /**
+     * Starts trying to reconnect if reconnection is enabled and we have not
+     * started reconnecting yet
+     *
+     * @private
+     */
+    maybeReconnectOnOpen() {
+        // Only try to reconnect if it's the first time we're connecting
+        if (!this._reconnecting &&
+            this._reconnection &&
+            this.backoff.attempts === 0) {
+            // keeps reconnection from firing twice for the same reconnection loop
+            this.reconnect();
+        }
+    }
+    /**
+     * Sets the current transport `socket`.
+     *
+     * @param {Function} fn - optional, callback
+     * @return self
+     * @public
+     */
+    open(fn) {
+        debug("readyState %s", this._readyState);
+        if (~this._readyState.indexOf("open"))
+            return this;
+        debug("opening %s", this.uri);
+        this.engine = eio(this.uri, this.opts);
+        const socket = this.engine;
+        const self = this;
+        this._readyState = "opening";
+        this.skipReconnect = false;
+        // emit `open`
+        const openSubDestroy = (0, on_1.on)(socket, "open", function () {
+            self.onopen();
+            fn && fn();
+        });
+        // emit `error`
+        const errorSub = (0, on_1.on)(socket, "error", (err) => {
+            debug("error");
+            self.cleanup();
+            self._readyState = "closed";
+            this.emitReserved("error", err);
+            if (fn) {
+                fn(err);
+            }
+            else {
+                // Only do this if there is no fn to handle the error
+                self.maybeReconnectOnOpen();
+            }
+        });
+        if (false !== this._timeout) {
+            const timeout = this._timeout;
+            debug("connect attempt will timeout after %d", timeout);
+            if (timeout === 0) {
+                openSubDestroy(); // prevents a race condition with the 'open' event
+            }
+            // set timer
+            const timer = this.setTimeoutFn(() => {
+                debug("connect attempt timed out after %d", timeout);
+                openSubDestroy();
+                socket.close();
+                socket.emit("error", new Error("timeout"));
+            }, timeout);
+            if (this.opts.autoUnref) {
+                timer.unref();
+            }
+            this.subs.push(function subDestroy() {
+                clearTimeout(timer);
+            });
+        }
+        this.subs.push(openSubDestroy);
+        this.subs.push(errorSub);
+        return this;
+    }
+    /**
+     * Alias for open()
+     *
+     * @return self
+     * @public
+     */
+    connect(fn) {
+        return this.open(fn);
+    }
+    /**
+     * Called upon transport open.
+     *
+     * @private
+     */
+    onopen() {
+        debug("open");
+        // clear old subs
+        this.cleanup();
+        // mark as open
+        this._readyState = "open";
+        this.emitReserved("open");
+        // add new subs
+        const socket = this.engine;
+        this.subs.push((0, on_1.on)(socket, "ping", this.onping.bind(this)), (0, on_1.on)(socket, "data", this.ondata.bind(this)), (0, on_1.on)(socket, "error", this.onerror.bind(this)), (0, on_1.on)(socket, "close", this.onclose.bind(this)), (0, on_1.on)(this.decoder, "decoded", this.ondecoded.bind(this)));
+    }
+    /**
+     * Called upon a ping.
+     *
+     * @private
+     */
+    onping() {
+        this.emitReserved("ping");
+    }
+    /**
+     * Called with data.
+     *
+     * @private
+     */
+    ondata(data) {
+        this.decoder.add(data);
+    }
+    /**
+     * Called when parser fully decodes a packet.
+     *
+     * @private
+     */
+    ondecoded(packet) {
+        this.emitReserved("packet", packet);
+    }
+    /**
+     * Called upon socket error.
+     *
+     * @private
+     */
+    onerror(err) {
+        debug("error", err);
+        this.emitReserved("error", err);
+    }
+    /**
+     * Creates a new socket for the given `nsp`.
+     *
+     * @return {Socket}
+     * @public
+     */
+    socket(nsp, opts) {
+        let socket = this.nsps[nsp];
+        if (!socket) {
+            socket = new socket_1.Socket(this, nsp, opts);
+            this.nsps[nsp] = socket;
+        }
+        return socket;
+    }
+    /**
+     * Called upon a socket close.
+     *
+     * @param socket
+     * @private
+     */
+    _destroy(socket) {
+        const nsps = Object.keys(this.nsps);
+        for (const nsp of nsps) {
+            const socket = this.nsps[nsp];
+            if (socket.active) {
+                debug("socket %s is still active, skipping close", nsp);
+                return;
+            }
+        }
+        this._close();
+    }
+    /**
+     * Writes a packet.
+     *
+     * @param packet
+     * @private
+     */
+    _packet(packet) {
+        debug("writing packet %j", packet);
+        const encodedPackets = this.encoder.encode(packet);
+        for (let i = 0; i < encodedPackets.length; i++) {
+            this.engine.write(encodedPackets[i], packet.options);
+        }
+    }
+    /**
+     * Clean up transport subscriptions and packet buffer.
+     *
+     * @private
+     */
+    cleanup() {
+        debug("cleanup");
+        this.subs.forEach((subDestroy) => subDestroy());
+        this.subs.length = 0;
+        this.decoder.destroy();
+    }
+    /**
+     * Close the current socket.
+     *
+     * @private
+     */
+    _close() {
+        debug("disconnect");
+        this.skipReconnect = true;
+        this._reconnecting = false;
+        if ("opening" === this._readyState) {
+            // `onclose` will not fire because
+            // an open event never happened
+            this.cleanup();
+        }
+        this.backoff.reset();
+        this._readyState = "closed";
+        if (this.engine)
+            this.engine.close();
+    }
+    /**
+     * Alias for close()
+     *
+     * @private
+     */
+    disconnect() {
+        return this._close();
+    }
+    /**
+     * Called upon engine close.
+     *
+     * @private
+     */
+    onclose(reason) {
+        debug("onclose");
+        this.cleanup();
+        this.backoff.reset();
+        this._readyState = "closed";
+        this.emitReserved("close", reason);
+        if (this._reconnection && !this.skipReconnect) {
+            this.reconnect();
+        }
+    }
+    /**
+     * Attempt a reconnection.
+     *
+     * @private
+     */
+    reconnect() {
+        if (this._reconnecting || this.skipReconnect)
+            return this;
+        const self = this;
+        if (this.backoff.attempts >= this._reconnectionAttempts) {
+            debug("reconnect failed");
+            this.backoff.reset();
+            this.emitReserved("reconnect_failed");
+            this._reconnecting = false;
+        }
+        else {
+            const delay = this.backoff.duration();
+            debug("will wait %dms before reconnect attempt", delay);
+            this._reconnecting = true;
+            const timer = this.setTimeoutFn(() => {
+                if (self.skipReconnect)
+                    return;
+                debug("attempting reconnect");
+                this.emitReserved("reconnect_attempt", self.backoff.attempts);
+                // check again for the case socket closed in above events
+                if (self.skipReconnect)
+                    return;
+                self.open((err) => {
+                    if (err) {
+                        debug("reconnect attempt error");
+                        self._reconnecting = false;
+                        self.reconnect();
+                        this.emitReserved("reconnect_error", err);
+                    }
+                    else {
+                        debug("reconnect success");
+                        self.onreconnect();
+                    }
+                });
+            }, delay);
+            if (this.opts.autoUnref) {
+                timer.unref();
+            }
+            this.subs.push(function subDestroy() {
+                clearTimeout(timer);
+            });
+        }
+    }
+    /**
+     * Called upon successful reconnect.
+     *
+     * @private
+     */
+    onreconnect() {
+        const attempt = this.backoff.attempts;
+        this._reconnecting = false;
+        this.backoff.reset();
+        this.emitReserved("reconnect", attempt);
+    }
+}
+exports.Manager = Manager;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/on.js":
+/*!***************************************************!*\
+  !*** ./node_modules/socket.io-client/build/on.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.on = void 0;
+function on(obj, ev, fn) {
+    obj.on(ev, fn);
+    return function subDestroy() {
+        obj.off(ev, fn);
+    };
+}
+exports.on = on;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/socket.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/socket.io-client/build/socket.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Socket = void 0;
+const socket_io_parser_1 = __webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-parser/dist/index.js");
+const on_1 = __webpack_require__(/*! ./on */ "./node_modules/socket.io-client/build/on.js");
+const typed_events_1 = __webpack_require__(/*! ./typed-events */ "./node_modules/socket.io-client/build/typed-events.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("socket.io-client:socket");
+/**
+ * Internal events.
+ * These events can't be emitted by the user.
+ */
+const RESERVED_EVENTS = Object.freeze({
+    connect: 1,
+    connect_error: 1,
+    disconnect: 1,
+    disconnecting: 1,
+    // EventEmitter reserved events: https://nodejs.org/api/events.html#events_event_newlistener
+    newListener: 1,
+    removeListener: 1,
+});
+class Socket extends typed_events_1.StrictEventEmitter {
+    /**
+     * `Socket` constructor.
+     *
+     * @public
+     */
+    constructor(io, nsp, opts) {
+        super();
+        this.connected = false;
+        this.disconnected = true;
+        this.receiveBuffer = [];
+        this.sendBuffer = [];
+        this.ids = 0;
+        this.acks = {};
+        this.flags = {};
+        this.io = io;
+        this.nsp = nsp;
+        if (opts && opts.auth) {
+            this.auth = opts.auth;
+        }
+        if (this.io._autoConnect)
+            this.open();
+    }
+    /**
+     * Subscribe to open, close and packet events
+     *
+     * @private
+     */
+    subEvents() {
+        if (this.subs)
+            return;
+        const io = this.io;
+        this.subs = [
+            (0, on_1.on)(io, "open", this.onopen.bind(this)),
+            (0, on_1.on)(io, "packet", this.onpacket.bind(this)),
+            (0, on_1.on)(io, "error", this.onerror.bind(this)),
+            (0, on_1.on)(io, "close", this.onclose.bind(this)),
+        ];
+    }
+    /**
+     * Whether the Socket will try to reconnect when its Manager connects or reconnects
+     */
+    get active() {
+        return !!this.subs;
+    }
+    /**
+     * "Opens" the socket.
+     *
+     * @public
+     */
+    connect() {
+        if (this.connected)
+            return this;
+        this.subEvents();
+        if (!this.io["_reconnecting"])
+            this.io.open(); // ensure open
+        if ("open" === this.io._readyState)
+            this.onopen();
+        return this;
+    }
+    /**
+     * Alias for connect()
+     */
+    open() {
+        return this.connect();
+    }
+    /**
+     * Sends a `message` event.
+     *
+     * @return self
+     * @public
+     */
+    send(...args) {
+        args.unshift("message");
+        this.emit.apply(this, args);
+        return this;
+    }
+    /**
+     * Override `emit`.
+     * If the event is in `events`, it's emitted normally.
+     *
+     * @return self
+     * @public
+     */
+    emit(ev, ...args) {
+        if (RESERVED_EVENTS.hasOwnProperty(ev)) {
+            throw new Error('"' + ev + '" is a reserved event name');
+        }
+        args.unshift(ev);
+        const packet = {
+            type: socket_io_parser_1.PacketType.EVENT,
+            data: args,
+        };
+        packet.options = {};
+        packet.options.compress = this.flags.compress !== false;
+        // event ack callback
+        if ("function" === typeof args[args.length - 1]) {
+            debug("emitting packet with ack id %d", this.ids);
+            this.acks[this.ids] = args.pop();
+            packet.id = this.ids++;
+        }
+        const isTransportWritable = this.io.engine &&
+            this.io.engine.transport &&
+            this.io.engine.transport.writable;
+        const discardPacket = this.flags.volatile && (!isTransportWritable || !this.connected);
+        if (discardPacket) {
+            debug("discard packet as the transport is not currently writable");
+        }
+        else if (this.connected) {
+            this.packet(packet);
+        }
+        else {
+            this.sendBuffer.push(packet);
+        }
+        this.flags = {};
+        return this;
+    }
+    /**
+     * Sends a packet.
+     *
+     * @param packet
+     * @private
+     */
+    packet(packet) {
+        packet.nsp = this.nsp;
+        this.io._packet(packet);
+    }
+    /**
+     * Called upon engine `open`.
+     *
+     * @private
+     */
+    onopen() {
+        debug("transport is open - connecting");
+        if (typeof this.auth == "function") {
+            this.auth((data) => {
+                this.packet({ type: socket_io_parser_1.PacketType.CONNECT, data });
+            });
+        }
+        else {
+            this.packet({ type: socket_io_parser_1.PacketType.CONNECT, data: this.auth });
+        }
+    }
+    /**
+     * Called upon engine or manager `error`.
+     *
+     * @param err
+     * @private
+     */
+    onerror(err) {
+        if (!this.connected) {
+            this.emitReserved("connect_error", err);
+        }
+    }
+    /**
+     * Called upon engine `close`.
+     *
+     * @param reason
+     * @private
+     */
+    onclose(reason) {
+        debug("close (%s)", reason);
+        this.connected = false;
+        this.disconnected = true;
+        delete this.id;
+        this.emitReserved("disconnect", reason);
+    }
+    /**
+     * Called with socket packet.
+     *
+     * @param packet
+     * @private
+     */
+    onpacket(packet) {
+        const sameNamespace = packet.nsp === this.nsp;
+        if (!sameNamespace)
+            return;
+        switch (packet.type) {
+            case socket_io_parser_1.PacketType.CONNECT:
+                if (packet.data && packet.data.sid) {
+                    const id = packet.data.sid;
+                    this.onconnect(id);
+                }
+                else {
+                    this.emitReserved("connect_error", new Error("It seems you are trying to reach a Socket.IO server in v2.x with a v3.x client, but they are not compatible (more information here: https://socket.io/docs/v3/migrating-from-2-x-to-3-0/)"));
+                }
+                break;
+            case socket_io_parser_1.PacketType.EVENT:
+                this.onevent(packet);
+                break;
+            case socket_io_parser_1.PacketType.BINARY_EVENT:
+                this.onevent(packet);
+                break;
+            case socket_io_parser_1.PacketType.ACK:
+                this.onack(packet);
+                break;
+            case socket_io_parser_1.PacketType.BINARY_ACK:
+                this.onack(packet);
+                break;
+            case socket_io_parser_1.PacketType.DISCONNECT:
+                this.ondisconnect();
+                break;
+            case socket_io_parser_1.PacketType.CONNECT_ERROR:
+                const err = new Error(packet.data.message);
+                // @ts-ignore
+                err.data = packet.data.data;
+                this.emitReserved("connect_error", err);
+                break;
+        }
+    }
+    /**
+     * Called upon a server event.
+     *
+     * @param packet
+     * @private
+     */
+    onevent(packet) {
+        const args = packet.data || [];
+        debug("emitting event %j", args);
+        if (null != packet.id) {
+            debug("attaching ack callback to event");
+            args.push(this.ack(packet.id));
+        }
+        if (this.connected) {
+            this.emitEvent(args);
+        }
+        else {
+            this.receiveBuffer.push(Object.freeze(args));
+        }
+    }
+    emitEvent(args) {
+        if (this._anyListeners && this._anyListeners.length) {
+            const listeners = this._anyListeners.slice();
+            for (const listener of listeners) {
+                listener.apply(this, args);
+            }
+        }
+        super.emit.apply(this, args);
+    }
+    /**
+     * Produces an ack callback to emit with an event.
+     *
+     * @private
+     */
+    ack(id) {
+        const self = this;
+        let sent = false;
+        return function (...args) {
+            // prevent double callbacks
+            if (sent)
+                return;
+            sent = true;
+            debug("sending ack %j", args);
+            self.packet({
+                type: socket_io_parser_1.PacketType.ACK,
+                id: id,
+                data: args,
+            });
+        };
+    }
+    /**
+     * Called upon a server acknowlegement.
+     *
+     * @param packet
+     * @private
+     */
+    onack(packet) {
+        const ack = this.acks[packet.id];
+        if ("function" === typeof ack) {
+            debug("calling ack %s with %j", packet.id, packet.data);
+            ack.apply(this, packet.data);
+            delete this.acks[packet.id];
+        }
+        else {
+            debug("bad ack %s", packet.id);
+        }
+    }
+    /**
+     * Called upon server connect.
+     *
+     * @private
+     */
+    onconnect(id) {
+        debug("socket connected with id %s", id);
+        this.id = id;
+        this.connected = true;
+        this.disconnected = false;
+        this.emitBuffered();
+        this.emitReserved("connect");
+    }
+    /**
+     * Emit buffered events (received and emitted).
+     *
+     * @private
+     */
+    emitBuffered() {
+        this.receiveBuffer.forEach((args) => this.emitEvent(args));
+        this.receiveBuffer = [];
+        this.sendBuffer.forEach((packet) => this.packet(packet));
+        this.sendBuffer = [];
+    }
+    /**
+     * Called upon server disconnect.
+     *
+     * @private
+     */
+    ondisconnect() {
+        debug("server disconnect (%s)", this.nsp);
+        this.destroy();
+        this.onclose("io server disconnect");
+    }
+    /**
+     * Called upon forced client/server side disconnections,
+     * this method ensures the manager stops tracking us and
+     * that reconnections don't get triggered for this.
+     *
+     * @private
+     */
+    destroy() {
+        if (this.subs) {
+            // clean subscriptions to avoid reconnections
+            this.subs.forEach((subDestroy) => subDestroy());
+            this.subs = undefined;
+        }
+        this.io["_destroy"](this);
+    }
+    /**
+     * Disconnects the socket manually.
+     *
+     * @return self
+     * @public
+     */
+    disconnect() {
+        if (this.connected) {
+            debug("performing disconnect (%s)", this.nsp);
+            this.packet({ type: socket_io_parser_1.PacketType.DISCONNECT });
+        }
+        // remove socket from pool
+        this.destroy();
+        if (this.connected) {
+            // fire events
+            this.onclose("io client disconnect");
+        }
+        return this;
+    }
+    /**
+     * Alias for disconnect()
+     *
+     * @return self
+     * @public
+     */
+    close() {
+        return this.disconnect();
+    }
+    /**
+     * Sets the compress flag.
+     *
+     * @param compress - if `true`, compresses the sending data
+     * @return self
+     * @public
+     */
+    compress(compress) {
+        this.flags.compress = compress;
+        return this;
+    }
+    /**
+     * Sets a modifier for a subsequent event emission that the event message will be dropped when this socket is not
+     * ready to send messages.
+     *
+     * @returns self
+     * @public
+     */
+    get volatile() {
+        this.flags.volatile = true;
+        return this;
+    }
+    /**
+     * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+     * callback.
+     *
+     * @param listener
+     * @public
+     */
+    onAny(listener) {
+        this._anyListeners = this._anyListeners || [];
+        this._anyListeners.push(listener);
+        return this;
+    }
+    /**
+     * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+     * callback. The listener is added to the beginning of the listeners array.
+     *
+     * @param listener
+     * @public
+     */
+    prependAny(listener) {
+        this._anyListeners = this._anyListeners || [];
+        this._anyListeners.unshift(listener);
+        return this;
+    }
+    /**
+     * Removes the listener that will be fired when any event is emitted.
+     *
+     * @param listener
+     * @public
+     */
+    offAny(listener) {
+        if (!this._anyListeners) {
+            return this;
+        }
+        if (listener) {
+            const listeners = this._anyListeners;
+            for (let i = 0; i < listeners.length; i++) {
+                if (listener === listeners[i]) {
+                    listeners.splice(i, 1);
+                    return this;
+                }
+            }
+        }
+        else {
+            this._anyListeners = [];
+        }
+        return this;
+    }
+    /**
+     * Returns an array of listeners that are listening for any event that is specified. This array can be manipulated,
+     * e.g. to remove listeners.
+     *
+     * @public
+     */
+    listenersAny() {
+        return this._anyListeners || [];
+    }
+}
+exports.Socket = Socket;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/typed-events.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/socket.io-client/build/typed-events.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.StrictEventEmitter = void 0;
+const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
+/**
+ * Strictly typed version of an `EventEmitter`. A `TypedEventEmitter` takes type
+ * parameters for mappings of event names to event data types, and strictly
+ * types method calls to the `EventEmitter` according to these event maps.
+ *
+ * @typeParam ListenEvents - `EventsMap` of user-defined events that can be
+ * listened to with `on` or `once`
+ * @typeParam EmitEvents - `EventsMap` of user-defined events that can be
+ * emitted with `emit`
+ * @typeParam ReservedEvents - `EventsMap` of reserved events, that can be
+ * emitted by socket.io with `emitReserved`, and can be listened to with
+ * `listen`.
+ */
+class StrictEventEmitter extends Emitter {
+    /**
+     * Adds the `listener` function as an event listener for `ev`.
+     *
+     * @param ev Name of the event
+     * @param listener Callback function
+     */
+    on(ev, listener) {
+        super.on(ev, listener);
+        return this;
+    }
+    /**
+     * Adds a one-time `listener` function as an event listener for `ev`.
+     *
+     * @param ev Name of the event
+     * @param listener Callback function
+     */
+    once(ev, listener) {
+        super.once(ev, listener);
+        return this;
+    }
+    /**
+     * Emits an event.
+     *
+     * @param ev Name of the event
+     * @param args Values to send to listeners of this event
+     */
+    emit(ev, ...args) {
+        super.emit(ev, ...args);
+        return this;
+    }
+    /**
+     * Emits a reserved event.
+     *
+     * This method is `protected`, so that only a class extending
+     * `StrictEventEmitter` can emit its own reserved events.
+     *
+     * @param ev Reserved event name
+     * @param args Arguments to emit along with the event
+     */
+    emitReserved(ev, ...args) {
+        super.emit(ev, ...args);
+        return this;
+    }
+    /**
+     * Returns the listeners listening to an event.
+     *
+     * @param event Event name
+     * @returns Array of listeners subscribed to `event`
+     */
+    listeners(event) {
+        return super.listeners(event);
+    }
+}
+exports.StrictEventEmitter = StrictEventEmitter;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/url.js":
+/*!****************************************************!*\
+  !*** ./node_modules/socket.io-client/build/url.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.url = void 0;
+const parseuri = __webpack_require__(/*! parseuri */ "./node_modules/parseuri/index.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("socket.io-client:url");
+/**
+ * URL parser.
+ *
+ * @param uri - url
+ * @param path - the request path of the connection
+ * @param loc - An object meant to mimic window.location.
+ *        Defaults to window.location.
+ * @public
+ */
+function url(uri, path = "", loc) {
+    let obj = uri;
+    // default to window.location
+    loc = loc || (typeof location !== "undefined" && location);
+    if (null == uri)
+        uri = loc.protocol + "//" + loc.host;
+    // relative path support
+    if (typeof uri === "string") {
+        if ("/" === uri.charAt(0)) {
+            if ("/" === uri.charAt(1)) {
+                uri = loc.protocol + uri;
+            }
+            else {
+                uri = loc.host + uri;
+            }
+        }
+        if (!/^(https?|wss?):\/\//.test(uri)) {
+            debug("protocol-less url %s", uri);
+            if ("undefined" !== typeof loc) {
+                uri = loc.protocol + "//" + uri;
+            }
+            else {
+                uri = "https://" + uri;
+            }
+        }
+        // parse
+        debug("parse %s", uri);
+        obj = parseuri(uri);
+    }
+    // make sure we treat `localhost:80` and `localhost` equally
+    if (!obj.port) {
+        if (/^(http|ws)$/.test(obj.protocol)) {
+            obj.port = "80";
+        }
+        else if (/^(http|ws)s$/.test(obj.protocol)) {
+            obj.port = "443";
+        }
+    }
+    obj.path = obj.path || "/";
+    const ipv6 = obj.host.indexOf(":") !== -1;
+    const host = ipv6 ? "[" + obj.host + "]" : obj.host;
+    // define unique id
+    obj.id = obj.protocol + "://" + host + ":" + obj.port + path;
+    // define href
+    obj.href =
+        obj.protocol +
+            "://" +
+            host +
+            (loc && loc.port === obj.port ? "" : ":" + obj.port);
+    return obj;
+}
+exports.url = url;
+
 
 /***/ })
 

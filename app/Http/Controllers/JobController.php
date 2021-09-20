@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
@@ -78,8 +79,21 @@ class JobController extends Controller
      * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+
+    public function changeStatus(Request $request){
+        $job = Job::where('id', $request->input('id'))->first();
+        $job->status = $request->input('status');
+        if($request->input('status') == 1){
+            $job->user_id = Auth::user()->id;
+        }
+        $job->save();
+        return(Auth::user());
+    }
+
+    public function delete(Request $request)
     {
-        //
+        $job = Job::where('id', $request->input('id'))->first();
+        $job->delete();
+        return("Deleted");
     }
 }

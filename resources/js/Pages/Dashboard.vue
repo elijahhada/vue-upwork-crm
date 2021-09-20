@@ -1,9 +1,12 @@
 <template>
     <app-layout>
-        <div class="p-4 mx-auto">
-            <div class="flex flex-col space-y-4">
-                <job-card class="w-8/12 py-7 px-8 border" v-for="job in jobs.data"
-                    :key="job.id"
+            <dash-header></dash-header>
+            <div class="w-full ">
+                    <p class="text-2xl font-bold">Find {{data.length}} jobs</p>
+            </div>
+            <div class="flex flex-col space-y-4" v-if="!isReloading">
+                <job-card class="w-8/12 py-7 px-8 border" v-for="job in data" :key="job.id"
+                    :id="job.id"
                     :title="job.title"
                     :excerpt="job.excerpt"
                     :score="job.client_score"
@@ -22,15 +25,16 @@
                     :hireRate="job.client_hire_rate"
                     :feedbacksCount="job.client_reviews_count"
                     :jobsPosted="job.client_jobs_posted"
+                    :jobStatus="job.status"
                 ></job-card>
             </div>
-        </div>
     </app-layout>
 </template>
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import JobCard from "../Components/Jobs/JobCard";
+    import DashHeader from "../Components/DashboardHeader";
 
     export default {
         props: {
@@ -39,9 +43,77 @@
                 required: true,
             }
         },
+        data(){
+            return{
+                data: [],
+                isReloading: false
+            }
+        },
         components: {
             JobCard,
             AppLayout,
+            DashHeader,
         },
+        mounted() {
+            console.log(this.jobs);
+            this.data = this.jobs.data;
+            socket.emit('test', 'FFFFFFF');
+            this.jobEventListener();
+        },
+        methods: {
+            jobEventListener(){
+                socket.on('jobEventMessage', ({id, action}) => {
+                    console.log('Данные получены');
+                    this.isReloading = true;
+                    // this.data.forEach(function(item, i, arr) {
+                    //     if(item.id == id){
+                    //         console.log('aboba');
+                    //         switch (action){
+                    //             case 'delete':
+                    //             case 'book':
+                    //                 unset(this.data[item]);
+                    //                 break;
+                    //             case 'think':
+                    //                 item.status = 2;
+                    //         }
+                    //     };
+                    // })
+                    // const currentItem = this.data.filter((obj) => {
+                    //     const [item] = Object.entries(obj);
+                    //     return item.id === id;
+                    // });
+                    var index = this.data.findIndex(p => p.id == id);
+                    console.log(index);
+                    console.log(this.data[index])
+                    console.log(action);
+                    // setTimeout(() =>{
+                    //     switch(action){
+                    //         case 'delete':
+                    //         case 'book':
+                    //             this.data.splice(index, 1);
+                    //             break;
+                    //         case 'think':
+                    //             this.data[index].status = 2;
+                    //             break;
+                    //     }
+                    //     this.isReloading = false;
+                    // }, 30);
+                    switch(action){
+                            case 'delete':
+                            case 'book':
+                                this.data.splice(index, 1);
+                                break;
+                            case 'think':
+                                var currentItem = this.data[index];
+                                currentItem.status = 2;
+                                this.$set(this.data, index, currentItem);
+                                break;
+                        }
+                    setTimeout(() =>{
+                        this.isReloading = false;
+                    }, 10)
+                })
+            }
+        }
     }
 </script>
