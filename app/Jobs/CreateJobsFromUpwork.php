@@ -79,10 +79,8 @@ class CreateJobsFromUpwork implements ShouldQueue
 
             foreach ($jobContents as $index => $job) {
                 $jobProfile = (new UpworkJobsProfileService())->getJobProfiles($job->upwork_id);
-                if (isset($jobProfiles->profile)) {
-                    foreach ($jobProfiles->profile as $item) {
-                        $job->setExtraFields($jobProfile);
-                    }
+                if (isset($jobProfile->profile)) {
+                    $job->setExtraFields($jobProfile->profile);
                 } else {
                     Log::info(json_encode($jobProfile));
                 }
