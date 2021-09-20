@@ -66,6 +66,13 @@ class UpworkJob implements Arrayable
             if ($index === 'client') {
                 continue;
             }
+            if ($index === 'date_created') {
+                /**
+                 * @var Carbon $item
+                 */
+                $data[$index] = $item->toISOString();
+                continue;
+            }
 
             $data[$index] = $item;
         }

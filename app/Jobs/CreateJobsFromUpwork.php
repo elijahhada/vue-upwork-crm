@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Actions\Upwork\CalculateClientScore;
+use App\Models\Category;
 use App\Models\Country;
 use App\Models\Job;
 use App\Models\UpworkJob;
@@ -55,41 +56,42 @@ class CreateJobsFromUpwork implements ShouldQueue
 
             $jobContents = [];
             $countries = [];
-            $upworkIds = [];
+            $categories = [];
 
             foreach ($jobsContainer->jobs as $upworkJob) {
                 $upworkJob = new UpworkJob($upworkJob);
 
                 $jobContents[$upworkJob->upwork_id] = $upworkJob;
 
-                $upworkIds[] = $upworkJob->upwork_id;
-
                 if ($upworkJob->client->country) {
                     $countries[] = [
                         'title' => $upworkJob->client->country,
                     ];
                 }
-            }
 
-            foreach (array_chunk($upworkIds, 20) as $chunk) {
-                sleep(10);
-                $jobProfiles = (new UpworkJobsProfileService())->getJobProfiles(implode(';', $chunk));
-
-                if (isset($jobProfiles->profiles->profile)) {
-                    foreach ($jobProfiles->profiles->profile as $item) {
-                        $jobContents[$item->ciphertext]->setExtraFields($item);
-                    }
-                } else {
-                    Log::info(json_encode($jobProfiles));
+                if ($upworkJob->subcategory2) {
+                    $categories[] = [
+                        'title' => $upworkJob->subcategory2,
+                        'upwork_id' => 1,
+                    ];
                 }
             }
 
             foreach ($jobContents as $index => $job) {
+                $jobProfile = (new UpworkJobsProfileService())->getJobProfiles($job->upwork_id);
+                if (isset($jobProfiles->profile)) {
+                    foreach ($jobProfiles->profile as $item) {
+                        $job->setExtraFields($jobProfile);
+                    }
+                } else {
+                    Log::info(json_encode($jobProfiles));
+                }
                 $job->calculateClientScore();
                 $jobContents[$index] = $job->toArray();
+                sleep(2);
             }
 
-            $jobsFromDB = Job::query()->whereIn('upwork_id', $upworkIds)->get();
+            $jobsFromDB = Job::query()->whereIn('upwork_id', collect($jobContents)->flatten()->pluck('upwork_id'))->get();
 
             if ($jobsFromDB->isEmpty()) {
                 $offset += 1;
@@ -97,10 +99,9 @@ class CreateJobsFromUpwork implements ShouldQueue
                 $flag = true;
             }
 
-            Log::info($jobContents);
-
             Job::upsert($jobContents, ['upwork_id']);
             Country::upsert($countries, ['title']);
+            Category::upsert($categories, ['title']);
             sleep(10);
         };
     }
