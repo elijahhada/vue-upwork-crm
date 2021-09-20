@@ -84,7 +84,7 @@ class CreateJobsFromUpwork implements ShouldQueue
                         $job->setExtraFields($jobProfile);
                     }
                 } else {
-                    Log::info(json_encode($jobProfiles));
+                    Log::info(json_encode($jobProfile));
                 }
                 $job->calculateClientScore();
                 $jobContents[$index] = $job->toArray();
