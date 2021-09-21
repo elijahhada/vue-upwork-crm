@@ -18,7 +18,6 @@ class UpworkJob implements Arrayable
     public $budget;
     public $duration;
     public $workload;
-    public $job_status;
     public $status;
     public $client;
     public $date_created;
