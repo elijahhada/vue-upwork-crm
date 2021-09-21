@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\JobDeleted;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -93,7 +94,8 @@ class JobController extends Controller
     public function delete(Request $request)
     {
         $job = Job::where('id', $request->input('id'))->first();
+
         $job->delete();
-        return("Deleted");
+        event(new JobDeleted($job));
     }
 }

@@ -16,12 +16,10 @@
             </p>
         </div>
         <div class="w-11/12 mb-8 flex justify-start items-center">
-            <p class=" bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4"><span
-                    class="py-2 px-3">Project Management</span></p>
-            <p class="  bg-gray-200 text-black rounded py-3 px-2 font-normal mx-4"><span
-                    class="py-2 px-3">Bandits</span></p>
-            <p class=" bg-gray-200 text-black rounded py-3 px-2 font-normal mx-4"><span
-                    class="py-2 px-3">Data Analytics</span></p>
+            <p
+                v-for="cat in categoryArr"
+                class=" bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4"
+            ><span class="py-2 px-3">{{cat.trim()}}</span></p>
         </div>
         <div class="w-11/12 mb-8 flex nowrap justify-start items-start text-md leading-6 ">
             <div class="w-4/12 flex flex-col justify-start items-start">
@@ -39,8 +37,8 @@
             </div>
             <div class="w-4/12 flex flex-col justify-start items-start">
                 <p><span class="font-bold">Spent:</span> {{ totalCharge }}</p>
-                <p><span class="font-bold">Hours:</span> 1031</p>
-                <p><span class="font-bold">Avg Rate (based on last 6 month):</span> $22.86/h</p>
+                <p><span class="font-bold">Hours:</span> {{duration}}</p>
+                <p><span class="font-bold">Avg Rate (based on last 6 month):</span> {{avgRate ? '$'+avgRate+'/h' : ''}}</p>
                 <p><span class="font-bold">Member since:</span> April 24, 2015</p>
             </div>
 
@@ -138,8 +136,16 @@ export default {
             required: true,
             type: String,
         },
+        avgRate: {
+            required: false,
+            type: String,
+        },
         hireRate: {
             required: true,
+            type: String,
+        },
+        duration: {
+            required: false,
             type: String,
         },
         feedbacksCount: {
@@ -156,6 +162,7 @@ export default {
     },
     data() {
         return {
+            categoryArr: this.category.split(','),
             truncatedLength: 300,
             truncated: true,
             isThinking: false,
@@ -184,6 +191,9 @@ export default {
                 });
         },
         deleteJob(){
+            this.$emit('delete', {
+                id: this.id
+            })
             axios
                 .post('/jobs/delete', {id: this.id})
                 .then(response => {

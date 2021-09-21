@@ -5,7 +5,7 @@
                     <p class="text-2xl font-bold">Find {{data.length}} jobs</p>
             </div>
             <div class="flex flex-col space-y-4" v-if="!isReloading">
-                <job-card class="w-8/12 py-7 px-8 border" v-for="job in data" :key="job.id"
+                <job-card class="w-8/12 py-7 px-8 border" v-for="job in data" :key="job.id" @delete="onDelete"
                     :id="job.id"
                     :title="job.title"
                     :excerpt="job.excerpt"
@@ -26,6 +26,8 @@
                     :feedbacksCount="job.client_reviews_count"
                     :jobsPosted="job.client_jobs_posted"
                     :jobStatus="job.status"
+                    :duration="job.duration"
+                    :avgRate="job.client_avg_rate"
                 ></job-card>
             </div>
     </app-layout>
@@ -55,12 +57,21 @@
             DashHeader,
         },
         mounted() {
-            console.log(this.jobs);
             this.data = this.jobs.data;
             socket.emit('test', 'FFFFFFF');
             this.jobEventListener();
+            socket.on('job-delete:App\\Events\\JobDeleted', function (data) {
+                this.data = data.result
+            }.bind(thid))
         },
         methods: {
+            onDelete(d) {
+                this.data.forEach((item, index) => {
+                    if(item.id == d.id) {
+                        this.data.splice(index, 1)
+                    }
+                })
+            },
             jobEventListener(){
                 socket.on('jobEventMessage', ({id, action}) => {
                     console.log('Данные получены');

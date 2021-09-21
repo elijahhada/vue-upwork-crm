@@ -32,6 +32,8 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//    Route::get('/dashboard/socket-event', [DashboardController::class, 'deleteJob']);
+
     Route::resource('jobs', JobsController::class);
     Route::post('/jobs/change-status', [JobController::class, 'changeStatus'])->name('jobs.change-status');
     Route::post('/jobs/delete', [JobController::class, 'delete'])->name('jobs.delete');

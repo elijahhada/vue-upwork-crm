@@ -2,10 +2,21 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const cors = require('cors');
+var Redis = require('ioredis');
+var redis = new Redis();
+
+redis.subscribe('job-delete');
+redis.on('message', function (channel, message) {
+    console.log('Message receved: '+ message)
+    console.log('Channel: '+ channel)
+    message = JSON.parse(message)
+    io.emit(channel + ':' +message.event, message.data)
+})
 
 const app = express();
 const server = http.createServer(app);
-const io = require('socket.io')(server);
+const httpio = http.Server();
+const io = require('socket.io')(httpio);
 
 app.use(express.static(path.join(__dirname, 'public')));
 const bodyParser = require('body-parser');
