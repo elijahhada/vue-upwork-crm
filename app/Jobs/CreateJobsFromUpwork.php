@@ -50,7 +50,7 @@ class CreateJobsFromUpwork implements ShouldQueue
 
         while (!$flag) {
             $jobsContainer = $service
-                ->setCount(100)
+                ->setCount(5)
                 ->setOffset($offset)
                 ->getJobs();
 
@@ -85,7 +85,7 @@ class CreateJobsFromUpwork implements ShouldQueue
                     Log::info(json_encode($jobProfile));
                 }
                 $job->calculateClientScore();
-                $jobContents[$index] = [$job->toArray()];
+                $jobContents[$index] = $job->toArray();
                 sleep(2);
             }
 
@@ -96,6 +96,8 @@ class CreateJobsFromUpwork implements ShouldQueue
             } else {
                 $flag = true;
             }
+
+            Log::info($jobContents);
 
             Job::upsert($jobContents, ['upwork_id']);
             Country::upsert($countries, ['title']);
