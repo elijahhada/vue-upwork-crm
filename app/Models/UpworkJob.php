@@ -78,6 +78,11 @@ class UpworkJob implements Arrayable
         }
 
         foreach (get_object_vars($this->client) as $index => $item) {
+            if ($index === 'assignments') {
+                $data['client_assignments'] = json_encode($item);
+                continue;
+            }
+
             $data['client_'.$index] = $item;
         }
 
