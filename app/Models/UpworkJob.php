@@ -69,7 +69,7 @@ class UpworkJob implements Arrayable
                 /**
                  * @var Carbon $item
                  */
-                $data[$index] = $item->toISOString();
+                $data[$index] = $item->format('Y-m-d H:i:s');
                 continue;
             }
 

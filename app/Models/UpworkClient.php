@@ -59,7 +59,7 @@ class UpworkClient
             }
         }
 
-        return number_format(collect($avgCharges)->avg(), 2);
+        return number_format(collect($avgCharges)->avg(), 2, '.', '');
     }
 
     private function calculateAvgCharge()
@@ -74,7 +74,7 @@ class UpworkClient
             }
         }
 
-        return number_format(collect($avgCharges)->avg(), 2);
+        return number_format(collect($avgCharges)->avg(), 2, '.', '');
     }
 
     /**
