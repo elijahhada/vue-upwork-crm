@@ -1,0 +1,3061 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Upwork</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/Favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .container-template {
+            /*max-width: 1980px;*/
+            max-width: 100vw;
+            margin: 0 auto;
+        }
+
+        button:hover {
+            transition: all .3s linear;
+        }
+
+        a:hover {
+            transition: all .3s linear;
+        }
+
+        html {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+        }
+
+        .day-to-day::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 0;
+            scrollbar-width: none;
+            /*IE10+*/
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+            display: none;
+        }
+
+        .calendar::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 0;
+            scrollbar-width: none;
+            /*IE10+*/
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+            display: none;
+        }
+
+        .topmenu-width {
+            /*max-width: 1980px;*/
+            max-width: 100vw;
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+        }
+
+        #take {
+            width: 80vw;
+            max-width: 1200px;
+            max-height: 88vh;
+            height: 100%;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .textarea-form {
+            min-height: 405px;
+            overflow-y: auto;
+        }
+
+        .drop-menu-technologies {
+            max-height: 345px;
+        }
+
+        .parent-tech {
+            min-height: 45px;
+        }
+
+        @keyframes width0 {
+            0% {
+                width: content-box;
+
+            }
+            100% {
+                width: 0px;
+            }
+
+        }
+
+        @keyframes width100 {
+            0% {
+                width: 0px
+
+            }
+            100% {
+                width: content-box;
+            }
+
+        }
+
+        @media (min-width: 2000px) {
+            .calendar-date {
+                width: inherit;
+                margin-left: 6%;
+            }
+
+            .open-big-calendar {
+                margin-left: 5.7%;
+            }
+        }
+
+        @media (max-width: 1990px) {
+            .calendar-date {
+                width: inherit;
+                margin-left: 5%;
+            }
+
+            .open-big-calendar {
+                margin-left: 4.2%;
+            }
+        }
+
+        @media (max-width: 1535px) {
+            .calendar-date {
+                width: inherit;
+                margin-left: 7.7%;
+            }
+
+            .open-big-calendar {
+                margin-left: 7.2%;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            .calendar-date {
+                width: inherit;
+                margin-left: 7.2%;
+            }
+
+            .open-big-calendar {
+                margin-left: 6.4%;
+            }
+        }
+
+        .green-500, .text-green-500 {
+            color: #4EA52F;
+        }
+
+        .bg-green-500 {
+            background: #4EA52F;
+        }
+
+        .hover\:bg-green-500:hover {
+            background: #4EA52F;
+        }
+
+        .hover\:bg-green-600:hover {
+            background: #2F7616;
+        }
+
+        .hover\:bg-red-700:hover {
+            background: #CE3737;
+        }
+
+        .bg-red-700 {
+            background: #FF4F4F;
+        }
+
+        .create-kid {
+            min-width: 120px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="relative overflow-x-hidden container-template">
+    <section class="container min-w-full mx-auto">
+        <div class="container min-w-full flex justify-between">
+            <div class="w-9/12 py-4 pl-6 pr-4 2xl:mr-0 mr-8 " style="padding-left: 5vw;">
+                <div class="w-full flex justify-between fixed top-0 left-0  z-30 bg-white pb-2 topmenu topmenu-width"
+                     style="padding-left: 5vw;">
+                    <div class="w-4/12 flex justify-start items-start ">
+                        <img class="relative mt-2 fill-current text-green-500" src="images/vasterra-logo.svg"
+                             alt="vasterra-logo">
+                        <a href="#"
+                           class="mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500">Jobs</a>
+                        <a href="#"
+                           class="pt-1 mt-2  text-black border-white border-b-4 hover:border-green-500">Lidgens</a>
+
+                    </div>
+                    <div class="w-5/12 flex justify-end items-center mr-9 user-block">
+                        <div class="flex justify-end items-center relative">
+                            <img class="w-12" src="images/user.png" alt="user">
+                            <p class="flex justify-center items-center cursor-pointer link-image">
+                                <span class="ml-2" href="#">Artem</span>
+                                <img class="ml-1 mt-1 cursor-pointer " src="images/arrow-down.svg"
+                                     alt="arrow down">
+                            </p>
+                            <div class="absolute top-10 left-6 w-40 bg-white rounded-2xl shadow-2xl hidden dropdown">
+                                <ul class="p-4">
+                                    <li class="my-4"><a class="border-b-4  border-white hover:border-green-500"
+                                                        href="#">Profile</a></li>
+                                    <li><a class="border-b-4 border-white hover:border-green-500" href="#">Setting
+                                        filteres</a></li>
+                                    <hr class="mt-6 mb-2 min-w-full">
+                                    <li><a class="border-b-4  border-white hover:border-green-500" href="#">Log out</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="w-3/12 last-block"></div>
+                </div>
+                <div class="w-full flex nowrap mb-8 mt-20">
+                    <div class="w-4/12 xl:w-3/12">
+                        <div class="flex justify-start items-start">
+                            <img src="images/star-gold.svg" alt="gold">
+                            <div class="flex flex-col items-start">
+                                <p class="ml-2 font-bold mt-1 ">Artem </p>
+                                <p class="ml-2 mt-2 text-sm flex items-center">
+                                    <span>112</span><span> → </span> <span>75%</span><span> → </span><span>84</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-4/12 xl:w-3/12">
+                        <div class="flex justify-start items-start">
+                            <img src="images/star-silver.svg" alt="silver">
+                            <div class="flex flex-col items-start">
+                                <p class="ml-2 font-bold mt-1 ">Olga </p>
+                                <p class="ml-2 mt-2 text-sm flex items-center">
+                                    <span>87</span><span> → </span> <span>66,7%</span><span> → </span><span>58</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-4/12 xl:w-3/12">
+                        <div class="flex justify-start items-start">
+                            <img src="images/star-bronze.svg" alt="bronze">
+                            <div class="flex flex-col items-start">
+                                <p class="ml-2 font-bold mt-1 ">Stepan </p>
+                                <p class="ml-2 mt-2 text-sm flex items-center p-0">
+                                    <span>57</span><span> → </span> <span>56,1%</span><span> → </span><span>32</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full my-12 flex justify-between items-center nowrap">
+                    <div class="block-kit flex justify-start items-center nowrap w-6/12 flex-shrink ">
+                        <button class="create-kid rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7">
+                            Create
+                            Kit
+                        </button>
+                        <div class="relative">
+                            <div class=" bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ">
+                                <p class="mr-2">Artem</p>
+                                <button class="open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer">
+                                    ...
+                                </button>
+                            </div>
+                            <!--                            <div class="absolute top-10 -left-2 w-28 bg-white rounded-2xl shadow-2xl  dropdown text-right hidden">-->
+                            <!--                                <ul class="p-4">-->
+                            <!--                                    <li class="my-2"><a class="border-b-4 border-white  hover:border-green-500"-->
+                            <!--                                                        href="#">Edit</a></li>-->
+                            <!--                                    <li><a class="border-b-4 border-white  hover:border-green-500" href="#">Show</a>-->
+                            <!--                                    </li>-->
+
+                            <!--                                </ul>-->
+                            <!--                            </div>-->
+                        </div>
+                        <div class="relative">
+                            <div class=" bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ">
+                                <p class="mr-2">Boris</p>
+                                <button class="open-filters py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer">
+                                    ...
+                                </button>
+                            </div>
+                            <!--                            <div class="absolute top-10 -left-2 w-28 bg-white rounded-2xl shadow-2xl  dropdown text-right hidden">-->
+                            <!--                                <ul class="p-4">-->
+                            <!--                                    <li class="my-2"><a class="border-b-4 border-white  hover:border-green-500"-->
+                            <!--                                                        href="#">Edit</a></li>-->
+                            <!--                                    <li><a class="border-b-4 border-white  hover:border-green-500" href="#">Show</a>-->
+                            <!--                                    </li>-->
+
+                            <!--                                </ul>-->
+                            <!--                            </div>-->
+                        </div>
+
+                        <div class="relative">
+                            <div class=" bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ">
+                                <p class="mr-2">Olga</p>
+                                <button class="open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer">
+                                    ...
+                                </button>
+                            </div>
+                            <!--                            <div class="absolute top-10 -left-2 w-28 bg-white rounded-2xl shadow-2xl  dropdown text-right hidden">-->
+                            <!--                                <ul class="p-4">-->
+                            <!--                                    <li class="my-2"><a class="border-b-4 border-white  hover:border-green-500"-->
+                            <!--                                                        href="#">Edit</a></li>-->
+                            <!--                                    <li><a class="border-b-4 border-white  hover:border-green-500" href="#">Show</a>-->
+                            <!--                                    </li>-->
+
+                            <!--                                </ul>-->
+                            <!--                            </div>-->
+                        </div>
+                        <div class="relative">
+                            <div class="bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ">
+                                <p class="mr-2">Petr</p>
+                                <button class="open-filters   py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer ">
+                                    ...
+                                </button>
+                            </div>
+                            <div class="absolute top-10 -left-2 w-28 bg-white rounded-2xl shadow-2xl  dropdown text-right hidden">
+                                <ul class="p-4">
+                                    <li class="my-2"><a class="border-b-4 border-white  hover:border-green-500"
+                                                        href="#">Edit</a></li>
+                                    <li><a class="border-b-4 border-white  hover:border-green-500" href="#">Show</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="parent-search-block flex nowrap w-6/12 flex justify-end flex-grow items-center">
+                        <div class="w-0 overflow-hidden flex justify-between  search-block ">
+                            <input type="text" placeholder="Job id, URL,Title or key word"
+                                   class="w-11/12 search-input  border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300">
+                            <button class=" rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white">
+                                Search
+                            </button>
+                            <!--                            <button class="search-button  rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white">Close-->
+                            <!--                            </button>-->
+                            <p class="ml-4 search-button text-black text-5xl  cursor-pointer hover:text-red-500"
+                               title="Close search panel">×</p>
+                        </div>
+                        <!--                        <img class="cursor-pointer search" src="images/search.svg" alt="search">-->
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                             class="cursor-pointer search" title="Open search panel">
+                            <path id="search-svg" fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M14.618 16.032C13.0243 17.309 11.0422 18.0033 9 18C6.61305 18 4.32387 17.0518 2.63604 15.364C0.948211 13.6761 0 11.3869 0 9C0 6.61305 0.948211 4.32387 2.63604 2.63604C4.32387 0.948211 6.61305 0 9 0C11.3869 0 13.6761 0.948211 15.364 2.63604C17.0518 4.32387 18 6.61305 18 9C18.0033 11.0422 17.309 13.0243 16.032 14.618L24 22.586L22.586 24L14.618 16.032ZM9 2C12.86 2 16 5.14 16 9C16 12.86 12.86 16 9 16C5.14 16 2 12.86 2 9C2 5.14 5.14 2 9 2Z"
+                                  fill="black"/>
+                        </svg>
+
+                    </div>
+                </div>
+                <div class="w-full ">
+                    <p class="text-2xl font-bold">Find 235 jobs</p>
+                </div>
+                <div class="w-full p-7 border border-gray-300 rounded-md my-6 relative">
+                    <!--                    <img class="cursor-pointer absolute top-6 right-6" src="images/close.svg" alt="close">-->
+                    <p class="text-black text-3xl  cursor-pointer hover:text-red-500 absolute top-6 right-6">×</p>
+                    <div class="w-11/12 mb-7 flex justify-between items-center">
+                        <p>
+                            <span class="text-green-500 font-bold text-2xl mr-4  border-b border-gray-300">Article on “BTS Quiz”</span>
+                            <span class="text-black font-bold text-2xl">Score: 85%</span>
+                        </p>
+                        <p>
+                            <span class="text-gray-400 font-normal">Posted: 08.04.2021 10:13:38</span>
+                        </p>
+                    </div>
+                    <div class="w-11/12 mb-5">
+                        <p class="leading-7 text-base font-normal ">
+                            Looking for a written who can write an article on BTS quiz with answers. The article should
+                            be
+                            1000-1200 words long or more. You’ll have to write original content, do not copy the
+                            referenced
+                            article. Please come up with creative titles and headlines for the article. The article
+                            should
+                            be formatted in the following manner: Intro Paragraph - 40 BTS quiz with Answers (In
+                            Multiple
+                            choice) Reference article^ www.buzzfeed.com/jennaguillame,bts
+                        </p>
+                    </div>
+                    <div class="w-11/12 mb-8 flex justify-start items-center">
+                        <p class=" bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4"><span
+                                class="py-2 px-3">Project Management</span></p>
+                        <p class="  bg-gray-200 text-black rounded py-3 px-2 font-normal mx-4"><span
+                                class="py-2 px-3">Bandits</span></p>
+                        <p class=" bg-gray-200 text-black rounded py-3 px-2 font-normal mx-4"><span
+                                class="py-2 px-3">Data Analytics</span></p>
+
+                    </div>
+                    <div class="w-11/12 mb-8 flex nowrap justify-start items-start text-md leading-6 ">
+                        <div class="w-4/12 flex flex-col justify-start items-start">
+                            <p><span class="font-bold">Country:</span> USA</p>
+                            <p><span class="font-bold">Category:</span> Content & Copywriting</p>
+                            <p><span class="font-bold">Payment Verified:</span> Yes</p>
+                            <p><span class="font-bold">Jobs posted:</span> 84</p>
+
+                        </div>
+                        <div class="w-4/12 flex flex-col justify-start items-start">
+                            <p><span class="font-bold">Hires:</span> 82</p>
+                            <p><span class="font-bold">Hire Rate:</span> 98%</p>
+                            <p><span class="font-bold">Total feedbacks:</span> 58</p>
+                            <p><span class="font-bold">Feedbacks score:</span> 5.00</p>
+                        </div>
+                        <div class="w-4/12 flex flex-col justify-start items-start">
+                            <p><span class="font-bold">Spent:</span> $20000</p>
+                            <p><span class="font-bold">Hours:</span> 1031</p>
+                            <p><span class="font-bold">Avg Rate (based on last 6 month):</span> $22.86/h</p>
+                            <p><span class="font-bold">Member since:</span> April 24, 2015</p>
+                        </div>
+
+
+                    </div>
+                    <div class="w-11/12 mb-12">
+                        <p><span
+                                class="text-green-500 text-lg border-b-2  border-green-500 border-dotted cursor-pointer whitespace-nowrap">Show Feedbacks (3)</span>
+                        </p>
+                    </div>
+                    <div class="w-full flex justify-end items-center">
+                        <a href="#"
+                           class="open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7">
+                            Take
+                        </a>
+                        <a href="#"
+                           class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white ">
+                            Think
+                        </a>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30">
+                <div class="w-3/12 2xl:w-2/12  calendar  bg-gray-200 text-white fixed top-0  overflow-y-scroll  max-h-screen  "
+                     style="width: inherit;">
+                    <div class="slick-slider34 ">
+                        <div>
+                            <div class="rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                                <div> 10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                    <p>Sveta</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                    Delete me
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                    To book
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                    <p>Sveta</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                    Delete me
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                    To book
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                    <p>Sveta</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                    Delete me
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                    To book
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                    <p>Sveta</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                    Delete me
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                    To book
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                    <p>Sveta</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                    Delete me
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                    To book
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                    <p>Sveta</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                    Delete me
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                    To book
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                    <p>Sveta</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                    Delete me
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                    To book
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="rounded-lg bg-red-700 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                    <p>Sveta</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                    Delete me
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="rounded-lg bg-green-500 text-white text-base flex justify-between items-start mx-4 my-6 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                                <div>10:00</div>
+                                <div clas="flex flex-col">
+                                    <p>Nikolay</p>
+                                    <p>Elena</p>
+                                </div>
+                                <div>0/67</div>
+                                <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                    To book
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <!--                <img class="cursor-pointer calendar-switcher fixed -ml-6 2xl:-ml-5 bottom-1/2 z-40"-->
+                <!--                     src="images/arrow-right.svg"-->
+                <!--                     alt="arrow-right">-->
+                <svg width="14" height="22" viewBox="0 0 14 22" fill="none"
+                     xmlns="http://www.w3.org/2000/svg"
+                     class="cursor-pointer calendar-switcher fixed -ml-6 2xl:-ml-5 bottom-1/2 z-40">
+                    <path d="M2.08834 21.0515C2.59101 21.0467 3.07408 20.8559 3.44438 20.5159L12.696 12.0406C12.9035 11.8501 13.0692 11.6185 13.1826 11.3606C13.296 11.1026 13.3545 10.8239 13.3545 10.5422C13.3545 10.2604 13.296 9.98176 13.1826 9.72382C13.0692 9.46587 12.9035 9.2343 12.696 9.04376L3.44438 0.568499C3.24897 0.380429 3.01793 0.233334 2.76483 0.13587C2.51174 0.0384068 2.24172 -0.00745915 1.97064 0.000969431C1.69956 0.00939992 1.4329 0.0719552 1.18636 0.184956C0.939809 0.297957 0.718349 0.45912 0.535004 0.65897C0.351659 0.858819 0.210132 1.09331 0.118746 1.34866C0.027361 1.60401 -0.0120372 1.87506 0.00287069 2.14586C0.0177785 2.41666 0.0866911 2.68174 0.205554 2.92552C0.324416 3.16929 0.49083 3.38684 0.695004 3.56535L8.32613 10.5422L0.711955 17.519C0.410086 17.7961 0.198954 18.158 0.106215 18.5571C0.0134763 18.9563 0.0434551 19.3741 0.192224 19.7559C0.340994 20.1377 0.601616 20.4657 0.939952 20.6969C1.27829 20.9281 1.67856 21.0517 2.08834 21.0515Z"
+                          id="right-arrow-55" fill="black"/>
+                </svg>
+
+
+                <div class="fixed top-2 ml-1  w-full z-50 calendar-date">
+                    <button class="rounded rounded-full text-white text-lg py-3 px-6 bg-black bg-opacity-50">18 August
+                    </button>
+                </div>
+                <div class="fixed bottom-2 ml-1 w-full text-black  z-50 calendar-button">
+                    <button class="hover:bg-opacity-100 open-big-calendar rounded rounded-full text-white text-lg py-3 px-6 bg-gray-500 bg-opacity-80">
+                        All calendar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="create-kit" class="w-full bg-white p-8 hidden min-h-screen">
+        <div class="flex justify-between items-center mb-8">
+            <p class="text-2xl text-black font-bold">Create Kit</p>
+            <p class="text-black text-5xl close-kit cursor-pointer hover:text-red-500">×</p>
+            <!--            <img class="close-kit cursor-pointer" src="images/close.svg" alt="close">-->
+
+        </div>
+        <div class="mb-10">
+            <p class="text-lg font-bold text-black mb-3">Countries</p>
+            <div class="flex wrap justify-start items-start">
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    All country
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    USA
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    United Arab Emirates
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 "
+                        title="Show more">
+                    ...
+                </button>
+            </div>
+        </div>
+        <div class="mb-10">
+            <p class="text-lg font-bold text-black mb-3">Categories</p>
+            <div class="flex wrap justify-start items-start">
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    All categories
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Project Management
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    CMS Customization
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 "
+                        title="Show more">
+                    ...
+                </button>
+            </div>
+        </div>
+
+        <div class="mb-10">
+            <p class="text-lg font-bold text-black mb-3">Filters</p>
+            <div class="flex wrap justify-start items-start">
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    All filters
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Project Management
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    CMS Customization
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 "
+                        title="Show more">
+                    ...
+                </button>
+            </div>
+        </div>
+
+        <div class="mb-10">
+            <p class="text-lg font-bold text-black mb-3">Technologies</p>
+            <div class="flex wrap justify-start items-start">
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button font-bold">
+                    PHP
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Laravel
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Zend
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 "
+                        title="Show more">
+                    ...
+                </button>
+            </div>
+        </div>
+
+        <div class="mb-7">
+            <p class="text-lg font-bold text-black mb-3">Exception words</p>
+            <div class="flex wrap justify-start items-start">
+                <button class="cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button">
+                    <p class="mr-2">Word1</p>
+                    <p class="  py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500"
+                       title="Delete word">
+                        ×</p>
+
+                </button>
+                <button class="cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white  flex items-center active-button">
+                    <p class="mr-2">Word2</p>
+                    <p class="  py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500"
+                       title="Delete word">
+                        ×</p>
+                </button>
+                <button class="cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white  flex items-center active-button">
+                    <p class="mr-2">Word3</p>
+                    <p class=" py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500"
+                       title="Delete word">
+                        ×</p>
+                </button>
+            </div>
+
+        </div>
+        <div class="mb-12 flex nowrap">
+            <input type="text" placeholder="New word"
+                   class=" input-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none">
+            <button class="rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-word">+ Add word
+            </button>
+            <button class="rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-word-input hidden mr-4">
+                Save
+            </button>
+            <button class="rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 close-word-input hidden">
+                Close
+            </button>
+        </div>
+
+
+        <div class="flex nowrap mb-12">
+            <input type="text" placeholder="Name kit"
+                   class="input-kit border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none">
+
+            <button class="rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 ">Save Kit</button>
+        </div>
+    </section>
+
+    <section id="big-calendar" class="z-50 hidden">
+        <div class="w-full bg-gray-200 py-6 px-12 text-black z-50 min-h-screen  fixed top-0 left-0 right-0 ">
+            <div class="bg-gray-200 w-12/12 h-12/12 flex flex-col justify-start items-center px-2  relative "
+                 style="max-height: 98vh;">
+                <!--                <img class="absolute right-6 top-6 cursor-pointer close-big-calendar " src="images/close.svg"-->
+                <!--                     alt="close">-->
+                <p class="text-black text-5xl  cursor-pointer hover:text-red-500 absolute right-3 -top-3 cursor-pointer close-big-calendar">
+                    ×</p>
+                <div class="flex flex-row items-center justify-center">
+                    <img class="prev mx-6 cursor-pointer" src="images/calendar-arrow-left.svg" alt="prev">
+                    <p>Неделя 16.08—24.08 </p>
+                    <img class="next mx-6 cursor-pointer" src="images/calendar-arrow-right.svg" alt="next">
+                </div>
+
+                <div class="mt-8 w-full grid grid-cols-7 gap-4 ">
+                    <div class="flex justify-center items-center ">18.08</div>
+                    <div class="flex justify-center items-center ">19.08</div>
+                    <div class="flex justify-center items-center ">20.08</div>
+                    <div class="flex justify-center items-center ">21.08</div>
+                    <div class="flex justify-center items-center ">22.08</div>
+                    <div class="flex justify-center items-center ">23.08</div>
+                    <div class="flex justify-center items-center ">24.08</div>
+                </div>
+                <div class=" day-to-day mt-2 w-full grid grid-cols-7 gap-4  max-h-full overflow-y-auto">
+
+                    <div data-name="day-1" class="overflow-y-visible max-h-full">
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div data-name="day-2" class="overflow-y-visible max-h-full">
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div data-name="day-3" class="overflow-y-visible max-h-full">
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div data-name="day-4" class="overflow-y-visible max-h-full">
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div data-name="day-5" class="overflow-y-visible max-h-full">
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div data-name="day-6" class="overflow-y-visible max-h-full">
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div data-name="day-7" class="overflow-y-visible max-h-full">
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-red-700 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative hover:bg-red-700 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me">
+                                Delete me
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-500 text-white text-xs flex justify-between items-start my-3 pt-3 pb-6 px-3 cursor-pointer to-book  transition-all relative hover:bg-green-600 ">
+                            <div> 10:00</div>
+                            <div clas="flex flex-col">
+                                <p>Nikolay</p>
+                                <p>Elena</p>
+                                <p>Sveta</p>
+                            </div>
+                            <div>0/67</div>
+                            <div class="z-40 hover:shadow-lg hidden bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer book-me">
+                                Book me
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="green-footer-stripe" class="hidden">
+        <div class="z-50 w-full fixed bottom-0 left-0 right-0 bg-green-400 text-white text-base p-8 flex justify-between items-center">
+            <p> За последние 15 минут появилось 28 jobs
+                <button class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mx-7">
+                    Update
+                </button>
+            </p>
+            <img class="cursor-pointer" src="images/close-white.svg" alt="close">
+        </div>
+    </section>
+
+    <section id="manager-filters" class="w-full bg-white p-8  min-h-screen hidden">
+        <div class="flex justify-between items-center mb-8">
+            <p class="text-2xl text-black font-bold">Artem's filters</p>
+            <p class="text-black text-5xl close-manager-filters cursor-pointer hover:text-red-500">×</p>
+            <!--            <img class="close-kit cursor-pointer" src="images/close.svg" alt="close">-->
+
+        </div>
+        <div class="mb-10">
+            <p class="text-lg font-bold text-black mb-3">Filters</p>
+            <div class="flex wrap justify-start items-start">
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    All filters
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Project Management
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    A/B Testing
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Bandits
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Data Analytics
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Deep Learning
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Scrum
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Prototyping
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    CMS Development
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    CMS Customization
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Back-End Development
+                </button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button">
+                    Design
+                </button>
+
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 "
+                        title="Show more">
+                    ...
+                </button>
+            </div>
+        </div>
+
+
+    </section>
+
+    <section id="take"
+             class="hidden fixed bg-white py-5 px-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-300 flex flex-col justify-between ">
+        <div class="f-full space-x-6 flex flex-nowrap justify-between items-start ">
+            <div class="w-full h-full flex flex-col justify-start items-start">
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Organization</p>
+                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
+                        <option value="" selected>Vasterra</option>
+                        <option value="">Company name</option>
+                        <option value="">Company name</option>
+                    </select>
+                </div>
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Title</p>
+                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
+                        <option value="" selected>Mobile Desktop responsive UI UX redes</option>
+                        <option value="">Title2</option>
+                        <option value="">Title3</option>
+                    </select>
+                </div>
+                <div class="w-full mb-3 relative">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Technologies</p>
+                    <div class="relative parent-tech p-1 w-full border border-gray-300 rounded-md focus:outline-none  text-white flex flex-wrap justify-start items-start wrap ">
+                        <p class="parent-button bg-green-500 p-1 rounded-sm cursor-pointer m-1">Laravel ×</p>
+                        <p class="parent-button bg-yellow-400 p-1 rounded-sm cursor-pointer m-1">Vue ×</p>
+                        <p class="parent-button  bg-red-700 p-1 rounded-sm cursor-pointer m-1">PHP ×</p>
+
+
+                        <img class="open-drop-tech-menu ml-1 mt-1 cursor-pointer absolute right-2 top-4 "
+                             src="images/arrow-down.svg" alt="arrow down">
+                    </div>
+                    <ul class="absolute mt-4 overflow-y-auto hidden drop-menu-technologies  bg-white  w-full border border-gray-300 rounded-md focus:outline-none  text-white flex flex-col justify-start items-start wrap space-y-2 ">
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-green-500 p-1 rounded-sm cursor-pointer ">Laravel</span></li>
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-yellow-400 p-1 rounded-sm cursor-pointer ">Vue</span></li>
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-red-700 p-1 rounded-sm cursor-pointer ">PHP</span></li>
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-green-500 p-1 rounded-sm cursor-pointer ">JavaScript</span></li>
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-yellow-400 p-1 rounded-sm cursor-pointer ">Bootstrap</span></li>
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-red-700 p-1 rounded-sm cursor-pointer ">TailWind</span></li>
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-green-500 p-1 rounded-sm cursor-pointer ">Laravel</span></li>
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-yellow-400 p-1 rounded-sm cursor-pointer ">Vue</span></li>
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-red-700 p-1 rounded-sm cursor-pointer ">PHP</span></li>
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-green-500 p-1 rounded-sm cursor-pointer ">JavaScript</span></li>
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-yellow-400 p-1 rounded-sm cursor-pointer ">Bootstrap</span></li>
+                        <li class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1"><span
+                                class="bg-red-700 p-1 rounded-sm cursor-pointer ">TailWind</span></li>
+                    </ul>
+
+                </div>
+
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Owner</p>
+                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
+                        <option value="" selected>Artem M (You)</option>
+                        <option value="">Name2</option>
+                        <option value="">Name3</option>
+                    </select>
+                </div>
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Time of bid</p>
+                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
+                        <option value="" selected>15:15</option>
+                        <option value="">15:16</option>
+                        <option value="">15:17</option>
+                    </select>
+                </div>
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Time after job creation</p>
+                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
+                        <option value="" selected>15:45</option>
+                        <option value="">15:55</option>
+                        <option value="">17:45</option>
+                    </select>
+                </div>
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Bid profile</p>
+                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
+                        <option value="" selected>Artem Mazurchak</option>
+                        <option value="">Title2</option>
+                        <option value="">Title3</option>
+                    </select>
+                </div>
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Job posting</p>
+                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
+                        <option value="" selected>https://docs.google.com/document/d/1xxs</option>
+                        <option value="">Title2</option>
+                        <option value="">Title3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="w-full h-full flex flex-col justify-start items-start">
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Task link</p>
+                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
+                        <option value="" selected>https://ac.vasterra.com/projects/663?modal=Taskс</option>
+                        <option value="">link 2</option>
+                        <option value="">link3</option>
+                    </select>
+                </div>
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Invite</p>
+                    <div class="space-x-3">
+                        <button class="px-3 py-2 bg-gray-200 rounded-sm text-base text-black hover:bg-green-500 hover:text-white">
+                            None
+                        </button>
+                        <button class="px-3 py-2 bg-green-500 rounded-sm text-base text-white hover:bg-gray-200 hover:text-black">
+                            Yes, invite
+                        </button>
+                    </div>
+                </div>
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Bid</p>
+                    <div class="space-x-3">
+                    <textarea name="" id=""
+                              class="textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non">
+Hi! I’d hope to create an Airbnb-like mobile app, as I built a counterpart of the Airbnb website and it was an amazing experience that I want to repeat with you.
+Here you can check this project we built with my team https://www.biz-cen.ru/. This platform is specifically designed for the office segment of commercial real estate.
+Visitors to the site can view a city’s commercial districts with a list of vacant premises including floor plans, and register for a preview directly online.
+You can see more information here https://vasterra.com/biz-cen.
+Yes, it was a web project, but of course I have strong expertise in mobile development. For example, here I worked on a Booking app for workplaces designed for Colliers International real estate company - https://play.google.com/store/apps/details?id=com.calcey.colliers&hl=en
+I’d like to go to the next stage and give you an estimation of your project, are there any other details that you can share?
+
+Best regards, Artem
+                    </textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="w-full h-full mt-4 flex justify-end items-start ">
+            <div class="flex space-x-4">
+                <button class="close-take rounded-full border border-gray-300 px-12 py-3 text-black hover:bg-green-500 hover:text-white hover:border-green-500">
+                    Cancel
+                </button>
+                <button class="rounded-full border border-green-500 bg-green-500 px-12 py-3 text-white hover:bg-white hover:text-black">
+                    Save
+                </button>
+            </div>
+        </div>
+    </section>
+
+</div>
+<script>
+    // open modal take press
+    document.querySelector(".open-take").addEventListener("click",()=>{
+        document.getElementById("take").classList.remove('hidden')
+        document.querySelector(".container").classList.add('bg-white','opacity-40')
+    })
+    //close modal press cancel
+    document.querySelector(".close-take").addEventListener("click",()=>{
+        document.getElementById("take").classList.add('hidden')
+        document.querySelector(".container").classList.remove('bg-white','opacity-40')
+    })
+    //technologies menu open -- close
+    document.querySelector(".open-drop-tech-menu").addEventListener("click", () => {
+        document.querySelector(".open-drop-tech-menu").classList.toggle("rotate-180")
+        document.querySelector(".open-drop-tech-menu").classList.toggle("transform")
+        document.querySelector(".drop-menu-technologies").classList.toggle('hidden')
+    })
+    // technologies select
+    const techArr = document.querySelectorAll('.tech-button')
+    for (let i = 0; i < techArr.length; i++) {
+        techArr[i].addEventListener("click", (e) => {
+            let dopClass = e.currentTarget.getElementsByTagName('span')[0].classList[0]
+            let text = e.currentTarget.getElementsByTagName('span')[0].innerHTML
+            let newTechToList = document.createElement('p')
+            newTechToList.classList.add('p-1', 'rounded-sm', 'm-1', 'cursor-pointer', 'parent-button', dopClass)
+            newTechToList.innerHTML = `${text} ×`
+            document.querySelector(".parent-tech").append(newTechToList)
+            parButtons = document.querySelectorAll(".parent-button")
+        })
+    }
+    // delete buttons from input
+    document.querySelector(".parent-tech").addEventListener("click", (e) => {
+        if (e.target.classList.contains("parent-button")) {
+
+            e.target.classList.add('need-to-delete')
+            setTimeout(() => {
+                document.querySelector(".need-to-delete").remove()
+            }, 40)
+
+        }
+    })
+
+    // open big calendar
+    document.querySelector('.open-big-calendar').addEventListener('click', () => {
+        document.getElementById('big-calendar').classList.toggle('hidden')
+    })
+    //close big-calendar
+    document.querySelector('.close-big-calendar').addEventListener('click', () => {
+        document.getElementById('big-calendar').classList.toggle('hidden')
+    })
+
+    // top menu dropdown menu show-close
+    document.querySelector(".link-image").addEventListener("click", () => {
+        document.querySelector('.dropdown').classList.toggle('hidden')
+    })
+
+    //open-filters
+    const filterButton = document.querySelectorAll('.open-filters')
+    for (let x = 0; x < filterButton.length; x++) {
+        filterButton[x].addEventListener("click", () => {
+            document.getElementById('manager-filters').classList.toggle('hidden')
+            document.getElementById('manager-filters').classList.add('z-50', 'absolute', 'top-0', 'left-0', 'right-0')
+        })
+    }
+
+    document.querySelector('.close-manager-filters').addEventListener("click", () => {
+        document.getElementById('manager-filters').classList.toggle('hidden')
+        document.getElementById('manager-filters').classList.remove('z-50', 'absolute', 'top-0', 'left-0', 'right-0')
+    })
+
+
+    // search block show-hide input
+    document.querySelector(".search").addEventListener("click", () => {
+        document.querySelector('.search-block').classList.remove('w-0')
+        document.querySelector('.search-block').classList.add('w-full')
+        document.querySelector('.search-block').style.cssText = 'animation: width100 .3s linear'
+        setTimeout(() => {
+
+            document.querySelector('.search-block').classList.add('w-full')
+        }, 280)
+
+        document.querySelector('.parent-search-block').classList.remove('w-6/12')
+        document.querySelector('.parent-search-block').classList.add('w-full')
+        document.querySelector('.block-kit').classList.remove('w-6/12')
+        document.querySelector('.block-kit').classList.add('w-0', 'overflow-hidden')
+
+        document.querySelector('.search').classList.add('hidden')
+
+    })
+
+    document.querySelector('.search-button').addEventListener("click", () => {
+        // document.querySelector('.search-block').classList.add('hidden')
+
+
+        document.querySelector('.search-block').style.cssText = 'animation: width0 .3s linear'
+        setTimeout(() => {
+            document.querySelector('.search-block').classList.remove('w-full')
+            document.querySelector('.search-block').classList.add('w-0')
+            document.querySelector('.search').classList.remove('hidden')
+
+            document.querySelector('.parent-search-block').classList.remove('w-full')
+            document.querySelector('.parent-search-block').classList.add('w-6/12')
+            document.querySelector('.block-kit').classList.remove('w-0', 'overflow-hidden')
+            document.querySelector('.block-kit').classList.add('w-6/12')
+        }, 280)
+
+    })
+    // fill search image
+
+    document.querySelector(".search").addEventListener('mouseover', () => {
+        document.querySelector("#search-svg").style.fill = "#4EA52F"
+    })
+    document.querySelector(".search").addEventListener('mouseout', () => {
+        document.querySelector("#search-svg").style.fill = "black"
+    })
+    //top menu add shadow on scroll
+    document.addEventListener("scroll", () => {
+        if (pageYOffset > 1) {
+            document.querySelector(".topmenu").classList.add("shadow-xl")
+        } else {
+            document.querySelector(".topmenu").classList.remove("shadow-xl")
+        }
+    })
+
+
+    // calendar hide-show
+    document.querySelector(".calendar-switcher").addEventListener('mouseover', () => {
+        document.querySelector("#right-arrow-55").style.fill = "#4EA52F"
+        // document.querySelector(".calendar-switcher").src='images/arrow-right-green.svg'
+
+    })
+    document.querySelector(".calendar-switcher").addEventListener('mouseout', () => {
+        document.querySelector("#right-arrow-55").style.fill = "black"
+    })
+
+    let flag2 = true
+    document.querySelector(".calendar-switcher").addEventListener("click", () => {
+        if (flag2) {
+
+            document.querySelector('.calendar-block').style.cssText = 'animation: width0 .3s linear;'
+            setTimeout(() => {
+                document.querySelector('.calendar').classList.add('hidden')
+                document.querySelector('.calendar-switcher').classList.add('right-4')
+                document.querySelector('.calendar-switcher').style.cssText = 'transform: rotate(180deg)'
+            }, 280)
+            document.querySelector('.calendar-block').classList.toggle('z-40')
+
+
+            document.querySelector('.calendar-switcher').classList.remove('-ml-5')
+
+            document.querySelector('.calendar-date').classList.toggle('hidden')
+            document.querySelector('.calendar-button').classList.toggle('hidden')
+            // add to top menu full width
+            document.querySelector('.topmenu').classList.toggle('z-50')
+            document.querySelector('.topmenu').querySelector(".last-block").classList.remove('w-3/12')
+            document.querySelector('.topmenu').querySelector(".last-block").classList.add('w-0')
+            document.querySelector('.topmenu').querySelector(".user-block").classList.remove('w-5/12')
+            document.querySelector('.topmenu').querySelector(".user-block").classList.add('w-8/12')
+            flag2 = !flag2
+        } else {
+
+            document.querySelector('.calendar-block').style.cssText = 'animation: width100 .3s linear;'
+
+            document.querySelector('.calendar').classList.remove('hidden')
+
+
+            document.querySelector('.calendar-block').classList.toggle('z-40')
+            setTimeout(() => {
+                document.querySelector('.calendar-switcher').style.cssText = 'transform: rotate(0deg)'
+            }, 280)
+            document.querySelector('.calendar-switcher').classList.remove('right-4')
+            document.querySelector('.calendar-switcher').classList.add('-ml-5')
+            document.querySelector('.calendar-date').classList.toggle('hidden')
+            document.querySelector('.calendar-button').classList.toggle('hidden')
+            // delete from top menu full width
+            document.querySelector('.topmenu').classList.toggle('z-50')
+            document.querySelector('.topmenu').querySelector(".last-block").classList.add('w-3/12')
+            document.querySelector('.topmenu').querySelector(".last-block").classList.remove('w-0')
+            document.querySelector('.topmenu').querySelector(".user-block").classList.add('w-5/12')
+            document.querySelector('.topmenu').querySelector(".user-block").classList.remove('w-8/12')
+            flag2 = !flag2
+        }
+    })
+    //// active buttons add-remove new class on click
+    const activeButtons = document.querySelectorAll(".active-button")
+    for (let i = 0; i < activeButtons.length; i++) {
+        activeButtons[i].addEventListener("click", (e) => {
+            if (e.currentTarget.classList.contains('bg-green-500') && e.currentTarget.classList.contains('text-white')) {
+                e.currentTarget.classList.remove('bg-green-500')
+                e.currentTarget.classList.remove('text-white')
+            } else {
+                e.currentTarget.classList.add('bg-green-500')
+                e.currentTarget.classList.add('text-white')
+            }
+        })
+    }
+    // exception words  delete
+    const deleteWords = document.querySelectorAll('.exception-words')
+    for (let i = 0; i < deleteWords.length; i++) {
+        deleteWords[i].addEventListener("click", (e) => {
+            e.target.parentNode.remove()
+        })
+    }
+    // open input for new words
+    document.querySelector(".add-word").addEventListener("click", () => {
+        document.querySelector('.add-word').classList.add('hidden')
+        document.querySelector('.input-word').classList.remove('hidden')
+        document.querySelector('.close-word-input').classList.remove('hidden')
+        document.querySelector('.save-word-input').classList.remove('hidden')
+    })
+    document.querySelector(".close-word-input").addEventListener("click", () => {
+        document.querySelector('.add-word').classList.remove('hidden')
+        document.querySelector('.input-word').classList.add('hidden')
+        document.querySelector('.close-word-input').classList.add('hidden')
+        document.querySelector('.save-word-input').classList.add('hidden')
+    })
+    // open-close Kit window
+    document.querySelector('.create-kid').addEventListener('click', () => {
+        document.querySelector('#create-kit').classList.remove('hidden')
+        document.querySelector('#create-kit').classList.add('z-50', 'absolute', 'top-0', 'left-0', 'right-0')
+    })
+    document.querySelector('.close-kit').addEventListener('click', () => {
+        document.querySelector('#create-kit').classList.add('hidden')
+        document.querySelector('#create-kit').classList.remove('z-50', 'absolute', 'top-0', 'left-0', 'right-0')
+    })
+
+    // calendar to-book ---- to-delete
+    const toDelete = document.querySelectorAll('.to-delete')
+    for (let i = 0; i < toDelete.length; i++) {
+        toDelete[i].addEventListener('mouseover', (e) => {
+            e.currentTarget.querySelector('.delete-me').classList.toggle('hidden')
+        })
+    }
+    for (let i = 0; i < toDelete.length; i++) {
+        toDelete[i].addEventListener('mouseout', (e) => {
+            e.currentTarget.querySelector('.delete-me').classList.toggle('hidden')
+        })
+    }
+
+    const toBook = document.querySelectorAll('.to-book')
+    for (let i = 0; i < toBook.length; i++) {
+        toBook[i].addEventListener('mouseover', (e) => {
+            e.currentTarget.querySelector('.book-me').classList.toggle('hidden')
+        })
+    }
+
+    for (let i = 0; i < toBook.length; i++) {
+        toBook[i].addEventListener('mouseout', (e) => {
+            e.currentTarget.querySelector('.book-me').classList.toggle('hidden')
+        })
+    }
+
+    const deleteMe = document.querySelectorAll('.delete-me')
+    for (let i = 0; i < deleteMe.length; i++) {
+        deleteMe[i].addEventListener('click', (e) => {
+            alert('Delete this note')
+        })
+    }
+    const bookMe = document.querySelectorAll('.book-me')
+    for (let i = 0; i < bookMe.length; i++) {
+        bookMe[i].addEventListener('click', (e) => {
+            alert('Book this note')
+        })
+    }
+
+
+</script>
+</body>
+</html>
