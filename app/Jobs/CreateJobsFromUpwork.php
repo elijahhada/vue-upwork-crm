@@ -58,6 +58,12 @@ class CreateJobsFromUpwork implements ShouldQueue
             $countries = [];
             $categories = [];
 
+            if (!isset($jobsContainer->jobs)) {
+                Log::alert('Jobs list error: '.json_encode($jobsContainer));
+                $flag = true;
+                continue;
+            }
+
             foreach ($jobsContainer->jobs as $upworkJob) {
                 $upworkJob = new UpworkJob($upworkJob);
 
@@ -82,7 +88,7 @@ class CreateJobsFromUpwork implements ShouldQueue
                 if (isset($jobProfile->profile)) {
                     $job->setExtraFields($jobProfile->profile);
                 } else {
-                    Log::info(json_encode($jobProfile));
+                    Log::alert('Jobs profile error on '.$index.': '.json_encode($jobProfile));
                 }
                 $job->calculateClientScore();
                 $jobContents[$index] = $job->toArray();
@@ -96,8 +102,6 @@ class CreateJobsFromUpwork implements ShouldQueue
             } else {
                 $flag = true;
             }
-
-            Log::info($jobContents);
 
             Job::upsert($jobContents, ['upwork_id']);
             Country::upsert($countries, ['title']);
