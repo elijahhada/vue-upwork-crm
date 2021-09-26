@@ -40,49 +40,16 @@
                             Create
                             Kit
                         </button>
-                        <div class="relative">
+                        <div class="relative"
+                             v-for="filter in filtersArr"
+                        >
                             <div class=" bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ">
-                                <p class="mr-2">Artem</p>
+                                <p class="mr-2">{{filter.title}}</p>
                                 <button class="open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer"  @click="showFilterFrom">
                                     ...
                                 </button>
                             </div>
                         </div>
-                        <div class="relative">
-                            <div class=" bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ">
-                                <p class="mr-2">Boris</p>
-                                <button class="open-filters py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer"  @click="showFilterFrom">
-                                    ...
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="relative">
-                            <div class=" bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ">
-                                <p class="mr-2">Olga</p>
-                                <button class="open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer" @click="showFilterFrom">
-                                    ...
-                                </button>
-                            </div>
-                        </div>
-                        <div class="relative">
-                            <div class="bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ">
-                                <p class="mr-2">Petr</p>
-                                <button class="open-filters   py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer "  @click="showFilterFrom">
-                                    ...
-                                </button>
-                            </div>
-                            <div class="absolute top-10 -left-2 w-28 bg-white rounded-2xl shadow-2xl  dropdown text-right hidden">
-                                <ul class="p-4">
-                                    <li class="my-2"><a class="border-b-4 border-white  hover:border-green-500"
-                                                        href="#">Edit</a></li>
-                                    <li><a class="border-b-4 border-white  hover:border-green-500" href="#">Show</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="parent-search-block flex nowrap w-6/12 flex justify-end flex-grow items-center" ref='parent_search_block'>
                         <div class="w-0 overflow-hidden flex justify-between  search-block " ref="search_block">
@@ -103,7 +70,13 @@
 
                     </div>
                 </div>
-                <kit-modal v-if="showKit"  v-on:disable-kit="showKit = !showKit"></kit-modal>
+                <kit-modal
+                    v-if="showKit"
+                    v-on:disable-kit="closeKit"
+                    :countries="countries"
+                    :categories="categories"
+                    :userId="userId"
+                ></kit-modal>
                 <filter-modal v-if="FiltersVisibility" v-on:disable-filter="FiltersVisibility = !FiltersVisibility"></filter-modal>
 </div>
 </template>
@@ -113,10 +86,28 @@ import kitModal from './Modals/CreateKit'
 import filterModal from './Modals/FiltersModal'
 
 export default{
+    props: {
+        filters: {
+            type: Array,
+            required: false
+        },
+        countries: {
+            type: Array,
+            required: true
+        },
+        categories: {
+            type: Array,
+            required: true
+        },
+        userId: {
+            type: Number
+        }
+    },
     data(){
         return{
             showKit: false,
-            FiltersVisibility: false
+            FiltersVisibility: false,
+            filtersArr: this.filters
         }
     },
     components:{
@@ -140,25 +131,29 @@ export default{
 
                 this.$refs.search.classList.add('hidden')
             },
-            closeSearch(){
-                this.$refs.search_block.cssText = 'animation: width0 .3s linear'
-                setTimeout(() => {
-                    this.$refs.search_block.classList.remove('w-full')
-                    this.$refs.search_block.classList.add('w-0')
-                    this.$refs.search.classList.remove('hidden')
+        closeSearch(){
+            this.$refs.search_block.cssText = 'animation: width0 .3s linear'
+            setTimeout(() => {
+                this.$refs.search_block.classList.remove('w-full')
+                this.$refs.search_block.classList.add('w-0')
+                this.$refs.search.classList.remove('hidden')
 
-                    this.$refs.parent_search_block.classList.remove('w-full')
-                    this.$refs.parent_search_block.classList.add('w-6/12')
-                    this.$refs.block_kit.classList.remove('w-0', 'overflow-hidden')
-                    this.$refs.block_kit.classList.add('w-6/12')
-                }, 10)
-            },
-            showKitForm(){
-                this.showKit = !this.showKit
-            },
-            showFilterFrom(){
-                this.FiltersVisibility = !this.FiltersVisibility
-            },
+                this.$refs.parent_search_block.classList.remove('w-full')
+                this.$refs.parent_search_block.classList.add('w-6/12')
+                this.$refs.block_kit.classList.remove('w-0', 'overflow-hidden')
+                this.$refs.block_kit.classList.add('w-6/12')
+            }, 10)
+        },
+        showKitForm(){
+            this.showKit = !this.showKit
+        },
+        showFilterFrom(){
+            this.FiltersVisibility = !this.FiltersVisibility
+        },
+        closeKit(event) {
+            this.showKit = !this.showKit
+            this.filtersArr.push(event)
+        }
     }
 }
 </script>

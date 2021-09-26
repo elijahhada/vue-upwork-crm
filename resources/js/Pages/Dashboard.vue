@@ -1,6 +1,11 @@
 <template>
     <app-layout>
-            <dash-header></dash-header>
+            <dash-header
+                :countries="countries"
+                :categories="categories"
+                :userId="userId"
+                :filters="filters"
+            ></dash-header>
             <div class="w-full ">
                     <p class="text-2xl font-bold">Find {{data.length}} jobs</p>
             </div>
@@ -40,9 +45,25 @@
 
     export default {
         props: {
+            filters: {
+                type: Array,
+                required: false
+            },
             jobs: {
                 type: Object,
                 required: true,
+            },
+            countries: {
+                type: Array,
+                required: true
+            },
+            categories: {
+                type: Array,
+                required: true
+            },
+            userId: {
+                type: Number,
+                required: true
             }
         },
         data(){
@@ -60,9 +81,10 @@
             this.data = this.jobs.data;
             socket.emit('test', 'FFFFFFF');
             this.jobEventListener();
+
             socket.on('job-delete:App\\Events\\JobDeleted', function (data) {
                 this.data = data.result
-            }.bind(thid))
+            }.bind(this))
         },
         methods: {
             onDelete(d) {

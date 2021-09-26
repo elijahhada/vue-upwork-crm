@@ -3067,40 +3067,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    filters: {
+      type: Array,
+      required: false
+    },
+    countries: {
+      type: Array,
+      required: true
+    },
+    categories: {
+      type: Array,
+      required: true
+    },
+    userId: {
+      type: Number
+    }
+  },
   data: function data() {
     return {
       showKit: false,
-      FiltersVisibility: false
+      FiltersVisibility: false,
+      filtersArr: this.filters
     };
   },
   components: {
@@ -3148,6 +3139,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     showFilterFrom: function showFilterFrom() {
       this.FiltersVisibility = !this.FiltersVisibility;
+    },
+    closeKit: function closeKit(event) {
+      this.showKit = !this.showKit;
+      this.filtersArr.push(event);
     }
   }
 });
@@ -5504,50 +5499,103 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {};
+  props: {
+    countries: {
+      type: Array
+    },
+    categories: {
+      type: Array
+    },
+    userId: {
+      type: Number
+    }
   },
-  methods: {}
+  data: function data() {
+    return {
+      createdKitTitle: '',
+      exseptionWords: [],
+      newWord: '',
+      allCountriesChecked: false,
+      allCategoriesChecked: false,
+      filter: null
+    };
+  },
+  methods: {
+    chooseAllItems: function chooseAllItems(obj) {
+      switch (obj) {
+        case this.countries:
+          this.allCountriesChecked ? this.allCheck(obj, false) : this.allCheck(obj, true);
+          this.allCountriesChecked = !this.allCountriesChecked;
+          break;
+
+        case this.categories:
+          this.allCategoriesChecked ? this.allCheck(obj, false) : this.allCheck(obj, true);
+          this.allCategoriesChecked = !this.allCategoriesChecked;
+          break;
+      }
+    },
+    openAddWord: function openAddWord() {
+      document.querySelector('.add-word').classList.add('hidden');
+      document.querySelector('.input-word').classList.remove('hidden');
+      document.querySelector('.close-word-input').classList.remove('hidden');
+      document.querySelector('.save-word-input').classList.remove('hidden');
+    },
+    closeAddWord: function closeAddWord() {
+      document.querySelector('.add-word').classList.remove('hidden');
+      document.querySelector('.input-word').classList.add('hidden');
+      document.querySelector('.close-word-input').classList.add('hidden');
+      document.querySelector('.save-word-input').classList.add('hidden');
+    },
+    saveWord: function saveWord() {
+      if (this.newWord != false) this.exseptionWords.push(this.newWord.trim());
+      this.newWord = '';
+      this.closeAddWord();
+    },
+    deleteWord: function deleteWord(i) {
+      this.exseptionWords.splice(i, 1);
+    },
+    saveKit: function saveKit() {
+      var _this = this;
+
+      var countries = [];
+      this.countries.forEach(function (item) {
+        if (item.checked) countries.push(item.id);
+      });
+      var categories = [];
+      this.categories.forEach(function (item) {
+        if (item.checked) categories.push(item.id);
+      });
+      if (!this.createdKitTitle) return alert('Введите название фильтра!');
+      if (!countries.length && !categories.length && !this.exseptionWords.length) return alert('Введите параметр(ы) фильтра!');
+      axios.post('/add-filter', {
+        user_id: this.userId,
+        title: this.createdKitTitle,
+        countries_ids: countries.join(','),
+        categories_ids: categories.join(','),
+        exseption_words: this.exseptionWords.join('_|_')
+      }).then(function (response) {
+        _this.filter = response.data;
+      });
+      this.createdKitTitle = '';
+      this.allCheck(this.countries, false);
+      this.allCheck(this.categories, false);
+      this.exseptionWords = [];
+      return alert('Success!');
+    },
+    closeKit: function closeKit() {
+      this.$emit('disable-kit', this.filter);
+    }
+  },
+  computed: {
+    allCheck: function allCheck(obj, val) {
+      return function (obj, val) {
+        obj.forEach(function (item) {
+          item.checked = val;
+        });
+      };
+    }
+  }
 });
 
 /***/ }),
@@ -8402,13 +8450,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
+    filters: {
+      type: Array,
+      required: false
+    },
     jobs: {
       type: Object,
+      required: true
+    },
+    countries: {
+      type: Array,
+      required: true
+    },
+    categories: {
+      type: Array,
+      required: true
+    },
+    userId: {
+      type: Number,
       required: true
     }
   },
@@ -8427,6 +8496,9 @@ __webpack_require__.r(__webpack_exports__);
     this.data = this.jobs.data;
     socket.emit('test', 'FFFFFFF');
     this.jobEventListener();
+    socket.on('job-delete:App\\Events\\JobDeleted', function (data) {
+      this.data = data.result;
+    }.bind(this));
   },
   methods: {
     onDelete: function onDelete(d) {
@@ -42637,121 +42709,43 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                            Create\r\n                            Kit\r\n                        "
+                    "\n                            Create\n                            Kit\n                        "
                   )
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      " bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center "
-                  },
-                  [
-                    _c("p", { staticClass: "mr-2" }, [_vm._v("Artem")]),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer",
-                        on: { click: _vm.showFilterFrom }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                                    ...\r\n                                "
-                        )
-                      ]
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      " bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center "
-                  },
-                  [
-                    _c("p", { staticClass: "mr-2" }, [_vm._v("Boris")]),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "open-filters py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer",
-                        on: { click: _vm.showFilterFrom }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                                    ...\r\n                                "
-                        )
-                      ]
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      " bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center "
-                  },
-                  [
-                    _c("p", { staticClass: "mr-2" }, [_vm._v("Olga")]),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer",
-                        on: { click: _vm.showFilterFrom }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                                    ...\r\n                                "
-                        )
-                      ]
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center "
-                  },
-                  [
-                    _c("p", { staticClass: "mr-2" }, [_vm._v("Petr")]),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "open-filters   py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer ",
-                        on: { click: _vm.showFilterFrom }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                                    ...\r\n                                "
-                        )
-                      ]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._m(1)
-              ])
-            ]
+              _vm._l(_vm.filtersArr, function(filter) {
+                return _c("div", { staticClass: "relative" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        " bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center "
+                    },
+                    [
+                      _c("p", { staticClass: "mr-2" }, [
+                        _vm._v(_vm._s(filter.title))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer",
+                          on: { click: _vm.showFilterFrom }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                    ...\n                                "
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              })
+            ],
+            2
           ),
           _vm._v(" "),
           _c(
@@ -42787,7 +42781,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                                Search\r\n                            "
+                        "\n                                Search\n                            "
                       )
                     ]
                   ),
@@ -42848,11 +42842,12 @@ var render = function() {
       _vm._v(" "),
       _vm.showKit
         ? _c("kit-modal", {
-            on: {
-              "disable-kit": function($event) {
-                _vm.showKit = !_vm.showKit
-              }
-            }
+            attrs: {
+              countries: _vm.countries,
+              categories: _vm.categories,
+              userId: _vm.userId
+            },
+            on: { "disable-kit": _vm.closeKit }
           })
         : _vm._e(),
       _vm._v(" "),
@@ -42944,43 +42939,6 @@ var staticRenderFns = [
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "absolute top-10 -left-2 w-28 bg-white rounded-2xl shadow-2xl  dropdown text-right hidden"
-      },
-      [
-        _c("ul", { staticClass: "p-4" }, [
-          _c("li", { staticClass: "my-2" }, [
-            _c(
-              "a",
-              {
-                staticClass: "border-b-4 border-white  hover:border-green-500",
-                attrs: { href: "#" }
-              },
-              [_vm._v("Edit")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c(
-              "a",
-              {
-                staticClass: "border-b-4 border-white  hover:border-green-500",
-                attrs: { href: "#" }
-              },
-              [_vm._v("Show")]
-            )
-          ])
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -48725,7 +48683,7 @@ var render = function() {
                 "text-black text-5xl close-kit cursor-pointer hover:text-red-500",
               on: {
                 click: function($event) {
-                  return _vm.$emit("disable-kit")
+                  return _vm.closeKit()
                 }
               }
             },
@@ -48733,39 +48691,209 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _c("div", { staticClass: "mb-10" }, [
+          _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+            _vm._v("Countries")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex flex-wrap justify-content-start items-start" },
+            [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                  class: { "bg-green-500 text-white": _vm.allCountriesChecked },
+                  on: {
+                    click: function($event) {
+                      _vm.chooseAllItems(_vm.countries)
+                      _vm.$forceUpdate()
+                    }
+                  }
+                },
+                [_vm._v("\n                    All country\n                ")]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.countries, function(country, index) {
+                return _c(
+                  "button",
+                  {
+                    key: country.index,
+                    staticClass:
+                      "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                    class: { "bg-green-500 text-white": country.checked },
+                    on: {
+                      click: function($event) {
+                        country.checked = !country.checked
+                        _vm.$forceUpdate()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(country.title) +
+                        "\n                "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ]),
         _vm._v(" "),
-        _vm._m(1),
+        _c("div", { staticClass: "mb-10" }, [
+          _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+            _vm._v("Categories")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex flex-wrap justify-content-start items-start" },
+            [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                  class: {
+                    "bg-green-500 text-white": _vm.allCategoriesChecked
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.chooseAllItems(_vm.categories)
+                      _vm.$forceUpdate()
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                    All categories\n                "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.categories, function(category) {
+                return _c(
+                  "button",
+                  {
+                    key: category.index,
+                    staticClass:
+                      "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                    class: { "bg-green-500 text-white": category.checked },
+                    on: {
+                      click: function($event) {
+                        category.checked = !category.checked
+                        _vm.$forceUpdate()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(category.title) +
+                        "\n                "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ]),
         _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _vm._m(4),
+        _c("div", { staticClass: "mb-7" }, [
+          _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+            _vm._v("Exception words")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex flex-wrap justify-content-start items-start" },
+            _vm._l(_vm.exseptionWords, function(word, index) {
+              return _c(
+                "button",
+                {
+                  staticClass:
+                    "cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
+                },
+                [
+                  _c("p", { staticClass: "mr-2" }, [_vm._v(_vm._s(word))]),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass:
+                        "  py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
+                      attrs: { title: "Delete word" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteWord(index)
+                        }
+                      }
+                    },
+                    [_vm._v("×")]
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "mb-12 flex nowrap" }, [
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.newWord,
+                expression: "newWord"
+              }
+            ],
             staticClass:
               " input-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
-            attrs: { type: "text", placeholder: "New word" }
+            attrs: { type: "text", placeholder: "New word" },
+            domProps: { value: _vm.newWord },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.newWord = $event.target.value
+              }
+            }
           }),
           _vm._v(" "),
           _c(
             "button",
             {
               staticClass:
-                "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-word"
+                "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-word",
+              on: {
+                click: function($event) {
+                  return _vm.openAddWord()
+                }
+              }
             },
-            [_vm._v("+ Add word\r\n            ")]
+            [_vm._v("+ Add word")]
           ),
           _vm._v(" "),
           _c(
             "button",
             {
               staticClass:
-                "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-word-input hidden mr-4"
+                "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-word-input hidden mr-4",
+              on: {
+                click: function($event) {
+                  return _vm.saveWord()
+                }
+              }
             },
-            [_vm._v("\r\n                Save\r\n            ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -48775,333 +48903,57 @@ var render = function() {
                 "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 close-word-input hidden",
               on: {
                 click: function($event) {
-                  return _vm.$emit("disable-kit")
+                  return _vm.closeAddWord()
                 }
               }
             },
-            [_vm._v("\r\n                Close\r\n            ")]
+            [_vm._v("Close")]
           )
         ]),
         _vm._v(" "),
-        _vm._m(5)
+        _c("div", { staticClass: "flex nowrap mb-12" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.createdKitTitle,
+                expression: "createdKitTitle"
+              }
+            ],
+            staticClass:
+              "input-kit border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+            attrs: { type: "text", placeholder: "Name kit" },
+            domProps: { value: _vm.createdKitTitle },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.createdKitTitle = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 ",
+              on: {
+                click: function($event) {
+                  return _vm.saveKit()
+                }
+              }
+            },
+            [_vm._v("Save Kit")]
+          )
+        ])
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-10" }, [
-      _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
-        _vm._v("Countries")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex wrap justify-start items-start" }, [
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
-          },
-          [_vm._v("\r\n                    All country\r\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
-          },
-          [_vm._v("\r\n                    USA\r\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
-          },
-          [
-            _vm._v(
-              "\r\n                    United Arab Emirates\r\n                "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 ",
-            attrs: { title: "Show more" }
-          },
-          [_vm._v("\r\n                    ...\r\n                ")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-10" }, [
-      _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
-        _vm._v("Categories")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex wrap justify-start items-start" }, [
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
-          },
-          [_vm._v("\r\n                    All categories\r\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
-          },
-          [
-            _vm._v(
-              "\r\n                    Project Management\r\n                "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
-          },
-          [
-            _vm._v(
-              "\r\n                    CMS Customization\r\n                "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 ",
-            attrs: { title: "Show more" }
-          },
-          [_vm._v("\r\n                    ...\r\n                ")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-10" }, [
-      _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
-        _vm._v("Filters")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex wrap justify-start items-start" }, [
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
-          },
-          [_vm._v("\r\n                    All filters\r\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
-          },
-          [
-            _vm._v(
-              "\r\n                    Project Management\r\n                "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
-          },
-          [
-            _vm._v(
-              "\r\n                    CMS Customization\r\n                "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 ",
-            attrs: { title: "Show more" }
-          },
-          [_vm._v("\r\n                    ...\r\n                ")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-10" }, [
-      _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
-        _vm._v("Technologies")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex wrap justify-start items-start" }, [
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button font-bold"
-          },
-          [_vm._v("\r\n                    PHP\r\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
-          },
-          [_vm._v("\r\n                    Laravel\r\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 active-button"
-          },
-          [_vm._v("\r\n                    Zend\r\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal mr-2 ",
-            attrs: { title: "Show more" }
-          },
-          [_vm._v("\r\n                    ...\r\n                ")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-7" }, [
-      _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
-        _vm._v("Exception words")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex wrap justify-start items-start" }, [
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
-          },
-          [
-            _c("p", { staticClass: "mr-2" }, [_vm._v("Word1")]),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass:
-                  "  py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
-                attrs: { title: "Delete word" }
-              },
-              [_vm._v("\r\n                        ×")]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white  flex items-center active-button"
-          },
-          [
-            _c("p", { staticClass: "mr-2" }, [_vm._v("Word2")]),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass:
-                  "  py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
-                attrs: { title: "Delete word" }
-              },
-              [_vm._v("\r\n                        ×")]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white  flex items-center active-button"
-          },
-          [
-            _c("p", { staticClass: "mr-2" }, [_vm._v("Word3")]),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass:
-                  " py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
-                attrs: { title: "Delete word" }
-              },
-              [_vm._v("\r\n                        ×")]
-            )
-          ]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex nowrap mb-12" }, [
-      _c("input", {
-        staticClass:
-          "input-kit border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
-        attrs: { type: "text", placeholder: "Name kit" }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass:
-            "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 "
-        },
-        [_vm._v("Save Kit")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -54067,7 +53919,14 @@ var render = function() {
   return _c(
     "app-layout",
     [
-      _c("dash-header"),
+      _c("dash-header", {
+        attrs: {
+          countries: _vm.countries,
+          categories: _vm.categories,
+          userId: _vm.userId,
+          filters: _vm.filters
+        }
+      }),
       _vm._v(" "),
       _c("div", { staticClass: "w-full " }, [
         _c("p", { staticClass: "text-2xl font-bold" }, [
