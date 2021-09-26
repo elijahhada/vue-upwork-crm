@@ -152,7 +152,7 @@ export default{
         },
         closeKit(event) {
             this.showKit = !this.showKit
-            this.filtersArr.push(event)
+            if(event) this.filtersArr.push(event)
         }
     }
 }
