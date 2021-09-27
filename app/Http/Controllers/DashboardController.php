@@ -18,7 +18,7 @@ class DashboardController extends Controller
 
 //        go to Dashboard.vue->DashboardHeader.vue->CreateKit
         $countries = Country::select('id','title')->get();
-        $categories = Category::select('id', 'title')->get()->unique('title');
+        $categories = Category::select('id', 'title')->get();
         $filters = Filter::select('id', 'title', 'user_id', 'user_id', 'categories_ids', 'exseption_words')->get();
 
         return inertia('Dashboard', [

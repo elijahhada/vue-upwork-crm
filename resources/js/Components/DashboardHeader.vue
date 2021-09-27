@@ -51,24 +51,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="parent-search-block flex nowrap w-6/12 flex justify-end flex-grow items-center" ref='parent_search_block'>
-                        <div class="w-0 overflow-hidden flex justify-between  search-block " ref="search_block">
-                            <input type="text" placeholder="Job id, URL,Title or key word"
-                                   class="w-11/12 search-input  border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300">
-                            <button class=" rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white">
-                                Search
-                            </button>
-                            <p class="ml-4 search-button text-black text-5xl  cursor-pointer hover:text-red-500" @click="closeSearch()"
-                               title="Close search panel">×</p>
-                        </div>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                             class="cursor-pointer search" title="Open search panel" @click="showSearch()" ref="search">
-                            <path id="search-svg" fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M14.618 16.032C13.0243 17.309 11.0422 18.0033 9 18C6.61305 18 4.32387 17.0518 2.63604 15.364C0.948211 13.6761 0 11.3869 0 9C0 6.61305 0.948211 4.32387 2.63604 2.63604C4.32387 0.948211 6.61305 0 9 0C11.3869 0 13.6761 0.948211 15.364 2.63604C17.0518 4.32387 18 6.61305 18 9C18.0033 11.0422 17.309 13.0243 16.032 14.618L24 22.586L22.586 24L14.618 16.032ZM9 2C12.86 2 16 5.14 16 9C16 12.86 12.86 16 9 16C5.14 16 2 12.86 2 9C2 5.14 5.14 2 9 2Z"
-                                  fill="black"/>
-                        </svg>
-
-                    </div>
                 </div>
                 <kit-modal
                     v-if="showKit"
