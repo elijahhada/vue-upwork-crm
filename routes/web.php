@@ -8,6 +8,7 @@ use App\Http\Controllers\TimetableController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\FilterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,11 +50,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     })->name('upwork.jobs.profile');
     Route::get('/filters', [UpworkController::class, 'filters'])->name('filters');
 
-    Route::get('/calendar/dayTimes/{day?}', [TimetableController::class, 'dayTimes']);
-    Route::get('/calendar/dayUsers/{day?}', [TimetableController::class, 'dayUsers']);
-    Route::get('/calendar/itemUsers/{data}', [TimetableController::class, 'itemUsers']);
-    Route::get('/calendar/userHour/{time}', [TimetableController::class, 'userHour']);
-    Route::get('/calendar/currentWeek/{data}', [TimetableController::class, 'currentWeek']);
+
+
+    Route::post('/add-filter', [FilterController::class, 'create']);
+
 });
 
 Route::get('/auth/pipedrive', [\App\Http\Controllers\Auth\PipedriveController::class, 'index'])->name('auth.pipedrive')->middleware('guest');

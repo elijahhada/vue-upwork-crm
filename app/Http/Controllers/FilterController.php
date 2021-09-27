@@ -22,9 +22,18 @@ class FilterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $filters = new Filter();
+        $filters->user_id = $request->user_id;
+        $filters->title = $request->title;
+        $filters->countries_ids = $request->countries_ids;
+        $filters->categories_ids = $request->categories_ids;
+        $filters->exseption_words = $request->exseption_words;
+
+        $filters->save();
+
+        return $filters;
     }
 
     /**

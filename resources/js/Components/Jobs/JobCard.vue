@@ -194,6 +194,7 @@ export default {
             this.$emit('delete', {
                 id: this.id
             })
+
             axios
                 .post('/jobs/delete', {id: this.id})
                 .then(response => {
