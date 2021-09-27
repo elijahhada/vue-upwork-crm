@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\Upwork\UpworkController;
+use App\Http\Controllers\TimetableController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -49,7 +50,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     })->name('upwork.jobs.profile');
     Route::get('/filters', [UpworkController::class, 'filters'])->name('filters');
 
+
+
     Route::post('/add-filter', [FilterController::class, 'create']);
+
 });
 
 Route::get('/auth/pipedrive', [\App\Http\Controllers\Auth\PipedriveController::class, 'index'])->name('auth.pipedrive')->middleware('guest');
