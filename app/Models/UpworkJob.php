@@ -18,7 +18,6 @@ class UpworkJob implements Arrayable
     public $budget;
     public $duration;
     public $workload;
-    public $job_status;
     public $status;
     public $client;
     public $date_created;
@@ -66,11 +65,23 @@ class UpworkJob implements Arrayable
             if ($index === 'client') {
                 continue;
             }
+            if ($index === 'date_created') {
+                /**
+                 * @var Carbon $item
+                 */
+                $data[$index] = $item->format('Y-m-d H:i:s');
+                continue;
+            }
 
             $data[$index] = $item;
         }
 
         foreach (get_object_vars($this->client) as $index => $item) {
+            if ($index === 'assignments') {
+                $data['client_assignments'] = json_encode($item);
+                continue;
+            }
+
             $data['client_'.$index] = $item;
         }
 

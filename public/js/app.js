@@ -10526,6 +10526,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import
 
 
 
+ //
 
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].mixin({
   methods: {
