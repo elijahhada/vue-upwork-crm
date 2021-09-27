@@ -138,7 +138,7 @@ export default {
         },
         avgRate: {
             required: false,
-            type: String,
+            type: Number,
         },
         hireRate: {
             required: true,

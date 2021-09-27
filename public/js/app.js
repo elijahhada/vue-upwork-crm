@@ -5072,7 +5072,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     avgRate: {
       required: false,
-      type: String
+      type: Number
     },
     hireRate: {
       required: true,
@@ -10526,7 +10526,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import
 
 
 
- //
 
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].mixin({
   methods: {
@@ -42710,7 +42709,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                            Create\n                            Kit\n                        "
+                    "\r\n                            Create\r\n                            Kit\r\n                        "
                   )
                 ]
               ),
@@ -42737,7 +42736,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                                    ...\n                                "
+                            "\r\n                                    ...\r\n                                "
                           )
                         ]
                       )
@@ -42782,7 +42781,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                Search\n                            "
+                        "\r\n                                Search\r\n                            "
                       )
                     ]
                   ),
@@ -48714,7 +48713,11 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("\n                    All country\n                ")]
+                [
+                  _vm._v(
+                    "\r\n                    All country\r\n                "
+                  )
+                ]
               ),
               _vm._v(" "),
               _vm._l(_vm.countries, function(country, index) {
@@ -48734,9 +48737,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                    " +
+                      "\r\n                    " +
                         _vm._s(country.title) +
-                        "\n                "
+                        "\r\n                "
                     )
                   ]
                 )
@@ -48772,7 +48775,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                    All categories\n                "
+                    "\r\n                    All categories\r\n                "
                   )
                 ]
               ),
@@ -48794,9 +48797,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                    " +
+                      "\r\n                    " +
                         _vm._s(category.title) +
-                        "\n                "
+                        "\r\n                "
                     )
                   ]
                 )
