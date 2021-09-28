@@ -50,9 +50,13 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     })->name('upwork.jobs.profile');
     Route::get('/filters', [UpworkController::class, 'filters'])->name('filters');
 
-
-
     Route::post('/add-filter', [FilterController::class, 'create']);
+
+    Route::get('/calendar/dayTimes/{day?}', [TimetableController::class, 'dayTimes']);
+    Route::get('/calendar/dayUsers/{day?}', [TimetableController::class, 'dayUsers']);
+    Route::get('/calendar/itemUsers/{data}', [TimetableController::class, 'itemUsers']);
+    Route::get('/calendar/userHour/{time}', [TimetableController::class, 'userHour']);
+    Route::get('/calendar/currentWeek/{data}', [TimetableController::class, 'currentWeek']);
 
 });
 
