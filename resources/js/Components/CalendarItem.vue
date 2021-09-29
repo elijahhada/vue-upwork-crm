@@ -41,6 +41,10 @@ export default {
         dataUsers: Array,
         typeCalendar: String
     },
+    model: {
+        prop: 'dataUsers',
+        event: 'change',
+    },
     data() {
         return {
             showButton: 0
@@ -77,7 +81,7 @@ export default {
         },
         setDataUsers(time) {
             axios.get("/calendar/itemUsers/" + time).then(res => {
-                this.dataUsers = res.data;
+                this.$emit('change', res.data);
             });
         }
     }

@@ -6,6 +6,7 @@
                 :data-time="calendarDayTimes[index]"
                 :data-users="calendarDayUsers[index]"
                 :type-calendar="typeCalendar"
+                v-model="calendarDayUsers[index]"
             ></CalendarItem>
         </div>
     </div>

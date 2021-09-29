@@ -87,22 +87,22 @@ class TimetableController extends Controller
     public function dayTimes($day = null) {
 
         $data = [];
-        
+
         if(!$day) {
             $day = date('Y-m-d H:i:s', strtotime('now 00:00:00'));
-        }             
+        }
         $data[0]['dateTime'] = date('Y-m-d H:i:s', strtotime($day));
         $data[0]['hour'] = date('H:i', strtotime($day));
         for($i = 1; $i <= 23; $i++ ) {
             $data[$i]['dateTime'] = date('Y-m-d H:i:s', strtotime($data[0]['dateTime']." +".$i." hours"));
             $data[$i]['hour'] = date('H:i', strtotime($data[0]['dateTime']." +".$i." hours"));
-        }        
+        }
 
         return $data;
     }
 
-    public function dayUsers($day = null) {        
-        
+    public function dayUsers($day = null) {
+
         if(!$day) {
             $day = date('Y-m-d', strtotime('now'));
         }
@@ -115,9 +115,9 @@ class TimetableController extends Controller
 
         $data_users = [];
         $data = [];
-        
+
         foreach($data_db as $item) {
-            $data_users[$item->datetime][] = $item; 
+            $data_users[$item->datetime][] = $item;
         }
 
         $data_times = $this->dayTimes($day);
@@ -131,14 +131,14 @@ class TimetableController extends Controller
                     $_i++;
                 }
             }
-            
-        }        
 
-        return $data;        
+        }
+
+        return $data;
     }
 
-    public function userHour($data) {       
-        
+    public function userHour($data) {
+
         $data = json_decode($data, true);
         $user_id = Auth::id();
 
@@ -149,16 +149,16 @@ class TimetableController extends Controller
             $timetable->save();
         } else {
             Timetable::where('user_id', $user_id)->where('datetime', $data['time'])->delete();
-        }        
+        }
 
-        return $data;        
+        return $data;
     }
 
-    public function itemUsers($time) {       
-        
+    public function itemUsers($time) {
+
         $data = [];
 
-        $data_db = Timetable::where('timetables.datetime', '=', $time)                            
+        $data_db = Timetable::where('timetables.datetime', '=', $time)
                             ->join('users', 'timetables.user_id', '=', 'users.id')
                             ->select(['timetables.user_id', 'users.name'])
                             ->get();
@@ -168,16 +168,16 @@ class TimetableController extends Controller
                 'id' => $item->user_id,
                 'name' => $item->name
             ];
-        }             
+        }
 
-        return count($data) ? $data : '';        
-    }    
-    
+        return count($data) ? $data : null;
+    }
+
     public function currentWeek($dataWeek) {
-        
+
         $dataWeek = json_decode($dataWeek, true);
         $data = [];
-        
+
         if($dataWeek['type'] == 'now') {
             $date = strtotime('monday this week');
         } else {
@@ -186,17 +186,17 @@ class TimetableController extends Controller
             } else {
                 $date = strtotime($dataWeek['current'].' -7 day');
             }
-        }        
+        }
 
         for($i = 0; $i < 7; $i++) {
-            $data['dates'][$i]['date'] = date("d.m", $date);         
-            $data['dates'][$i]['dateFull'] = date("Y-m-d", $date);         
+            $data['dates'][$i]['date'] = date("d.m", $date);
+            $data['dates'][$i]['dateFull'] = date("Y-m-d", $date);
             $date =  strtotime('+1 day', $date);
-        }    
+        }
 
         $data['title'] = $data['dates'][0]['date'] .'-'.$data['dates'][6]['date'];
 
-        return $data;        
+        return $data;
     }
 
 
