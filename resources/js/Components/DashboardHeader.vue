@@ -45,7 +45,7 @@
                         >
                             <div class=" bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ">
                                 <p class="mr-2">{{filter.title}}</p>
-                                <button class="open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer"  @click="showFilterFrom">
+                                <button class="open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer"  @click="showFilterFrom(filter)">
                                     ...
                                 </button>
                             </div>
@@ -59,7 +59,14 @@
                     :categories="categories"
                     :userId="userId"
                 ></kit-modal>
-                <filter-modal v-if="FiltersVisibility" v-on:disable-filter="FiltersVisibility = !FiltersVisibility"></filter-modal>
+                <filter-modal
+                    v-if="FiltersVisibility"
+                    v-on:disable-filter="FiltersVisibility = !FiltersVisibility"
+                    :filter="SelectedFilter"
+                    :filterCountries="countries"
+                    :filterCategories="categories"
+                    :userId="userId"
+                ></filter-modal>
 </div>
 </template>
 
@@ -89,7 +96,8 @@ export default{
         return{
             showKit: false,
             FiltersVisibility: false,
-            filtersArr: this.filters
+            filtersArr: this.filters,
+            SelectedFilter: null,
         }
     },
     components:{
@@ -129,8 +137,9 @@ export default{
         showKitForm(){
             this.showKit = !this.showKit
         },
-        showFilterFrom(){
-            this.FiltersVisibility = !this.FiltersVisibility
+        showFilterFrom(filter){
+            this.FiltersVisibility = !this.FiltersVisibility;
+            this.SelectedFilter = filter;
         },
         closeKit(event) {
             this.showKit = !this.showKit

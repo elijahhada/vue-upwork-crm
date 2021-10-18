@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/filters', [UpworkController::class, 'filters'])->name('filters');
 
     Route::post('/add-filter', [FilterController::class, 'create']);
+    Route::post('/update-filter', [FilterController::class, 'update']);
 
     Route::get('/calendar/dayTimes/{day?}', [TimetableController::class, 'dayTimes']);
     Route::get('/calendar/dayUsers/{day?}', [TimetableController::class, 'dayUsers']);
