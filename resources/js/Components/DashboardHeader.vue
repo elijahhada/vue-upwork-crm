@@ -43,8 +43,8 @@
                         <div class="relative"
                              v-for="filter in filtersArr"
                         >
-                            <div class=" bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ">
-                                <p class="mr-2">{{filter.title}}</p>
+                            <div class=" bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center " v-bind:class="{'bg-green-500 text-white': selectedKits.includes(filter.id)}">
+                                <p class="mr-2 cursor-pointer" @click="toggleSelectedKits(filter.id)">{{filter.title}}</p>
                                 <button class="open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer"  @click="showFilterFrom(filter)">
                                     ...
                                 </button>
@@ -71,10 +71,10 @@
 </template>
 
 <script>
-import kitModal from './Modals/CreateKit'
-import filterModal from './Modals/FiltersModal'
+    import kitModal from './Modals/CreateKit'
+    import filterModal from './Modals/FiltersModal'
 
-export default{
+    export default{
     props: {
         filters: {
             type: Array,
@@ -90,7 +90,15 @@ export default{
         },
         userId: {
             type: Number
+        },
+        selectedKits: {
+            type: Array,
+            required: true
         }
+    },
+    model: {
+        prop: 'selectedKits',
+        event: 'change'
     },
     data(){
         return{
@@ -98,6 +106,7 @@ export default{
             FiltersVisibility: false,
             filtersArr: this.filters,
             SelectedFilter: null,
+            dataSelectedKits: [],
         }
     },
     components:{
@@ -105,6 +114,14 @@ export default{
         filterModal
     },
     methods:{
+        toggleSelectedKits(filterId) {
+            if (this.dataSelectedKits.includes(filterId)){
+                this.dataSelectedKits.splice(this.dataSelectedKits.indexOf(filterId), 1);
+            }else {
+                this.dataSelectedKits.push(filterId);
+            }
+            this.$emit('change', this.dataSelectedKits);
+        },
         showSearch(){
                 this.$refs.search_block.classList.remove('w-0')
                 this.$refs.search_block.classList.add('w-full')

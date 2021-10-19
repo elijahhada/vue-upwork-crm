@@ -5,6 +5,7 @@
                 :categories="categories"
                 :userId="userId"
                 :filters="filters"
+                v-model="selectedKits"
             ></dash-header>
             <div class="w-full ">
                     <p class="text-2xl font-bold">Find {{data.length}} jobs</p>
@@ -69,7 +70,8 @@
         data(){
             return{
                 data: [],
-                isReloading: false
+                isReloading: false,
+                selectedKits: [],
             }
         },
         components: {
@@ -85,6 +87,18 @@
             socket.on('job-delete:App\\Events\\JobDeleted', function (data) {
                 this.data = data.result
             }.bind(this))
+        },
+        watch: {
+            selectedKits(kits) {
+                this.isReloading = true;
+                axios.post('/jobs/filter', {
+                    kits: kits,
+                }).then(response => {
+                    this.data = response.data.data;
+                    this.$forceUpdate()
+                    this.isReloading = false;
+                });
+            }
         },
         methods: {
             onDelete(d) {

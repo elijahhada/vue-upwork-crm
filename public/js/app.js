@@ -3532,14 +3532,23 @@ __webpack_require__.r(__webpack_exports__);
     },
     userId: {
       type: Number
+    },
+    selectedKits: {
+      type: Array,
+      required: true
     }
+  },
+  model: {
+    prop: 'selectedKits',
+    event: 'change'
   },
   data: function data() {
     return {
       showKit: false,
       FiltersVisibility: false,
       filtersArr: this.filters,
-      SelectedFilter: null
+      SelectedFilter: null,
+      dataSelectedKits: []
     };
   },
   components: {
@@ -3547,6 +3556,15 @@ __webpack_require__.r(__webpack_exports__);
     filterModal: _Modals_FiltersModal__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   methods: {
+    toggleSelectedKits: function toggleSelectedKits(filterId) {
+      if (this.dataSelectedKits.includes(filterId)) {
+        this.dataSelectedKits.splice(this.dataSelectedKits.indexOf(filterId), 1);
+      } else {
+        this.dataSelectedKits.push(filterId);
+      }
+
+      this.$emit('change', this.dataSelectedKits);
+    },
     showSearch: function showSearch() {
       var _this = this;
 
@@ -7035,6 +7053,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -7064,7 +7083,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       data: [],
-      isReloading: false
+      isReloading: false,
+      selectedKits: []
     };
   },
   components: {
@@ -7080,24 +7100,40 @@ __webpack_require__.r(__webpack_exports__);
       this.data = data.result;
     }.bind(this));
   },
+  watch: {
+    selectedKits: function selectedKits(kits) {
+      var _this = this;
+
+      this.isReloading = true;
+      axios.post('/jobs/filter', {
+        kits: kits
+      }).then(function (response) {
+        _this.data = response.data.data;
+
+        _this.$forceUpdate();
+
+        _this.isReloading = false;
+      });
+    }
+  },
   methods: {
     onDelete: function onDelete(d) {
-      var _this = this;
+      var _this2 = this;
 
       this.data.forEach(function (item, index) {
         if (item.id == d.id) {
-          _this.data.splice(index, 1);
+          _this2.data.splice(index, 1);
         }
       });
     },
     jobEventListener: function jobEventListener() {
-      var _this2 = this;
+      var _this3 = this;
 
       socket.on('jobEventMessage', function (_ref) {
         var id = _ref.id,
             action = _ref.action;
         console.log('Данные получены');
-        _this2.isReloading = true; // this.data.forEach(function(item, i, arr) {
+        _this3.isReloading = true; // this.data.forEach(function(item, i, arr) {
         //     if(item.id == id){
         //         console.log('aboba');
         //         switch (action){
@@ -7115,12 +7151,12 @@ __webpack_require__.r(__webpack_exports__);
         //     return item.id === id;
         // });
 
-        var index = _this2.data.findIndex(function (p) {
+        var index = _this3.data.findIndex(function (p) {
           return p.id == id;
         });
 
         console.log(index);
-        console.log(_this2.data[index]);
+        console.log(_this3.data[index]);
         console.log(action); // setTimeout(() =>{
         //     switch(action){
         //         case 'delete':
@@ -7137,21 +7173,21 @@ __webpack_require__.r(__webpack_exports__);
         switch (action) {
           case 'delete':
           case 'book':
-            _this2.data.splice(index, 1);
+            _this3.data.splice(index, 1);
 
             break;
 
           case 'think':
-            var currentItem = _this2.data[index];
+            var currentItem = _this3.data[index];
             currentItem.status = 2;
 
-            _this2.$set(_this2.data, index, currentItem);
+            _this3.$set(_this3.data, index, currentItem);
 
             break;
         }
 
         setTimeout(function () {
-          _this2.isReloading = false;
+          _this3.isReloading = false;
         }, 10);
       });
     }
@@ -43331,12 +43367,26 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        " bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center "
+                        " bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ",
+                      class: {
+                        "bg-green-500 text-white": _vm.selectedKits.includes(
+                          filter.id
+                        )
+                      }
                     },
                     [
-                      _c("p", { staticClass: "mr-2" }, [
-                        _vm._v(_vm._s(filter.title))
-                      ]),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "mr-2 cursor-pointer",
+                          on: {
+                            click: function($event) {
+                              return _vm.toggleSelectedKits(filter.id)
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(filter.title))]
+                      ),
                       _vm._v(" "),
                       _c(
                         "button",
@@ -49031,6 +49081,13 @@ var render = function() {
           categories: _vm.categories,
           userId: _vm.userId,
           filters: _vm.filters
+        },
+        model: {
+          value: _vm.selectedKits,
+          callback: function($$v) {
+            _vm.selectedKits = $$v
+          },
+          expression: "selectedKits"
         }
       }),
       _vm._v(" "),
