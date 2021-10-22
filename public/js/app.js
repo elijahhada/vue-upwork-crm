@@ -3032,6 +3032,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.getDayTimes();
     this.getDayUsers();
+    this.calendarListen();
   },
   methods: {
     getDayTimes: function getDayTimes() {
@@ -3039,6 +3040,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/calendar/dayTimes/" + this.dataDay).then(function (res) {
         _this.calendarDayTimes = res.data;
+        console.log(res.data);
       });
     },
     getDayUsers: function getDayUsers() {
@@ -3046,6 +3048,19 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/calendar/dayUsers/" + this.dataDay).then(function (res) {
         _this2.calendarDayUsers = res.data;
+      });
+    },
+    calendarListen: function calendarListen() {
+      var _this3 = this;
+
+      socket.on('calendar:listeners', function (_ref) {
+        var index = _ref.index,
+            time = _ref.time,
+            users = _ref.users;
+        var hasItem = _this3.calendarDayTimes[index].dateTime === time;
+        if (!hasItem) return;
+
+        _this3.$set(_this3.calendarDayUsers, index, users);
       });
     }
   }
@@ -3234,8 +3249,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     dataIndex: Number,
@@ -3255,39 +3268,40 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   computed: {
     free: function free() {
-      return this.dataUsers ? 0 : 1;
+      return this.dataUsers && this.dataUsers.length !== 0 ? false : true;
     },
     buttonType: function buttonType() {
-      var type = 0;
+      var _this = this;
 
-      for (var key in this.dataUsers) {
-        if (this.dataUsers[key]["id"] === +this.$userId) {
-          type = 1;
-        }
-      }
-
-      return type;
+      return this.dataUsers && this.dataUsers.find(function (u) {
+        return u.id === +_this.$userId;
+      }) ? 1 : 0;
     }
   },
   methods: {
-    clickItem: function clickItem() {
-      this.showButton = !this.showButton;
-    },
     clickButton: function clickButton(type) {
-      var _this = this;
+      var _this2 = this;
 
-      var data = {};
-      data.type = type;
-      data.time = this.dataTime.dateTime;
+      var data = {
+        type: type,
+        time: this.dataTime.dateTime
+      };
       axios.get("/calendar/userHour/" + JSON.stringify(data)).then(function (res) {
-        _this.setDataUsers(_this.dataTime.dateTime);
+        _this2.setDataUsers(data.time);
       });
     },
     setDataUsers: function setDataUsers(time) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/calendar/itemUsers/" + time).then(function (res) {
-        _this2.$emit('change', res.data);
+        var users = res.data || [];
+        socket.emit('calendar:speak', {
+          index: _this3.dataIndex,
+          time: time,
+          users: users
+        });
+
+        _this3.$emit('change', users);
       });
     }
   }
@@ -3696,11 +3710,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  computed: {
-    truncatedExcerpt: function truncatedExcerpt() {
-      return this.excerpt.substring(0, this.truncatedLength);
-    }
-  },
   props: {
     id: {
       required: true
@@ -3790,60 +3799,63 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      categoryArr: this.category.split(','),
+      categories: this.category.split(',').map(function (c, i) {
+        return {
+          id: i,
+          name: c.trim()
+        };
+      }),
       truncatedLength: 300,
-      truncated: true,
-      isThinking: false
+      truncated: true
     };
+  },
+  computed: {
+    isThinking: function isThinking() {
+      return this.jobStatus === 2;
+    },
+    truncatedExcerpt: function truncatedExcerpt() {
+      return this.excerpt.substring(0, this.truncatedLength);
+    }
   },
   methods: {
     showModal: function showModal() {
       this.$inertia.get(this.route('pipedrive.deal.add'));
-      console.log(this.$modal.show(_Modals_AddDeal__WEBPACK_IMPORTED_MODULE_0__["default"]));
+      this.$modal.show(_Modals_AddDeal__WEBPACK_IMPORTED_MODULE_0__["default"]);
     },
-    changeStatus: function changeStatus(status_id) {
+    changeStatus: function changeStatus(status) {
       var _this = this;
 
-      var el = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      if (el) this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
-      console.log(this.id);
+      var showModal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      if (showModal) this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
       axios.post('/jobs/change-status', {
-        status: status_id,
-        id: this.id
-      }).then(function (response) {
-        var action;
-
-        if (status_id == 1) {
-          action = 'book';
-        } else {
-          action = 'think';
-        }
-
-        socket.emit('jobEvent', {
+        id: this.id,
+        status: status
+      }).then(function (res) {
+        var action = status === 1 ? "book" : status === 2 ? "think" : "reconsider";
+        socket.emit('job:speak', {
           id: _this.id,
           action: action
         });
+      });
+      this.$emit('changeStatus', {
+        id: this.id,
+        status: status
       });
     },
     deleteJob: function deleteJob() {
       var _this2 = this;
 
+      axios.post('/jobs/delete', {
+        id: this.id
+      }).then(function (res) {
+        socket.emit('job:speak', {
+          id: _this2.id,
+          action: "delete"
+        });
+      });
       this.$emit('delete', {
         id: this.id
       });
-      axios.post('/jobs/delete', {
-        id: this.id
-      }).then(function (response) {
-        socket.emit('jobEvent', {
-          id: _this2.id,
-          action: 'delete'
-        });
-      });
-    }
-  },
-  mounted: function mounted() {
-    if (this.jobStatus == 2) {
-      this.isThinking = true;
     }
   }
 });
@@ -7094,11 +7106,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.data = this.jobs.data;
-    socket.emit('test', 'FFFFFFF');
-    this.jobEventListener();
-    socket.on('job-delete:App\\Events\\JobDeleted', function (data) {
-      this.data = data.result;
-    }.bind(this));
+    this.jobListen();
   },
   watch: {
     selectedKits: function selectedKits(kits) {
@@ -7117,78 +7125,66 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    onDelete: function onDelete(d) {
+    onDelete: function onDelete(_ref) {
+      var id = _ref.id;
+      var index = this.data.findIndex(function (p) {
+        return p.id == id;
+      });
+      if (index === -1) return;
+      this.data.splice(index, 1);
+    },
+    onChangeStatus: function onChangeStatus(_ref2) {
+      var id = _ref2.id,
+          status = _ref2.status;
+      var index = this.data.findIndex(function (p) {
+        return p.id == id;
+      });
+      if (index === -1) return;
+      var currentItem = this.data[index];
+      currentItem.status = status;
+      this.$set(this.data, index, currentItem);
+    },
+    jobListen: function jobListen() {
       var _this2 = this;
 
-      this.data.forEach(function (item, index) {
-        if (item.id == d.id) {
-          _this2.data.splice(index, 1);
-        }
-      });
-    },
-    jobEventListener: function jobEventListener() {
-      var _this3 = this;
+      socket.on('job:listeners', function (_ref3) {
+        var id = _ref3.id,
+            action = _ref3.action;
 
-      socket.on('jobEventMessage', function (_ref) {
-        var id = _ref.id,
-            action = _ref.action;
-        console.log('Данные получены');
-        _this3.isReloading = true; // this.data.forEach(function(item, i, arr) {
-        //     if(item.id == id){
-        //         console.log('aboba');
-        //         switch (action){
-        //             case 'delete':
-        //             case 'book':
-        //                 unset(this.data[item]);
-        //                 break;
-        //             case 'think':
-        //                 item.status = 2;
-        //         }
-        //     };
-        // })
-        // const currentItem = this.data.filter((obj) => {
-        //     const [item] = Object.entries(obj);
-        //     return item.id === id;
-        // });
-
-        var index = _this3.data.findIndex(function (p) {
+        var index = _this2.data.findIndex(function (p) {
           return p.id == id;
         });
 
-        console.log(index);
-        console.log(_this3.data[index]);
-        console.log(action); // setTimeout(() =>{
-        //     switch(action){
-        //         case 'delete':
-        //         case 'book':
-        //             this.data.splice(index, 1);
-        //             break;
-        //         case 'think':
-        //             this.data[index].status = 2;
-        //             break;
-        //     }
-        //     this.isReloading = false;
-        // }, 30);
+        if (index === -1) return;
+        var currentItem = _this2.data[index];
 
         switch (action) {
           case 'delete':
+            _this2.data.splice(index, 1);
+
+            break;
+
           case 'book':
-            _this3.data.splice(index, 1);
+            currentItem.status = 1;
+
+            _this2.$set(_this2.data, index, currentItem);
 
             break;
 
           case 'think':
-            var currentItem = _this3.data[index];
             currentItem.status = 2;
 
-            _this3.$set(_this3.data, index, currentItem);
+            _this2.$set(_this2.data, index, currentItem);
+
+            break;
+
+          case 'reconsider':
+            currentItem.status = null;
+
+            _this2.$set(_this2.data, index, currentItem);
 
             break;
         }
-
-        setTimeout(function () {
-          _this3.isReloading = false;
-        }, 10);
       });
     }
   }
@@ -9191,22 +9187,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
-// import Echo from 'laravel-echo';
-// window.Pusher = require('pusher-js');
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
 
 window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/build/index.js");
-window.socket = io("http://localhost:3000", {
-  "force new connection": true,
-  "reconnectionAttempts": "Infinity",
-  //avoid having user reconnect manually in order to prevent dead clients after a server restart
-  "transports": ["websocket"]
-});
+window.socket = io("http://localhost:3000");
 
 /***/ }),
 
@@ -11672,7 +11655,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f]{\n    background-color: #d9c36c !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f]{\n    background-color: #FAEAE3 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42926,7 +42909,7 @@ var render = function() {
             attrs: {
               "data-index": index,
               "data-time": _vm.calendarDayTimes[index],
-              "data-users": _vm.calendarDayUsers[index],
+              "data-users": _vm.calendarDayUsers[index] || [],
               "type-calendar": _vm.typeCalendar
             },
             model: {
@@ -43136,8 +43119,11 @@ var render = function() {
         "my-3 text-xs": _vm.typeCalendar === "global"
       },
       on: {
-        click: function($event) {
-          return _vm.clickItem()
+        mouseover: function($event) {
+          _vm.showButton = true
+        },
+        mouseleave: function($event) {
+          _vm.showButton = false
         }
       }
     },
@@ -43167,9 +43153,7 @@ var render = function() {
         {
           staticClass:
             "z-40 hover:shadow-lg bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me",
-          class: {
-            hidden: !_vm.showButton
-          },
+          class: { hidden: !_vm.showButton },
           on: {
             click: function($event) {
               return _vm.clickButton(_vm.buttonType)
@@ -43356,7 +43340,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                            Create\n                            Kit\n                        "
+                    "\r\n                            Create\r\n                            Kit\r\n                        "
                   )
                 ]
               ),
@@ -43401,7 +43385,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                                    ...\n                                "
+                            "\r\n                                    ...\r\n                                "
                           )
                         ]
                       )
@@ -43547,7 +43531,8 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "w-full p-7 border border-gray-300 rounded-md my-6 relative"
+      staticClass: "w-full p-7 border border-gray-300 rounded-md my-6 relative",
+      class: { "bg-yellow": _vm.isThinking }
     },
     [
       _c(
@@ -43570,7 +43555,7 @@ var render = function() {
                 "span",
                 {
                   staticClass:
-                    "text-green-500 font-bold text-2xl mr-4  border-b border-gray-300"
+                    "text-green-500 font-bold text-2xl mr-4 border-b border-gray-300"
                 },
                 [_vm._v(_vm._s(_vm.title))]
               )
@@ -43598,16 +43583,17 @@ var render = function() {
       _c(
         "div",
         { staticClass: "w-11/12 mb-8 flex justify-start items-center" },
-        _vm._l(_vm.categoryArr, function(cat) {
+        _vm._l(_vm.categories, function(cat) {
           return _c(
             "p",
             {
+              key: cat.id,
               staticClass:
-                " bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4"
+                "bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4"
             },
             [
               _c("span", { staticClass: "py-2 px-3" }, [
-                _vm._v(_vm._s(cat.trim()))
+                _vm._v(_vm._s(cat.name))
               ])
             ]
           )
@@ -43717,11 +43703,10 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "w-full flex justify-end items-center" }, [
         _c(
-          "a",
+          "button",
           {
             staticClass:
               "open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7",
-            attrs: { href: "#" },
             on: {
               click: function($event) {
                 return _vm.changeStatus(1, true)
@@ -43732,18 +43717,23 @@ var render = function() {
         ),
         _vm._v(" "),
         _c(
-          "a",
+          "button",
           {
             staticClass:
               "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white ",
-            attrs: { href: "#" },
             on: {
               click: function($event) {
-                return _vm.changeStatus(2)
+                return _vm.changeStatus(_vm.isThinking ? 0 : 2)
               }
             }
           },
-          [_vm._v("\n            Think\n        ")]
+          [
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm.isThinking ? "Reconsider" : "Think") +
+                "\n        "
+            )
+          ]
         )
       ])
     ]
@@ -49129,7 +49119,7 @@ var render = function() {
                   duration: job.duration,
                   avgRate: job.client_avg_rate
                 },
-                on: { delete: _vm.onDelete }
+                on: { delete: _vm.onDelete, changeStatus: _vm.onChangeStatus }
               })
             }),
             1

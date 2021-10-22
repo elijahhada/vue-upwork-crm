@@ -4,7 +4,7 @@
             <CalendarItem
                 :data-index="index"
                 :data-time="calendarDayTimes[index]"
-                :data-users="calendarDayUsers[index]"
+                :data-users="calendarDayUsers[index] || []"
                 :type-calendar="typeCalendar"
                 v-model="calendarDayUsers[index]"
             ></CalendarItem>
@@ -49,17 +49,26 @@ export default {
     mounted() {
         this.getDayTimes();
         this.getDayUsers();
+        this.calendarListen();
     },
     methods: {
         getDayTimes() {
             axios.get("/calendar/dayTimes/" + this.dataDay).then(res => {
                 this.calendarDayTimes = res.data;
+                console.log(res.data)
             });
         },
         getDayUsers() {
             axios.get("/calendar/dayUsers/" + this.dataDay).then(res => {
                 this.calendarDayUsers = res.data;
             });
+        },
+        calendarListen() {
+            socket.on('calendar:listeners', ({ index, time, users }) => {
+                const hasItem = this.calendarDayTimes[index].dateTime === time
+                if (!hasItem) return;
+                this.$set(this.calendarDayUsers, index, users);
+            })
         }
     }
 };

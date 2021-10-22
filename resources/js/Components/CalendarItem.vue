@@ -7,7 +7,7 @@
             'my-6 mx-4 text-base': typeCalendar === 'local',
             'my-3 text-xs': typeCalendar === 'global'
         }"
-        @click="clickItem()"
+        @mouseover="showButton = true" @mouseleave="showButton = false"
     >
         <div>{{ dataTime ? dataTime.hour : "" }}</div>
         <div class="flex flex-col">
@@ -23,9 +23,7 @@
         <div></div>
         <div
             class="z-40 hover:shadow-lg bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me"
-            :class="{
-                hidden: !showButton
-            }"
+            :class="{ hidden: !showButton }"
             @click="clickButton(buttonType)"
         >
             {{ buttonType === 0 ? "To book" : "Delete me" }}
@@ -53,35 +51,26 @@ export default {
     mounted() {},
     computed: {
         free() {
-            return this.dataUsers ? 0 : 1;
+            return this.dataUsers && this.dataUsers.length !== 0 ? false : true;
         },
         buttonType() {
-            let type = 0;
-            for (let key in this.dataUsers) {
-                if (this.dataUsers[key]["id"] === +this.$userId) {
-                    type = 1;
-                }
-            }
-            return type;
+            return this.dataUsers && this.dataUsers.find(u => u.id === +this.$userId) ? 1 : 0
         }
     },
     methods: {
-        clickItem() {
-            this.showButton = !this.showButton;
-        },
         clickButton(type) {
-            let data = {};
-            data.type = type;
-            data.time = this.dataTime.dateTime;
+            const data = { type, time: this.dataTime.dateTime };
             axios
                 .get("/calendar/userHour/" + JSON.stringify(data))
                 .then(res => {
-                    this.setDataUsers(this.dataTime.dateTime);
+                    this.setDataUsers(data.time);
                 });
         },
         setDataUsers(time) {
             axios.get("/calendar/itemUsers/" + time).then(res => {
-                this.$emit('change', res.data);
+                const users = res.data || []
+                socket.emit('calendar:speak', { index: this.dataIndex, time, users });
+                this.$emit('change', users);
             });
         }
     }

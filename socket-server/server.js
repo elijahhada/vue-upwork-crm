@@ -1,43 +1,38 @@
-const path = require('path');
-const http = require('http');
+const HOST = "http://localhost";
+const PORT = 3000;
+const hostname = `${HOST}:${PORT}`;
+
 const express = require('express');
-const cors = require('cors');
-
-var Redis = require('ioredis');
-var redis = new Redis();
-
-redis.subscribe('job-delete');
-redis.on('message', function (channel, message) {
-    console.log('Message receved: '+ message)
-    console.log('Channel: '+ channel)
-    message = JSON.parse(message)
-    io.emit(channel + ':' +message.event, message.data)
-})
-
 const app = express();
-const server = http.createServer(app);
-const httpio = http.Server();
-const io = require('socket.io')(httpio);
+const server = require('http').createServer(app);
 
-app.use(express.static(path.join(__dirname, 'public')));
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(cors());
-
-const PORT = 3000 || process.env.PORT;
-
-server.listen(PORT, console.log(`Сервер запущен по порту ${PORT}`));
+const io = require('socket.io')(server, {
+    cors: { origin: "*" }
+});
 
 io.on('connection', socket => {
-    console.log("Начало положено");
-    socket.on('test', (message) => {
-        io.emit('message', 'SPACITY, YA DOLZHEN OTPRAVIT SOOBSHENIE');
-    });
-    socket.on('jobEvent', ({id, action}) => {
-        console.log('Данные отправлены');
-        io.emit('jobEventMessage', {id, action});
+    socket.connected && console.log(`→ Socket connected`);
+
+
+    socket.on("test", (data) => {
+        console.log(data)
     })
-    socket.on('disconnect', (socket) => {
-        console.log("Отключился")
+
+    socket.on('job:speak', (data) => {
+        console.log("job:speak", data)
+        socket.broadcast.emit('job:listeners', data);
     })
+
+    socket.on('calendar:speak', (data) => {
+        console.log("calendar:speak", data)
+        socket.broadcast.emit('calendar:listeners', data);
+    })
+
+    socket.on("disconnect", () => {
+        console.log(`← Socket disconnect`)
+    })
+});
+
+server.listen(PORT, () => {
+    console.log(`WS Server ranning on ${hostname}\n`);
 });

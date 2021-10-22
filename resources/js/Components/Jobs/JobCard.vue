@@ -1,9 +1,9 @@
 <template>
-    <div class="w-full p-7 border border-gray-300 rounded-md my-6 relative">
+    <div class="w-full p-7 border border-gray-300 rounded-md my-6 relative" v-bind:class="{ 'bg-yellow': isThinking }">
         <p class="text-black text-3xl  cursor-pointer hover:text-red-500 absolute top-6 right-6" @click="deleteJob">×</p>
         <div class="w-11/12 mb-7 flex justify-between items-center">
             <p>
-                <a :href="url"><span class="text-green-500 font-bold text-2xl mr-4  border-b border-gray-300">{{ title }}</span></a>
+                <a :href="url"><span class="text-green-500 font-bold text-2xl mr-4 border-b border-gray-300">{{ title }}</span></a>
                 <span class="text-black font-bold text-2xl">Score: {{ score }}%</span>
             </p>
             <p>
@@ -17,9 +17,9 @@
         </div>
         <div class="w-11/12 mb-8 flex justify-start items-center">
             <p
-                v-for="cat in categoryArr"
-                class=" bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4"
-            ><span class="py-2 px-3">{{cat.trim()}}</span></p>
+                v-for="cat in categories" :key="cat.id"
+                class="bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4"
+            ><span class="py-2 px-3">{{cat.name}}</span></p>
         </div>
         <div class="w-11/12 mb-8 flex nowrap justify-start items-start text-md leading-6 ">
             <div class="w-4/12 flex flex-col justify-start items-start">
@@ -50,15 +50,15 @@
             </p>
         </div>
         <div class="w-full flex justify-end items-center">
-            <a href="#"
+            <button
                class="open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7"
-               @click="changeStatus(1,true)">
+               @click="changeStatus(1, true)">
                 Take
-            </a>
-            <a href="#"
-               class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white " @click="changeStatus(2)">
-                Think
-            </a>
+            </button>
+            <button
+               class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white " @click="changeStatus(isThinking ? 0 : 2)">
+                {{ isThinking ? "Reconsider" : "Think"}}
+            </button>
 
         </div>
     </div>
@@ -68,11 +68,6 @@
 import AddDeal from "../Modals/AddDeal";
 
 export default {
-    computed: {
-        truncatedExcerpt: function() {
-            return this.excerpt.substring(0, this.truncatedLength);
-        }
-    },
     props: {
         id: {
             required: true,
@@ -162,56 +157,51 @@ export default {
     },
     data() {
         return {
-            categoryArr: this.category.split(','),
+            categories: this.category.split(',').map((c, i) => {
+                return { id: i, name: c.trim() }
+            }),
             truncatedLength: 300,
             truncated: true,
-            isThinking: false,
+        }
+    },
+    computed: {
+        isThinking() {
+            return this.jobStatus === 2
+        },
+        truncatedExcerpt: function() {
+            return this.excerpt.substring(0, this.truncatedLength);
         }
     },
     methods: {
         showModal() {
             this.$inertia.get(this.route('pipedrive.deal.add'));
-            console.log(this.$modal.show(
-                AddDeal
-            ))
+            this.$modal.show(AddDeal)
         },
-        changeStatus(status_id, el=null){
-            if (el) this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched
-            console.log(this.id);
-            axios
-                .post('/jobs/change-status', {status: status_id, id: this.id})
-                .then(response => {
-                    var action;
-                    if(status_id == 1){
-                        action = 'book';
-                    }else{
-                        action = 'think';
-                    }
-                    socket.emit('jobEvent', {id: this.id, action: action});
-                });
-        },
-        deleteJob(){
-            this.$emit('delete', {
-                id: this.id
-            })
+        changeStatus(status, showModal = false){
+            if (showModal) this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched
 
             axios
-                .post('/jobs/delete', {id: this.id})
-                .then(response => {
-                    socket.emit('jobEvent', {id: this.id, action: 'delete'})
+                .post('/jobs/change-status', { id: this.id, status })
+                .then(res => {
+                    let action = status === 1 ? "book" : status === 2 ? "think" : "reconsider"
+                    socket.emit('job:speak', { id: this.id, action });
                 });
+            this.$emit('changeStatus', { id: this.id, status });
+        },
+        deleteJob(){
+            axios
+                .post('/jobs/delete', { id: this.id })
+                .then(res => {
+                    socket.emit('job:speak', { id: this.id, action: "delete" })
+                });
+            this.$emit('delete', { id: this.id });
         },
     },
-    mounted() {
-            if(this.jobStatus == 2){
-                this.isThinking = true
-            }
-    }
 }
 </script>
 
 <style scoped>
     .bg-yellow{
-        background-color: #d9c36c !important;
+        background-color: #FAEAE3 !important;
     }
 </style>
