@@ -11,7 +11,7 @@
                     <p class="text-2xl font-bold">Find {{data.length}} jobs</p>
             </div>
             <div class="flex flex-col space-y-4" v-if="!isReloading">
-                <job-card class="w-8/12 py-7 px-8 border" v-for="job in data" :key="job.id" @delete="onDelete"
+                <job-card class="w-8/12 py-7 px-8 border" v-for="job in data" :key="job.id" @delete="onDelete" @changeStatus="onChangeStatus"
                     :id="job.id"
                     :title="job.title"
                     :excerpt="job.excerpt"
@@ -81,12 +81,7 @@
         },
         mounted() {
             this.data = this.jobs.data;
-            socket.emit('test', 'FFFFFFF');
-            this.jobEventListener();
-
-            socket.on('job-delete:App\\Events\\JobDeleted', function (data) {
-                this.data = data.result
-            }.bind(this))
+            this.jobListen();
         },
         watch: {
             selectedKits(kits) {
@@ -101,64 +96,40 @@
             }
         },
         methods: {
-            onDelete(d) {
-                this.data.forEach((item, index) => {
-                    if(item.id == d.id) {
-                        this.data.splice(index, 1)
-                    }
-                })
+            onDelete({ id }) {
+                const index = this.data.findIndex(p => p.id == id);
+                if (index === -1) return;
+                this.data.splice(index, 1);
             },
-            jobEventListener(){
-                socket.on('jobEventMessage', ({id, action}) => {
-                    console.log('Данные получены');
-                    this.isReloading = true;
-                    // this.data.forEach(function(item, i, arr) {
-                    //     if(item.id == id){
-                    //         console.log('aboba');
-                    //         switch (action){
-                    //             case 'delete':
-                    //             case 'book':
-                    //                 unset(this.data[item]);
-                    //                 break;
-                    //             case 'think':
-                    //                 item.status = 2;
-                    //         }
-                    //     };
-                    // })
-                    // const currentItem = this.data.filter((obj) => {
-                    //     const [item] = Object.entries(obj);
-                    //     return item.id === id;
-                    // });
-                    var index = this.data.findIndex(p => p.id == id);
-                    console.log(index);
-                    console.log(this.data[index])
-                    console.log(action);
-                    // setTimeout(() =>{
-                    //     switch(action){
-                    //         case 'delete':
-                    //         case 'book':
-                    //             this.data.splice(index, 1);
-                    //             break;
-                    //         case 'think':
-                    //             this.data[index].status = 2;
-                    //             break;
-                    //     }
-                    //     this.isReloading = false;
-                    // }, 30);
-                    switch(action){
-                            case 'delete':
-                            case 'book':
-                                this.data.splice(index, 1);
-                                break;
-                            case 'think':
-                                var currentItem = this.data[index];
-                                currentItem.status = 2;
-                                this.$set(this.data, index, currentItem);
-                                break;
-                        }
-                    setTimeout(() =>{
-                        this.isReloading = false;
-                    }, 10)
+            onChangeStatus({ id, status }) {
+                const index = this.data.findIndex(p => p.id == id);
+                if (index === -1) return;
+                const currentItem = this.data[index];
+                currentItem.status = status;
+                this.$set(this.data, index, currentItem);
+            },
+            jobListen() {
+                socket.on('job:listeners', ({id, action}) => {
+                    const index = this.data.findIndex(p => p.id == id);
+                    if (index === -1) return;
+                    const currentItem = this.data[index];
+                    switch (action) {
+                        case 'delete':
+                            this.data.splice(index, 1);
+                            break;
+                        case 'book':
+                            currentItem.status = 1;
+                            this.$set(this.data, index, currentItem);
+                            break;
+                        case 'think':
+                            currentItem.status = 2;
+                            this.$set(this.data, index, currentItem);
+                            break;
+                        case 'reconsider':
+                            currentItem.status = null;
+                            this.$set(this.data, index, currentItem);
+                            break;
+                    }
                 })
             }
         }

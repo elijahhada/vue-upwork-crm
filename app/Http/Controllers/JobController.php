@@ -101,7 +101,6 @@ class JobController extends Controller
         $job = Job::where('id', $request->input('id'))->first();
 
         $job->delete();
-        event(new JobDeleted($job));
     }
 
     public function filter(Request $request) {
