@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Services;
-
 
 use Upwork\API\Routers\Jobs\Profile;
 

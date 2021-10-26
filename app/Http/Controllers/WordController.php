@@ -63,8 +63,8 @@ class WordController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Word  $word
+     * @param  \Illuminate\Http\Request   $request
+     * @param  \App\Models\Word           $word
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Word $word)

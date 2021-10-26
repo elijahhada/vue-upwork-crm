@@ -7,7 +7,6 @@ window._ = require('lodash');
  */
 
 window.axios = require('axios');
-
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
@@ -17,4 +16,4 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 window.io = require('socket.io-client');
-window.socket = io("http://localhost:3000");
+window.socket = io(`${window.location.hostname}:3000`);

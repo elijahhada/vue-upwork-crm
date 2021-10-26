@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Services;
-
 
 use App\Contracts\OAuthable;
 use Illuminate\Support\Facades\Session;

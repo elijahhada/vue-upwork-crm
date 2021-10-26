@@ -1,0 +1,17 @@
+{
+    "arrowParens": "always",
+    "bracketSameLine": true,
+    "bracketSpacing": true,
+    "embeddedLanguageFormatting": "auto",
+    "endOfLine": "auto",
+    "phpVersion": "7.4",
+    "printWidth": 200,
+    "proseWrap": "never",
+    "quoteProps": "preserve",
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "es5",
+    "trailingCommaPHP": true,
+    "useTabs": false
+}

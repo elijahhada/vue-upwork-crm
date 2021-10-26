@@ -29,7 +29,9 @@ class PipedriveController extends Controller
 
         abort_if(!$userInfo, 404, 'Whoops, we get an error!');
 
-        $user = User::query()->where('email', $userInfo->data->email)->first();
+        $user = User::query()
+            ->where('email', $userInfo->data->email)
+            ->first();
 
         if (!$user) {
             $user = (new CreateNewUser())->create([

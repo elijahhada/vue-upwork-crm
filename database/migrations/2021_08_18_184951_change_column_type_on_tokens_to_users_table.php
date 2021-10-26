@@ -14,8 +14,14 @@ class ChangeColumnTypeOnTokensToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('upwork_token')->nullable()->change();
-            $table->text('pipedrive_token')->nullable()->change();
+            $table
+                ->text('upwork_token')
+                ->nullable()
+                ->change();
+            $table
+                ->text('pipedrive_token')
+                ->nullable()
+                ->change();
         });
     }
 
@@ -27,8 +33,14 @@ class ChangeColumnTypeOnTokensToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('upwork_token')->nullable()->change();
-            $table->string('pipedrive_token')->nullable()->change();
+            $table
+                ->string('upwork_token')
+                ->nullable()
+                ->change();
+            $table
+                ->string('pipedrive_token')
+                ->nullable()
+                ->change();
         });
     }
 }

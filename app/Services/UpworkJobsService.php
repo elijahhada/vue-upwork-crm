@@ -1,9 +1,7 @@
-<?php 
-
+<?php
 
 namespace App\Services;
 
-use Upwork\API\Routers\Hr\Jobs;
 use Upwork\API\Routers\Jobs\Search;
 
 class UpworkJobsService extends Upwork
@@ -18,11 +16,11 @@ class UpworkJobsService extends Upwork
     public function getJobs()
     {
         $this->client->auth();
-        
+
         return (new Search($this->client))->find([
             'q' => $this->query,
             'title' => $this->title,
-            'paging' => $this->offset.';'.$this->count,
+            'paging' => $this->offset . ';' . $this->count,
             'category2' => $this->category2,
             'subcategory2' => $this->subcategory2,
         ]);
@@ -45,7 +43,7 @@ class UpworkJobsService extends Upwork
         if ($count) {
             $this->count = $count;
         }
-        
+
         return $this;
     }
 

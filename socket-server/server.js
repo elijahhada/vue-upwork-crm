@@ -1,4 +1,4 @@
-const HOST = "http://localhost";
+const HOST = 'http://localhost';
 const PORT = 3000;
 const hostname = `${HOST}:${PORT}`;
 
@@ -7,30 +7,24 @@ const app = express();
 const server = require('http').createServer(app);
 
 const io = require('socket.io')(server, {
-    cors: { origin: "*" }
+    cors: { origin: '*' },
 });
 
-io.on('connection', socket => {
+io.on('connection', (socket) => {
     socket.connected && console.log(`→ Socket connected`);
 
-
-    socket.on("test", (data) => {
-        console.log(data)
-    })
-
-    socket.on('job:speak', (data) => {
-        console.log("job:speak", data)
-        socket.broadcast.emit('job:listeners', data);
-    })
-
-    socket.on('calendar:speak', (data) => {
-        console.log("calendar:speak", data)
-        socket.broadcast.emit('calendar:listeners', data);
-    })
-
-    socket.on("disconnect", () => {
-        console.log(`← Socket disconnect`)
-    })
+    socket
+        .on('job:speak', (data) => {
+            console.log('job:speak', data);
+            socket.broadcast.emit('job:listeners', data);
+        })
+        .on('calendar:speak', (data) => {
+            console.log('calendar:speak', data);
+            socket.broadcast.emit('calendar:listeners', data);
+        })
+        .on('disconnect', () => {
+            console.log(`← Socket disconnect`);
+        });
 });
 
 server.listen(PORT, () => {

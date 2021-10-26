@@ -1,0 +1,14 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "prettier.arrowParens": "avoid",
+    "prettier.endOfLine": "auto",
+    "prettier.printWidth": 150,
+    "prettier.singleQuote": true,
+    "php.validate.enable": false,
+    "php.suggest.basic": false,
+    "intelephense.format.enable": true
+}

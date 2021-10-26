@@ -14,8 +14,14 @@ class ChangeToNullableStatusColumnToJobsTable extends Migration
     public function up()
     {
         Schema::table('jobs', function (Blueprint $table) {
-            $table->string('status')->nullable()->change();
-            $table->string('client_country')->nullable()->change();
+            $table
+                ->string('status')
+                ->nullable()
+                ->change();
+            $table
+                ->string('client_country')
+                ->nullable()
+                ->change();
         });
     }
 
@@ -27,8 +33,14 @@ class ChangeToNullableStatusColumnToJobsTable extends Migration
     public function down()
     {
         Schema::table('jobs', function (Blueprint $table) {
-            $table->string('status')->nullable(false)->change();
-            $table->string('client_country')->nullable(false)->change();
+            $table
+                ->string('status')
+                ->nullable(false)
+                ->change();
+            $table
+                ->string('client_country')
+                ->nullable(false)
+                ->change();
         });
     }
 }

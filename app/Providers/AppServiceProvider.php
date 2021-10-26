@@ -21,11 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->when(UpworkController::class)
+        $this->app
+            ->when(UpworkController::class)
             ->needs(OAuthable::class)
             ->give(UpworkAuthService::class);
 
-        $this->app->when(PipedriveController::class)
+        $this->app
+            ->when(PipedriveController::class)
             ->needs(OAuthable::class)
             ->give(PipedriveAuthService::class);
     }
@@ -37,12 +39,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if($this->app->environment('production')) {
+        if ($this->app->environment('production')) {
             URL::forceScheme('https');
         }
 
-        Configuration::$oAuthTokenUpdateCallback = function($token) {
-            // use session or some other way to persist the $token
+        Configuration::$oAuthTokenUpdateCallback = function ($token) {
             session()->put('pipedrive_token', $token);
         };
     }

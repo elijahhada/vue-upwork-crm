@@ -4,8 +4,9 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 use Upwork\API\Config;
+use App\Services\Upwork\Client;
 
-abstract class Upwork 
+abstract class Upwork
 {
     protected $client;
 
@@ -14,14 +15,14 @@ abstract class Upwork
         $config = new Config([
             'clientId' => config('upwork.client_id'),
             'clientSecret' => config('upwork.client_secret'),
-            'redirectUri' => url('/').'/auth/callback',
+            'redirectUri' => url('/') . '/auth/callback',
             'mode' => 'web',
             'code' => session()->get('upwork_code'),
             'accessToken' => $this->getOAuthToken()->access_token,
             'refreshToken' => $this->getOAuthToken()->refresh_token,
             'expiresIn' => $this->getOAuthToken()->expires_in,
         ]);
-        $this->client = new \App\Services\Upwork\Client($config);
+        $this->client = new Client($config);
     }
 
     public function setOAuthToken($token)
@@ -31,8 +32,8 @@ abstract class Upwork
         Config::set('refreshToken', $token['refresh_token']);
         Config::set('expiresIn', $token['expires_in']);
 
-        if (\Illuminate\Support\Facades\Auth::check()) {
-            \Illuminate\Support\Facades\Auth::user()->update([
+        if (Auth::check()) {
+            Auth::user()->update([
                 'upwork_token' => $token,
             ]);
         }
@@ -41,8 +42,8 @@ abstract class Upwork
     public function getOAuthToken()
     {
         if (Auth::check() && !session()->has('upwork_token') && Auth::user()->upwork_token) {
-            $this->setOAuthToken(Auth::user()->upwork_token);   
-        } 
+            $this->setOAuthToken(Auth::user()->upwork_token);
+        }
 
         return session()->has('upwork_token')
             ? session()->get('upwork_token')

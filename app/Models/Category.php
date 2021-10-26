@@ -14,10 +14,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'upwork_id',
-        'title',
-    ];
+    protected $fillable = ['upwork_id', 'title'];
 
     public function topics()
     {
