@@ -86,14 +86,15 @@ class JobController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function changeStatus(Request $request){
+    public function changeStatus(Request $request)
+    {
         $job = Job::where('id', $request->input('id'))->first();
         $job->status = $request->input('status');
-        if($request->input('status') == 1){
+        if ($request->input('status') == 1) {
             $job->user_id = Auth::user()->id;
         }
         $job->save();
-        return(Auth::user());
+        return Auth::user();
     }
 
     public function delete(Request $request)
@@ -103,27 +104,30 @@ class JobController extends Controller
         $job->delete();
     }
 
-    public function filter(Request $request) {
+    public function filter(Request $request)
+    {
         $filters = Filter::find($request->kits);
         if (!count($filters)) {
-            $jobs = Job::query()->orderBy('date_created', 'desc')->paginate(20);
+            $jobs = Job::query()
+                ->orderBy('date_created', 'desc')
+                ->paginate(20);
             return $jobs;
         }
         $categories = $filters->pluck('categories_ids');
-        $categories = $categories->filter(function ($value) { return !is_null($value); });
+        $categories = $categories->filter(fn($value) => !is_null($value));
         $filterCategories = collect();
 
         $countries = $filters->pluck('countries_ids');
-        $countries = $countries->filter(function ($value) {return !is_null($value); });
+        $countries = $countries->filter(fn($value) => !is_null($value));
         $filterCountries = collect();
 
         $exceptionWords = $filters->pluck('exseption_words');
-        $exceptionWords = $exceptionWords->filter(function ($value) { return !is_null($value); });
+        $exceptionWords = $exceptionWords->filter(fn($value) => !is_null($value));
         $filterWords = collect();
 
-        if (count($categories)){
-            foreach ($categories as $category){
-                foreach (explode(",", $category) as $item) {
+        if (count($categories)) {
+            foreach ($categories as $category) {
+                foreach (explode(',', $category) as $item) {
                     $filterCategories->push($item);
                 }
             }
@@ -133,7 +137,7 @@ class JobController extends Controller
 
         if (count($countries)) {
             foreach ($countries as $country) {
-                foreach (explode(",", $country) as $item) {
+                foreach (explode(',', $country) as $item) {
                     $filterCountries->push($item);
                 }
             }
@@ -143,7 +147,7 @@ class JobController extends Controller
 
         if (count($exceptionWords)) {
             foreach ($exceptionWords as $exceptionWord) {
-                foreach (explode("_|_", $exceptionWord) as $item) {
+                foreach (explode('_|_', $exceptionWord) as $item) {
                     $filterWords->push($item);
                 }
             }
@@ -165,6 +169,5 @@ class JobController extends Controller
         }
 
         return $jobs->paginate(20);
-
     }
 }

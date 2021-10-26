@@ -34,7 +34,7 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-//    Route::get('/dashboard/socket-event', [DashboardController::class, 'deleteJob']);
+    //    Route::get('/dashboard/socket-event', [DashboardController::class, 'deleteJob']);
 
     Route::resource('jobs', JobsController::class);
     Route::post('/jobs/change-status', [JobController::class, 'changeStatus'])->name('jobs.change-status');
@@ -59,8 +59,11 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/calendar/itemUsers/{data}', [TimetableController::class, 'itemUsers']);
     Route::get('/calendar/userHour/{time}', [TimetableController::class, 'userHour']);
     Route::get('/calendar/currentWeek/{data}', [TimetableController::class, 'currentWeek']);
-
 });
 
-Route::get('/auth/pipedrive', [\App\Http\Controllers\Auth\PipedriveController::class, 'index'])->name('auth.pipedrive')->middleware('guest');
-Route::get('/auth/pipedrive/callback', [\App\Http\Controllers\Auth\PipedriveController::class, 'callback'])->name('auth.pipedrive.callback')->middleware('guest');
+Route::get('/auth/pipedrive', [\App\Http\Controllers\Auth\PipedriveController::class, 'index'])
+    ->name('auth.pipedrive')
+    ->middleware('guest');
+Route::get('/auth/pipedrive/callback', [\App\Http\Controllers\Auth\PipedriveController::class, 'callback'])
+    ->name('auth.pipedrive.callback')
+    ->middleware('guest');

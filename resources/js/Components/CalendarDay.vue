@@ -6,27 +6,26 @@
                 :data-time="calendarDayTimes[index]"
                 :data-users="calendarDayUsers[index] || []"
                 :type-calendar="typeCalendar"
-                v-model="calendarDayUsers[index]"
-            ></CalendarItem>
+                v-model="calendarDayUsers[index]"></CalendarItem>
         </div>
     </div>
 </template>
 
 <script>
-import CalendarItem from "@/Components/CalendarItem";
+import CalendarItem from '@/Components/CalendarItem';
 
 export default {
     props: {
         typeCalendar: String,
-        dataDay: String
+        dataDay: String,
     },
     components: {
-        CalendarItem
+        CalendarItem,
     },
     data() {
         return {
             calendarDayTimes: [],
-            calendarDayUsers: []
+            calendarDayUsers: [],
         };
     },
     computed: {
@@ -35,7 +34,7 @@ export default {
         },
         calendarUpdate() {
             return this.$store.state.GlobalCalendarUpdate;
-        }
+        },
     },
     watch: {
         GlobalCalendarSwitched() {
@@ -44,7 +43,7 @@ export default {
         calendarUpdate() {
             this.getDayTimes();
             this.getDayUsers();
-        }
+        },
     },
     mounted() {
         this.getDayTimes();
@@ -53,25 +52,22 @@ export default {
     },
     methods: {
         getDayTimes() {
-            axios.get("/calendar/dayTimes/" + this.dataDay).then(res => {
+            axios.get('/calendar/dayTimes/' + this.dataDay).then((res) => {
                 this.calendarDayTimes = res.data;
-                console.log(res.data)
             });
         },
         getDayUsers() {
-            axios.get("/calendar/dayUsers/" + this.dataDay).then(res => {
+            axios.get('/calendar/dayUsers/' + this.dataDay).then((res) => {
                 this.calendarDayUsers = res.data;
             });
         },
         calendarListen() {
             socket.on('calendar:listeners', ({ index, time, users }) => {
-                const hasItem = this.calendarDayTimes[index].dateTime === time
+                const hasItem = this.calendarDayTimes[index].dateTime === time;
                 if (!hasItem) return;
                 this.$set(this.calendarDayUsers, index, users);
-            })
-        }
-    }
+            });
+        },
+    },
 };
 </script>
-
-<style></style>

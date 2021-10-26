@@ -2996,7 +2996,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -3038,15 +3037,14 @@ __webpack_require__.r(__webpack_exports__);
     getDayTimes: function getDayTimes() {
       var _this = this;
 
-      axios.get("/calendar/dayTimes/" + this.dataDay).then(function (res) {
+      axios.get('/calendar/dayTimes/' + this.dataDay).then(function (res) {
         _this.calendarDayTimes = res.data;
-        console.log(res.data);
       });
     },
     getDayUsers: function getDayUsers() {
       var _this2 = this;
 
-      axios.get("/calendar/dayUsers/" + this.dataDay).then(function (res) {
+      axios.get('/calendar/dayUsers/' + this.dataDay).then(function (res) {
         _this2.calendarDayUsers = res.data;
       });
     },
@@ -3106,51 +3104,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -3158,7 +3111,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      currentWeek: "",
+      currentWeek: '',
       weekLoading: 0
     };
   },
@@ -3184,14 +3137,14 @@ __webpack_require__.r(__webpack_exports__);
     setCurrentWeek: function setCurrentWeek() {
       var _this = this;
 
-      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "now";
-      var current = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'now';
+      var current = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
       var data = {};
       data.type = type;
       data.current = current;
-      this.currentWeek == "";
+      this.currentWeek == '';
       this.weekLoading = 1;
-      axios.get("/calendar/currentWeek/" + JSON.stringify(data)).then(function (res) {
+      axios.get('/calendar/currentWeek/' + JSON.stringify(data)).then(function (res) {
         _this.currentWeek = res.data;
         _this.$store.state.GlobalCalendarUpdate = !_this.$store.state.GlobalCalendarUpdate;
         _this.weekLoading = 0;
@@ -3262,7 +3215,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      showButton: 0
+      showButton: 0,
+      isAddedLoading: false
     };
   },
   mounted: function mounted() {},
@@ -3274,7 +3228,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       return this.dataUsers && this.dataUsers.find(function (u) {
-        return u.id === +_this.$userId;
+        return u.id == _this.$userId;
       }) ? 1 : 0;
     }
   },
@@ -3282,18 +3236,19 @@ __webpack_require__.r(__webpack_exports__);
     clickButton: function clickButton(type) {
       var _this2 = this;
 
+      this.isAddedLoading = true;
       var data = {
         type: type,
         time: this.dataTime.dateTime
       };
-      axios.get("/calendar/userHour/" + JSON.stringify(data)).then(function (res) {
+      axios.get('/calendar/userHour/' + JSON.stringify(data)).then(function (res) {
         _this2.setDataUsers(data.time);
       });
     },
     setDataUsers: function setDataUsers(time) {
       var _this3 = this;
 
-      axios.get("/calendar/itemUsers/" + time).then(function (res) {
+      axios.get('/calendar/itemUsers/' + time).then(function (res) {
         var users = res.data || [];
         socket.emit('calendar:speak', {
           index: _this3.dataIndex,
@@ -3302,6 +3257,8 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         _this3.$emit('change', users);
+
+        _this3.isAddedLoading = false;
       });
     }
   }
@@ -3353,23 +3310,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -3378,11 +3318,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       switched: true,
-      currentDate: "",
-      currentDateFull: ""
+      currentDate: '',
+      currentDateFull: ''
     };
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     this.setCurrentDate();
   },
   methods: {
@@ -3392,48 +3332,48 @@ __webpack_require__.r(__webpack_exports__);
     },
     switchSidebarCalendar: function switchSidebarCalendar() {
       if (this.switched) {
-        document.querySelector(".calendar-block").style.cssText = "animation: width0 .3s linear;";
+        document.querySelector('.calendar-block').style.cssText = 'animation: width0 .3s linear;';
         setTimeout(function () {
-          document.querySelector(".calendar").classList.add("hidden");
-          document.querySelector(".calendar-switcher").classList.add("right-4");
-          document.querySelector(".calendar-switcher").style.cssText = "transform: rotate(180deg)";
+          document.querySelector('.calendar').classList.add('hidden');
+          document.querySelector('.calendar-switcher').classList.add('right-4');
+          document.querySelector('.calendar-switcher').style.cssText = 'transform: rotate(180deg)';
         }, 280);
-        document.querySelector(".calendar-block").classList.toggle("z-40");
-        document.querySelector(".calendar-switcher").classList.remove("-ml-5");
-        document.querySelector(".calendar-date").classList.toggle("hidden");
-        document.querySelector(".calendar-button").classList.toggle("hidden"); // add to top menu full width
+        document.querySelector('.calendar-block').classList.toggle('z-40');
+        document.querySelector('.calendar-switcher').classList.remove('-ml-5');
+        document.querySelector('.calendar-date').classList.toggle('hidden');
+        document.querySelector('.calendar-button').classList.toggle('hidden'); // add to top menu full width
 
-        document.querySelector(".topmenu").classList.toggle("z-50");
-        document.querySelector(".topmenu").querySelector(".last-block").classList.remove("w-3/12");
-        document.querySelector(".topmenu").querySelector(".last-block").classList.add("w-0");
-        document.querySelector(".topmenu").querySelector(".user-block").classList.remove("w-5/12");
-        document.querySelector(".topmenu").querySelector(".user-block").classList.add("w-8/12");
+        document.querySelector('.topmenu').classList.toggle('z-50');
+        document.querySelector('.topmenu').querySelector('.last-block').classList.remove('w-3/12');
+        document.querySelector('.topmenu').querySelector('.last-block').classList.add('w-0');
+        document.querySelector('.topmenu').querySelector('.user-block').classList.remove('w-5/12');
+        document.querySelector('.topmenu').querySelector('.user-block').classList.add('w-8/12');
         this.switched = !this.switched;
       } else {
-        document.querySelector(".calendar-block").style.cssText = "animation: width100 .3s linear;";
-        document.querySelector(".calendar").classList.remove("hidden");
-        document.querySelector(".calendar-block").classList.toggle("z-40");
+        document.querySelector('.calendar-block').style.cssText = 'animation: width100 .3s linear;';
+        document.querySelector('.calendar').classList.remove('hidden');
+        document.querySelector('.calendar-block').classList.toggle('z-40');
         setTimeout(function () {
-          document.querySelector(".calendar-switcher").style.cssText = "transform: rotate(0deg)";
+          document.querySelector('.calendar-switcher').style.cssText = 'transform: rotate(0deg)';
         }, 280);
-        document.querySelector(".calendar-switcher").classList.remove("right-4");
-        document.querySelector(".calendar-switcher").classList.add("-ml-5");
-        document.querySelector(".calendar-date").classList.toggle("hidden");
-        document.querySelector(".calendar-button").classList.toggle("hidden"); // delete from top menu full width
+        document.querySelector('.calendar-switcher').classList.remove('right-4');
+        document.querySelector('.calendar-switcher').classList.add('-ml-5');
+        document.querySelector('.calendar-date').classList.toggle('hidden');
+        document.querySelector('.calendar-button').classList.toggle('hidden'); // delete from top menu full width
 
-        document.querySelector(".topmenu").classList.toggle("z-50");
-        document.querySelector(".topmenu").querySelector(".last-block").classList.add("w-3/12");
-        document.querySelector(".topmenu").querySelector(".last-block").classList.remove("w-0");
-        document.querySelector(".topmenu").querySelector(".user-block").classList.add("w-5/12");
-        document.querySelector(".topmenu").querySelector(".user-block").classList.remove("w-8/12");
+        document.querySelector('.topmenu').classList.toggle('z-50');
+        document.querySelector('.topmenu').querySelector('.last-block').classList.add('w-3/12');
+        document.querySelector('.topmenu').querySelector('.last-block').classList.remove('w-0');
+        document.querySelector('.topmenu').querySelector('.user-block').classList.add('w-5/12');
+        document.querySelector('.topmenu').querySelector('.user-block').classList.remove('w-8/12');
         this.switched = !this.switched;
       }
     },
     overGreen: function overGreen() {
-      document.querySelector("#right-arrow-55").style.fill = "#4EA52F";
+      document.querySelector('#right-arrow-55').style.fill = '#4EA52F';
     },
     overNormal: function overNormal() {
-      document.querySelector("#right-arrow-55").style.fill = "black";
+      document.querySelector('#right-arrow-55').style.fill = 'black';
     },
     switchGlobal: function switchGlobal() {
       this.$store.state.GlobalCalendarSwitched = !this.$store.state.GlobalCalendarSwitched;
@@ -3456,29 +3396,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Modals_CreateKit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modals/CreateKit */ "./resources/js/Components/Modals/CreateKit.vue");
 /* harmony import */ var _Modals_FiltersModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modals/FiltersModal */ "./resources/js/Components/Modals/FiltersModal.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3616,13 +3533,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     showKitForm: function showKitForm() {
       this.showKit = !this.showKit;
+      document.body.classList.add('overflow-y-hidden');
     },
     showFilterFrom: function showFilterFrom(filter) {
       this.FiltersVisibility = !this.FiltersVisibility;
+      document.body.classList.add('overflow-y-hidden');
       this.SelectedFilter = filter;
+    },
+    closeFilter: function closeFilter(filter) {
+      this.FiltersVisibility = !this.FiltersVisibility;
+      document.body.classList.remove('overflow-y-hidden');
     },
     closeKit: function closeKit(event) {
       this.showKit = !this.showKit;
+      document.body.classList.remove('overflow-y-hidden');
       if (event) this.filtersArr.push(event);
     }
   }
@@ -3642,16 +3566,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Modals_AddDeal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Modals/AddDeal */ "./resources/js/Components/Modals/AddDeal.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3811,7 +3725,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     isThinking: function isThinking() {
-      return this.jobStatus === 2;
+      return this.jobStatus == 2;
     },
     truncatedExcerpt: function truncatedExcerpt() {
       return this.excerpt.substring(0, this.truncatedLength);
@@ -3826,12 +3740,17 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var showModal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      if (showModal) this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
+
+      if (showModal) {
+        this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
+        document.body.classList.add('overflow-y-hidden');
+      }
+
       axios.post('/jobs/change-status', {
         id: this.id,
         status: status
       }).then(function (res) {
-        var action = status === 1 ? "book" : status === 2 ? "think" : "reconsider";
+        var action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
         socket.emit('job:speak', {
           id: _this.id,
           action: action
@@ -3850,7 +3769,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         socket.emit('job:speak', {
           id: _this2.id,
-          action: "delete"
+          action: 'delete'
         });
       });
       this.$emit('delete', {
@@ -4022,6 +3941,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -4044,25 +3965,33 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         name: 'Bootstarp',
         color: 'yellow'
-      }]
+      }],
+      isTechDroped: false
     };
   },
   methods: {
     closeModalJob: function closeModalJob() {
       this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
+      this.isTechDroped = false;
+      document.body.classList.remove('overflow-y-hidden');
     },
     dropdownTechs: function dropdownTechs() {
-      document.querySelector(".open-drop-tech-menu").classList.toggle("rotate-180");
-      document.querySelector(".open-drop-tech-menu").classList.toggle("transform");
-      document.querySelector(".drop-menu-technologies").classList.toggle('hidden');
+      if (this.techsList.length != 0) {
+        this.isTechDroped = !this.isTechDroped;
+      }
     },
     removeTech: function removeTech(i, el) {
       this.techsList.push(el);
       this.selectedTechsList.splice(i, 1);
+      this.dropdownTechs();
     },
     addTech: function addTech(i, el) {
       this.selectedTechsList.push(el);
       this.techsList.splice(i, 1);
+
+      if (this.techsList.length == 0) {
+        this.isTechDroped = false;
+      }
     }
   },
   computed: {
@@ -4089,8 +4018,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   methods: {
     show: function show() {},
@@ -4111,16 +4038,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4398,15 +4315,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     filter: {
@@ -4440,13 +4348,13 @@ __webpack_require__.r(__webpack_exports__);
 
     if (filter.countries_ids) {
       this.countries.forEach(function (item) {
-        if (filter.countries_ids.split(",").map(Number).includes(item.id)) item.checked = !item.checked;
+        if (filter.countries_ids.split(',').map(Number).includes(item.id)) item.checked = !item.checked;
       });
     }
 
     if (filter.categories_ids) {
       this.categories.forEach(function (item) {
-        if (filter.categories_ids.split(",").map(Number).includes(item.id)) item.checked = !item.checked;
+        if (filter.categories_ids.split(',').map(Number).includes(item.id)) item.checked = !item.checked;
       });
     }
 
@@ -4652,6 +4560,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -4691,6 +4603,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     type: {
@@ -4718,10 +4650,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   model: {
-    prop: "checked",
-    event: "change"
+    prop: 'checked',
+    event: 'change'
   },
   props: {
     checked: {
@@ -4738,7 +4673,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.checked;
       },
       set: function set(val) {
-        this.$emit("change", val);
+        this.$emit('change', val);
       }
     }
   }
@@ -4758,6 +4693,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modal */ "./resources/js/Jetstream/Modal.vue");
+//
+//
+//
 //
 //
 //
@@ -4828,14 +4766,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Input */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _InputError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./InputError */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _SecondaryButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4961,6 +4891,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     type: {
@@ -4984,9 +4935,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modal */ "./resources/js/Jetstream/Modal.vue");
-//
-//
-//
 //
 //
 //
@@ -5041,11 +4989,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5147,6 +5090,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['href', 'as']
 });
@@ -5165,7 +5111,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _SectionTitle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SectionTitle */ "./resources/js/Jetstream/SectionTitle.vue");
-//
 //
 //
 //
@@ -5214,6 +5159,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -5289,6 +5238,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -5400,7 +5350,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['href', 'active'],
   computed: {
     classes: function classes() {
-      return this.active ? 'inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out' : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out';
+      var classes = 'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 transition duration-150 ease-in-out ';
+      return classes + this.active ? 'border-indigo-400 text-gray-900 focus:outline-none focus:border-indigo-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300';
     }
   }
 });
@@ -5434,7 +5385,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['active', 'href', 'as'],
   computed: {
     classes: function classes() {
-      return this.active ? 'block pl-3 pr-4 py-2 border-l-4 border-indigo-400 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out' : 'block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out';
+      var classes = 'block pl-3 pr-4 py-2 border-l-4 text-base font-medium focus:outline-none transition duration-150 ease-in-out ';
+      return classes + this.active ? 'border-indigo-400 text-indigo-700 bg-indigo-50 focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300';
     }
   }
 });
@@ -5452,6 +5404,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5616,44 +5589,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5705,17 +5640,17 @@ __webpack_require__.r(__webpack_exports__);
       }, 10);
     },
     switchToTeam: function switchToTeam(team) {
-      this.$inertia.put(route("current-team.update"), {
+      this.$inertia.put(route('current-team.update'), {
         team_id: team.id
       }, {
         preserveState: false
       });
     },
     logout: function logout() {
-      this.$inertia.post(route("logout"));
+      this.$inertia.post(route('logout'));
     },
     showDropdown: function showDropdown() {
-      this.$refs.dropdown.classList.toggle("hidden");
+      this.$refs.dropdown.classList.toggle('hidden');
     }
   },
   computed: {
@@ -5751,53 +5686,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
 /* harmony import */ var _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Jetstream/SectionBorder */ "./resources/js/Jetstream/SectionBorder.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6035,10 +5923,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6075,48 +5959,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Jetstream/Label.vue */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_SecondaryButton_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Jetstream/SecondaryButton.vue */ "./resources/js/Jetstream/SecondaryButton.vue");
 /* harmony import */ var _Jetstream_SectionBorder_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Jetstream/SectionBorder.vue */ "./resources/js/Jetstream/SectionBorder.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6372,10 +6214,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -6430,8 +6268,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_ValidationErrors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/ValidationErrors */ "./resources/js/Jetstream/ValidationErrors.vue");
-//
-//
 //
 //
 //
@@ -6519,10 +6355,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
 //
 //
 //
@@ -6684,11 +6516,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -6749,8 +6576,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_ValidationErrors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/ValidationErrors */ "./resources/js/Jetstream/ValidationErrors.vue");
-//
-//
 //
 //
 //
@@ -6878,19 +6703,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -6954,10 +6766,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_AuthenticationCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/AuthenticationCard */ "./resources/js/Jetstream/AuthenticationCard.vue");
 /* harmony import */ var _Jetstream_AuthenticationCardLogo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/AuthenticationCardLogo */ "./resources/js/Jetstream/AuthenticationCardLogo.vue");
 /* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-//
-//
-//
-//
 //
 //
 //
@@ -7064,8 +6872,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -7116,7 +6922,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/jobs/filter', {
         kits: kits
       }).then(function (response) {
-        _this.data = response.data.data;
+        _this.data = response.data.data.filter(function (j) {
+          return j.status !== 1;
+        });
 
         _this.$forceUpdate();
 
@@ -7140,9 +6948,11 @@ __webpack_require__.r(__webpack_exports__);
         return p.id == id;
       });
       if (index === -1) return;
-      var currentItem = this.data[index];
-      currentItem.status = status;
-      this.$set(this.data, index, currentItem);
+      if (status == 1) this.data.splice(index, 1);else {
+        var currentItem = this.data[index];
+        currentItem.status = status;
+        this.$set(this.data, index, currentItem);
+      }
     },
     jobListen: function jobListen() {
       var _this2 = this;
@@ -7165,9 +6975,7 @@ __webpack_require__.r(__webpack_exports__);
             break;
 
           case 'book':
-            currentItem.status = 1;
-
-            _this2.$set(_this2.data, index, currentItem);
+            _this2.data.splice(index, 1);
 
             break;
 
@@ -7207,6 +7015,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_multiselect_dist_vue_multiselect_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect/dist/vue-multiselect.min.css */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.css");
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7281,9 +7098,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['policy'],
@@ -7311,24 +7125,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7440,9 +7236,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-//
-//
-//
 //
 //
 //
@@ -7640,25 +7433,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -7734,10 +7508,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Input.vue */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _Jetstream_InputError_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/InputError.vue */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Jetstream_SecondaryButton_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/SecondaryButton.vue */ "./resources/js/Jetstream/SecondaryButton.vue");
-//
-//
-//
-//
 //
 //
 //
@@ -7962,30 +7732,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -8112,17 +7858,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -8195,24 +7930,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Label.vue */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_ActionMessage_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/ActionMessage.vue */ "./resources/js/Jetstream/ActionMessage.vue");
 /* harmony import */ var _Jetstream_SecondaryButton_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/SecondaryButton.vue */ "./resources/js/Jetstream/SecondaryButton.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8402,12 +8119,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -8446,29 +8157,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_ConfirmsPassword__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/ConfirmsPassword */ "./resources/js/Jetstream/ConfirmsPassword.vue");
 /* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
 /* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8660,17 +8348,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -8743,24 +8420,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_ActionMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/ActionMessage */ "./resources/js/Jetstream/ActionMessage.vue");
 /* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8894,9 +8553,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Jetstream_AuthenticationCardLogo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/AuthenticationCardLogo */ "./resources/js/Jetstream/AuthenticationCardLogo.vue");
-//
-//
-//
 //
 //
 //
@@ -9050,62 +8706,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     canLogin: Boolean,
@@ -9125,9 +8725,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue */ "./node_modules/@inertiajs/inertia-vue/dist/index.js");
 /* harmony import */ var portal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! portal-vue */ "./node_modules/portal-vue/dist/portal-vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
@@ -9147,7 +8747,7 @@ vue__WEBPACK_IMPORTED_MODULE_4__["default"].mixin({
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(_inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.plugin);
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(portal_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].use((vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default()));
-var app = document.getElementById("app");
+var app = document.getElementById('app');
 new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
   render: function render(h) {
     return h(_inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.App, {
@@ -9161,9 +8761,9 @@ new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
   },
   store: _store__WEBPACK_IMPORTED_MODULE_3__["default"]
 }).$mount(app);
-vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute("content");
-vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$currentDate = document.querySelector("meta[name='current-date']").getAttribute("content");
-vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$currentDateFull = document.querySelector("meta[name='current-date-full']").getAttribute("content");
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$currentDate = document.querySelector("meta[name='current-date']").getAttribute('content');
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].prototype.$currentDateFull = document.querySelector("meta[name='current-date-full']").getAttribute('content');
 
 /***/ }),
 
@@ -9189,7 +8789,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/build/index.js");
-window.socket = io("http://localhost:3000");
+window.socket = io("".concat(window.location.hostname, ":3000"));
 
 /***/ }),
 
@@ -11655,7 +11255,31 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f]{\n    background-color: #FAEAE3 !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f] {\n    background-color: #faeae3 !important;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.parent-tech.focused[data-v-563a65ec] {\r\n    --tw-ring-color: #2563eb;\r\n    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\r\n    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\r\n    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\r\n    border-color: #2563eb;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11680,7 +11304,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*@import '../../css/style.css';*/\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*@import '../../css/style.css';*/\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11704,7 +11328,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-gray-100[data-v-317d1a6e] {\n    background-color: #f7fafc;\n    background-color: rgba(247, 250, 252, var(--tw-bg-opacity));\n}\n.border-gray-200[data-v-317d1a6e] {\n    border-color: #edf2f7;\n    border-color: rgba(237, 242, 247, var(--tw-border-opacity));\n}\n.text-gray-400[data-v-317d1a6e] {\n    color: #cbd5e0;\n    color: rgba(203, 213, 224, var(--tw-text-opacity));\n}\n.text-gray-500[data-v-317d1a6e] {\n    color: #a0aec0;\n    color: rgba(160, 174, 192, var(--tw-text-opacity));\n}\n.text-gray-600[data-v-317d1a6e] {\n    color: #718096;\n    color: rgba(113, 128, 150, var(--tw-text-opacity));\n}\n.text-gray-700[data-v-317d1a6e] {\n    color: #4a5568;\n    color: rgba(74, 85, 104, var(--tw-text-opacity));\n}\n.text-gray-900[data-v-317d1a6e] {\n    color: #1a202c;\n    color: rgba(26, 32, 44, var(--tw-text-opacity));\n}\n@media (prefers-color-scheme: dark) {\n.dark\\:bg-gray-800[data-v-317d1a6e] {\n        background-color: #2d3748;\n        background-color: rgba(45, 55, 72, var(--tw-bg-opacity));\n}\n.dark\\:bg-gray-900[data-v-317d1a6e] {\n        background-color: #1a202c;\n        background-color: rgba(26, 32, 44, var(--tw-bg-opacity));\n}\n.dark\\:border-gray-700[data-v-317d1a6e] {\n        border-color: #4a5568;\n        border-color: rgba(74, 85, 104, var(--tw-border-opacity));\n}\n.dark\\:text-white[data-v-317d1a6e] {\n        color: #fff;\n        color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n.dark\\:text-gray-400[data-v-317d1a6e] {\n        color: #cbd5e0;\n        color: rgba(203, 213, 224, var(--tw-text-opacity));\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-gray-100[data-v-317d1a6e] {\r\n    background-color: #f7fafc;\r\n    background-color: rgba(247, 250, 252, var(--tw-bg-opacity));\n}\n.border-gray-200[data-v-317d1a6e] {\r\n    border-color: #edf2f7;\r\n    border-color: rgba(237, 242, 247, var(--tw-border-opacity));\n}\n.text-gray-400[data-v-317d1a6e] {\r\n    color: #cbd5e0;\r\n    color: rgba(203, 213, 224, var(--tw-text-opacity));\n}\n.text-gray-500[data-v-317d1a6e] {\r\n    color: #a0aec0;\r\n    color: rgba(160, 174, 192, var(--tw-text-opacity));\n}\n.text-gray-600[data-v-317d1a6e] {\r\n    color: #718096;\r\n    color: rgba(113, 128, 150, var(--tw-text-opacity));\n}\n.text-gray-700[data-v-317d1a6e] {\r\n    color: #4a5568;\r\n    color: rgba(74, 85, 104, var(--tw-text-opacity));\n}\n.text-gray-900[data-v-317d1a6e] {\r\n    color: #1a202c;\r\n    color: rgba(26, 32, 44, var(--tw-text-opacity));\n}\n@media (prefers-color-scheme: dark) {\n.dark\\:bg-gray-800[data-v-317d1a6e] {\r\n        background-color: #2d3748;\r\n        background-color: rgba(45, 55, 72, var(--tw-bg-opacity));\n}\n.dark\\:bg-gray-900[data-v-317d1a6e] {\r\n        background-color: #1a202c;\r\n        background-color: rgba(26, 32, 44, var(--tw-bg-opacity));\n}\n.dark\\:border-gray-700[data-v-317d1a6e] {\r\n        border-color: #4a5568;\r\n        border-color: rgba(74, 85, 104, var(--tw-border-opacity));\n}\n.dark\\:text-white[data-v-317d1a6e] {\r\n        color: #fff;\r\n        color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n.dark\\:text-gray-400[data-v-317d1a6e] {\r\n        color: #cbd5e0;\r\n        color: rgba(203, 213, 224, var(--tw-text-opacity));\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38112,6 +37736,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_style_index_0_id_563a65ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_style_index_0_id_563a65ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_style_index_0_id_563a65ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css& ***!
@@ -38512,7 +38166,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _CalendarGlobal_vue_vue_type_template_id_3a6a91e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CalendarGlobal.vue?vue&type=template&id=3a6a91e8&scoped=true& */ "./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8&scoped=true&");
+/* harmony import */ var _CalendarGlobal_vue_vue_type_template_id_3a6a91e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CalendarGlobal.vue?vue&type=template&id=3a6a91e8& */ "./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8&");
 /* harmony import */ var _CalendarGlobal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CalendarGlobal.vue?vue&type=script&lang=js& */ "./resources/js/Components/CalendarGlobal.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -38524,11 +38178,11 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _CalendarGlobal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CalendarGlobal_vue_vue_type_template_id_3a6a91e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _CalendarGlobal_vue_vue_type_template_id_3a6a91e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _CalendarGlobal_vue_vue_type_template_id_3a6a91e8___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CalendarGlobal_vue_vue_type_template_id_3a6a91e8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "3a6a91e8",
+  null,
   null
   
 )
@@ -38590,7 +38244,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _CalendarSidebar_vue_vue_type_template_id_da4d207a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CalendarSidebar.vue?vue&type=template&id=da4d207a&scoped=true& */ "./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a&scoped=true&");
+/* harmony import */ var _CalendarSidebar_vue_vue_type_template_id_da4d207a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CalendarSidebar.vue?vue&type=template&id=da4d207a& */ "./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a&");
 /* harmony import */ var _CalendarSidebar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CalendarSidebar.vue?vue&type=script&lang=js& */ "./resources/js/Components/CalendarSidebar.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -38602,11 +38256,11 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _CalendarSidebar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CalendarSidebar_vue_vue_type_template_id_da4d207a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _CalendarSidebar_vue_vue_type_template_id_da4d207a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _CalendarSidebar_vue_vue_type_template_id_da4d207a___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CalendarSidebar_vue_vue_type_template_id_da4d207a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "da4d207a",
+  null,
   null
   
 )
@@ -38709,23 +38363,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JobFormModal.vue?vue&type=template&id=563a65ec& */ "./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&");
+/* harmony import */ var _JobFormModal_vue_vue_type_template_id_563a65ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JobFormModal.vue?vue&type=template&id=563a65ec&scoped=true& */ "./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&scoped=true&");
 /* harmony import */ var _JobFormModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JobFormModal.vue?vue&type=script&lang=js& */ "./resources/js/Components/Jobs/JobFormModal.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _JobFormModal_vue_vue_type_style_index_0_id_563a65ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css& */ "./resources/js/Components/Jobs/JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _JobFormModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__.render,
-  _JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _JobFormModal_vue_vue_type_template_id_563a65ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _JobFormModal_vue_vue_type_template_id_563a65ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "563a65ec",
   null
   
 )
@@ -38748,7 +38404,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AddDeal_vue_vue_type_template_id_1d5a3822_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true& */ "./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true&");
+/* harmony import */ var _AddDeal_vue_vue_type_template_id_1d5a3822___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddDeal.vue?vue&type=template&id=1d5a3822& */ "./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&");
 /* harmony import */ var _AddDeal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddDeal.vue?vue&type=script&lang=js& */ "./resources/js/Components/Modals/AddDeal.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -38760,11 +38416,11 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _AddDeal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AddDeal_vue_vue_type_template_id_1d5a3822_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _AddDeal_vue_vue_type_template_id_1d5a3822_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _AddDeal_vue_vue_type_template_id_1d5a3822___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AddDeal_vue_vue_type_template_id_1d5a3822___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "1d5a3822",
+  null,
   null
   
 )
@@ -41801,6 +41457,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Jobs/JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/Components/Jobs/JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css& ***!
+  \****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_style_index_0_id_563a65ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=style&index=0&id=563a65ec&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css&":
 /*!*****************************************************************************************************!*\
   !*** ./resources/js/Layouts/AppLayout.vue?vue&type=style&index=0&id=5663af57&scoped=true&lang=css& ***!
@@ -41844,19 +41513,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8&scoped=true&":
-/*!***********************************************************************************************!*\
-  !*** ./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8&scoped=true& ***!
-  \***********************************************************************************************/
+/***/ "./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8& ***!
+  \***********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarGlobal_vue_vue_type_template_id_3a6a91e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarGlobal_vue_vue_type_template_id_3a6a91e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarGlobal_vue_vue_type_template_id_3a6a91e8___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarGlobal_vue_vue_type_template_id_3a6a91e8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarGlobal_vue_vue_type_template_id_3a6a91e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarGlobal.vue?vue&type=template&id=3a6a91e8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarGlobal_vue_vue_type_template_id_3a6a91e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarGlobal.vue?vue&type=template&id=3a6a91e8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8&");
 
 
 /***/ }),
@@ -41878,19 +41547,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a&scoped=true&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a&scoped=true& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a& ***!
+  \************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarSidebar_vue_vue_type_template_id_da4d207a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarSidebar_vue_vue_type_template_id_da4d207a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarSidebar_vue_vue_type_template_id_da4d207a___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarSidebar_vue_vue_type_template_id_da4d207a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarSidebar_vue_vue_type_template_id_da4d207a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarSidebar.vue?vue&type=template&id=da4d207a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarSidebar_vue_vue_type_template_id_da4d207a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarSidebar.vue?vue&type=template&id=da4d207a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a&");
 
 
 /***/ }),
@@ -41929,36 +41598,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&scoped=true& ***!
+  \**************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_template_id_563a65ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_template_id_563a65ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_template_id_563a65ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobFormModal.vue?vue&type=template&id=563a65ec& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JobFormModal_vue_vue_type_template_id_563a65ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JobFormModal.vue?vue&type=template&id=563a65ec&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true&":
-/*!***********************************************************************************************!*\
-  !*** ./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true& ***!
-  \***********************************************************************************************/
+/***/ "./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822& ***!
+  \***********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDeal_vue_vue_type_template_id_1d5a3822_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDeal_vue_vue_type_template_id_1d5a3822_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDeal_vue_vue_type_template_id_1d5a3822___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDeal_vue_vue_type_template_id_1d5a3822___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDeal_vue_vue_type_template_id_1d5a3822_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDeal_vue_vue_type_template_id_1d5a3822___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddDeal.vue?vue&type=template&id=1d5a3822& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&");
 
 
 /***/ }),
@@ -42934,10 +42603,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarGlobal.vue?vue&type=template&id=3a6a91e8& ***!
+  \**************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -42969,7 +42638,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "bg-gray-200 w-12/12 h-12/12 flex flex-col justify-start items-center px-2  relative ",
+                "bg-gray-200 w-12/12 h-12/12 flex flex-col justify-start items-center px-2 relative",
               staticStyle: { "max-height": "98vh" }
             },
             [
@@ -42977,14 +42646,14 @@ var render = function() {
                 "p",
                 {
                   staticClass:
-                    "text-black text-5xl  cursor-pointer hover:text-red-500 absolute right-3 -top-3 cursor-pointer close-big-calendar ",
+                    "text-black text-5xl cursor-pointer hover:text-red-500 absolute right-3 -top-3 cursor-pointer close-big-calendar",
                   on: {
                     click: function($event) {
                       return _vm.closeGlobalCalendar()
                     }
                   }
                 },
-                [_vm._v("\n                ×\n            ")]
+                [_vm._v("×")]
               ),
               _vm._v(" "),
               _c(
@@ -42997,7 +42666,7 @@ var render = function() {
                   _c("img", {
                     staticClass: "prev px-6 py-2 cursor-pointer",
                     attrs: {
-                      src: "images/calendar-arrow-left.svg",
+                      src: "/images/calendar-arrow-left.svg",
                       alt: "prev"
                     },
                     on: {
@@ -43012,7 +42681,7 @@ var render = function() {
                   _c("img", {
                     staticClass: "next px-6 py-2 cursor-pointer",
                     attrs: {
-                      src: "images/calendar-arrow-right.svg",
+                      src: "/images/calendar-arrow-right.svg",
                       alt: "next"
                     },
                     on: {
@@ -43035,7 +42704,7 @@ var render = function() {
                     "div",
                     {
                       key: index,
-                      staticClass: "flex justify-center items-center "
+                      staticClass: "flex justify-center items-center"
                     },
                     [
                       _vm._v(
@@ -43053,7 +42722,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    " day-to-day mt-2 w-full grid grid-cols-7 gap-4  max-h-full overflow-y-auto",
+                    "day-to-day mt-2 w-full grid grid-cols-7 gap-4 max-h-full overflow-y-auto",
                   class: { "opacity-40": _vm.weekLoading }
                 },
                 _vm._l(_vm.currentWeek.dates, function(item, index) {
@@ -43111,7 +42780,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "rounded-lg text-white flex justify-between items-start pt-3 pb-6 px-3 cursor-pointer to-delete  transition-all relative ",
+        "rounded-lg text-white flex justify-between items-start pt-3 pb-6 px-3 to-delete transition-all relative",
       class: {
         "bg-red-700 hover:bg-red-600": !_vm.free,
         "bg-green-500 hover:bg-green-600": _vm.free,
@@ -43149,13 +42818,15 @@ var render = function() {
       _c("div"),
       _vm._v(" "),
       _c(
-        "div",
+        "button",
         {
           staticClass:
-            "z-40 hover:shadow-lg bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute cursor-pointer delete-me",
-          class: { hidden: !_vm.showButton },
+            "z-40 hover:shadow-lg bg-white rounded-xl text-black text-sm py-2 px-4 -bottom-4 left-1/2 transform -translate-x-2/4 absolute delete-me",
+          class: { hidden: !_vm.showButton, "bg-gray-100": _vm.isAddedLoading },
+          attrs: { disabled: _vm.isAddedLoading },
           on: {
             click: function($event) {
+              $event.stopPropagation()
               return _vm.clickButton(_vm.buttonType)
             }
           }
@@ -43178,10 +42849,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/CalendarSidebar.vue?vue&type=template&id=da4d207a& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -43204,7 +42875,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "w-3/12 2xl:w-2/12 calendar bg-gray-200 text-white fixed top-0  overflow-y-scroll  max-h-screen  ",
+            "w-3/12 2xl:w-2/12 calendar bg-gray-200 text-white fixed top-0 overflow-y-scroll max-h-screen",
           staticStyle: { width: "inherit" }
         },
         [
@@ -43245,26 +42916,22 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "fixed top-2 ml-1  w-full z-50 calendar-date" },
-        [
-          _c(
-            "button",
-            {
-              staticClass:
-                "rounded rounded-full text-white text-lg py-3 px-6 bg-black bg-opacity-50"
-            },
-            [_vm._v("\n            " + _vm._s(_vm.currentDate) + "\n        ")]
-          )
-        ]
-      ),
+      _c("div", { staticClass: "fixed top-2 ml-1 w-full z-50 calendar-date" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "rounded rounded-full text-white text-lg py-3 px-6 bg-black bg-opacity-50"
+          },
+          [_vm._v("\n            " + _vm._s(_vm.currentDate) + "\n        ")]
+        )
+      ]),
       _vm._v(" "),
       _c(
         "div",
         {
           staticClass:
-            "fixed bottom-2 ml-1 w-full text-black  z-50 calendar-button"
+            "fixed bottom-2 ml-1 w-full text-black z-50 calendar-button"
         },
         [
           _c(
@@ -43274,11 +42941,12 @@ var render = function() {
                 "hover:bg-opacity-100 open-big-calendar rounded rounded-full text-white text-lg py-3 px-6 bg-gray-500 bg-opacity-80",
               on: {
                 click: function($event) {
+                  $event.stopPropagation()
                   return _vm.switchGlobal()
                 }
               }
             },
-            [_vm._v("\n            All calendar\n        ")]
+            [_vm._v("All calendar")]
           )
         ]
       )
@@ -43324,7 +42992,7 @@ var render = function() {
             {
               ref: "block_kit",
               staticClass:
-                "block-kit flex justify-start items-center nowrap w-6/12 flex-shrink "
+                "block-kit flex justify-start items-center nowrap w-6/12 flex-shrink"
             },
             [
               _c(
@@ -43334,15 +43002,12 @@ var render = function() {
                     "create-kid rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7",
                   on: {
                     click: function($event) {
+                      $event.stopPropagation()
                       return _vm.showKitForm()
                     }
                   }
                 },
-                [
-                  _vm._v(
-                    "\r\n                            Create\r\n                            Kit\r\n                        "
-                  )
-                ]
+                [_vm._v("Create Kit")]
               ),
               _vm._v(" "),
               _vm._l(_vm.filtersArr, function(filter) {
@@ -43351,7 +43016,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        " bg-gray-200 text-black rounded  px-3 font-normal mr-6 hover:bg-green-500 hover:text-white  flex items-center ",
+                        "bg-gray-200 text-black rounded px-3 font-normal mr-6 hover:bg-green-500 hover:text-white flex items-center",
                       class: {
                         "bg-green-500 text-white": _vm.selectedKits.includes(
                           filter.id
@@ -43376,18 +43041,15 @@ var render = function() {
                         "button",
                         {
                           staticClass:
-                            "open-filters  py-3 pl-3  pr-1 border-l border-gray-400 cursor-pointer",
+                            "open-filters py-3 pl-3 pr-1 border-l border-gray-400 cursor-pointer",
                           on: {
                             click: function($event) {
+                              $event.stopPropagation()
                               return _vm.showFilterFrom(filter)
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\r\n                                    ...\r\n                                "
-                          )
-                        ]
+                        [_vm._v("...")]
                       )
                     ]
                   )
@@ -43418,11 +43080,7 @@ var render = function() {
               filterCategories: _vm.categories,
               userId: _vm.userId
             },
-            on: {
-              "disable-filter": function($event) {
-                _vm.FiltersVisibility = !_vm.FiltersVisibility
-              }
-            }
+            on: { "disable-filter": _vm.closeFilter }
           })
         : _vm._e()
     ],
@@ -43437,12 +43095,10 @@ var staticRenderFns = [
     return _c("div", { staticClass: "w-full flex nowrap mb-8 mt-20" }, [
       _c("div", { staticClass: "w-4/12 xl:w-3/12" }, [
         _c("div", { staticClass: "flex justify-start items-start" }, [
-          _c("img", { attrs: { src: "images/star-gold.svg", alt: "gold" } }),
+          _c("img", { attrs: { src: "/images/star-gold.svg", alt: "gold" } }),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col items-start" }, [
-            _c("p", { staticClass: "ml-2 font-bold mt-1 " }, [
-              _vm._v("Artem ")
-            ]),
+            _c("p", { staticClass: "ml-2 font-bold mt-1" }, [_vm._v("Artem")]),
             _vm._v(" "),
             _c("p", { staticClass: "ml-2 mt-2 text-sm flex items-center" }, [
               _c("span", [_vm._v("112")]),
@@ -43459,11 +43115,11 @@ var staticRenderFns = [
       _c("div", { staticClass: "w-4/12 xl:w-3/12" }, [
         _c("div", { staticClass: "flex justify-start items-start" }, [
           _c("img", {
-            attrs: { src: "images/star-silver.svg", alt: "silver" }
+            attrs: { src: "/images/star-silver.svg", alt: "silver" }
           }),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col items-start" }, [
-            _c("p", { staticClass: "ml-2 font-bold mt-1 " }, [_vm._v("Olga ")]),
+            _c("p", { staticClass: "ml-2 font-bold mt-1" }, [_vm._v("Olga")]),
             _vm._v(" "),
             _c("p", { staticClass: "ml-2 mt-2 text-sm flex items-center" }, [
               _c("span", [_vm._v("87")]),
@@ -43480,13 +43136,11 @@ var staticRenderFns = [
       _c("div", { staticClass: "w-4/12 xl:w-3/12" }, [
         _c("div", { staticClass: "flex justify-start items-start" }, [
           _c("img", {
-            attrs: { src: "images/star-bronze.svg", alt: "bronze" }
+            attrs: { src: "/images/star-bronze.svg", alt: "bronze" }
           }),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col items-start" }, [
-            _c("p", { staticClass: "ml-2 font-bold mt-1 " }, [
-              _vm._v("Stepan ")
-            ]),
+            _c("p", { staticClass: "ml-2 font-bold mt-1" }, [_vm._v("Stepan")]),
             _vm._v(" "),
             _c(
               "p",
@@ -43539,7 +43193,7 @@ var render = function() {
         "p",
         {
           staticClass:
-            "text-black text-3xl  cursor-pointer hover:text-red-500 absolute top-6 right-6",
+            "text-black text-3xl cursor-pointer hover:text-red-500 absolute top-6 right-6",
           on: { click: _vm.deleteJob }
         },
         [_vm._v("×")]
@@ -43575,8 +43229,8 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "w-11/12 mb-5" }, [
-        _c("p", { staticClass: "leading-7 text-base font-normal " }, [
-          _vm._v("\n           " + _vm._s(_vm.truncatedExcerpt) + "\n        ")
+        _c("p", { staticClass: "leading-7 text-base font-normal" }, [
+          _vm._v("\n            " + _vm._s(_vm.truncatedExcerpt) + "\n        ")
         ])
       ]),
       _vm._v(" "),
@@ -43605,7 +43259,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "w-11/12 mb-8 flex nowrap justify-start items-start text-md leading-6 "
+            "w-11/12 mb-8 flex nowrap justify-start items-start text-md leading-6"
         },
         [
           _c(
@@ -43709,21 +43363,23 @@ var render = function() {
               "open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7",
             on: {
               click: function($event) {
+                $event.stopPropagation()
                 return _vm.changeStatus(1, true)
               }
             }
           },
-          [_vm._v("\n            Take\n        ")]
+          [_vm._v("Take")]
         ),
         _vm._v(" "),
         _c(
           "button",
           {
             staticClass:
-              "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white ",
+              "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white",
             on: {
               click: function($event) {
-                return _vm.changeStatus(_vm.isThinking ? 0 : 2)
+                $event.stopPropagation()
+                return _vm.changeStatus(_vm.isThinking ? null : 2)
               }
             }
           },
@@ -43759,7 +43415,7 @@ var staticRenderFns = [
           "span",
           {
             staticClass:
-              "text-green-500 text-lg border-b-2  border-green-500 border-dotted cursor-pointer whitespace-nowrap"
+              "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap"
           },
           [_vm._v("Show Feedbacks (3)")]
         )
@@ -43773,10 +43429,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec& ***!
-  \*****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Jobs/JobFormModal.vue?vue&type=template&id=563a65ec&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -43793,7 +43449,7 @@ var render = function() {
     "section",
     {
       staticClass:
-        "fixed bg-white py-5 px-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-300 flex flex-col justify-between ",
+        "fixed bg-white py-5 px-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-300 flex flex-col justify-between",
       class: { hidden: !_vm.ModalJobSwitched },
       attrs: { id: "take" }
     },
@@ -43802,7 +43458,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "f-full space-x-6 flex flex-nowrap justify-between items-start "
+            "f-full space-x-6 flex flex-nowrap justify-between items-start"
         },
         [
           _c(
@@ -43825,15 +43481,22 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "relative parent-tech p-1 w-full border border-gray-300 rounded-md focus:outline-none  text-white flex flex-wrap justify-start items-start wrap "
+                      "relative parent-tech w-full p-2 border border-gray-300 rounded-md focus:outline-none text-white flex flex-wrap justify-start items-center wrap",
+                    class: { focused: _vm.isTechDroped },
+                    on: {
+                      click: function($event) {
+                        return _vm.dropdownTechs()
+                      }
+                    }
                   },
                   [
                     _vm._l(_vm.selectedTechsList, function(item, index) {
                       return _c(
                         "p",
                         {
+                          key: index,
                           staticClass:
-                            "parent-button p-1 rounded-sm cursor-pointer m-1",
+                            "parent-button px-1 rounded-sm cursor-pointer mr-1.5 align-middle select-none",
                           class: "bg-" + item.color + "-500",
                           on: {
                             click: function($event) {
@@ -43841,18 +43504,23 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v(_vm._s(item.name) + " ×")]
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(item.name) +
+                              " ×\n                        "
+                          )
+                        ]
                       )
                     }),
                     _vm._v(" "),
                     _c("img", {
                       staticClass:
-                        "open-drop-tech-menu ml-1 mt-1 cursor-pointer absolute right-2 top-4 ",
+                        "open-drop-tech-menu mt-1 absolute right-3.5 top-4 select-none",
                       attrs: {
-                        src: "images/arrow-down.svg",
+                        src: "/images/arrow-down-section.svg",
                         alt: "arrow down"
-                      },
-                      on: { click: _vm.dropdownTechs }
+                      }
                     })
                   ],
                   2
@@ -43862,12 +43530,14 @@ var render = function() {
                   "ul",
                   {
                     staticClass:
-                      "absolute mt-4 overflow-y-auto hidden drop-menu-technologies  bg-white  w-full border border-gray-300 rounded-md focus:outline-none  text-white flex flex-col justify-start items-start wrap space-y-2 "
+                      "\n                            absolute\n                            mt-2\n                            overflow-y-auto\n                            drop-menu-technologies\n                            bg-white\n                            w-full\n                            border border-gray-300\n                            rounded-md\n                            focus:outline-none\n                            text-white\n                            flex flex-col\n                            justify-start\n                            items-start\n                            wrap\n                            space-y-2\n                            shadow-lg\n                        ",
+                    class: { hidden: !_vm.isTechDroped }
                   },
                   _vm._l(_vm.techsList, function(item, index) {
                     return _c(
                       "li",
                       {
+                        key: index,
                         staticClass:
                           "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1",
                         on: {
@@ -43880,7 +43550,7 @@ var render = function() {
                         _c(
                           "span",
                           {
-                            staticClass: "p-1 rounded-sm cursor-pointer ",
+                            staticClass: "px-1 rounded-sm select-none",
                             class: "bg-" + item.color + "-500"
                           },
                           [_vm._v(_vm._s(item.name))]
@@ -43910,7 +43580,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "w-full h-full mt-4 flex justify-end items-start " },
+        { staticClass: "w-full h-full mt-4 flex justify-end items-start" },
         [
           _c("div", { staticClass: "flex space-x-4" }, [
             _c(
@@ -43918,7 +43588,12 @@ var render = function() {
               {
                 staticClass:
                   "close-take rounded-full border border-gray-300 px-12 py-3 text-black hover:bg-green-500 hover:text-white hover:border-green-500",
-                on: { click: _vm.closeModalJob }
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    return _vm.closeModalJob.apply(null, arguments)
+                  }
+                }
               },
               [_vm._v("\n                    Cancel\n                ")]
             ),
@@ -43929,7 +43604,7 @@ var render = function() {
                 staticClass:
                   "rounded-full border border-green-500 bg-green-500 px-12 py-3 text-white hover:bg-white hover:text-black"
               },
-              [_vm._v("\n                    Save\n                ")]
+              [_vm._v("Save")]
             )
           ])
         ]
@@ -44176,11 +43851,7 @@ var staticRenderFns = [
                 staticClass:
                   "px-3 py-2 bg-gray-200 rounded-sm text-base text-black hover:bg-green-500 hover:text-white"
               },
-              [
-                _vm._v(
-                  "\n                            None\n                        "
-                )
-              ]
+              [_vm._v("None")]
             ),
             _vm._v(" "),
             _c(
@@ -44189,11 +43860,7 @@ var staticRenderFns = [
                 staticClass:
                   "px-3 py-2 bg-green-500 rounded-sm text-base text-white hover:bg-gray-200 hover:text-black"
               },
-              [
-                _vm._v(
-                  "\n                            Yes, invite\n                        "
-                )
-              ]
+              [_vm._v("Yes, invite")]
             )
           ])
         ]),
@@ -44229,10 +43896,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/AddDeal.vue?vue&type=template&id=1d5a3822& ***!
+  \**************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -44246,7 +43913,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("modal", { attrs: { name: "add-deal" } }, [
-    _vm._v("\n    This is modal\n")
+    _vm._v(" This is modal ")
   ])
 }
 var staticRenderFns = []
@@ -44277,7 +43944,7 @@ var render = function() {
       "section",
       {
         staticClass:
-          "w-full bg-white p-8 min-h-screen z-50 absolute top-0 left-0 right-0",
+          "w-full overflow-y-scroll bg-white p-8 h-screen z-50 fixed top-0 left-0 right-0",
         attrs: { id: "create-kit" }
       },
       [
@@ -44314,32 +43981,30 @@ var render = function() {
                 "button",
                 {
                   staticClass:
-                    "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                    "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                   class: { "bg-green-500 text-white": _vm.allCountriesChecked },
                   on: {
                     click: function($event) {
+                      $event.stopPropagation()
                       _vm.chooseAllItems(_vm.countries)
                       _vm.$forceUpdate()
                     }
                   }
                 },
-                [
-                  _vm._v(
-                    "\r\n                    All country\r\n                "
-                  )
-                ]
+                [_vm._v("\n                    All country\n                ")]
               ),
               _vm._v(" "),
-              _vm._l(_vm.countries, function(country, index) {
+              _vm._l(_vm.countries, function(country) {
                 return _c(
                   "button",
                   {
                     key: country.index,
                     staticClass:
-                      "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                     class: { "bg-green-500 text-white": country.checked },
                     on: {
                       click: function($event) {
+                        $event.stopPropagation()
                         country.checked = !country.checked
                         _vm.$forceUpdate()
                       }
@@ -44347,9 +44012,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\r\n                    " +
+                      "\n                    " +
                         _vm._s(country.title) +
-                        "\r\n                "
+                        "\n                "
                     )
                   ]
                 )
@@ -44372,12 +44037,13 @@ var render = function() {
                 "button",
                 {
                   staticClass:
-                    "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                    "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                   class: {
                     "bg-green-500 text-white": _vm.allCategoriesChecked
                   },
                   on: {
                     click: function($event) {
+                      $event.stopPropagation()
                       _vm.chooseAllItems(_vm.categories)
                       _vm.$forceUpdate()
                     }
@@ -44385,7 +44051,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                    All categories\r\n                "
+                    "\n                    All categories\n                "
                   )
                 ]
               ),
@@ -44396,10 +44062,11 @@ var render = function() {
                   {
                     key: category.index,
                     staticClass:
-                      "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                     class: { "bg-green-500 text-white": category.checked },
                     on: {
                       click: function($event) {
+                        $event.stopPropagation()
                         category.checked = !category.checked
                         _vm.$forceUpdate()
                       }
@@ -44407,9 +44074,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\r\n                    " +
+                      "\n                    " +
                         _vm._s(category.title) +
-                        "\r\n                "
+                        "\n                "
                     )
                   ]
                 )
@@ -44432,7 +44099,7 @@ var render = function() {
                 "button",
                 {
                   staticClass:
-                    "cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
+                    "cursor-pointer bg-gray-200 text-black rounded px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
                 },
                 [
                   _c("p", { staticClass: "mr-2" }, [_vm._v(_vm._s(word))]),
@@ -44441,7 +44108,7 @@ var render = function() {
                     "p",
                     {
                       staticClass:
-                        "  py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
+                        "py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
                       attrs: { title: "Delete word" },
                       on: {
                         click: function($event) {
@@ -44469,7 +44136,7 @@ var render = function() {
               }
             ],
             staticClass:
-              " input-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+              "input-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
             attrs: { type: "text", placeholder: "New word" },
             domProps: { value: _vm.newWord },
             on: {
@@ -44489,6 +44156,7 @@ var render = function() {
                 "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-word",
               on: {
                 click: function($event) {
+                  $event.stopPropagation()
                   return _vm.openAddWord()
                 }
               }
@@ -44503,6 +44171,7 @@ var render = function() {
                 "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-word-input hidden mr-4",
               on: {
                 click: function($event) {
+                  $event.stopPropagation()
                   return _vm.saveWord()
                 }
               }
@@ -44517,6 +44186,7 @@ var render = function() {
                 "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 close-word-input hidden",
               on: {
                 click: function($event) {
+                  $event.stopPropagation()
                   return _vm.closeAddWord()
                 }
               }
@@ -44553,9 +44223,10 @@ var render = function() {
             "button",
             {
               staticClass:
-                "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 ",
+                "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700",
               on: {
                 click: function($event) {
+                  $event.stopPropagation()
                   return _vm.saveKit()
                 }
               }
@@ -44594,7 +44265,7 @@ var render = function() {
     "section",
     {
       staticClass:
-        "w-full bg-white p-8  min-h-screen z-50 absolute top-0 left-0 right-0",
+        "w-full overflow-y-scroll bg-white p-8 h-screen z-50 fixed top-0 left-0 right-0",
       attrs: { id: "manager-filters" }
     },
     [
@@ -44631,10 +44302,11 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                  "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                 class: { "bg-green-500 text-white": _vm.allCountriesChecked },
                 on: {
                   click: function($event) {
+                    $event.stopPropagation()
                     _vm.chooseAllItems(_vm.countries)
                     _vm.$forceUpdate()
                   }
@@ -44643,16 +44315,17 @@ var render = function() {
               [_vm._v("\n                All country\n            ")]
             ),
             _vm._v(" "),
-            _vm._l(_vm.countries, function(country, index) {
+            _vm._l(_vm.countries, function(country) {
               return _c(
                 "button",
                 {
                   key: country.index,
                   staticClass:
-                    "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                    "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                   class: { "bg-green-500 text-white": country.checked },
                   on: {
                     click: function($event) {
+                      $event.stopPropagation()
                       country.checked = !country.checked
                       _vm.$forceUpdate()
                     }
@@ -44685,10 +44358,11 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "cursor-pointer hover:bg-green-500 hover:text-white   bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                  "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                 class: { "bg-green-500 text-white": _vm.allCategoriesChecked },
                 on: {
                   click: function($event) {
+                    $event.stopPropagation()
                     _vm.chooseAllItems(_vm.categories)
                     _vm.$forceUpdate()
                   }
@@ -44702,10 +44376,11 @@ var render = function() {
                 "button",
                 {
                   staticClass:
-                    "cursor-pointer hover:bg-green-500 hover:text-white  bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                    "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                   class: { "bg-green-500 text-white": category.checked },
                   on: {
                     click: function($event) {
+                      $event.stopPropagation()
                       category.checked = !category.checked
                       _vm.$forceUpdate()
                     }
@@ -44738,7 +44413,7 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "cursor-pointer bg-gray-200 text-black rounded  px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
+                  "cursor-pointer bg-gray-200 text-black rounded px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
               },
               [
                 _c("p", { staticClass: "mr-2" }, [_vm._v(_vm._s(word))]),
@@ -44747,7 +44422,7 @@ var render = function() {
                   "p",
                   {
                     staticClass:
-                      "  py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
+                      "py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
                     attrs: { title: "Delete word" },
                     on: {
                       click: function($event) {
@@ -44775,7 +44450,7 @@ var render = function() {
             }
           ],
           staticClass:
-            " input-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+            "input-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
           attrs: { type: "text", placeholder: "New word" },
           domProps: { value: _vm.newWord },
           on: {
@@ -44795,6 +44470,7 @@ var render = function() {
               "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-word",
             on: {
               click: function($event) {
+                $event.stopPropagation()
                 return _vm.openAddWord()
               }
             }
@@ -44809,6 +44485,7 @@ var render = function() {
               "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-word-input hidden mr-4",
             on: {
               click: function($event) {
+                $event.stopPropagation()
                 return _vm.saveWord()
               }
             }
@@ -44823,6 +44500,7 @@ var render = function() {
               "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 close-word-input hidden",
             on: {
               click: function($event) {
+                $event.stopPropagation()
                 return _vm.closeAddWord()
               }
             }
@@ -44859,9 +44537,10 @@ var render = function() {
           "button",
           {
             staticClass:
-              "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 ",
+              "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700",
             on: {
               click: function($event) {
+                $event.stopPropagation()
                 return _vm.saveKit()
               }
             }
@@ -45354,7 +45033,7 @@ var render = function() {
     "button",
     {
       staticClass:
-        "inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150",
+        "\n        inline-flex\n        items-center\n        px-4\n        py-2\n        bg-gray-800\n        border border-transparent\n        rounded-md\n        font-semibold\n        text-xs text-white\n        uppercase\n        tracking-widest\n        hover:bg-gray-700\n        active:bg-gray-900\n        focus:outline-none focus:border-gray-900 focus:shadow-outline-gray\n        transition\n        ease-in-out\n        duration-150\n    ",
       attrs: { type: _vm.type }
     },
     [_vm._t("default")],
@@ -45563,7 +45242,7 @@ var render = function() {
             fn: function() {
               return [
                 _vm._v(
-                  "\n            " + _vm._s(_vm.content) + "\n\n            "
+                  "\n            " + _vm._s(_vm.content) + "\n            "
                 ),
                 _c(
                   "div",
@@ -45623,7 +45302,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Nevermind\n            ")]
+                  [_vm._v(" Nevermind ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -45683,7 +45362,7 @@ var render = function() {
     "button",
     {
       staticClass:
-        "inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150",
+        "\n        inline-flex\n        items-center\n        justify-center\n        px-4\n        py-2\n        bg-red-600\n        border border-transparent\n        rounded-md\n        font-semibold\n        text-xs text-white\n        uppercase\n        tracking-widest\n        hover:bg-red-500\n        focus:outline-none focus:border-red-700 focus:shadow-outline-red\n        active:bg-red-600\n        transition\n        ease-in-out\n        duration-150\n    ",
       attrs: { type: _vm.type }
     },
     [_vm._t("default")],
@@ -46327,7 +46006,7 @@ var render = function() {
     "button",
     {
       staticClass:
-        "inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150",
+        "\n        inline-flex\n        items-center\n        px-4\n        py-2\n        bg-white\n        border border-gray-300\n        rounded-md\n        font-semibold\n        text-xs text-gray-700\n        uppercase\n        tracking-widest\n        shadow-sm\n        hover:text-gray-500\n        focus:outline-none focus:border-blue-300 focus:shadow-outline-blue\n        active:text-gray-800 active:bg-gray-50\n        transition\n        ease-in-out\n        duration-150\n    ",
       attrs: { type: _vm.type }
     },
     [_vm._t("default")],
@@ -46485,7 +46164,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "w-9/12 py-4 pl-6 pr-4 2xl:mr-0 mr-8 ",
+                staticClass: "w-9/12 py-4 pl-6 pr-4 2xl:mr-0 mr-8",
                 staticStyle: { "padding-left": "5vw" }
               },
               [
@@ -46493,11 +46172,44 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "w-full flex justify-between fixed top-0 left-0  z-30 bg-white pb-2 topmenu topmenu-width",
+                      "w-full flex justify-between fixed top-0 left-0 z-30 bg-white pb-2 topmenu topmenu-width",
                     staticStyle: { "padding-left": "5vw" }
                   },
                   [
-                    _vm._m(0),
+                    _c(
+                      "div",
+                      { staticClass: "w-2/12 flex justify-start items-start" },
+                      [
+                        _c("img", {
+                          staticClass:
+                            "relative mt-2 fill-current text-green-500",
+                          attrs: {
+                            src: "/images/vasterra-logo.svg",
+                            alt: "vasterra-logo"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500",
+                            attrs: { href: _vm.route("dashboard") }
+                          },
+                          [_vm._v("Jobs")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "pt-1 mt-2 text-black border-white border-b-4 hover:border-green-500",
+                            attrs: { href: "#" }
+                          },
+                          [_vm._v("Lidgens")]
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -46506,7 +46218,7 @@ var render = function() {
                           "w-7/12 flex justify-end items-center mr-9 user-block"
                       },
                       [
-                        _c("div", { staticClass: "w-full mr-4 " }, [
+                        _c("div", { staticClass: "w-full mr-4" }, [
                           _c(
                             "div",
                             {
@@ -46520,12 +46232,12 @@ var render = function() {
                                 {
                                   ref: "search_block",
                                   staticClass:
-                                    "w-0 overflow-hidden flex justify-between  search-block "
+                                    "w-0 overflow-hidden flex justify-between search-block"
                                 },
                                 [
                                   _c("input", {
                                     staticClass:
-                                      "w-11/12 search-input  border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300",
+                                      "w-11/12 search-input border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300",
                                     attrs: {
                                       type: "text",
                                       placeholder:
@@ -46537,20 +46249,16 @@ var render = function() {
                                     "button",
                                     {
                                       staticClass:
-                                        " rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white"
+                                        "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white"
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                        Search\n                                    "
-                                      )
-                                    ]
+                                    [_vm._v("Search")]
                                   ),
                                   _vm._v(" "),
                                   _c(
                                     "p",
                                     {
                                       staticClass:
-                                        "ml-4 search-button text-black text-5xl  cursor-pointer hover:text-red-500",
+                                        "ml-4 search-button text-black text-5xl cursor-pointer hover:text-red-500",
                                       attrs: { title: "Close search panel" },
                                       on: {
                                         click: function($event) {
@@ -46633,9 +46341,9 @@ var render = function() {
                                 ),
                                 _vm._v(" "),
                                 _c("img", {
-                                  staticClass: "ml-1 mt-1 cursor-pointer ",
+                                  staticClass: "ml-1 mt-1 cursor-pointer",
                                   attrs: {
-                                    src: "images/arrow-down.svg",
+                                    src: "/images/arrow-down.svg",
                                     alt: "arrow down"
                                   }
                                 })
@@ -46656,7 +46364,7 @@ var render = function() {
                                       "a",
                                       {
                                         staticClass:
-                                          "border-b-4  border-white hover:border-green-500",
+                                          "border-b-4 border-white hover:border-green-500",
                                         attrs: {
                                           href: _vm.route("profile.show")
                                         }
@@ -46665,13 +46373,13 @@ var render = function() {
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  _vm._m(1),
+                                  _vm._m(0),
                                   _vm._v(" "),
                                   _c("hr", {
                                     staticClass: "mt-6 mb-2 min-w-full"
                                   }),
                                   _vm._v(" "),
-                                  _vm._m(2)
+                                  _vm._m(1)
                                 ])
                               ]
                             )
@@ -46731,41 +46439,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "w-2/12 flex justify-start items-start " },
-      [
-        _c("img", {
-          staticClass: "relative mt-2 fill-current text-green-500",
-          attrs: { src: "images/vasterra-logo.svg", alt: "vasterra-logo" }
-        }),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass:
-              "mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500",
-            attrs: { href: "#" }
-          },
-          [_vm._v("Jobs")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass:
-              "pt-1 mt-2  text-black border-white border-b-4 hover:border-green-500",
-            attrs: { href: "#" }
-          },
-          [_vm._v("Lidgens")]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("li", [
       _c(
         "a",
@@ -46785,7 +46458,7 @@ var staticRenderFns = [
       _c(
         "a",
         {
-          staticClass: "border-b-4  border-white hover:border-green-500",
+          staticClass: "border-b-4 border-white hover:border-green-500",
           attrs: { href: "#" }
         },
         [_vm._v("Log out")]
@@ -46824,7 +46497,7 @@ var render = function() {
           {
             key: "title",
             fn: function() {
-              return [_vm._v("\n            Create API Token\n        ")]
+              return [_vm._v(" Create API Token ")]
             },
             proxy: true
           },
@@ -46833,7 +46506,7 @@ var render = function() {
             fn: function() {
               return [
                 _vm._v(
-                  "\n            API tokens allow third-party services to authenticate with our application on your behalf.\n        "
+                  " API tokens allow third-party services to authenticate with our application on your behalf. "
                 )
               ]
             },
@@ -46940,7 +46613,7 @@ var render = function() {
                     staticClass: "mr-3",
                     attrs: { on: _vm.createApiTokenForm.recentlySuccessful }
                   },
-                  [_vm._v("\n                Created.\n            ")]
+                  [_vm._v(" Created. ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -46949,7 +46622,7 @@ var render = function() {
                     class: { "opacity-25": _vm.createApiTokenForm.processing },
                     attrs: { disabled: _vm.createApiTokenForm.processing }
                   },
-                  [_vm._v("\n                Create\n            ")]
+                  [_vm._v(" Create ")]
                 )
               ]
             },
@@ -46974,11 +46647,7 @@ var render = function() {
                         {
                           key: "title",
                           fn: function() {
-                            return [
-                              _vm._v(
-                                "\n                    Manage API Tokens\n                "
-                              )
-                            ]
+                            return [_vm._v(" Manage API Tokens ")]
                           },
                           proxy: true
                         },
@@ -46987,7 +46656,7 @@ var render = function() {
                           fn: function() {
                             return [
                               _vm._v(
-                                "\n                    You may delete any of your existing tokens if they are no longer needed.\n                "
+                                " You may delete any of your existing tokens if they are no longer needed. "
                               )
                             ]
                           },
@@ -47030,11 +46699,10 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                                    Last used " +
+                                                    "Last used " +
                                                       _vm._s(
                                                         token.last_used_ago
-                                                      ) +
-                                                      "\n                                "
+                                                      )
                                                   )
                                                 ]
                                               )
@@ -47075,11 +46743,7 @@ var render = function() {
                                                 }
                                               }
                                             },
-                                            [
-                                              _vm._v(
-                                                "\n                                    Delete\n                                "
-                                              )
-                                            ]
+                                            [_vm._v("Delete")]
                                           )
                                         ]
                                       )
@@ -47095,7 +46759,7 @@ var render = function() {
                       ],
                       null,
                       false,
-                      3995867736
+                      1902782963
                     )
                   })
                 ],
@@ -47117,7 +46781,7 @@ var render = function() {
           {
             key: "title",
             fn: function() {
-              return [_vm._v("\n            API Token\n        ")]
+              return [_vm._v(" API Token ")]
             },
             proxy: true
           },
@@ -47127,7 +46791,7 @@ var render = function() {
               return [
                 _c("div", [
                   _vm._v(
-                    "\n                Please copy your new API token. For your security, it won't be shown again.\n            "
+                    "Please copy your new API token. For your security, it won't be shown again."
                   )
                 ]),
                 _vm._v(" "),
@@ -47164,7 +46828,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Close\n            ")]
+                  [_vm._v(" Close ")]
                 )
               ]
             },
@@ -47184,7 +46848,7 @@ var render = function() {
           {
             key: "title",
             fn: function() {
-              return [_vm._v("\n            API Token Permissions\n        ")]
+              return [_vm._v(" API Token Permissions ")]
             },
             proxy: true
           },
@@ -47245,7 +46909,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Nevermind\n            ")]
+                  [_vm._v(" Nevermind ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -47260,7 +46924,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Save\n            ")]
+                  [_vm._v(" Save ")]
                 )
               ]
             },
@@ -47280,7 +46944,7 @@ var render = function() {
           {
             key: "title",
             fn: function() {
-              return [_vm._v("\n            Delete API Token\n        ")]
+              return [_vm._v(" Delete API Token ")]
             },
             proxy: true
           },
@@ -47289,7 +46953,7 @@ var render = function() {
             fn: function() {
               return [
                 _vm._v(
-                  "\n            Are you sure you would like to delete this API token?\n        "
+                  " Are you sure you would like to delete this API token? "
                 )
               ]
             },
@@ -47308,7 +46972,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Nevermind\n            ")]
+                  [_vm._v(" Nevermind ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -47372,7 +47036,7 @@ var render = function() {
                   staticClass:
                     "font-semibold text-xl text-gray-800 leading-tight"
                 },
-                [_vm._v("\n            API Tokens\n        ")]
+                [_vm._v("API Tokens")]
               )
             ]
           },
@@ -47433,7 +47097,7 @@ var render = function() {
           {
             key: "title",
             fn: function() {
-              return [_vm._v("\n            Create API Token\n        ")]
+              return [_vm._v(" Create API Token ")]
             },
             proxy: true
           },
@@ -47442,7 +47106,7 @@ var render = function() {
             fn: function() {
               return [
                 _vm._v(
-                  "\n            API tokens allow third-party services to authenticate with our application on your behalf.\n        "
+                  " API tokens allow third-party services to authenticate with our application on your behalf. "
                 )
               ]
             },
@@ -47503,17 +47167,9 @@ var render = function() {
                                 [
                                   _c("jet-checkbox", {
                                     attrs: { value: permission },
-                                    model: {
-                                      value: _vm.createApiTokenForm.permissions,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.createApiTokenForm,
-                                          "permissions",
-                                          $$v
-                                        )
-                                      },
-                                      expression:
-                                        "createApiTokenForm.permissions"
+                                    on: {
+                                      checked:
+                                        _vm.createApiTokenForm.permissions
                                     }
                                   }),
                                   _vm._v(" "),
@@ -47549,7 +47205,7 @@ var render = function() {
                     staticClass: "mr-3",
                     attrs: { on: _vm.createApiTokenForm.recentlySuccessful }
                   },
-                  [_vm._v("\n                Created.\n            ")]
+                  [_vm._v(" Created. ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -47558,7 +47214,7 @@ var render = function() {
                     class: { "opacity-25": _vm.createApiTokenForm.processing },
                     attrs: { disabled: _vm.createApiTokenForm.processing }
                   },
-                  [_vm._v("\n                Create\n            ")]
+                  [_vm._v(" Create ")]
                 )
               ]
             },
@@ -47583,11 +47239,7 @@ var render = function() {
                         {
                           key: "title",
                           fn: function() {
-                            return [
-                              _vm._v(
-                                "\n                    Manage API Tokens\n                "
-                              )
-                            ]
+                            return [_vm._v(" Manage API Tokens ")]
                           },
                           proxy: true
                         },
@@ -47596,7 +47248,7 @@ var render = function() {
                           fn: function() {
                             return [
                               _vm._v(
-                                "\n                    You may delete any of your existing tokens if they are no longer needed.\n                "
+                                " You may delete any of your existing tokens if they are no longer needed. "
                               )
                             ]
                           },
@@ -47639,11 +47291,10 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                                    Last used " +
+                                                    "Last used " +
                                                       _vm._s(
                                                         token.last_used_ago
-                                                      ) +
-                                                      "\n                                "
+                                                      )
                                                   )
                                                 ]
                                               )
@@ -47684,11 +47335,7 @@ var render = function() {
                                                 }
                                               }
                                             },
-                                            [
-                                              _vm._v(
-                                                "\n                                    Delete\n                                "
-                                              )
-                                            ]
+                                            [_vm._v("Delete")]
                                           )
                                         ]
                                       )
@@ -47704,7 +47351,7 @@ var render = function() {
                       ],
                       null,
                       false,
-                      3995867736
+                      1902782963
                     )
                   })
                 ],
@@ -47726,7 +47373,7 @@ var render = function() {
           {
             key: "title",
             fn: function() {
-              return [_vm._v("\n            API Token\n        ")]
+              return [_vm._v(" API Token ")]
             },
             proxy: true
           },
@@ -47736,7 +47383,7 @@ var render = function() {
               return [
                 _c("div", [
                   _vm._v(
-                    "\n                Please copy your new API token. For your security, it won't be shown again.\n            "
+                    "Please copy your new API token. For your security, it won't be shown again."
                   )
                 ]),
                 _vm._v(" "),
@@ -47773,7 +47420,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Close\n            ")]
+                  [_vm._v(" Close ")]
                 )
               ]
             },
@@ -47793,7 +47440,7 @@ var render = function() {
           {
             key: "title",
             fn: function() {
-              return [_vm._v("\n            API Token Permissions\n        ")]
+              return [_vm._v(" API Token Permissions ")]
             },
             proxy: true
           },
@@ -47812,17 +47459,7 @@ var render = function() {
                         [
                           _c("jet-checkbox", {
                             attrs: { value: permission },
-                            model: {
-                              value: _vm.updateApiTokenForm.permissions,
-                              callback: function($$v) {
-                                _vm.$set(
-                                  _vm.updateApiTokenForm,
-                                  "permissions",
-                                  $$v
-                                )
-                              },
-                              expression: "updateApiTokenForm.permissions"
-                            }
+                            on: { checked: _vm.updateApiTokenForm.permissions }
                           }),
                           _vm._v(" "),
                           _c(
@@ -47854,7 +47491,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Cancel\n            ")]
+                  [_vm._v(" Cancel ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -47865,7 +47502,7 @@ var render = function() {
                     attrs: { disabled: _vm.updateApiTokenForm.processing },
                     on: { click: _vm.updateApiToken }
                   },
-                  [_vm._v("\n                Save\n            ")]
+                  [_vm._v(" Save ")]
                 )
               ]
             },
@@ -47885,7 +47522,7 @@ var render = function() {
           {
             key: "title",
             fn: function() {
-              return [_vm._v("\n            Delete API Token\n        ")]
+              return [_vm._v(" Delete API Token ")]
             },
             proxy: true
           },
@@ -47894,7 +47531,7 @@ var render = function() {
             fn: function() {
               return [
                 _vm._v(
-                  "\n            Are you sure you would like to delete this API token?\n        "
+                  " Are you sure you would like to delete this API token? "
                 )
               ]
             },
@@ -47913,7 +47550,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Cancel\n            ")]
+                  [_vm._v(" Cancel ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -47924,7 +47561,7 @@ var render = function() {
                     attrs: { disabled: _vm.deleteApiTokenForm.processing },
                     on: { click: _vm.deleteApiToken }
                   },
-                  [_vm._v("\n                Delete\n            ")]
+                  [_vm._v(" Delete ")]
                 )
               ]
             },
@@ -47976,7 +47613,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "mb-4 text-sm text-gray-600" }, [
         _vm._v(
-          "\n        This is a secure area of the application. Please confirm your password before continuing.\n    "
+          "This is a secure area of the application. Please confirm your password before continuing."
         )
       ]),
       _vm._v(" "),
@@ -48032,7 +47669,7 @@ var render = function() {
                   class: { "opacity-25": _vm.form.processing },
                   attrs: { disabled: _vm.form.processing }
                 },
-                [_vm._v("\n                Confirm\n            ")]
+                [_vm._v(" Confirm ")]
               )
             ],
             1
@@ -48143,11 +47780,7 @@ var render = function() {
                   class: { "opacity-25": _vm.form.processing },
                   attrs: { disabled: _vm.form.processing }
                 },
-                [
-                  _vm._v(
-                    "\n                Email Password Reset Link\n            "
-                  )
-                ]
+                [_vm._v(" Email Password Reset Link ")]
               )
             ],
             1
@@ -48306,11 +47939,7 @@ var render = function() {
                         "underline text-sm text-gray-600 hover:text-gray-900",
                       attrs: { href: _vm.route("password.request") }
                     },
-                    [
-                      _vm._v(
-                        "\n                Forgot your password?\n            "
-                      )
-                    ]
+                    [_vm._v(" Forgot your password? ")]
                   )
                 : _vm._e(),
               _vm._v(" "),
@@ -48321,7 +47950,7 @@ var render = function() {
                   class: { "opacity-25": _vm.form.processing },
                   attrs: { disabled: _vm.form.processing }
                 },
-                [_vm._v("\n                Login\n            ")]
+                [_vm._v(" Login ")]
               )
             ],
             1
@@ -48548,7 +48177,7 @@ var render = function() {
                             },
                             [_vm._v("Terms of Service")]
                           ),
-                          _vm._v(" and "),
+                          _vm._v(" and\n                        "),
                           _c(
                             "a",
                             {
@@ -48582,7 +48211,7 @@ var render = function() {
                     "underline text-sm text-gray-600 hover:text-gray-900",
                   attrs: { href: _vm.route("login") }
                 },
-                [_vm._v("\n                Already registered?\n            ")]
+                [_vm._v(" Already registered? ")]
               ),
               _vm._v(" "),
               _c(
@@ -48592,7 +48221,7 @@ var render = function() {
                   class: { "opacity-25": _vm.form.processing },
                   attrs: { disabled: _vm.form.processing }
                 },
-                [_vm._v("\n                Register\n            ")]
+                [_vm._v(" Register ")]
               )
             ],
             1
@@ -48748,7 +48377,7 @@ var render = function() {
                   class: { "opacity-25": _vm.form.processing },
                   attrs: { disabled: _vm.form.processing }
                 },
-                [_vm._v("\n                Reset Password\n            ")]
+                [_vm._v(" Reset Password ")]
               )
             ],
             1
@@ -48804,12 +48433,12 @@ var render = function() {
           !_vm.recovery
             ? [
                 _vm._v(
-                  "\n            Please confirm access to your account by entering the authentication code provided by your authenticator application.\n        "
+                  " Please confirm access to your account by entering the authentication code provided by your authenticator application. "
                 )
               ]
             : [
                 _vm._v(
-                  "\n            Please confirm access to your account by entering one of your emergency recovery codes.\n        "
+                  " Please confirm access to your account by entering one of your emergency recovery codes. "
                 )
               ]
         ],
@@ -48902,16 +48531,8 @@ var render = function() {
                 },
                 [
                   !_vm.recovery
-                    ? [
-                        _vm._v(
-                          "\n                    Use a recovery code\n                "
-                        )
-                      ]
-                    : [
-                        _vm._v(
-                          "\n                    Use an authentication code\n                "
-                        )
-                      ]
+                    ? [_vm._v(" Use a recovery code ")]
+                    : [_vm._v(" Use an authentication code ")]
                 ],
                 2
               ),
@@ -48923,7 +48544,7 @@ var render = function() {
                   class: { "opacity-25": _vm.form.processing },
                   attrs: { disabled: _vm.form.processing }
                 },
-                [_vm._v("\n                Login\n            ")]
+                [_vm._v(" Login ")]
               )
             ],
             1
@@ -48974,7 +48595,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "mb-4 text-sm text-gray-600" }, [
         _vm._v(
-          "\n        Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.\n    "
+          "\n        Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you\n        another.\n    "
         )
       ]),
       _vm._v(" "),
@@ -48984,7 +48605,7 @@ var render = function() {
             { staticClass: "mb-4 font-medium text-sm text-green-600" },
             [
               _vm._v(
-                "\n        A new verification link has been sent to the email address you provided during registration.\n    "
+                "A new verification link has been sent to the email address you provided during registration."
               )
             ]
           )
@@ -49011,11 +48632,7 @@ var render = function() {
                   class: { "opacity-25": _vm.form.processing },
                   attrs: { disabled: _vm.form.processing }
                 },
-                [
-                  _vm._v(
-                    "\n                Resend Verification Email\n            "
-                  )
-                ]
+                [_vm._v(" Resend Verification Email ")]
               ),
               _vm._v(" "),
               _c(
@@ -49081,7 +48698,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "w-full " }, [
+      _c("div", { staticClass: "w-full" }, [
         _c("p", { staticClass: "text-2xl font-bold" }, [
           _vm._v("Find " + _vm._s(_vm.data.length) + " jobs")
         ])
@@ -49279,14 +48896,14 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Delete Account\n    ")]
+          return [_vm._v(" Delete Account ")]
         },
         proxy: true
       },
       {
         key: "description",
         fn: function() {
-          return [_vm._v("\n        Permanently delete your account.\n    ")]
+          return [_vm._v(" Permanently delete your account. ")]
         },
         proxy: true
       },
@@ -49313,7 +48930,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Delete Account\n            ")]
+                  [_vm._v(" Delete Account ")]
                 )
               ],
               1
@@ -49326,9 +48943,7 @@ var render = function() {
                 {
                   key: "title",
                   fn: function() {
-                    return [
-                      _vm._v("\n                Delete Account\n            ")
-                    ]
+                    return [_vm._v(" Delete Account ")]
                   },
                   proxy: true
                 },
@@ -49337,7 +48952,7 @@ var render = function() {
                   fn: function() {
                     return [
                       _vm._v(
-                        "\n                Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.\n\n                "
+                        "\n                Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you\n                would like to permanently delete your account.\n\n                "
                       ),
                       _c(
                         "div",
@@ -49400,11 +49015,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                    Nevermind\n                "
-                          )
-                        ]
+                        [_vm._v(" Nevermind ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -49419,11 +49030,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                    Delete Account\n                "
-                          )
-                        ]
+                        [_vm._v(" Delete Account ")]
                       )
                     ]
                   },
@@ -49466,7 +49073,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Browser Sessions\n    ")]
+          return [_vm._v(" Browser Sessions ")]
         },
         proxy: true
       },
@@ -49475,7 +49082,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Manage and logout your active sessions on other browsers and devices.\n    "
+              " Manage and logout your active sessions on other browsers and devices. "
             )
           ]
         },
@@ -49487,7 +49094,7 @@ var render = function() {
           return [
             _c("div", { staticClass: "max-w-xl text-sm text-gray-600" }, [
               _vm._v(
-                "\n            If necessary, you may logout of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.\n        "
+                "\n            If necessary, you may logout of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive.\n            If you feel your account has been compromised, you should also update your password.\n        "
               )
             ]),
             _vm._v(" "),
@@ -49545,6 +49152,7 @@ var render = function() {
                                       stroke: "none"
                                     }
                                   }),
+                                  _vm._v(" "),
                                   _c("rect", {
                                     attrs: {
                                       x: "7",
@@ -49554,6 +49162,7 @@ var render = function() {
                                       rx: "1"
                                     }
                                   }),
+                                  _vm._v(" "),
                                   _c("path", {
                                     attrs: { d: "M11 5h2M12 17v.01" }
                                   })
@@ -49564,11 +49173,9 @@ var render = function() {
                         _c("div", { staticClass: "ml-3" }, [
                           _c("div", { staticClass: "text-sm text-gray-600" }, [
                             _vm._v(
-                              "\n                        " +
-                                _vm._s(session.agent.platform) +
+                              _vm._s(session.agent.platform) +
                                 " - " +
-                                _vm._s(session.agent.browser) +
-                                "\n                    "
+                                _vm._s(session.agent.browser)
                             )
                           ]),
                           _vm._v(" "),
@@ -49621,11 +49228,7 @@ var render = function() {
                       }
                     }
                   },
-                  [
-                    _vm._v(
-                      "\n                Logout Other Browser Sessions\n            "
-                    )
-                  ]
+                  [_vm._v(" Logout Other Browser Sessions ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -49634,7 +49237,7 @@ var render = function() {
                     staticClass: "ml-3",
                     attrs: { on: _vm.form.recentlySuccessful }
                   },
-                  [_vm._v("\n                Done.\n            ")]
+                  [_vm._v(" Done. ")]
                 )
               ],
               1
@@ -49647,11 +49250,7 @@ var render = function() {
                 {
                   key: "title",
                   fn: function() {
-                    return [
-                      _vm._v(
-                        "\n                Logout Other Browser Sessions\n            "
-                      )
-                    ]
+                    return [_vm._v(" Logout Other Browser Sessions ")]
                   },
                   proxy: true
                 },
@@ -49726,11 +49325,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                    Nevermind\n                "
-                          )
-                        ]
+                        [_vm._v(" Nevermind ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -49795,14 +49390,14 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Delete Account\n    ")]
+          return [_vm._v(" Delete Account ")]
         },
         proxy: true
       },
       {
         key: "description",
         fn: function() {
-          return [_vm._v("\n        Permanently delete your account.\n    ")]
+          return [_vm._v(" Permanently delete your account. ")]
         },
         proxy: true
       },
@@ -49823,7 +49418,7 @@ var render = function() {
                 _c(
                   "jet-danger-button",
                   { on: { click: _vm.confirmUserDeletion } },
-                  [_vm._v("\n                Delete Account\n            ")]
+                  [_vm._v(" Delete Account ")]
                 )
               ],
               1
@@ -49836,9 +49431,7 @@ var render = function() {
                 {
                   key: "title",
                   fn: function() {
-                    return [
-                      _vm._v("\n                Delete Account\n            ")
-                    ]
+                    return [_vm._v(" Delete Account ")]
                   },
                   proxy: true
                 },
@@ -49847,7 +49440,7 @@ var render = function() {
                   fn: function() {
                     return [
                       _vm._v(
-                        "\n                Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.\n\n                "
+                        "\n                Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you\n                would like to permanently delete your account.\n\n                "
                       ),
                       _c(
                         "div",
@@ -49904,11 +49497,7 @@ var render = function() {
                       _c(
                         "jet-secondary-button",
                         { on: { click: _vm.closeModal } },
-                        [
-                          _vm._v(
-                            "\n                    Cancel\n                "
-                          )
-                        ]
+                        [_vm._v(" Cancel ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -49919,11 +49508,7 @@ var render = function() {
                           attrs: { disabled: _vm.form.processing },
                           on: { click: _vm.deleteUser }
                         },
-                        [
-                          _vm._v(
-                            "\n                    Delete Account\n                "
-                          )
-                        ]
+                        [_vm._v(" Delete Account ")]
                       )
                     ]
                   },
@@ -49966,7 +49551,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Browser Sessions\n    ")]
+          return [_vm._v(" Browser Sessions ")]
         },
         proxy: true
       },
@@ -49975,7 +49560,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Manage and log out your active sessions on other browsers and devices.\n    "
+              " Manage and log out your active sessions on other browsers and devices. "
             )
           ]
         },
@@ -49987,7 +49572,7 @@ var render = function() {
           return [
             _c("div", { staticClass: "max-w-xl text-sm text-gray-600" }, [
               _vm._v(
-                "\n            If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.\n        "
+                "\n            If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive.\n            If you feel your account has been compromised, you should also update your password.\n        "
               )
             ]),
             _vm._v(" "),
@@ -50045,6 +49630,7 @@ var render = function() {
                                       stroke: "none"
                                     }
                                   }),
+                                  _vm._v(" "),
                                   _c("rect", {
                                     attrs: {
                                       x: "7",
@@ -50054,6 +49640,7 @@ var render = function() {
                                       rx: "1"
                                     }
                                   }),
+                                  _vm._v(" "),
                                   _c("path", {
                                     attrs: { d: "M11 5h2M12 17v.01" }
                                   })
@@ -50064,11 +49651,9 @@ var render = function() {
                         _c("div", { staticClass: "ml-3" }, [
                           _c("div", { staticClass: "text-sm text-gray-600" }, [
                             _vm._v(
-                              "\n                        " +
-                                _vm._s(session.agent.platform) +
+                              _vm._s(session.agent.platform) +
                                 " - " +
-                                _vm._s(session.agent.browser) +
-                                "\n                    "
+                                _vm._s(session.agent.browser)
                             )
                           ]),
                           _vm._v(" "),
@@ -50113,9 +49698,7 @@ var render = function() {
               { staticClass: "flex items-center mt-5" },
               [
                 _c("jet-button", { on: { click: _vm.confirmLogout } }, [
-                  _vm._v(
-                    "\n                Log Out Other Browser Sessions\n            "
-                  )
+                  _vm._v(" Log Out Other Browser Sessions ")
                 ]),
                 _vm._v(" "),
                 _c(
@@ -50124,7 +49707,7 @@ var render = function() {
                     staticClass: "ml-3",
                     attrs: { on: _vm.form.recentlySuccessful }
                   },
-                  [_vm._v("\n                Done.\n            ")]
+                  [_vm._v(" Done. ")]
                 )
               ],
               1
@@ -50137,11 +49720,7 @@ var render = function() {
                 {
                   key: "title",
                   fn: function() {
-                    return [
-                      _vm._v(
-                        "\n                Log Out Other Browser Sessions\n            "
-                      )
-                    ]
+                    return [_vm._v(" Log Out Other Browser Sessions ")]
                   },
                   proxy: true
                 },
@@ -50210,11 +49789,7 @@ var render = function() {
                       _c(
                         "jet-secondary-button",
                         { on: { click: _vm.closeModal } },
-                        [
-                          _vm._v(
-                            "\n                    Cancel\n                "
-                          )
-                        ]
+                        [_vm._v(" Cancel ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -50225,11 +49800,7 @@ var render = function() {
                           attrs: { disabled: _vm.form.processing },
                           on: { click: _vm.logoutOtherBrowserSessions }
                         },
-                        [
-                          _vm._v(
-                            "\n                    Log Out Other Browser Sessions\n                "
-                          )
-                        ]
+                        [_vm._v(" Log Out Other Browser Sessions ")]
                       )
                     ]
                   },
@@ -50272,7 +49843,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Two Factor Authentication\n    ")]
+          return [_vm._v(" Two Factor Authentication ")]
         },
         proxy: true
       },
@@ -50281,7 +49852,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Add additional security to your account using two factor authentication.\n    "
+              " Add additional security to your account using two factor authentication. "
             )
           ]
         },
@@ -50293,20 +49864,16 @@ var render = function() {
           return [
             _vm.twoFactorEnabled
               ? _c("h3", { staticClass: "text-lg font-medium text-gray-900" }, [
-                  _vm._v(
-                    "\n            You have enabled two factor authentication.\n        "
-                  )
+                  _vm._v("You have enabled two factor authentication.")
                 ])
               : _c("h3", { staticClass: "text-lg font-medium text-gray-900" }, [
-                  _vm._v(
-                    "\n            You have not enabled two factor authentication.\n        "
-                  )
+                  _vm._v("You have not enabled two factor authentication.")
                 ]),
             _vm._v(" "),
             _c("div", { staticClass: "mt-3 max-w-xl text-sm text-gray-600" }, [
               _c("p", [
                 _vm._v(
-                  "\n                When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.\n            "
+                  "\n                When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator\n                application.\n            "
                 )
               ])
             ]),
@@ -50323,7 +49890,7 @@ var render = function() {
                           [
                             _c("p", { staticClass: "font-semibold" }, [
                               _vm._v(
-                                "\n                        Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application.\n                    "
+                                "Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application."
                               )
                             ])
                           ]
@@ -50391,11 +49958,7 @@ var render = function() {
                               class: { "opacity-25": _vm.enabling },
                               attrs: { type: "button", disabled: _vm.enabling }
                             },
-                            [
-                              _vm._v(
-                                "\n                        Enable\n                    "
-                              )
-                            ]
+                            [_vm._v(" Enable ")]
                           )
                         ],
                         1
@@ -50414,11 +49977,7 @@ var render = function() {
                             ? _c(
                                 "jet-secondary-button",
                                 { staticClass: "mr-3" },
-                                [
-                                  _vm._v(
-                                    "\n                        Regenerate Recovery Codes\n                    "
-                                  )
-                                ]
+                                [_vm._v(" Regenerate Recovery Codes ")]
                               )
                             : _vm._e()
                         ],
@@ -50433,11 +49992,7 @@ var render = function() {
                             ? _c(
                                 "jet-secondary-button",
                                 { staticClass: "mr-3" },
-                                [
-                                  _vm._v(
-                                    "\n                        Show Recovery Codes\n                    "
-                                  )
-                                ]
+                                [_vm._v(" Show Recovery Codes ")]
                               )
                             : _vm._e()
                         ],
@@ -50456,11 +50011,7 @@ var render = function() {
                               class: { "opacity-25": _vm.disabling },
                               attrs: { disabled: _vm.disabling }
                             },
-                            [
-                              _vm._v(
-                                "\n                        Disable\n                    "
-                              )
-                            ]
+                            [_vm._v(" Disable ")]
                           )
                         ],
                         1
@@ -50505,7 +50056,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Update Password\n    ")]
+          return [_vm._v(" Update Password ")]
         },
         proxy: true
       },
@@ -50514,7 +50065,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Ensure your account is using a long, random password to stay secure.\n    "
+              " Ensure your account is using a long, random password to stay secure. "
             )
           ]
         },
@@ -50638,7 +50189,7 @@ var render = function() {
                 staticClass: "mr-3",
                 attrs: { on: _vm.form.recentlySuccessful }
               },
-              [_vm._v("\n            Saved.\n        ")]
+              [_vm._v(" Saved. ")]
             ),
             _vm._v(" "),
             _c(
@@ -50647,7 +50198,7 @@ var render = function() {
                 class: { "opacity-25": _vm.form.processing },
                 attrs: { disabled: _vm.form.processing }
               },
-              [_vm._v("\n            Save\n        ")]
+              [_vm._v(" Save ")]
             )
           ]
         },
@@ -50685,7 +50236,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Profile Information\n    ")]
+          return [_vm._v(" Profile Information ")]
         },
         proxy: true
       },
@@ -50694,7 +50245,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Update your account's profile information and email address.\n    "
+              " Update your account's profile information and email address. "
             )
           ]
         },
@@ -50728,7 +50279,7 @@ var render = function() {
                             name: "show",
                             rawName: "v-show",
                             value: !_vm.photoPreview,
-                            expression: "! photoPreview"
+                            expression: "!photoPreview"
                           }
                         ],
                         staticClass: "mt-2"
@@ -50780,11 +50331,7 @@ var render = function() {
                           }
                         }
                       },
-                      [
-                        _vm._v(
-                          "\n                Select A New Photo\n            "
-                        )
-                      ]
+                      [_vm._v(" Select A New Photo ")]
                     ),
                     _vm._v(" "),
                     _vm.user.profile_photo_path
@@ -50800,11 +50347,7 @@ var render = function() {
                               }
                             }
                           },
-                          [
-                            _vm._v(
-                              "\n                Remove Photo\n            "
-                            )
-                          ]
+                          [_vm._v(" Remove Photo ")]
                         )
                       : _vm._e(),
                     _vm._v(" "),
@@ -50882,7 +50425,7 @@ var render = function() {
                 staticClass: "mr-3",
                 attrs: { on: _vm.form.recentlySuccessful }
               },
-              [_vm._v("\n            Saved.\n        ")]
+              [_vm._v(" Saved. ")]
             ),
             _vm._v(" "),
             _c(
@@ -50891,7 +50434,7 @@ var render = function() {
                 class: { "opacity-25": _vm.form.processing },
                 attrs: { disabled: _vm.form.processing }
               },
-              [_vm._v("\n            Save\n        ")]
+              [_vm._v(" Save ")]
             )
           ]
         },
@@ -50937,7 +50480,7 @@ var render = function() {
                   staticClass:
                     "font-semibold text-xl text-gray-800 leading-tight"
                 },
-                [_vm._v("\n            Profile\n        ")]
+                [_vm._v("Profile")]
               )
             ]
           },
@@ -51041,7 +50584,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Two Factor Authentication\n    ")]
+          return [_vm._v(" Two Factor Authentication ")]
         },
         proxy: true
       },
@@ -51050,7 +50593,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Add additional security to your account using two factor authentication.\n    "
+              " Add additional security to your account using two factor authentication. "
             )
           ]
         },
@@ -51062,20 +50605,16 @@ var render = function() {
           return [
             _vm.twoFactorEnabled
               ? _c("h3", { staticClass: "text-lg font-medium text-gray-900" }, [
-                  _vm._v(
-                    "\n            You have enabled two factor authentication.\n        "
-                  )
+                  _vm._v("You have enabled two factor authentication.")
                 ])
               : _c("h3", { staticClass: "text-lg font-medium text-gray-900" }, [
-                  _vm._v(
-                    "\n            You have not enabled two factor authentication.\n        "
-                  )
+                  _vm._v("You have not enabled two factor authentication.")
                 ]),
             _vm._v(" "),
             _c("div", { staticClass: "mt-3 max-w-xl text-sm text-gray-600" }, [
               _c("p", [
                 _vm._v(
-                  "\n                When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.\n            "
+                  "\n                When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator\n                application.\n            "
                 )
               ])
             ]),
@@ -51092,7 +50631,7 @@ var render = function() {
                           [
                             _c("p", { staticClass: "font-semibold" }, [
                               _vm._v(
-                                "\n                        Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application.\n                    "
+                                "Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application."
                               )
                             ])
                           ]
@@ -51160,11 +50699,7 @@ var render = function() {
                               class: { "opacity-25": _vm.enabling },
                               attrs: { type: "button", disabled: _vm.enabling }
                             },
-                            [
-                              _vm._v(
-                                "\n                        Enable\n                    "
-                              )
-                            ]
+                            [_vm._v(" Enable ")]
                           )
                         ],
                         1
@@ -51183,11 +50718,7 @@ var render = function() {
                             ? _c(
                                 "jet-secondary-button",
                                 { staticClass: "mr-3" },
-                                [
-                                  _vm._v(
-                                    "\n                        Regenerate Recovery Codes\n                    "
-                                  )
-                                ]
+                                [_vm._v(" Regenerate Recovery Codes ")]
                               )
                             : _vm._e()
                         ],
@@ -51202,11 +50733,7 @@ var render = function() {
                             ? _c(
                                 "jet-secondary-button",
                                 { staticClass: "mr-3" },
-                                [
-                                  _vm._v(
-                                    "\n                        Show Recovery Codes\n                    "
-                                  )
-                                ]
+                                [_vm._v(" Show Recovery Codes ")]
                               )
                             : _vm._e()
                         ],
@@ -51225,11 +50752,7 @@ var render = function() {
                               class: { "opacity-25": _vm.disabling },
                               attrs: { disabled: _vm.disabling }
                             },
-                            [
-                              _vm._v(
-                                "\n                        Disable\n                    "
-                              )
-                            ]
+                            [_vm._v(" Disable ")]
                           )
                         ],
                         1
@@ -51274,7 +50797,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Update Password\n    ")]
+          return [_vm._v(" Update Password ")]
         },
         proxy: true
       },
@@ -51283,7 +50806,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Ensure your account is using a long, random password to stay secure.\n    "
+              " Ensure your account is using a long, random password to stay secure. "
             )
           ]
         },
@@ -51407,7 +50930,7 @@ var render = function() {
                 staticClass: "mr-3",
                 attrs: { on: _vm.form.recentlySuccessful }
               },
-              [_vm._v("\n            Saved.\n        ")]
+              [_vm._v(" Saved. ")]
             ),
             _vm._v(" "),
             _c(
@@ -51416,7 +50939,7 @@ var render = function() {
                 class: { "opacity-25": _vm.form.processing },
                 attrs: { disabled: _vm.form.processing }
               },
-              [_vm._v("\n            Save\n        ")]
+              [_vm._v(" Save ")]
             )
           ]
         },
@@ -51454,7 +50977,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Profile Information\n    ")]
+          return [_vm._v(" Profile Information ")]
         },
         proxy: true
       },
@@ -51463,7 +50986,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Update your account's profile information and email address.\n    "
+              " Update your account's profile information and email address. "
             )
           ]
         },
@@ -51497,7 +51020,7 @@ var render = function() {
                             name: "show",
                             rawName: "v-show",
                             value: !_vm.photoPreview,
-                            expression: "! photoPreview"
+                            expression: "!photoPreview"
                           }
                         ],
                         staticClass: "mt-2"
@@ -51549,11 +51072,7 @@ var render = function() {
                           }
                         }
                       },
-                      [
-                        _vm._v(
-                          "\n                Select A New Photo\n            "
-                        )
-                      ]
+                      [_vm._v(" Select A New Photo ")]
                     ),
                     _vm._v(" "),
                     _vm.user.profile_photo_path
@@ -51569,11 +51088,7 @@ var render = function() {
                               }
                             }
                           },
-                          [
-                            _vm._v(
-                              "\n                Remove Photo\n            "
-                            )
-                          ]
+                          [_vm._v(" Remove Photo ")]
                         )
                       : _vm._e(),
                     _vm._v(" "),
@@ -51651,7 +51166,7 @@ var render = function() {
                 staticClass: "mr-3",
                 attrs: { on: _vm.form.recentlySuccessful }
               },
-              [_vm._v("\n            Saved.\n        ")]
+              [_vm._v(" Saved. ")]
             ),
             _vm._v(" "),
             _c(
@@ -51660,7 +51175,7 @@ var render = function() {
                 class: { "opacity-25": _vm.form.processing },
                 attrs: { disabled: _vm.form.processing }
               },
-              [_vm._v("\n            Save\n        ")]
+              [_vm._v(" Save ")]
             )
           ]
         },
@@ -51752,7 +51267,7 @@ var render = function() {
                       staticClass: "text-sm text-gray-700 underline",
                       attrs: { href: "/dashboard" }
                     },
-                    [_vm._v("\n            Dashboard\n        ")]
+                    [_vm._v(" Dashboard ")]
                   )
                 : [
                     _c(
@@ -51761,7 +51276,7 @@ var render = function() {
                         staticClass: "text-sm text-gray-700 underline",
                         attrs: { href: _vm.route("login") }
                       },
-                      [_vm._v("\n                Login\n            ")]
+                      [_vm._v(" Login ")]
                     ),
                     _vm._v(" "),
                     _vm.canRegister
@@ -51771,7 +51286,7 @@ var render = function() {
                             staticClass: "ml-4 text-sm text-gray-700 underline",
                             attrs: { href: _vm.route("register") }
                           },
-                          [_vm._v("\n                Register\n            ")]
+                          [_vm._v(" Register ")]
                         )
                       : _vm._e()
                   ]
@@ -51880,6 +51395,7 @@ var render = function() {
                               "M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
                           }
                         }),
+                        _vm._v(" "),
                         _c("path", {
                           attrs: { d: "M15 13a3 3 0 11-6 0 3 3 0 016 0z" }
                         })
@@ -52020,11 +51536,7 @@ var render = function() {
                       staticClass: "ml-1 underline",
                       attrs: { href: "https://laravel.bigcartel.com" }
                     },
-                    [
-                      _vm._v(
-                        "\n                        Shop\n                    "
-                      )
-                    ]
+                    [_vm._v(" Shop ")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -52058,11 +51570,7 @@ var render = function() {
                         href: "https://github.com/sponsors/taylorotwell"
                       }
                     },
-                    [
-                      _vm._v(
-                        "\n                        Sponsor\n                    "
-                      )
-                    ]
+                    [_vm._v(" Sponsor ")]
                   )
                 ])
               ]
@@ -52076,11 +51584,11 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\n                Laravel v" +
+                  "Laravel v" +
                     _vm._s(_vm.laravelVersion) +
                     " (PHP v" +
                     _vm._s(_vm.phpVersion) +
-                    ")\n            "
+                    ")"
                 )
               ]
             )
@@ -52116,7 +51624,7 @@ var staticRenderFns = [
         { staticClass: "mt-2 text-gray-600 dark:text-gray-400 text-sm" },
         [
           _vm._v(
-            "\n                            Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.\n                        "
+            "\n                            Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we\n                            recommend reading all of the documentation from beginning to end.\n                        "
           )
         ]
       )
@@ -52147,7 +51655,7 @@ var staticRenderFns = [
         { staticClass: "mt-2 text-gray-600 dark:text-gray-400 text-sm" },
         [
           _vm._v(
-            "\n                            Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.\n                        "
+            "\n                            Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development\n                            skills in the process.\n                        "
           )
         ]
       )
@@ -52178,7 +51686,7 @@ var staticRenderFns = [
         { staticClass: "mt-2 text-gray-600 dark:text-gray-400 text-sm" },
         [
           _vm._v(
-            "\n                            Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.\n                        "
+            "\n                            Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases\n                            and tutorials.\n                        "
           )
         ]
       )
@@ -52204,7 +51712,7 @@ var staticRenderFns = [
             },
             [_vm._v("Forge")]
           ),
-          _vm._v(", "),
+          _vm._v(",\n                            "),
           _c(
             "a",
             {
@@ -52222,14 +51730,14 @@ var staticRenderFns = [
             },
             [_vm._v("Nova")]
           ),
-          _vm._v(", and "),
+          _vm._v(", and\n                            "),
           _c(
             "a",
             { staticClass: "underline", attrs: { href: "https://envoyer.io" } },
             [_vm._v("Envoyer")]
           ),
           _vm._v(
-            " help you take your projects to the next level. Pair them with powerful open source libraries like "
+            " help you take your projects to the next level. Pair them with powerful open source libraries like\n                            "
           ),
           _c(
             "a",
@@ -52248,7 +51756,7 @@ var staticRenderFns = [
             },
             [_vm._v("Dusk")]
           ),
-          _vm._v(", "),
+          _vm._v(",\n                            "),
           _c(
             "a",
             {
@@ -52266,7 +51774,7 @@ var staticRenderFns = [
             },
             [_vm._v("Horizon")]
           ),
-          _vm._v(", "),
+          _vm._v(",\n                            "),
           _c(
             "a",
             {

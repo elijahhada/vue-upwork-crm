@@ -5,7 +5,7 @@ namespace App\Actions\Upwork;
 use App\Models\Job;
 use App\Models\UpworkJob;
 
-class CreateNewJob 
+class CreateNewJob
 {
     public function create(UpworkJob $job)
     {

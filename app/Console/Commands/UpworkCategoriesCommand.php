@@ -41,20 +41,20 @@ class UpworkCategoriesCommand extends Command
      */
     public function handle()
     {
-        Config::set('redirectUri', url('/').'/auth/callback/console');
+        Config::set('redirectUri', url('/') . '/auth/callback/console');
         $service = new UpworkMetadataService();
         Config::set('mode', 'nonweb');
-        Config::set('redirectUri', url('/').'/auth/callback/console');
+        Config::set('redirectUri', url('/') . '/auth/callback/console');
 
         $categories = $service->getCategories(0, 50);
 
-        foreach($categories->categories as $category) {
+        foreach ($categories->categories as $category) {
             $categoryModel = Category::create([
                 'title' => $category->title,
                 'upwork_id' => $category->id,
             ]);
 
-            foreach($category->topics as $topic) {
+            foreach ($category->topics as $topic) {
                 Topic::create([
                     'title' => $topic->title,
                     'upwork_id' => $topic->id,

@@ -63,8 +63,8 @@ class TopicController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Topic  $topic
+     * @param  \Illuminate\Http\Request   $request
+     * @param  \App\Models\Topic          $topic
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Topic $topic)

@@ -21,8 +21,6 @@ class TimetableFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

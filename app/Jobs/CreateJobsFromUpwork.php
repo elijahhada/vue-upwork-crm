@@ -97,11 +97,7 @@ class CreateJobsFromUpwork implements ShouldQueue
 
             $jobsFromDB = Job::query()->whereIn('upwork_id', collect($jobContents)->flatten()->pluck('upwork_id'))->get();
 
-            if ($jobsFromDB->isEmpty()) {
-                $offset += 1;
-            } else {
-                $flag = true;
-            }
+            $jobsFromDB->isEmpty() ? ($offset += 1) : ($flag = true);
 
             Job::upsert($jobContents, ['upwork_id']);
             Country::upsert($countries, ['title']);

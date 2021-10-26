@@ -14,9 +14,18 @@ class ChangeFiltersTable extends Migration
     public function up()
     {
         Schema::table('filters', function (Blueprint $table) {
-            $table->string('countries_ids')->after('user_id')->nullable();
-            $table->string('categories_ids')->after('user_id')->nullable();
-            $table->string('exseption_words')->after('user_id')->nullable();
+            $table
+                ->string('countries_ids')
+                ->after('user_id')
+                ->nullable();
+            $table
+                ->string('categories_ids')
+                ->after('user_id')
+                ->nullable();
+            $table
+                ->string('exseption_words')
+                ->after('user_id')
+                ->nullable();
         });
     }
 

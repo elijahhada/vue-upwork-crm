@@ -43,9 +43,9 @@ class UpworkJob implements Arrayable
     public function setExtraFields($data)
     {
         $this->client
-            ->setClientAssignments(isset($data->assignments->assignment)
-                ? is_array($data->assignments->assignment) ? $data->assignments->assignment : [$data->assignments->assignment]
-                : null)
+            ->setClientAssignments(
+                isset($data->assignments->assignment) ? (is_array($data->assignments->assignment) ? $data->assignments->assignment : [$data->assignments->assignment]) : null,
+            )
             ->setClientTotalCharge($data->buyer->op_tot_charge)
             ->setClientAvgRate()
             ->setClientAvgCharge()
@@ -82,7 +82,7 @@ class UpworkJob implements Arrayable
                 continue;
             }
 
-            $data['client_'.$index] = $item;
+            $data['client_' . $index] = $item;
         }
 
         return $data;

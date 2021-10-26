@@ -28,7 +28,7 @@ class Client extends \Upwork\API\Client
     /**
      * @var Entry point name
      */
-    static protected $_epoint = UPWORK_API_EP_NAME;
+    protected static $_epoint = UPWORK_API_EP_NAME;
 
     /**
      * @var Server instance (AuthTypes)
@@ -45,18 +45,18 @@ class Client extends \Upwork\API\Client
     {
         ApiDebug::p('preparing Client');
 
-        $clientId     = $config::get('clientId');
+        $clientId = $config::get('clientId');
         $clientSecret = $config::get('clientSecret');
-        $redirectUri  = $config::get('redirectUri');
-        $aToken       = $config::get('accessToken');
-        $rToken       = $config::get('refreshToken');
-        $expiresIn    = $config::get('expiresIn');
-        $verifySsl    = $config::get('verifySsl');
-        $auth         = 'Upwork\API\AuthTypes\\' . $config::get('authType');
+        $redirectUri = $config::get('redirectUri');
+        $aToken = $config::get('accessToken');
+        $rToken = $config::get('refreshToken');
+        $expiresIn = $config::get('expiresIn');
+        $verifySsl = $config::get('verifySsl');
+        $auth = 'Upwork\API\AuthTypes\\' . $config::get('authType');
 
         $this->_server = new $auth($clientId, $clientSecret, $redirectUri);
-        !$aToken    || $this->_server->option('accessToken', $aToken);
-        !$rToken    || $this->_server->option('refreshToken', $rToken);
+        !$aToken || $this->_server->option('accessToken', $aToken);
+        !$rToken || $this->_server->option('refreshToken', $rToken);
         !$expiresIn || $this->_server->option('expiresIn', $expiresIn);
         $this->_server->option('verifySsl', $verifySsl);
     }
@@ -101,12 +101,12 @@ class Client extends \Upwork\API\Client
         // setup request tokens for web-based app
         // they must be already obrained on the first step
         if (ApiConfig::get('mode') === 'web') {
-            $aToken   = ApiConfig::get('accessToken');
-            $rToken   = ApiConfig::get('refreshToken');
+            $aToken = ApiConfig::get('accessToken');
+            $rToken = ApiConfig::get('refreshToken');
             $authCode = ApiConfig::get('code');
 
-            !$aToken   || $this->_server->option('accessToken', $aToken);
-            !$rToken   || $this->_server->option('refreshToken', $rToken);
+            !$aToken || $this->_server->option('accessToken', $aToken);
+            !$rToken || $this->_server->option('refreshToken', $rToken);
             !$authCode || $this->_server->option('authzCode', $authCode);
         }
 
@@ -122,7 +122,7 @@ class Client extends \Upwork\API\Client
      * @access  protected
      * @return  array
      */
-    protected function _request($type, $url, $params = array())
+    protected function _request($type, $url, $params = [])
     {
         ApiDebug::p('running Client request', $this->_server);
 
@@ -162,7 +162,7 @@ class Client extends \Upwork\API\Client
      * @access  public
      * @return  mixed
      */
-    public function get($url, $params = array())
+    public function get($url, $params = [])
     {
         ApiDebug::p('starting GET request');
         return $this->_request('GET', $url, $params);
@@ -176,7 +176,7 @@ class Client extends \Upwork\API\Client
      * @access  public
      * @return  mixed
      */
-    public function post($url, $params = array())
+    public function post($url, $params = [])
     {
         ApiDebug::p('starting POST request');
         return $this->_request('POST', $url, $params);
@@ -190,7 +190,7 @@ class Client extends \Upwork\API\Client
      * @access  public
      * @return  mixed
      */
-    public function put($url, $params = array())
+    public function put($url, $params = [])
     {
         ApiDebug::p('starting PUT request');
         return $this->_request('PUT', $url, $params);
@@ -204,7 +204,7 @@ class Client extends \Upwork\API\Client
      * @access  public
      * @return  mixed
      */
-    public function delete($url, $params = array())
+    public function delete($url, $params = [])
     {
         ApiDebug::p('starting DELETE request');
         return $this->_request('DELETE', $url, $params);
