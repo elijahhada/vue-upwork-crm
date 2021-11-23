@@ -2,7 +2,7 @@
     <app-layout>
         <dash-header :countries="countries" :categories="categories" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
         <div class="w-full">
-            <p class="text-2xl font-bold">Find {{ data.length }} jobs</p>
+            <p class="text-2xl font-bold">Find {{ jobsData.total }} jobs</p>
         </div>
         <div class="flex flex-col space-y-4" v-if="!isReloading">
             <job-card
@@ -41,6 +41,7 @@
 import AppLayout from '@/Layouts/AppLayout';
 import JobCard from '../Components/Jobs/JobCard';
 import DashHeader from '../Components/DashboardHeader';
+import {debounce} from "lodash/function";
 
 export default {
     props: {
@@ -70,6 +71,7 @@ export default {
             data: [],
             isReloading: false,
             selectedKits: [],
+            jobsData: Object,
         };
     },
     components: {
@@ -79,7 +81,9 @@ export default {
     },
     mounted() {
         this.data = this.jobs.data;
+        this.jobsData = this.jobs;
         this.jobListen();
+        this.loadMoreOnScroll();
     },
     watch: {
         selectedKits(kits) {
@@ -134,6 +138,23 @@ export default {
                 }
             });
         },
+        loadMoreOnScroll() {
+            window.addEventListener('scroll', debounce((e) => {
+                let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
+
+                if(pixelsFromBottom < 600) {
+                    axios
+                        .post('/jobs/filter?page=' + this.jobsData.next_page_url.substr(this.jobsData.next_page_url.length - 1), {
+                            kits: this.selectedKits,
+                        })
+                        .then((response) => {
+                            console.log(response)
+                            this.data.push(...response.data.data.filter((j) => j.status !== 1));
+                            this.jobsData = response.data;
+                        });
+                }
+            },300))
+        }
     },
 };
 </script>

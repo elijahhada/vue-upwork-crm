@@ -918,6 +918,192 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/@socket.io/component-emitter/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@socket.io/component-emitter/index.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+/**
+ * Expose `Emitter`.
+ */
+
+exports.Emitter = Emitter;
+
+/**
+ * Initialize a new `Emitter`.
+ *
+ * @api public
+ */
+
+function Emitter(obj) {
+  if (obj) return mixin(obj);
+}
+
+/**
+ * Mixin the emitter properties.
+ *
+ * @param {Object} obj
+ * @return {Object}
+ * @api private
+ */
+
+function mixin(obj) {
+  for (var key in Emitter.prototype) {
+    obj[key] = Emitter.prototype[key];
+  }
+  return obj;
+}
+
+/**
+ * Listen on the given `event` with `fn`.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.on =
+Emitter.prototype.addEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
+    .push(fn);
+  return this;
+};
+
+/**
+ * Adds an `event` listener that will be invoked a single
+ * time then automatically removed.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.once = function(event, fn){
+  function on() {
+    this.off(event, on);
+    fn.apply(this, arguments);
+  }
+
+  on.fn = fn;
+  this.on(event, on);
+  return this;
+};
+
+/**
+ * Remove the given callback for `event` or all
+ * registered callbacks.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.off =
+Emitter.prototype.removeListener =
+Emitter.prototype.removeAllListeners =
+Emitter.prototype.removeEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+
+  // all
+  if (0 == arguments.length) {
+    this._callbacks = {};
+    return this;
+  }
+
+  // specific event
+  var callbacks = this._callbacks['$' + event];
+  if (!callbacks) return this;
+
+  // remove all handlers
+  if (1 == arguments.length) {
+    delete this._callbacks['$' + event];
+    return this;
+  }
+
+  // remove specific handler
+  var cb;
+  for (var i = 0; i < callbacks.length; i++) {
+    cb = callbacks[i];
+    if (cb === fn || cb.fn === fn) {
+      callbacks.splice(i, 1);
+      break;
+    }
+  }
+
+  // Remove event specific arrays for event types that no
+  // one is subscribed for to avoid memory leak.
+  if (callbacks.length === 0) {
+    delete this._callbacks['$' + event];
+  }
+
+  return this;
+};
+
+/**
+ * Emit `event` with the given args.
+ *
+ * @param {String} event
+ * @param {Mixed} ...
+ * @return {Emitter}
+ */
+
+Emitter.prototype.emit = function(event){
+  this._callbacks = this._callbacks || {};
+
+  var args = new Array(arguments.length - 1)
+    , callbacks = this._callbacks['$' + event];
+
+  for (var i = 1; i < arguments.length; i++) {
+    args[i - 1] = arguments[i];
+  }
+
+  if (callbacks) {
+    callbacks = callbacks.slice(0);
+    for (var i = 0, len = callbacks.length; i < len; ++i) {
+      callbacks[i].apply(this, args);
+    }
+  }
+
+  return this;
+};
+
+// alias used for reserved events (protected method)
+Emitter.prototype.emitReserved = Emitter.prototype.emit;
+
+/**
+ * Return array of callbacks for `event`.
+ *
+ * @param {String} event
+ * @return {Array}
+ * @api public
+ */
+
+Emitter.prototype.listeners = function(event){
+  this._callbacks = this._callbacks || {};
+  return this._callbacks['$' + event] || [];
+};
+
+/**
+ * Check if this emitter has `event` handlers.
+ *
+ * @param {String} event
+ * @return {Boolean}
+ * @api public
+ */
+
+Emitter.prototype.hasListeners = function(event){
+  return !! this.listeners(event).length;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -1913,7 +2099,7 @@ module.exports = function transformData(data, headers, fns) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
+/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 var utils = __webpack_require__(/*! ./utils */ "./node_modules/axios/lib/utils.js");
@@ -6833,6 +7019,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Components_Jobs_JobCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/Jobs/JobCard */ "./resources/js/Components/Jobs/JobCard.vue");
 /* harmony import */ var _Components_DashboardHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Components/DashboardHeader */ "./resources/js/Components/DashboardHeader.vue");
+/* harmony import */ var lodash_function__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/function */ "./node_modules/lodash/function.js");
+/* harmony import */ var lodash_function__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_function__WEBPACK_IMPORTED_MODULE_3__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -6872,6 +7072,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -6902,7 +7103,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       data: [],
       isReloading: false,
-      selectedKits: []
+      selectedKits: [],
+      jobsData: Object
     };
   },
   components: {
@@ -6912,7 +7114,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.data = this.jobs.data;
+    this.jobsData = this.jobs;
     this.jobListen();
+    this.loadMoreOnScroll();
   },
   watch: {
     selectedKits: function selectedKits(kits) {
@@ -6994,6 +7198,29 @@ __webpack_require__.r(__webpack_exports__);
             break;
         }
       });
+    },
+    loadMoreOnScroll: function loadMoreOnScroll() {
+      var _this3 = this;
+
+      window.addEventListener('scroll', (0,lodash_function__WEBPACK_IMPORTED_MODULE_3__.debounce)(function (e) {
+        var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
+
+        if (pixelsFromBottom < 600) {
+          axios.post('/jobs/filter?page=' + _this3.jobsData.next_page_url.substr(_this3.jobsData.next_page_url.length - 1), {
+            kits: _this3.selectedKits
+          }).then(function (response) {
+            var _this3$data;
+
+            console.log(response);
+
+            (_this3$data = _this3.data).push.apply(_this3$data, _toConsumableArray(response.data.data.filter(function (j) {
+              return j.status !== 1;
+            })));
+
+            _this3.jobsData = response.data;
+          });
+        }
+      }, 300));
     }
   }
 });
@@ -8788,7 +9015,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/build/index.js");
+window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/build/cjs/index.js");
 window.socket = io("".concat(window.location.hostname, ":3000"));
 
 /***/ }),
@@ -8915,71 +9142,68 @@ Backoff.prototype.setJitter = function(jitter){
 
 /***/ }),
 
-/***/ "./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ "./node_modules/base64-arraybuffer/dist/base64-arraybuffer.es5.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/base64-arraybuffer/dist/base64-arraybuffer.es5.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "decode": () => (/* binding */ decode),
+/* harmony export */   "encode": () => (/* binding */ encode)
+/* harmony export */ });
 /*
- * base64-arraybuffer
- * https://github.com/niklasvh/base64-arraybuffer
- *
- * Copyright (c) 2012 Niklas von Hertzen
- * Licensed under the MIT license.
+ * base64-arraybuffer 1.0.1 <https://github.com/niklasvh/base64-arraybuffer>
+ * Copyright (c) 2021 Niklas von Hertzen <https://hertzen.com>
+ * Released under MIT License
  */
-(function(chars){
-  "use strict";
-
-  exports.encode = function(arraybuffer) {
-    var bytes = new Uint8Array(arraybuffer),
-    i, len = bytes.length, base64 = "";
-
-    for (i = 0; i < len; i+=3) {
-      base64 += chars[bytes[i] >> 2];
-      base64 += chars[((bytes[i] & 3) << 4) | (bytes[i + 1] >> 4)];
-      base64 += chars[((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6)];
-      base64 += chars[bytes[i + 2] & 63];
+var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+// Use a lookup table to find the index.
+var lookup = typeof Uint8Array === 'undefined' ? [] : new Uint8Array(256);
+for (var i = 0; i < chars.length; i++) {
+    lookup[chars.charCodeAt(i)] = i;
+}
+var encode = function (arraybuffer) {
+    var bytes = new Uint8Array(arraybuffer), i, len = bytes.length, base64 = '';
+    for (i = 0; i < len; i += 3) {
+        base64 += chars[bytes[i] >> 2];
+        base64 += chars[((bytes[i] & 3) << 4) | (bytes[i + 1] >> 4)];
+        base64 += chars[((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6)];
+        base64 += chars[bytes[i + 2] & 63];
     }
-
-    if ((len % 3) === 2) {
-      base64 = base64.substring(0, base64.length - 1) + "=";
-    } else if (len % 3 === 1) {
-      base64 = base64.substring(0, base64.length - 2) + "==";
+    if (len % 3 === 2) {
+        base64 = base64.substring(0, base64.length - 1) + '=';
     }
-
+    else if (len % 3 === 1) {
+        base64 = base64.substring(0, base64.length - 2) + '==';
+    }
     return base64;
-  };
-
-  exports.decode =  function(base64) {
-    var bufferLength = base64.length * 0.75,
-    len = base64.length, i, p = 0,
-    encoded1, encoded2, encoded3, encoded4;
-
-    if (base64[base64.length - 1] === "=") {
-      bufferLength--;
-      if (base64[base64.length - 2] === "=") {
+};
+var decode = function (base64) {
+    var bufferLength = base64.length * 0.75, len = base64.length, i, p = 0, encoded1, encoded2, encoded3, encoded4;
+    if (base64[base64.length - 1] === '=') {
         bufferLength--;
-      }
+        if (base64[base64.length - 2] === '=') {
+            bufferLength--;
+        }
     }
-
-    var arraybuffer = new ArrayBuffer(bufferLength),
-    bytes = new Uint8Array(arraybuffer);
-
-    for (i = 0; i < len; i+=4) {
-      encoded1 = chars.indexOf(base64[i]);
-      encoded2 = chars.indexOf(base64[i+1]);
-      encoded3 = chars.indexOf(base64[i+2]);
-      encoded4 = chars.indexOf(base64[i+3]);
-
-      bytes[p++] = (encoded1 << 2) | (encoded2 >> 4);
-      bytes[p++] = ((encoded2 & 15) << 4) | (encoded3 >> 2);
-      bytes[p++] = ((encoded3 & 3) << 6) | (encoded4 & 63);
+    var arraybuffer = new ArrayBuffer(bufferLength), bytes = new Uint8Array(arraybuffer);
+    for (i = 0; i < len; i += 4) {
+        encoded1 = lookup[base64.charCodeAt(i)];
+        encoded2 = lookup[base64.charCodeAt(i + 1)];
+        encoded3 = lookup[base64.charCodeAt(i + 2)];
+        encoded4 = lookup[base64.charCodeAt(i + 3)];
+        bytes[p++] = (encoded1 << 2) | (encoded2 >> 4);
+        bytes[p++] = ((encoded2 & 15) << 4) | (encoded3 >> 2);
+        bytes[p++] = ((encoded3 & 3) << 6) | (encoded4 & 63);
     }
-
     return arraybuffer;
-  };
-})("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
+};
+
+
+//# sourceMappingURL=base64-arraybuffer.es5.js.map
 
 
 /***/ }),
@@ -11029,191 +11253,6 @@ if ($defineProperty) {
 
 /***/ }),
 
-/***/ "./node_modules/component-emitter/index.js":
-/*!*************************************************!*\
-  !*** ./node_modules/component-emitter/index.js ***!
-  \*************************************************/
-/***/ ((module) => {
-
-
-/**
- * Expose `Emitter`.
- */
-
-if (true) {
-  module.exports = Emitter;
-}
-
-/**
- * Initialize a new `Emitter`.
- *
- * @api public
- */
-
-function Emitter(obj) {
-  if (obj) return mixin(obj);
-};
-
-/**
- * Mixin the emitter properties.
- *
- * @param {Object} obj
- * @return {Object}
- * @api private
- */
-
-function mixin(obj) {
-  for (var key in Emitter.prototype) {
-    obj[key] = Emitter.prototype[key];
-  }
-  return obj;
-}
-
-/**
- * Listen on the given `event` with `fn`.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.on =
-Emitter.prototype.addEventListener = function(event, fn){
-  this._callbacks = this._callbacks || {};
-  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
-    .push(fn);
-  return this;
-};
-
-/**
- * Adds an `event` listener that will be invoked a single
- * time then automatically removed.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.once = function(event, fn){
-  function on() {
-    this.off(event, on);
-    fn.apply(this, arguments);
-  }
-
-  on.fn = fn;
-  this.on(event, on);
-  return this;
-};
-
-/**
- * Remove the given callback for `event` or all
- * registered callbacks.
- *
- * @param {String} event
- * @param {Function} fn
- * @return {Emitter}
- * @api public
- */
-
-Emitter.prototype.off =
-Emitter.prototype.removeListener =
-Emitter.prototype.removeAllListeners =
-Emitter.prototype.removeEventListener = function(event, fn){
-  this._callbacks = this._callbacks || {};
-
-  // all
-  if (0 == arguments.length) {
-    this._callbacks = {};
-    return this;
-  }
-
-  // specific event
-  var callbacks = this._callbacks['$' + event];
-  if (!callbacks) return this;
-
-  // remove all handlers
-  if (1 == arguments.length) {
-    delete this._callbacks['$' + event];
-    return this;
-  }
-
-  // remove specific handler
-  var cb;
-  for (var i = 0; i < callbacks.length; i++) {
-    cb = callbacks[i];
-    if (cb === fn || cb.fn === fn) {
-      callbacks.splice(i, 1);
-      break;
-    }
-  }
-
-  // Remove event specific arrays for event types that no
-  // one is subscribed for to avoid memory leak.
-  if (callbacks.length === 0) {
-    delete this._callbacks['$' + event];
-  }
-
-  return this;
-};
-
-/**
- * Emit `event` with the given args.
- *
- * @param {String} event
- * @param {Mixed} ...
- * @return {Emitter}
- */
-
-Emitter.prototype.emit = function(event){
-  this._callbacks = this._callbacks || {};
-
-  var args = new Array(arguments.length - 1)
-    , callbacks = this._callbacks['$' + event];
-
-  for (var i = 1; i < arguments.length; i++) {
-    args[i - 1] = arguments[i];
-  }
-
-  if (callbacks) {
-    callbacks = callbacks.slice(0);
-    for (var i = 0, len = callbacks.length; i < len; ++i) {
-      callbacks[i].apply(this, args);
-    }
-  }
-
-  return this;
-};
-
-/**
- * Return array of callbacks for `event`.
- *
- * @param {String} event
- * @return {Array}
- * @api public
- */
-
-Emitter.prototype.listeners = function(event){
-  this._callbacks = this._callbacks || {};
-  return this._callbacks['$' + event] || [];
-};
-
-/**
- * Check if this emitter has `event` handlers.
- *
- * @param {String} event
- * @return {Boolean}
- * @api public
- */
-
-Emitter.prototype.hasListeners = function(event){
-  return !! this.listeners(event).length;
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-multiselect/dist/vue-multiselect.min.css":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-multiselect/dist/vue-multiselect.min.css ***!
@@ -11255,7 +11294,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f] {\n    background-color: #faeae3 !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f] {\r\n    background-color: #faeae3 !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11555,2079 +11594,13 @@ module.exports = deepmerge_1;
 
 /***/ }),
 
-/***/ "./node_modules/engine.io-client/lib/globalThis.browser.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/globalThis.browser.js ***!
-  \*****************************************************************/
-/***/ ((module) => {
-
-module.exports = (() => {
-  if (typeof self !== "undefined") {
-    return self;
-  } else if (typeof window !== "undefined") {
-    return window;
-  } else {
-    return Function("return this")();
-  }
-})();
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-client/lib/index.js":
-/*!****************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/index.js ***!
-  \****************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const Socket = __webpack_require__(/*! ./socket */ "./node_modules/engine.io-client/lib/socket.js");
-
-module.exports = (uri, opts) => new Socket(uri, opts);
-
-/**
- * Expose deps for legacy compatibility
- * and standalone browser access.
- */
-
-module.exports.Socket = Socket;
-module.exports.protocol = Socket.protocol; // this is an int
-module.exports.Transport = __webpack_require__(/*! ./transport */ "./node_modules/engine.io-client/lib/transport.js");
-module.exports.transports = __webpack_require__(/*! ./transports/index */ "./node_modules/engine.io-client/lib/transports/index.js");
-module.exports.parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-client/lib/socket.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/socket.js ***!
-  \*****************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const transports = __webpack_require__(/*! ./transports/index */ "./node_modules/engine.io-client/lib/transports/index.js");
-const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
-const debug = __webpack_require__(/*! debug */ "./node_modules/engine.io-client/node_modules/debug/src/browser.js")("engine.io-client:socket");
-const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
-const parseuri = __webpack_require__(/*! parseuri */ "./node_modules/parseuri/index.js");
-const parseqs = __webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js");
-const { installTimerFunctions } = __webpack_require__(/*! ./util */ "./node_modules/engine.io-client/lib/util.js");
-
-class Socket extends Emitter {
-  /**
-   * Socket constructor.
-   *
-   * @param {String|Object} uri or options
-   * @param {Object} options
-   * @api public
-   */
-  constructor(uri, opts = {}) {
-    super();
-
-    if (uri && "object" === typeof uri) {
-      opts = uri;
-      uri = null;
-    }
-
-    if (uri) {
-      uri = parseuri(uri);
-      opts.hostname = uri.host;
-      opts.secure = uri.protocol === "https" || uri.protocol === "wss";
-      opts.port = uri.port;
-      if (uri.query) opts.query = uri.query;
-    } else if (opts.host) {
-      opts.hostname = parseuri(opts.host).host;
-    }
-
-    installTimerFunctions(this, opts);
-
-    this.secure =
-      null != opts.secure
-        ? opts.secure
-        : typeof location !== "undefined" && "https:" === location.protocol;
-
-    if (opts.hostname && !opts.port) {
-      // if no port is specified manually, use the protocol default
-      opts.port = this.secure ? "443" : "80";
-    }
-
-    this.hostname =
-      opts.hostname ||
-      (typeof location !== "undefined" ? location.hostname : "localhost");
-    this.port =
-      opts.port ||
-      (typeof location !== "undefined" && location.port
-        ? location.port
-        : this.secure
-        ? 443
-        : 80);
-
-    this.transports = opts.transports || ["polling", "websocket"];
-    this.readyState = "";
-    this.writeBuffer = [];
-    this.prevBufferLen = 0;
-
-    this.opts = Object.assign(
-      {
-        path: "/engine.io",
-        agent: false,
-        withCredentials: false,
-        upgrade: true,
-        jsonp: true,
-        timestampParam: "t",
-        rememberUpgrade: false,
-        rejectUnauthorized: true,
-        perMessageDeflate: {
-          threshold: 1024
-        },
-        transportOptions: {},
-        closeOnBeforeunload: true
-      },
-      opts
-    );
-
-    this.opts.path = this.opts.path.replace(/\/$/, "") + "/";
-
-    if (typeof this.opts.query === "string") {
-      this.opts.query = parseqs.decode(this.opts.query);
-    }
-
-    // set on handshake
-    this.id = null;
-    this.upgrades = null;
-    this.pingInterval = null;
-    this.pingTimeout = null;
-
-    // set on heartbeat
-    this.pingTimeoutTimer = null;
-
-    if (typeof addEventListener === "function") {
-      if (this.opts.closeOnBeforeunload) {
-        // Firefox closes the connection when the "beforeunload" event is emitted but not Chrome. This event listener
-        // ensures every browser behaves the same (no "disconnect" event at the Socket.IO level when the page is
-        // closed/reloaded)
-        addEventListener(
-          "beforeunload",
-          () => {
-            if (this.transport) {
-              // silently close the transport
-              this.transport.removeAllListeners();
-              this.transport.close();
-            }
-          },
-          false
-        );
-      }
-      if (this.hostname !== "localhost") {
-        this.offlineEventListener = () => {
-          this.onClose("transport close");
-        };
-        addEventListener("offline", this.offlineEventListener, false);
-      }
-    }
-
-    this.open();
-  }
-
-  /**
-   * Creates transport of the given type.
-   *
-   * @param {String} transport name
-   * @return {Transport}
-   * @api private
-   */
-  createTransport(name) {
-    debug('creating transport "%s"', name);
-    const query = clone(this.opts.query);
-
-    // append engine.io protocol identifier
-    query.EIO = parser.protocol;
-
-    // transport name
-    query.transport = name;
-
-    // session id if we already have one
-    if (this.id) query.sid = this.id;
-
-    const opts = Object.assign(
-      {},
-      this.opts.transportOptions[name],
-      this.opts,
-      {
-        query,
-        socket: this,
-        hostname: this.hostname,
-        secure: this.secure,
-        port: this.port
-      }
-    );
-
-    debug("options: %j", opts);
-
-    return new transports[name](opts);
-  }
-
-  /**
-   * Initializes transport to use and starts probe.
-   *
-   * @api private
-   */
-  open() {
-    let transport;
-    if (
-      this.opts.rememberUpgrade &&
-      Socket.priorWebsocketSuccess &&
-      this.transports.indexOf("websocket") !== -1
-    ) {
-      transport = "websocket";
-    } else if (0 === this.transports.length) {
-      // Emit error on next tick so it can be listened to
-      this.setTimeoutFn(() => {
-        this.emit("error", "No transports available");
-      }, 0);
-      return;
-    } else {
-      transport = this.transports[0];
-    }
-    this.readyState = "opening";
-
-    // Retry with the next transport if the transport is disabled (jsonp: false)
-    try {
-      transport = this.createTransport(transport);
-    } catch (e) {
-      debug("error while creating transport: %s", e);
-      this.transports.shift();
-      this.open();
-      return;
-    }
-
-    transport.open();
-    this.setTransport(transport);
-  }
-
-  /**
-   * Sets the current transport. Disables the existing one (if any).
-   *
-   * @api private
-   */
-  setTransport(transport) {
-    debug("setting transport %s", transport.name);
-
-    if (this.transport) {
-      debug("clearing existing transport %s", this.transport.name);
-      this.transport.removeAllListeners();
-    }
-
-    // set up transport
-    this.transport = transport;
-
-    // set up transport listeners
-    transport
-      .on("drain", this.onDrain.bind(this))
-      .on("packet", this.onPacket.bind(this))
-      .on("error", this.onError.bind(this))
-      .on("close", () => {
-        this.onClose("transport close");
-      });
-  }
-
-  /**
-   * Probes a transport.
-   *
-   * @param {String} transport name
-   * @api private
-   */
-  probe(name) {
-    debug('probing transport "%s"', name);
-    let transport = this.createTransport(name, { probe: 1 });
-    let failed = false;
-
-    Socket.priorWebsocketSuccess = false;
-
-    const onTransportOpen = () => {
-      if (failed) return;
-
-      debug('probe transport "%s" opened', name);
-      transport.send([{ type: "ping", data: "probe" }]);
-      transport.once("packet", msg => {
-        if (failed) return;
-        if ("pong" === msg.type && "probe" === msg.data) {
-          debug('probe transport "%s" pong', name);
-          this.upgrading = true;
-          this.emit("upgrading", transport);
-          if (!transport) return;
-          Socket.priorWebsocketSuccess = "websocket" === transport.name;
-
-          debug('pausing current transport "%s"', this.transport.name);
-          this.transport.pause(() => {
-            if (failed) return;
-            if ("closed" === this.readyState) return;
-            debug("changing transport and sending upgrade packet");
-
-            cleanup();
-
-            this.setTransport(transport);
-            transport.send([{ type: "upgrade" }]);
-            this.emit("upgrade", transport);
-            transport = null;
-            this.upgrading = false;
-            this.flush();
-          });
-        } else {
-          debug('probe transport "%s" failed', name);
-          const err = new Error("probe error");
-          err.transport = transport.name;
-          this.emit("upgradeError", err);
-        }
-      });
-    };
-
-    function freezeTransport() {
-      if (failed) return;
-
-      // Any callback called by transport should be ignored since now
-      failed = true;
-
-      cleanup();
-
-      transport.close();
-      transport = null;
-    }
-
-    // Handle any error that happens while probing
-    const onerror = err => {
-      const error = new Error("probe error: " + err);
-      error.transport = transport.name;
-
-      freezeTransport();
-
-      debug('probe transport "%s" failed because of error: %s', name, err);
-
-      this.emit("upgradeError", error);
-    };
-
-    function onTransportClose() {
-      onerror("transport closed");
-    }
-
-    // When the socket is closed while we're probing
-    function onclose() {
-      onerror("socket closed");
-    }
-
-    // When the socket is upgraded while we're probing
-    function onupgrade(to) {
-      if (transport && to.name !== transport.name) {
-        debug('"%s" works - aborting "%s"', to.name, transport.name);
-        freezeTransport();
-      }
-    }
-
-    // Remove all listeners on the transport and on self
-    const cleanup = () => {
-      transport.removeListener("open", onTransportOpen);
-      transport.removeListener("error", onerror);
-      transport.removeListener("close", onTransportClose);
-      this.removeListener("close", onclose);
-      this.removeListener("upgrading", onupgrade);
-    };
-
-    transport.once("open", onTransportOpen);
-    transport.once("error", onerror);
-    transport.once("close", onTransportClose);
-
-    this.once("close", onclose);
-    this.once("upgrading", onupgrade);
-
-    transport.open();
-  }
-
-  /**
-   * Called when connection is deemed open.
-   *
-   * @api public
-   */
-  onOpen() {
-    debug("socket open");
-    this.readyState = "open";
-    Socket.priorWebsocketSuccess = "websocket" === this.transport.name;
-    this.emit("open");
-    this.flush();
-
-    // we check for `readyState` in case an `open`
-    // listener already closed the socket
-    if (
-      "open" === this.readyState &&
-      this.opts.upgrade &&
-      this.transport.pause
-    ) {
-      debug("starting upgrade probes");
-      let i = 0;
-      const l = this.upgrades.length;
-      for (; i < l; i++) {
-        this.probe(this.upgrades[i]);
-      }
-    }
-  }
-
-  /**
-   * Handles a packet.
-   *
-   * @api private
-   */
-  onPacket(packet) {
-    if (
-      "opening" === this.readyState ||
-      "open" === this.readyState ||
-      "closing" === this.readyState
-    ) {
-      debug('socket receive: type "%s", data "%s"', packet.type, packet.data);
-
-      this.emit("packet", packet);
-
-      // Socket is live - any packet counts
-      this.emit("heartbeat");
-
-      switch (packet.type) {
-        case "open":
-          this.onHandshake(JSON.parse(packet.data));
-          break;
-
-        case "ping":
-          this.resetPingTimeout();
-          this.sendPacket("pong");
-          this.emit("ping");
-          this.emit("pong");
-          break;
-
-        case "error":
-          const err = new Error("server error");
-          err.code = packet.data;
-          this.onError(err);
-          break;
-
-        case "message":
-          this.emit("data", packet.data);
-          this.emit("message", packet.data);
-          break;
-      }
-    } else {
-      debug('packet received with socket readyState "%s"', this.readyState);
-    }
-  }
-
-  /**
-   * Called upon handshake completion.
-   *
-   * @param {Object} handshake obj
-   * @api private
-   */
-  onHandshake(data) {
-    this.emit("handshake", data);
-    this.id = data.sid;
-    this.transport.query.sid = data.sid;
-    this.upgrades = this.filterUpgrades(data.upgrades);
-    this.pingInterval = data.pingInterval;
-    this.pingTimeout = data.pingTimeout;
-    this.onOpen();
-    // In case open handler closes socket
-    if ("closed" === this.readyState) return;
-    this.resetPingTimeout();
-  }
-
-  /**
-   * Sets and resets ping timeout timer based on server pings.
-   *
-   * @api private
-   */
-  resetPingTimeout() {
-    this.clearTimeoutFn(this.pingTimeoutTimer);
-    this.pingTimeoutTimer = this.setTimeoutFn(() => {
-      this.onClose("ping timeout");
-    }, this.pingInterval + this.pingTimeout);
-    if (this.opts.autoUnref) {
-      this.pingTimeoutTimer.unref();
-    }
-  }
-
-  /**
-   * Called on `drain` event
-   *
-   * @api private
-   */
-  onDrain() {
-    this.writeBuffer.splice(0, this.prevBufferLen);
-
-    // setting prevBufferLen = 0 is very important
-    // for example, when upgrading, upgrade packet is sent over,
-    // and a nonzero prevBufferLen could cause problems on `drain`
-    this.prevBufferLen = 0;
-
-    if (0 === this.writeBuffer.length) {
-      this.emit("drain");
-    } else {
-      this.flush();
-    }
-  }
-
-  /**
-   * Flush write buffers.
-   *
-   * @api private
-   */
-  flush() {
-    if (
-      "closed" !== this.readyState &&
-      this.transport.writable &&
-      !this.upgrading &&
-      this.writeBuffer.length
-    ) {
-      debug("flushing %d packets in socket", this.writeBuffer.length);
-      this.transport.send(this.writeBuffer);
-      // keep track of current length of writeBuffer
-      // splice writeBuffer and callbackBuffer on `drain`
-      this.prevBufferLen = this.writeBuffer.length;
-      this.emit("flush");
-    }
-  }
-
-  /**
-   * Sends a message.
-   *
-   * @param {String} message.
-   * @param {Function} callback function.
-   * @param {Object} options.
-   * @return {Socket} for chaining.
-   * @api public
-   */
-  write(msg, options, fn) {
-    this.sendPacket("message", msg, options, fn);
-    return this;
-  }
-
-  send(msg, options, fn) {
-    this.sendPacket("message", msg, options, fn);
-    return this;
-  }
-
-  /**
-   * Sends a packet.
-   *
-   * @param {String} packet type.
-   * @param {String} data.
-   * @param {Object} options.
-   * @param {Function} callback function.
-   * @api private
-   */
-  sendPacket(type, data, options, fn) {
-    if ("function" === typeof data) {
-      fn = data;
-      data = undefined;
-    }
-
-    if ("function" === typeof options) {
-      fn = options;
-      options = null;
-    }
-
-    if ("closing" === this.readyState || "closed" === this.readyState) {
-      return;
-    }
-
-    options = options || {};
-    options.compress = false !== options.compress;
-
-    const packet = {
-      type: type,
-      data: data,
-      options: options
-    };
-    this.emit("packetCreate", packet);
-    this.writeBuffer.push(packet);
-    if (fn) this.once("flush", fn);
-    this.flush();
-  }
-
-  /**
-   * Closes the connection.
-   *
-   * @api private
-   */
-  close() {
-    const close = () => {
-      this.onClose("forced close");
-      debug("socket closing - telling transport to close");
-      this.transport.close();
-    };
-
-    const cleanupAndClose = () => {
-      this.removeListener("upgrade", cleanupAndClose);
-      this.removeListener("upgradeError", cleanupAndClose);
-      close();
-    };
-
-    const waitForUpgrade = () => {
-      // wait for upgrade to finish since we can't send packets while pausing a transport
-      this.once("upgrade", cleanupAndClose);
-      this.once("upgradeError", cleanupAndClose);
-    };
-
-    if ("opening" === this.readyState || "open" === this.readyState) {
-      this.readyState = "closing";
-
-      if (this.writeBuffer.length) {
-        this.once("drain", () => {
-          if (this.upgrading) {
-            waitForUpgrade();
-          } else {
-            close();
-          }
-        });
-      } else if (this.upgrading) {
-        waitForUpgrade();
-      } else {
-        close();
-      }
-    }
-
-    return this;
-  }
-
-  /**
-   * Called upon transport error
-   *
-   * @api private
-   */
-  onError(err) {
-    debug("socket error %j", err);
-    Socket.priorWebsocketSuccess = false;
-    this.emit("error", err);
-    this.onClose("transport error", err);
-  }
-
-  /**
-   * Called upon transport close.
-   *
-   * @api private
-   */
-  onClose(reason, desc) {
-    if (
-      "opening" === this.readyState ||
-      "open" === this.readyState ||
-      "closing" === this.readyState
-    ) {
-      debug('socket close with reason: "%s"', reason);
-
-      // clear timers
-      this.clearTimeoutFn(this.pingIntervalTimer);
-      this.clearTimeoutFn(this.pingTimeoutTimer);
-
-      // stop event from firing again for transport
-      this.transport.removeAllListeners("close");
-
-      // ensure transport won't stay open
-      this.transport.close();
-
-      // ignore further transport communication
-      this.transport.removeAllListeners();
-
-      if (typeof removeEventListener === "function") {
-        removeEventListener("offline", this.offlineEventListener, false);
-      }
-
-      // set ready state
-      this.readyState = "closed";
-
-      // clear session id
-      this.id = null;
-
-      // emit close event
-      this.emit("close", reason, desc);
-
-      // clean buffers after, so users can still
-      // grab the buffers on `close` event
-      this.writeBuffer = [];
-      this.prevBufferLen = 0;
-    }
-  }
-
-  /**
-   * Filters upgrades, returning only those matching client transports.
-   *
-   * @param {Array} server upgrades
-   * @api private
-   *
-   */
-  filterUpgrades(upgrades) {
-    const filteredUpgrades = [];
-    let i = 0;
-    const j = upgrades.length;
-    for (; i < j; i++) {
-      if (~this.transports.indexOf(upgrades[i]))
-        filteredUpgrades.push(upgrades[i]);
-    }
-    return filteredUpgrades;
-  }
-}
-
-Socket.priorWebsocketSuccess = false;
-
-/**
- * Protocol version.
- *
- * @api public
- */
-
-Socket.protocol = parser.protocol; // this is an int
-
-function clone(obj) {
-  const o = {};
-  for (let i in obj) {
-    if (obj.hasOwnProperty(i)) {
-      o[i] = obj[i];
-    }
-  }
-  return o;
-}
-
-module.exports = Socket;
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-client/lib/transport.js":
-/*!********************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/transport.js ***!
-  \********************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
-const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
-const { installTimerFunctions } = __webpack_require__(/*! ./util */ "./node_modules/engine.io-client/lib/util.js");
-const debug = __webpack_require__(/*! debug */ "./node_modules/engine.io-client/node_modules/debug/src/browser.js")("engine.io-client:transport");
-
-class Transport extends Emitter {
-  /**
-   * Transport abstract constructor.
-   *
-   * @param {Object} options.
-   * @api private
-   */
-  constructor(opts) {
-    super();
-    installTimerFunctions(this, opts);
-
-    this.opts = opts;
-    this.query = opts.query;
-    this.readyState = "";
-    this.socket = opts.socket;
-  }
-
-  /**
-   * Emits an error.
-   *
-   * @param {String} str
-   * @return {Transport} for chaining
-   * @api public
-   */
-  onError(msg, desc) {
-    const err = new Error(msg);
-    err.type = "TransportError";
-    err.description = desc;
-    this.emit("error", err);
-    return this;
-  }
-
-  /**
-   * Opens the transport.
-   *
-   * @api public
-   */
-  open() {
-    if ("closed" === this.readyState || "" === this.readyState) {
-      this.readyState = "opening";
-      this.doOpen();
-    }
-
-    return this;
-  }
-
-  /**
-   * Closes the transport.
-   *
-   * @api private
-   */
-  close() {
-    if ("opening" === this.readyState || "open" === this.readyState) {
-      this.doClose();
-      this.onClose();
-    }
-
-    return this;
-  }
-
-  /**
-   * Sends multiple packets.
-   *
-   * @param {Array} packets
-   * @api private
-   */
-  send(packets) {
-    if ("open" === this.readyState) {
-      this.write(packets);
-    } else {
-      // this might happen if the transport was silently closed in the beforeunload event handler
-      debug("transport is not open, discarding packets");
-    }
-  }
-
-  /**
-   * Called upon open
-   *
-   * @api private
-   */
-  onOpen() {
-    this.readyState = "open";
-    this.writable = true;
-    this.emit("open");
-  }
-
-  /**
-   * Called with data.
-   *
-   * @param {String} data
-   * @api private
-   */
-  onData(data) {
-    const packet = parser.decodePacket(data, this.socket.binaryType);
-    this.onPacket(packet);
-  }
-
-  /**
-   * Called with a decoded packet.
-   */
-  onPacket(packet) {
-    this.emit("packet", packet);
-  }
-
-  /**
-   * Called upon close.
-   *
-   * @api private
-   */
-  onClose() {
-    this.readyState = "closed";
-    this.emit("close");
-  }
-}
-
-module.exports = Transport;
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-client/lib/transports/index.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/transports/index.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-const XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ "./node_modules/engine.io-client/lib/xmlhttprequest.js");
-const XHR = __webpack_require__(/*! ./polling-xhr */ "./node_modules/engine.io-client/lib/transports/polling-xhr.js");
-const JSONP = __webpack_require__(/*! ./polling-jsonp */ "./node_modules/engine.io-client/lib/transports/polling-jsonp.js");
-const websocket = __webpack_require__(/*! ./websocket */ "./node_modules/engine.io-client/lib/transports/websocket.js");
-
-exports.polling = polling;
-exports.websocket = websocket;
-
-/**
- * Polling transport polymorphic constructor.
- * Decides on xhr vs jsonp based on feature detection.
- *
- * @api private
- */
-
-function polling(opts) {
-  let xhr;
-  let xd = false;
-  let xs = false;
-  const jsonp = false !== opts.jsonp;
-
-  if (typeof location !== "undefined") {
-    const isSSL = "https:" === location.protocol;
-    let port = location.port;
-
-    // some user agents have empty `location.port`
-    if (!port) {
-      port = isSSL ? 443 : 80;
-    }
-
-    xd = opts.hostname !== location.hostname || port !== opts.port;
-    xs = opts.secure !== isSSL;
-  }
-
-  opts.xdomain = xd;
-  opts.xscheme = xs;
-  xhr = new XMLHttpRequest(opts);
-
-  if ("open" in xhr && !opts.forceJSONP) {
-    return new XHR(opts);
-  } else {
-    if (!jsonp) throw new Error("JSONP disabled");
-    return new JSONP(opts);
-  }
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-client/lib/transports/polling-jsonp.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/transports/polling-jsonp.js ***!
-  \***********************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const Polling = __webpack_require__(/*! ./polling */ "./node_modules/engine.io-client/lib/transports/polling.js");
-const globalThis = __webpack_require__(/*! ../globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
-
-const rNewline = /\n/g;
-const rEscapedNewline = /\\n/g;
-
-/**
- * Global JSONP callbacks.
- */
-
-let callbacks;
-
-class JSONPPolling extends Polling {
-  /**
-   * JSONP Polling constructor.
-   *
-   * @param {Object} opts.
-   * @api public
-   */
-  constructor(opts) {
-    super(opts);
-
-    this.query = this.query || {};
-
-    // define global callbacks array if not present
-    // we do this here (lazily) to avoid unneeded global pollution
-    if (!callbacks) {
-      // we need to consider multiple engines in the same page
-      callbacks = globalThis.___eio = globalThis.___eio || [];
-    }
-
-    // callback identifier
-    this.index = callbacks.length;
-
-    // add callback to jsonp global
-    callbacks.push(this.onData.bind(this));
-
-    // append to query string
-    this.query.j = this.index;
-  }
-
-  /**
-   * JSONP only supports binary as base64 encoded strings
-   */
-  get supportsBinary() {
-    return false;
-  }
-
-  /**
-   * Closes the socket.
-   *
-   * @api private
-   */
-  doClose() {
-    if (this.script) {
-      // prevent spurious errors from being emitted when the window is unloaded
-      this.script.onerror = () => {};
-      this.script.parentNode.removeChild(this.script);
-      this.script = null;
-    }
-
-    if (this.form) {
-      this.form.parentNode.removeChild(this.form);
-      this.form = null;
-      this.iframe = null;
-    }
-
-    super.doClose();
-  }
-
-  /**
-   * Starts a poll cycle.
-   *
-   * @api private
-   */
-  doPoll() {
-    const script = document.createElement("script");
-
-    if (this.script) {
-      this.script.parentNode.removeChild(this.script);
-      this.script = null;
-    }
-
-    script.async = true;
-    script.src = this.uri();
-    script.onerror = e => {
-      this.onError("jsonp poll error", e);
-    };
-
-    const insertAt = document.getElementsByTagName("script")[0];
-    if (insertAt) {
-      insertAt.parentNode.insertBefore(script, insertAt);
-    } else {
-      (document.head || document.body).appendChild(script);
-    }
-    this.script = script;
-
-    const isUAgecko =
-      "undefined" !== typeof navigator && /gecko/i.test(navigator.userAgent);
-
-    if (isUAgecko) {
-      this.setTimeoutFn(function() {
-        const iframe = document.createElement("iframe");
-        document.body.appendChild(iframe);
-        document.body.removeChild(iframe);
-      }, 100);
-    }
-  }
-
-  /**
-   * Writes with a hidden iframe.
-   *
-   * @param {String} data to send
-   * @param {Function} called upon flush.
-   * @api private
-   */
-  doWrite(data, fn) {
-    let iframe;
-
-    if (!this.form) {
-      const form = document.createElement("form");
-      const area = document.createElement("textarea");
-      const id = (this.iframeId = "eio_iframe_" + this.index);
-
-      form.className = "socketio";
-      form.style.position = "absolute";
-      form.style.top = "-1000px";
-      form.style.left = "-1000px";
-      form.target = id;
-      form.method = "POST";
-      form.setAttribute("accept-charset", "utf-8");
-      area.name = "d";
-      form.appendChild(area);
-      document.body.appendChild(form);
-
-      this.form = form;
-      this.area = area;
-    }
-
-    this.form.action = this.uri();
-
-    function complete() {
-      initIframe();
-      fn();
-    }
-
-    const initIframe = () => {
-      if (this.iframe) {
-        try {
-          this.form.removeChild(this.iframe);
-        } catch (e) {
-          this.onError("jsonp polling iframe removal error", e);
-        }
-      }
-
-      try {
-        // ie6 dynamic iframes with target="" support (thanks Chris Lambacher)
-        const html = '<iframe src="javascript:0" name="' + this.iframeId + '">';
-        iframe = document.createElement(html);
-      } catch (e) {
-        iframe = document.createElement("iframe");
-        iframe.name = this.iframeId;
-        iframe.src = "javascript:0";
-      }
-
-      iframe.id = this.iframeId;
-
-      this.form.appendChild(iframe);
-      this.iframe = iframe;
-    };
-
-    initIframe();
-
-    // escape \n to prevent it from being converted into \r\n by some UAs
-    // double escaping is required for escaped new lines because unescaping of new lines can be done safely on server-side
-    data = data.replace(rEscapedNewline, "\\\n");
-    this.area.value = data.replace(rNewline, "\\n");
-
-    try {
-      this.form.submit();
-    } catch (e) {}
-
-    if (this.iframe.attachEvent) {
-      this.iframe.onreadystatechange = () => {
-        if (this.iframe.readyState === "complete") {
-          complete();
-        }
-      };
-    } else {
-      this.iframe.onload = complete;
-    }
-  }
-}
-
-module.exports = JSONPPolling;
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-client/lib/transports/polling-xhr.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/transports/polling-xhr.js ***!
-  \*********************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-/* global attachEvent */
-
-const XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ "./node_modules/engine.io-client/lib/xmlhttprequest.js");
-const Polling = __webpack_require__(/*! ./polling */ "./node_modules/engine.io-client/lib/transports/polling.js");
-const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
-const { pick, installTimerFunctions } = __webpack_require__(/*! ../util */ "./node_modules/engine.io-client/lib/util.js");
-const globalThis = __webpack_require__(/*! ../globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
-
-const debug = __webpack_require__(/*! debug */ "./node_modules/engine.io-client/node_modules/debug/src/browser.js")("engine.io-client:polling-xhr");
-
-/**
- * Empty function
- */
-
-function empty() {}
-
-const hasXHR2 = (function() {
-  const xhr = new XMLHttpRequest({ xdomain: false });
-  return null != xhr.responseType;
-})();
-
-class XHR extends Polling {
-  /**
-   * XHR Polling constructor.
-   *
-   * @param {Object} opts
-   * @api public
-   */
-  constructor(opts) {
-    super(opts);
-
-    if (typeof location !== "undefined") {
-      const isSSL = "https:" === location.protocol;
-      let port = location.port;
-
-      // some user agents have empty `location.port`
-      if (!port) {
-        port = isSSL ? 443 : 80;
-      }
-
-      this.xd =
-        (typeof location !== "undefined" &&
-          opts.hostname !== location.hostname) ||
-        port !== opts.port;
-      this.xs = opts.secure !== isSSL;
-    }
-    /**
-     * XHR supports binary
-     */
-    const forceBase64 = opts && opts.forceBase64;
-    this.supportsBinary = hasXHR2 && !forceBase64;
-  }
-
-  /**
-   * Creates a request.
-   *
-   * @param {String} method
-   * @api private
-   */
-  request(opts = {}) {
-    Object.assign(opts, { xd: this.xd, xs: this.xs }, this.opts);
-    return new Request(this.uri(), opts);
-  }
-
-  /**
-   * Sends data.
-   *
-   * @param {String} data to send.
-   * @param {Function} called upon flush.
-   * @api private
-   */
-  doWrite(data, fn) {
-    const req = this.request({
-      method: "POST",
-      data: data
-    });
-    req.on("success", fn);
-    req.on("error", err => {
-      this.onError("xhr post error", err);
-    });
-  }
-
-  /**
-   * Starts a poll cycle.
-   *
-   * @api private
-   */
-  doPoll() {
-    debug("xhr poll");
-    const req = this.request();
-    req.on("data", this.onData.bind(this));
-    req.on("error", err => {
-      this.onError("xhr poll error", err);
-    });
-    this.pollXhr = req;
-  }
-}
-
-class Request extends Emitter {
-  /**
-   * Request constructor
-   *
-   * @param {Object} options
-   * @api public
-   */
-  constructor(uri, opts) {
-    super();
-    installTimerFunctions(this, opts);
-    this.opts = opts;
-
-    this.method = opts.method || "GET";
-    this.uri = uri;
-    this.async = false !== opts.async;
-    this.data = undefined !== opts.data ? opts.data : null;
-
-    this.create();
-  }
-
-  /**
-   * Creates the XHR object and sends the request.
-   *
-   * @api private
-   */
-  create() {
-    const opts = pick(
-      this.opts,
-      "agent",
-      "enablesXDR",
-      "pfx",
-      "key",
-      "passphrase",
-      "cert",
-      "ca",
-      "ciphers",
-      "rejectUnauthorized",
-      "autoUnref"
-    );
-    opts.xdomain = !!this.opts.xd;
-    opts.xscheme = !!this.opts.xs;
-
-    const xhr = (this.xhr = new XMLHttpRequest(opts));
-
-    try {
-      debug("xhr open %s: %s", this.method, this.uri);
-      xhr.open(this.method, this.uri, this.async);
-      try {
-        if (this.opts.extraHeaders) {
-          xhr.setDisableHeaderCheck && xhr.setDisableHeaderCheck(true);
-          for (let i in this.opts.extraHeaders) {
-            if (this.opts.extraHeaders.hasOwnProperty(i)) {
-              xhr.setRequestHeader(i, this.opts.extraHeaders[i]);
-            }
-          }
-        }
-      } catch (e) {}
-
-      if ("POST" === this.method) {
-        try {
-          xhr.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
-        } catch (e) {}
-      }
-
-      try {
-        xhr.setRequestHeader("Accept", "*/*");
-      } catch (e) {}
-
-      // ie6 check
-      if ("withCredentials" in xhr) {
-        xhr.withCredentials = this.opts.withCredentials;
-      }
-
-      if (this.opts.requestTimeout) {
-        xhr.timeout = this.opts.requestTimeout;
-      }
-
-      if (this.hasXDR()) {
-        xhr.onload = () => {
-          this.onLoad();
-        };
-        xhr.onerror = () => {
-          this.onError(xhr.responseText);
-        };
-      } else {
-        xhr.onreadystatechange = () => {
-          if (4 !== xhr.readyState) return;
-          if (200 === xhr.status || 1223 === xhr.status) {
-            this.onLoad();
-          } else {
-            // make sure the `error` event handler that's user-set
-            // does not throw in the same tick and gets caught here
-            this.setTimeoutFn(() => {
-              this.onError(typeof xhr.status === "number" ? xhr.status : 0);
-            }, 0);
-          }
-        };
-      }
-
-      debug("xhr data %s", this.data);
-      xhr.send(this.data);
-    } catch (e) {
-      // Need to defer since .create() is called directly from the constructor
-      // and thus the 'error' event can only be only bound *after* this exception
-      // occurs.  Therefore, also, we cannot throw here at all.
-      this.setTimeoutFn(() => {
-        this.onError(e);
-      }, 0);
-      return;
-    }
-
-    if (typeof document !== "undefined") {
-      this.index = Request.requestsCount++;
-      Request.requests[this.index] = this;
-    }
-  }
-
-  /**
-   * Called upon successful response.
-   *
-   * @api private
-   */
-  onSuccess() {
-    this.emit("success");
-    this.cleanup();
-  }
-
-  /**
-   * Called if we have data.
-   *
-   * @api private
-   */
-  onData(data) {
-    this.emit("data", data);
-    this.onSuccess();
-  }
-
-  /**
-   * Called upon error.
-   *
-   * @api private
-   */
-  onError(err) {
-    this.emit("error", err);
-    this.cleanup(true);
-  }
-
-  /**
-   * Cleans up house.
-   *
-   * @api private
-   */
-  cleanup(fromError) {
-    if ("undefined" === typeof this.xhr || null === this.xhr) {
-      return;
-    }
-    // xmlhttprequest
-    if (this.hasXDR()) {
-      this.xhr.onload = this.xhr.onerror = empty;
-    } else {
-      this.xhr.onreadystatechange = empty;
-    }
-
-    if (fromError) {
-      try {
-        this.xhr.abort();
-      } catch (e) {}
-    }
-
-    if (typeof document !== "undefined") {
-      delete Request.requests[this.index];
-    }
-
-    this.xhr = null;
-  }
-
-  /**
-   * Called upon load.
-   *
-   * @api private
-   */
-  onLoad() {
-    const data = this.xhr.responseText;
-    if (data !== null) {
-      this.onData(data);
-    }
-  }
-
-  /**
-   * Check if it has XDomainRequest.
-   *
-   * @api private
-   */
-  hasXDR() {
-    return typeof XDomainRequest !== "undefined" && !this.xs && this.enablesXDR;
-  }
-
-  /**
-   * Aborts the request.
-   *
-   * @api public
-   */
-  abort() {
-    this.cleanup();
-  }
-}
-
-/**
- * Aborts pending requests when unloading the window. This is needed to prevent
- * memory leaks (e.g. when using IE) and to ensure that no spurious error is
- * emitted.
- */
-
-Request.requestsCount = 0;
-Request.requests = {};
-
-if (typeof document !== "undefined") {
-  if (typeof attachEvent === "function") {
-    attachEvent("onunload", unloadHandler);
-  } else if (typeof addEventListener === "function") {
-    const terminationEvent = "onpagehide" in globalThis ? "pagehide" : "unload";
-    addEventListener(terminationEvent, unloadHandler, false);
-  }
-}
-
-function unloadHandler() {
-  for (let i in Request.requests) {
-    if (Request.requests.hasOwnProperty(i)) {
-      Request.requests[i].abort();
-    }
-  }
-}
-
-module.exports = XHR;
-module.exports.Request = Request;
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-client/lib/transports/polling.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/transports/polling.js ***!
-  \*****************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const Transport = __webpack_require__(/*! ../transport */ "./node_modules/engine.io-client/lib/transport.js");
-const parseqs = __webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js");
-const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
-const yeast = __webpack_require__(/*! yeast */ "./node_modules/yeast/index.js");
-
-const debug = __webpack_require__(/*! debug */ "./node_modules/engine.io-client/node_modules/debug/src/browser.js")("engine.io-client:polling");
-
-class Polling extends Transport {
-  /**
-   * Transport name.
-   */
-  get name() {
-    return "polling";
-  }
-
-  /**
-   * Opens the socket (triggers polling). We write a PING message to determine
-   * when the transport is open.
-   *
-   * @api private
-   */
-  doOpen() {
-    this.poll();
-  }
-
-  /**
-   * Pauses polling.
-   *
-   * @param {Function} callback upon buffers are flushed and transport is paused
-   * @api private
-   */
-  pause(onPause) {
-    this.readyState = "pausing";
-
-    const pause = () => {
-      debug("paused");
-      this.readyState = "paused";
-      onPause();
-    };
-
-    if (this.polling || !this.writable) {
-      let total = 0;
-
-      if (this.polling) {
-        debug("we are currently polling - waiting to pause");
-        total++;
-        this.once("pollComplete", function() {
-          debug("pre-pause polling complete");
-          --total || pause();
-        });
-      }
-
-      if (!this.writable) {
-        debug("we are currently writing - waiting to pause");
-        total++;
-        this.once("drain", function() {
-          debug("pre-pause writing complete");
-          --total || pause();
-        });
-      }
-    } else {
-      pause();
-    }
-  }
-
-  /**
-   * Starts polling cycle.
-   *
-   * @api public
-   */
-  poll() {
-    debug("polling");
-    this.polling = true;
-    this.doPoll();
-    this.emit("poll");
-  }
-
-  /**
-   * Overloads onData to detect payloads.
-   *
-   * @api private
-   */
-  onData(data) {
-    debug("polling got data %s", data);
-    const callback = packet => {
-      // if its the first message we consider the transport open
-      if ("opening" === this.readyState && packet.type === "open") {
-        this.onOpen();
-      }
-
-      // if its a close packet, we close the ongoing requests
-      if ("close" === packet.type) {
-        this.onClose();
-        return false;
-      }
-
-      // otherwise bypass onData and handle the message
-      this.onPacket(packet);
-    };
-
-    // decode payload
-    parser.decodePayload(data, this.socket.binaryType).forEach(callback);
-
-    // if an event did not trigger closing
-    if ("closed" !== this.readyState) {
-      // if we got data we're not polling
-      this.polling = false;
-      this.emit("pollComplete");
-
-      if ("open" === this.readyState) {
-        this.poll();
-      } else {
-        debug('ignoring poll - transport state "%s"', this.readyState);
-      }
-    }
-  }
-
-  /**
-   * For polling, send a close packet.
-   *
-   * @api private
-   */
-  doClose() {
-    const close = () => {
-      debug("writing close packet");
-      this.write([{ type: "close" }]);
-    };
-
-    if ("open" === this.readyState) {
-      debug("transport open - closing");
-      close();
-    } else {
-      // in case we're trying to close while
-      // handshaking is in progress (GH-164)
-      debug("transport not open - deferring close");
-      this.once("open", close);
-    }
-  }
-
-  /**
-   * Writes a packets payload.
-   *
-   * @param {Array} data packets
-   * @param {Function} drain callback
-   * @api private
-   */
-  write(packets) {
-    this.writable = false;
-
-    parser.encodePayload(packets, data => {
-      this.doWrite(data, () => {
-        this.writable = true;
-        this.emit("drain");
-      });
-    });
-  }
-
-  /**
-   * Generates uri for connection.
-   *
-   * @api private
-   */
-  uri() {
-    let query = this.query || {};
-    const schema = this.opts.secure ? "https" : "http";
-    let port = "";
-
-    // cache busting is forced
-    if (false !== this.opts.timestampRequests) {
-      query[this.opts.timestampParam] = yeast();
-    }
-
-    if (!this.supportsBinary && !query.sid) {
-      query.b64 = 1;
-    }
-
-    query = parseqs.encode(query);
-
-    // avoid port if default for schema
-    if (
-      this.opts.port &&
-      (("https" === schema && Number(this.opts.port) !== 443) ||
-        ("http" === schema && Number(this.opts.port) !== 80))
-    ) {
-      port = ":" + this.opts.port;
-    }
-
-    // prepend ? to query
-    if (query.length) {
-      query = "?" + query;
-    }
-
-    const ipv6 = this.opts.hostname.indexOf(":") !== -1;
-    return (
-      schema +
-      "://" +
-      (ipv6 ? "[" + this.opts.hostname + "]" : this.opts.hostname) +
-      port +
-      this.opts.path +
-      query
-    );
-  }
-}
-
-module.exports = Polling;
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-client/lib/transports/websocket-constructor.browser.js":
-/*!***************************************************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/transports/websocket-constructor.browser.js ***!
-  \***************************************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const globalThis = __webpack_require__(/*! ../globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
-const nextTick = (() => {
-  const isPromiseAvailable =
-    typeof Promise === "function" && typeof Promise.resolve === "function";
-  if (isPromiseAvailable) {
-    return cb => Promise.resolve().then(cb);
-  } else {
-    return (cb, setTimeoutFn) => setTimeoutFn(cb, 0);
-  }
-})();
-
-module.exports = {
-  WebSocket: globalThis.WebSocket || globalThis.MozWebSocket,
-  usingBrowserWebSocket: true,
-  defaultBinaryType: "arraybuffer",
-  nextTick
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-client/lib/transports/websocket.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/transports/websocket.js ***!
-  \*******************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-/* provided dependency */ var Buffer = __webpack_require__(/*! buffer */ "./node_modules/buffer/index.js")["Buffer"];
-const Transport = __webpack_require__(/*! ../transport */ "./node_modules/engine.io-client/lib/transport.js");
-const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
-const parseqs = __webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js");
-const yeast = __webpack_require__(/*! yeast */ "./node_modules/yeast/index.js");
-const { pick } = __webpack_require__(/*! ../util */ "./node_modules/engine.io-client/lib/util.js");
-const {
-  WebSocket,
-  usingBrowserWebSocket,
-  defaultBinaryType,
-  nextTick
-} = __webpack_require__(/*! ./websocket-constructor */ "./node_modules/engine.io-client/lib/transports/websocket-constructor.browser.js");
-
-const debug = __webpack_require__(/*! debug */ "./node_modules/engine.io-client/node_modules/debug/src/browser.js")("engine.io-client:websocket");
-
-// detect ReactNative environment
-const isReactNative =
-  typeof navigator !== "undefined" &&
-  typeof navigator.product === "string" &&
-  navigator.product.toLowerCase() === "reactnative";
-
-class WS extends Transport {
-  /**
-   * WebSocket transport constructor.
-   *
-   * @api {Object} connection options
-   * @api public
-   */
-  constructor(opts) {
-    super(opts);
-
-    this.supportsBinary = !opts.forceBase64;
-  }
-
-  /**
-   * Transport name.
-   *
-   * @api public
-   */
-  get name() {
-    return "websocket";
-  }
-
-  /**
-   * Opens socket.
-   *
-   * @api private
-   */
-  doOpen() {
-    if (!this.check()) {
-      // let probe timeout
-      return;
-    }
-
-    const uri = this.uri();
-    const protocols = this.opts.protocols;
-
-    // React Native only supports the 'headers' option, and will print a warning if anything else is passed
-    const opts = isReactNative
-      ? {}
-      : pick(
-          this.opts,
-          "agent",
-          "perMessageDeflate",
-          "pfx",
-          "key",
-          "passphrase",
-          "cert",
-          "ca",
-          "ciphers",
-          "rejectUnauthorized",
-          "localAddress",
-          "protocolVersion",
-          "origin",
-          "maxPayload",
-          "family",
-          "checkServerIdentity"
-        );
-
-    if (this.opts.extraHeaders) {
-      opts.headers = this.opts.extraHeaders;
-    }
-
-    try {
-      this.ws =
-        usingBrowserWebSocket && !isReactNative
-          ? protocols
-            ? new WebSocket(uri, protocols)
-            : new WebSocket(uri)
-          : new WebSocket(uri, protocols, opts);
-    } catch (err) {
-      return this.emit("error", err);
-    }
-
-    this.ws.binaryType = this.socket.binaryType || defaultBinaryType;
-
-    this.addEventListeners();
-  }
-
-  /**
-   * Adds event listeners to the socket
-   *
-   * @api private
-   */
-  addEventListeners() {
-    this.ws.onopen = () => {
-      if (this.opts.autoUnref) {
-        this.ws._socket.unref();
-      }
-      this.onOpen();
-    };
-    this.ws.onclose = this.onClose.bind(this);
-    this.ws.onmessage = ev => this.onData(ev.data);
-    this.ws.onerror = e => this.onError("websocket error", e);
-  }
-
-  /**
-   * Writes data to socket.
-   *
-   * @param {Array} array of packets.
-   * @api private
-   */
-  write(packets) {
-    this.writable = false;
-
-    // encodePacket efficient as it uses WS framing
-    // no need for encodePayload
-    for (let i = 0; i < packets.length; i++) {
-      const packet = packets[i];
-      const lastPacket = i === packets.length - 1;
-
-      parser.encodePacket(packet, this.supportsBinary, data => {
-        // always create a new object (GH-437)
-        const opts = {};
-        if (!usingBrowserWebSocket) {
-          if (packet.options) {
-            opts.compress = packet.options.compress;
-          }
-
-          if (this.opts.perMessageDeflate) {
-            const len =
-              "string" === typeof data ? Buffer.byteLength(data) : data.length;
-            if (len < this.opts.perMessageDeflate.threshold) {
-              opts.compress = false;
-            }
-          }
-        }
-
-        // Sometimes the websocket has already been closed but the browser didn't
-        // have a chance of informing us about it yet, in that case send will
-        // throw an error
-        try {
-          if (usingBrowserWebSocket) {
-            // TypeError is thrown when passing the second argument on Safari
-            this.ws.send(data);
-          } else {
-            this.ws.send(data, opts);
-          }
-        } catch (e) {
-          debug("websocket closed before onclose event");
-        }
-
-        if (lastPacket) {
-          // fake drain
-          // defer to next tick to allow Socket to clear writeBuffer
-          nextTick(() => {
-            this.writable = true;
-            this.emit("drain");
-          }, this.setTimeoutFn);
-        }
-      });
-    }
-  }
-
-  /**
-   * Called upon close
-   *
-   * @api private
-   */
-  onClose() {
-    Transport.prototype.onClose.call(this);
-  }
-
-  /**
-   * Closes socket.
-   *
-   * @api private
-   */
-  doClose() {
-    if (typeof this.ws !== "undefined") {
-      this.ws.close();
-      this.ws = null;
-    }
-  }
-
-  /**
-   * Generates uri for connection.
-   *
-   * @api private
-   */
-  uri() {
-    let query = this.query || {};
-    const schema = this.opts.secure ? "wss" : "ws";
-    let port = "";
-
-    // avoid port if default for schema
-    if (
-      this.opts.port &&
-      (("wss" === schema && Number(this.opts.port) !== 443) ||
-        ("ws" === schema && Number(this.opts.port) !== 80))
-    ) {
-      port = ":" + this.opts.port;
-    }
-
-    // append timestamp to URI
-    if (this.opts.timestampRequests) {
-      query[this.opts.timestampParam] = yeast();
-    }
-
-    // communicate binary support capabilities
-    if (!this.supportsBinary) {
-      query.b64 = 1;
-    }
-
-    query = parseqs.encode(query);
-
-    // prepend ? to query
-    if (query.length) {
-      query = "?" + query;
-    }
-
-    const ipv6 = this.opts.hostname.indexOf(":") !== -1;
-    return (
-      schema +
-      "://" +
-      (ipv6 ? "[" + this.opts.hostname + "]" : this.opts.hostname) +
-      port +
-      this.opts.path +
-      query
-    );
-  }
-
-  /**
-   * Feature detection for WebSocket.
-   *
-   * @return {Boolean} whether this transport is available.
-   * @api public
-   */
-  check() {
-    return (
-      !!WebSocket &&
-      !("__initialize" in WebSocket && this.name === WS.prototype.name)
-    );
-  }
-}
-
-module.exports = WS;
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-client/lib/util.js":
-/*!***************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/util.js ***!
-  \***************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const globalThis = __webpack_require__(/*! ./globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
-
-module.exports.pick = (obj, ...attr) => {
-  return attr.reduce((acc, k) => {
-    if (obj.hasOwnProperty(k)) {
-      acc[k] = obj[k];
-    }
-    return acc;
-  }, {});
-};
-
-// Keep a reference to the real timeout functions so they can be used when overridden
-const NATIVE_SET_TIMEOUT = setTimeout;
-const NATIVE_CLEAR_TIMEOUT = clearTimeout;
-
-module.exports.installTimerFunctions = (obj, opts) => {
-  if (opts.useNativeTimers) {
-    obj.setTimeoutFn = NATIVE_SET_TIMEOUT.bind(globalThis);
-    obj.clearTimeoutFn = NATIVE_CLEAR_TIMEOUT.bind(globalThis);
-  } else {
-    obj.setTimeoutFn = setTimeout.bind(globalThis);
-    obj.clearTimeoutFn = clearTimeout.bind(globalThis);
-  }
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-client/lib/xmlhttprequest.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/engine.io-client/lib/xmlhttprequest.js ***!
-  \*************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// browser shim for xmlhttprequest module
-
-const hasCORS = __webpack_require__(/*! has-cors */ "./node_modules/has-cors/index.js");
-const globalThis = __webpack_require__(/*! ./globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
-
-module.exports = function(opts) {
-  const xdomain = opts.xdomain;
-
-  // scheme must be same when usign XDomainRequest
-  // http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx
-  const xscheme = opts.xscheme;
-
-  // XDomainRequest has a flow of not sending cookie, therefore it should be disabled as a default.
-  // https://github.com/Automattic/engine.io-client/pull/217
-  const enablesXDR = opts.enablesXDR;
-
-  // XMLHttpRequest can be disabled on IE
-  try {
-    if ("undefined" !== typeof XMLHttpRequest && (!xdomain || hasCORS)) {
-      return new XMLHttpRequest();
-    }
-  } catch (e) {}
-
-  // Use XDomainRequest for IE8 if enablesXDR is true
-  // because loading bar keeps flashing when using jsonp-polling
-  // https://github.com/yujiosaka/socke.io-ie8-loading-example
-  try {
-    if ("undefined" !== typeof XDomainRequest && !xscheme && enablesXDR) {
-      return new XDomainRequest();
-    }
-  } catch (e) {}
-
-  if (!xdomain) {
-    try {
-      return new globalThis[["Active"].concat("Object").join("X")](
-        "Microsoft.XMLHTTP"
-      );
-    } catch (e) {}
-  }
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/engine.io-client/node_modules/debug/src/browser.js":
 /*!*************************************************************************!*\
   !*** ./node_modules/engine.io-client/node_modules/debug/src/browser.js ***!
   \*************************************************************************/
 /***/ ((module, exports, __webpack_require__) => {
 
-/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
+/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 /* eslint-env browser */
 
 /**
@@ -14353,212 +12326,6 @@ function plural(ms, msAbs, n, name) {
   var isPlural = msAbs >= n * 1.5;
   return Math.round(ms / n) + ' ' + name + (isPlural ? 's' : '');
 }
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-parser/lib/commons.js":
-/*!******************************************************!*\
-  !*** ./node_modules/engine.io-parser/lib/commons.js ***!
-  \******************************************************/
-/***/ ((module) => {
-
-const PACKET_TYPES = Object.create(null); // no Map = no polyfill
-PACKET_TYPES["open"] = "0";
-PACKET_TYPES["close"] = "1";
-PACKET_TYPES["ping"] = "2";
-PACKET_TYPES["pong"] = "3";
-PACKET_TYPES["message"] = "4";
-PACKET_TYPES["upgrade"] = "5";
-PACKET_TYPES["noop"] = "6";
-
-const PACKET_TYPES_REVERSE = Object.create(null);
-Object.keys(PACKET_TYPES).forEach(key => {
-  PACKET_TYPES_REVERSE[PACKET_TYPES[key]] = key;
-});
-
-const ERROR_PACKET = { type: "error", data: "parser error" };
-
-module.exports = {
-  PACKET_TYPES,
-  PACKET_TYPES_REVERSE,
-  ERROR_PACKET
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-parser/lib/decodePacket.browser.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/engine.io-parser/lib/decodePacket.browser.js ***!
-  \*******************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const { PACKET_TYPES_REVERSE, ERROR_PACKET } = __webpack_require__(/*! ./commons */ "./node_modules/engine.io-parser/lib/commons.js");
-
-const withNativeArrayBuffer = typeof ArrayBuffer === "function";
-
-let base64decoder;
-if (withNativeArrayBuffer) {
-  base64decoder = __webpack_require__(/*! base64-arraybuffer */ "./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js");
-}
-
-const decodePacket = (encodedPacket, binaryType) => {
-  if (typeof encodedPacket !== "string") {
-    return {
-      type: "message",
-      data: mapBinary(encodedPacket, binaryType)
-    };
-  }
-  const type = encodedPacket.charAt(0);
-  if (type === "b") {
-    return {
-      type: "message",
-      data: decodeBase64Packet(encodedPacket.substring(1), binaryType)
-    };
-  }
-  const packetType = PACKET_TYPES_REVERSE[type];
-  if (!packetType) {
-    return ERROR_PACKET;
-  }
-  return encodedPacket.length > 1
-    ? {
-        type: PACKET_TYPES_REVERSE[type],
-        data: encodedPacket.substring(1)
-      }
-    : {
-        type: PACKET_TYPES_REVERSE[type]
-      };
-};
-
-const decodeBase64Packet = (data, binaryType) => {
-  if (base64decoder) {
-    const decoded = base64decoder.decode(data);
-    return mapBinary(decoded, binaryType);
-  } else {
-    return { base64: true, data }; // fallback for old browsers
-  }
-};
-
-const mapBinary = (data, binaryType) => {
-  switch (binaryType) {
-    case "blob":
-      return data instanceof ArrayBuffer ? new Blob([data]) : data;
-    case "arraybuffer":
-    default:
-      return data; // assuming the data is already an ArrayBuffer
-  }
-};
-
-module.exports = decodePacket;
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-parser/lib/encodePacket.browser.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/engine.io-parser/lib/encodePacket.browser.js ***!
-  \*******************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const { PACKET_TYPES } = __webpack_require__(/*! ./commons */ "./node_modules/engine.io-parser/lib/commons.js");
-
-const withNativeBlob =
-  typeof Blob === "function" ||
-  (typeof Blob !== "undefined" &&
-    Object.prototype.toString.call(Blob) === "[object BlobConstructor]");
-const withNativeArrayBuffer = typeof ArrayBuffer === "function";
-
-// ArrayBuffer.isView method is not defined in IE10
-const isView = obj => {
-  return typeof ArrayBuffer.isView === "function"
-    ? ArrayBuffer.isView(obj)
-    : obj && obj.buffer instanceof ArrayBuffer;
-};
-
-const encodePacket = ({ type, data }, supportsBinary, callback) => {
-  if (withNativeBlob && data instanceof Blob) {
-    if (supportsBinary) {
-      return callback(data);
-    } else {
-      return encodeBlobAsBase64(data, callback);
-    }
-  } else if (
-    withNativeArrayBuffer &&
-    (data instanceof ArrayBuffer || isView(data))
-  ) {
-    if (supportsBinary) {
-      return callback(data);
-    } else {
-      return encodeBlobAsBase64(new Blob([data]), callback);
-    }
-  }
-  // plain string
-  return callback(PACKET_TYPES[type] + (data || ""));
-};
-
-const encodeBlobAsBase64 = (data, callback) => {
-  const fileReader = new FileReader();
-  fileReader.onload = function() {
-    const content = fileReader.result.split(",")[1];
-    callback("b" + content);
-  };
-  return fileReader.readAsDataURL(data);
-};
-
-module.exports = encodePacket;
-
-
-/***/ }),
-
-/***/ "./node_modules/engine.io-parser/lib/index.js":
-/*!****************************************************!*\
-  !*** ./node_modules/engine.io-parser/lib/index.js ***!
-  \****************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const encodePacket = __webpack_require__(/*! ./encodePacket */ "./node_modules/engine.io-parser/lib/encodePacket.browser.js");
-const decodePacket = __webpack_require__(/*! ./decodePacket */ "./node_modules/engine.io-parser/lib/decodePacket.browser.js");
-
-const SEPARATOR = String.fromCharCode(30); // see https://en.wikipedia.org/wiki/Delimiter#ASCII_delimited_text
-
-const encodePayload = (packets, callback) => {
-  // some packets may be added to the array while encoding, so the initial length must be saved
-  const length = packets.length;
-  const encodedPackets = new Array(length);
-  let count = 0;
-
-  packets.forEach((packet, i) => {
-    // force base64 encoding for binary packets
-    encodePacket(packet, false, encodedPacket => {
-      encodedPackets[i] = encodedPacket;
-      if (++count === length) {
-        callback(encodedPackets.join(SEPARATOR));
-      }
-    });
-  });
-};
-
-const decodePayload = (encodedPayload, binaryType) => {
-  const encodedPackets = encodedPayload.split(SEPARATOR);
-  const packets = [];
-  for (let i = 0; i < encodedPackets.length; i++) {
-    const decodedPacket = decodePacket(encodedPackets[i], binaryType);
-    packets.push(decodedPacket);
-    if (decodedPacket.type === "error") {
-      break;
-    }
-  }
-  return packets;
-};
-
-module.exports = {
-  protocol: 4,
-  encodePacket,
-  encodePayload,
-  decodePacket,
-  decodePayload
-};
 
 
 /***/ }),
@@ -16968,6 +14735,6822 @@ function stubFalse() {
 }
 
 module.exports = cloneDeep;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_DataView.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_DataView.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/* Built-in method references that are verified to be native. */
+var DataView = getNative(root, 'DataView');
+
+module.exports = DataView;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Hash.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/_Hash.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var hashClear = __webpack_require__(/*! ./_hashClear */ "./node_modules/lodash/_hashClear.js"),
+    hashDelete = __webpack_require__(/*! ./_hashDelete */ "./node_modules/lodash/_hashDelete.js"),
+    hashGet = __webpack_require__(/*! ./_hashGet */ "./node_modules/lodash/_hashGet.js"),
+    hashHas = __webpack_require__(/*! ./_hashHas */ "./node_modules/lodash/_hashHas.js"),
+    hashSet = __webpack_require__(/*! ./_hashSet */ "./node_modules/lodash/_hashSet.js");
+
+/**
+ * Creates a hash object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function Hash(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `Hash`.
+Hash.prototype.clear = hashClear;
+Hash.prototype['delete'] = hashDelete;
+Hash.prototype.get = hashGet;
+Hash.prototype.has = hashHas;
+Hash.prototype.set = hashSet;
+
+module.exports = Hash;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_LazyWrapper.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_LazyWrapper.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseCreate = __webpack_require__(/*! ./_baseCreate */ "./node_modules/lodash/_baseCreate.js"),
+    baseLodash = __webpack_require__(/*! ./_baseLodash */ "./node_modules/lodash/_baseLodash.js");
+
+/** Used as references for the maximum length and index of an array. */
+var MAX_ARRAY_LENGTH = 4294967295;
+
+/**
+ * Creates a lazy wrapper object which wraps `value` to enable lazy evaluation.
+ *
+ * @private
+ * @constructor
+ * @param {*} value The value to wrap.
+ */
+function LazyWrapper(value) {
+  this.__wrapped__ = value;
+  this.__actions__ = [];
+  this.__dir__ = 1;
+  this.__filtered__ = false;
+  this.__iteratees__ = [];
+  this.__takeCount__ = MAX_ARRAY_LENGTH;
+  this.__views__ = [];
+}
+
+// Ensure `LazyWrapper` is an instance of `baseLodash`.
+LazyWrapper.prototype = baseCreate(baseLodash.prototype);
+LazyWrapper.prototype.constructor = LazyWrapper;
+
+module.exports = LazyWrapper;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_ListCache.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_ListCache.js ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var listCacheClear = __webpack_require__(/*! ./_listCacheClear */ "./node_modules/lodash/_listCacheClear.js"),
+    listCacheDelete = __webpack_require__(/*! ./_listCacheDelete */ "./node_modules/lodash/_listCacheDelete.js"),
+    listCacheGet = __webpack_require__(/*! ./_listCacheGet */ "./node_modules/lodash/_listCacheGet.js"),
+    listCacheHas = __webpack_require__(/*! ./_listCacheHas */ "./node_modules/lodash/_listCacheHas.js"),
+    listCacheSet = __webpack_require__(/*! ./_listCacheSet */ "./node_modules/lodash/_listCacheSet.js");
+
+/**
+ * Creates an list cache object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function ListCache(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `ListCache`.
+ListCache.prototype.clear = listCacheClear;
+ListCache.prototype['delete'] = listCacheDelete;
+ListCache.prototype.get = listCacheGet;
+ListCache.prototype.has = listCacheHas;
+ListCache.prototype.set = listCacheSet;
+
+module.exports = ListCache;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_LodashWrapper.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_LodashWrapper.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseCreate = __webpack_require__(/*! ./_baseCreate */ "./node_modules/lodash/_baseCreate.js"),
+    baseLodash = __webpack_require__(/*! ./_baseLodash */ "./node_modules/lodash/_baseLodash.js");
+
+/**
+ * The base constructor for creating `lodash` wrapper objects.
+ *
+ * @private
+ * @param {*} value The value to wrap.
+ * @param {boolean} [chainAll] Enable explicit method chain sequences.
+ */
+function LodashWrapper(value, chainAll) {
+  this.__wrapped__ = value;
+  this.__actions__ = [];
+  this.__chain__ = !!chainAll;
+  this.__index__ = 0;
+  this.__values__ = undefined;
+}
+
+LodashWrapper.prototype = baseCreate(baseLodash.prototype);
+LodashWrapper.prototype.constructor = LodashWrapper;
+
+module.exports = LodashWrapper;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Map.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/_Map.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/* Built-in method references that are verified to be native. */
+var Map = getNative(root, 'Map');
+
+module.exports = Map;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_MapCache.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_MapCache.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var mapCacheClear = __webpack_require__(/*! ./_mapCacheClear */ "./node_modules/lodash/_mapCacheClear.js"),
+    mapCacheDelete = __webpack_require__(/*! ./_mapCacheDelete */ "./node_modules/lodash/_mapCacheDelete.js"),
+    mapCacheGet = __webpack_require__(/*! ./_mapCacheGet */ "./node_modules/lodash/_mapCacheGet.js"),
+    mapCacheHas = __webpack_require__(/*! ./_mapCacheHas */ "./node_modules/lodash/_mapCacheHas.js"),
+    mapCacheSet = __webpack_require__(/*! ./_mapCacheSet */ "./node_modules/lodash/_mapCacheSet.js");
+
+/**
+ * Creates a map cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function MapCache(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `MapCache`.
+MapCache.prototype.clear = mapCacheClear;
+MapCache.prototype['delete'] = mapCacheDelete;
+MapCache.prototype.get = mapCacheGet;
+MapCache.prototype.has = mapCacheHas;
+MapCache.prototype.set = mapCacheSet;
+
+module.exports = MapCache;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Promise.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_Promise.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/* Built-in method references that are verified to be native. */
+var Promise = getNative(root, 'Promise');
+
+module.exports = Promise;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Set.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/_Set.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/* Built-in method references that are verified to be native. */
+var Set = getNative(root, 'Set');
+
+module.exports = Set;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_SetCache.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_SetCache.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var MapCache = __webpack_require__(/*! ./_MapCache */ "./node_modules/lodash/_MapCache.js"),
+    setCacheAdd = __webpack_require__(/*! ./_setCacheAdd */ "./node_modules/lodash/_setCacheAdd.js"),
+    setCacheHas = __webpack_require__(/*! ./_setCacheHas */ "./node_modules/lodash/_setCacheHas.js");
+
+/**
+ *
+ * Creates an array cache object to store unique values.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [values] The values to cache.
+ */
+function SetCache(values) {
+  var index = -1,
+      length = values == null ? 0 : values.length;
+
+  this.__data__ = new MapCache;
+  while (++index < length) {
+    this.add(values[index]);
+  }
+}
+
+// Add methods to `SetCache`.
+SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
+SetCache.prototype.has = setCacheHas;
+
+module.exports = SetCache;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Stack.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_Stack.js ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var ListCache = __webpack_require__(/*! ./_ListCache */ "./node_modules/lodash/_ListCache.js"),
+    stackClear = __webpack_require__(/*! ./_stackClear */ "./node_modules/lodash/_stackClear.js"),
+    stackDelete = __webpack_require__(/*! ./_stackDelete */ "./node_modules/lodash/_stackDelete.js"),
+    stackGet = __webpack_require__(/*! ./_stackGet */ "./node_modules/lodash/_stackGet.js"),
+    stackHas = __webpack_require__(/*! ./_stackHas */ "./node_modules/lodash/_stackHas.js"),
+    stackSet = __webpack_require__(/*! ./_stackSet */ "./node_modules/lodash/_stackSet.js");
+
+/**
+ * Creates a stack cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function Stack(entries) {
+  var data = this.__data__ = new ListCache(entries);
+  this.size = data.size;
+}
+
+// Add methods to `Stack`.
+Stack.prototype.clear = stackClear;
+Stack.prototype['delete'] = stackDelete;
+Stack.prototype.get = stackGet;
+Stack.prototype.has = stackHas;
+Stack.prototype.set = stackSet;
+
+module.exports = Stack;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Symbol.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_Symbol.js ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/** Built-in value references. */
+var Symbol = root.Symbol;
+
+module.exports = Symbol;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Uint8Array.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_Uint8Array.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/** Built-in value references. */
+var Uint8Array = root.Uint8Array;
+
+module.exports = Uint8Array;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_WeakMap.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_WeakMap.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/* Built-in method references that are verified to be native. */
+var WeakMap = getNative(root, 'WeakMap');
+
+module.exports = WeakMap;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_apply.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_apply.js ***!
+  \***************************************/
+/***/ ((module) => {
+
+/**
+ * A faster alternative to `Function#apply`, this function invokes `func`
+ * with the `this` binding of `thisArg` and the arguments of `args`.
+ *
+ * @private
+ * @param {Function} func The function to invoke.
+ * @param {*} thisArg The `this` binding of `func`.
+ * @param {Array} args The arguments to invoke `func` with.
+ * @returns {*} Returns the result of `func`.
+ */
+function apply(func, thisArg, args) {
+  switch (args.length) {
+    case 0: return func.call(thisArg);
+    case 1: return func.call(thisArg, args[0]);
+    case 2: return func.call(thisArg, args[0], args[1]);
+    case 3: return func.call(thisArg, args[0], args[1], args[2]);
+  }
+  return func.apply(thisArg, args);
+}
+
+module.exports = apply;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayEach.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_arrayEach.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/**
+ * A specialized version of `_.forEach` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns `array`.
+ */
+function arrayEach(array, iteratee) {
+  var index = -1,
+      length = array == null ? 0 : array.length;
+
+  while (++index < length) {
+    if (iteratee(array[index], index, array) === false) {
+      break;
+    }
+  }
+  return array;
+}
+
+module.exports = arrayEach;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayFilter.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_arrayFilter.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+/**
+ * A specialized version of `_.filter` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {Array} Returns the new filtered array.
+ */
+function arrayFilter(array, predicate) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      resIndex = 0,
+      result = [];
+
+  while (++index < length) {
+    var value = array[index];
+    if (predicate(value, index, array)) {
+      result[resIndex++] = value;
+    }
+  }
+  return result;
+}
+
+module.exports = arrayFilter;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayIncludes.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_arrayIncludes.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseIndexOf = __webpack_require__(/*! ./_baseIndexOf */ "./node_modules/lodash/_baseIndexOf.js");
+
+/**
+ * A specialized version of `_.includes` for arrays without support for
+ * specifying an index to search from.
+ *
+ * @private
+ * @param {Array} [array] The array to inspect.
+ * @param {*} target The value to search for.
+ * @returns {boolean} Returns `true` if `target` is found, else `false`.
+ */
+function arrayIncludes(array, value) {
+  var length = array == null ? 0 : array.length;
+  return !!length && baseIndexOf(array, value, 0) > -1;
+}
+
+module.exports = arrayIncludes;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayLikeKeys.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_arrayLikeKeys.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseTimes = __webpack_require__(/*! ./_baseTimes */ "./node_modules/lodash/_baseTimes.js"),
+    isArguments = __webpack_require__(/*! ./isArguments */ "./node_modules/lodash/isArguments.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isBuffer = __webpack_require__(/*! ./isBuffer */ "./node_modules/lodash/isBuffer.js"),
+    isIndex = __webpack_require__(/*! ./_isIndex */ "./node_modules/lodash/_isIndex.js"),
+    isTypedArray = __webpack_require__(/*! ./isTypedArray */ "./node_modules/lodash/isTypedArray.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Creates an array of the enumerable property names of the array-like `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @param {boolean} inherited Specify returning inherited property names.
+ * @returns {Array} Returns the array of property names.
+ */
+function arrayLikeKeys(value, inherited) {
+  var isArr = isArray(value),
+      isArg = !isArr && isArguments(value),
+      isBuff = !isArr && !isArg && isBuffer(value),
+      isType = !isArr && !isArg && !isBuff && isTypedArray(value),
+      skipIndexes = isArr || isArg || isBuff || isType,
+      result = skipIndexes ? baseTimes(value.length, String) : [],
+      length = result.length;
+
+  for (var key in value) {
+    if ((inherited || hasOwnProperty.call(value, key)) &&
+        !(skipIndexes && (
+           // Safari 9 has enumerable `arguments.length` in strict mode.
+           key == 'length' ||
+           // Node.js 0.10 has enumerable non-index properties on buffers.
+           (isBuff && (key == 'offset' || key == 'parent')) ||
+           // PhantomJS 2 has enumerable non-index properties on typed arrays.
+           (isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) ||
+           // Skip index properties.
+           isIndex(key, length)
+        ))) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = arrayLikeKeys;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayMap.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_arrayMap.js ***!
+  \******************************************/
+/***/ ((module) => {
+
+/**
+ * A specialized version of `_.map` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ */
+function arrayMap(array, iteratee) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      result = Array(length);
+
+  while (++index < length) {
+    result[index] = iteratee(array[index], index, array);
+  }
+  return result;
+}
+
+module.exports = arrayMap;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayPush.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_arrayPush.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/**
+ * Appends the elements of `values` to `array`.
+ *
+ * @private
+ * @param {Array} array The array to modify.
+ * @param {Array} values The values to append.
+ * @returns {Array} Returns `array`.
+ */
+function arrayPush(array, values) {
+  var index = -1,
+      length = values.length,
+      offset = array.length;
+
+  while (++index < length) {
+    array[offset + index] = values[index];
+  }
+  return array;
+}
+
+module.exports = arrayPush;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arraySome.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_arraySome.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/**
+ * A specialized version of `_.some` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {boolean} Returns `true` if any element passes the predicate check,
+ *  else `false`.
+ */
+function arraySome(array, predicate) {
+  var index = -1,
+      length = array == null ? 0 : array.length;
+
+  while (++index < length) {
+    if (predicate(array[index], index, array)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+module.exports = arraySome;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_assocIndexOf.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_assocIndexOf.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var eq = __webpack_require__(/*! ./eq */ "./node_modules/lodash/eq.js");
+
+/**
+ * Gets the index at which the `key` is found in `array` of key-value pairs.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} key The key to search for.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function assocIndexOf(array, key) {
+  var length = array.length;
+  while (length--) {
+    if (eq(array[length][0], key)) {
+      return length;
+    }
+  }
+  return -1;
+}
+
+module.exports = assocIndexOf;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseCreate.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseCreate.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
+
+/** Built-in value references. */
+var objectCreate = Object.create;
+
+/**
+ * The base implementation of `_.create` without support for assigning
+ * properties to the created object.
+ *
+ * @private
+ * @param {Object} proto The object to inherit from.
+ * @returns {Object} Returns the new object.
+ */
+var baseCreate = (function() {
+  function object() {}
+  return function(proto) {
+    if (!isObject(proto)) {
+      return {};
+    }
+    if (objectCreate) {
+      return objectCreate(proto);
+    }
+    object.prototype = proto;
+    var result = new object;
+    object.prototype = undefined;
+    return result;
+  };
+}());
+
+module.exports = baseCreate;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseDelay.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseDelay.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * The base implementation of `_.delay` and `_.defer` which accepts `args`
+ * to provide to `func`.
+ *
+ * @private
+ * @param {Function} func The function to delay.
+ * @param {number} wait The number of milliseconds to delay invocation.
+ * @param {Array} args The arguments to provide to `func`.
+ * @returns {number|Object} Returns the timer id or timeout object.
+ */
+function baseDelay(func, wait, args) {
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  return setTimeout(function() { func.apply(undefined, args); }, wait);
+}
+
+module.exports = baseDelay;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseFindIndex.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_baseFindIndex.js ***!
+  \***********************************************/
+/***/ ((module) => {
+
+/**
+ * The base implementation of `_.findIndex` and `_.findLastIndex` without
+ * support for iteratee shorthands.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {Function} predicate The function invoked per iteration.
+ * @param {number} fromIndex The index to search from.
+ * @param {boolean} [fromRight] Specify iterating from right to left.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function baseFindIndex(array, predicate, fromIndex, fromRight) {
+  var length = array.length,
+      index = fromIndex + (fromRight ? 1 : -1);
+
+  while ((fromRight ? index-- : ++index < length)) {
+    if (predicate(array[index], index, array)) {
+      return index;
+    }
+  }
+  return -1;
+}
+
+module.exports = baseFindIndex;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseFlatten.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseFlatten.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var arrayPush = __webpack_require__(/*! ./_arrayPush */ "./node_modules/lodash/_arrayPush.js"),
+    isFlattenable = __webpack_require__(/*! ./_isFlattenable */ "./node_modules/lodash/_isFlattenable.js");
+
+/**
+ * The base implementation of `_.flatten` with support for restricting flattening.
+ *
+ * @private
+ * @param {Array} array The array to flatten.
+ * @param {number} depth The maximum recursion depth.
+ * @param {boolean} [predicate=isFlattenable] The function invoked per iteration.
+ * @param {boolean} [isStrict] Restrict to values that pass `predicate` checks.
+ * @param {Array} [result=[]] The initial result value.
+ * @returns {Array} Returns the new flattened array.
+ */
+function baseFlatten(array, depth, predicate, isStrict, result) {
+  var index = -1,
+      length = array.length;
+
+  predicate || (predicate = isFlattenable);
+  result || (result = []);
+
+  while (++index < length) {
+    var value = array[index];
+    if (depth > 0 && predicate(value)) {
+      if (depth > 1) {
+        // Recursively flatten arrays (susceptible to call stack limits).
+        baseFlatten(value, depth - 1, predicate, isStrict, result);
+      } else {
+        arrayPush(result, value);
+      }
+    } else if (!isStrict) {
+      result[result.length] = value;
+    }
+  }
+  return result;
+}
+
+module.exports = baseFlatten;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseGet.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_baseGet.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var castPath = __webpack_require__(/*! ./_castPath */ "./node_modules/lodash/_castPath.js"),
+    toKey = __webpack_require__(/*! ./_toKey */ "./node_modules/lodash/_toKey.js");
+
+/**
+ * The base implementation of `_.get` without support for default values.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path of the property to get.
+ * @returns {*} Returns the resolved value.
+ */
+function baseGet(object, path) {
+  path = castPath(path, object);
+
+  var index = 0,
+      length = path.length;
+
+  while (object != null && index < length) {
+    object = object[toKey(path[index++])];
+  }
+  return (index && index == length) ? object : undefined;
+}
+
+module.exports = baseGet;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseGetAllKeys.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_baseGetAllKeys.js ***!
+  \************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var arrayPush = __webpack_require__(/*! ./_arrayPush */ "./node_modules/lodash/_arrayPush.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js");
+
+/**
+ * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
+ * `keysFunc` and `symbolsFunc` to get the enumerable property names and
+ * symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Function} keysFunc The function to get the keys of `object`.
+ * @param {Function} symbolsFunc The function to get the symbols of `object`.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+  var result = keysFunc(object);
+  return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
+}
+
+module.exports = baseGetAllKeys;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseGetTag.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseGetTag.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    getRawTag = __webpack_require__(/*! ./_getRawTag */ "./node_modules/lodash/_getRawTag.js"),
+    objectToString = __webpack_require__(/*! ./_objectToString */ "./node_modules/lodash/_objectToString.js");
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return (symToStringTag && symToStringTag in Object(value))
+    ? getRawTag(value)
+    : objectToString(value);
+}
+
+module.exports = baseGetTag;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseHasIn.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseHasIn.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/**
+ * The base implementation of `_.hasIn` without support for deep paths.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {Array|string} key The key to check.
+ * @returns {boolean} Returns `true` if `key` exists, else `false`.
+ */
+function baseHasIn(object, key) {
+  return object != null && key in Object(object);
+}
+
+module.exports = baseHasIn;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIndexOf.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseIndexOf.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseFindIndex = __webpack_require__(/*! ./_baseFindIndex */ "./node_modules/lodash/_baseFindIndex.js"),
+    baseIsNaN = __webpack_require__(/*! ./_baseIsNaN */ "./node_modules/lodash/_baseIsNaN.js"),
+    strictIndexOf = __webpack_require__(/*! ./_strictIndexOf */ "./node_modules/lodash/_strictIndexOf.js");
+
+/**
+ * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} value The value to search for.
+ * @param {number} fromIndex The index to search from.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function baseIndexOf(array, value, fromIndex) {
+  return value === value
+    ? strictIndexOf(array, value, fromIndex)
+    : baseFindIndex(array, baseIsNaN, fromIndex);
+}
+
+module.exports = baseIndexOf;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsArguments.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_baseIsArguments.js ***!
+  \*************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]';
+
+/**
+ * The base implementation of `_.isArguments`.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ */
+function baseIsArguments(value) {
+  return isObjectLike(value) && baseGetTag(value) == argsTag;
+}
+
+module.exports = baseIsArguments;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsEqual.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseIsEqual.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseIsEqualDeep = __webpack_require__(/*! ./_baseIsEqualDeep */ "./node_modules/lodash/_baseIsEqualDeep.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
+
+/**
+ * The base implementation of `_.isEqual` which supports partial comparisons
+ * and tracks traversed objects.
+ *
+ * @private
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @param {boolean} bitmask The bitmask flags.
+ *  1 - Unordered comparison
+ *  2 - Partial comparison
+ * @param {Function} [customizer] The function to customize comparisons.
+ * @param {Object} [stack] Tracks traversed `value` and `other` objects.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ */
+function baseIsEqual(value, other, bitmask, customizer, stack) {
+  if (value === other) {
+    return true;
+  }
+  if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
+    return value !== value && other !== other;
+  }
+  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
+}
+
+module.exports = baseIsEqual;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsEqualDeep.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_baseIsEqualDeep.js ***!
+  \*************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Stack = __webpack_require__(/*! ./_Stack */ "./node_modules/lodash/_Stack.js"),
+    equalArrays = __webpack_require__(/*! ./_equalArrays */ "./node_modules/lodash/_equalArrays.js"),
+    equalByTag = __webpack_require__(/*! ./_equalByTag */ "./node_modules/lodash/_equalByTag.js"),
+    equalObjects = __webpack_require__(/*! ./_equalObjects */ "./node_modules/lodash/_equalObjects.js"),
+    getTag = __webpack_require__(/*! ./_getTag */ "./node_modules/lodash/_getTag.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isBuffer = __webpack_require__(/*! ./isBuffer */ "./node_modules/lodash/isBuffer.js"),
+    isTypedArray = __webpack_require__(/*! ./isTypedArray */ "./node_modules/lodash/isTypedArray.js");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1;
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    objectTag = '[object Object]';
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * A specialized version of `baseIsEqual` for arrays and objects which performs
+ * deep comparisons and tracks traversed objects enabling objects with circular
+ * references to be compared.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} [stack] Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
+  var objIsArr = isArray(object),
+      othIsArr = isArray(other),
+      objTag = objIsArr ? arrayTag : getTag(object),
+      othTag = othIsArr ? arrayTag : getTag(other);
+
+  objTag = objTag == argsTag ? objectTag : objTag;
+  othTag = othTag == argsTag ? objectTag : othTag;
+
+  var objIsObj = objTag == objectTag,
+      othIsObj = othTag == objectTag,
+      isSameTag = objTag == othTag;
+
+  if (isSameTag && isBuffer(object)) {
+    if (!isBuffer(other)) {
+      return false;
+    }
+    objIsArr = true;
+    objIsObj = false;
+  }
+  if (isSameTag && !objIsObj) {
+    stack || (stack = new Stack);
+    return (objIsArr || isTypedArray(object))
+      ? equalArrays(object, other, bitmask, customizer, equalFunc, stack)
+      : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
+  }
+  if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
+    var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
+        othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+
+    if (objIsWrapped || othIsWrapped) {
+      var objUnwrapped = objIsWrapped ? object.value() : object,
+          othUnwrapped = othIsWrapped ? other.value() : other;
+
+      stack || (stack = new Stack);
+      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
+    }
+  }
+  if (!isSameTag) {
+    return false;
+  }
+  stack || (stack = new Stack);
+  return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
+}
+
+module.exports = baseIsEqualDeep;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsMatch.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseIsMatch.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Stack = __webpack_require__(/*! ./_Stack */ "./node_modules/lodash/_Stack.js"),
+    baseIsEqual = __webpack_require__(/*! ./_baseIsEqual */ "./node_modules/lodash/_baseIsEqual.js");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/**
+ * The base implementation of `_.isMatch` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Object} object The object to inspect.
+ * @param {Object} source The object of property values to match.
+ * @param {Array} matchData The property names, values, and compare flags to match.
+ * @param {Function} [customizer] The function to customize comparisons.
+ * @returns {boolean} Returns `true` if `object` is a match, else `false`.
+ */
+function baseIsMatch(object, source, matchData, customizer) {
+  var index = matchData.length,
+      length = index,
+      noCustomizer = !customizer;
+
+  if (object == null) {
+    return !length;
+  }
+  object = Object(object);
+  while (index--) {
+    var data = matchData[index];
+    if ((noCustomizer && data[2])
+          ? data[1] !== object[data[0]]
+          : !(data[0] in object)
+        ) {
+      return false;
+    }
+  }
+  while (++index < length) {
+    data = matchData[index];
+    var key = data[0],
+        objValue = object[key],
+        srcValue = data[1];
+
+    if (noCustomizer && data[2]) {
+      if (objValue === undefined && !(key in object)) {
+        return false;
+      }
+    } else {
+      var stack = new Stack;
+      if (customizer) {
+        var result = customizer(objValue, srcValue, key, object, source, stack);
+      }
+      if (!(result === undefined
+            ? baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG, customizer, stack)
+            : result
+          )) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+module.exports = baseIsMatch;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsNaN.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseIsNaN.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/**
+ * The base implementation of `_.isNaN` without support for number objects.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is `NaN`, else `false`.
+ */
+function baseIsNaN(value) {
+  return value !== value;
+}
+
+module.exports = baseIsNaN;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsNative.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseIsNative.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isFunction = __webpack_require__(/*! ./isFunction */ "./node_modules/lodash/isFunction.js"),
+    isMasked = __webpack_require__(/*! ./_isMasked */ "./node_modules/lodash/_isMasked.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
+    toSource = __webpack_require__(/*! ./_toSource */ "./node_modules/lodash/_toSource.js");
+
+/**
+ * Used to match `RegExp`
+ * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+ */
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+
+/** Used to detect host constructors (Safari). */
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+/** Used for built-in method references. */
+var funcProto = Function.prototype,
+    objectProto = Object.prototype;
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Used to detect if a method is native. */
+var reIsNative = RegExp('^' +
+  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
+  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+);
+
+/**
+ * The base implementation of `_.isNative` without bad shim checks.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a native function,
+ *  else `false`.
+ */
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+
+module.exports = baseIsNative;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsTypedArray.js":
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_baseIsTypedArray.js ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    isLength = __webpack_require__(/*! ./isLength */ "./node_modules/lodash/isLength.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    funcTag = '[object Function]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    objectTag = '[object Object]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    weakMapTag = '[object WeakMap]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]',
+    float32Tag = '[object Float32Array]',
+    float64Tag = '[object Float64Array]',
+    int8Tag = '[object Int8Array]',
+    int16Tag = '[object Int16Array]',
+    int32Tag = '[object Int32Array]',
+    uint8Tag = '[object Uint8Array]',
+    uint8ClampedTag = '[object Uint8ClampedArray]',
+    uint16Tag = '[object Uint16Array]',
+    uint32Tag = '[object Uint32Array]';
+
+/** Used to identify `toStringTag` values of typed arrays. */
+var typedArrayTags = {};
+typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
+typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
+typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
+typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
+typedArrayTags[uint32Tag] = true;
+typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
+typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
+typedArrayTags[dataViewTag] = typedArrayTags[dateTag] =
+typedArrayTags[errorTag] = typedArrayTags[funcTag] =
+typedArrayTags[mapTag] = typedArrayTags[numberTag] =
+typedArrayTags[objectTag] = typedArrayTags[regexpTag] =
+typedArrayTags[setTag] = typedArrayTags[stringTag] =
+typedArrayTags[weakMapTag] = false;
+
+/**
+ * The base implementation of `_.isTypedArray` without Node.js optimizations.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ */
+function baseIsTypedArray(value) {
+  return isObjectLike(value) &&
+    isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
+}
+
+module.exports = baseIsTypedArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIteratee.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseIteratee.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseMatches = __webpack_require__(/*! ./_baseMatches */ "./node_modules/lodash/_baseMatches.js"),
+    baseMatchesProperty = __webpack_require__(/*! ./_baseMatchesProperty */ "./node_modules/lodash/_baseMatchesProperty.js"),
+    identity = __webpack_require__(/*! ./identity */ "./node_modules/lodash/identity.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    property = __webpack_require__(/*! ./property */ "./node_modules/lodash/property.js");
+
+/**
+ * The base implementation of `_.iteratee`.
+ *
+ * @private
+ * @param {*} [value=_.identity] The value to convert to an iteratee.
+ * @returns {Function} Returns the iteratee.
+ */
+function baseIteratee(value) {
+  // Don't store the `typeof` result in a variable to avoid a JIT bug in Safari 9.
+  // See https://bugs.webkit.org/show_bug.cgi?id=156034 for more details.
+  if (typeof value == 'function') {
+    return value;
+  }
+  if (value == null) {
+    return identity;
+  }
+  if (typeof value == 'object') {
+    return isArray(value)
+      ? baseMatchesProperty(value[0], value[1])
+      : baseMatches(value);
+  }
+  return property(value);
+}
+
+module.exports = baseIteratee;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseKeys.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseKeys.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isPrototype = __webpack_require__(/*! ./_isPrototype */ "./node_modules/lodash/_isPrototype.js"),
+    nativeKeys = __webpack_require__(/*! ./_nativeKeys */ "./node_modules/lodash/_nativeKeys.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = baseKeys;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseLodash.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseLodash.js ***!
+  \********************************************/
+/***/ ((module) => {
+
+/**
+ * The function whose prototype chain sequence wrappers inherit from.
+ *
+ * @private
+ */
+function baseLodash() {
+  // No operation performed.
+}
+
+module.exports = baseLodash;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseMatches.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseMatches.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseIsMatch = __webpack_require__(/*! ./_baseIsMatch */ "./node_modules/lodash/_baseIsMatch.js"),
+    getMatchData = __webpack_require__(/*! ./_getMatchData */ "./node_modules/lodash/_getMatchData.js"),
+    matchesStrictComparable = __webpack_require__(/*! ./_matchesStrictComparable */ "./node_modules/lodash/_matchesStrictComparable.js");
+
+/**
+ * The base implementation of `_.matches` which doesn't clone `source`.
+ *
+ * @private
+ * @param {Object} source The object of property values to match.
+ * @returns {Function} Returns the new spec function.
+ */
+function baseMatches(source) {
+  var matchData = getMatchData(source);
+  if (matchData.length == 1 && matchData[0][2]) {
+    return matchesStrictComparable(matchData[0][0], matchData[0][1]);
+  }
+  return function(object) {
+    return object === source || baseIsMatch(object, source, matchData);
+  };
+}
+
+module.exports = baseMatches;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseMatchesProperty.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/lodash/_baseMatchesProperty.js ***!
+  \*****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseIsEqual = __webpack_require__(/*! ./_baseIsEqual */ "./node_modules/lodash/_baseIsEqual.js"),
+    get = __webpack_require__(/*! ./get */ "./node_modules/lodash/get.js"),
+    hasIn = __webpack_require__(/*! ./hasIn */ "./node_modules/lodash/hasIn.js"),
+    isKey = __webpack_require__(/*! ./_isKey */ "./node_modules/lodash/_isKey.js"),
+    isStrictComparable = __webpack_require__(/*! ./_isStrictComparable */ "./node_modules/lodash/_isStrictComparable.js"),
+    matchesStrictComparable = __webpack_require__(/*! ./_matchesStrictComparable */ "./node_modules/lodash/_matchesStrictComparable.js"),
+    toKey = __webpack_require__(/*! ./_toKey */ "./node_modules/lodash/_toKey.js");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/**
+ * The base implementation of `_.matchesProperty` which doesn't clone `srcValue`.
+ *
+ * @private
+ * @param {string} path The path of the property to get.
+ * @param {*} srcValue The value to match.
+ * @returns {Function} Returns the new spec function.
+ */
+function baseMatchesProperty(path, srcValue) {
+  if (isKey(path) && isStrictComparable(srcValue)) {
+    return matchesStrictComparable(toKey(path), srcValue);
+  }
+  return function(object) {
+    var objValue = get(object, path);
+    return (objValue === undefined && objValue === srcValue)
+      ? hasIn(object, path)
+      : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
+  };
+}
+
+module.exports = baseMatchesProperty;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseProperty.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseProperty.js ***!
+  \**********************************************/
+/***/ ((module) => {
+
+/**
+ * The base implementation of `_.property` without support for deep paths.
+ *
+ * @private
+ * @param {string} key The key of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ */
+function baseProperty(key) {
+  return function(object) {
+    return object == null ? undefined : object[key];
+  };
+}
+
+module.exports = baseProperty;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_basePropertyDeep.js":
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_basePropertyDeep.js ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseGet = __webpack_require__(/*! ./_baseGet */ "./node_modules/lodash/_baseGet.js");
+
+/**
+ * A specialized version of `baseProperty` which supports deep paths.
+ *
+ * @private
+ * @param {Array|string} path The path of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ */
+function basePropertyDeep(path) {
+  return function(object) {
+    return baseGet(object, path);
+  };
+}
+
+module.exports = basePropertyDeep;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseRest.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseRest.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var identity = __webpack_require__(/*! ./identity */ "./node_modules/lodash/identity.js"),
+    overRest = __webpack_require__(/*! ./_overRest */ "./node_modules/lodash/_overRest.js"),
+    setToString = __webpack_require__(/*! ./_setToString */ "./node_modules/lodash/_setToString.js");
+
+/**
+ * The base implementation of `_.rest` which doesn't validate or coerce arguments.
+ *
+ * @private
+ * @param {Function} func The function to apply a rest parameter to.
+ * @param {number} [start=func.length-1] The start position of the rest parameter.
+ * @returns {Function} Returns the new function.
+ */
+function baseRest(func, start) {
+  return setToString(overRest(func, start, identity), func + '');
+}
+
+module.exports = baseRest;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseSetData.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseSetData.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var identity = __webpack_require__(/*! ./identity */ "./node_modules/lodash/identity.js"),
+    metaMap = __webpack_require__(/*! ./_metaMap */ "./node_modules/lodash/_metaMap.js");
+
+/**
+ * The base implementation of `setData` without support for hot loop shorting.
+ *
+ * @private
+ * @param {Function} func The function to associate metadata with.
+ * @param {*} data The metadata.
+ * @returns {Function} Returns `func`.
+ */
+var baseSetData = !metaMap ? identity : function(func, data) {
+  metaMap.set(func, data);
+  return func;
+};
+
+module.exports = baseSetData;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseSetToString.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_baseSetToString.js ***!
+  \*************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var constant = __webpack_require__(/*! ./constant */ "./node_modules/lodash/constant.js"),
+    defineProperty = __webpack_require__(/*! ./_defineProperty */ "./node_modules/lodash/_defineProperty.js"),
+    identity = __webpack_require__(/*! ./identity */ "./node_modules/lodash/identity.js");
+
+/**
+ * The base implementation of `setToString` without support for hot loop shorting.
+ *
+ * @private
+ * @param {Function} func The function to modify.
+ * @param {Function} string The `toString` result.
+ * @returns {Function} Returns `func`.
+ */
+var baseSetToString = !defineProperty ? identity : function(func, string) {
+  return defineProperty(func, 'toString', {
+    'configurable': true,
+    'enumerable': false,
+    'value': constant(string),
+    'writable': true
+  });
+};
+
+module.exports = baseSetToString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseSlice.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseSlice.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/**
+ * The base implementation of `_.slice` without an iteratee call guard.
+ *
+ * @private
+ * @param {Array} array The array to slice.
+ * @param {number} [start=0] The start position.
+ * @param {number} [end=array.length] The end position.
+ * @returns {Array} Returns the slice of `array`.
+ */
+function baseSlice(array, start, end) {
+  var index = -1,
+      length = array.length;
+
+  if (start < 0) {
+    start = -start > length ? 0 : (length + start);
+  }
+  end = end > length ? length : end;
+  if (end < 0) {
+    end += length;
+  }
+  length = start > end ? 0 : ((end - start) >>> 0);
+  start >>>= 0;
+
+  var result = Array(length);
+  while (++index < length) {
+    result[index] = array[index + start];
+  }
+  return result;
+}
+
+module.exports = baseSlice;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseTimes.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseTimes.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/**
+ * The base implementation of `_.times` without support for iteratee shorthands
+ * or max array length checks.
+ *
+ * @private
+ * @param {number} n The number of times to invoke `iteratee`.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the array of results.
+ */
+function baseTimes(n, iteratee) {
+  var index = -1,
+      result = Array(n);
+
+  while (++index < n) {
+    result[index] = iteratee(index);
+  }
+  return result;
+}
+
+module.exports = baseTimes;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseToString.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseToString.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    arrayMap = __webpack_require__(/*! ./_arrayMap */ "./node_modules/lodash/_arrayMap.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
+
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0;
+
+/** Used to convert symbols to primitives and strings. */
+var symbolProto = Symbol ? Symbol.prototype : undefined,
+    symbolToString = symbolProto ? symbolProto.toString : undefined;
+
+/**
+ * The base implementation of `_.toString` which doesn't convert nullish
+ * values to empty strings.
+ *
+ * @private
+ * @param {*} value The value to process.
+ * @returns {string} Returns the string.
+ */
+function baseToString(value) {
+  // Exit early for strings to avoid a performance hit in some environments.
+  if (typeof value == 'string') {
+    return value;
+  }
+  if (isArray(value)) {
+    // Recursively convert values (susceptible to call stack limits).
+    return arrayMap(value, baseToString) + '';
+  }
+  if (isSymbol(value)) {
+    return symbolToString ? symbolToString.call(value) : '';
+  }
+  var result = (value + '');
+  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+}
+
+module.exports = baseToString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseTrim.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseTrim.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var trimmedEndIndex = __webpack_require__(/*! ./_trimmedEndIndex */ "./node_modules/lodash/_trimmedEndIndex.js");
+
+/** Used to match leading whitespace. */
+var reTrimStart = /^\s+/;
+
+/**
+ * The base implementation of `_.trim`.
+ *
+ * @private
+ * @param {string} string The string to trim.
+ * @returns {string} Returns the trimmed string.
+ */
+function baseTrim(string) {
+  return string
+    ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '')
+    : string;
+}
+
+module.exports = baseTrim;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseUnary.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseUnary.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/**
+ * The base implementation of `_.unary` without support for storing metadata.
+ *
+ * @private
+ * @param {Function} func The function to cap arguments for.
+ * @returns {Function} Returns the new capped function.
+ */
+function baseUnary(func) {
+  return function(value) {
+    return func(value);
+  };
+}
+
+module.exports = baseUnary;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_cacheHas.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_cacheHas.js ***!
+  \******************************************/
+/***/ ((module) => {
+
+/**
+ * Checks if a `cache` value for `key` exists.
+ *
+ * @private
+ * @param {Object} cache The cache to query.
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function cacheHas(cache, key) {
+  return cache.has(key);
+}
+
+module.exports = cacheHas;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_castFunction.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_castFunction.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var identity = __webpack_require__(/*! ./identity */ "./node_modules/lodash/identity.js");
+
+/**
+ * Casts `value` to `identity` if it's not a function.
+ *
+ * @private
+ * @param {*} value The value to inspect.
+ * @returns {Function} Returns cast function.
+ */
+function castFunction(value) {
+  return typeof value == 'function' ? value : identity;
+}
+
+module.exports = castFunction;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_castPath.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_castPath.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isKey = __webpack_require__(/*! ./_isKey */ "./node_modules/lodash/_isKey.js"),
+    stringToPath = __webpack_require__(/*! ./_stringToPath */ "./node_modules/lodash/_stringToPath.js"),
+    toString = __webpack_require__(/*! ./toString */ "./node_modules/lodash/toString.js");
+
+/**
+ * Casts `value` to a path array if it's not one.
+ *
+ * @private
+ * @param {*} value The value to inspect.
+ * @param {Object} [object] The object to query keys on.
+ * @returns {Array} Returns the cast property path array.
+ */
+function castPath(value, object) {
+  if (isArray(value)) {
+    return value;
+  }
+  return isKey(value, object) ? [value] : stringToPath(toString(value));
+}
+
+module.exports = castPath;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_castRest.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_castRest.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js");
+
+/**
+ * A `baseRest` alias which can be replaced with `identity` by module
+ * replacement plugins.
+ *
+ * @private
+ * @type {Function}
+ * @param {Function} func The function to apply a rest parameter to.
+ * @returns {Function} Returns the new function.
+ */
+var castRest = baseRest;
+
+module.exports = castRest;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_castSlice.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_castSlice.js ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseSlice = __webpack_require__(/*! ./_baseSlice */ "./node_modules/lodash/_baseSlice.js");
+
+/**
+ * Casts `array` to a slice if it's needed.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {number} start The start position.
+ * @param {number} [end=array.length] The end position.
+ * @returns {Array} Returns the cast slice.
+ */
+function castSlice(array, start, end) {
+  var length = array.length;
+  end = end === undefined ? length : end;
+  return (!start && end >= length) ? array : baseSlice(array, start, end);
+}
+
+module.exports = castSlice;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_composeArgs.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_composeArgs.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max;
+
+/**
+ * Creates an array that is the composition of partially applied arguments,
+ * placeholders, and provided arguments into a single array of arguments.
+ *
+ * @private
+ * @param {Array} args The provided arguments.
+ * @param {Array} partials The arguments to prepend to those provided.
+ * @param {Array} holders The `partials` placeholder indexes.
+ * @params {boolean} [isCurried] Specify composing for a curried function.
+ * @returns {Array} Returns the new array of composed arguments.
+ */
+function composeArgs(args, partials, holders, isCurried) {
+  var argsIndex = -1,
+      argsLength = args.length,
+      holdersLength = holders.length,
+      leftIndex = -1,
+      leftLength = partials.length,
+      rangeLength = nativeMax(argsLength - holdersLength, 0),
+      result = Array(leftLength + rangeLength),
+      isUncurried = !isCurried;
+
+  while (++leftIndex < leftLength) {
+    result[leftIndex] = partials[leftIndex];
+  }
+  while (++argsIndex < holdersLength) {
+    if (isUncurried || argsIndex < argsLength) {
+      result[holders[argsIndex]] = args[argsIndex];
+    }
+  }
+  while (rangeLength--) {
+    result[leftIndex++] = args[argsIndex++];
+  }
+  return result;
+}
+
+module.exports = composeArgs;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_composeArgsRight.js":
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_composeArgsRight.js ***!
+  \**************************************************/
+/***/ ((module) => {
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max;
+
+/**
+ * This function is like `composeArgs` except that the arguments composition
+ * is tailored for `_.partialRight`.
+ *
+ * @private
+ * @param {Array} args The provided arguments.
+ * @param {Array} partials The arguments to append to those provided.
+ * @param {Array} holders The `partials` placeholder indexes.
+ * @params {boolean} [isCurried] Specify composing for a curried function.
+ * @returns {Array} Returns the new array of composed arguments.
+ */
+function composeArgsRight(args, partials, holders, isCurried) {
+  var argsIndex = -1,
+      argsLength = args.length,
+      holdersIndex = -1,
+      holdersLength = holders.length,
+      rightIndex = -1,
+      rightLength = partials.length,
+      rangeLength = nativeMax(argsLength - holdersLength, 0),
+      result = Array(rangeLength + rightLength),
+      isUncurried = !isCurried;
+
+  while (++argsIndex < rangeLength) {
+    result[argsIndex] = args[argsIndex];
+  }
+  var offset = argsIndex;
+  while (++rightIndex < rightLength) {
+    result[offset + rightIndex] = partials[rightIndex];
+  }
+  while (++holdersIndex < holdersLength) {
+    if (isUncurried || argsIndex < argsLength) {
+      result[offset + holders[holdersIndex]] = args[argsIndex++];
+    }
+  }
+  return result;
+}
+
+module.exports = composeArgsRight;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_copyArray.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_copyArray.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/**
+ * Copies the values of `source` to `array`.
+ *
+ * @private
+ * @param {Array} source The array to copy values from.
+ * @param {Array} [array=[]] The array to copy values to.
+ * @returns {Array} Returns `array`.
+ */
+function copyArray(source, array) {
+  var index = -1,
+      length = source.length;
+
+  array || (array = Array(length));
+  while (++index < length) {
+    array[index] = source[index];
+  }
+  return array;
+}
+
+module.exports = copyArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_coreJsData.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_coreJsData.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/** Used to detect overreaching core-js shims. */
+var coreJsData = root['__core-js_shared__'];
+
+module.exports = coreJsData;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_countHolders.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_countHolders.js ***!
+  \**********************************************/
+/***/ ((module) => {
+
+/**
+ * Gets the number of `placeholder` occurrences in `array`.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} placeholder The placeholder to search for.
+ * @returns {number} Returns the placeholder count.
+ */
+function countHolders(array, placeholder) {
+  var length = array.length,
+      result = 0;
+
+  while (length--) {
+    if (array[length] === placeholder) {
+      ++result;
+    }
+  }
+  return result;
+}
+
+module.exports = countHolders;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createBind.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_createBind.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var createCtor = __webpack_require__(/*! ./_createCtor */ "./node_modules/lodash/_createCtor.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_BIND_FLAG = 1;
+
+/**
+ * Creates a function that wraps `func` to invoke it with the optional `this`
+ * binding of `thisArg`.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+ * @param {*} [thisArg] The `this` binding of `func`.
+ * @returns {Function} Returns the new wrapped function.
+ */
+function createBind(func, bitmask, thisArg) {
+  var isBind = bitmask & WRAP_BIND_FLAG,
+      Ctor = createCtor(func);
+
+  function wrapper() {
+    var fn = (this && this !== root && this instanceof wrapper) ? Ctor : func;
+    return fn.apply(isBind ? thisArg : this, arguments);
+  }
+  return wrapper;
+}
+
+module.exports = createBind;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createCtor.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_createCtor.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseCreate = __webpack_require__(/*! ./_baseCreate */ "./node_modules/lodash/_baseCreate.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
+
+/**
+ * Creates a function that produces an instance of `Ctor` regardless of
+ * whether it was invoked as part of a `new` expression or by `call` or `apply`.
+ *
+ * @private
+ * @param {Function} Ctor The constructor to wrap.
+ * @returns {Function} Returns the new wrapped function.
+ */
+function createCtor(Ctor) {
+  return function() {
+    // Use a `switch` statement to work with class constructors. See
+    // http://ecma-international.org/ecma-262/7.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist
+    // for more details.
+    var args = arguments;
+    switch (args.length) {
+      case 0: return new Ctor;
+      case 1: return new Ctor(args[0]);
+      case 2: return new Ctor(args[0], args[1]);
+      case 3: return new Ctor(args[0], args[1], args[2]);
+      case 4: return new Ctor(args[0], args[1], args[2], args[3]);
+      case 5: return new Ctor(args[0], args[1], args[2], args[3], args[4]);
+      case 6: return new Ctor(args[0], args[1], args[2], args[3], args[4], args[5]);
+      case 7: return new Ctor(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+    }
+    var thisBinding = baseCreate(Ctor.prototype),
+        result = Ctor.apply(thisBinding, args);
+
+    // Mimic the constructor's `return` behavior.
+    // See https://es5.github.io/#x13.2.2 for more details.
+    return isObject(result) ? result : thisBinding;
+  };
+}
+
+module.exports = createCtor;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createCurry.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_createCurry.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var apply = __webpack_require__(/*! ./_apply */ "./node_modules/lodash/_apply.js"),
+    createCtor = __webpack_require__(/*! ./_createCtor */ "./node_modules/lodash/_createCtor.js"),
+    createHybrid = __webpack_require__(/*! ./_createHybrid */ "./node_modules/lodash/_createHybrid.js"),
+    createRecurry = __webpack_require__(/*! ./_createRecurry */ "./node_modules/lodash/_createRecurry.js"),
+    getHolder = __webpack_require__(/*! ./_getHolder */ "./node_modules/lodash/_getHolder.js"),
+    replaceHolders = __webpack_require__(/*! ./_replaceHolders */ "./node_modules/lodash/_replaceHolders.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/**
+ * Creates a function that wraps `func` to enable currying.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+ * @param {number} arity The arity of `func`.
+ * @returns {Function} Returns the new wrapped function.
+ */
+function createCurry(func, bitmask, arity) {
+  var Ctor = createCtor(func);
+
+  function wrapper() {
+    var length = arguments.length,
+        args = Array(length),
+        index = length,
+        placeholder = getHolder(wrapper);
+
+    while (index--) {
+      args[index] = arguments[index];
+    }
+    var holders = (length < 3 && args[0] !== placeholder && args[length - 1] !== placeholder)
+      ? []
+      : replaceHolders(args, placeholder);
+
+    length -= holders.length;
+    if (length < arity) {
+      return createRecurry(
+        func, bitmask, createHybrid, wrapper.placeholder, undefined,
+        args, holders, undefined, undefined, arity - length);
+    }
+    var fn = (this && this !== root && this instanceof wrapper) ? Ctor : func;
+    return apply(fn, this, args);
+  }
+  return wrapper;
+}
+
+module.exports = createCurry;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createHybrid.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_createHybrid.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var composeArgs = __webpack_require__(/*! ./_composeArgs */ "./node_modules/lodash/_composeArgs.js"),
+    composeArgsRight = __webpack_require__(/*! ./_composeArgsRight */ "./node_modules/lodash/_composeArgsRight.js"),
+    countHolders = __webpack_require__(/*! ./_countHolders */ "./node_modules/lodash/_countHolders.js"),
+    createCtor = __webpack_require__(/*! ./_createCtor */ "./node_modules/lodash/_createCtor.js"),
+    createRecurry = __webpack_require__(/*! ./_createRecurry */ "./node_modules/lodash/_createRecurry.js"),
+    getHolder = __webpack_require__(/*! ./_getHolder */ "./node_modules/lodash/_getHolder.js"),
+    reorder = __webpack_require__(/*! ./_reorder */ "./node_modules/lodash/_reorder.js"),
+    replaceHolders = __webpack_require__(/*! ./_replaceHolders */ "./node_modules/lodash/_replaceHolders.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_BIND_FLAG = 1,
+    WRAP_BIND_KEY_FLAG = 2,
+    WRAP_CURRY_FLAG = 8,
+    WRAP_CURRY_RIGHT_FLAG = 16,
+    WRAP_ARY_FLAG = 128,
+    WRAP_FLIP_FLAG = 512;
+
+/**
+ * Creates a function that wraps `func` to invoke it with optional `this`
+ * binding of `thisArg`, partial application, and currying.
+ *
+ * @private
+ * @param {Function|string} func The function or method name to wrap.
+ * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+ * @param {*} [thisArg] The `this` binding of `func`.
+ * @param {Array} [partials] The arguments to prepend to those provided to
+ *  the new function.
+ * @param {Array} [holders] The `partials` placeholder indexes.
+ * @param {Array} [partialsRight] The arguments to append to those provided
+ *  to the new function.
+ * @param {Array} [holdersRight] The `partialsRight` placeholder indexes.
+ * @param {Array} [argPos] The argument positions of the new function.
+ * @param {number} [ary] The arity cap of `func`.
+ * @param {number} [arity] The arity of `func`.
+ * @returns {Function} Returns the new wrapped function.
+ */
+function createHybrid(func, bitmask, thisArg, partials, holders, partialsRight, holdersRight, argPos, ary, arity) {
+  var isAry = bitmask & WRAP_ARY_FLAG,
+      isBind = bitmask & WRAP_BIND_FLAG,
+      isBindKey = bitmask & WRAP_BIND_KEY_FLAG,
+      isCurried = bitmask & (WRAP_CURRY_FLAG | WRAP_CURRY_RIGHT_FLAG),
+      isFlip = bitmask & WRAP_FLIP_FLAG,
+      Ctor = isBindKey ? undefined : createCtor(func);
+
+  function wrapper() {
+    var length = arguments.length,
+        args = Array(length),
+        index = length;
+
+    while (index--) {
+      args[index] = arguments[index];
+    }
+    if (isCurried) {
+      var placeholder = getHolder(wrapper),
+          holdersCount = countHolders(args, placeholder);
+    }
+    if (partials) {
+      args = composeArgs(args, partials, holders, isCurried);
+    }
+    if (partialsRight) {
+      args = composeArgsRight(args, partialsRight, holdersRight, isCurried);
+    }
+    length -= holdersCount;
+    if (isCurried && length < arity) {
+      var newHolders = replaceHolders(args, placeholder);
+      return createRecurry(
+        func, bitmask, createHybrid, wrapper.placeholder, thisArg,
+        args, newHolders, argPos, ary, arity - length
+      );
+    }
+    var thisBinding = isBind ? thisArg : this,
+        fn = isBindKey ? thisBinding[func] : func;
+
+    length = args.length;
+    if (argPos) {
+      args = reorder(args, argPos);
+    } else if (isFlip && length > 1) {
+      args.reverse();
+    }
+    if (isAry && ary < length) {
+      args.length = ary;
+    }
+    if (this && this !== root && this instanceof wrapper) {
+      fn = Ctor || createCtor(fn);
+    }
+    return fn.apply(thisBinding, args);
+  }
+  return wrapper;
+}
+
+module.exports = createHybrid;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createPartial.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_createPartial.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var apply = __webpack_require__(/*! ./_apply */ "./node_modules/lodash/_apply.js"),
+    createCtor = __webpack_require__(/*! ./_createCtor */ "./node_modules/lodash/_createCtor.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_BIND_FLAG = 1;
+
+/**
+ * Creates a function that wraps `func` to invoke it with the `this` binding
+ * of `thisArg` and `partials` prepended to the arguments it receives.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+ * @param {*} thisArg The `this` binding of `func`.
+ * @param {Array} partials The arguments to prepend to those provided to
+ *  the new function.
+ * @returns {Function} Returns the new wrapped function.
+ */
+function createPartial(func, bitmask, thisArg, partials) {
+  var isBind = bitmask & WRAP_BIND_FLAG,
+      Ctor = createCtor(func);
+
+  function wrapper() {
+    var argsIndex = -1,
+        argsLength = arguments.length,
+        leftIndex = -1,
+        leftLength = partials.length,
+        args = Array(leftLength + argsLength),
+        fn = (this && this !== root && this instanceof wrapper) ? Ctor : func;
+
+    while (++leftIndex < leftLength) {
+      args[leftIndex] = partials[leftIndex];
+    }
+    while (argsLength--) {
+      args[leftIndex++] = arguments[++argsIndex];
+    }
+    return apply(fn, isBind ? thisArg : this, args);
+  }
+  return wrapper;
+}
+
+module.exports = createPartial;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createRecurry.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_createRecurry.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isLaziable = __webpack_require__(/*! ./_isLaziable */ "./node_modules/lodash/_isLaziable.js"),
+    setData = __webpack_require__(/*! ./_setData */ "./node_modules/lodash/_setData.js"),
+    setWrapToString = __webpack_require__(/*! ./_setWrapToString */ "./node_modules/lodash/_setWrapToString.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_BIND_FLAG = 1,
+    WRAP_BIND_KEY_FLAG = 2,
+    WRAP_CURRY_BOUND_FLAG = 4,
+    WRAP_CURRY_FLAG = 8,
+    WRAP_PARTIAL_FLAG = 32,
+    WRAP_PARTIAL_RIGHT_FLAG = 64;
+
+/**
+ * Creates a function that wraps `func` to continue currying.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+ * @param {Function} wrapFunc The function to create the `func` wrapper.
+ * @param {*} placeholder The placeholder value.
+ * @param {*} [thisArg] The `this` binding of `func`.
+ * @param {Array} [partials] The arguments to prepend to those provided to
+ *  the new function.
+ * @param {Array} [holders] The `partials` placeholder indexes.
+ * @param {Array} [argPos] The argument positions of the new function.
+ * @param {number} [ary] The arity cap of `func`.
+ * @param {number} [arity] The arity of `func`.
+ * @returns {Function} Returns the new wrapped function.
+ */
+function createRecurry(func, bitmask, wrapFunc, placeholder, thisArg, partials, holders, argPos, ary, arity) {
+  var isCurry = bitmask & WRAP_CURRY_FLAG,
+      newHolders = isCurry ? holders : undefined,
+      newHoldersRight = isCurry ? undefined : holders,
+      newPartials = isCurry ? partials : undefined,
+      newPartialsRight = isCurry ? undefined : partials;
+
+  bitmask |= (isCurry ? WRAP_PARTIAL_FLAG : WRAP_PARTIAL_RIGHT_FLAG);
+  bitmask &= ~(isCurry ? WRAP_PARTIAL_RIGHT_FLAG : WRAP_PARTIAL_FLAG);
+
+  if (!(bitmask & WRAP_CURRY_BOUND_FLAG)) {
+    bitmask &= ~(WRAP_BIND_FLAG | WRAP_BIND_KEY_FLAG);
+  }
+  var newData = [
+    func, bitmask, thisArg, newPartials, newHolders, newPartialsRight,
+    newHoldersRight, argPos, ary, arity
+  ];
+
+  var result = wrapFunc.apply(undefined, newData);
+  if (isLaziable(func)) {
+    setData(result, newData);
+  }
+  result.placeholder = placeholder;
+  return setWrapToString(result, func, bitmask);
+}
+
+module.exports = createRecurry;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createWrap.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_createWrap.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseSetData = __webpack_require__(/*! ./_baseSetData */ "./node_modules/lodash/_baseSetData.js"),
+    createBind = __webpack_require__(/*! ./_createBind */ "./node_modules/lodash/_createBind.js"),
+    createCurry = __webpack_require__(/*! ./_createCurry */ "./node_modules/lodash/_createCurry.js"),
+    createHybrid = __webpack_require__(/*! ./_createHybrid */ "./node_modules/lodash/_createHybrid.js"),
+    createPartial = __webpack_require__(/*! ./_createPartial */ "./node_modules/lodash/_createPartial.js"),
+    getData = __webpack_require__(/*! ./_getData */ "./node_modules/lodash/_getData.js"),
+    mergeData = __webpack_require__(/*! ./_mergeData */ "./node_modules/lodash/_mergeData.js"),
+    setData = __webpack_require__(/*! ./_setData */ "./node_modules/lodash/_setData.js"),
+    setWrapToString = __webpack_require__(/*! ./_setWrapToString */ "./node_modules/lodash/_setWrapToString.js"),
+    toInteger = __webpack_require__(/*! ./toInteger */ "./node_modules/lodash/toInteger.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_BIND_FLAG = 1,
+    WRAP_BIND_KEY_FLAG = 2,
+    WRAP_CURRY_FLAG = 8,
+    WRAP_CURRY_RIGHT_FLAG = 16,
+    WRAP_PARTIAL_FLAG = 32,
+    WRAP_PARTIAL_RIGHT_FLAG = 64;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max;
+
+/**
+ * Creates a function that either curries or invokes `func` with optional
+ * `this` binding and partially applied arguments.
+ *
+ * @private
+ * @param {Function|string} func The function or method name to wrap.
+ * @param {number} bitmask The bitmask flags.
+ *    1 - `_.bind`
+ *    2 - `_.bindKey`
+ *    4 - `_.curry` or `_.curryRight` of a bound function
+ *    8 - `_.curry`
+ *   16 - `_.curryRight`
+ *   32 - `_.partial`
+ *   64 - `_.partialRight`
+ *  128 - `_.rearg`
+ *  256 - `_.ary`
+ *  512 - `_.flip`
+ * @param {*} [thisArg] The `this` binding of `func`.
+ * @param {Array} [partials] The arguments to be partially applied.
+ * @param {Array} [holders] The `partials` placeholder indexes.
+ * @param {Array} [argPos] The argument positions of the new function.
+ * @param {number} [ary] The arity cap of `func`.
+ * @param {number} [arity] The arity of `func`.
+ * @returns {Function} Returns the new wrapped function.
+ */
+function createWrap(func, bitmask, thisArg, partials, holders, argPos, ary, arity) {
+  var isBindKey = bitmask & WRAP_BIND_KEY_FLAG;
+  if (!isBindKey && typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  var length = partials ? partials.length : 0;
+  if (!length) {
+    bitmask &= ~(WRAP_PARTIAL_FLAG | WRAP_PARTIAL_RIGHT_FLAG);
+    partials = holders = undefined;
+  }
+  ary = ary === undefined ? ary : nativeMax(toInteger(ary), 0);
+  arity = arity === undefined ? arity : toInteger(arity);
+  length -= holders ? holders.length : 0;
+
+  if (bitmask & WRAP_PARTIAL_RIGHT_FLAG) {
+    var partialsRight = partials,
+        holdersRight = holders;
+
+    partials = holders = undefined;
+  }
+  var data = isBindKey ? undefined : getData(func);
+
+  var newData = [
+    func, bitmask, thisArg, partials, holders, partialsRight, holdersRight,
+    argPos, ary, arity
+  ];
+
+  if (data) {
+    mergeData(newData, data);
+  }
+  func = newData[0];
+  bitmask = newData[1];
+  thisArg = newData[2];
+  partials = newData[3];
+  holders = newData[4];
+  arity = newData[9] = newData[9] === undefined
+    ? (isBindKey ? 0 : func.length)
+    : nativeMax(newData[9] - length, 0);
+
+  if (!arity && bitmask & (WRAP_CURRY_FLAG | WRAP_CURRY_RIGHT_FLAG)) {
+    bitmask &= ~(WRAP_CURRY_FLAG | WRAP_CURRY_RIGHT_FLAG);
+  }
+  if (!bitmask || bitmask == WRAP_BIND_FLAG) {
+    var result = createBind(func, bitmask, thisArg);
+  } else if (bitmask == WRAP_CURRY_FLAG || bitmask == WRAP_CURRY_RIGHT_FLAG) {
+    result = createCurry(func, bitmask, arity);
+  } else if ((bitmask == WRAP_PARTIAL_FLAG || bitmask == (WRAP_BIND_FLAG | WRAP_PARTIAL_FLAG)) && !holders.length) {
+    result = createPartial(func, bitmask, thisArg, partials);
+  } else {
+    result = createHybrid.apply(undefined, newData);
+  }
+  var setter = data ? baseSetData : setData;
+  return setWrapToString(setter(result, newData), func, bitmask);
+}
+
+module.exports = createWrap;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_defineProperty.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_defineProperty.js ***!
+  \************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js");
+
+var defineProperty = (function() {
+  try {
+    var func = getNative(Object, 'defineProperty');
+    func({}, '', {});
+    return func;
+  } catch (e) {}
+}());
+
+module.exports = defineProperty;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_equalArrays.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_equalArrays.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var SetCache = __webpack_require__(/*! ./_SetCache */ "./node_modules/lodash/_SetCache.js"),
+    arraySome = __webpack_require__(/*! ./_arraySome */ "./node_modules/lodash/_arraySome.js"),
+    cacheHas = __webpack_require__(/*! ./_cacheHas */ "./node_modules/lodash/_cacheHas.js");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/**
+ * A specialized version of `baseIsEqualDeep` for arrays with support for
+ * partial deep comparisons.
+ *
+ * @private
+ * @param {Array} array The array to compare.
+ * @param {Array} other The other array to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `array` and `other` objects.
+ * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
+ */
+function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
+  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
+      arrLength = array.length,
+      othLength = other.length;
+
+  if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
+    return false;
+  }
+  // Check that cyclic values are equal.
+  var arrStacked = stack.get(array);
+  var othStacked = stack.get(other);
+  if (arrStacked && othStacked) {
+    return arrStacked == other && othStacked == array;
+  }
+  var index = -1,
+      result = true,
+      seen = (bitmask & COMPARE_UNORDERED_FLAG) ? new SetCache : undefined;
+
+  stack.set(array, other);
+  stack.set(other, array);
+
+  // Ignore non-index properties.
+  while (++index < arrLength) {
+    var arrValue = array[index],
+        othValue = other[index];
+
+    if (customizer) {
+      var compared = isPartial
+        ? customizer(othValue, arrValue, index, other, array, stack)
+        : customizer(arrValue, othValue, index, array, other, stack);
+    }
+    if (compared !== undefined) {
+      if (compared) {
+        continue;
+      }
+      result = false;
+      break;
+    }
+    // Recursively compare arrays (susceptible to call stack limits).
+    if (seen) {
+      if (!arraySome(other, function(othValue, othIndex) {
+            if (!cacheHas(seen, othIndex) &&
+                (arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
+              return seen.push(othIndex);
+            }
+          })) {
+        result = false;
+        break;
+      }
+    } else if (!(
+          arrValue === othValue ||
+            equalFunc(arrValue, othValue, bitmask, customizer, stack)
+        )) {
+      result = false;
+      break;
+    }
+  }
+  stack['delete'](array);
+  stack['delete'](other);
+  return result;
+}
+
+module.exports = equalArrays;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_equalByTag.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_equalByTag.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    Uint8Array = __webpack_require__(/*! ./_Uint8Array */ "./node_modules/lodash/_Uint8Array.js"),
+    eq = __webpack_require__(/*! ./eq */ "./node_modules/lodash/eq.js"),
+    equalArrays = __webpack_require__(/*! ./_equalArrays */ "./node_modules/lodash/_equalArrays.js"),
+    mapToArray = __webpack_require__(/*! ./_mapToArray */ "./node_modules/lodash/_mapToArray.js"),
+    setToArray = __webpack_require__(/*! ./_setToArray */ "./node_modules/lodash/_setToArray.js");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/** `Object#toString` result references. */
+var boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    symbolTag = '[object Symbol]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]';
+
+/** Used to convert symbols to primitives and strings. */
+var symbolProto = Symbol ? Symbol.prototype : undefined,
+    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
+
+/**
+ * A specialized version of `baseIsEqualDeep` for comparing objects of
+ * the same `toStringTag`.
+ *
+ * **Note:** This function only supports comparing values with tags of
+ * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {string} tag The `toStringTag` of the objects to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
+  switch (tag) {
+    case dataViewTag:
+      if ((object.byteLength != other.byteLength) ||
+          (object.byteOffset != other.byteOffset)) {
+        return false;
+      }
+      object = object.buffer;
+      other = other.buffer;
+
+    case arrayBufferTag:
+      if ((object.byteLength != other.byteLength) ||
+          !equalFunc(new Uint8Array(object), new Uint8Array(other))) {
+        return false;
+      }
+      return true;
+
+    case boolTag:
+    case dateTag:
+    case numberTag:
+      // Coerce booleans to `1` or `0` and dates to milliseconds.
+      // Invalid dates are coerced to `NaN`.
+      return eq(+object, +other);
+
+    case errorTag:
+      return object.name == other.name && object.message == other.message;
+
+    case regexpTag:
+    case stringTag:
+      // Coerce regexes to strings and treat strings, primitives and objects,
+      // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
+      // for more details.
+      return object == (other + '');
+
+    case mapTag:
+      var convert = mapToArray;
+
+    case setTag:
+      var isPartial = bitmask & COMPARE_PARTIAL_FLAG;
+      convert || (convert = setToArray);
+
+      if (object.size != other.size && !isPartial) {
+        return false;
+      }
+      // Assume cyclic values are equal.
+      var stacked = stack.get(object);
+      if (stacked) {
+        return stacked == other;
+      }
+      bitmask |= COMPARE_UNORDERED_FLAG;
+
+      // Recursively compare objects (susceptible to call stack limits).
+      stack.set(object, other);
+      var result = equalArrays(convert(object), convert(other), bitmask, customizer, equalFunc, stack);
+      stack['delete'](object);
+      return result;
+
+    case symbolTag:
+      if (symbolValueOf) {
+        return symbolValueOf.call(object) == symbolValueOf.call(other);
+      }
+  }
+  return false;
+}
+
+module.exports = equalByTag;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_equalObjects.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_equalObjects.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getAllKeys = __webpack_require__(/*! ./_getAllKeys */ "./node_modules/lodash/_getAllKeys.js");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1;
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * A specialized version of `baseIsEqualDeep` for objects with support for
+ * partial deep comparisons.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
+  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
+      objProps = getAllKeys(object),
+      objLength = objProps.length,
+      othProps = getAllKeys(other),
+      othLength = othProps.length;
+
+  if (objLength != othLength && !isPartial) {
+    return false;
+  }
+  var index = objLength;
+  while (index--) {
+    var key = objProps[index];
+    if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
+      return false;
+    }
+  }
+  // Check that cyclic values are equal.
+  var objStacked = stack.get(object);
+  var othStacked = stack.get(other);
+  if (objStacked && othStacked) {
+    return objStacked == other && othStacked == object;
+  }
+  var result = true;
+  stack.set(object, other);
+  stack.set(other, object);
+
+  var skipCtor = isPartial;
+  while (++index < objLength) {
+    key = objProps[index];
+    var objValue = object[key],
+        othValue = other[key];
+
+    if (customizer) {
+      var compared = isPartial
+        ? customizer(othValue, objValue, key, other, object, stack)
+        : customizer(objValue, othValue, key, object, other, stack);
+    }
+    // Recursively compare objects (susceptible to call stack limits).
+    if (!(compared === undefined
+          ? (objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack))
+          : compared
+        )) {
+      result = false;
+      break;
+    }
+    skipCtor || (skipCtor = key == 'constructor');
+  }
+  if (result && !skipCtor) {
+    var objCtor = object.constructor,
+        othCtor = other.constructor;
+
+    // Non `Object` object instances with different constructors are not equal.
+    if (objCtor != othCtor &&
+        ('constructor' in object && 'constructor' in other) &&
+        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
+          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
+      result = false;
+    }
+  }
+  stack['delete'](object);
+  stack['delete'](other);
+  return result;
+}
+
+module.exports = equalObjects;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_flatRest.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_flatRest.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var flatten = __webpack_require__(/*! ./flatten */ "./node_modules/lodash/flatten.js"),
+    overRest = __webpack_require__(/*! ./_overRest */ "./node_modules/lodash/_overRest.js"),
+    setToString = __webpack_require__(/*! ./_setToString */ "./node_modules/lodash/_setToString.js");
+
+/**
+ * A specialized version of `baseRest` which flattens the rest array.
+ *
+ * @private
+ * @param {Function} func The function to apply a rest parameter to.
+ * @returns {Function} Returns the new function.
+ */
+function flatRest(func) {
+  return setToString(overRest(func, undefined, flatten), func + '');
+}
+
+module.exports = flatRest;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_freeGlobal.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_freeGlobal.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof __webpack_require__.g == 'object' && __webpack_require__.g && __webpack_require__.g.Object === Object && __webpack_require__.g;
+
+module.exports = freeGlobal;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getAllKeys.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_getAllKeys.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseGetAllKeys = __webpack_require__(/*! ./_baseGetAllKeys */ "./node_modules/lodash/_baseGetAllKeys.js"),
+    getSymbols = __webpack_require__(/*! ./_getSymbols */ "./node_modules/lodash/_getSymbols.js"),
+    keys = __webpack_require__(/*! ./keys */ "./node_modules/lodash/keys.js");
+
+/**
+ * Creates an array of own enumerable property names and symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+function getAllKeys(object) {
+  return baseGetAllKeys(object, keys, getSymbols);
+}
+
+module.exports = getAllKeys;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getData.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_getData.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var metaMap = __webpack_require__(/*! ./_metaMap */ "./node_modules/lodash/_metaMap.js"),
+    noop = __webpack_require__(/*! ./noop */ "./node_modules/lodash/noop.js");
+
+/**
+ * Gets metadata for `func`.
+ *
+ * @private
+ * @param {Function} func The function to query.
+ * @returns {*} Returns the metadata for `func`.
+ */
+var getData = !metaMap ? noop : function(func) {
+  return metaMap.get(func);
+};
+
+module.exports = getData;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getFuncName.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_getFuncName.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var realNames = __webpack_require__(/*! ./_realNames */ "./node_modules/lodash/_realNames.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Gets the name of `func`.
+ *
+ * @private
+ * @param {Function} func The function to query.
+ * @returns {string} Returns the function name.
+ */
+function getFuncName(func) {
+  var result = (func.name + ''),
+      array = realNames[result],
+      length = hasOwnProperty.call(realNames, result) ? array.length : 0;
+
+  while (length--) {
+    var data = array[length],
+        otherFunc = data.func;
+    if (otherFunc == null || otherFunc == func) {
+      return data.name;
+    }
+  }
+  return result;
+}
+
+module.exports = getFuncName;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getHolder.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_getHolder.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/**
+ * Gets the argument placeholder value for `func`.
+ *
+ * @private
+ * @param {Function} func The function to inspect.
+ * @returns {*} Returns the placeholder value.
+ */
+function getHolder(func) {
+  var object = func;
+  return object.placeholder;
+}
+
+module.exports = getHolder;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getMapData.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_getMapData.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isKeyable = __webpack_require__(/*! ./_isKeyable */ "./node_modules/lodash/_isKeyable.js");
+
+/**
+ * Gets the data for `map`.
+ *
+ * @private
+ * @param {Object} map The map to query.
+ * @param {string} key The reference key.
+ * @returns {*} Returns the map data.
+ */
+function getMapData(map, key) {
+  var data = map.__data__;
+  return isKeyable(key)
+    ? data[typeof key == 'string' ? 'string' : 'hash']
+    : data.map;
+}
+
+module.exports = getMapData;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getMatchData.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_getMatchData.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isStrictComparable = __webpack_require__(/*! ./_isStrictComparable */ "./node_modules/lodash/_isStrictComparable.js"),
+    keys = __webpack_require__(/*! ./keys */ "./node_modules/lodash/keys.js");
+
+/**
+ * Gets the property names, values, and compare flags of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the match data of `object`.
+ */
+function getMatchData(object) {
+  var result = keys(object),
+      length = result.length;
+
+  while (length--) {
+    var key = result[length],
+        value = object[key];
+
+    result[length] = [key, value, isStrictComparable(value)];
+  }
+  return result;
+}
+
+module.exports = getMatchData;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getNative.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_getNative.js ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseIsNative = __webpack_require__(/*! ./_baseIsNative */ "./node_modules/lodash/_baseIsNative.js"),
+    getValue = __webpack_require__(/*! ./_getValue */ "./node_modules/lodash/_getValue.js");
+
+/**
+ * Gets the native function at `key` of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {string} key The key of the method to get.
+ * @returns {*} Returns the function if it's native, else `undefined`.
+ */
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
+}
+
+module.exports = getNative;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getRawTag.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_getRawTag.js ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+
+module.exports = getRawTag;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getSymbols.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_getSymbols.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var arrayFilter = __webpack_require__(/*! ./_arrayFilter */ "./node_modules/lodash/_arrayFilter.js"),
+    stubArray = __webpack_require__(/*! ./stubArray */ "./node_modules/lodash/stubArray.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Built-in value references. */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeGetSymbols = Object.getOwnPropertySymbols;
+
+/**
+ * Creates an array of the own enumerable symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of symbols.
+ */
+var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
+  if (object == null) {
+    return [];
+  }
+  object = Object(object);
+  return arrayFilter(nativeGetSymbols(object), function(symbol) {
+    return propertyIsEnumerable.call(object, symbol);
+  });
+};
+
+module.exports = getSymbols;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getTag.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_getTag.js ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var DataView = __webpack_require__(/*! ./_DataView */ "./node_modules/lodash/_DataView.js"),
+    Map = __webpack_require__(/*! ./_Map */ "./node_modules/lodash/_Map.js"),
+    Promise = __webpack_require__(/*! ./_Promise */ "./node_modules/lodash/_Promise.js"),
+    Set = __webpack_require__(/*! ./_Set */ "./node_modules/lodash/_Set.js"),
+    WeakMap = __webpack_require__(/*! ./_WeakMap */ "./node_modules/lodash/_WeakMap.js"),
+    baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    toSource = __webpack_require__(/*! ./_toSource */ "./node_modules/lodash/_toSource.js");
+
+/** `Object#toString` result references. */
+var mapTag = '[object Map]',
+    objectTag = '[object Object]',
+    promiseTag = '[object Promise]',
+    setTag = '[object Set]',
+    weakMapTag = '[object WeakMap]';
+
+var dataViewTag = '[object DataView]';
+
+/** Used to detect maps, sets, and weakmaps. */
+var dataViewCtorString = toSource(DataView),
+    mapCtorString = toSource(Map),
+    promiseCtorString = toSource(Promise),
+    setCtorString = toSource(Set),
+    weakMapCtorString = toSource(WeakMap);
+
+/**
+ * Gets the `toStringTag` of `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+var getTag = baseGetTag;
+
+// Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
+if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
+    (Map && getTag(new Map) != mapTag) ||
+    (Promise && getTag(Promise.resolve()) != promiseTag) ||
+    (Set && getTag(new Set) != setTag) ||
+    (WeakMap && getTag(new WeakMap) != weakMapTag)) {
+  getTag = function(value) {
+    var result = baseGetTag(value),
+        Ctor = result == objectTag ? value.constructor : undefined,
+        ctorString = Ctor ? toSource(Ctor) : '';
+
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString: return dataViewTag;
+        case mapCtorString: return mapTag;
+        case promiseCtorString: return promiseTag;
+        case setCtorString: return setTag;
+        case weakMapCtorString: return weakMapTag;
+      }
+    }
+    return result;
+  };
+}
+
+module.exports = getTag;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getValue.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_getValue.js ***!
+  \******************************************/
+/***/ ((module) => {
+
+/**
+ * Gets the value at `key` of `object`.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {string} key The key of the property to get.
+ * @returns {*} Returns the property value.
+ */
+function getValue(object, key) {
+  return object == null ? undefined : object[key];
+}
+
+module.exports = getValue;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getWrapDetails.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_getWrapDetails.js ***!
+  \************************************************/
+/***/ ((module) => {
+
+/** Used to match wrap detail comments. */
+var reWrapDetails = /\{\n\/\* \[wrapped with (.+)\] \*/,
+    reSplitDetails = /,? & /;
+
+/**
+ * Extracts wrapper details from the `source` body comment.
+ *
+ * @private
+ * @param {string} source The source to inspect.
+ * @returns {Array} Returns the wrapper details.
+ */
+function getWrapDetails(source) {
+  var match = source.match(reWrapDetails);
+  return match ? match[1].split(reSplitDetails) : [];
+}
+
+module.exports = getWrapDetails;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hasPath.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hasPath.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var castPath = __webpack_require__(/*! ./_castPath */ "./node_modules/lodash/_castPath.js"),
+    isArguments = __webpack_require__(/*! ./isArguments */ "./node_modules/lodash/isArguments.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isIndex = __webpack_require__(/*! ./_isIndex */ "./node_modules/lodash/_isIndex.js"),
+    isLength = __webpack_require__(/*! ./isLength */ "./node_modules/lodash/isLength.js"),
+    toKey = __webpack_require__(/*! ./_toKey */ "./node_modules/lodash/_toKey.js");
+
+/**
+ * Checks if `path` exists on `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path to check.
+ * @param {Function} hasFunc The function to check properties.
+ * @returns {boolean} Returns `true` if `path` exists, else `false`.
+ */
+function hasPath(object, path, hasFunc) {
+  path = castPath(path, object);
+
+  var index = -1,
+      length = path.length,
+      result = false;
+
+  while (++index < length) {
+    var key = toKey(path[index]);
+    if (!(result = object != null && hasFunc(object, key))) {
+      break;
+    }
+    object = object[key];
+  }
+  if (result || ++index != length) {
+    return result;
+  }
+  length = object == null ? 0 : object.length;
+  return !!length && isLength(length) && isIndex(key, length) &&
+    (isArray(object) || isArguments(object));
+}
+
+module.exports = hasPath;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hashClear.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_hashClear.js ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "./node_modules/lodash/_nativeCreate.js");
+
+/**
+ * Removes all key-value entries from the hash.
+ *
+ * @private
+ * @name clear
+ * @memberOf Hash
+ */
+function hashClear() {
+  this.__data__ = nativeCreate ? nativeCreate(null) : {};
+  this.size = 0;
+}
+
+module.exports = hashClear;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hashDelete.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_hashDelete.js ***!
+  \********************************************/
+/***/ ((module) => {
+
+/**
+ * Removes `key` and its value from the hash.
+ *
+ * @private
+ * @name delete
+ * @memberOf Hash
+ * @param {Object} hash The hash to modify.
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function hashDelete(key) {
+  var result = this.has(key) && delete this.__data__[key];
+  this.size -= result ? 1 : 0;
+  return result;
+}
+
+module.exports = hashDelete;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hashGet.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hashGet.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "./node_modules/lodash/_nativeCreate.js");
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Gets the hash value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Hash
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function hashGet(key) {
+  var data = this.__data__;
+  if (nativeCreate) {
+    var result = data[key];
+    return result === HASH_UNDEFINED ? undefined : result;
+  }
+  return hasOwnProperty.call(data, key) ? data[key] : undefined;
+}
+
+module.exports = hashGet;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hashHas.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hashHas.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "./node_modules/lodash/_nativeCreate.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Checks if a hash value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Hash
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function hashHas(key) {
+  var data = this.__data__;
+  return nativeCreate ? (data[key] !== undefined) : hasOwnProperty.call(data, key);
+}
+
+module.exports = hashHas;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hashSet.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hashSet.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "./node_modules/lodash/_nativeCreate.js");
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/**
+ * Sets the hash `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Hash
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the hash instance.
+ */
+function hashSet(key, value) {
+  var data = this.__data__;
+  this.size += this.has(key) ? 0 : 1;
+  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
+  return this;
+}
+
+module.exports = hashSet;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_insertWrapDetails.js":
+/*!***************************************************!*\
+  !*** ./node_modules/lodash/_insertWrapDetails.js ***!
+  \***************************************************/
+/***/ ((module) => {
+
+/** Used to match wrap detail comments. */
+var reWrapComment = /\{(?:\n\/\* \[wrapped with .+\] \*\/)?\n?/;
+
+/**
+ * Inserts wrapper `details` in a comment at the top of the `source` body.
+ *
+ * @private
+ * @param {string} source The source to modify.
+ * @returns {Array} details The details to insert.
+ * @returns {string} Returns the modified source.
+ */
+function insertWrapDetails(source, details) {
+  var length = details.length;
+  if (!length) {
+    return source;
+  }
+  var lastIndex = length - 1;
+  details[lastIndex] = (length > 1 ? '& ' : '') + details[lastIndex];
+  details = details.join(length > 2 ? ', ' : ' ');
+  return source.replace(reWrapComment, '{\n/* [wrapped with ' + details + '] */\n');
+}
+
+module.exports = insertWrapDetails;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isFlattenable.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_isFlattenable.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    isArguments = __webpack_require__(/*! ./isArguments */ "./node_modules/lodash/isArguments.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js");
+
+/** Built-in value references. */
+var spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
+
+/**
+ * Checks if `value` is a flattenable `arguments` object or array.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
+ */
+function isFlattenable(value) {
+  return isArray(value) || isArguments(value) ||
+    !!(spreadableSymbol && value && value[spreadableSymbol]);
+}
+
+module.exports = isFlattenable;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isIndex.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_isIndex.js ***!
+  \*****************************************/
+/***/ ((module) => {
+
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER = 9007199254740991;
+
+/** Used to detect unsigned integer values. */
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+
+/**
+ * Checks if `value` is a valid array-like index.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+ * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+ */
+function isIndex(value, length) {
+  var type = typeof value;
+  length = length == null ? MAX_SAFE_INTEGER : length;
+
+  return !!length &&
+    (type == 'number' ||
+      (type != 'symbol' && reIsUint.test(value))) &&
+        (value > -1 && value % 1 == 0 && value < length);
+}
+
+module.exports = isIndex;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isKey.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_isKey.js ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
+
+/** Used to match property names within property paths. */
+var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
+    reIsPlainProp = /^\w*$/;
+
+/**
+ * Checks if `value` is a property name and not a property path.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {Object} [object] The object to query keys on.
+ * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
+ */
+function isKey(value, object) {
+  if (isArray(value)) {
+    return false;
+  }
+  var type = typeof value;
+  if (type == 'number' || type == 'symbol' || type == 'boolean' ||
+      value == null || isSymbol(value)) {
+    return true;
+  }
+  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) ||
+    (object != null && value in Object(object));
+}
+
+module.exports = isKey;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isKeyable.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_isKeyable.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/**
+ * Checks if `value` is suitable for use as unique object key.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
+ */
+function isKeyable(value) {
+  var type = typeof value;
+  return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
+    ? (value !== '__proto__')
+    : (value === null);
+}
+
+module.exports = isKeyable;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isLaziable.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_isLaziable.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var LazyWrapper = __webpack_require__(/*! ./_LazyWrapper */ "./node_modules/lodash/_LazyWrapper.js"),
+    getData = __webpack_require__(/*! ./_getData */ "./node_modules/lodash/_getData.js"),
+    getFuncName = __webpack_require__(/*! ./_getFuncName */ "./node_modules/lodash/_getFuncName.js"),
+    lodash = __webpack_require__(/*! ./wrapperLodash */ "./node_modules/lodash/wrapperLodash.js");
+
+/**
+ * Checks if `func` has a lazy counterpart.
+ *
+ * @private
+ * @param {Function} func The function to check.
+ * @returns {boolean} Returns `true` if `func` has a lazy counterpart,
+ *  else `false`.
+ */
+function isLaziable(func) {
+  var funcName = getFuncName(func),
+      other = lodash[funcName];
+
+  if (typeof other != 'function' || !(funcName in LazyWrapper.prototype)) {
+    return false;
+  }
+  if (func === other) {
+    return true;
+  }
+  var data = getData(other);
+  return !!data && func === data[0];
+}
+
+module.exports = isLaziable;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isMasked.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_isMasked.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var coreJsData = __webpack_require__(/*! ./_coreJsData */ "./node_modules/lodash/_coreJsData.js");
+
+/** Used to detect methods masquerading as native. */
+var maskSrcKey = (function() {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+  return uid ? ('Symbol(src)_1.' + uid) : '';
+}());
+
+/**
+ * Checks if `func` has its source masked.
+ *
+ * @private
+ * @param {Function} func The function to check.
+ * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+ */
+function isMasked(func) {
+  return !!maskSrcKey && (maskSrcKey in func);
+}
+
+module.exports = isMasked;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isPrototype.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_isPrototype.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Checks if `value` is likely a prototype object.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+ */
+function isPrototype(value) {
+  var Ctor = value && value.constructor,
+      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
+
+  return value === proto;
+}
+
+module.exports = isPrototype;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isStrictComparable.js":
+/*!****************************************************!*\
+  !*** ./node_modules/lodash/_isStrictComparable.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
+
+/**
+ * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` if suitable for strict
+ *  equality comparisons, else `false`.
+ */
+function isStrictComparable(value) {
+  return value === value && !isObject(value);
+}
+
+module.exports = isStrictComparable;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_listCacheClear.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_listCacheClear.js ***!
+  \************************************************/
+/***/ ((module) => {
+
+/**
+ * Removes all key-value entries from the list cache.
+ *
+ * @private
+ * @name clear
+ * @memberOf ListCache
+ */
+function listCacheClear() {
+  this.__data__ = [];
+  this.size = 0;
+}
+
+module.exports = listCacheClear;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_listCacheDelete.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_listCacheDelete.js ***!
+  \*************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "./node_modules/lodash/_assocIndexOf.js");
+
+/** Used for built-in method references. */
+var arrayProto = Array.prototype;
+
+/** Built-in value references. */
+var splice = arrayProto.splice;
+
+/**
+ * Removes `key` and its value from the list cache.
+ *
+ * @private
+ * @name delete
+ * @memberOf ListCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function listCacheDelete(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    return false;
+  }
+  var lastIndex = data.length - 1;
+  if (index == lastIndex) {
+    data.pop();
+  } else {
+    splice.call(data, index, 1);
+  }
+  --this.size;
+  return true;
+}
+
+module.exports = listCacheDelete;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_listCacheGet.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_listCacheGet.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "./node_modules/lodash/_assocIndexOf.js");
+
+/**
+ * Gets the list cache value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf ListCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function listCacheGet(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  return index < 0 ? undefined : data[index][1];
+}
+
+module.exports = listCacheGet;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_listCacheHas.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_listCacheHas.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "./node_modules/lodash/_assocIndexOf.js");
+
+/**
+ * Checks if a list cache value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf ListCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function listCacheHas(key) {
+  return assocIndexOf(this.__data__, key) > -1;
+}
+
+module.exports = listCacheHas;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_listCacheSet.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_listCacheSet.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "./node_modules/lodash/_assocIndexOf.js");
+
+/**
+ * Sets the list cache `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf ListCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the list cache instance.
+ */
+function listCacheSet(key, value) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    ++this.size;
+    data.push([key, value]);
+  } else {
+    data[index][1] = value;
+  }
+  return this;
+}
+
+module.exports = listCacheSet;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapCacheClear.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheClear.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Hash = __webpack_require__(/*! ./_Hash */ "./node_modules/lodash/_Hash.js"),
+    ListCache = __webpack_require__(/*! ./_ListCache */ "./node_modules/lodash/_ListCache.js"),
+    Map = __webpack_require__(/*! ./_Map */ "./node_modules/lodash/_Map.js");
+
+/**
+ * Removes all key-value entries from the map.
+ *
+ * @private
+ * @name clear
+ * @memberOf MapCache
+ */
+function mapCacheClear() {
+  this.size = 0;
+  this.__data__ = {
+    'hash': new Hash,
+    'map': new (Map || ListCache),
+    'string': new Hash
+  };
+}
+
+module.exports = mapCacheClear;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapCacheDelete.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_mapCacheDelete.js ***!
+  \************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "./node_modules/lodash/_getMapData.js");
+
+/**
+ * Removes `key` and its value from the map.
+ *
+ * @private
+ * @name delete
+ * @memberOf MapCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function mapCacheDelete(key) {
+  var result = getMapData(this, key)['delete'](key);
+  this.size -= result ? 1 : 0;
+  return result;
+}
+
+module.exports = mapCacheDelete;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapCacheGet.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheGet.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "./node_modules/lodash/_getMapData.js");
+
+/**
+ * Gets the map value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf MapCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function mapCacheGet(key) {
+  return getMapData(this, key).get(key);
+}
+
+module.exports = mapCacheGet;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapCacheHas.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheHas.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "./node_modules/lodash/_getMapData.js");
+
+/**
+ * Checks if a map value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf MapCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function mapCacheHas(key) {
+  return getMapData(this, key).has(key);
+}
+
+module.exports = mapCacheHas;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapCacheSet.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheSet.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "./node_modules/lodash/_getMapData.js");
+
+/**
+ * Sets the map `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf MapCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the map cache instance.
+ */
+function mapCacheSet(key, value) {
+  var data = getMapData(this, key),
+      size = data.size;
+
+  data.set(key, value);
+  this.size += data.size == size ? 0 : 1;
+  return this;
+}
+
+module.exports = mapCacheSet;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapToArray.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_mapToArray.js ***!
+  \********************************************/
+/***/ ((module) => {
+
+/**
+ * Converts `map` to its key-value pairs.
+ *
+ * @private
+ * @param {Object} map The map to convert.
+ * @returns {Array} Returns the key-value pairs.
+ */
+function mapToArray(map) {
+  var index = -1,
+      result = Array(map.size);
+
+  map.forEach(function(value, key) {
+    result[++index] = [key, value];
+  });
+  return result;
+}
+
+module.exports = mapToArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_matchesStrictComparable.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/lodash/_matchesStrictComparable.js ***!
+  \*********************************************************/
+/***/ ((module) => {
+
+/**
+ * A specialized version of `matchesProperty` for source values suitable
+ * for strict equality comparisons, i.e. `===`.
+ *
+ * @private
+ * @param {string} key The key of the property to get.
+ * @param {*} srcValue The value to match.
+ * @returns {Function} Returns the new spec function.
+ */
+function matchesStrictComparable(key, srcValue) {
+  return function(object) {
+    if (object == null) {
+      return false;
+    }
+    return object[key] === srcValue &&
+      (srcValue !== undefined || (key in Object(object)));
+  };
+}
+
+module.exports = matchesStrictComparable;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_memoizeCapped.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_memoizeCapped.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var memoize = __webpack_require__(/*! ./memoize */ "./node_modules/lodash/memoize.js");
+
+/** Used as the maximum memoize cache size. */
+var MAX_MEMOIZE_SIZE = 500;
+
+/**
+ * A specialized version of `_.memoize` which clears the memoized function's
+ * cache when it exceeds `MAX_MEMOIZE_SIZE`.
+ *
+ * @private
+ * @param {Function} func The function to have its output memoized.
+ * @returns {Function} Returns the new memoized function.
+ */
+function memoizeCapped(func) {
+  var result = memoize(func, function(key) {
+    if (cache.size === MAX_MEMOIZE_SIZE) {
+      cache.clear();
+    }
+    return key;
+  });
+
+  var cache = result.cache;
+  return result;
+}
+
+module.exports = memoizeCapped;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mergeData.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_mergeData.js ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var composeArgs = __webpack_require__(/*! ./_composeArgs */ "./node_modules/lodash/_composeArgs.js"),
+    composeArgsRight = __webpack_require__(/*! ./_composeArgsRight */ "./node_modules/lodash/_composeArgsRight.js"),
+    replaceHolders = __webpack_require__(/*! ./_replaceHolders */ "./node_modules/lodash/_replaceHolders.js");
+
+/** Used as the internal argument placeholder. */
+var PLACEHOLDER = '__lodash_placeholder__';
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_BIND_FLAG = 1,
+    WRAP_BIND_KEY_FLAG = 2,
+    WRAP_CURRY_BOUND_FLAG = 4,
+    WRAP_CURRY_FLAG = 8,
+    WRAP_ARY_FLAG = 128,
+    WRAP_REARG_FLAG = 256;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMin = Math.min;
+
+/**
+ * Merges the function metadata of `source` into `data`.
+ *
+ * Merging metadata reduces the number of wrappers used to invoke a function.
+ * This is possible because methods like `_.bind`, `_.curry`, and `_.partial`
+ * may be applied regardless of execution order. Methods like `_.ary` and
+ * `_.rearg` modify function arguments, making the order in which they are
+ * executed important, preventing the merging of metadata. However, we make
+ * an exception for a safe combined case where curried functions have `_.ary`
+ * and or `_.rearg` applied.
+ *
+ * @private
+ * @param {Array} data The destination metadata.
+ * @param {Array} source The source metadata.
+ * @returns {Array} Returns `data`.
+ */
+function mergeData(data, source) {
+  var bitmask = data[1],
+      srcBitmask = source[1],
+      newBitmask = bitmask | srcBitmask,
+      isCommon = newBitmask < (WRAP_BIND_FLAG | WRAP_BIND_KEY_FLAG | WRAP_ARY_FLAG);
+
+  var isCombo =
+    ((srcBitmask == WRAP_ARY_FLAG) && (bitmask == WRAP_CURRY_FLAG)) ||
+    ((srcBitmask == WRAP_ARY_FLAG) && (bitmask == WRAP_REARG_FLAG) && (data[7].length <= source[8])) ||
+    ((srcBitmask == (WRAP_ARY_FLAG | WRAP_REARG_FLAG)) && (source[7].length <= source[8]) && (bitmask == WRAP_CURRY_FLAG));
+
+  // Exit early if metadata can't be merged.
+  if (!(isCommon || isCombo)) {
+    return data;
+  }
+  // Use source `thisArg` if available.
+  if (srcBitmask & WRAP_BIND_FLAG) {
+    data[2] = source[2];
+    // Set when currying a bound function.
+    newBitmask |= bitmask & WRAP_BIND_FLAG ? 0 : WRAP_CURRY_BOUND_FLAG;
+  }
+  // Compose partial arguments.
+  var value = source[3];
+  if (value) {
+    var partials = data[3];
+    data[3] = partials ? composeArgs(partials, value, source[4]) : value;
+    data[4] = partials ? replaceHolders(data[3], PLACEHOLDER) : source[4];
+  }
+  // Compose partial right arguments.
+  value = source[5];
+  if (value) {
+    partials = data[5];
+    data[5] = partials ? composeArgsRight(partials, value, source[6]) : value;
+    data[6] = partials ? replaceHolders(data[5], PLACEHOLDER) : source[6];
+  }
+  // Use source `argPos` if available.
+  value = source[7];
+  if (value) {
+    data[7] = value;
+  }
+  // Use source `ary` if it's smaller.
+  if (srcBitmask & WRAP_ARY_FLAG) {
+    data[8] = data[8] == null ? source[8] : nativeMin(data[8], source[8]);
+  }
+  // Use source `arity` if one is not provided.
+  if (data[9] == null) {
+    data[9] = source[9];
+  }
+  // Use source `func` and merge bitmasks.
+  data[0] = source[0];
+  data[1] = newBitmask;
+
+  return data;
+}
+
+module.exports = mergeData;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_metaMap.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_metaMap.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var WeakMap = __webpack_require__(/*! ./_WeakMap */ "./node_modules/lodash/_WeakMap.js");
+
+/** Used to store function metadata. */
+var metaMap = WeakMap && new WeakMap;
+
+module.exports = metaMap;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_nativeCreate.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_nativeCreate.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js");
+
+/* Built-in method references that are verified to be native. */
+var nativeCreate = getNative(Object, 'create');
+
+module.exports = nativeCreate;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_nativeKeys.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_nativeKeys.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var overArg = __webpack_require__(/*! ./_overArg */ "./node_modules/lodash/_overArg.js");
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeKeys = overArg(Object.keys, Object);
+
+module.exports = nativeKeys;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_nodeUtil.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_nodeUtil.js ***!
+  \******************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+/* module decorator */ module = __webpack_require__.nmd(module);
+var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "./node_modules/lodash/_freeGlobal.js");
+
+/** Detect free variable `exports`. */
+var freeExports =  true && exports && !exports.nodeType && exports;
+
+/** Detect free variable `module`. */
+var freeModule = freeExports && "object" == 'object' && module && !module.nodeType && module;
+
+/** Detect the popular CommonJS extension `module.exports`. */
+var moduleExports = freeModule && freeModule.exports === freeExports;
+
+/** Detect free variable `process` from Node.js. */
+var freeProcess = moduleExports && freeGlobal.process;
+
+/** Used to access faster Node.js helpers. */
+var nodeUtil = (function() {
+  try {
+    // Use `util.types` for Node.js 10+.
+    var types = freeModule && freeModule.require && freeModule.require('util').types;
+
+    if (types) {
+      return types;
+    }
+
+    // Legacy `process.binding('util')` for Node.js < 10.
+    return freeProcess && freeProcess.binding && freeProcess.binding('util');
+  } catch (e) {}
+}());
+
+module.exports = nodeUtil;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_objectToString.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_objectToString.js ***!
+  \************************************************/
+/***/ ((module) => {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+module.exports = objectToString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_overArg.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_overArg.js ***!
+  \*****************************************/
+/***/ ((module) => {
+
+/**
+ * Creates a unary function that invokes `func` with its argument transformed.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {Function} transform The argument transform.
+ * @returns {Function} Returns the new function.
+ */
+function overArg(func, transform) {
+  return function(arg) {
+    return func(transform(arg));
+  };
+}
+
+module.exports = overArg;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_overRest.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_overRest.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var apply = __webpack_require__(/*! ./_apply */ "./node_modules/lodash/_apply.js");
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max;
+
+/**
+ * A specialized version of `baseRest` which transforms the rest array.
+ *
+ * @private
+ * @param {Function} func The function to apply a rest parameter to.
+ * @param {number} [start=func.length-1] The start position of the rest parameter.
+ * @param {Function} transform The rest array transform.
+ * @returns {Function} Returns the new function.
+ */
+function overRest(func, start, transform) {
+  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
+  return function() {
+    var args = arguments,
+        index = -1,
+        length = nativeMax(args.length - start, 0),
+        array = Array(length);
+
+    while (++index < length) {
+      array[index] = args[start + index];
+    }
+    index = -1;
+    var otherArgs = Array(start + 1);
+    while (++index < start) {
+      otherArgs[index] = args[index];
+    }
+    otherArgs[start] = transform(array);
+    return apply(func, this, otherArgs);
+  };
+}
+
+module.exports = overRest;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_realNames.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_realNames.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/** Used to lookup unminified function names. */
+var realNames = {};
+
+module.exports = realNames;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_reorder.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_reorder.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var copyArray = __webpack_require__(/*! ./_copyArray */ "./node_modules/lodash/_copyArray.js"),
+    isIndex = __webpack_require__(/*! ./_isIndex */ "./node_modules/lodash/_isIndex.js");
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMin = Math.min;
+
+/**
+ * Reorder `array` according to the specified indexes where the element at
+ * the first index is assigned as the first element, the element at
+ * the second index is assigned as the second element, and so on.
+ *
+ * @private
+ * @param {Array} array The array to reorder.
+ * @param {Array} indexes The arranged array indexes.
+ * @returns {Array} Returns `array`.
+ */
+function reorder(array, indexes) {
+  var arrLength = array.length,
+      length = nativeMin(indexes.length, arrLength),
+      oldArray = copyArray(array);
+
+  while (length--) {
+    var index = indexes[length];
+    array[length] = isIndex(index, arrLength) ? oldArray[index] : undefined;
+  }
+  return array;
+}
+
+module.exports = reorder;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_replaceHolders.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_replaceHolders.js ***!
+  \************************************************/
+/***/ ((module) => {
+
+/** Used as the internal argument placeholder. */
+var PLACEHOLDER = '__lodash_placeholder__';
+
+/**
+ * Replaces all `placeholder` elements in `array` with an internal placeholder
+ * and returns an array of their indexes.
+ *
+ * @private
+ * @param {Array} array The array to modify.
+ * @param {*} placeholder The placeholder to replace.
+ * @returns {Array} Returns the new array of placeholder indexes.
+ */
+function replaceHolders(array, placeholder) {
+  var index = -1,
+      length = array.length,
+      resIndex = 0,
+      result = [];
+
+  while (++index < length) {
+    var value = array[index];
+    if (value === placeholder || value === PLACEHOLDER) {
+      array[index] = PLACEHOLDER;
+      result[resIndex++] = index;
+    }
+  }
+  return result;
+}
+
+module.exports = replaceHolders;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_root.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/_root.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "./node_modules/lodash/_freeGlobal.js");
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setCacheAdd.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_setCacheAdd.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/**
+ * Adds `value` to the array cache.
+ *
+ * @private
+ * @name add
+ * @memberOf SetCache
+ * @alias push
+ * @param {*} value The value to cache.
+ * @returns {Object} Returns the cache instance.
+ */
+function setCacheAdd(value) {
+  this.__data__.set(value, HASH_UNDEFINED);
+  return this;
+}
+
+module.exports = setCacheAdd;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setCacheHas.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_setCacheHas.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+/**
+ * Checks if `value` is in the array cache.
+ *
+ * @private
+ * @name has
+ * @memberOf SetCache
+ * @param {*} value The value to search for.
+ * @returns {number} Returns `true` if `value` is found, else `false`.
+ */
+function setCacheHas(value) {
+  return this.__data__.has(value);
+}
+
+module.exports = setCacheHas;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setData.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_setData.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseSetData = __webpack_require__(/*! ./_baseSetData */ "./node_modules/lodash/_baseSetData.js"),
+    shortOut = __webpack_require__(/*! ./_shortOut */ "./node_modules/lodash/_shortOut.js");
+
+/**
+ * Sets metadata for `func`.
+ *
+ * **Note:** If this function becomes hot, i.e. is invoked a lot in a short
+ * period of time, it will trip its breaker and transition to an identity
+ * function to avoid garbage collection pauses in V8. See
+ * [V8 issue 2070](https://bugs.chromium.org/p/v8/issues/detail?id=2070)
+ * for more details.
+ *
+ * @private
+ * @param {Function} func The function to associate metadata with.
+ * @param {*} data The metadata.
+ * @returns {Function} Returns `func`.
+ */
+var setData = shortOut(baseSetData);
+
+module.exports = setData;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setToArray.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_setToArray.js ***!
+  \********************************************/
+/***/ ((module) => {
+
+/**
+ * Converts `set` to an array of its values.
+ *
+ * @private
+ * @param {Object} set The set to convert.
+ * @returns {Array} Returns the values.
+ */
+function setToArray(set) {
+  var index = -1,
+      result = Array(set.size);
+
+  set.forEach(function(value) {
+    result[++index] = value;
+  });
+  return result;
+}
+
+module.exports = setToArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setToString.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_setToString.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseSetToString = __webpack_require__(/*! ./_baseSetToString */ "./node_modules/lodash/_baseSetToString.js"),
+    shortOut = __webpack_require__(/*! ./_shortOut */ "./node_modules/lodash/_shortOut.js");
+
+/**
+ * Sets the `toString` method of `func` to return `string`.
+ *
+ * @private
+ * @param {Function} func The function to modify.
+ * @param {Function} string The `toString` result.
+ * @returns {Function} Returns `func`.
+ */
+var setToString = shortOut(baseSetToString);
+
+module.exports = setToString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setWrapToString.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_setWrapToString.js ***!
+  \*************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getWrapDetails = __webpack_require__(/*! ./_getWrapDetails */ "./node_modules/lodash/_getWrapDetails.js"),
+    insertWrapDetails = __webpack_require__(/*! ./_insertWrapDetails */ "./node_modules/lodash/_insertWrapDetails.js"),
+    setToString = __webpack_require__(/*! ./_setToString */ "./node_modules/lodash/_setToString.js"),
+    updateWrapDetails = __webpack_require__(/*! ./_updateWrapDetails */ "./node_modules/lodash/_updateWrapDetails.js");
+
+/**
+ * Sets the `toString` method of `wrapper` to mimic the source of `reference`
+ * with wrapper details in a comment at the top of the source body.
+ *
+ * @private
+ * @param {Function} wrapper The function to modify.
+ * @param {Function} reference The reference function.
+ * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+ * @returns {Function} Returns `wrapper`.
+ */
+function setWrapToString(wrapper, reference, bitmask) {
+  var source = (reference + '');
+  return setToString(wrapper, insertWrapDetails(source, updateWrapDetails(getWrapDetails(source), bitmask)));
+}
+
+module.exports = setWrapToString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_shortOut.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_shortOut.js ***!
+  \******************************************/
+/***/ ((module) => {
+
+/** Used to detect hot functions by number of calls within a span of milliseconds. */
+var HOT_COUNT = 800,
+    HOT_SPAN = 16;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeNow = Date.now;
+
+/**
+ * Creates a function that'll short out and invoke `identity` instead
+ * of `func` when it's called `HOT_COUNT` or more times in `HOT_SPAN`
+ * milliseconds.
+ *
+ * @private
+ * @param {Function} func The function to restrict.
+ * @returns {Function} Returns the new shortable function.
+ */
+function shortOut(func) {
+  var count = 0,
+      lastCalled = 0;
+
+  return function() {
+    var stamp = nativeNow(),
+        remaining = HOT_SPAN - (stamp - lastCalled);
+
+    lastCalled = stamp;
+    if (remaining > 0) {
+      if (++count >= HOT_COUNT) {
+        return arguments[0];
+      }
+    } else {
+      count = 0;
+    }
+    return func.apply(undefined, arguments);
+  };
+}
+
+module.exports = shortOut;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stackClear.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_stackClear.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var ListCache = __webpack_require__(/*! ./_ListCache */ "./node_modules/lodash/_ListCache.js");
+
+/**
+ * Removes all key-value entries from the stack.
+ *
+ * @private
+ * @name clear
+ * @memberOf Stack
+ */
+function stackClear() {
+  this.__data__ = new ListCache;
+  this.size = 0;
+}
+
+module.exports = stackClear;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stackDelete.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_stackDelete.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+/**
+ * Removes `key` and its value from the stack.
+ *
+ * @private
+ * @name delete
+ * @memberOf Stack
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function stackDelete(key) {
+  var data = this.__data__,
+      result = data['delete'](key);
+
+  this.size = data.size;
+  return result;
+}
+
+module.exports = stackDelete;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stackGet.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_stackGet.js ***!
+  \******************************************/
+/***/ ((module) => {
+
+/**
+ * Gets the stack value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Stack
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function stackGet(key) {
+  return this.__data__.get(key);
+}
+
+module.exports = stackGet;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stackHas.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_stackHas.js ***!
+  \******************************************/
+/***/ ((module) => {
+
+/**
+ * Checks if a stack value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Stack
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function stackHas(key) {
+  return this.__data__.has(key);
+}
+
+module.exports = stackHas;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stackSet.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_stackSet.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var ListCache = __webpack_require__(/*! ./_ListCache */ "./node_modules/lodash/_ListCache.js"),
+    Map = __webpack_require__(/*! ./_Map */ "./node_modules/lodash/_Map.js"),
+    MapCache = __webpack_require__(/*! ./_MapCache */ "./node_modules/lodash/_MapCache.js");
+
+/** Used as the size to enable large array optimizations. */
+var LARGE_ARRAY_SIZE = 200;
+
+/**
+ * Sets the stack `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Stack
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the stack cache instance.
+ */
+function stackSet(key, value) {
+  var data = this.__data__;
+  if (data instanceof ListCache) {
+    var pairs = data.__data__;
+    if (!Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
+      pairs.push([key, value]);
+      this.size = ++data.size;
+      return this;
+    }
+    data = this.__data__ = new MapCache(pairs);
+  }
+  data.set(key, value);
+  this.size = data.size;
+  return this;
+}
+
+module.exports = stackSet;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_strictIndexOf.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_strictIndexOf.js ***!
+  \***********************************************/
+/***/ ((module) => {
+
+/**
+ * A specialized version of `_.indexOf` which performs strict equality
+ * comparisons of values, i.e. `===`.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} value The value to search for.
+ * @param {number} fromIndex The index to search from.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function strictIndexOf(array, value, fromIndex) {
+  var index = fromIndex - 1,
+      length = array.length;
+
+  while (++index < length) {
+    if (array[index] === value) {
+      return index;
+    }
+  }
+  return -1;
+}
+
+module.exports = strictIndexOf;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stringToPath.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_stringToPath.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var memoizeCapped = __webpack_require__(/*! ./_memoizeCapped */ "./node_modules/lodash/_memoizeCapped.js");
+
+/** Used to match property names within property paths. */
+var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+
+/** Used to match backslashes in property paths. */
+var reEscapeChar = /\\(\\)?/g;
+
+/**
+ * Converts `string` to a property path array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the property path array.
+ */
+var stringToPath = memoizeCapped(function(string) {
+  var result = [];
+  if (string.charCodeAt(0) === 46 /* . */) {
+    result.push('');
+  }
+  string.replace(rePropName, function(match, number, quote, subString) {
+    result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
+  });
+  return result;
+});
+
+module.exports = stringToPath;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_toKey.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_toKey.js ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
+
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0;
+
+/**
+ * Converts `value` to a string key if it's not a string or symbol.
+ *
+ * @private
+ * @param {*} value The value to inspect.
+ * @returns {string|symbol} Returns the key.
+ */
+function toKey(value) {
+  if (typeof value == 'string' || isSymbol(value)) {
+    return value;
+  }
+  var result = (value + '');
+  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+}
+
+module.exports = toKey;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_toSource.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_toSource.js ***!
+  \******************************************/
+/***/ ((module) => {
+
+/** Used for built-in method references. */
+var funcProto = Function.prototype;
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/**
+ * Converts `func` to its source code.
+ *
+ * @private
+ * @param {Function} func The function to convert.
+ * @returns {string} Returns the source code.
+ */
+function toSource(func) {
+  if (func != null) {
+    try {
+      return funcToString.call(func);
+    } catch (e) {}
+    try {
+      return (func + '');
+    } catch (e) {}
+  }
+  return '';
+}
+
+module.exports = toSource;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_trimmedEndIndex.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_trimmedEndIndex.js ***!
+  \*************************************************/
+/***/ ((module) => {
+
+/** Used to match a single whitespace character. */
+var reWhitespace = /\s/;
+
+/**
+ * Used by `_.trim` and `_.trimEnd` to get the index of the last non-whitespace
+ * character of `string`.
+ *
+ * @private
+ * @param {string} string The string to inspect.
+ * @returns {number} Returns the index of the last non-whitespace character.
+ */
+function trimmedEndIndex(string) {
+  var index = string.length;
+
+  while (index-- && reWhitespace.test(string.charAt(index))) {}
+  return index;
+}
+
+module.exports = trimmedEndIndex;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_updateWrapDetails.js":
+/*!***************************************************!*\
+  !*** ./node_modules/lodash/_updateWrapDetails.js ***!
+  \***************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var arrayEach = __webpack_require__(/*! ./_arrayEach */ "./node_modules/lodash/_arrayEach.js"),
+    arrayIncludes = __webpack_require__(/*! ./_arrayIncludes */ "./node_modules/lodash/_arrayIncludes.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_BIND_FLAG = 1,
+    WRAP_BIND_KEY_FLAG = 2,
+    WRAP_CURRY_FLAG = 8,
+    WRAP_CURRY_RIGHT_FLAG = 16,
+    WRAP_PARTIAL_FLAG = 32,
+    WRAP_PARTIAL_RIGHT_FLAG = 64,
+    WRAP_ARY_FLAG = 128,
+    WRAP_REARG_FLAG = 256,
+    WRAP_FLIP_FLAG = 512;
+
+/** Used to associate wrap methods with their bit flags. */
+var wrapFlags = [
+  ['ary', WRAP_ARY_FLAG],
+  ['bind', WRAP_BIND_FLAG],
+  ['bindKey', WRAP_BIND_KEY_FLAG],
+  ['curry', WRAP_CURRY_FLAG],
+  ['curryRight', WRAP_CURRY_RIGHT_FLAG],
+  ['flip', WRAP_FLIP_FLAG],
+  ['partial', WRAP_PARTIAL_FLAG],
+  ['partialRight', WRAP_PARTIAL_RIGHT_FLAG],
+  ['rearg', WRAP_REARG_FLAG]
+];
+
+/**
+ * Updates wrapper `details` based on `bitmask` flags.
+ *
+ * @private
+ * @returns {Array} details The details to modify.
+ * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
+ * @returns {Array} Returns `details`.
+ */
+function updateWrapDetails(details, bitmask) {
+  arrayEach(wrapFlags, function(pair) {
+    var value = '_.' + pair[0];
+    if ((bitmask & pair[1]) && !arrayIncludes(details, value)) {
+      details.push(value);
+    }
+  });
+  return details.sort();
+}
+
+module.exports = updateWrapDetails;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_wrapperClone.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_wrapperClone.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var LazyWrapper = __webpack_require__(/*! ./_LazyWrapper */ "./node_modules/lodash/_LazyWrapper.js"),
+    LodashWrapper = __webpack_require__(/*! ./_LodashWrapper */ "./node_modules/lodash/_LodashWrapper.js"),
+    copyArray = __webpack_require__(/*! ./_copyArray */ "./node_modules/lodash/_copyArray.js");
+
+/**
+ * Creates a clone of `wrapper`.
+ *
+ * @private
+ * @param {Object} wrapper The wrapper to clone.
+ * @returns {Object} Returns the cloned wrapper.
+ */
+function wrapperClone(wrapper) {
+  if (wrapper instanceof LazyWrapper) {
+    return wrapper.clone();
+  }
+  var result = new LodashWrapper(wrapper.__wrapped__, wrapper.__chain__);
+  result.__actions__ = copyArray(wrapper.__actions__);
+  result.__index__  = wrapper.__index__;
+  result.__values__ = wrapper.__values__;
+  return result;
+}
+
+module.exports = wrapperClone;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/after.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/after.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var toInteger = __webpack_require__(/*! ./toInteger */ "./node_modules/lodash/toInteger.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * The opposite of `_.before`; this method creates a function that invokes
+ * `func` once it's called `n` or more times.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {number} n The number of calls before `func` is invoked.
+ * @param {Function} func The function to restrict.
+ * @returns {Function} Returns the new restricted function.
+ * @example
+ *
+ * var saves = ['profile', 'settings'];
+ *
+ * var done = _.after(saves.length, function() {
+ *   console.log('done saving!');
+ * });
+ *
+ * _.forEach(saves, function(type) {
+ *   asyncSave({ 'type': type, 'complete': done });
+ * });
+ * // => Logs 'done saving!' after the two async saves have completed.
+ */
+function after(n, func) {
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  n = toInteger(n);
+  return function() {
+    if (--n < 1) {
+      return func.apply(this, arguments);
+    }
+  };
+}
+
+module.exports = after;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/ary.js":
+/*!************************************!*\
+  !*** ./node_modules/lodash/ary.js ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var createWrap = __webpack_require__(/*! ./_createWrap */ "./node_modules/lodash/_createWrap.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_ARY_FLAG = 128;
+
+/**
+ * Creates a function that invokes `func`, with up to `n` arguments,
+ * ignoring any additional arguments.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Function
+ * @param {Function} func The function to cap arguments for.
+ * @param {number} [n=func.length] The arity cap.
+ * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+ * @returns {Function} Returns the new capped function.
+ * @example
+ *
+ * _.map(['6', '8', '10'], _.ary(parseInt, 1));
+ * // => [6, 8, 10]
+ */
+function ary(func, n, guard) {
+  n = guard ? undefined : n;
+  n = (func && n == null) ? func.length : n;
+  return createWrap(func, WRAP_ARY_FLAG, undefined, undefined, undefined, undefined, n);
+}
+
+module.exports = ary;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/before.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/before.js ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var toInteger = __webpack_require__(/*! ./toInteger */ "./node_modules/lodash/toInteger.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that invokes `func`, with the `this` binding and arguments
+ * of the created function, while it's called less than `n` times. Subsequent
+ * calls to the created function return the result of the last `func` invocation.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Function
+ * @param {number} n The number of calls at which `func` is no longer invoked.
+ * @param {Function} func The function to restrict.
+ * @returns {Function} Returns the new restricted function.
+ * @example
+ *
+ * jQuery(element).on('click', _.before(5, addContactToList));
+ * // => Allows adding up to 4 contacts to the list.
+ */
+function before(n, func) {
+  var result;
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  n = toInteger(n);
+  return function() {
+    if (--n > 0) {
+      result = func.apply(this, arguments);
+    }
+    if (n <= 1) {
+      func = undefined;
+    }
+    return result;
+  };
+}
+
+module.exports = before;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/bind.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/bind.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js"),
+    createWrap = __webpack_require__(/*! ./_createWrap */ "./node_modules/lodash/_createWrap.js"),
+    getHolder = __webpack_require__(/*! ./_getHolder */ "./node_modules/lodash/_getHolder.js"),
+    replaceHolders = __webpack_require__(/*! ./_replaceHolders */ "./node_modules/lodash/_replaceHolders.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_BIND_FLAG = 1,
+    WRAP_PARTIAL_FLAG = 32;
+
+/**
+ * Creates a function that invokes `func` with the `this` binding of `thisArg`
+ * and `partials` prepended to the arguments it receives.
+ *
+ * The `_.bind.placeholder` value, which defaults to `_` in monolithic builds,
+ * may be used as a placeholder for partially applied arguments.
+ *
+ * **Note:** Unlike native `Function#bind`, this method doesn't set the "length"
+ * property of bound functions.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to bind.
+ * @param {*} thisArg The `this` binding of `func`.
+ * @param {...*} [partials] The arguments to be partially applied.
+ * @returns {Function} Returns the new bound function.
+ * @example
+ *
+ * function greet(greeting, punctuation) {
+ *   return greeting + ' ' + this.user + punctuation;
+ * }
+ *
+ * var object = { 'user': 'fred' };
+ *
+ * var bound = _.bind(greet, object, 'hi');
+ * bound('!');
+ * // => 'hi fred!'
+ *
+ * // Bound with placeholders.
+ * var bound = _.bind(greet, object, _, '!');
+ * bound('hi');
+ * // => 'hi fred!'
+ */
+var bind = baseRest(function(func, thisArg, partials) {
+  var bitmask = WRAP_BIND_FLAG;
+  if (partials.length) {
+    var holders = replaceHolders(partials, getHolder(bind));
+    bitmask |= WRAP_PARTIAL_FLAG;
+  }
+  return createWrap(func, bitmask, thisArg, partials, holders);
+});
+
+// Assign default placeholders.
+bind.placeholder = {};
+
+module.exports = bind;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/bindKey.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/bindKey.js ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js"),
+    createWrap = __webpack_require__(/*! ./_createWrap */ "./node_modules/lodash/_createWrap.js"),
+    getHolder = __webpack_require__(/*! ./_getHolder */ "./node_modules/lodash/_getHolder.js"),
+    replaceHolders = __webpack_require__(/*! ./_replaceHolders */ "./node_modules/lodash/_replaceHolders.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_BIND_FLAG = 1,
+    WRAP_BIND_KEY_FLAG = 2,
+    WRAP_PARTIAL_FLAG = 32;
+
+/**
+ * Creates a function that invokes the method at `object[key]` with `partials`
+ * prepended to the arguments it receives.
+ *
+ * This method differs from `_.bind` by allowing bound functions to reference
+ * methods that may be redefined or don't yet exist. See
+ * [Peter Michaux's article](http://peter.michaux.ca/articles/lazy-function-definition-pattern)
+ * for more details.
+ *
+ * The `_.bindKey.placeholder` value, which defaults to `_` in monolithic
+ * builds, may be used as a placeholder for partially applied arguments.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.10.0
+ * @category Function
+ * @param {Object} object The object to invoke the method on.
+ * @param {string} key The key of the method.
+ * @param {...*} [partials] The arguments to be partially applied.
+ * @returns {Function} Returns the new bound function.
+ * @example
+ *
+ * var object = {
+ *   'user': 'fred',
+ *   'greet': function(greeting, punctuation) {
+ *     return greeting + ' ' + this.user + punctuation;
+ *   }
+ * };
+ *
+ * var bound = _.bindKey(object, 'greet', 'hi');
+ * bound('!');
+ * // => 'hi fred!'
+ *
+ * object.greet = function(greeting, punctuation) {
+ *   return greeting + 'ya ' + this.user + punctuation;
+ * };
+ *
+ * bound('!');
+ * // => 'hiya fred!'
+ *
+ * // Bound with placeholders.
+ * var bound = _.bindKey(object, 'greet', _, '!');
+ * bound('hi');
+ * // => 'hiya fred!'
+ */
+var bindKey = baseRest(function(object, key, partials) {
+  var bitmask = WRAP_BIND_FLAG | WRAP_BIND_KEY_FLAG;
+  if (partials.length) {
+    var holders = replaceHolders(partials, getHolder(bindKey));
+    bitmask |= WRAP_PARTIAL_FLAG;
+  }
+  return createWrap(key, bitmask, object, partials, holders);
+});
+
+// Assign default placeholders.
+bindKey.placeholder = {};
+
+module.exports = bindKey;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/constant.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/constant.js ***!
+  \*****************************************/
+/***/ ((module) => {
+
+/**
+ * Creates a function that returns `value`.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Util
+ * @param {*} value The value to return from the new function.
+ * @returns {Function} Returns the new constant function.
+ * @example
+ *
+ * var objects = _.times(2, _.constant({ 'a': 1 }));
+ *
+ * console.log(objects);
+ * // => [{ 'a': 1 }, { 'a': 1 }]
+ *
+ * console.log(objects[0] === objects[1]);
+ * // => true
+ */
+function constant(value) {
+  return function() {
+    return value;
+  };
+}
+
+module.exports = constant;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/curry.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/curry.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var createWrap = __webpack_require__(/*! ./_createWrap */ "./node_modules/lodash/_createWrap.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_CURRY_FLAG = 8;
+
+/**
+ * Creates a function that accepts arguments of `func` and either invokes
+ * `func` returning its result, if at least `arity` number of arguments have
+ * been provided, or returns a function that accepts the remaining `func`
+ * arguments, and so on. The arity of `func` may be specified if `func.length`
+ * is not sufficient.
+ *
+ * The `_.curry.placeholder` value, which defaults to `_` in monolithic builds,
+ * may be used as a placeholder for provided arguments.
+ *
+ * **Note:** This method doesn't set the "length" property of curried functions.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.0.0
+ * @category Function
+ * @param {Function} func The function to curry.
+ * @param {number} [arity=func.length] The arity of `func`.
+ * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+ * @returns {Function} Returns the new curried function.
+ * @example
+ *
+ * var abc = function(a, b, c) {
+ *   return [a, b, c];
+ * };
+ *
+ * var curried = _.curry(abc);
+ *
+ * curried(1)(2)(3);
+ * // => [1, 2, 3]
+ *
+ * curried(1, 2)(3);
+ * // => [1, 2, 3]
+ *
+ * curried(1, 2, 3);
+ * // => [1, 2, 3]
+ *
+ * // Curried with placeholders.
+ * curried(1)(_, 3)(2);
+ * // => [1, 2, 3]
+ */
+function curry(func, arity, guard) {
+  arity = guard ? undefined : arity;
+  var result = createWrap(func, WRAP_CURRY_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
+  result.placeholder = curry.placeholder;
+  return result;
+}
+
+// Assign default placeholders.
+curry.placeholder = {};
+
+module.exports = curry;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/curryRight.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/curryRight.js ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var createWrap = __webpack_require__(/*! ./_createWrap */ "./node_modules/lodash/_createWrap.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_CURRY_RIGHT_FLAG = 16;
+
+/**
+ * This method is like `_.curry` except that arguments are applied to `func`
+ * in the manner of `_.partialRight` instead of `_.partial`.
+ *
+ * The `_.curryRight.placeholder` value, which defaults to `_` in monolithic
+ * builds, may be used as a placeholder for provided arguments.
+ *
+ * **Note:** This method doesn't set the "length" property of curried functions.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Function
+ * @param {Function} func The function to curry.
+ * @param {number} [arity=func.length] The arity of `func`.
+ * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+ * @returns {Function} Returns the new curried function.
+ * @example
+ *
+ * var abc = function(a, b, c) {
+ *   return [a, b, c];
+ * };
+ *
+ * var curried = _.curryRight(abc);
+ *
+ * curried(3)(2)(1);
+ * // => [1, 2, 3]
+ *
+ * curried(2, 3)(1);
+ * // => [1, 2, 3]
+ *
+ * curried(1, 2, 3);
+ * // => [1, 2, 3]
+ *
+ * // Curried with placeholders.
+ * curried(3)(1, _)(2);
+ * // => [1, 2, 3]
+ */
+function curryRight(func, arity, guard) {
+  arity = guard ? undefined : arity;
+  var result = createWrap(func, WRAP_CURRY_RIGHT_FLAG, undefined, undefined, undefined, undefined, undefined, arity);
+  result.placeholder = curryRight.placeholder;
+  return result;
+}
+
+// Assign default placeholders.
+curryRight.placeholder = {};
+
+module.exports = curryRight;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/debounce.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/debounce.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
+    now = __webpack_require__(/*! ./now */ "./node_modules/lodash/now.js"),
+    toNumber = __webpack_require__(/*! ./toNumber */ "./node_modules/lodash/toNumber.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+      lastThis,
+      maxWait,
+      result,
+      timerId,
+      lastCallTime,
+      lastInvokeTime = 0,
+      leading = false,
+      maxing = false,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+
+  function invokeFunc(time) {
+    var args = lastArgs,
+        thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime,
+        timeWaiting = wait - timeSinceLastCall;
+
+    return maxing
+      ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke)
+      : timeWaiting;
+  }
+
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+  }
+
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+
+  function debounced() {
+    var time = now(),
+        isInvoking = shouldInvoke(time);
+
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        clearTimeout(timerId);
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+module.exports = debounce;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/defer.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/defer.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseDelay = __webpack_require__(/*! ./_baseDelay */ "./node_modules/lodash/_baseDelay.js"),
+    baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js");
+
+/**
+ * Defers invoking the `func` until the current call stack has cleared. Any
+ * additional arguments are provided to `func` when it's invoked.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to defer.
+ * @param {...*} [args] The arguments to invoke `func` with.
+ * @returns {number} Returns the timer id.
+ * @example
+ *
+ * _.defer(function(text) {
+ *   console.log(text);
+ * }, 'deferred');
+ * // => Logs 'deferred' after one millisecond.
+ */
+var defer = baseRest(function(func, args) {
+  return baseDelay(func, 1, args);
+});
+
+module.exports = defer;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/delay.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/delay.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseDelay = __webpack_require__(/*! ./_baseDelay */ "./node_modules/lodash/_baseDelay.js"),
+    baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js"),
+    toNumber = __webpack_require__(/*! ./toNumber */ "./node_modules/lodash/toNumber.js");
+
+/**
+ * Invokes `func` after `wait` milliseconds. Any additional arguments are
+ * provided to `func` when it's invoked.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to delay.
+ * @param {number} wait The number of milliseconds to delay invocation.
+ * @param {...*} [args] The arguments to invoke `func` with.
+ * @returns {number} Returns the timer id.
+ * @example
+ *
+ * _.delay(function(text) {
+ *   console.log(text);
+ * }, 1000, 'later');
+ * // => Logs 'later' after one second.
+ */
+var delay = baseRest(function(func, wait, args) {
+  return baseDelay(func, toNumber(wait) || 0, args);
+});
+
+module.exports = delay;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/eq.js":
+/*!***********************************!*\
+  !*** ./node_modules/lodash/eq.js ***!
+  \***********************************/
+/***/ ((module) => {
+
+/**
+ * Performs a
+ * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * comparison between two values to determine if they are equivalent.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ * var other = { 'a': 1 };
+ *
+ * _.eq(object, object);
+ * // => true
+ *
+ * _.eq(object, other);
+ * // => false
+ *
+ * _.eq('a', 'a');
+ * // => true
+ *
+ * _.eq('a', Object('a'));
+ * // => false
+ *
+ * _.eq(NaN, NaN);
+ * // => true
+ */
+function eq(value, other) {
+  return value === other || (value !== value && other !== other);
+}
+
+module.exports = eq;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/flatten.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/flatten.js ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseFlatten = __webpack_require__(/*! ./_baseFlatten */ "./node_modules/lodash/_baseFlatten.js");
+
+/**
+ * Flattens `array` a single level deep.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Array
+ * @param {Array} array The array to flatten.
+ * @returns {Array} Returns the new flattened array.
+ * @example
+ *
+ * _.flatten([1, [2, [3, [4]], 5]]);
+ * // => [1, 2, [3, [4]], 5]
+ */
+function flatten(array) {
+  var length = array == null ? 0 : array.length;
+  return length ? baseFlatten(array, 1) : [];
+}
+
+module.exports = flatten;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/flip.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/flip.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var createWrap = __webpack_require__(/*! ./_createWrap */ "./node_modules/lodash/_createWrap.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_FLIP_FLAG = 512;
+
+/**
+ * Creates a function that invokes `func` with arguments reversed.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Function
+ * @param {Function} func The function to flip arguments for.
+ * @returns {Function} Returns the new flipped function.
+ * @example
+ *
+ * var flipped = _.flip(function() {
+ *   return _.toArray(arguments);
+ * });
+ *
+ * flipped('a', 'b', 'c', 'd');
+ * // => ['d', 'c', 'b', 'a']
+ */
+function flip(func) {
+  return createWrap(func, WRAP_FLIP_FLAG);
+}
+
+module.exports = flip;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/function.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/function.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = {
+  'after': __webpack_require__(/*! ./after */ "./node_modules/lodash/after.js"),
+  'ary': __webpack_require__(/*! ./ary */ "./node_modules/lodash/ary.js"),
+  'before': __webpack_require__(/*! ./before */ "./node_modules/lodash/before.js"),
+  'bind': __webpack_require__(/*! ./bind */ "./node_modules/lodash/bind.js"),
+  'bindKey': __webpack_require__(/*! ./bindKey */ "./node_modules/lodash/bindKey.js"),
+  'curry': __webpack_require__(/*! ./curry */ "./node_modules/lodash/curry.js"),
+  'curryRight': __webpack_require__(/*! ./curryRight */ "./node_modules/lodash/curryRight.js"),
+  'debounce': __webpack_require__(/*! ./debounce */ "./node_modules/lodash/debounce.js"),
+  'defer': __webpack_require__(/*! ./defer */ "./node_modules/lodash/defer.js"),
+  'delay': __webpack_require__(/*! ./delay */ "./node_modules/lodash/delay.js"),
+  'flip': __webpack_require__(/*! ./flip */ "./node_modules/lodash/flip.js"),
+  'memoize': __webpack_require__(/*! ./memoize */ "./node_modules/lodash/memoize.js"),
+  'negate': __webpack_require__(/*! ./negate */ "./node_modules/lodash/negate.js"),
+  'once': __webpack_require__(/*! ./once */ "./node_modules/lodash/once.js"),
+  'overArgs': __webpack_require__(/*! ./overArgs */ "./node_modules/lodash/overArgs.js"),
+  'partial': __webpack_require__(/*! ./partial */ "./node_modules/lodash/partial.js"),
+  'partialRight': __webpack_require__(/*! ./partialRight */ "./node_modules/lodash/partialRight.js"),
+  'rearg': __webpack_require__(/*! ./rearg */ "./node_modules/lodash/rearg.js"),
+  'rest': __webpack_require__(/*! ./rest */ "./node_modules/lodash/rest.js"),
+  'spread': __webpack_require__(/*! ./spread */ "./node_modules/lodash/spread.js"),
+  'throttle': __webpack_require__(/*! ./throttle */ "./node_modules/lodash/throttle.js"),
+  'unary': __webpack_require__(/*! ./unary */ "./node_modules/lodash/unary.js"),
+  'wrap': __webpack_require__(/*! ./wrap */ "./node_modules/lodash/wrap.js")
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/get.js":
+/*!************************************!*\
+  !*** ./node_modules/lodash/get.js ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseGet = __webpack_require__(/*! ./_baseGet */ "./node_modules/lodash/_baseGet.js");
+
+/**
+ * Gets the value at `path` of `object`. If the resolved value is
+ * `undefined`, the `defaultValue` is returned in its place.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.7.0
+ * @category Object
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path of the property to get.
+ * @param {*} [defaultValue] The value returned for `undefined` resolved values.
+ * @returns {*} Returns the resolved value.
+ * @example
+ *
+ * var object = { 'a': [{ 'b': { 'c': 3 } }] };
+ *
+ * _.get(object, 'a[0].b.c');
+ * // => 3
+ *
+ * _.get(object, ['a', '0', 'b', 'c']);
+ * // => 3
+ *
+ * _.get(object, 'a.b.c', 'default');
+ * // => 'default'
+ */
+function get(object, path, defaultValue) {
+  var result = object == null ? undefined : baseGet(object, path);
+  return result === undefined ? defaultValue : result;
+}
+
+module.exports = get;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/hasIn.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/hasIn.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseHasIn = __webpack_require__(/*! ./_baseHasIn */ "./node_modules/lodash/_baseHasIn.js"),
+    hasPath = __webpack_require__(/*! ./_hasPath */ "./node_modules/lodash/_hasPath.js");
+
+/**
+ * Checks if `path` is a direct or inherited property of `object`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Object
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path to check.
+ * @returns {boolean} Returns `true` if `path` exists, else `false`.
+ * @example
+ *
+ * var object = _.create({ 'a': _.create({ 'b': 2 }) });
+ *
+ * _.hasIn(object, 'a');
+ * // => true
+ *
+ * _.hasIn(object, 'a.b');
+ * // => true
+ *
+ * _.hasIn(object, ['a', 'b']);
+ * // => true
+ *
+ * _.hasIn(object, 'b');
+ * // => false
+ */
+function hasIn(object, path) {
+  return object != null && hasPath(object, path, baseHasIn);
+}
+
+module.exports = hasIn;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/identity.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/identity.js ***!
+  \*****************************************/
+/***/ ((module) => {
+
+/**
+ * This method returns the first argument it receives.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Util
+ * @param {*} value Any value.
+ * @returns {*} Returns `value`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ *
+ * console.log(_.identity(object) === object);
+ * // => true
+ */
+function identity(value) {
+  return value;
+}
+
+module.exports = identity;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isArguments.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/isArguments.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseIsArguments = __webpack_require__(/*! ./_baseIsArguments */ "./node_modules/lodash/_baseIsArguments.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Built-in value references. */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * _.isArguments([1, 2, 3]);
+ * // => false
+ */
+var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
+  return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
+    !propertyIsEnumerable.call(value, 'callee');
+};
+
+module.exports = isArguments;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isArray.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/isArray.js ***!
+  \****************************************/
+/***/ ((module) => {
+
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
+
+module.exports = isArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isArrayLike.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/isArrayLike.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isFunction = __webpack_require__(/*! ./isFunction */ "./node_modules/lodash/isFunction.js"),
+    isLength = __webpack_require__(/*! ./isLength */ "./node_modules/lodash/isLength.js");
+
+/**
+ * Checks if `value` is array-like. A value is considered array-like if it's
+ * not a function and has a `value.length` that's an integer greater than or
+ * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+ * @example
+ *
+ * _.isArrayLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLike(document.body.children);
+ * // => true
+ *
+ * _.isArrayLike('abc');
+ * // => true
+ *
+ * _.isArrayLike(_.noop);
+ * // => false
+ */
+function isArrayLike(value) {
+  return value != null && isLength(value.length) && !isFunction(value);
+}
+
+module.exports = isArrayLike;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isBuffer.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isBuffer.js ***!
+  \*****************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+/* module decorator */ module = __webpack_require__.nmd(module);
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js"),
+    stubFalse = __webpack_require__(/*! ./stubFalse */ "./node_modules/lodash/stubFalse.js");
+
+/** Detect free variable `exports`. */
+var freeExports =  true && exports && !exports.nodeType && exports;
+
+/** Detect free variable `module`. */
+var freeModule = freeExports && "object" == 'object' && module && !module.nodeType && module;
+
+/** Detect the popular CommonJS extension `module.exports`. */
+var moduleExports = freeModule && freeModule.exports === freeExports;
+
+/** Built-in value references. */
+var Buffer = moduleExports ? root.Buffer : undefined;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
+
+/**
+ * Checks if `value` is a buffer.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
+ * @example
+ *
+ * _.isBuffer(new Buffer(2));
+ * // => true
+ *
+ * _.isBuffer(new Uint8Array(2));
+ * // => false
+ */
+var isBuffer = nativeIsBuffer || stubFalse;
+
+module.exports = isBuffer;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isFunction.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/isFunction.js ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
+
+/** `Object#toString` result references. */
+var asyncTag = '[object AsyncFunction]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]',
+    proxyTag = '[object Proxy]';
+
+/**
+ * Checks if `value` is classified as a `Function` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @example
+ *
+ * _.isFunction(_);
+ * // => true
+ *
+ * _.isFunction(/abc/);
+ * // => false
+ */
+function isFunction(value) {
+  if (!isObject(value)) {
+    return false;
+  }
+  // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 9 which returns 'object' for typed arrays and other constructors.
+  var tag = baseGetTag(value);
+  return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+}
+
+module.exports = isFunction;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isLength.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isLength.js ***!
+  \*****************************************/
+/***/ ((module) => {
+
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER = 9007199254740991;
+
+/**
+ * Checks if `value` is a valid array-like length.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+ * @example
+ *
+ * _.isLength(3);
+ * // => true
+ *
+ * _.isLength(Number.MIN_VALUE);
+ * // => false
+ *
+ * _.isLength(Infinity);
+ * // => false
+ *
+ * _.isLength('3');
+ * // => false
+ */
+function isLength(value) {
+  return typeof value == 'number' &&
+    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+
+module.exports = isLength;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isObject.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isObject.js ***!
+  \*****************************************/
+/***/ ((module) => {
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+}
+
+module.exports = isObject;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isObjectLike.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/isObjectLike.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+
+module.exports = isObjectLike;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isSymbol.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isSymbol.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && baseGetTag(value) == symbolTag);
+}
+
+module.exports = isSymbol;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isTypedArray.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/isTypedArray.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseIsTypedArray = __webpack_require__(/*! ./_baseIsTypedArray */ "./node_modules/lodash/_baseIsTypedArray.js"),
+    baseUnary = __webpack_require__(/*! ./_baseUnary */ "./node_modules/lodash/_baseUnary.js"),
+    nodeUtil = __webpack_require__(/*! ./_nodeUtil */ "./node_modules/lodash/_nodeUtil.js");
+
+/* Node.js helper references. */
+var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
+
+/**
+ * Checks if `value` is classified as a typed array.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ * @example
+ *
+ * _.isTypedArray(new Uint8Array);
+ * // => true
+ *
+ * _.isTypedArray([]);
+ * // => false
+ */
+var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
+
+module.exports = isTypedArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/keys.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/keys.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var arrayLikeKeys = __webpack_require__(/*! ./_arrayLikeKeys */ "./node_modules/lodash/_arrayLikeKeys.js"),
+    baseKeys = __webpack_require__(/*! ./_baseKeys */ "./node_modules/lodash/_baseKeys.js"),
+    isArrayLike = __webpack_require__(/*! ./isArrayLike */ "./node_modules/lodash/isArrayLike.js");
+
+/**
+ * Creates an array of the own enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects. See the
+ * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * for more details.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keys(new Foo);
+ * // => ['a', 'b'] (iteration order is not guaranteed)
+ *
+ * _.keys('hi');
+ * // => ['0', '1']
+ */
+function keys(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+
+module.exports = keys;
 
 
 /***/ }),
@@ -34184,6 +38767,1211 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
+/***/ "./node_modules/lodash/memoize.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/memoize.js ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var MapCache = __webpack_require__(/*! ./_MapCache */ "./node_modules/lodash/_MapCache.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that memoizes the result of `func`. If `resolver` is
+ * provided, it determines the cache key for storing the result based on the
+ * arguments provided to the memoized function. By default, the first argument
+ * provided to the memoized function is used as the map cache key. The `func`
+ * is invoked with the `this` binding of the memoized function.
+ *
+ * **Note:** The cache is exposed as the `cache` property on the memoized
+ * function. Its creation may be customized by replacing the `_.memoize.Cache`
+ * constructor with one whose instances implement the
+ * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
+ * method interface of `clear`, `delete`, `get`, `has`, and `set`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to have its output memoized.
+ * @param {Function} [resolver] The function to resolve the cache key.
+ * @returns {Function} Returns the new memoized function.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': 2 };
+ * var other = { 'c': 3, 'd': 4 };
+ *
+ * var values = _.memoize(_.values);
+ * values(object);
+ * // => [1, 2]
+ *
+ * values(other);
+ * // => [3, 4]
+ *
+ * object.a = 2;
+ * values(object);
+ * // => [1, 2]
+ *
+ * // Modify the result cache.
+ * values.cache.set(object, ['a', 'b']);
+ * values(object);
+ * // => ['a', 'b']
+ *
+ * // Replace `_.memoize.Cache`.
+ * _.memoize.Cache = WeakMap;
+ */
+function memoize(func, resolver) {
+  if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  var memoized = function() {
+    var args = arguments,
+        key = resolver ? resolver.apply(this, args) : args[0],
+        cache = memoized.cache;
+
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    var result = func.apply(this, args);
+    memoized.cache = cache.set(key, result) || cache;
+    return result;
+  };
+  memoized.cache = new (memoize.Cache || MapCache);
+  return memoized;
+}
+
+// Expose `MapCache`.
+memoize.Cache = MapCache;
+
+module.exports = memoize;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/negate.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/negate.js ***!
+  \***************************************/
+/***/ ((module) => {
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that negates the result of the predicate `func`. The
+ * `func` predicate is invoked with the `this` binding and arguments of the
+ * created function.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Function
+ * @param {Function} predicate The predicate to negate.
+ * @returns {Function} Returns the new negated function.
+ * @example
+ *
+ * function isEven(n) {
+ *   return n % 2 == 0;
+ * }
+ *
+ * _.filter([1, 2, 3, 4, 5, 6], _.negate(isEven));
+ * // => [1, 3, 5]
+ */
+function negate(predicate) {
+  if (typeof predicate != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  return function() {
+    var args = arguments;
+    switch (args.length) {
+      case 0: return !predicate.call(this);
+      case 1: return !predicate.call(this, args[0]);
+      case 2: return !predicate.call(this, args[0], args[1]);
+      case 3: return !predicate.call(this, args[0], args[1], args[2]);
+    }
+    return !predicate.apply(this, args);
+  };
+}
+
+module.exports = negate;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/noop.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/noop.js ***!
+  \*************************************/
+/***/ ((module) => {
+
+/**
+ * This method returns `undefined`.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.3.0
+ * @category Util
+ * @example
+ *
+ * _.times(2, _.noop);
+ * // => [undefined, undefined]
+ */
+function noop() {
+  // No operation performed.
+}
+
+module.exports = noop;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/now.js":
+/*!************************************!*\
+  !*** ./node_modules/lodash/now.js ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+  return root.Date.now();
+};
+
+module.exports = now;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/once.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/once.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var before = __webpack_require__(/*! ./before */ "./node_modules/lodash/before.js");
+
+/**
+ * Creates a function that is restricted to invoking `func` once. Repeat calls
+ * to the function return the value of the first invocation. The `func` is
+ * invoked with the `this` binding and arguments of the created function.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to restrict.
+ * @returns {Function} Returns the new restricted function.
+ * @example
+ *
+ * var initialize = _.once(createApplication);
+ * initialize();
+ * initialize();
+ * // => `createApplication` is invoked once
+ */
+function once(func) {
+  return before(2, func);
+}
+
+module.exports = once;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/overArgs.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/overArgs.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var apply = __webpack_require__(/*! ./_apply */ "./node_modules/lodash/_apply.js"),
+    arrayMap = __webpack_require__(/*! ./_arrayMap */ "./node_modules/lodash/_arrayMap.js"),
+    baseFlatten = __webpack_require__(/*! ./_baseFlatten */ "./node_modules/lodash/_baseFlatten.js"),
+    baseIteratee = __webpack_require__(/*! ./_baseIteratee */ "./node_modules/lodash/_baseIteratee.js"),
+    baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js"),
+    baseUnary = __webpack_require__(/*! ./_baseUnary */ "./node_modules/lodash/_baseUnary.js"),
+    castRest = __webpack_require__(/*! ./_castRest */ "./node_modules/lodash/_castRest.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js");
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMin = Math.min;
+
+/**
+ * Creates a function that invokes `func` with its arguments transformed.
+ *
+ * @static
+ * @since 4.0.0
+ * @memberOf _
+ * @category Function
+ * @param {Function} func The function to wrap.
+ * @param {...(Function|Function[])} [transforms=[_.identity]]
+ *  The argument transforms.
+ * @returns {Function} Returns the new function.
+ * @example
+ *
+ * function doubled(n) {
+ *   return n * 2;
+ * }
+ *
+ * function square(n) {
+ *   return n * n;
+ * }
+ *
+ * var func = _.overArgs(function(x, y) {
+ *   return [x, y];
+ * }, [square, doubled]);
+ *
+ * func(9, 3);
+ * // => [81, 6]
+ *
+ * func(10, 5);
+ * // => [100, 10]
+ */
+var overArgs = castRest(function(func, transforms) {
+  transforms = (transforms.length == 1 && isArray(transforms[0]))
+    ? arrayMap(transforms[0], baseUnary(baseIteratee))
+    : arrayMap(baseFlatten(transforms, 1), baseUnary(baseIteratee));
+
+  var funcsLength = transforms.length;
+  return baseRest(function(args) {
+    var index = -1,
+        length = nativeMin(args.length, funcsLength);
+
+    while (++index < length) {
+      args[index] = transforms[index].call(this, args[index]);
+    }
+    return apply(func, this, args);
+  });
+});
+
+module.exports = overArgs;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/partial.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/partial.js ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js"),
+    createWrap = __webpack_require__(/*! ./_createWrap */ "./node_modules/lodash/_createWrap.js"),
+    getHolder = __webpack_require__(/*! ./_getHolder */ "./node_modules/lodash/_getHolder.js"),
+    replaceHolders = __webpack_require__(/*! ./_replaceHolders */ "./node_modules/lodash/_replaceHolders.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_PARTIAL_FLAG = 32;
+
+/**
+ * Creates a function that invokes `func` with `partials` prepended to the
+ * arguments it receives. This method is like `_.bind` except it does **not**
+ * alter the `this` binding.
+ *
+ * The `_.partial.placeholder` value, which defaults to `_` in monolithic
+ * builds, may be used as a placeholder for partially applied arguments.
+ *
+ * **Note:** This method doesn't set the "length" property of partially
+ * applied functions.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.2.0
+ * @category Function
+ * @param {Function} func The function to partially apply arguments to.
+ * @param {...*} [partials] The arguments to be partially applied.
+ * @returns {Function} Returns the new partially applied function.
+ * @example
+ *
+ * function greet(greeting, name) {
+ *   return greeting + ' ' + name;
+ * }
+ *
+ * var sayHelloTo = _.partial(greet, 'hello');
+ * sayHelloTo('fred');
+ * // => 'hello fred'
+ *
+ * // Partially applied with placeholders.
+ * var greetFred = _.partial(greet, _, 'fred');
+ * greetFred('hi');
+ * // => 'hi fred'
+ */
+var partial = baseRest(function(func, partials) {
+  var holders = replaceHolders(partials, getHolder(partial));
+  return createWrap(func, WRAP_PARTIAL_FLAG, undefined, partials, holders);
+});
+
+// Assign default placeholders.
+partial.placeholder = {};
+
+module.exports = partial;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/partialRight.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/partialRight.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js"),
+    createWrap = __webpack_require__(/*! ./_createWrap */ "./node_modules/lodash/_createWrap.js"),
+    getHolder = __webpack_require__(/*! ./_getHolder */ "./node_modules/lodash/_getHolder.js"),
+    replaceHolders = __webpack_require__(/*! ./_replaceHolders */ "./node_modules/lodash/_replaceHolders.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_PARTIAL_RIGHT_FLAG = 64;
+
+/**
+ * This method is like `_.partial` except that partially applied arguments
+ * are appended to the arguments it receives.
+ *
+ * The `_.partialRight.placeholder` value, which defaults to `_` in monolithic
+ * builds, may be used as a placeholder for partially applied arguments.
+ *
+ * **Note:** This method doesn't set the "length" property of partially
+ * applied functions.
+ *
+ * @static
+ * @memberOf _
+ * @since 1.0.0
+ * @category Function
+ * @param {Function} func The function to partially apply arguments to.
+ * @param {...*} [partials] The arguments to be partially applied.
+ * @returns {Function} Returns the new partially applied function.
+ * @example
+ *
+ * function greet(greeting, name) {
+ *   return greeting + ' ' + name;
+ * }
+ *
+ * var greetFred = _.partialRight(greet, 'fred');
+ * greetFred('hi');
+ * // => 'hi fred'
+ *
+ * // Partially applied with placeholders.
+ * var sayHelloTo = _.partialRight(greet, 'hello', _);
+ * sayHelloTo('fred');
+ * // => 'hello fred'
+ */
+var partialRight = baseRest(function(func, partials) {
+  var holders = replaceHolders(partials, getHolder(partialRight));
+  return createWrap(func, WRAP_PARTIAL_RIGHT_FLAG, undefined, partials, holders);
+});
+
+// Assign default placeholders.
+partialRight.placeholder = {};
+
+module.exports = partialRight;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/property.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/property.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseProperty = __webpack_require__(/*! ./_baseProperty */ "./node_modules/lodash/_baseProperty.js"),
+    basePropertyDeep = __webpack_require__(/*! ./_basePropertyDeep */ "./node_modules/lodash/_basePropertyDeep.js"),
+    isKey = __webpack_require__(/*! ./_isKey */ "./node_modules/lodash/_isKey.js"),
+    toKey = __webpack_require__(/*! ./_toKey */ "./node_modules/lodash/_toKey.js");
+
+/**
+ * Creates a function that returns the value at `path` of a given object.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Util
+ * @param {Array|string} path The path of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ * @example
+ *
+ * var objects = [
+ *   { 'a': { 'b': 2 } },
+ *   { 'a': { 'b': 1 } }
+ * ];
+ *
+ * _.map(objects, _.property('a.b'));
+ * // => [2, 1]
+ *
+ * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');
+ * // => [1, 2]
+ */
+function property(path) {
+  return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
+}
+
+module.exports = property;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/rearg.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/rearg.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var createWrap = __webpack_require__(/*! ./_createWrap */ "./node_modules/lodash/_createWrap.js"),
+    flatRest = __webpack_require__(/*! ./_flatRest */ "./node_modules/lodash/_flatRest.js");
+
+/** Used to compose bitmasks for function metadata. */
+var WRAP_REARG_FLAG = 256;
+
+/**
+ * Creates a function that invokes `func` with arguments arranged according
+ * to the specified `indexes` where the argument value at the first index is
+ * provided as the first argument, the argument value at the second index is
+ * provided as the second argument, and so on.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Function
+ * @param {Function} func The function to rearrange arguments for.
+ * @param {...(number|number[])} indexes The arranged argument indexes.
+ * @returns {Function} Returns the new function.
+ * @example
+ *
+ * var rearged = _.rearg(function(a, b, c) {
+ *   return [a, b, c];
+ * }, [2, 0, 1]);
+ *
+ * rearged('b', 'c', 'a')
+ * // => ['a', 'b', 'c']
+ */
+var rearg = flatRest(function(func, indexes) {
+  return createWrap(func, WRAP_REARG_FLAG, undefined, undefined, undefined, indexes);
+});
+
+module.exports = rearg;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/rest.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/rest.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js"),
+    toInteger = __webpack_require__(/*! ./toInteger */ "./node_modules/lodash/toInteger.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that invokes `func` with the `this` binding of the
+ * created function and arguments from `start` and beyond provided as
+ * an array.
+ *
+ * **Note:** This method is based on the
+ * [rest parameter](https://mdn.io/rest_parameters).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Function
+ * @param {Function} func The function to apply a rest parameter to.
+ * @param {number} [start=func.length-1] The start position of the rest parameter.
+ * @returns {Function} Returns the new function.
+ * @example
+ *
+ * var say = _.rest(function(what, names) {
+ *   return what + ' ' + _.initial(names).join(', ') +
+ *     (_.size(names) > 1 ? ', & ' : '') + _.last(names);
+ * });
+ *
+ * say('hello', 'fred', 'barney', 'pebbles');
+ * // => 'hello fred, barney, & pebbles'
+ */
+function rest(func, start) {
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  start = start === undefined ? start : toInteger(start);
+  return baseRest(func, start);
+}
+
+module.exports = rest;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/spread.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/spread.js ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var apply = __webpack_require__(/*! ./_apply */ "./node_modules/lodash/_apply.js"),
+    arrayPush = __webpack_require__(/*! ./_arrayPush */ "./node_modules/lodash/_arrayPush.js"),
+    baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js"),
+    castSlice = __webpack_require__(/*! ./_castSlice */ "./node_modules/lodash/_castSlice.js"),
+    toInteger = __webpack_require__(/*! ./toInteger */ "./node_modules/lodash/toInteger.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max;
+
+/**
+ * Creates a function that invokes `func` with the `this` binding of the
+ * create function and an array of arguments much like
+ * [`Function#apply`](http://www.ecma-international.org/ecma-262/7.0/#sec-function.prototype.apply).
+ *
+ * **Note:** This method is based on the
+ * [spread operator](https://mdn.io/spread_operator).
+ *
+ * @static
+ * @memberOf _
+ * @since 3.2.0
+ * @category Function
+ * @param {Function} func The function to spread arguments over.
+ * @param {number} [start=0] The start position of the spread.
+ * @returns {Function} Returns the new function.
+ * @example
+ *
+ * var say = _.spread(function(who, what) {
+ *   return who + ' says ' + what;
+ * });
+ *
+ * say(['fred', 'hello']);
+ * // => 'fred says hello'
+ *
+ * var numbers = Promise.all([
+ *   Promise.resolve(40),
+ *   Promise.resolve(36)
+ * ]);
+ *
+ * numbers.then(_.spread(function(x, y) {
+ *   return x + y;
+ * }));
+ * // => a Promise of 76
+ */
+function spread(func, start) {
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  start = start == null ? 0 : nativeMax(toInteger(start), 0);
+  return baseRest(function(args) {
+    var array = args[start],
+        otherArgs = castSlice(args, 0, start);
+
+    if (array) {
+      arrayPush(otherArgs, array);
+    }
+    return apply(func, this, otherArgs);
+  });
+}
+
+module.exports = spread;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/stubArray.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/stubArray.js ***!
+  \******************************************/
+/***/ ((module) => {
+
+/**
+ * This method returns a new empty array.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {Array} Returns the new empty array.
+ * @example
+ *
+ * var arrays = _.times(2, _.stubArray);
+ *
+ * console.log(arrays);
+ * // => [[], []]
+ *
+ * console.log(arrays[0] === arrays[1]);
+ * // => false
+ */
+function stubArray() {
+  return [];
+}
+
+module.exports = stubArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/stubFalse.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/stubFalse.js ***!
+  \******************************************/
+/***/ ((module) => {
+
+/**
+ * This method returns `false`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {boolean} Returns `false`.
+ * @example
+ *
+ * _.times(2, _.stubFalse);
+ * // => [false, false]
+ */
+function stubFalse() {
+  return false;
+}
+
+module.exports = stubFalse;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/throttle.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/throttle.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var debounce = __webpack_require__(/*! ./debounce */ "./node_modules/lodash/debounce.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a throttled function that only invokes `func` at most once per
+ * every `wait` milliseconds. The throttled function comes with a `cancel`
+ * method to cancel delayed `func` invocations and a `flush` method to
+ * immediately invoke them. Provide `options` to indicate whether `func`
+ * should be invoked on the leading and/or trailing edge of the `wait`
+ * timeout. The `func` is invoked with the last arguments provided to the
+ * throttled function. Subsequent calls to the throttled function return the
+ * result of the last `func` invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the throttled function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.throttle` and `_.debounce`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to throttle.
+ * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=true]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new throttled function.
+ * @example
+ *
+ * // Avoid excessively updating the position while scrolling.
+ * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+ *
+ * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
+ * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
+ * jQuery(element).on('click', throttled);
+ *
+ * // Cancel the trailing throttled invocation.
+ * jQuery(window).on('popstate', throttled.cancel);
+ */
+function throttle(func, wait, options) {
+  var leading = true,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  if (isObject(options)) {
+    leading = 'leading' in options ? !!options.leading : leading;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+  return debounce(func, wait, {
+    'leading': leading,
+    'maxWait': wait,
+    'trailing': trailing
+  });
+}
+
+module.exports = throttle;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toFinite.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toFinite.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var toNumber = __webpack_require__(/*! ./toNumber */ "./node_modules/lodash/toNumber.js");
+
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0,
+    MAX_INTEGER = 1.7976931348623157e+308;
+
+/**
+ * Converts `value` to a finite number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.12.0
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {number} Returns the converted number.
+ * @example
+ *
+ * _.toFinite(3.2);
+ * // => 3.2
+ *
+ * _.toFinite(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toFinite(Infinity);
+ * // => 1.7976931348623157e+308
+ *
+ * _.toFinite('3.2');
+ * // => 3.2
+ */
+function toFinite(value) {
+  if (!value) {
+    return value === 0 ? value : 0;
+  }
+  value = toNumber(value);
+  if (value === INFINITY || value === -INFINITY) {
+    var sign = (value < 0 ? -1 : 1);
+    return sign * MAX_INTEGER;
+  }
+  return value === value ? value : 0;
+}
+
+module.exports = toFinite;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toInteger.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/toInteger.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var toFinite = __webpack_require__(/*! ./toFinite */ "./node_modules/lodash/toFinite.js");
+
+/**
+ * Converts `value` to an integer.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToInteger`](http://www.ecma-international.org/ecma-262/7.0/#sec-tointeger).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {number} Returns the converted integer.
+ * @example
+ *
+ * _.toInteger(3.2);
+ * // => 3
+ *
+ * _.toInteger(Number.MIN_VALUE);
+ * // => 0
+ *
+ * _.toInteger(Infinity);
+ * // => 1.7976931348623157e+308
+ *
+ * _.toInteger('3.2');
+ * // => 3
+ */
+function toInteger(value) {
+  var result = toFinite(value),
+      remainder = result % 1;
+
+  return result === result ? (remainder ? result - remainder : result) : 0;
+}
+
+module.exports = toInteger;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toNumber.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toNumber.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseTrim = __webpack_require__(/*! ./_baseTrim */ "./node_modules/lodash/_baseTrim.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
+    isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = baseTrim(value);
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+module.exports = toNumber;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toString.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toString.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseToString = __webpack_require__(/*! ./_baseToString */ "./node_modules/lodash/_baseToString.js");
+
+/**
+ * Converts `value` to a string. An empty string is returned for `null`
+ * and `undefined` values. The sign of `-0` is preserved.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ * @example
+ *
+ * _.toString(null);
+ * // => ''
+ *
+ * _.toString(-0);
+ * // => '-0'
+ *
+ * _.toString([1, 2, 3]);
+ * // => '1,2,3'
+ */
+function toString(value) {
+  return value == null ? '' : baseToString(value);
+}
+
+module.exports = toString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/unary.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/unary.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var ary = __webpack_require__(/*! ./ary */ "./node_modules/lodash/ary.js");
+
+/**
+ * Creates a function that accepts up to one argument, ignoring any
+ * additional arguments.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Function
+ * @param {Function} func The function to cap arguments for.
+ * @returns {Function} Returns the new capped function.
+ * @example
+ *
+ * _.map(['6', '8', '10'], _.unary(parseInt));
+ * // => [6, 8, 10]
+ */
+function unary(func) {
+  return ary(func, 1);
+}
+
+module.exports = unary;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/wrap.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/wrap.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var castFunction = __webpack_require__(/*! ./_castFunction */ "./node_modules/lodash/_castFunction.js"),
+    partial = __webpack_require__(/*! ./partial */ "./node_modules/lodash/partial.js");
+
+/**
+ * Creates a function that provides `value` to `wrapper` as its first
+ * argument. Any additional arguments provided to the function are appended
+ * to those provided to the `wrapper`. The wrapper is invoked with the `this`
+ * binding of the created function.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {*} value The value to wrap.
+ * @param {Function} [wrapper=identity] The wrapper function.
+ * @returns {Function} Returns the new function.
+ * @example
+ *
+ * var p = _.wrap(_.escape, function(func, text) {
+ *   return '<p>' + func(text) + '</p>';
+ * });
+ *
+ * p('fred, barney, & pebbles');
+ * // => '<p>fred, barney, &amp; pebbles</p>'
+ */
+function wrap(value, wrapper) {
+  return partial(castFunction(wrapper), value);
+}
+
+module.exports = wrap;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/wrapperLodash.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/wrapperLodash.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var LazyWrapper = __webpack_require__(/*! ./_LazyWrapper */ "./node_modules/lodash/_LazyWrapper.js"),
+    LodashWrapper = __webpack_require__(/*! ./_LodashWrapper */ "./node_modules/lodash/_LodashWrapper.js"),
+    baseLodash = __webpack_require__(/*! ./_baseLodash */ "./node_modules/lodash/_baseLodash.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js"),
+    wrapperClone = __webpack_require__(/*! ./_wrapperClone */ "./node_modules/lodash/_wrapperClone.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Creates a `lodash` object which wraps `value` to enable implicit method
+ * chain sequences. Methods that operate on and return arrays, collections,
+ * and functions can be chained together. Methods that retrieve a single value
+ * or may return a primitive value will automatically end the chain sequence
+ * and return the unwrapped value. Otherwise, the value must be unwrapped
+ * with `_#value`.
+ *
+ * Explicit chain sequences, which must be unwrapped with `_#value`, may be
+ * enabled using `_.chain`.
+ *
+ * The execution of chained methods is lazy, that is, it's deferred until
+ * `_#value` is implicitly or explicitly called.
+ *
+ * Lazy evaluation allows several methods to support shortcut fusion.
+ * Shortcut fusion is an optimization to merge iteratee calls; this avoids
+ * the creation of intermediate arrays and can greatly reduce the number of
+ * iteratee executions. Sections of a chain sequence qualify for shortcut
+ * fusion if the section is applied to an array and iteratees accept only
+ * one argument. The heuristic for whether a section qualifies for shortcut
+ * fusion is subject to change.
+ *
+ * Chaining is supported in custom builds as long as the `_#value` method is
+ * directly or indirectly included in the build.
+ *
+ * In addition to lodash methods, wrappers have `Array` and `String` methods.
+ *
+ * The wrapper `Array` methods are:
+ * `concat`, `join`, `pop`, `push`, `shift`, `sort`, `splice`, and `unshift`
+ *
+ * The wrapper `String` methods are:
+ * `replace` and `split`
+ *
+ * The wrapper methods that support shortcut fusion are:
+ * `at`, `compact`, `drop`, `dropRight`, `dropWhile`, `filter`, `find`,
+ * `findLast`, `head`, `initial`, `last`, `map`, `reject`, `reverse`, `slice`,
+ * `tail`, `take`, `takeRight`, `takeRightWhile`, `takeWhile`, and `toArray`
+ *
+ * The chainable wrapper methods are:
+ * `after`, `ary`, `assign`, `assignIn`, `assignInWith`, `assignWith`, `at`,
+ * `before`, `bind`, `bindAll`, `bindKey`, `castArray`, `chain`, `chunk`,
+ * `commit`, `compact`, `concat`, `conforms`, `constant`, `countBy`, `create`,
+ * `curry`, `debounce`, `defaults`, `defaultsDeep`, `defer`, `delay`,
+ * `difference`, `differenceBy`, `differenceWith`, `drop`, `dropRight`,
+ * `dropRightWhile`, `dropWhile`, `extend`, `extendWith`, `fill`, `filter`,
+ * `flatMap`, `flatMapDeep`, `flatMapDepth`, `flatten`, `flattenDeep`,
+ * `flattenDepth`, `flip`, `flow`, `flowRight`, `fromPairs`, `functions`,
+ * `functionsIn`, `groupBy`, `initial`, `intersection`, `intersectionBy`,
+ * `intersectionWith`, `invert`, `invertBy`, `invokeMap`, `iteratee`, `keyBy`,
+ * `keys`, `keysIn`, `map`, `mapKeys`, `mapValues`, `matches`, `matchesProperty`,
+ * `memoize`, `merge`, `mergeWith`, `method`, `methodOf`, `mixin`, `negate`,
+ * `nthArg`, `omit`, `omitBy`, `once`, `orderBy`, `over`, `overArgs`,
+ * `overEvery`, `overSome`, `partial`, `partialRight`, `partition`, `pick`,
+ * `pickBy`, `plant`, `property`, `propertyOf`, `pull`, `pullAll`, `pullAllBy`,
+ * `pullAllWith`, `pullAt`, `push`, `range`, `rangeRight`, `rearg`, `reject`,
+ * `remove`, `rest`, `reverse`, `sampleSize`, `set`, `setWith`, `shuffle`,
+ * `slice`, `sort`, `sortBy`, `splice`, `spread`, `tail`, `take`, `takeRight`,
+ * `takeRightWhile`, `takeWhile`, `tap`, `throttle`, `thru`, `toArray`,
+ * `toPairs`, `toPairsIn`, `toPath`, `toPlainObject`, `transform`, `unary`,
+ * `union`, `unionBy`, `unionWith`, `uniq`, `uniqBy`, `uniqWith`, `unset`,
+ * `unshift`, `unzip`, `unzipWith`, `update`, `updateWith`, `values`,
+ * `valuesIn`, `without`, `wrap`, `xor`, `xorBy`, `xorWith`, `zip`,
+ * `zipObject`, `zipObjectDeep`, and `zipWith`
+ *
+ * The wrapper methods that are **not** chainable by default are:
+ * `add`, `attempt`, `camelCase`, `capitalize`, `ceil`, `clamp`, `clone`,
+ * `cloneDeep`, `cloneDeepWith`, `cloneWith`, `conformsTo`, `deburr`,
+ * `defaultTo`, `divide`, `each`, `eachRight`, `endsWith`, `eq`, `escape`,
+ * `escapeRegExp`, `every`, `find`, `findIndex`, `findKey`, `findLast`,
+ * `findLastIndex`, `findLastKey`, `first`, `floor`, `forEach`, `forEachRight`,
+ * `forIn`, `forInRight`, `forOwn`, `forOwnRight`, `get`, `gt`, `gte`, `has`,
+ * `hasIn`, `head`, `identity`, `includes`, `indexOf`, `inRange`, `invoke`,
+ * `isArguments`, `isArray`, `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`,
+ * `isBoolean`, `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`,
+ * `isEqualWith`, `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`,
+ * `isMap`, `isMatch`, `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`,
+ * `isNumber`, `isObject`, `isObjectLike`, `isPlainObject`, `isRegExp`,
+ * `isSafeInteger`, `isSet`, `isString`, `isUndefined`, `isTypedArray`,
+ * `isWeakMap`, `isWeakSet`, `join`, `kebabCase`, `last`, `lastIndexOf`,
+ * `lowerCase`, `lowerFirst`, `lt`, `lte`, `max`, `maxBy`, `mean`, `meanBy`,
+ * `min`, `minBy`, `multiply`, `noConflict`, `noop`, `now`, `nth`, `pad`,
+ * `padEnd`, `padStart`, `parseInt`, `pop`, `random`, `reduce`, `reduceRight`,
+ * `repeat`, `result`, `round`, `runInContext`, `sample`, `shift`, `size`,
+ * `snakeCase`, `some`, `sortedIndex`, `sortedIndexBy`, `sortedLastIndex`,
+ * `sortedLastIndexBy`, `startCase`, `startsWith`, `stubArray`, `stubFalse`,
+ * `stubObject`, `stubString`, `stubTrue`, `subtract`, `sum`, `sumBy`,
+ * `template`, `times`, `toFinite`, `toInteger`, `toJSON`, `toLength`,
+ * `toLower`, `toNumber`, `toSafeInteger`, `toString`, `toUpper`, `trim`,
+ * `trimEnd`, `trimStart`, `truncate`, `unescape`, `uniqueId`, `upperCase`,
+ * `upperFirst`, `value`, and `words`
+ *
+ * @name _
+ * @constructor
+ * @category Seq
+ * @param {*} value The value to wrap in a `lodash` instance.
+ * @returns {Object} Returns the new `lodash` wrapper instance.
+ * @example
+ *
+ * function square(n) {
+ *   return n * n;
+ * }
+ *
+ * var wrapped = _([1, 2, 3]);
+ *
+ * // Returns an unwrapped value.
+ * wrapped.reduce(_.add);
+ * // => 6
+ *
+ * // Returns a wrapped value.
+ * var squares = wrapped.map(square);
+ *
+ * _.isArray(squares);
+ * // => false
+ *
+ * _.isArray(squares.value());
+ * // => true
+ */
+function lodash(value) {
+  if (isObjectLike(value) && !isArray(value) && !(value instanceof LazyWrapper)) {
+    if (value instanceof LodashWrapper) {
+      return value;
+    }
+    if (hasOwnProperty.call(value, '__wrapped__')) {
+      return wrapperClone(value);
+    }
+  }
+  return new LodashWrapper(value);
+}
+
+// Ensure wrappers are instances of `baseLodash`.
+lodash.prototype = baseLodash.prototype;
+lodash.prototype.constructor = lodash;
+
+module.exports = lodash;
+
+
+/***/ }),
+
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
@@ -34235,7 +40023,7 @@ var gPO = (typeof Reflect === 'function' ? Reflect.getPrototypeOf : Object.getPr
         : null
 );
 
-var inspectCustom = __webpack_require__(/*! ./util.inspect */ "?4f7e").custom;
+var inspectCustom = (__webpack_require__(/*! ./util.inspect */ "?2128").custom);
 var inspectSymbol = inspectCustom && isSymbol(inspectCustom) ? inspectCustom : null;
 var toStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag !== 'undefined' ? Symbol.toStringTag : null;
 
@@ -35762,7 +41550,7 @@ module.exports = function getSideChannel() {
   \*************************************************************************/
 /***/ ((module, exports, __webpack_require__) => {
 
-/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
+/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 /* eslint-env browser */
 
 /**
@@ -36323,1190 +42111,6 @@ module.exports = setup;
 /***/ "./node_modules/socket.io-client/node_modules/ms/index.js":
 /*!****************************************************************!*\
   !*** ./node_modules/socket.io-client/node_modules/ms/index.js ***!
-  \****************************************************************/
-/***/ ((module) => {
-
-/**
- * Helpers.
- */
-
-var s = 1000;
-var m = s * 60;
-var h = m * 60;
-var d = h * 24;
-var w = d * 7;
-var y = d * 365.25;
-
-/**
- * Parse or format the given `val`.
- *
- * Options:
- *
- *  - `long` verbose formatting [false]
- *
- * @param {String|Number} val
- * @param {Object} [options]
- * @throws {Error} throw an error if val is not a non-empty string or a number
- * @return {String|Number}
- * @api public
- */
-
-module.exports = function(val, options) {
-  options = options || {};
-  var type = typeof val;
-  if (type === 'string' && val.length > 0) {
-    return parse(val);
-  } else if (type === 'number' && isFinite(val)) {
-    return options.long ? fmtLong(val) : fmtShort(val);
-  }
-  throw new Error(
-    'val is not a non-empty string or a valid number. val=' +
-      JSON.stringify(val)
-  );
-};
-
-/**
- * Parse the given `str` and return milliseconds.
- *
- * @param {String} str
- * @return {Number}
- * @api private
- */
-
-function parse(str) {
-  str = String(str);
-  if (str.length > 100) {
-    return;
-  }
-  var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
-    str
-  );
-  if (!match) {
-    return;
-  }
-  var n = parseFloat(match[1]);
-  var type = (match[2] || 'ms').toLowerCase();
-  switch (type) {
-    case 'years':
-    case 'year':
-    case 'yrs':
-    case 'yr':
-    case 'y':
-      return n * y;
-    case 'weeks':
-    case 'week':
-    case 'w':
-      return n * w;
-    case 'days':
-    case 'day':
-    case 'd':
-      return n * d;
-    case 'hours':
-    case 'hour':
-    case 'hrs':
-    case 'hr':
-    case 'h':
-      return n * h;
-    case 'minutes':
-    case 'minute':
-    case 'mins':
-    case 'min':
-    case 'm':
-      return n * m;
-    case 'seconds':
-    case 'second':
-    case 'secs':
-    case 'sec':
-    case 's':
-      return n * s;
-    case 'milliseconds':
-    case 'millisecond':
-    case 'msecs':
-    case 'msec':
-    case 'ms':
-      return n;
-    default:
-      return undefined;
-  }
-}
-
-/**
- * Short format for `ms`.
- *
- * @param {Number} ms
- * @return {String}
- * @api private
- */
-
-function fmtShort(ms) {
-  var msAbs = Math.abs(ms);
-  if (msAbs >= d) {
-    return Math.round(ms / d) + 'd';
-  }
-  if (msAbs >= h) {
-    return Math.round(ms / h) + 'h';
-  }
-  if (msAbs >= m) {
-    return Math.round(ms / m) + 'm';
-  }
-  if (msAbs >= s) {
-    return Math.round(ms / s) + 's';
-  }
-  return ms + 'ms';
-}
-
-/**
- * Long format for `ms`.
- *
- * @param {Number} ms
- * @return {String}
- * @api private
- */
-
-function fmtLong(ms) {
-  var msAbs = Math.abs(ms);
-  if (msAbs >= d) {
-    return plural(ms, msAbs, d, 'day');
-  }
-  if (msAbs >= h) {
-    return plural(ms, msAbs, h, 'hour');
-  }
-  if (msAbs >= m) {
-    return plural(ms, msAbs, m, 'minute');
-  }
-  if (msAbs >= s) {
-    return plural(ms, msAbs, s, 'second');
-  }
-  return ms + ' ms';
-}
-
-/**
- * Pluralization helper.
- */
-
-function plural(ms, msAbs, n, name) {
-  var isPlural = msAbs >= n * 1.5;
-  return Math.round(ms / n) + ' ' + name + (isPlural ? 's' : '');
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/socket.io-parser/dist/binary.js":
-/*!******************************************************!*\
-  !*** ./node_modules/socket.io-parser/dist/binary.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.reconstructPacket = exports.deconstructPacket = void 0;
-const is_binary_1 = __webpack_require__(/*! ./is-binary */ "./node_modules/socket.io-parser/dist/is-binary.js");
-/**
- * Replaces every Buffer | ArrayBuffer | Blob | File in packet with a numbered placeholder.
- *
- * @param {Object} packet - socket.io event packet
- * @return {Object} with deconstructed packet and list of buffers
- * @public
- */
-function deconstructPacket(packet) {
-    const buffers = [];
-    const packetData = packet.data;
-    const pack = packet;
-    pack.data = _deconstructPacket(packetData, buffers);
-    pack.attachments = buffers.length; // number of binary 'attachments'
-    return { packet: pack, buffers: buffers };
-}
-exports.deconstructPacket = deconstructPacket;
-function _deconstructPacket(data, buffers) {
-    if (!data)
-        return data;
-    if (is_binary_1.isBinary(data)) {
-        const placeholder = { _placeholder: true, num: buffers.length };
-        buffers.push(data);
-        return placeholder;
-    }
-    else if (Array.isArray(data)) {
-        const newData = new Array(data.length);
-        for (let i = 0; i < data.length; i++) {
-            newData[i] = _deconstructPacket(data[i], buffers);
-        }
-        return newData;
-    }
-    else if (typeof data === "object" && !(data instanceof Date)) {
-        const newData = {};
-        for (const key in data) {
-            if (data.hasOwnProperty(key)) {
-                newData[key] = _deconstructPacket(data[key], buffers);
-            }
-        }
-        return newData;
-    }
-    return data;
-}
-/**
- * Reconstructs a binary packet from its placeholder packet and buffers
- *
- * @param {Object} packet - event packet with placeholders
- * @param {Array} buffers - binary buffers to put in placeholder positions
- * @return {Object} reconstructed packet
- * @public
- */
-function reconstructPacket(packet, buffers) {
-    packet.data = _reconstructPacket(packet.data, buffers);
-    packet.attachments = undefined; // no longer useful
-    return packet;
-}
-exports.reconstructPacket = reconstructPacket;
-function _reconstructPacket(data, buffers) {
-    if (!data)
-        return data;
-    if (data && data._placeholder) {
-        return buffers[data.num]; // appropriate buffer (should be natural order anyway)
-    }
-    else if (Array.isArray(data)) {
-        for (let i = 0; i < data.length; i++) {
-            data[i] = _reconstructPacket(data[i], buffers);
-        }
-    }
-    else if (typeof data === "object") {
-        for (const key in data) {
-            if (data.hasOwnProperty(key)) {
-                data[key] = _reconstructPacket(data[key], buffers);
-            }
-        }
-    }
-    return data;
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/socket.io-parser/dist/index.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/socket.io-parser/dist/index.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Decoder = exports.Encoder = exports.PacketType = exports.protocol = void 0;
-const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
-const binary_1 = __webpack_require__(/*! ./binary */ "./node_modules/socket.io-parser/dist/binary.js");
-const is_binary_1 = __webpack_require__(/*! ./is-binary */ "./node_modules/socket.io-parser/dist/is-binary.js");
-const debug = __webpack_require__(/*! debug */ "./node_modules/socket.io-parser/node_modules/debug/src/browser.js")("socket.io-parser");
-/**
- * Protocol version.
- *
- * @public
- */
-exports.protocol = 5;
-var PacketType;
-(function (PacketType) {
-    PacketType[PacketType["CONNECT"] = 0] = "CONNECT";
-    PacketType[PacketType["DISCONNECT"] = 1] = "DISCONNECT";
-    PacketType[PacketType["EVENT"] = 2] = "EVENT";
-    PacketType[PacketType["ACK"] = 3] = "ACK";
-    PacketType[PacketType["CONNECT_ERROR"] = 4] = "CONNECT_ERROR";
-    PacketType[PacketType["BINARY_EVENT"] = 5] = "BINARY_EVENT";
-    PacketType[PacketType["BINARY_ACK"] = 6] = "BINARY_ACK";
-})(PacketType = exports.PacketType || (exports.PacketType = {}));
-/**
- * A socket.io Encoder instance
- */
-class Encoder {
-    /**
-     * Encode a packet as a single string if non-binary, or as a
-     * buffer sequence, depending on packet type.
-     *
-     * @param {Object} obj - packet object
-     */
-    encode(obj) {
-        debug("encoding packet %j", obj);
-        if (obj.type === PacketType.EVENT || obj.type === PacketType.ACK) {
-            if (is_binary_1.hasBinary(obj)) {
-                obj.type =
-                    obj.type === PacketType.EVENT
-                        ? PacketType.BINARY_EVENT
-                        : PacketType.BINARY_ACK;
-                return this.encodeAsBinary(obj);
-            }
-        }
-        return [this.encodeAsString(obj)];
-    }
-    /**
-     * Encode packet as string.
-     */
-    encodeAsString(obj) {
-        // first is type
-        let str = "" + obj.type;
-        // attachments if we have them
-        if (obj.type === PacketType.BINARY_EVENT ||
-            obj.type === PacketType.BINARY_ACK) {
-            str += obj.attachments + "-";
-        }
-        // if we have a namespace other than `/`
-        // we append it followed by a comma `,`
-        if (obj.nsp && "/" !== obj.nsp) {
-            str += obj.nsp + ",";
-        }
-        // immediately followed by the id
-        if (null != obj.id) {
-            str += obj.id;
-        }
-        // json data
-        if (null != obj.data) {
-            str += JSON.stringify(obj.data);
-        }
-        debug("encoded %j as %s", obj, str);
-        return str;
-    }
-    /**
-     * Encode packet as 'buffer sequence' by removing blobs, and
-     * deconstructing packet into object with placeholders and
-     * a list of buffers.
-     */
-    encodeAsBinary(obj) {
-        const deconstruction = binary_1.deconstructPacket(obj);
-        const pack = this.encodeAsString(deconstruction.packet);
-        const buffers = deconstruction.buffers;
-        buffers.unshift(pack); // add packet info to beginning of data list
-        return buffers; // write all the buffers
-    }
-}
-exports.Encoder = Encoder;
-/**
- * A socket.io Decoder instance
- *
- * @return {Object} decoder
- */
-class Decoder extends Emitter {
-    constructor() {
-        super();
-    }
-    /**
-     * Decodes an encoded packet string into packet JSON.
-     *
-     * @param {String} obj - encoded packet
-     */
-    add(obj) {
-        let packet;
-        if (typeof obj === "string") {
-            packet = this.decodeString(obj);
-            if (packet.type === PacketType.BINARY_EVENT ||
-                packet.type === PacketType.BINARY_ACK) {
-                // binary packet's json
-                this.reconstructor = new BinaryReconstructor(packet);
-                // no attachments, labeled binary but no binary data to follow
-                if (packet.attachments === 0) {
-                    super.emit("decoded", packet);
-                }
-            }
-            else {
-                // non-binary full packet
-                super.emit("decoded", packet);
-            }
-        }
-        else if (is_binary_1.isBinary(obj) || obj.base64) {
-            // raw binary data
-            if (!this.reconstructor) {
-                throw new Error("got binary data when not reconstructing a packet");
-            }
-            else {
-                packet = this.reconstructor.takeBinaryData(obj);
-                if (packet) {
-                    // received final buffer
-                    this.reconstructor = null;
-                    super.emit("decoded", packet);
-                }
-            }
-        }
-        else {
-            throw new Error("Unknown type: " + obj);
-        }
-    }
-    /**
-     * Decode a packet String (JSON data)
-     *
-     * @param {String} str
-     * @return {Object} packet
-     */
-    decodeString(str) {
-        let i = 0;
-        // look up type
-        const p = {
-            type: Number(str.charAt(0)),
-        };
-        if (PacketType[p.type] === undefined) {
-            throw new Error("unknown packet type " + p.type);
-        }
-        // look up attachments if type binary
-        if (p.type === PacketType.BINARY_EVENT ||
-            p.type === PacketType.BINARY_ACK) {
-            const start = i + 1;
-            while (str.charAt(++i) !== "-" && i != str.length) { }
-            const buf = str.substring(start, i);
-            if (buf != Number(buf) || str.charAt(i) !== "-") {
-                throw new Error("Illegal attachments");
-            }
-            p.attachments = Number(buf);
-        }
-        // look up namespace (if any)
-        if ("/" === str.charAt(i + 1)) {
-            const start = i + 1;
-            while (++i) {
-                const c = str.charAt(i);
-                if ("," === c)
-                    break;
-                if (i === str.length)
-                    break;
-            }
-            p.nsp = str.substring(start, i);
-        }
-        else {
-            p.nsp = "/";
-        }
-        // look up id
-        const next = str.charAt(i + 1);
-        if ("" !== next && Number(next) == next) {
-            const start = i + 1;
-            while (++i) {
-                const c = str.charAt(i);
-                if (null == c || Number(c) != c) {
-                    --i;
-                    break;
-                }
-                if (i === str.length)
-                    break;
-            }
-            p.id = Number(str.substring(start, i + 1));
-        }
-        // look up json data
-        if (str.charAt(++i)) {
-            const payload = tryParse(str.substr(i));
-            if (Decoder.isPayloadValid(p.type, payload)) {
-                p.data = payload;
-            }
-            else {
-                throw new Error("invalid payload");
-            }
-        }
-        debug("decoded %s as %j", str, p);
-        return p;
-    }
-    static isPayloadValid(type, payload) {
-        switch (type) {
-            case PacketType.CONNECT:
-                return typeof payload === "object";
-            case PacketType.DISCONNECT:
-                return payload === undefined;
-            case PacketType.CONNECT_ERROR:
-                return typeof payload === "string" || typeof payload === "object";
-            case PacketType.EVENT:
-            case PacketType.BINARY_EVENT:
-                return Array.isArray(payload) && payload.length > 0;
-            case PacketType.ACK:
-            case PacketType.BINARY_ACK:
-                return Array.isArray(payload);
-        }
-    }
-    /**
-     * Deallocates a parser's resources
-     */
-    destroy() {
-        if (this.reconstructor) {
-            this.reconstructor.finishedReconstruction();
-        }
-    }
-}
-exports.Decoder = Decoder;
-function tryParse(str) {
-    try {
-        return JSON.parse(str);
-    }
-    catch (e) {
-        return false;
-    }
-}
-/**
- * A manager of a binary event's 'buffer sequence'. Should
- * be constructed whenever a packet of type BINARY_EVENT is
- * decoded.
- *
- * @param {Object} packet
- * @return {BinaryReconstructor} initialized reconstructor
- */
-class BinaryReconstructor {
-    constructor(packet) {
-        this.packet = packet;
-        this.buffers = [];
-        this.reconPack = packet;
-    }
-    /**
-     * Method to be called when binary data received from connection
-     * after a BINARY_EVENT packet.
-     *
-     * @param {Buffer | ArrayBuffer} binData - the raw binary data received
-     * @return {null | Object} returns null if more binary data is expected or
-     *   a reconstructed packet object if all buffers have been received.
-     */
-    takeBinaryData(binData) {
-        this.buffers.push(binData);
-        if (this.buffers.length === this.reconPack.attachments) {
-            // done with buffer list
-            const packet = binary_1.reconstructPacket(this.reconPack, this.buffers);
-            this.finishedReconstruction();
-            return packet;
-        }
-        return null;
-    }
-    /**
-     * Cleans up binary packet reconstruction variables.
-     */
-    finishedReconstruction() {
-        this.reconPack = null;
-        this.buffers = [];
-    }
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/socket.io-parser/dist/is-binary.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/socket.io-parser/dist/is-binary.js ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.hasBinary = exports.isBinary = void 0;
-const withNativeArrayBuffer = typeof ArrayBuffer === "function";
-const isView = (obj) => {
-    return typeof ArrayBuffer.isView === "function"
-        ? ArrayBuffer.isView(obj)
-        : obj.buffer instanceof ArrayBuffer;
-};
-const toString = Object.prototype.toString;
-const withNativeBlob = typeof Blob === "function" ||
-    (typeof Blob !== "undefined" &&
-        toString.call(Blob) === "[object BlobConstructor]");
-const withNativeFile = typeof File === "function" ||
-    (typeof File !== "undefined" &&
-        toString.call(File) === "[object FileConstructor]");
-/**
- * Returns true if obj is a Buffer, an ArrayBuffer, a Blob or a File.
- *
- * @private
- */
-function isBinary(obj) {
-    return ((withNativeArrayBuffer && (obj instanceof ArrayBuffer || isView(obj))) ||
-        (withNativeBlob && obj instanceof Blob) ||
-        (withNativeFile && obj instanceof File));
-}
-exports.isBinary = isBinary;
-function hasBinary(obj, toJSON) {
-    if (!obj || typeof obj !== "object") {
-        return false;
-    }
-    if (Array.isArray(obj)) {
-        for (let i = 0, l = obj.length; i < l; i++) {
-            if (hasBinary(obj[i])) {
-                return true;
-            }
-        }
-        return false;
-    }
-    if (isBinary(obj)) {
-        return true;
-    }
-    if (obj.toJSON &&
-        typeof obj.toJSON === "function" &&
-        arguments.length === 1) {
-        return hasBinary(obj.toJSON(), true);
-    }
-    for (const key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key) && hasBinary(obj[key])) {
-            return true;
-        }
-    }
-    return false;
-}
-exports.hasBinary = hasBinary;
-
-
-/***/ }),
-
-/***/ "./node_modules/socket.io-parser/node_modules/debug/src/browser.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/socket.io-parser/node_modules/debug/src/browser.js ***!
-  \*************************************************************************/
-/***/ ((module, exports, __webpack_require__) => {
-
-/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
-/* eslint-env browser */
-
-/**
- * This is the web browser implementation of `debug()`.
- */
-
-exports.formatArgs = formatArgs;
-exports.save = save;
-exports.load = load;
-exports.useColors = useColors;
-exports.storage = localstorage();
-exports.destroy = (() => {
-	let warned = false;
-
-	return () => {
-		if (!warned) {
-			warned = true;
-			console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
-		}
-	};
-})();
-
-/**
- * Colors.
- */
-
-exports.colors = [
-	'#0000CC',
-	'#0000FF',
-	'#0033CC',
-	'#0033FF',
-	'#0066CC',
-	'#0066FF',
-	'#0099CC',
-	'#0099FF',
-	'#00CC00',
-	'#00CC33',
-	'#00CC66',
-	'#00CC99',
-	'#00CCCC',
-	'#00CCFF',
-	'#3300CC',
-	'#3300FF',
-	'#3333CC',
-	'#3333FF',
-	'#3366CC',
-	'#3366FF',
-	'#3399CC',
-	'#3399FF',
-	'#33CC00',
-	'#33CC33',
-	'#33CC66',
-	'#33CC99',
-	'#33CCCC',
-	'#33CCFF',
-	'#6600CC',
-	'#6600FF',
-	'#6633CC',
-	'#6633FF',
-	'#66CC00',
-	'#66CC33',
-	'#9900CC',
-	'#9900FF',
-	'#9933CC',
-	'#9933FF',
-	'#99CC00',
-	'#99CC33',
-	'#CC0000',
-	'#CC0033',
-	'#CC0066',
-	'#CC0099',
-	'#CC00CC',
-	'#CC00FF',
-	'#CC3300',
-	'#CC3333',
-	'#CC3366',
-	'#CC3399',
-	'#CC33CC',
-	'#CC33FF',
-	'#CC6600',
-	'#CC6633',
-	'#CC9900',
-	'#CC9933',
-	'#CCCC00',
-	'#CCCC33',
-	'#FF0000',
-	'#FF0033',
-	'#FF0066',
-	'#FF0099',
-	'#FF00CC',
-	'#FF00FF',
-	'#FF3300',
-	'#FF3333',
-	'#FF3366',
-	'#FF3399',
-	'#FF33CC',
-	'#FF33FF',
-	'#FF6600',
-	'#FF6633',
-	'#FF9900',
-	'#FF9933',
-	'#FFCC00',
-	'#FFCC33'
-];
-
-/**
- * Currently only WebKit-based Web Inspectors, Firefox >= v31,
- * and the Firebug extension (any Firefox version) are known
- * to support "%c" CSS customizations.
- *
- * TODO: add a `localStorage` variable to explicitly enable/disable colors
- */
-
-// eslint-disable-next-line complexity
-function useColors() {
-	// NB: In an Electron preload script, document will be defined but not fully
-	// initialized. Since we know we're in Chrome, we'll just detect this case
-	// explicitly
-	if (typeof window !== 'undefined' && window.process && (window.process.type === 'renderer' || window.process.__nwjs)) {
-		return true;
-	}
-
-	// Internet Explorer and Edge do not support colors.
-	if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
-		return false;
-	}
-
-	// Is webkit? http://stackoverflow.com/a/16459606/376773
-	// document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
-	return (typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance) ||
-		// Is firebug? http://stackoverflow.com/a/398120/376773
-		(typeof window !== 'undefined' && window.console && (window.console.firebug || (window.console.exception && window.console.table))) ||
-		// Is firefox >= v31?
-		// https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
-		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
-		// Double check webkit in userAgent just in case we are in a worker
-		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
-}
-
-/**
- * Colorize log arguments if enabled.
- *
- * @api public
- */
-
-function formatArgs(args) {
-	args[0] = (this.useColors ? '%c' : '') +
-		this.namespace +
-		(this.useColors ? ' %c' : ' ') +
-		args[0] +
-		(this.useColors ? '%c ' : ' ') +
-		'+' + module.exports.humanize(this.diff);
-
-	if (!this.useColors) {
-		return;
-	}
-
-	const c = 'color: ' + this.color;
-	args.splice(1, 0, c, 'color: inherit');
-
-	// The final "%c" is somewhat tricky, because there could be other
-	// arguments passed either before or after the %c, so we need to
-	// figure out the correct index to insert the CSS into
-	let index = 0;
-	let lastC = 0;
-	args[0].replace(/%[a-zA-Z%]/g, match => {
-		if (match === '%%') {
-			return;
-		}
-		index++;
-		if (match === '%c') {
-			// We only are interested in the *last* %c
-			// (the user may have provided their own)
-			lastC = index;
-		}
-	});
-
-	args.splice(lastC, 0, c);
-}
-
-/**
- * Invokes `console.debug()` when available.
- * No-op when `console.debug` is not a "function".
- * If `console.debug` is not available, falls back
- * to `console.log`.
- *
- * @api public
- */
-exports.log = console.debug || console.log || (() => {});
-
-/**
- * Save `namespaces`.
- *
- * @param {String} namespaces
- * @api private
- */
-function save(namespaces) {
-	try {
-		if (namespaces) {
-			exports.storage.setItem('debug', namespaces);
-		} else {
-			exports.storage.removeItem('debug');
-		}
-	} catch (error) {
-		// Swallow
-		// XXX (@Qix-) should we be logging these?
-	}
-}
-
-/**
- * Load `namespaces`.
- *
- * @return {String} returns the previously persisted debug modes
- * @api private
- */
-function load() {
-	let r;
-	try {
-		r = exports.storage.getItem('debug');
-	} catch (error) {
-		// Swallow
-		// XXX (@Qix-) should we be logging these?
-	}
-
-	// If debug isn't set in LS, and we're in Electron, try to load $DEBUG
-	if (!r && typeof process !== 'undefined' && 'env' in process) {
-		r = process.env.DEBUG;
-	}
-
-	return r;
-}
-
-/**
- * Localstorage attempts to return the localstorage.
- *
- * This is necessary because safari throws
- * when a user disables cookies/localstorage
- * and you attempt to access it.
- *
- * @return {LocalStorage}
- * @api private
- */
-
-function localstorage() {
-	try {
-		// TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
-		// The Browser also has localStorage in the global context.
-		return localStorage;
-	} catch (error) {
-		// Swallow
-		// XXX (@Qix-) should we be logging these?
-	}
-}
-
-module.exports = __webpack_require__(/*! ./common */ "./node_modules/socket.io-parser/node_modules/debug/src/common.js")(exports);
-
-const {formatters} = module.exports;
-
-/**
- * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
- */
-
-formatters.j = function (v) {
-	try {
-		return JSON.stringify(v);
-	} catch (error) {
-		return '[UnexpectedJSONParseError]: ' + error.message;
-	}
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/socket.io-parser/node_modules/debug/src/common.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/socket.io-parser/node_modules/debug/src/common.js ***!
-  \************************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-
-/**
- * This is the common logic for both the Node.js and web browser
- * implementations of `debug()`.
- */
-
-function setup(env) {
-	createDebug.debug = createDebug;
-	createDebug.default = createDebug;
-	createDebug.coerce = coerce;
-	createDebug.disable = disable;
-	createDebug.enable = enable;
-	createDebug.enabled = enabled;
-	createDebug.humanize = __webpack_require__(/*! ms */ "./node_modules/socket.io-parser/node_modules/ms/index.js");
-	createDebug.destroy = destroy;
-
-	Object.keys(env).forEach(key => {
-		createDebug[key] = env[key];
-	});
-
-	/**
-	* The currently active debug mode names, and names to skip.
-	*/
-
-	createDebug.names = [];
-	createDebug.skips = [];
-
-	/**
-	* Map of special "%n" handling functions, for the debug "format" argument.
-	*
-	* Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
-	*/
-	createDebug.formatters = {};
-
-	/**
-	* Selects a color for a debug namespace
-	* @param {String} namespace The namespace string for the for the debug instance to be colored
-	* @return {Number|String} An ANSI color code for the given namespace
-	* @api private
-	*/
-	function selectColor(namespace) {
-		let hash = 0;
-
-		for (let i = 0; i < namespace.length; i++) {
-			hash = ((hash << 5) - hash) + namespace.charCodeAt(i);
-			hash |= 0; // Convert to 32bit integer
-		}
-
-		return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
-	}
-	createDebug.selectColor = selectColor;
-
-	/**
-	* Create a debugger with the given `namespace`.
-	*
-	* @param {String} namespace
-	* @return {Function}
-	* @api public
-	*/
-	function createDebug(namespace) {
-		let prevTime;
-		let enableOverride = null;
-		let namespacesCache;
-		let enabledCache;
-
-		function debug(...args) {
-			// Disabled?
-			if (!debug.enabled) {
-				return;
-			}
-
-			const self = debug;
-
-			// Set `diff` timestamp
-			const curr = Number(new Date());
-			const ms = curr - (prevTime || curr);
-			self.diff = ms;
-			self.prev = prevTime;
-			self.curr = curr;
-			prevTime = curr;
-
-			args[0] = createDebug.coerce(args[0]);
-
-			if (typeof args[0] !== 'string') {
-				// Anything else let's inspect with %O
-				args.unshift('%O');
-			}
-
-			// Apply any `formatters` transformations
-			let index = 0;
-			args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
-				// If we encounter an escaped % then don't increase the array index
-				if (match === '%%') {
-					return '%';
-				}
-				index++;
-				const formatter = createDebug.formatters[format];
-				if (typeof formatter === 'function') {
-					const val = args[index];
-					match = formatter.call(self, val);
-
-					// Now we need to remove `args[index]` since it's inlined in the `format`
-					args.splice(index, 1);
-					index--;
-				}
-				return match;
-			});
-
-			// Apply env-specific formatting (colors, etc.)
-			createDebug.formatArgs.call(self, args);
-
-			const logFn = self.log || createDebug.log;
-			logFn.apply(self, args);
-		}
-
-		debug.namespace = namespace;
-		debug.useColors = createDebug.useColors();
-		debug.color = createDebug.selectColor(namespace);
-		debug.extend = extend;
-		debug.destroy = createDebug.destroy; // XXX Temporary. Will be removed in the next major release.
-
-		Object.defineProperty(debug, 'enabled', {
-			enumerable: true,
-			configurable: false,
-			get: () => {
-				if (enableOverride !== null) {
-					return enableOverride;
-				}
-				if (namespacesCache !== createDebug.namespaces) {
-					namespacesCache = createDebug.namespaces;
-					enabledCache = createDebug.enabled(namespace);
-				}
-
-				return enabledCache;
-			},
-			set: v => {
-				enableOverride = v;
-			}
-		});
-
-		// Env-specific initialization logic for debug instances
-		if (typeof createDebug.init === 'function') {
-			createDebug.init(debug);
-		}
-
-		return debug;
-	}
-
-	function extend(namespace, delimiter) {
-		const newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
-		newDebug.log = this.log;
-		return newDebug;
-	}
-
-	/**
-	* Enables a debug mode by namespaces. This can include modes
-	* separated by a colon and wildcards.
-	*
-	* @param {String} namespaces
-	* @api public
-	*/
-	function enable(namespaces) {
-		createDebug.save(namespaces);
-		createDebug.namespaces = namespaces;
-
-		createDebug.names = [];
-		createDebug.skips = [];
-
-		let i;
-		const split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
-		const len = split.length;
-
-		for (i = 0; i < len; i++) {
-			if (!split[i]) {
-				// ignore empty strings
-				continue;
-			}
-
-			namespaces = split[i].replace(/\*/g, '.*?');
-
-			if (namespaces[0] === '-') {
-				createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
-			} else {
-				createDebug.names.push(new RegExp('^' + namespaces + '$'));
-			}
-		}
-	}
-
-	/**
-	* Disable debug output.
-	*
-	* @return {String} namespaces
-	* @api public
-	*/
-	function disable() {
-		const namespaces = [
-			...createDebug.names.map(toNamespace),
-			...createDebug.skips.map(toNamespace).map(namespace => '-' + namespace)
-		].join(',');
-		createDebug.enable('');
-		return namespaces;
-	}
-
-	/**
-	* Returns true if the given mode name is enabled, false otherwise.
-	*
-	* @param {String} name
-	* @return {Boolean}
-	* @api public
-	*/
-	function enabled(name) {
-		if (name[name.length - 1] === '*') {
-			return true;
-		}
-
-		let i;
-		let len;
-
-		for (i = 0, len = createDebug.skips.length; i < len; i++) {
-			if (createDebug.skips[i].test(name)) {
-				return false;
-			}
-		}
-
-		for (i = 0, len = createDebug.names.length; i < len; i++) {
-			if (createDebug.names[i].test(name)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	* Convert regexp to namespace
-	*
-	* @param {RegExp} regxep
-	* @return {String} namespace
-	* @api private
-	*/
-	function toNamespace(regexp) {
-		return regexp.toString()
-			.substring(2, regexp.toString().length - 2)
-			.replace(/\.\*\?$/, '*');
-	}
-
-	/**
-	* Coerce `val`.
-	*
-	* @param {Mixed} val
-	* @return {Mixed}
-	* @api private
-	*/
-	function coerce(val) {
-		if (val instanceof Error) {
-			return val.stack || val.message;
-		}
-		return val;
-	}
-
-	/**
-	* XXX DO NOT USE. This is a temporary stub function.
-	* XXX It WILL be removed in the next major release.
-	*/
-	function destroy() {
-		console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
-	}
-
-	createDebug.enable(createDebug.load());
-
-	return createDebug;
-}
-
-module.exports = setup;
-
-
-/***/ }),
-
-/***/ "./node_modules/socket.io-parser/node_modules/ms/index.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/socket.io-parser/node_modules/ms/index.js ***!
   \****************************************************************/
 /***/ ((module) => {
 
@@ -42562,14 +47166,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
     "div",
     { staticClass: "slick-slider34" },
-    _vm._l(24, function(item, index) {
+    _vm._l(24, function (item, index) {
       return _c(
         "div",
         { key: index },
@@ -42579,16 +47183,16 @@ var render = function() {
               "data-index": index,
               "data-time": _vm.calendarDayTimes[index],
               "data-users": _vm.calendarDayUsers[index] || [],
-              "type-calendar": _vm.typeCalendar
+              "type-calendar": _vm.typeCalendar,
             },
             model: {
               value: _vm.calendarDayUsers[index],
-              callback: function($$v) {
+              callback: function ($$v) {
                 _vm.$set(_vm.calendarDayUsers, index, $$v)
               },
-              expression: "calendarDayUsers[index]"
-            }
-          })
+              expression: "calendarDayUsers[index]",
+            },
+          }),
         ],
         1
       )
@@ -42615,7 +47219,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -42624,14 +47228,14 @@ var render = function() {
     {
       staticClass: "z-50",
       class: { hidden: _vm.GlobalCalendarSwitched },
-      attrs: { id: "big-calendar" }
+      attrs: { id: "big-calendar" },
     },
     [
       _c(
         "div",
         {
           staticClass:
-            "w-full bg-gray-200 py-6 px-12 text-black z-50 min-h-screen fixed top-0 left-0 right-0"
+            "w-full bg-gray-200 py-6 px-12 text-black z-50 min-h-screen fixed top-0 left-0 right-0",
         },
         [
           _c(
@@ -42639,7 +47243,7 @@ var render = function() {
             {
               staticClass:
                 "bg-gray-200 w-12/12 h-12/12 flex flex-col justify-start items-center px-2 relative",
-              staticStyle: { "max-height": "98vh" }
+              staticStyle: { "max-height": "98vh" },
             },
             [
               _c(
@@ -42648,10 +47252,10 @@ var render = function() {
                   staticClass:
                     "text-black text-5xl cursor-pointer hover:text-red-500 absolute right-3 -top-3 cursor-pointer close-big-calendar",
                   on: {
-                    click: function($event) {
+                    click: function ($event) {
                       return _vm.closeGlobalCalendar()
-                    }
-                  }
+                    },
+                  },
                 },
                 [_vm._v("×")]
               ),
@@ -42660,20 +47264,20 @@ var render = function() {
                 "div",
                 {
                   staticClass: "flex flex-row items-center justify-center",
-                  class: { "opacity-40": _vm.weekLoading }
+                  class: { "opacity-40": _vm.weekLoading },
                 },
                 [
                   _c("img", {
                     staticClass: "prev px-6 py-2 cursor-pointer",
                     attrs: {
                       src: "/images/calendar-arrow-left.svg",
-                      alt: "prev"
+                      alt: "prev",
                     },
                     on: {
-                      click: function($event) {
+                      click: function ($event) {
                         return _vm.clickWeek("prev")
-                      }
-                    }
+                      },
+                    },
                   }),
                   _vm._v(" "),
                   _c("p", [_vm._v("Неделя " + _vm._s(_vm.currentWeek.title))]),
@@ -42682,14 +47286,14 @@ var render = function() {
                     staticClass: "next px-6 py-2 cursor-pointer",
                     attrs: {
                       src: "/images/calendar-arrow-right.svg",
-                      alt: "next"
+                      alt: "next",
                     },
                     on: {
-                      click: function($event) {
+                      click: function ($event) {
                         return _vm.clickWeek("next")
-                      }
-                    }
-                  })
+                      },
+                    },
+                  }),
                 ]
               ),
               _vm._v(" "),
@@ -42697,21 +47301,21 @@ var render = function() {
                 "div",
                 {
                   staticClass: "mt-8 w-full grid grid-cols-7 gap-4",
-                  class: { "opacity-40": _vm.weekLoading }
+                  class: { "opacity-40": _vm.weekLoading },
                 },
-                _vm._l(_vm.currentWeek.dates, function(item, index) {
+                _vm._l(_vm.currentWeek.dates, function (item, index) {
                   return _c(
                     "div",
                     {
                       key: index,
-                      staticClass: "flex justify-center items-center"
+                      staticClass: "flex justify-center items-center",
                     },
                     [
                       _vm._v(
                         "\n                    " +
                           _vm._s(item.date) +
                           "\n                "
-                      )
+                      ),
                     ]
                   )
                 }),
@@ -42723,33 +47327,33 @@ var render = function() {
                 {
                   staticClass:
                     "day-to-day mt-2 w-full grid grid-cols-7 gap-4 max-h-full overflow-y-auto",
-                  class: { "opacity-40": _vm.weekLoading }
+                  class: { "opacity-40": _vm.weekLoading },
                 },
-                _vm._l(_vm.currentWeek.dates, function(item, index) {
+                _vm._l(_vm.currentWeek.dates, function (item, index) {
                   return _c(
                     "div",
                     {
                       key: index,
                       staticClass: "overflow-y-visible max-h-full",
-                      attrs: { "data-name": "day" + "-" + index }
+                      attrs: { "data-name": "day" + "-" + index },
                     },
                     [
                       _c("CalendarDay", {
                         attrs: {
                           "type-calendar": "global",
-                          "data-day": item.dateFull
-                        }
-                      })
+                          "data-day": item.dateFull,
+                        },
+                      }),
                     ],
                     1
                   )
                 }),
                 0
-              )
+              ),
             ]
-          )
+          ),
         ]
-      )
+      ),
     ]
   )
 }
@@ -42772,7 +47376,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -42785,16 +47389,16 @@ var render = function() {
         "bg-red-700 hover:bg-red-600": !_vm.free,
         "bg-green-500 hover:bg-green-600": _vm.free,
         "my-6 mx-4 text-base": _vm.typeCalendar === "local",
-        "my-3 text-xs": _vm.typeCalendar === "global"
+        "my-3 text-xs": _vm.typeCalendar === "global",
       },
       on: {
-        mouseover: function($event) {
+        mouseover: function ($event) {
           _vm.showButton = true
         },
-        mouseleave: function($event) {
+        mouseleave: function ($event) {
           _vm.showButton = false
-        }
-      }
+        },
+      },
     },
     [
       _c("div", [_vm._v(_vm._s(_vm.dataTime ? _vm.dataTime.hour : ""))]),
@@ -42803,16 +47407,16 @@ var render = function() {
         !_vm.free
           ? _c(
               "div",
-              _vm._l(_vm.dataUsers, function(user, userIndex) {
+              _vm._l(_vm.dataUsers, function (user, userIndex) {
                 return _c("p", { key: userIndex }, [
                   _vm._v(
                     "\n                " + _vm._s(user.name) + "\n            "
-                  )
+                  ),
                 ])
               }),
               0
             )
-          : _c("div", [_c("p", [_vm._v("Free")])])
+          : _c("div", [_c("p", [_vm._v("Free")])]),
       ]),
       _vm._v(" "),
       _c("div"),
@@ -42825,20 +47429,20 @@ var render = function() {
           class: { hidden: !_vm.showButton, "bg-gray-100": _vm.isAddedLoading },
           attrs: { disabled: _vm.isAddedLoading },
           on: {
-            click: function($event) {
+            click: function ($event) {
               $event.stopPropagation()
               return _vm.clickButton(_vm.buttonType)
-            }
-          }
+            },
+          },
         },
         [
           _vm._v(
             "\n        " +
               _vm._s(_vm.buttonType === 0 ? "To book" : "Delete me") +
               "\n    "
-          )
+          ),
         ]
-      )
+      ),
     ]
   )
 }
@@ -42861,14 +47465,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
     "div",
     {
-      staticClass: "w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30"
+      staticClass: "w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30",
     },
     [
       _c(
@@ -42876,12 +47480,15 @@ var render = function() {
         {
           staticClass:
             "w-3/12 2xl:w-2/12 calendar bg-gray-200 text-white fixed top-0 overflow-y-scroll max-h-screen",
-          staticStyle: { width: "inherit" }
+          staticStyle: { width: "inherit" },
         },
         [
           _c("CalendarDay", {
-            attrs: { "type-calendar": "local", "data-day": _vm.currentDateFull }
-          })
+            attrs: {
+              "type-calendar": "local",
+              "data-day": _vm.currentDateFull,
+            },
+          }),
         ],
         1
       ),
@@ -42896,23 +47503,22 @@ var render = function() {
             height: "22",
             viewBox: "0 0 14 22",
             fill: "none",
-            xmlns: "http://www.w3.org/2000/svg"
+            xmlns: "http://www.w3.org/2000/svg",
           },
           on: {
             click: _vm.switchSidebarCalendar,
             mouseover: _vm.overGreen,
-            mouseout: _vm.overNormal
-          }
+            mouseout: _vm.overNormal,
+          },
         },
         [
           _c("path", {
             attrs: {
-              d:
-                "M2.08834 21.0515C2.59101 21.0467 3.07408 20.8559 3.44438 20.5159L12.696 12.0406C12.9035 11.8501 13.0692 11.6185 13.1826 11.3606C13.296 11.1026 13.3545 10.8239 13.3545 10.5422C13.3545 10.2604 13.296 9.98176 13.1826 9.72382C13.0692 9.46587 12.9035 9.2343 12.696 9.04376L3.44438 0.568499C3.24897 0.380429 3.01793 0.233334 2.76483 0.13587C2.51174 0.0384068 2.24172 -0.00745915 1.97064 0.000969431C1.69956 0.00939992 1.4329 0.0719552 1.18636 0.184956C0.939809 0.297957 0.718349 0.45912 0.535004 0.65897C0.351659 0.858819 0.210132 1.09331 0.118746 1.34866C0.027361 1.60401 -0.0120372 1.87506 0.00287069 2.14586C0.0177785 2.41666 0.0866911 2.68174 0.205554 2.92552C0.324416 3.16929 0.49083 3.38684 0.695004 3.56535L8.32613 10.5422L0.711955 17.519C0.410086 17.7961 0.198954 18.158 0.106215 18.5571C0.0134763 18.9563 0.0434551 19.3741 0.192224 19.7559C0.340994 20.1377 0.601616 20.4657 0.939952 20.6969C1.27829 20.9281 1.67856 21.0517 2.08834 21.0515Z",
+              d: "M2.08834 21.0515C2.59101 21.0467 3.07408 20.8559 3.44438 20.5159L12.696 12.0406C12.9035 11.8501 13.0692 11.6185 13.1826 11.3606C13.296 11.1026 13.3545 10.8239 13.3545 10.5422C13.3545 10.2604 13.296 9.98176 13.1826 9.72382C13.0692 9.46587 12.9035 9.2343 12.696 9.04376L3.44438 0.568499C3.24897 0.380429 3.01793 0.233334 2.76483 0.13587C2.51174 0.0384068 2.24172 -0.00745915 1.97064 0.000969431C1.69956 0.00939992 1.4329 0.0719552 1.18636 0.184956C0.939809 0.297957 0.718349 0.45912 0.535004 0.65897C0.351659 0.858819 0.210132 1.09331 0.118746 1.34866C0.027361 1.60401 -0.0120372 1.87506 0.00287069 2.14586C0.0177785 2.41666 0.0866911 2.68174 0.205554 2.92552C0.324416 3.16929 0.49083 3.38684 0.695004 3.56535L8.32613 10.5422L0.711955 17.519C0.410086 17.7961 0.198954 18.158 0.106215 18.5571C0.0134763 18.9563 0.0434551 19.3741 0.192224 19.7559C0.340994 20.1377 0.601616 20.4657 0.939952 20.6969C1.27829 20.9281 1.67856 21.0517 2.08834 21.0515Z",
               id: "right-arrow-55",
-              fill: "black"
-            }
-          })
+              fill: "black",
+            },
+          }),
         ]
       ),
       _vm._v(" "),
@@ -42921,17 +47527,17 @@ var render = function() {
           "button",
           {
             staticClass:
-              "rounded rounded-full text-white text-lg py-3 px-6 bg-black bg-opacity-50"
+              "rounded rounded-full text-white text-lg py-3 px-6 bg-black bg-opacity-50",
           },
           [_vm._v("\n            " + _vm._s(_vm.currentDate) + "\n        ")]
-        )
+        ),
       ]),
       _vm._v(" "),
       _c(
         "div",
         {
           staticClass:
-            "fixed bottom-2 ml-1 w-full text-black z-50 calendar-button"
+            "fixed bottom-2 ml-1 w-full text-black z-50 calendar-button",
         },
         [
           _c(
@@ -42940,16 +47546,16 @@ var render = function() {
               staticClass:
                 "hover:bg-opacity-100 open-big-calendar rounded rounded-full text-white text-lg py-3 px-6 bg-gray-500 bg-opacity-80",
               on: {
-                click: function($event) {
+                click: function ($event) {
                   $event.stopPropagation()
                   return _vm.switchGlobal()
-                }
-              }
+                },
+              },
             },
             [_vm._v("All calendar")]
-          )
+          ),
         ]
-      )
+      ),
     ]
   )
 }
@@ -42972,7 +47578,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -42984,7 +47590,7 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "w-full my-12 flex justify-between items-center nowrap"
+          staticClass: "w-full my-12 flex justify-between items-center nowrap",
         },
         [
           _c(
@@ -42992,7 +47598,7 @@ var render = function() {
             {
               ref: "block_kit",
               staticClass:
-                "block-kit flex justify-start items-center nowrap w-6/12 flex-shrink"
+                "block-kit flex justify-start items-center nowrap w-6/12 flex-shrink",
             },
             [
               _c(
@@ -43001,16 +47607,16 @@ var render = function() {
                   staticClass:
                     "create-kid rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7",
                   on: {
-                    click: function($event) {
+                    click: function ($event) {
                       $event.stopPropagation()
                       return _vm.showKitForm()
-                    }
-                  }
+                    },
+                  },
                 },
                 [_vm._v("Create Kit")]
               ),
               _vm._v(" "),
-              _vm._l(_vm.filtersArr, function(filter) {
+              _vm._l(_vm.filtersArr, function (filter) {
                 return _c("div", { staticClass: "relative" }, [
                   _c(
                     "div",
@@ -43020,8 +47626,8 @@ var render = function() {
                       class: {
                         "bg-green-500 text-white": _vm.selectedKits.includes(
                           filter.id
-                        )
-                      }
+                        ),
+                      },
                     },
                     [
                       _c(
@@ -43029,10 +47635,10 @@ var render = function() {
                         {
                           staticClass: "mr-2 cursor-pointer",
                           on: {
-                            click: function($event) {
+                            click: function ($event) {
                               return _vm.toggleSelectedKits(filter.id)
-                            }
-                          }
+                            },
+                          },
                         },
                         [_vm._v(_vm._s(filter.title))]
                       ),
@@ -43043,21 +47649,21 @@ var render = function() {
                           staticClass:
                             "open-filters py-3 pl-3 pr-1 border-l border-gray-400 cursor-pointer",
                           on: {
-                            click: function($event) {
+                            click: function ($event) {
                               $event.stopPropagation()
                               return _vm.showFilterFrom(filter)
-                            }
-                          }
+                            },
+                          },
                         },
                         [_vm._v("...")]
-                      )
+                      ),
                     ]
-                  )
+                  ),
                 ])
-              })
+              }),
             ],
             2
-          )
+          ),
         ]
       ),
       _vm._v(" "),
@@ -43066,9 +47672,9 @@ var render = function() {
             attrs: {
               countries: _vm.countries,
               categories: _vm.categories,
-              userId: _vm.userId
+              userId: _vm.userId,
             },
-            on: { "disable-kit": _vm.closeKit }
+            on: { "disable-kit": _vm.closeKit },
           })
         : _vm._e(),
       _vm._v(" "),
@@ -43078,17 +47684,17 @@ var render = function() {
               filter: _vm.SelectedFilter,
               filterCountries: _vm.countries,
               filterCategories: _vm.categories,
-              userId: _vm.userId
+              userId: _vm.userId,
             },
-            on: { "disable-filter": _vm.closeFilter }
+            on: { "disable-filter": _vm.closeFilter },
           })
-        : _vm._e()
+        : _vm._e(),
     ],
     1
   )
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -43106,16 +47712,16 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("span", [_vm._v("75%")]),
               _c("span", [_vm._v(" → ")]),
-              _c("span", [_vm._v("84")])
-            ])
-          ])
-        ])
+              _c("span", [_vm._v("84")]),
+            ]),
+          ]),
+        ]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "w-4/12 xl:w-3/12" }, [
         _c("div", { staticClass: "flex justify-start items-start" }, [
           _c("img", {
-            attrs: { src: "/images/star-silver.svg", alt: "silver" }
+            attrs: { src: "/images/star-silver.svg", alt: "silver" },
           }),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col items-start" }, [
@@ -43127,16 +47733,16 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("span", [_vm._v("66,7%")]),
               _c("span", [_vm._v(" → ")]),
-              _c("span", [_vm._v("58")])
-            ])
-          ])
-        ])
+              _c("span", [_vm._v("58")]),
+            ]),
+          ]),
+        ]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "w-4/12 xl:w-3/12" }, [
         _c("div", { staticClass: "flex justify-start items-start" }, [
           _c("img", {
-            attrs: { src: "/images/star-bronze.svg", alt: "bronze" }
+            attrs: { src: "/images/star-bronze.svg", alt: "bronze" },
           }),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col items-start" }, [
@@ -43151,14 +47757,14 @@ var staticRenderFns = [
                 _vm._v(" "),
                 _c("span", [_vm._v("56,1%")]),
                 _c("span", [_vm._v(" → ")]),
-                _c("span", [_vm._v("32")])
+                _c("span", [_vm._v("32")]),
               ]
-            )
-          ])
-        ])
-      ])
+            ),
+          ]),
+        ]),
+      ]),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -43178,7 +47784,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -43186,7 +47792,7 @@ var render = function() {
     "div",
     {
       staticClass: "w-full p-7 border border-gray-300 rounded-md my-6 relative",
-      class: { "bg-yellow": _vm.isThinking }
+      class: { "bg-yellow": _vm.isThinking },
     },
     [
       _c(
@@ -43194,7 +47800,7 @@ var render = function() {
         {
           staticClass:
             "text-black text-3xl cursor-pointer hover:text-red-500 absolute top-6 right-6",
-          on: { click: _vm.deleteJob }
+          on: { click: _vm.deleteJob },
         },
         [_vm._v("×")]
       ),
@@ -43209,46 +47815,48 @@ var render = function() {
                 "span",
                 {
                   staticClass:
-                    "text-green-500 font-bold text-2xl mr-4 border-b border-gray-300"
+                    "text-green-500 font-bold text-2xl mr-4 border-b border-gray-300",
                 },
                 [_vm._v(_vm._s(_vm.title))]
-              )
+              ),
             ]),
             _vm._v(" "),
             _c("span", { staticClass: "text-black font-bold text-2xl" }, [
-              _vm._v("Score: " + _vm._s(_vm.score) + "%")
-            ])
+              _vm._v("Score: " + _vm._s(_vm.score) + "%"),
+            ]),
           ]),
           _vm._v(" "),
           _c("p", [
             _c("span", { staticClass: "text-gray-400 font-normal" }, [
-              _vm._v("Posted: " + _vm._s(_vm.dateCreated))
-            ])
-          ])
+              _vm._v("Posted: " + _vm._s(_vm.dateCreated)),
+            ]),
+          ]),
         ]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "w-11/12 mb-5" }, [
         _c("p", { staticClass: "leading-7 text-base font-normal" }, [
-          _vm._v("\n            " + _vm._s(_vm.truncatedExcerpt) + "\n        ")
-        ])
+          _vm._v(
+            "\n            " + _vm._s(_vm.truncatedExcerpt) + "\n        "
+          ),
+        ]),
       ]),
       _vm._v(" "),
       _c(
         "div",
         { staticClass: "w-11/12 mb-8 flex justify-start items-center" },
-        _vm._l(_vm.categories, function(cat) {
+        _vm._l(_vm.categories, function (cat) {
           return _c(
             "p",
             {
               key: cat.id,
               staticClass:
-                "bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4"
+                "bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4",
             },
             [
               _c("span", { staticClass: "py-2 px-3" }, [
-                _vm._v(_vm._s(cat.name))
-              ])
+                _vm._v(_vm._s(cat.name)),
+              ]),
             ]
           )
         }),
@@ -43259,7 +47867,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "w-11/12 mb-8 flex nowrap justify-start items-start text-md leading-6"
+            "w-11/12 mb-8 flex nowrap justify-start items-start text-md leading-6",
         },
         [
           _c(
@@ -43268,27 +47876,27 @@ var render = function() {
             [
               _c("p", [
                 _c("span", { staticClass: "font-bold" }, [_vm._v("Country:")]),
-                _vm._v(" " + _vm._s(_vm.country))
+                _vm._v(" " + _vm._s(_vm.country)),
               ]),
               _vm._v(" "),
               _c("p", [
                 _c("span", { staticClass: "font-bold" }, [_vm._v("Category:")]),
-                _vm._v(" " + _vm._s(_vm.category))
+                _vm._v(" " + _vm._s(_vm.category)),
               ]),
               _vm._v(" "),
               _c("p", [
                 _c("span", { staticClass: "font-bold" }, [
-                  _vm._v("Payment Verified:")
+                  _vm._v("Payment Verified:"),
                 ]),
-                _vm._v(" " + _vm._s(_vm.verification))
+                _vm._v(" " + _vm._s(_vm.verification)),
               ]),
               _vm._v(" "),
               _c("p", [
                 _c("span", { staticClass: "font-bold" }, [
-                  _vm._v("Jobs posted:")
+                  _vm._v("Jobs posted:"),
                 ]),
-                _vm._v(" " + _vm._s(_vm.jobsPosted))
-              ])
+                _vm._v(" " + _vm._s(_vm.jobsPosted)),
+              ]),
             ]
           ),
           _vm._v(" "),
@@ -43298,29 +47906,29 @@ var render = function() {
             [
               _c("p", [
                 _c("span", { staticClass: "font-bold" }, [_vm._v("Hires:")]),
-                _vm._v(" " + _vm._s(_vm.hires))
+                _vm._v(" " + _vm._s(_vm.hires)),
               ]),
               _vm._v(" "),
               _c("p", [
                 _c("span", { staticClass: "font-bold" }, [
-                  _vm._v("Hire Rate:")
+                  _vm._v("Hire Rate:"),
                 ]),
-                _vm._v(" " + _vm._s(_vm.hireRate))
+                _vm._v(" " + _vm._s(_vm.hireRate)),
               ]),
               _vm._v(" "),
               _c("p", [
                 _c("span", { staticClass: "font-bold" }, [
-                  _vm._v("Total feedbacks:")
+                  _vm._v("Total feedbacks:"),
                 ]),
-                _vm._v(" " + _vm._s(_vm.feedbacksCount))
+                _vm._v(" " + _vm._s(_vm.feedbacksCount)),
               ]),
               _vm._v(" "),
               _c("p", [
                 _c("span", { staticClass: "font-bold" }, [
-                  _vm._v("Feedbacks score:")
+                  _vm._v("Feedbacks score:"),
                 ]),
-                _vm._v(" " + _vm._s(_vm.feedback))
-              ])
+                _vm._v(" " + _vm._s(_vm.feedback)),
+              ]),
             ]
           ),
           _vm._v(" "),
@@ -43330,26 +47938,26 @@ var render = function() {
             [
               _c("p", [
                 _c("span", { staticClass: "font-bold" }, [_vm._v("Spent:")]),
-                _vm._v(" " + _vm._s(_vm.totalCharge))
+                _vm._v(" " + _vm._s(_vm.totalCharge)),
               ]),
               _vm._v(" "),
               _c("p", [
                 _c("span", { staticClass: "font-bold" }, [_vm._v("Hours:")]),
-                _vm._v(" " + _vm._s(_vm.duration))
+                _vm._v(" " + _vm._s(_vm.duration)),
               ]),
               _vm._v(" "),
               _c("p", [
                 _c("span", { staticClass: "font-bold" }, [
-                  _vm._v("Avg Rate (based on last 6 month):")
+                  _vm._v("Avg Rate (based on last 6 month):"),
                 ]),
                 _vm._v(
                   " " + _vm._s(_vm.avgRate ? "$" + _vm.avgRate + "/h" : "")
-                )
+                ),
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _vm._m(0),
             ]
-          )
+          ),
         ]
       ),
       _vm._v(" "),
@@ -43362,11 +47970,11 @@ var render = function() {
             staticClass:
               "open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7",
             on: {
-              click: function($event) {
+              click: function ($event) {
                 $event.stopPropagation()
                 return _vm.changeStatus(1, true)
-              }
-            }
+              },
+            },
           },
           [_vm._v("Take")]
         ),
@@ -43377,35 +47985,35 @@ var render = function() {
             staticClass:
               "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white",
             on: {
-              click: function($event) {
+              click: function ($event) {
                 $event.stopPropagation()
                 return _vm.changeStatus(_vm.isThinking ? null : 2)
-              }
-            }
+              },
+            },
           },
           [
             _vm._v(
               "\n            " +
                 _vm._s(_vm.isThinking ? "Reconsider" : "Think") +
                 "\n        "
-            )
+            ),
           ]
-        )
-      ])
+        ),
+      ]),
     ]
   )
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", [
       _c("span", { staticClass: "font-bold" }, [_vm._v("Member since:")]),
-      _vm._v(" April 24, 2015")
+      _vm._v(" April 24, 2015"),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -43415,13 +48023,13 @@ var staticRenderFns = [
           "span",
           {
             staticClass:
-              "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap"
+              "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap",
           },
           [_vm._v("Show Feedbacks (3)")]
-        )
-      ])
+        ),
+      ]),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -43441,7 +48049,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -43451,21 +48059,21 @@ var render = function() {
       staticClass:
         "fixed bg-white py-5 px-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-300 flex flex-col justify-between",
       class: { hidden: !_vm.ModalJobSwitched },
-      attrs: { id: "take" }
+      attrs: { id: "take" },
     },
     [
       _c(
         "div",
         {
           staticClass:
-            "f-full space-x-6 flex flex-nowrap justify-between items-start"
+            "f-full space-x-6 flex flex-nowrap justify-between items-start",
         },
         [
           _c(
             "div",
             {
               staticClass:
-                "w-full h-full flex flex-col justify-start items-start"
+                "w-full h-full flex flex-col justify-start items-start",
             },
             [
               _vm._m(0),
@@ -43474,7 +48082,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "w-full mb-3 relative" }, [
                 _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                  _vm._v("Technologies")
+                  _vm._v("Technologies"),
                 ]),
                 _vm._v(" "),
                 _c(
@@ -43484,13 +48092,13 @@ var render = function() {
                       "relative parent-tech w-full p-2 border border-gray-300 rounded-md focus:outline-none text-white flex flex-wrap justify-start items-center wrap",
                     class: { focused: _vm.isTechDroped },
                     on: {
-                      click: function($event) {
+                      click: function ($event) {
                         return _vm.dropdownTechs()
-                      }
-                    }
+                      },
+                    },
                   },
                   [
-                    _vm._l(_vm.selectedTechsList, function(item, index) {
+                    _vm._l(_vm.selectedTechsList, function (item, index) {
                       return _c(
                         "p",
                         {
@@ -43499,17 +48107,17 @@ var render = function() {
                             "parent-button px-1 rounded-sm cursor-pointer mr-1.5 align-middle select-none",
                           class: "bg-" + item.color + "-500",
                           on: {
-                            click: function($event) {
+                            click: function ($event) {
                               return _vm.removeTech(index, item)
-                            }
-                          }
+                            },
+                          },
                         },
                         [
                           _vm._v(
                             "\n                            " +
                               _vm._s(item.name) +
                               " ×\n                        "
-                          )
+                          ),
                         ]
                       )
                     }),
@@ -43519,9 +48127,9 @@ var render = function() {
                         "open-drop-tech-menu mt-1 absolute right-3.5 top-4 select-none",
                       attrs: {
                         src: "/images/arrow-down-section.svg",
-                        alt: "arrow down"
-                      }
-                    })
+                        alt: "arrow down",
+                      },
+                    }),
                   ],
                   2
                 ),
@@ -43531,9 +48139,9 @@ var render = function() {
                   {
                     staticClass:
                       "\n                            absolute\n                            mt-2\n                            overflow-y-auto\n                            drop-menu-technologies\n                            bg-white\n                            w-full\n                            border border-gray-300\n                            rounded-md\n                            focus:outline-none\n                            text-white\n                            flex flex-col\n                            justify-start\n                            items-start\n                            wrap\n                            space-y-2\n                            shadow-lg\n                        ",
-                    class: { hidden: !_vm.isTechDroped }
+                    class: { hidden: !_vm.isTechDroped },
                   },
-                  _vm._l(_vm.techsList, function(item, index) {
+                  _vm._l(_vm.techsList, function (item, index) {
                     return _c(
                       "li",
                       {
@@ -43541,25 +48149,25 @@ var render = function() {
                         staticClass:
                           "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1",
                         on: {
-                          click: function($event) {
+                          click: function ($event) {
                             return _vm.addTech(index, item)
-                          }
-                        }
+                          },
+                        },
                       },
                       [
                         _c(
                           "span",
                           {
                             staticClass: "px-1 rounded-sm select-none",
-                            class: "bg-" + item.color + "-500"
+                            class: "bg-" + item.color + "-500",
                           },
                           [_vm._v(_vm._s(item.name))]
-                        )
+                        ),
                       ]
                     )
                   }),
                   0
-                )
+                ),
               ]),
               _vm._v(" "),
               _vm._m(2),
@@ -43570,11 +48178,11 @@ var render = function() {
               _vm._v(" "),
               _vm._m(5),
               _vm._v(" "),
-              _vm._m(6)
+              _vm._m(6),
             ]
           ),
           _vm._v(" "),
-          _vm._m(7)
+          _vm._m(7),
         ]
       ),
       _vm._v(" "),
@@ -43589,11 +48197,11 @@ var render = function() {
                 staticClass:
                   "close-take rounded-full border border-gray-300 px-12 py-3 text-black hover:bg-green-500 hover:text-white hover:border-green-500",
                 on: {
-                  click: function($event) {
+                  click: function ($event) {
                     $event.stopPropagation()
                     return _vm.closeModalJob.apply(null, arguments)
-                  }
-                }
+                  },
+                },
               },
               [_vm._v("\n                    Cancel\n                ")]
             ),
@@ -43602,78 +48210,51 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "rounded-full border border-green-500 bg-green-500 px-12 py-3 text-white hover:bg-white hover:text-black"
+                  "rounded-full border border-green-500 bg-green-500 px-12 py-3 text-white hover:bg-white hover:text-black",
               },
               [_vm._v("Save")]
-            )
-          ])
+            ),
+          ]),
         ]
-      )
+      ),
     ]
   )
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "w-full mb-3" }, [
       _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Organization")
+        _vm._v("Organization"),
       ]),
       _vm._v(" "),
       _c(
         "select",
         {
           staticClass:
-            "p-2 w-full border border-gray-300 rounded-md focus:outline-none"
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
         },
         [
           _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("Vasterra")
+            _vm._v("Vasterra"),
           ]),
           _vm._v(" "),
           _c("option", { attrs: { value: "" } }, [_vm._v("Company name")]),
           _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Company name")])
+          _c("option", { attrs: { value: "" } }, [_vm._v("Company name")]),
         ]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "w-full mb-3" }, [
       _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Title")
-      ]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass:
-            "p-2 w-full border border-gray-300 rounded-md focus:outline-none"
-        },
-        [
-          _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("Mobile Desktop responsive UI UX redes")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mb-3" }, [
-      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Owner")
+        _vm._v("Title"),
       ]),
       _vm._v(" "),
       _c(
@@ -43681,27 +48262,54 @@ var staticRenderFns = [
         {
           staticClass:
             "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-          attrs: { name: "", id: "" }
         },
         [
           _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("Artem M (You)")
+            _vm._v("Mobile Desktop responsive UI UX redes"),
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")]),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Owner"),
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+          attrs: { name: "", id: "" },
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Artem M (You)"),
           ]),
           _vm._v(" "),
           _c("option", { attrs: { value: "" } }, [_vm._v("Name2")]),
           _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Name3")])
+          _c("option", { attrs: { value: "" } }, [_vm._v("Name3")]),
         ]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "w-full mb-3" }, [
       _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Time of bid")
+        _vm._v("Time of bid"),
       ]),
       _vm._v(" "),
       _c(
@@ -43709,27 +48317,27 @@ var staticRenderFns = [
         {
           staticClass:
             "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-          attrs: { name: "", id: "" }
+          attrs: { name: "", id: "" },
         },
         [
           _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("15:15")
+            _vm._v("15:15"),
           ]),
           _vm._v(" "),
           _c("option", { attrs: { value: "" } }, [_vm._v("15:16")]),
           _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("15:17")])
+          _c("option", { attrs: { value: "" } }, [_vm._v("15:17")]),
         ]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "w-full mb-3" }, [
       _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Time after job creation")
+        _vm._v("Time after job creation"),
       ]),
       _vm._v(" "),
       _c(
@@ -43737,27 +48345,27 @@ var staticRenderFns = [
         {
           staticClass:
             "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-          attrs: { name: "", id: "" }
+          attrs: { name: "", id: "" },
         },
         [
           _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("15:45")
+            _vm._v("15:45"),
           ]),
           _vm._v(" "),
           _c("option", { attrs: { value: "" } }, [_vm._v("15:55")]),
           _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("17:45")])
+          _c("option", { attrs: { value: "" } }, [_vm._v("17:45")]),
         ]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "w-full mb-3" }, [
       _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Bid profile")
+        _vm._v("Bid profile"),
       ]),
       _vm._v(" "),
       _c(
@@ -43765,27 +48373,27 @@ var staticRenderFns = [
         {
           staticClass:
             "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-          attrs: { name: "", id: "" }
+          attrs: { name: "", id: "" },
         },
         [
           _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("Artem Mazurchak")
+            _vm._v("Artem Mazurchak"),
           ]),
           _vm._v(" "),
           _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
           _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")]),
         ]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "w-full mb-3" }, [
       _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Job posting")
+        _vm._v("Job posting"),
       ]),
       _vm._v(" "),
       _c(
@@ -43793,21 +48401,21 @@ var staticRenderFns = [
         {
           staticClass:
             "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-          attrs: { name: "", id: "" }
+          attrs: { name: "", id: "" },
         },
         [
           _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("https://docs.google.com/document/d/1xxs")
+            _vm._v("https://docs.google.com/document/d/1xxs"),
           ]),
           _vm._v(" "),
           _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
           _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")])
+          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")]),
         ]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -43817,7 +48425,7 @@ var staticRenderFns = [
       [
         _c("div", { staticClass: "w-full mb-3" }, [
           _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-            _vm._v("Task link")
+            _vm._v("Task link"),
           ]),
           _vm._v(" "),
           _c(
@@ -43825,23 +48433,23 @@ var staticRenderFns = [
             {
               staticClass:
                 "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-              attrs: { name: "", id: "" }
+              attrs: { name: "", id: "" },
             },
             [
               _c("option", { attrs: { value: "", selected: "" } }, [
-                _vm._v("https://ac.vasterra.com/projects/663?modal=Taskс")
+                _vm._v("https://ac.vasterra.com/projects/663?modal=Taskс"),
               ]),
               _vm._v(" "),
               _c("option", { attrs: { value: "" } }, [_vm._v("link 2")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "" } }, [_vm._v("link3")])
+              _c("option", { attrs: { value: "" } }, [_vm._v("link3")]),
             ]
-          )
+          ),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-full mb-3" }, [
           _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-            _vm._v("Invite")
+            _vm._v("Invite"),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "space-x-3" }, [
@@ -43849,7 +48457,7 @@ var staticRenderFns = [
               "button",
               {
                 staticClass:
-                  "px-3 py-2 bg-gray-200 rounded-sm text-base text-black hover:bg-green-500 hover:text-white"
+                  "px-3 py-2 bg-gray-200 rounded-sm text-base text-black hover:bg-green-500 hover:text-white",
               },
               [_vm._v("None")]
             ),
@@ -43858,16 +48466,16 @@ var staticRenderFns = [
               "button",
               {
                 staticClass:
-                  "px-3 py-2 bg-green-500 rounded-sm text-base text-white hover:bg-gray-200 hover:text-black"
+                  "px-3 py-2 bg-green-500 rounded-sm text-base text-white hover:bg-gray-200 hover:text-black",
               },
               [_vm._v("Yes, invite")]
-            )
-          ])
+            ),
+          ]),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-full mb-3" }, [
           _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-            _vm._v("Bid")
+            _vm._v("Bid"),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "space-x-3" }, [
@@ -43876,19 +48484,19 @@ var staticRenderFns = [
               {
                 staticClass:
                   "textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non",
-                attrs: { name: "", id: "" }
+                attrs: { name: "", id: "" },
               },
               [
                 _vm._v(
                   "Hi! I’d hope to create an Airbnb-like mobile app, as I built a counterpart of the Airbnb website and it was an amazing experience that I want to repeat with you.\nHere you can check this project we built with my team https://www.biz-cen.ru/. This platform is specifically designed for the office segment of commercial real estate.\nVisitors to the site can view a city’s commercial districts with a list of vacant premises including floor plans, and register for a preview directly online.\nYou can see more information here https://vasterra.com/biz-cen.\nYes, it was a web project, but of course I have strong expertise in mobile development. For example, here I worked on a Booking app for workplaces designed for Colliers International real estate company - https://play.google.com/store/apps/details?id=com.calcey.colliers&hl=en\nI’d like to go to the next stage and give you an estimation of your project, are there any other details that you can share?\n\nBest regards, Artem\n                    "
-                )
+                ),
               ]
-            )
-          ])
-        ])
+            ),
+          ]),
+        ]),
       ]
     )
-  }
+  },
 ]
 render._withStripped = true
 
@@ -43908,12 +48516,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("modal", { attrs: { name: "add-deal" } }, [
-    _vm._v(" This is modal ")
+    _vm._v(" This is modal "),
   ])
 }
 var staticRenderFns = []
@@ -43935,7 +48543,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -43945,12 +48553,12 @@ var render = function() {
       {
         staticClass:
           "w-full overflow-y-scroll bg-white p-8 h-screen z-50 fixed top-0 left-0 right-0",
-        attrs: { id: "create-kit" }
+        attrs: { id: "create-kit" },
       },
       [
         _c("div", { staticClass: "flex justify-between items-center mb-8" }, [
           _c("p", { staticClass: "text-2xl text-black font-bold" }, [
-            _vm._v("Create Kit")
+            _vm._v("Create Kit"),
           ]),
           _vm._v(" "),
           _c(
@@ -43959,18 +48567,18 @@ var render = function() {
               staticClass:
                 "text-black text-5xl close-kit cursor-pointer hover:text-red-500",
               on: {
-                click: function($event) {
+                click: function ($event) {
                   return _vm.closeKit()
-                }
-              }
+                },
+              },
             },
             [_vm._v("×")]
-          )
+          ),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "mb-10" }, [
           _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
-            _vm._v("Countries")
+            _vm._v("Countries"),
           ]),
           _vm._v(" "),
           _c(
@@ -43984,17 +48592,17 @@ var render = function() {
                     "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                   class: { "bg-green-500 text-white": _vm.allCountriesChecked },
                   on: {
-                    click: function($event) {
+                    click: function ($event) {
                       $event.stopPropagation()
                       _vm.chooseAllItems(_vm.countries)
                       _vm.$forceUpdate()
-                    }
-                  }
+                    },
+                  },
                 },
                 [_vm._v("\n                    All country\n                ")]
               ),
               _vm._v(" "),
-              _vm._l(_vm.countries, function(country) {
+              _vm._l(_vm.countries, function (country) {
                 return _c(
                   "button",
                   {
@@ -44003,30 +48611,30 @@ var render = function() {
                       "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                     class: { "bg-green-500 text-white": country.checked },
                     on: {
-                      click: function($event) {
+                      click: function ($event) {
                         $event.stopPropagation()
                         country.checked = !country.checked
                         _vm.$forceUpdate()
-                      }
-                    }
+                      },
+                    },
                   },
                   [
                     _vm._v(
                       "\n                    " +
                         _vm._s(country.title) +
                         "\n                "
-                    )
+                    ),
                   ]
                 )
-              })
+              }),
             ],
             2
-          )
+          ),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "mb-10" }, [
           _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
-            _vm._v("Categories")
+            _vm._v("Categories"),
           ]),
           _vm._v(" "),
           _c(
@@ -44039,24 +48647,24 @@ var render = function() {
                   staticClass:
                     "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                   class: {
-                    "bg-green-500 text-white": _vm.allCategoriesChecked
+                    "bg-green-500 text-white": _vm.allCategoriesChecked,
                   },
                   on: {
-                    click: function($event) {
+                    click: function ($event) {
                       $event.stopPropagation()
                       _vm.chooseAllItems(_vm.categories)
                       _vm.$forceUpdate()
-                    }
-                  }
+                    },
+                  },
                 },
                 [
                   _vm._v(
                     "\n                    All categories\n                "
-                  )
+                  ),
                 ]
               ),
               _vm._v(" "),
-              _vm._l(_vm.categories, function(category) {
+              _vm._l(_vm.categories, function (category) {
                 return _c(
                   "button",
                   {
@@ -44065,41 +48673,41 @@ var render = function() {
                       "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                     class: { "bg-green-500 text-white": category.checked },
                     on: {
-                      click: function($event) {
+                      click: function ($event) {
                         $event.stopPropagation()
                         category.checked = !category.checked
                         _vm.$forceUpdate()
-                      }
-                    }
+                      },
+                    },
                   },
                   [
                     _vm._v(
                       "\n                    " +
                         _vm._s(category.title) +
                         "\n                "
-                    )
+                    ),
                   ]
                 )
-              })
+              }),
             ],
             2
-          )
+          ),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "mb-7" }, [
           _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
-            _vm._v("Exception words")
+            _vm._v("Exception words"),
           ]),
           _vm._v(" "),
           _c(
             "div",
             { staticClass: "flex flex-wrap justify-content-start items-start" },
-            _vm._l(_vm.exseptionWords, function(word, index) {
+            _vm._l(_vm.exseptionWords, function (word, index) {
               return _c(
                 "button",
                 {
                   staticClass:
-                    "cursor-pointer bg-gray-200 text-black rounded px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
+                    "cursor-pointer bg-gray-200 text-black rounded px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button",
                 },
                 [
                   _c("p", { staticClass: "mr-2" }, [_vm._v(_vm._s(word))]),
@@ -44111,18 +48719,18 @@ var render = function() {
                         "py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
                       attrs: { title: "Delete word" },
                       on: {
-                        click: function($event) {
+                        click: function ($event) {
                           return _vm.deleteWord(index)
-                        }
-                      }
+                        },
+                      },
                     },
                     [_vm._v("×")]
-                  )
+                  ),
                 ]
               )
             }),
             0
-          )
+          ),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "mb-12 flex nowrap" }, [
@@ -44132,21 +48740,21 @@ var render = function() {
                 name: "model",
                 rawName: "v-model",
                 value: _vm.newWord,
-                expression: "newWord"
-              }
+                expression: "newWord",
+              },
             ],
             staticClass:
               "input-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
             attrs: { type: "text", placeholder: "New word" },
             domProps: { value: _vm.newWord },
             on: {
-              input: function($event) {
+              input: function ($event) {
                 if ($event.target.composing) {
                   return
                 }
                 _vm.newWord = $event.target.value
-              }
-            }
+              },
+            },
           }),
           _vm._v(" "),
           _c(
@@ -44155,11 +48763,11 @@ var render = function() {
               staticClass:
                 "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-word",
               on: {
-                click: function($event) {
+                click: function ($event) {
                   $event.stopPropagation()
                   return _vm.openAddWord()
-                }
-              }
+                },
+              },
             },
             [_vm._v("+ Add word")]
           ),
@@ -44170,11 +48778,11 @@ var render = function() {
               staticClass:
                 "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-word-input hidden mr-4",
               on: {
-                click: function($event) {
+                click: function ($event) {
                   $event.stopPropagation()
                   return _vm.saveWord()
-                }
-              }
+                },
+              },
             },
             [_vm._v("Save")]
           ),
@@ -44185,14 +48793,14 @@ var render = function() {
               staticClass:
                 "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 close-word-input hidden",
               on: {
-                click: function($event) {
+                click: function ($event) {
                   $event.stopPropagation()
                   return _vm.closeAddWord()
-                }
-              }
+                },
+              },
             },
             [_vm._v("Close")]
-          )
+          ),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "flex nowrap mb-12" }, [
@@ -44202,21 +48810,21 @@ var render = function() {
                 name: "model",
                 rawName: "v-model",
                 value: _vm.createdKitTitle,
-                expression: "createdKitTitle"
-              }
+                expression: "createdKitTitle",
+              },
             ],
             staticClass:
               "input-kit border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
             attrs: { type: "text", placeholder: "Name kit" },
             domProps: { value: _vm.createdKitTitle },
             on: {
-              input: function($event) {
+              input: function ($event) {
                 if ($event.target.composing) {
                   return
                 }
                 _vm.createdKitTitle = $event.target.value
-              }
-            }
+              },
+            },
           }),
           _vm._v(" "),
           _c(
@@ -44225,17 +48833,17 @@ var render = function() {
               staticClass:
                 "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700",
               on: {
-                click: function($event) {
+                click: function ($event) {
                   $event.stopPropagation()
                   return _vm.saveKit()
-                }
-              }
+                },
+              },
             },
             [_vm._v("Save Kit")]
-          )
-        ])
+          ),
+        ]),
       ]
-    )
+    ),
   ])
 }
 var staticRenderFns = []
@@ -44257,7 +48865,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -44266,12 +48874,12 @@ var render = function() {
     {
       staticClass:
         "w-full overflow-y-scroll bg-white p-8 h-screen z-50 fixed top-0 left-0 right-0",
-      attrs: { id: "manager-filters" }
+      attrs: { id: "manager-filters" },
     },
     [
       _c("div", { staticClass: "flex justify-between items-center mb-8" }, [
         _c("p", { staticClass: "text-2xl text-black font-bold" }, [
-          _vm._v(_vm._s(_vm.filter.title))
+          _vm._v(_vm._s(_vm.filter.title)),
         ]),
         _vm._v(" "),
         _c(
@@ -44280,18 +48888,18 @@ var render = function() {
             staticClass:
               "text-black text-5xl close-kit cursor-pointer hover:text-red-500",
             on: {
-              click: function($event) {
+              click: function ($event) {
                 return _vm.closeFilter()
-              }
-            }
+              },
+            },
           },
           [_vm._v("×")]
-        )
+        ),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mb-10" }, [
         _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
-          _vm._v("Countries")
+          _vm._v("Countries"),
         ]),
         _vm._v(" "),
         _c(
@@ -44305,17 +48913,17 @@ var render = function() {
                   "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                 class: { "bg-green-500 text-white": _vm.allCountriesChecked },
                 on: {
-                  click: function($event) {
+                  click: function ($event) {
                     $event.stopPropagation()
                     _vm.chooseAllItems(_vm.countries)
                     _vm.$forceUpdate()
-                  }
-                }
+                  },
+                },
               },
               [_vm._v("\n                All country\n            ")]
             ),
             _vm._v(" "),
-            _vm._l(_vm.countries, function(country) {
+            _vm._l(_vm.countries, function (country) {
               return _c(
                 "button",
                 {
@@ -44324,30 +48932,30 @@ var render = function() {
                     "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                   class: { "bg-green-500 text-white": country.checked },
                   on: {
-                    click: function($event) {
+                    click: function ($event) {
                       $event.stopPropagation()
                       country.checked = !country.checked
                       _vm.$forceUpdate()
-                    }
-                  }
+                    },
+                  },
                 },
                 [
                   _vm._v(
                     "\n                " +
                       _vm._s(country.title) +
                       "\n            "
-                  )
+                  ),
                 ]
               )
-            })
+            }),
           ],
           2
-        )
+        ),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mb-10" }, [
         _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
-          _vm._v("Categories")
+          _vm._v("Categories"),
         ]),
         _vm._v(" "),
         _c(
@@ -44361,17 +48969,17 @@ var render = function() {
                   "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                 class: { "bg-green-500 text-white": _vm.allCategoriesChecked },
                 on: {
-                  click: function($event) {
+                  click: function ($event) {
                     $event.stopPropagation()
                     _vm.chooseAllItems(_vm.categories)
                     _vm.$forceUpdate()
-                  }
-                }
+                  },
+                },
               },
               [_vm._v("\n                All categories\n            ")]
             ),
             _vm._v(" "),
-            _vm._l(_vm.categories, function(category) {
+            _vm._l(_vm.categories, function (category) {
               return _c(
                 "button",
                 {
@@ -44379,41 +48987,41 @@ var render = function() {
                     "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
                   class: { "bg-green-500 text-white": category.checked },
                   on: {
-                    click: function($event) {
+                    click: function ($event) {
                       $event.stopPropagation()
                       category.checked = !category.checked
                       _vm.$forceUpdate()
-                    }
-                  }
+                    },
+                  },
                 },
                 [
                   _vm._v(
                     "\n                " +
                       _vm._s(category.title) +
                       "\n            "
-                  )
+                  ),
                 ]
               )
-            })
+            }),
           ],
           2
-        )
+        ),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mb-7" }, [
         _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
-          _vm._v("Exception words")
+          _vm._v("Exception words"),
         ]),
         _vm._v(" "),
         _c(
           "div",
           { staticClass: "flex flex-wrap justify-content-start items-start" },
-          _vm._l(_vm.exseptionWords, function(word, index) {
+          _vm._l(_vm.exseptionWords, function (word, index) {
             return _c(
               "button",
               {
                 staticClass:
-                  "cursor-pointer bg-gray-200 text-black rounded px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
+                  "cursor-pointer bg-gray-200 text-black rounded px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button",
               },
               [
                 _c("p", { staticClass: "mr-2" }, [_vm._v(_vm._s(word))]),
@@ -44425,18 +49033,18 @@ var render = function() {
                       "py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500",
                     attrs: { title: "Delete word" },
                     on: {
-                      click: function($event) {
+                      click: function ($event) {
                         return _vm.deleteWord(index)
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v("×")]
-                )
+                ),
               ]
             )
           }),
           0
-        )
+        ),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mb-12 flex nowrap" }, [
@@ -44446,21 +49054,21 @@ var render = function() {
               name: "model",
               rawName: "v-model",
               value: _vm.newWord,
-              expression: "newWord"
-            }
+              expression: "newWord",
+            },
           ],
           staticClass:
             "input-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
           attrs: { type: "text", placeholder: "New word" },
           domProps: { value: _vm.newWord },
           on: {
-            input: function($event) {
+            input: function ($event) {
               if ($event.target.composing) {
                 return
               }
               _vm.newWord = $event.target.value
-            }
-          }
+            },
+          },
         }),
         _vm._v(" "),
         _c(
@@ -44469,11 +49077,11 @@ var render = function() {
             staticClass:
               "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-word",
             on: {
-              click: function($event) {
+              click: function ($event) {
                 $event.stopPropagation()
                 return _vm.openAddWord()
-              }
-            }
+              },
+            },
           },
           [_vm._v("+ Add word")]
         ),
@@ -44484,11 +49092,11 @@ var render = function() {
             staticClass:
               "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-word-input hidden mr-4",
             on: {
-              click: function($event) {
+              click: function ($event) {
                 $event.stopPropagation()
                 return _vm.saveWord()
-              }
-            }
+              },
+            },
           },
           [_vm._v("Save")]
         ),
@@ -44499,14 +49107,14 @@ var render = function() {
             staticClass:
               "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 close-word-input hidden",
             on: {
-              click: function($event) {
+              click: function ($event) {
                 $event.stopPropagation()
                 return _vm.closeAddWord()
-              }
-            }
+              },
+            },
           },
           [_vm._v("Close")]
-        )
+        ),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "flex nowrap mb-12" }, [
@@ -44516,21 +49124,21 @@ var render = function() {
               name: "model",
               rawName: "v-model",
               value: _vm.createdKitTitle,
-              expression: "createdKitTitle"
-            }
+              expression: "createdKitTitle",
+            },
           ],
           staticClass:
             "input-kit border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
           attrs: { type: "text", placeholder: "Name kit" },
           domProps: { value: _vm.createdKitTitle },
           on: {
-            input: function($event) {
+            input: function ($event) {
               if ($event.target.composing) {
                 return
               }
               _vm.createdKitTitle = $event.target.value
-            }
-          }
+            },
+          },
         }),
         _vm._v(" "),
         _c(
@@ -44539,15 +49147,15 @@ var render = function() {
             staticClass:
               "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700",
             on: {
-              click: function($event) {
+              click: function ($event) {
                 $event.stopPropagation()
                 return _vm.saveKit()
-              }
-            }
+              },
+            },
           },
           [_vm._v("Update Kit")]
-        )
-      ])
+        ),
+      ]),
     ]
   )
 }
@@ -44570,7 +49178,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -44583,8 +49191,8 @@ var render = function() {
           attrs: {
             "leave-active-class": "transition ease-in duration-1000",
             "leave-class": "opacity-100",
-            "leave-to-class": "opacity-0"
-          }
+            "leave-to-class": "opacity-0",
+          },
         },
         [
           _c(
@@ -44595,16 +49203,16 @@ var render = function() {
                   name: "show",
                   rawName: "v-show",
                   value: _vm.on,
-                  expression: "on"
-                }
+                  expression: "on",
+                },
               ],
-              staticClass: "text-sm text-gray-600"
+              staticClass: "text-sm text-gray-600",
             },
             [_vm._t("default")],
             2
-          )
+          ),
         ]
-      )
+      ),
     ],
     1
   )
@@ -44628,7 +49236,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -44641,22 +49249,22 @@ var render = function() {
           [
             {
               key: "title",
-              fn: function() {
+              fn: function () {
                 return [_vm._t("title")]
               },
-              proxy: true
+              proxy: true,
             },
             {
               key: "description",
-              fn: function() {
+              fn: function () {
                 return [_vm._t("description")]
               },
-              proxy: true
-            }
+              proxy: true,
+            },
           ],
           null,
           true
-        )
+        ),
       }),
       _vm._v(" "),
       _c("div", { staticClass: "mt-5 md:mt-0 md:col-span-2" }, [
@@ -44665,8 +49273,8 @@ var render = function() {
           { staticClass: "px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg" },
           [_vm._t("content")],
           2
-        )
-      ])
+        ),
+      ]),
     ],
     1
   )
@@ -44690,7 +49298,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -44700,25 +49308,23 @@ var render = function() {
       attrs: {
         viewBox: "0 0 48 48",
         fill: "none",
-        xmlns: "http://www.w3.org/2000/svg"
-      }
+        xmlns: "http://www.w3.org/2000/svg",
+      },
     },
     [
       _c("path", {
         attrs: {
-          d:
-            "M11.395 44.428C4.557 40.198 0 32.632 0 24 0 10.745 10.745 0 24 0a23.891 23.891 0 0113.997 4.502c-.2 17.907-11.097 33.245-26.602 39.926z",
-          fill: "#6875F5"
-        }
+          d: "M11.395 44.428C4.557 40.198 0 32.632 0 24 0 10.745 10.745 0 24 0a23.891 23.891 0 0113.997 4.502c-.2 17.907-11.097 33.245-26.602 39.926z",
+          fill: "#6875F5",
+        },
       }),
       _vm._v(" "),
       _c("path", {
         attrs: {
-          d:
-            "M14.134 45.885A23.914 23.914 0 0024 48c13.255 0 24-10.745 24-24 0-3.516-.756-6.856-2.115-9.866-4.659 15.143-16.608 27.092-31.75 31.751z",
-          fill: "#6875F5"
-        }
-      })
+          d: "M14.134 45.885A23.914 23.914 0 0024 48c13.255 0 24-10.745 24-24 0-3.516-.756-6.856-2.115-9.866-4.659 15.143-16.608 27.092-31.75 31.751z",
+          fill: "#6875F5",
+        },
+      }),
     ]
   )
 }
@@ -44741,7 +49347,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -44749,7 +49355,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100"
+        "min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100",
     },
     [
       _c("div", [_vm._t("logo")], 2),
@@ -44758,11 +49364,11 @@ var render = function() {
         "div",
         {
           staticClass:
-            "w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg"
+            "w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg",
         },
         [_vm._t("default")],
         2
-      )
+      ),
     ]
   )
 }
@@ -44785,7 +49391,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -44797,27 +49403,25 @@ var render = function() {
         attrs: {
           viewBox: "0 0 48 48",
           fill: "none",
-          xmlns: "http://www.w3.org/2000/svg"
-        }
+          xmlns: "http://www.w3.org/2000/svg",
+        },
       },
       [
         _c("path", {
           attrs: {
-            d:
-              "M11.395 44.428C4.557 40.198 0 32.632 0 24 0 10.745 10.745 0 24 0a23.891 23.891 0 0113.997 4.502c-.2 17.907-11.097 33.245-26.602 39.926z",
-            fill: "#6875F5"
-          }
+            d: "M11.395 44.428C4.557 40.198 0 32.632 0 24 0 10.745 10.745 0 24 0a23.891 23.891 0 0113.997 4.502c-.2 17.907-11.097 33.245-26.602 39.926z",
+            fill: "#6875F5",
+          },
         }),
         _vm._v(" "),
         _c("path", {
           attrs: {
-            d:
-              "M14.134 45.885A23.914 23.914 0 0024 48c13.255 0 24-10.745 24-24 0-3.516-.756-6.856-2.115-9.866-4.659 15.143-16.608 27.092-31.75 31.751z",
-            fill: "#6875F5"
-          }
-        })
+            d: "M14.134 45.885A23.914 23.914 0 0024 48c13.255 0 24-10.745 24-24 0-3.516-.756-6.856-2.115-9.866-4.659 15.143-16.608 27.092-31.75 31.751z",
+            fill: "#6875F5",
+          },
+        }),
       ]
-    )
+    ),
   ])
 }
 var staticRenderFns = []
@@ -44839,7 +49443,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -44850,20 +49454,21 @@ var render = function() {
           {
             class: {
               "bg-indigo-500": _vm.style == "success",
-              "bg-red-700": _vm.style == "danger"
-            }
+              "bg-red-700": _vm.style == "danger",
+            },
           },
           [
             _c(
               "div",
               {
-                staticClass: "max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8"
+                staticClass:
+                  "max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8",
               },
               [
                 _c(
                   "div",
                   {
-                    staticClass: "flex items-center justify-between flex-wrap"
+                    staticClass: "flex items-center justify-between flex-wrap",
                   },
                   [
                     _c(
@@ -44876,8 +49481,8 @@ var render = function() {
                             staticClass: "flex p-2 rounded-lg",
                             class: {
                               "bg-indigo-600": _vm.style == "success",
-                              "bg-red-600": _vm.style == "danger"
-                            }
+                              "bg-red-600": _vm.style == "danger",
+                            },
                           },
                           [
                             _vm.style == "success"
@@ -44889,8 +49494,8 @@ var render = function() {
                                       xmlns: "http://www.w3.org/2000/svg",
                                       fill: "none",
                                       viewBox: "0 0 24 24",
-                                      stroke: "currentColor"
-                                    }
+                                      stroke: "currentColor",
+                                    },
                                   },
                                   [
                                     _c("path", {
@@ -44898,10 +49503,9 @@ var render = function() {
                                         "stroke-linecap": "round",
                                         "stroke-linejoin": "round",
                                         "stroke-width": "2",
-                                        d:
-                                          "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                      }
-                                    })
+                                        d: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+                                      },
+                                    }),
                                   ]
                                 )
                               : _vm._e(),
@@ -44915,8 +49519,8 @@ var render = function() {
                                       xmlns: "http://www.w3.org/2000/svg",
                                       fill: "none",
                                       viewBox: "0 0 24 24",
-                                      stroke: "currentColor"
-                                    }
+                                      stroke: "currentColor",
+                                    },
                                   },
                                   [
                                     _c("path", {
@@ -44924,13 +49528,12 @@ var render = function() {
                                         "stroke-linecap": "round",
                                         "stroke-linejoin": "round",
                                         "stroke-width": "2",
-                                        d:
-                                          "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                                      }
-                                    })
+                                        d: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z",
+                                      },
+                                    }),
                                   ]
                                 )
-                              : _vm._e()
+                              : _vm._e(),
                           ]
                         ),
                         _vm._v(" "),
@@ -44938,16 +49541,16 @@ var render = function() {
                           "p",
                           {
                             staticClass:
-                              "ml-3 font-medium text-sm text-white truncate"
+                              "ml-3 font-medium text-sm text-white truncate",
                           },
                           [
                             _vm._v(
                               "\n                        " +
                                 _vm._s(_vm.message) +
                                 "\n                    "
-                            )
+                            ),
                           ]
-                        )
+                        ),
                       ]
                     ),
                     _vm._v(" "),
@@ -44961,15 +49564,15 @@ var render = function() {
                             "hover:bg-indigo-600 focus:bg-indigo-600":
                               _vm.style == "success",
                             "hover:bg-red-600 focus:bg-red-600":
-                              _vm.style == "danger"
+                              _vm.style == "danger",
                           },
                           attrs: { type: "button", "aria-label": "Dismiss" },
                           on: {
-                            click: function($event) {
+                            click: function ($event) {
                               $event.preventDefault()
                               _vm.show = false
-                            }
-                          }
+                            },
+                          },
                         },
                         [
                           _c(
@@ -44980,8 +49583,8 @@ var render = function() {
                                 xmlns: "http://www.w3.org/2000/svg",
                                 fill: "none",
                                 viewBox: "0 0 24 24",
-                                stroke: "currentColor"
-                              }
+                                stroke: "currentColor",
+                              },
                             },
                             [
                               _c("path", {
@@ -44989,21 +49592,21 @@ var render = function() {
                                   "stroke-linecap": "round",
                                   "stroke-linejoin": "round",
                                   "stroke-width": "2",
-                                  d: "M6 18L18 6M6 6l12 12"
-                                }
-                              })
+                                  d: "M6 18L18 6M6 6l12 12",
+                                },
+                              }),
                             ]
-                          )
+                          ),
                         ]
-                      )
-                    ])
+                      ),
+                    ]),
                   ]
-                )
+                ),
               ]
-            )
+            ),
           ]
         )
-      : _vm._e()
+      : _vm._e(),
   ])
 }
 var staticRenderFns = []
@@ -45025,7 +49628,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45034,7 +49637,7 @@ var render = function() {
     {
       staticClass:
         "\n        inline-flex\n        items-center\n        px-4\n        py-2\n        bg-gray-800\n        border border-transparent\n        rounded-md\n        font-semibold\n        text-xs text-white\n        uppercase\n        tracking-widest\n        hover:bg-gray-700\n        active:bg-gray-900\n        focus:outline-none focus:border-gray-900 focus:shadow-outline-gray\n        transition\n        ease-in-out\n        duration-150\n    ",
-      attrs: { type: _vm.type }
+      attrs: { type: _vm.type },
     },
     [_vm._t("default")],
     2
@@ -45059,7 +49662,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45069,8 +49672,8 @@ var render = function() {
         name: "model",
         rawName: "v-model",
         value: _vm.proxyChecked,
-        expression: "proxyChecked"
-      }
+        expression: "proxyChecked",
+      },
     ],
     staticClass:
       "rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
@@ -45079,10 +49682,10 @@ var render = function() {
       value: _vm.value,
       checked: Array.isArray(_vm.proxyChecked)
         ? _vm._i(_vm.proxyChecked, _vm.value) > -1
-        : _vm.proxyChecked
+        : _vm.proxyChecked,
     },
     on: {
-      change: function($event) {
+      change: function ($event) {
         var $$a = _vm.proxyChecked,
           $$el = $event.target,
           $$c = $$el.checked ? true : false
@@ -45098,8 +49701,8 @@ var render = function() {
         } else {
           _vm.proxyChecked = $$c
         }
-      }
-    }
+      },
+    },
   })
 }
 var staticRenderFns = []
@@ -45121,7 +49724,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45131,9 +49734,9 @@ var render = function() {
       attrs: {
         show: _vm.show,
         "max-width": _vm.maxWidth,
-        closeable: _vm.closeable
+        closeable: _vm.closeable,
       },
-      on: { close: _vm.close }
+      on: { close: _vm.close },
     },
     [
       _c("div", { staticClass: "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4" }, [
@@ -45142,7 +49745,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+                "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10",
             },
             [
               _c(
@@ -45152,8 +49755,8 @@ var render = function() {
                   attrs: {
                     stroke: "currentColor",
                     fill: "none",
-                    viewBox: "0 0 24 24"
-                  }
+                    viewBox: "0 0 24 24",
+                  },
                 },
                 [
                   _c("path", {
@@ -45161,12 +49764,11 @@ var render = function() {
                       "stroke-linecap": "round",
                       "stroke-linejoin": "round",
                       "stroke-width": "2",
-                      d:
-                        "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                    }
-                  })
+                      d: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z",
+                    },
+                  }),
                 ]
-              )
+              ),
             ]
           ),
           _vm._v(" "),
@@ -45176,10 +49778,10 @@ var render = function() {
             [
               _c("h3", { staticClass: "text-lg" }, [_vm._t("title")], 2),
               _vm._v(" "),
-              _c("div", { staticClass: "mt-2" }, [_vm._t("content")], 2)
+              _c("div", { staticClass: "mt-2" }, [_vm._t("content")], 2),
             ]
-          )
-        ])
+          ),
+        ]),
       ]),
       _vm._v(" "),
       _c(
@@ -45187,7 +49789,7 @@ var render = function() {
         { staticClass: "px-6 py-4 bg-gray-100 text-right" },
         [_vm._t("footer")],
         2
-      )
+      ),
     ]
   )
 }
@@ -45210,7 +49812,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45230,16 +49832,16 @@ var render = function() {
         scopedSlots: _vm._u([
           {
             key: "title",
-            fn: function() {
+            fn: function () {
               return [
-                _vm._v("\n            " + _vm._s(_vm.title) + "\n        ")
+                _vm._v("\n            " + _vm._s(_vm.title) + "\n        "),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "content",
-            fn: function() {
+            fn: function () {
               return [
                 _vm._v(
                   "\n            " + _vm._s(_vm.content) + "\n            "
@@ -45253,7 +49855,7 @@ var render = function() {
                       staticClass: "mt-1 block w-3/4",
                       attrs: { type: "password", placeholder: "Password" },
                       nativeOn: {
-                        keyup: function($event) {
+                        keyup: function ($event) {
                           if (
                             !$event.type.indexOf("key") &&
                             _vm._k(
@@ -45267,40 +49869,40 @@ var render = function() {
                             return null
                           }
                           return _vm.confirmPassword.apply(null, arguments)
-                        }
+                        },
                       },
                       model: {
                         value: _vm.form.password,
-                        callback: function($$v) {
+                        callback: function ($$v) {
                           _vm.$set(_vm.form, "password", $$v)
                         },
-                        expression: "form.password"
-                      }
+                        expression: "form.password",
+                      },
                     }),
                     _vm._v(" "),
                     _c("jet-input-error", {
                       staticClass: "mt-2",
-                      attrs: { message: _vm.form.error }
-                    })
+                      attrs: { message: _vm.form.error },
+                    }),
                   ],
                   1
-                )
+                ),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "footer",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "jet-secondary-button",
                   {
                     nativeOn: {
-                      click: function($event) {
+                      click: function ($event) {
                         return _vm.closeModal.apply(null, arguments)
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v(" Nevermind ")]
                 ),
@@ -45312,25 +49914,25 @@ var render = function() {
                     class: { "opacity-25": _vm.form.processing },
                     attrs: { disabled: _vm.form.processing },
                     nativeOn: {
-                      click: function($event) {
+                      click: function ($event) {
                         return _vm.confirmPassword.apply(null, arguments)
-                      }
-                    }
+                      },
+                    },
                   },
                   [
                     _vm._v(
                       "\n                " +
                         _vm._s(_vm.button) +
                         "\n            "
-                    )
+                    ),
                   ]
-                )
+                ),
               ]
             },
-            proxy: true
-          }
-        ])
-      })
+            proxy: true,
+          },
+        ]),
+      }),
     ],
     1
   )
@@ -45354,7 +49956,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45363,7 +49965,7 @@ var render = function() {
     {
       staticClass:
         "\n        inline-flex\n        items-center\n        justify-center\n        px-4\n        py-2\n        bg-red-600\n        border border-transparent\n        rounded-md\n        font-semibold\n        text-xs text-white\n        uppercase\n        tracking-widest\n        hover:bg-red-500\n        focus:outline-none focus:border-red-700 focus:shadow-outline-red\n        active:bg-red-600\n        transition\n        ease-in-out\n        duration-150\n    ",
-      attrs: { type: _vm.type }
+      attrs: { type: _vm.type },
     },
     [_vm._t("default")],
     2
@@ -45388,7 +49990,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45398,15 +50000,15 @@ var render = function() {
       attrs: {
         show: _vm.show,
         "max-width": _vm.maxWidth,
-        closeable: _vm.closeable
+        closeable: _vm.closeable,
       },
-      on: { close: _vm.close }
+      on: { close: _vm.close },
     },
     [
       _c("div", { staticClass: "px-6 py-4" }, [
         _c("div", { staticClass: "text-lg" }, [_vm._t("title")], 2),
         _vm._v(" "),
-        _c("div", { staticClass: "mt-4" }, [_vm._t("content")], 2)
+        _c("div", { staticClass: "mt-4" }, [_vm._t("content")], 2),
       ]),
       _vm._v(" "),
       _c(
@@ -45414,7 +50016,7 @@ var render = function() {
         { staticClass: "px-6 py-4 bg-gray-100 text-right" },
         [_vm._t("footer")],
         2
-      )
+      ),
     ]
   )
 }
@@ -45437,7 +50039,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45449,10 +50051,10 @@ var render = function() {
         "div",
         {
           on: {
-            click: function($event) {
+            click: function ($event) {
               _vm.open = !_vm.open
-            }
-          }
+            },
+          },
         },
         [_vm._t("trigger")],
         2
@@ -45464,15 +50066,15 @@ var render = function() {
             name: "show",
             rawName: "v-show",
             value: _vm.open,
-            expression: "open"
-          }
+            expression: "open",
+          },
         ],
         staticClass: "fixed inset-0 z-40",
         on: {
-          click: function($event) {
+          click: function ($event) {
             _vm.open = false
-          }
-        }
+          },
+        },
       }),
       _vm._v(" "),
       _c(
@@ -45484,8 +50086,8 @@ var render = function() {
             "enter-to-class": "transform opacity-100 scale-100",
             "leave-active-class": "transition ease-in duration-75",
             "leave-class": "transform opacity-100 scale-100",
-            "leave-to-class": "transform opacity-0 scale-95"
-          }
+            "leave-to-class": "transform opacity-0 scale-95",
+          },
         },
         [
           _c(
@@ -45496,32 +50098,32 @@ var render = function() {
                   name: "show",
                   rawName: "v-show",
                   value: _vm.open,
-                  expression: "open"
-                }
+                  expression: "open",
+                },
               ],
               staticClass: "absolute z-50 mt-2 rounded-md shadow-lg",
               class: [_vm.widthClass, _vm.alignmentClasses],
               staticStyle: { display: "none" },
               on: {
-                click: function($event) {
+                click: function ($event) {
                   _vm.open = false
-                }
-              }
+                },
+              },
             },
             [
               _c(
                 "div",
                 {
                   staticClass: "rounded-md ring-1 ring-black ring-opacity-5",
-                  class: _vm.contentClasses
+                  class: _vm.contentClasses,
                 },
                 [_vm._t("content")],
                 2
-              )
+              ),
             ]
-          )
+          ),
         ]
-      )
+      ),
     ],
     1
   )
@@ -45545,7 +50147,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45558,7 +50160,7 @@ var render = function() {
             {
               staticClass:
                 "block w-full px-4 py-2 text-sm leading-5 text-gray-700 text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out",
-              attrs: { type: "submit" }
+              attrs: { type: "submit" },
             },
             [_vm._t("default")],
             2
@@ -45568,11 +50170,11 @@ var render = function() {
             {
               staticClass:
                 "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out",
-              attrs: { href: _vm.href }
+              attrs: { href: _vm.href },
             },
             [_vm._t("default")],
             2
-          )
+          ),
     ],
     1
   )
@@ -45596,7 +50198,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45609,22 +50211,22 @@ var render = function() {
           [
             {
               key: "title",
-              fn: function() {
+              fn: function () {
                 return [_vm._t("title")]
               },
-              proxy: true
+              proxy: true,
             },
             {
               key: "description",
-              fn: function() {
+              fn: function () {
                 return [_vm._t("description")]
               },
-              proxy: true
-            }
+              proxy: true,
+            },
           ],
           null,
           true
-        )
+        ),
       }),
       _vm._v(" "),
       _c("div", { staticClass: "mt-5 md:mt-0 md:col-span-2" }, [
@@ -45632,11 +50234,11 @@ var render = function() {
           "form",
           {
             on: {
-              submit: function($event) {
+              submit: function ($event) {
                 $event.preventDefault()
                 return _vm.$emit("submitted")
-              }
-            }
+              },
+            },
           },
           [
             _c(
@@ -45645,7 +50247,7 @@ var render = function() {
                 staticClass: "px-4 py-5 bg-white sm:p-6 shadow",
                 class: _vm.hasActions
                   ? "sm:rounded-tl-md sm:rounded-tr-md"
-                  : "sm:rounded-md"
+                  : "sm:rounded-md",
               },
               [
                 _c(
@@ -45653,7 +50255,7 @@ var render = function() {
                   { staticClass: "grid grid-cols-6 gap-6" },
                   [_vm._t("form")],
                   2
-                )
+                ),
               ]
             ),
             _vm._v(" "),
@@ -45662,15 +50264,15 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md"
+                      "flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md",
                   },
                   [_vm._t("actions")],
                   2
                 )
-              : _vm._e()
+              : _vm._e(),
           ]
-        )
-      ])
+        ),
+      ]),
     ],
     1
   )
@@ -45694,7 +50296,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45704,10 +50306,10 @@ var render = function() {
       "border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm",
     domProps: { value: _vm.value },
     on: {
-      input: function($event) {
+      input: function ($event) {
         return _vm.$emit("input", $event.target.value)
-      }
-    }
+      },
+    },
   })
 }
 var staticRenderFns = []
@@ -45729,7 +50331,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45741,14 +50343,14 @@ var render = function() {
           name: "show",
           rawName: "v-show",
           value: _vm.message,
-          expression: "message"
-        }
-      ]
+          expression: "message",
+        },
+      ],
     },
     [
       _c("p", { staticClass: "text-sm text-red-600" }, [
-        _vm._v("\n        " + _vm._s(_vm.message) + "\n    ")
-      ])
+        _vm._v("\n        " + _vm._s(_vm.message) + "\n    "),
+      ]),
     ]
   )
 }
@@ -45771,7 +50373,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45781,7 +50383,7 @@ var render = function() {
     [
       _vm.value
         ? _c("span", [_vm._v(_vm._s(_vm.value))])
-        : _c("span", [_vm._t("default")], 2)
+        : _c("span", [_vm._t("default")], 2),
     ]
   )
 }
@@ -45804,7 +50406,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45821,10 +50423,10 @@ var render = function() {
                 name: "show",
                 rawName: "v-show",
                 value: _vm.show,
-                expression: "show"
-              }
+                expression: "show",
+              },
             ],
-            staticClass: "fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50"
+            staticClass: "fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50",
           },
           [
             _c(
@@ -45836,8 +50438,8 @@ var render = function() {
                   "enter-to-class": "opacity-100",
                   "leave-active-class": "ease-in duration-200",
                   "leave-class": "opacity-100",
-                  "leave-to-class": "opacity-0"
-                }
+                  "leave-to-class": "opacity-0",
+                },
               },
               [
                 _c(
@@ -45848,18 +50450,18 @@ var render = function() {
                         name: "show",
                         rawName: "v-show",
                         value: _vm.show,
-                        expression: "show"
-                      }
+                        expression: "show",
+                      },
                     ],
                     staticClass: "fixed inset-0 transform transition-all",
-                    on: { click: _vm.close }
+                    on: { click: _vm.close },
                   },
                   [
                     _c("div", {
-                      staticClass: "absolute inset-0 bg-gray-500 opacity-75"
-                    })
+                      staticClass: "absolute inset-0 bg-gray-500 opacity-75",
+                    }),
                   ]
-                )
+                ),
               ]
             ),
             _vm._v(" "),
@@ -45874,8 +50476,8 @@ var render = function() {
                   "leave-active-class": "ease-in duration-200",
                   "leave-class": "opacity-100 translate-y-0 sm:scale-100",
                   "leave-to-class":
-                    "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                }
+                    "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95",
+                },
               },
               [
                 _c(
@@ -45886,22 +50488,22 @@ var render = function() {
                         name: "show",
                         rawName: "v-show",
                         value: _vm.show,
-                        expression: "show"
-                      }
+                        expression: "show",
+                      },
                     ],
                     staticClass:
                       "mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto",
-                    class: _vm.maxWidthClass
+                    class: _vm.maxWidthClass,
                   },
                   [_vm._t("default")],
                   2
-                )
+                ),
               ]
-            )
+            ),
           ],
           1
-        )
-      ])
+        ),
+      ]),
     ],
     1
   )
@@ -45925,7 +50527,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45955,7 +50557,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -45974,7 +50576,7 @@ var render = function() {
             { class: _vm.classes, attrs: { href: _vm.href } },
             [_vm._t("default")],
             2
-          )
+          ),
     ],
     1
   )
@@ -45998,7 +50600,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -46007,7 +50609,7 @@ var render = function() {
     {
       staticClass:
         "\n        inline-flex\n        items-center\n        px-4\n        py-2\n        bg-white\n        border border-gray-300\n        rounded-md\n        font-semibold\n        text-xs text-gray-700\n        uppercase\n        tracking-widest\n        shadow-sm\n        hover:text-gray-500\n        focus:outline-none focus:border-blue-300 focus:shadow-outline-blue\n        active:text-gray-800 active:bg-gray-50\n        transition\n        ease-in-out\n        duration-150\n    ",
-      attrs: { type: _vm.type }
+      attrs: { type: _vm.type },
     },
     [_vm._t("default")],
     2
@@ -46032,23 +50634,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm._m(0)
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "hidden sm:block" }, [
       _c("div", { staticClass: "py-8" }, [
-        _c("div", { staticClass: "border-t border-gray-200" })
-      ])
+        _c("div", { staticClass: "border-t border-gray-200" }),
+      ]),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -46068,7 +50670,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -46086,8 +50688,8 @@ var render = function() {
         { staticClass: "mt-1 text-sm text-gray-600" },
         [_vm._t("description")],
         2
-      )
-    ])
+      ),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -46109,24 +50711,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.hasErrors
     ? _c("div", [
         _c("div", { staticClass: "font-medium text-red-600" }, [
-          _vm._v("Whoops! Something went wrong.")
+          _vm._v("Whoops! Something went wrong."),
         ]),
         _vm._v(" "),
         _c(
           "ul",
           { staticClass: "mt-3 list-disc list-inside text-sm text-red-600" },
-          _vm._l(_vm.errors, function(error, key) {
+          _vm._l(_vm.errors, function (error, key) {
             return _c("li", { key: key }, [_vm._v(_vm._s(error))])
           }),
           0
-        )
+        ),
       ])
     : _vm._e()
 }
@@ -46149,7 +50751,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -46165,7 +50767,7 @@ var render = function() {
               "div",
               {
                 staticClass: "w-9/12 py-4 pl-6 pr-4 2xl:mr-0 mr-8",
-                staticStyle: { "padding-left": "5vw" }
+                staticStyle: { "padding-left": "5vw" },
               },
               [
                 _c(
@@ -46173,7 +50775,7 @@ var render = function() {
                   {
                     staticClass:
                       "w-full flex justify-between fixed top-0 left-0 z-30 bg-white pb-2 topmenu topmenu-width",
-                    staticStyle: { "padding-left": "5vw" }
+                    staticStyle: { "padding-left": "5vw" },
                   },
                   [
                     _c(
@@ -46185,8 +50787,8 @@ var render = function() {
                             "relative mt-2 fill-current text-green-500",
                           attrs: {
                             src: "/images/vasterra-logo.svg",
-                            alt: "vasterra-logo"
-                          }
+                            alt: "vasterra-logo",
+                          },
                         }),
                         _vm._v(" "),
                         _c(
@@ -46194,7 +50796,7 @@ var render = function() {
                           {
                             staticClass:
                               "mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500",
-                            attrs: { href: _vm.route("dashboard") }
+                            attrs: { href: _vm.route("dashboard") },
                           },
                           [_vm._v("Jobs")]
                         ),
@@ -46204,10 +50806,10 @@ var render = function() {
                           {
                             staticClass:
                               "pt-1 mt-2 text-black border-white border-b-4 hover:border-green-500",
-                            attrs: { href: "#" }
+                            attrs: { href: "#" },
                           },
                           [_vm._v("Lidgens")]
-                        )
+                        ),
                       ]
                     ),
                     _vm._v(" "),
@@ -46215,7 +50817,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "w-7/12 flex justify-end items-center mr-9 user-block"
+                          "w-7/12 flex justify-end items-center mr-9 user-block",
                       },
                       [
                         _c("div", { staticClass: "w-full mr-4" }, [
@@ -46224,7 +50826,7 @@ var render = function() {
                             {
                               ref: "parent_search_block",
                               staticClass:
-                                "parent-search-block flex-nowrap w-full flex justify-end items-center"
+                                "parent-search-block flex-nowrap w-full flex justify-end items-center",
                             },
                             [
                               _c(
@@ -46232,7 +50834,7 @@ var render = function() {
                                 {
                                   ref: "search_block",
                                   staticClass:
-                                    "w-0 overflow-hidden flex justify-between search-block"
+                                    "w-0 overflow-hidden flex justify-between search-block",
                                 },
                                 [
                                   _c("input", {
@@ -46241,15 +50843,15 @@ var render = function() {
                                     attrs: {
                                       type: "text",
                                       placeholder:
-                                        "Job id, URL,Title or key word"
-                                    }
+                                        "Job id, URL,Title or key word",
+                                    },
                                   }),
                                   _vm._v(" "),
                                   _c(
                                     "button",
                                     {
                                       staticClass:
-                                        "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white"
+                                        "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white",
                                     },
                                     [_vm._v("Search")]
                                   ),
@@ -46261,13 +50863,13 @@ var render = function() {
                                         "ml-4 search-button text-black text-5xl cursor-pointer hover:text-red-500",
                                       attrs: { title: "Close search panel" },
                                       on: {
-                                        click: function($event) {
+                                        click: function ($event) {
                                           return _vm.closeSearch()
-                                        }
-                                      }
+                                        },
+                                      },
                                     },
                                     [_vm._v("×")]
-                                  )
+                                  ),
                                 ]
                               ),
                               _vm._v(" "),
@@ -46282,13 +50884,13 @@ var render = function() {
                                     viewBox: "0 0 24 24",
                                     fill: "none",
                                     xmlns: "http://www.w3.org/2000/svg",
-                                    title: "Open search panel"
+                                    title: "Open search panel",
                                   },
                                   on: {
-                                    click: function($event) {
+                                    click: function ($event) {
                                       return _vm.showSearch()
-                                    }
-                                  }
+                                    },
+                                  },
                                 },
                                 [
                                   _c("path", {
@@ -46296,30 +50898,29 @@ var render = function() {
                                       id: "search-svg",
                                       "fill-rule": "evenodd",
                                       "clip-rule": "evenodd",
-                                      d:
-                                        "M14.618 16.032C13.0243 17.309 11.0422 18.0033 9 18C6.61305 18 4.32387 17.0518 2.63604 15.364C0.948211 13.6761 0 11.3869 0 9C0 6.61305 0.948211 4.32387 2.63604 2.63604C4.32387 0.948211 6.61305 0 9 0C11.3869 0 13.6761 0.948211 15.364 2.63604C17.0518 4.32387 18 6.61305 18 9C18.0033 11.0422 17.309 13.0243 16.032 14.618L24 22.586L22.586 24L14.618 16.032ZM9 2C12.86 2 16 5.14 16 9C16 12.86 12.86 16 9 16C5.14 16 2 12.86 2 9C2 5.14 5.14 2 9 2Z",
-                                      fill: "black"
-                                    }
-                                  })
+                                      d: "M14.618 16.032C13.0243 17.309 11.0422 18.0033 9 18C6.61305 18 4.32387 17.0518 2.63604 15.364C0.948211 13.6761 0 11.3869 0 9C0 6.61305 0.948211 4.32387 2.63604 2.63604C4.32387 0.948211 6.61305 0 9 0C11.3869 0 13.6761 0.948211 15.364 2.63604C17.0518 4.32387 18 6.61305 18 9C18.0033 11.0422 17.309 13.0243 16.032 14.618L24 22.586L22.586 24L14.618 16.032ZM9 2C12.86 2 16 5.14 16 9C16 12.86 12.86 16 9 16C5.14 16 2 12.86 2 9C2 5.14 5.14 2 9 2Z",
+                                      fill: "black",
+                                    },
+                                  }),
                                 ]
-                              )
+                              ),
                             ]
-                          )
+                          ),
                         ]),
                         _vm._v(" "),
                         _c(
                           "div",
                           {
                             staticClass:
-                              "ml-12 flex justify-end items-center relative"
+                              "ml-12 flex justify-end items-center relative",
                           },
                           [
                             _c("img", {
                               staticClass: "w-12",
                               attrs: {
                                 src: _vm.$page.props.user.profile_photo_url,
-                                alt: "user"
-                              }
+                                alt: "user",
+                              },
                             }),
                             _vm._v(" "),
                             _c(
@@ -46328,10 +50929,10 @@ var render = function() {
                                 staticClass:
                                   "flex justify-center items-center cursor-pointer link-image",
                                 on: {
-                                  click: function($event) {
+                                  click: function ($event) {
                                     return _vm.showDropdown()
-                                  }
-                                }
+                                  },
+                                },
                               },
                               [
                                 _c(
@@ -46344,9 +50945,9 @@ var render = function() {
                                   staticClass: "ml-1 mt-1 cursor-pointer",
                                   attrs: {
                                     src: "/images/arrow-down.svg",
-                                    alt: "arrow down"
-                                  }
-                                })
+                                    alt: "arrow down",
+                                  },
+                                }),
                               ]
                             ),
                             _vm._v(" "),
@@ -46355,7 +50956,7 @@ var render = function() {
                               {
                                 ref: "dropdown",
                                 staticClass:
-                                  "absolute top-10 left-6 w-40 bg-white rounded-2xl shadow-2xl hidden dropdown"
+                                  "absolute top-10 left-6 w-40 bg-white rounded-2xl shadow-2xl hidden dropdown",
                               },
                               [
                                 _c("ul", { staticClass: "p-4" }, [
@@ -46366,33 +50967,33 @@ var render = function() {
                                         staticClass:
                                           "border-b-4 border-white hover:border-green-500",
                                         attrs: {
-                                          href: _vm.route("profile.show")
-                                        }
+                                          href: _vm.route("profile.show"),
+                                        },
                                       },
                                       [_vm._v("Profile")]
-                                    )
+                                    ),
                                   ]),
                                   _vm._v(" "),
                                   _vm._m(0),
                                   _vm._v(" "),
                                   _c("hr", {
-                                    staticClass: "mt-6 mb-2 min-w-full"
+                                    staticClass: "mt-6 mb-2 min-w-full",
                                   }),
                                   _vm._v(" "),
-                                  _vm._m(1)
-                                ])
+                                  _vm._m(1),
+                                ]),
                               ]
-                            )
+                            ),
                           ]
-                        )
+                        ),
                       ]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "w-3/12 last-block" })
+                    _c("div", { staticClass: "w-3/12 last-block" }),
                   ]
                 ),
                 _vm._v(" "),
-                _c("main", [_vm._t("default")], 2)
+                _c("main", [_vm._t("default")], 2),
               ]
             ),
             _vm._v(" "),
@@ -46400,13 +51001,13 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30"
+                  "w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30",
               },
               [_c("CalendarSidebar")],
               1
-            )
+            ),
           ]
-        )
+        ),
       ]),
       _vm._v(" "),
       _vm.$slots.header
@@ -46416,7 +51017,7 @@ var render = function() {
               { staticClass: "max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8" },
               [_vm._t("header")],
               2
-            )
+            ),
           ])
         : _vm._e(),
       _vm._v(" "),
@@ -46428,14 +51029,14 @@ var render = function() {
       _vm._v(" "),
       _c("div", {
         staticClass: "modalShadow",
-        class: { hidden: !_vm.ModalJobSwitched }
-      })
+        class: { hidden: !_vm.ModalJobSwitched },
+      }),
     ],
     1
   )
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -46444,13 +51045,13 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "border-b-4 border-white hover:border-green-500",
-          attrs: { href: "#" }
+          attrs: { href: "#" },
         },
         [_vm._v("Setting filteres")]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -46459,12 +51060,12 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "border-b-4 border-white hover:border-green-500",
-          attrs: { href: "#" }
+          attrs: { href: "#" },
         },
         [_vm._v("Log out")]
-      )
+      ),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -46484,7 +51085,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -46496,25 +51097,25 @@ var render = function() {
         scopedSlots: _vm._u([
           {
             key: "title",
-            fn: function() {
+            fn: function () {
               return [_vm._v(" Create API Token ")]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "description",
-            fn: function() {
+            fn: function () {
               return [
                 _vm._v(
                   " API tokens allow third-party services to authenticate with our application on your behalf. "
-                )
+                ),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "form",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "div",
@@ -46527,17 +51128,17 @@ var render = function() {
                       attrs: { id: "name", type: "text", autofocus: "" },
                       model: {
                         value: _vm.createApiTokenForm.name,
-                        callback: function($$v) {
+                        callback: function ($$v) {
                           _vm.$set(_vm.createApiTokenForm, "name", $$v)
                         },
-                        expression: "createApiTokenForm.name"
-                      }
+                        expression: "createApiTokenForm.name",
+                      },
                     }),
                     _vm._v(" "),
                     _c("jet-input-error", {
                       staticClass: "mt-2",
-                      attrs: { message: _vm.createApiTokenForm.errors.name }
-                    })
+                      attrs: { message: _vm.createApiTokenForm.errors.name },
+                    }),
                   ],
                   1
                 ),
@@ -46548,70 +51149,73 @@ var render = function() {
                       { staticClass: "col-span-6" },
                       [
                         _c("jet-label", {
-                          attrs: { for: "permissions", value: "Permissions" }
+                          attrs: { for: "permissions", value: "Permissions" },
                         }),
                         _vm._v(" "),
                         _c(
                           "div",
                           {
                             staticClass:
-                              "mt-2 grid grid-cols-1 md:grid-cols-2 gap-4"
+                              "mt-2 grid grid-cols-1 md:grid-cols-2 gap-4",
                           },
-                          _vm._l(_vm.availablePermissions, function(
-                            permission
-                          ) {
-                            return _c("div", { key: permission }, [
-                              _c(
-                                "label",
-                                { staticClass: "flex items-center" },
-                                [
-                                  _c("jet-checkbox", {
-                                    attrs: { value: permission },
-                                    model: {
-                                      value: _vm.createApiTokenForm.permissions,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.createApiTokenForm,
-                                          "permissions",
-                                          $$v
-                                        )
+                          _vm._l(
+                            _vm.availablePermissions,
+                            function (permission) {
+                              return _c("div", { key: permission }, [
+                                _c(
+                                  "label",
+                                  { staticClass: "flex items-center" },
+                                  [
+                                    _c("jet-checkbox", {
+                                      attrs: { value: permission },
+                                      model: {
+                                        value:
+                                          _vm.createApiTokenForm.permissions,
+                                        callback: function ($$v) {
+                                          _vm.$set(
+                                            _vm.createApiTokenForm,
+                                            "permissions",
+                                            $$v
+                                          )
+                                        },
+                                        expression:
+                                          "createApiTokenForm.permissions",
                                       },
-                                      expression:
-                                        "createApiTokenForm.permissions"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass: "ml-2 text-sm text-gray-600"
-                                    },
-                                    [_vm._v(_vm._s(permission))]
-                                  )
-                                ],
-                                1
-                              )
-                            ])
-                          }),
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "ml-2 text-sm text-gray-600",
+                                      },
+                                      [_vm._v(_vm._s(permission))]
+                                    ),
+                                  ],
+                                  1
+                                ),
+                              ])
+                            }
+                          ),
                           0
-                        )
+                        ),
                       ],
                       1
                     )
-                  : _vm._e()
+                  : _vm._e(),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "actions",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "jet-action-message",
                   {
                     staticClass: "mr-3",
-                    attrs: { on: _vm.createApiTokenForm.recentlySuccessful }
+                    attrs: { on: _vm.createApiTokenForm.recentlySuccessful },
                   },
                   [_vm._v(" Created. ")]
                 ),
@@ -46620,15 +51224,15 @@ var render = function() {
                   "jet-button",
                   {
                     class: { "opacity-25": _vm.createApiTokenForm.processing },
-                    attrs: { disabled: _vm.createApiTokenForm.processing }
+                    attrs: { disabled: _vm.createApiTokenForm.processing },
                   },
                   [_vm._v(" Create ")]
-                )
+                ),
               ]
             },
-            proxy: true
-          }
-        ])
+            proxy: true,
+          },
+        ]),
       }),
       _vm._v(" "),
       _vm.tokens.length > 0
@@ -46646,36 +51250,36 @@ var render = function() {
                       [
                         {
                           key: "title",
-                          fn: function() {
+                          fn: function () {
                             return [_vm._v(" Manage API Tokens ")]
                           },
-                          proxy: true
+                          proxy: true,
                         },
                         {
                           key: "description",
-                          fn: function() {
+                          fn: function () {
                             return [
                               _vm._v(
                                 " You may delete any of your existing tokens if they are no longer needed. "
-                              )
+                              ),
                             ]
                           },
-                          proxy: true
+                          proxy: true,
                         },
                         {
                           key: "content",
-                          fn: function() {
+                          fn: function () {
                             return [
                               _c(
                                 "div",
                                 { staticClass: "space-y-6" },
-                                _vm._l(_vm.tokens, function(token) {
+                                _vm._l(_vm.tokens, function (token) {
                                   return _c(
                                     "div",
                                     {
                                       key: token.id,
                                       staticClass:
-                                        "flex items-center justify-between"
+                                        "flex items-center justify-between",
                                     },
                                     [
                                       _c("div", [
@@ -46683,7 +51287,7 @@ var render = function() {
                                           "\n                                " +
                                             _vm._s(token.name) +
                                             "\n                            "
-                                        )
+                                        ),
                                       ]),
                                       _vm._v(" "),
                                       _c(
@@ -46695,7 +51299,7 @@ var render = function() {
                                                 "div",
                                                 {
                                                   staticClass:
-                                                    "text-sm text-gray-400"
+                                                    "text-sm text-gray-400",
                                                 },
                                                 [
                                                   _vm._v(
@@ -46703,7 +51307,7 @@ var render = function() {
                                                       _vm._s(
                                                         token.last_used_ago
                                                       )
-                                                  )
+                                                  ),
                                                 ]
                                               )
                                             : _vm._e(),
@@ -46715,17 +51319,17 @@ var render = function() {
                                                   staticClass:
                                                     "cursor-pointer ml-6 text-sm text-gray-400 underline",
                                                   on: {
-                                                    click: function($event) {
+                                                    click: function ($event) {
                                                       return _vm.manageApiTokenPermissions(
                                                         token
                                                       )
-                                                    }
-                                                  }
+                                                    },
+                                                  },
                                                 },
                                                 [
                                                   _vm._v(
                                                     "\n                                    Permissions\n                                "
-                                                  )
+                                                  ),
                                                 ]
                                               )
                                             : _vm._e(),
@@ -46736,35 +51340,35 @@ var render = function() {
                                               staticClass:
                                                 "cursor-pointer ml-6 text-sm text-red-500",
                                               on: {
-                                                click: function($event) {
+                                                click: function ($event) {
                                                   return _vm.confirmApiTokenDeletion(
                                                     token
                                                   )
-                                                }
-                                              }
+                                                },
+                                              },
                                             },
                                             [_vm._v("Delete")]
-                                          )
+                                          ),
                                         ]
-                                      )
+                                      ),
                                     ]
                                   )
                                 }),
                                 0
-                              )
+                              ),
                             ]
                           },
-                          proxy: true
-                        }
+                          proxy: true,
+                        },
                       ],
                       null,
                       false,
                       1902782963
-                    )
-                  })
+                    ),
+                  }),
                 ],
                 1
-              )
+              ),
             ],
             1
           )
@@ -46773,26 +51377,26 @@ var render = function() {
       _c("jet-dialog-modal", {
         attrs: { show: _vm.displayingToken },
         on: {
-          close: function($event) {
+          close: function ($event) {
             _vm.displayingToken = false
-          }
+          },
         },
         scopedSlots: _vm._u([
           {
             key: "title",
-            fn: function() {
+            fn: function () {
               return [_vm._v(" API Token ")]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "content",
-            fn: function() {
+            fn: function () {
               return [
                 _c("div", [
                   _vm._v(
                     "Please copy your new API token. For your security, it won't be shown again."
-                  )
+                  ),
                 ]),
                 _vm._v(" "),
                 _vm.$page.props.jetstream.flash.token
@@ -46800,66 +51404,66 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500"
+                          "mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500",
                       },
                       [
                         _vm._v(
                           "\n                " +
                             _vm._s(_vm.$page.props.jetstream.flash.token) +
                             "\n            "
-                        )
+                        ),
                       ]
                     )
-                  : _vm._e()
+                  : _vm._e(),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "footer",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "jet-secondary-button",
                   {
                     nativeOn: {
-                      click: function($event) {
+                      click: function ($event) {
                         _vm.displayingToken = false
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v(" Close ")]
-                )
+                ),
               ]
             },
-            proxy: true
-          }
-        ])
+            proxy: true,
+          },
+        ]),
       }),
       _vm._v(" "),
       _c("jet-dialog-modal", {
         attrs: { show: _vm.managingPermissionsFor },
         on: {
-          close: function($event) {
+          close: function ($event) {
             _vm.managingPermissionsFor = null
-          }
+          },
         },
         scopedSlots: _vm._u([
           {
             key: "title",
-            fn: function() {
+            fn: function () {
               return [_vm._v(" API Token Permissions ")]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "content",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "div",
                   { staticClass: "grid grid-cols-1 md:grid-cols-2 gap-4" },
-                  _vm._l(_vm.availablePermissions, function(permission) {
+                  _vm._l(_vm.availablePermissions, function (permission) {
                     return _c("div", { key: permission }, [
                       _c(
                         "label",
@@ -46869,45 +51473,45 @@ var render = function() {
                             attrs: { value: permission },
                             model: {
                               value: _vm.updateApiTokenForm.permissions,
-                              callback: function($$v) {
+                              callback: function ($$v) {
                                 _vm.$set(
                                   _vm.updateApiTokenForm,
                                   "permissions",
                                   $$v
                                 )
                               },
-                              expression: "updateApiTokenForm.permissions"
-                            }
+                              expression: "updateApiTokenForm.permissions",
+                            },
                           }),
                           _vm._v(" "),
                           _c(
                             "span",
                             { staticClass: "ml-2 text-sm text-gray-600" },
                             [_vm._v(_vm._s(permission))]
-                          )
+                          ),
                         ],
                         1
-                      )
+                      ),
                     ])
                   }),
                   0
-                )
+                ),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "footer",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "jet-secondary-button",
                   {
                     nativeOn: {
-                      click: function($event) {
+                      click: function ($event) {
                         _vm.managingPermissionsFor = null
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v(" Nevermind ")]
                 ),
@@ -46919,58 +51523,58 @@ var render = function() {
                     class: { "opacity-25": _vm.updateApiTokenForm.processing },
                     attrs: { disabled: _vm.updateApiTokenForm.processing },
                     nativeOn: {
-                      click: function($event) {
+                      click: function ($event) {
                         return _vm.updateApiToken.apply(null, arguments)
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v(" Save ")]
-                )
+                ),
               ]
             },
-            proxy: true
-          }
-        ])
+            proxy: true,
+          },
+        ]),
       }),
       _vm._v(" "),
       _c("jet-confirmation-modal", {
         attrs: { show: _vm.apiTokenBeingDeleted },
         on: {
-          close: function($event) {
+          close: function ($event) {
             _vm.apiTokenBeingDeleted = null
-          }
+          },
         },
         scopedSlots: _vm._u([
           {
             key: "title",
-            fn: function() {
+            fn: function () {
               return [_vm._v(" Delete API Token ")]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "content",
-            fn: function() {
+            fn: function () {
               return [
                 _vm._v(
                   " Are you sure you would like to delete this API token? "
-                )
+                ),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "footer",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "jet-secondary-button",
                   {
                     nativeOn: {
-                      click: function($event) {
+                      click: function ($event) {
                         _vm.apiTokenBeingDeleted = null
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v(" Nevermind ")]
                 ),
@@ -46982,19 +51586,19 @@ var render = function() {
                     class: { "opacity-25": _vm.deleteApiTokenForm.processing },
                     attrs: { disabled: _vm.deleteApiTokenForm.processing },
                     nativeOn: {
-                      click: function($event) {
+                      click: function ($event) {
                         return _vm.deleteApiToken.apply(null, arguments)
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v("\n                Delete\n            ")]
-                )
+                ),
               ]
             },
-            proxy: true
-          }
-        ])
-      })
+            proxy: true,
+          },
+        ]),
+      }),
     ],
     1
   )
@@ -47018,7 +51622,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -47028,21 +51632,21 @@ var render = function() {
       scopedSlots: _vm._u([
         {
           key: "header",
-          fn: function() {
+          fn: function () {
             return [
               _c(
                 "h2",
                 {
                   staticClass:
-                    "font-semibold text-xl text-gray-800 leading-tight"
+                    "font-semibold text-xl text-gray-800 leading-tight",
                 },
                 [_vm._v("API Tokens")]
-              )
+              ),
             ]
           },
-          proxy: true
-        }
-      ])
+          proxy: true,
+        },
+      ]),
     },
     [
       _vm._v(" "),
@@ -47055,13 +51659,13 @@ var render = function() {
               attrs: {
                 tokens: _vm.tokens,
                 "available-permissions": _vm.availablePermissions,
-                "default-permissions": _vm.defaultPermissions
-              }
-            })
+                "default-permissions": _vm.defaultPermissions,
+              },
+            }),
           ],
           1
-        )
-      ])
+        ),
+      ]),
     ]
   )
 }
@@ -47084,7 +51688,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -47096,25 +51700,25 @@ var render = function() {
         scopedSlots: _vm._u([
           {
             key: "title",
-            fn: function() {
+            fn: function () {
               return [_vm._v(" Create API Token ")]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "description",
-            fn: function() {
+            fn: function () {
               return [
                 _vm._v(
                   " API tokens allow third-party services to authenticate with our application on your behalf. "
-                )
+                ),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "form",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "div",
@@ -47127,17 +51731,17 @@ var render = function() {
                       attrs: { id: "name", type: "text", autofocus: "" },
                       model: {
                         value: _vm.createApiTokenForm.name,
-                        callback: function($$v) {
+                        callback: function ($$v) {
                           _vm.$set(_vm.createApiTokenForm, "name", $$v)
                         },
-                        expression: "createApiTokenForm.name"
-                      }
+                        expression: "createApiTokenForm.name",
+                      },
                     }),
                     _vm._v(" "),
                     _c("jet-input-error", {
                       staticClass: "mt-2",
-                      attrs: { message: _vm.createApiTokenForm.errors.name }
-                    })
+                      attrs: { message: _vm.createApiTokenForm.errors.name },
+                    }),
                   ],
                   1
                 ),
@@ -47148,62 +51752,64 @@ var render = function() {
                       { staticClass: "col-span-6" },
                       [
                         _c("jet-label", {
-                          attrs: { for: "permissions", value: "Permissions" }
+                          attrs: { for: "permissions", value: "Permissions" },
                         }),
                         _vm._v(" "),
                         _c(
                           "div",
                           {
                             staticClass:
-                              "mt-2 grid grid-cols-1 md:grid-cols-2 gap-4"
+                              "mt-2 grid grid-cols-1 md:grid-cols-2 gap-4",
                           },
-                          _vm._l(_vm.availablePermissions, function(
-                            permission
-                          ) {
-                            return _c("div", { key: permission }, [
-                              _c(
-                                "label",
-                                { staticClass: "flex items-center" },
-                                [
-                                  _c("jet-checkbox", {
-                                    attrs: { value: permission },
-                                    on: {
-                                      checked:
-                                        _vm.createApiTokenForm.permissions
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass: "ml-2 text-sm text-gray-600"
-                                    },
-                                    [_vm._v(_vm._s(permission))]
-                                  )
-                                ],
-                                1
-                              )
-                            ])
-                          }),
+                          _vm._l(
+                            _vm.availablePermissions,
+                            function (permission) {
+                              return _c("div", { key: permission }, [
+                                _c(
+                                  "label",
+                                  { staticClass: "flex items-center" },
+                                  [
+                                    _c("jet-checkbox", {
+                                      attrs: { value: permission },
+                                      on: {
+                                        checked:
+                                          _vm.createApiTokenForm.permissions,
+                                      },
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "ml-2 text-sm text-gray-600",
+                                      },
+                                      [_vm._v(_vm._s(permission))]
+                                    ),
+                                  ],
+                                  1
+                                ),
+                              ])
+                            }
+                          ),
                           0
-                        )
+                        ),
                       ],
                       1
                     )
-                  : _vm._e()
+                  : _vm._e(),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "actions",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "jet-action-message",
                   {
                     staticClass: "mr-3",
-                    attrs: { on: _vm.createApiTokenForm.recentlySuccessful }
+                    attrs: { on: _vm.createApiTokenForm.recentlySuccessful },
                   },
                   [_vm._v(" Created. ")]
                 ),
@@ -47212,15 +51818,15 @@ var render = function() {
                   "jet-button",
                   {
                     class: { "opacity-25": _vm.createApiTokenForm.processing },
-                    attrs: { disabled: _vm.createApiTokenForm.processing }
+                    attrs: { disabled: _vm.createApiTokenForm.processing },
                   },
                   [_vm._v(" Create ")]
-                )
+                ),
               ]
             },
-            proxy: true
-          }
-        ])
+            proxy: true,
+          },
+        ]),
       }),
       _vm._v(" "),
       _vm.tokens.length > 0
@@ -47238,36 +51844,36 @@ var render = function() {
                       [
                         {
                           key: "title",
-                          fn: function() {
+                          fn: function () {
                             return [_vm._v(" Manage API Tokens ")]
                           },
-                          proxy: true
+                          proxy: true,
                         },
                         {
                           key: "description",
-                          fn: function() {
+                          fn: function () {
                             return [
                               _vm._v(
                                 " You may delete any of your existing tokens if they are no longer needed. "
-                              )
+                              ),
                             ]
                           },
-                          proxy: true
+                          proxy: true,
                         },
                         {
                           key: "content",
-                          fn: function() {
+                          fn: function () {
                             return [
                               _c(
                                 "div",
                                 { staticClass: "space-y-6" },
-                                _vm._l(_vm.tokens, function(token) {
+                                _vm._l(_vm.tokens, function (token) {
                                   return _c(
                                     "div",
                                     {
                                       key: token.id,
                                       staticClass:
-                                        "flex items-center justify-between"
+                                        "flex items-center justify-between",
                                     },
                                     [
                                       _c("div", [
@@ -47275,7 +51881,7 @@ var render = function() {
                                           "\n                                " +
                                             _vm._s(token.name) +
                                             "\n                            "
-                                        )
+                                        ),
                                       ]),
                                       _vm._v(" "),
                                       _c(
@@ -47287,7 +51893,7 @@ var render = function() {
                                                 "div",
                                                 {
                                                   staticClass:
-                                                    "text-sm text-gray-400"
+                                                    "text-sm text-gray-400",
                                                 },
                                                 [
                                                   _vm._v(
@@ -47295,7 +51901,7 @@ var render = function() {
                                                       _vm._s(
                                                         token.last_used_ago
                                                       )
-                                                  )
+                                                  ),
                                                 ]
                                               )
                                             : _vm._e(),
@@ -47307,17 +51913,17 @@ var render = function() {
                                                   staticClass:
                                                     "cursor-pointer ml-6 text-sm text-gray-400 underline",
                                                   on: {
-                                                    click: function($event) {
+                                                    click: function ($event) {
                                                       return _vm.manageApiTokenPermissions(
                                                         token
                                                       )
-                                                    }
-                                                  }
+                                                    },
+                                                  },
                                                 },
                                                 [
                                                   _vm._v(
                                                     "\n                                    Permissions\n                                "
-                                                  )
+                                                  ),
                                                 ]
                                               )
                                             : _vm._e(),
@@ -47328,35 +51934,35 @@ var render = function() {
                                               staticClass:
                                                 "cursor-pointer ml-6 text-sm text-red-500",
                                               on: {
-                                                click: function($event) {
+                                                click: function ($event) {
                                                   return _vm.confirmApiTokenDeletion(
                                                     token
                                                   )
-                                                }
-                                              }
+                                                },
+                                              },
                                             },
                                             [_vm._v("Delete")]
-                                          )
+                                          ),
                                         ]
-                                      )
+                                      ),
                                     ]
                                   )
                                 }),
                                 0
-                              )
+                              ),
                             ]
                           },
-                          proxy: true
-                        }
+                          proxy: true,
+                        },
                       ],
                       null,
                       false,
                       1902782963
-                    )
-                  })
+                    ),
+                  }),
                 ],
                 1
-              )
+              ),
             ],
             1
           )
@@ -47365,26 +51971,26 @@ var render = function() {
       _c("jet-dialog-modal", {
         attrs: { show: _vm.displayingToken },
         on: {
-          close: function($event) {
+          close: function ($event) {
             _vm.displayingToken = false
-          }
+          },
         },
         scopedSlots: _vm._u([
           {
             key: "title",
-            fn: function() {
+            fn: function () {
               return [_vm._v(" API Token ")]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "content",
-            fn: function() {
+            fn: function () {
               return [
                 _c("div", [
                   _vm._v(
                     "Please copy your new API token. For your security, it won't be shown again."
-                  )
+                  ),
                 ]),
                 _vm._v(" "),
                 _vm.$page.props.jetstream.flash.token
@@ -47392,66 +51998,66 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500"
+                          "mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500",
                       },
                       [
                         _vm._v(
                           "\n                " +
                             _vm._s(_vm.$page.props.jetstream.flash.token) +
                             "\n            "
-                        )
+                        ),
                       ]
                     )
-                  : _vm._e()
+                  : _vm._e(),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "footer",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "jet-secondary-button",
                   {
                     on: {
-                      click: function($event) {
+                      click: function ($event) {
                         _vm.displayingToken = false
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v(" Close ")]
-                )
+                ),
               ]
             },
-            proxy: true
-          }
-        ])
+            proxy: true,
+          },
+        ]),
       }),
       _vm._v(" "),
       _c("jet-dialog-modal", {
         attrs: { show: _vm.managingPermissionsFor },
         on: {
-          close: function($event) {
+          close: function ($event) {
             _vm.managingPermissionsFor = null
-          }
+          },
         },
         scopedSlots: _vm._u([
           {
             key: "title",
-            fn: function() {
+            fn: function () {
               return [_vm._v(" API Token Permissions ")]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "content",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "div",
                   { staticClass: "grid grid-cols-1 md:grid-cols-2 gap-4" },
-                  _vm._l(_vm.availablePermissions, function(permission) {
+                  _vm._l(_vm.availablePermissions, function (permission) {
                     return _c("div", { key: permission }, [
                       _c(
                         "label",
@@ -47459,37 +52065,37 @@ var render = function() {
                         [
                           _c("jet-checkbox", {
                             attrs: { value: permission },
-                            on: { checked: _vm.updateApiTokenForm.permissions }
+                            on: { checked: _vm.updateApiTokenForm.permissions },
                           }),
                           _vm._v(" "),
                           _c(
                             "span",
                             { staticClass: "ml-2 text-sm text-gray-600" },
                             [_vm._v(_vm._s(permission))]
-                          )
+                          ),
                         ],
                         1
-                      )
+                      ),
                     ])
                   }),
                   0
-                )
+                ),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "footer",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "jet-secondary-button",
                   {
                     on: {
-                      click: function($event) {
+                      click: function ($event) {
                         _vm.managingPermissionsFor = null
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v(" Cancel ")]
                 ),
@@ -47500,55 +52106,55 @@ var render = function() {
                     staticClass: "ml-2",
                     class: { "opacity-25": _vm.updateApiTokenForm.processing },
                     attrs: { disabled: _vm.updateApiTokenForm.processing },
-                    on: { click: _vm.updateApiToken }
+                    on: { click: _vm.updateApiToken },
                   },
                   [_vm._v(" Save ")]
-                )
+                ),
               ]
             },
-            proxy: true
-          }
-        ])
+            proxy: true,
+          },
+        ]),
       }),
       _vm._v(" "),
       _c("jet-confirmation-modal", {
         attrs: { show: _vm.apiTokenBeingDeleted },
         on: {
-          close: function($event) {
+          close: function ($event) {
             _vm.apiTokenBeingDeleted = null
-          }
+          },
         },
         scopedSlots: _vm._u([
           {
             key: "title",
-            fn: function() {
+            fn: function () {
               return [_vm._v(" Delete API Token ")]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "content",
-            fn: function() {
+            fn: function () {
               return [
                 _vm._v(
                   " Are you sure you would like to delete this API token? "
-                )
+                ),
               ]
             },
-            proxy: true
+            proxy: true,
           },
           {
             key: "footer",
-            fn: function() {
+            fn: function () {
               return [
                 _c(
                   "jet-secondary-button",
                   {
                     on: {
-                      click: function($event) {
+                      click: function ($event) {
                         _vm.apiTokenBeingDeleted = null
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v(" Cancel ")]
                 ),
@@ -47559,16 +52165,16 @@ var render = function() {
                     staticClass: "ml-2",
                     class: { "opacity-25": _vm.deleteApiTokenForm.processing },
                     attrs: { disabled: _vm.deleteApiTokenForm.processing },
-                    on: { click: _vm.deleteApiToken }
+                    on: { click: _vm.deleteApiToken },
                   },
                   [_vm._v(" Delete ")]
-                )
+                ),
               ]
             },
-            proxy: true
-          }
-        ])
-      })
+            proxy: true,
+          },
+        ]),
+      }),
     ],
     1
   )
@@ -47592,7 +52198,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -47602,19 +52208,19 @@ var render = function() {
       scopedSlots: _vm._u([
         {
           key: "logo",
-          fn: function() {
+          fn: function () {
             return [_c("jet-authentication-card-logo")]
           },
-          proxy: true
-        }
-      ])
+          proxy: true,
+        },
+      ]),
     },
     [
       _vm._v(" "),
       _c("div", { staticClass: "mb-4 text-sm text-gray-600" }, [
         _vm._v(
           "This is a secure area of the application. Please confirm your password before continuing."
-        )
+        ),
       ]),
       _vm._v(" "),
       _c("jet-validation-errors", { staticClass: "mb-4" }),
@@ -47623,18 +52229,18 @@ var render = function() {
         "form",
         {
           on: {
-            submit: function($event) {
+            submit: function ($event) {
               $event.preventDefault()
               return _vm.submit.apply(null, arguments)
-            }
-          }
+            },
+          },
         },
         [
           _c(
             "div",
             [
               _c("jet-label", {
-                attrs: { for: "password", value: "Password" }
+                attrs: { for: "password", value: "Password" },
               }),
               _vm._v(" "),
               _c("jet-input", {
@@ -47644,16 +52250,16 @@ var render = function() {
                   type: "password",
                   required: "",
                   autocomplete: "current-password",
-                  autofocus: ""
+                  autofocus: "",
                 },
                 model: {
                   value: _vm.form.password,
-                  callback: function($$v) {
+                  callback: function ($$v) {
                     _vm.$set(_vm.form, "password", $$v)
                   },
-                  expression: "form.password"
-                }
-              })
+                  expression: "form.password",
+                },
+              }),
             ],
             1
           ),
@@ -47667,15 +52273,15 @@ var render = function() {
                 {
                   staticClass: "ml-4",
                   class: { "opacity-25": _vm.form.processing },
-                  attrs: { disabled: _vm.form.processing }
+                  attrs: { disabled: _vm.form.processing },
                 },
                 [_vm._v(" Confirm ")]
-              )
+              ),
             ],
             1
-          )
+          ),
         ]
-      )
+      ),
     ],
     1
   )
@@ -47699,7 +52305,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -47709,19 +52315,19 @@ var render = function() {
       scopedSlots: _vm._u([
         {
           key: "logo",
-          fn: function() {
+          fn: function () {
             return [_c("jet-authentication-card-logo")]
           },
-          proxy: true
-        }
-      ])
+          proxy: true,
+        },
+      ]),
     },
     [
       _vm._v(" "),
       _c("div", { staticClass: "mb-4 text-sm text-gray-600" }, [
         _vm._v(
           "\n        Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.\n    "
-        )
+        ),
       ]),
       _vm._v(" "),
       _vm.status
@@ -47738,11 +52344,11 @@ var render = function() {
         "form",
         {
           on: {
-            submit: function($event) {
+            submit: function ($event) {
               $event.preventDefault()
               return _vm.submit.apply(null, arguments)
-            }
-          }
+            },
+          },
         },
         [
           _c(
@@ -47756,16 +52362,16 @@ var render = function() {
                   id: "email",
                   type: "email",
                   required: "",
-                  autofocus: ""
+                  autofocus: "",
                 },
                 model: {
                   value: _vm.form.email,
-                  callback: function($$v) {
+                  callback: function ($$v) {
                     _vm.$set(_vm.form, "email", $$v)
                   },
-                  expression: "form.email"
-                }
-              })
+                  expression: "form.email",
+                },
+              }),
             ],
             1
           ),
@@ -47778,15 +52384,15 @@ var render = function() {
                 "jet-button",
                 {
                   class: { "opacity-25": _vm.form.processing },
-                  attrs: { disabled: _vm.form.processing }
+                  attrs: { disabled: _vm.form.processing },
                 },
                 [_vm._v(" Email Password Reset Link ")]
-              )
+              ),
             ],
             1
-          )
+          ),
         ]
-      )
+      ),
     ],
     1
   )
@@ -47810,7 +52416,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -47820,12 +52426,12 @@ var render = function() {
       scopedSlots: _vm._u([
         {
           key: "logo",
-          fn: function() {
+          fn: function () {
             return [_c("jet-authentication-card-logo")]
           },
-          proxy: true
-        }
-      ])
+          proxy: true,
+        },
+      ]),
     },
     [
       _vm._v(" "),
@@ -47843,11 +52449,11 @@ var render = function() {
         "form",
         {
           on: {
-            submit: function($event) {
+            submit: function ($event) {
               $event.preventDefault()
               return _vm.submit.apply(null, arguments)
-            }
-          }
+            },
+          },
         },
         [
           _c(
@@ -47861,16 +52467,16 @@ var render = function() {
                   id: "email",
                   type: "email",
                   required: "",
-                  autofocus: ""
+                  autofocus: "",
                 },
                 model: {
                   value: _vm.form.email,
-                  callback: function($$v) {
+                  callback: function ($$v) {
                     _vm.$set(_vm.form, "email", $$v)
                   },
-                  expression: "form.email"
-                }
-              })
+                  expression: "form.email",
+                },
+              }),
             ],
             1
           ),
@@ -47880,7 +52486,7 @@ var render = function() {
             { staticClass: "mt-4" },
             [
               _c("jet-label", {
-                attrs: { for: "password", value: "Password" }
+                attrs: { for: "password", value: "Password" },
               }),
               _vm._v(" "),
               _c("jet-input", {
@@ -47889,16 +52495,16 @@ var render = function() {
                   id: "password",
                   type: "password",
                   required: "",
-                  autocomplete: "current-password"
+                  autocomplete: "current-password",
                 },
                 model: {
                   value: _vm.form.password,
-                  callback: function($$v) {
+                  callback: function ($$v) {
                     _vm.$set(_vm.form, "password", $$v)
                   },
-                  expression: "form.password"
-                }
-              })
+                  expression: "form.password",
+                },
+              }),
             ],
             1
           ),
@@ -47912,19 +52518,19 @@ var render = function() {
                   attrs: { name: "remember" },
                   model: {
                     value: _vm.form.remember,
-                    callback: function($$v) {
+                    callback: function ($$v) {
                       _vm.$set(_vm.form, "remember", $$v)
                     },
-                    expression: "form.remember"
-                  }
+                    expression: "form.remember",
+                  },
                 }),
                 _vm._v(" "),
                 _c("span", { staticClass: "ml-2 text-sm text-gray-600" }, [
-                  _vm._v("Remember me")
-                ])
+                  _vm._v("Remember me"),
+                ]),
               ],
               1
-            )
+            ),
           ]),
           _vm._v(" "),
           _c(
@@ -47937,7 +52543,7 @@ var render = function() {
                     {
                       staticClass:
                         "underline text-sm text-gray-600 hover:text-gray-900",
-                      attrs: { href: _vm.route("password.request") }
+                      attrs: { href: _vm.route("password.request") },
                     },
                     [_vm._v(" Forgot your password? ")]
                   )
@@ -47948,10 +52554,10 @@ var render = function() {
                 {
                   staticClass: "ml-4",
                   class: { "opacity-25": _vm.form.processing },
-                  attrs: { disabled: _vm.form.processing }
+                  attrs: { disabled: _vm.form.processing },
                 },
                 [_vm._v(" Login ")]
-              )
+              ),
             ],
             1
           ),
@@ -47962,10 +52568,10 @@ var render = function() {
               {
                 staticClass:
                   "px-6 py-4 bg-gray-200 rounded shadow w-full text-center",
-                attrs: { href: _vm.route("auth.pipedrive") }
+                attrs: { href: _vm.route("auth.pipedrive") },
               },
               [_vm._v("Login via Pipedrive")]
-            )
+            ),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex block mt-4" }, [
@@ -47974,13 +52580,13 @@ var render = function() {
               {
                 staticClass:
                   "px-6 py-4 bg-gray-200 rounded shadow w-full text-center",
-                attrs: { href: _vm.route("auth.upwork") }
+                attrs: { href: _vm.route("auth.upwork") },
               },
               [_vm._v("Login via Upwork")]
-            )
-          ])
+            ),
+          ]),
         ]
-      )
+      ),
     ],
     1
   )
@@ -48004,7 +52610,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -48014,12 +52620,12 @@ var render = function() {
       scopedSlots: _vm._u([
         {
           key: "logo",
-          fn: function() {
+          fn: function () {
             return [_c("jet-authentication-card-logo")]
           },
-          proxy: true
-        }
-      ])
+          proxy: true,
+        },
+      ]),
     },
     [
       _vm._v(" "),
@@ -48029,11 +52635,11 @@ var render = function() {
         "form",
         {
           on: {
-            submit: function($event) {
+            submit: function ($event) {
               $event.preventDefault()
               return _vm.submit.apply(null, arguments)
-            }
-          }
+            },
+          },
         },
         [
           _c(
@@ -48048,16 +52654,16 @@ var render = function() {
                   type: "text",
                   required: "",
                   autofocus: "",
-                  autocomplete: "name"
+                  autocomplete: "name",
                 },
                 model: {
                   value: _vm.form.name,
-                  callback: function($$v) {
+                  callback: function ($$v) {
                     _vm.$set(_vm.form, "name", $$v)
                   },
-                  expression: "form.name"
-                }
-              })
+                  expression: "form.name",
+                },
+              }),
             ],
             1
           ),
@@ -48073,12 +52679,12 @@ var render = function() {
                 attrs: { id: "email", type: "email", required: "" },
                 model: {
                   value: _vm.form.email,
-                  callback: function($$v) {
+                  callback: function ($$v) {
                     _vm.$set(_vm.form, "email", $$v)
                   },
-                  expression: "form.email"
-                }
-              })
+                  expression: "form.email",
+                },
+              }),
             ],
             1
           ),
@@ -48088,7 +52694,7 @@ var render = function() {
             { staticClass: "mt-4" },
             [
               _c("jet-label", {
-                attrs: { for: "password", value: "Password" }
+                attrs: { for: "password", value: "Password" },
               }),
               _vm._v(" "),
               _c("jet-input", {
@@ -48097,16 +52703,16 @@ var render = function() {
                   id: "password",
                   type: "password",
                   required: "",
-                  autocomplete: "new-password"
+                  autocomplete: "new-password",
                 },
                 model: {
                   value: _vm.form.password,
-                  callback: function($$v) {
+                  callback: function ($$v) {
                     _vm.$set(_vm.form, "password", $$v)
                   },
-                  expression: "form.password"
-                }
-              })
+                  expression: "form.password",
+                },
+              }),
             ],
             1
           ),
@@ -48118,8 +52724,8 @@ var render = function() {
               _c("jet-label", {
                 attrs: {
                   for: "password_confirmation",
-                  value: "Confirm Password"
-                }
+                  value: "Confirm Password",
+                },
               }),
               _vm._v(" "),
               _c("jet-input", {
@@ -48128,16 +52734,16 @@ var render = function() {
                   id: "password_confirmation",
                   type: "password",
                   required: "",
-                  autocomplete: "new-password"
+                  autocomplete: "new-password",
                 },
                 model: {
                   value: _vm.form.password_confirmation,
-                  callback: function($$v) {
+                  callback: function ($$v) {
                     _vm.$set(_vm.form, "password_confirmation", $$v)
                   },
-                  expression: "form.password_confirmation"
-                }
-              })
+                  expression: "form.password_confirmation",
+                },
+              }),
             ],
             1
           ),
@@ -48156,11 +52762,11 @@ var render = function() {
                           attrs: { name: "terms", id: "terms" },
                           model: {
                             value: _vm.form.terms,
-                            callback: function($$v) {
+                            callback: function ($$v) {
                               _vm.$set(_vm.form, "terms", $$v)
                             },
-                            expression: "form.terms"
-                          }
+                            expression: "form.terms",
+                          },
                         }),
                         _vm._v(" "),
                         _c("div", { staticClass: "ml-2" }, [
@@ -48172,8 +52778,8 @@ var render = function() {
                                 "underline text-sm text-gray-600 hover:text-gray-900",
                               attrs: {
                                 target: "_blank",
-                                href: _vm.route("terms.show")
-                              }
+                                href: _vm.route("terms.show"),
+                              },
                             },
                             [_vm._v("Terms of Service")]
                           ),
@@ -48185,16 +52791,16 @@ var render = function() {
                                 "underline text-sm text-gray-600 hover:text-gray-900",
                               attrs: {
                                 target: "_blank",
-                                href: _vm.route("policy.show")
-                              }
+                                href: _vm.route("policy.show"),
+                              },
                             },
                             [_vm._v("Privacy Policy")]
-                          )
-                        ])
+                          ),
+                        ]),
                       ],
                       1
-                    )
-                  ])
+                    ),
+                  ]),
                 ],
                 1
               )
@@ -48209,7 +52815,7 @@ var render = function() {
                 {
                   staticClass:
                     "underline text-sm text-gray-600 hover:text-gray-900",
-                  attrs: { href: _vm.route("login") }
+                  attrs: { href: _vm.route("login") },
                 },
                 [_vm._v(" Already registered? ")]
               ),
@@ -48219,15 +52825,15 @@ var render = function() {
                 {
                   staticClass: "ml-4",
                   class: { "opacity-25": _vm.form.processing },
-                  attrs: { disabled: _vm.form.processing }
+                  attrs: { disabled: _vm.form.processing },
                 },
                 [_vm._v(" Register ")]
-              )
+              ),
             ],
             1
-          )
+          ),
         ]
-      )
+      ),
     ],
     1
   )
@@ -48251,7 +52857,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -48261,12 +52867,12 @@ var render = function() {
       scopedSlots: _vm._u([
         {
           key: "logo",
-          fn: function() {
+          fn: function () {
             return [_c("jet-authentication-card-logo")]
           },
-          proxy: true
-        }
-      ])
+          proxy: true,
+        },
+      ]),
     },
     [
       _vm._v(" "),
@@ -48276,11 +52882,11 @@ var render = function() {
         "form",
         {
           on: {
-            submit: function($event) {
+            submit: function ($event) {
               $event.preventDefault()
               return _vm.submit.apply(null, arguments)
-            }
-          }
+            },
+          },
         },
         [
           _c(
@@ -48294,16 +52900,16 @@ var render = function() {
                   id: "email",
                   type: "email",
                   required: "",
-                  autofocus: ""
+                  autofocus: "",
                 },
                 model: {
                   value: _vm.form.email,
-                  callback: function($$v) {
+                  callback: function ($$v) {
                     _vm.$set(_vm.form, "email", $$v)
                   },
-                  expression: "form.email"
-                }
-              })
+                  expression: "form.email",
+                },
+              }),
             ],
             1
           ),
@@ -48313,7 +52919,7 @@ var render = function() {
             { staticClass: "mt-4" },
             [
               _c("jet-label", {
-                attrs: { for: "password", value: "Password" }
+                attrs: { for: "password", value: "Password" },
               }),
               _vm._v(" "),
               _c("jet-input", {
@@ -48322,16 +52928,16 @@ var render = function() {
                   id: "password",
                   type: "password",
                   required: "",
-                  autocomplete: "new-password"
+                  autocomplete: "new-password",
                 },
                 model: {
                   value: _vm.form.password,
-                  callback: function($$v) {
+                  callback: function ($$v) {
                     _vm.$set(_vm.form, "password", $$v)
                   },
-                  expression: "form.password"
-                }
-              })
+                  expression: "form.password",
+                },
+              }),
             ],
             1
           ),
@@ -48343,8 +52949,8 @@ var render = function() {
               _c("jet-label", {
                 attrs: {
                   for: "password_confirmation",
-                  value: "Confirm Password"
-                }
+                  value: "Confirm Password",
+                },
               }),
               _vm._v(" "),
               _c("jet-input", {
@@ -48353,16 +52959,16 @@ var render = function() {
                   id: "password_confirmation",
                   type: "password",
                   required: "",
-                  autocomplete: "new-password"
+                  autocomplete: "new-password",
                 },
                 model: {
                   value: _vm.form.password_confirmation,
-                  callback: function($$v) {
+                  callback: function ($$v) {
                     _vm.$set(_vm.form, "password_confirmation", $$v)
                   },
-                  expression: "form.password_confirmation"
-                }
-              })
+                  expression: "form.password_confirmation",
+                },
+              }),
             ],
             1
           ),
@@ -48375,15 +52981,15 @@ var render = function() {
                 "jet-button",
                 {
                   class: { "opacity-25": _vm.form.processing },
-                  attrs: { disabled: _vm.form.processing }
+                  attrs: { disabled: _vm.form.processing },
                 },
                 [_vm._v(" Reset Password ")]
-              )
+              ),
             ],
             1
-          )
+          ),
         ]
-      )
+      ),
     ],
     1
   )
@@ -48407,7 +53013,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -48417,12 +53023,12 @@ var render = function() {
       scopedSlots: _vm._u([
         {
           key: "logo",
-          fn: function() {
+          fn: function () {
             return [_c("jet-authentication-card-logo")]
           },
-          proxy: true
-        }
-      ])
+          proxy: true,
+        },
+      ]),
     },
     [
       _vm._v(" "),
@@ -48434,13 +53040,13 @@ var render = function() {
             ? [
                 _vm._v(
                   " Please confirm access to your account by entering the authentication code provided by your authenticator application. "
-                )
+                ),
               ]
             : [
                 _vm._v(
                   " Please confirm access to your account by entering one of your emergency recovery codes. "
-                )
-              ]
+                ),
+              ],
         ],
         2
       ),
@@ -48451,11 +53057,11 @@ var render = function() {
         "form",
         {
           on: {
-            submit: function($event) {
+            submit: function ($event) {
               $event.preventDefault()
               return _vm.submit.apply(null, arguments)
-            }
-          }
+            },
+          },
         },
         [
           !_vm.recovery
@@ -48472,16 +53078,16 @@ var render = function() {
                       type: "text",
                       inputmode: "numeric",
                       autofocus: "",
-                      autocomplete: "one-time-code"
+                      autocomplete: "one-time-code",
                     },
                     model: {
                       value: _vm.form.code,
-                      callback: function($$v) {
+                      callback: function ($$v) {
                         _vm.$set(_vm.form, "code", $$v)
                       },
-                      expression: "form.code"
-                    }
-                  })
+                      expression: "form.code",
+                    },
+                  }),
                 ],
                 1
               )
@@ -48489,7 +53095,7 @@ var render = function() {
                 "div",
                 [
                   _c("jet-label", {
-                    attrs: { for: "recovery_code", value: "Recovery Code" }
+                    attrs: { for: "recovery_code", value: "Recovery Code" },
                   }),
                   _vm._v(" "),
                   _c("jet-input", {
@@ -48498,16 +53104,16 @@ var render = function() {
                     attrs: {
                       id: "recovery_code",
                       type: "text",
-                      autocomplete: "one-time-code"
+                      autocomplete: "one-time-code",
                     },
                     model: {
                       value: _vm.form.recovery_code,
-                      callback: function($$v) {
+                      callback: function ($$v) {
                         _vm.$set(_vm.form, "recovery_code", $$v)
                       },
-                      expression: "form.recovery_code"
-                    }
-                  })
+                      expression: "form.recovery_code",
+                    },
+                  }),
                 ],
                 1
               ),
@@ -48523,16 +53129,16 @@ var render = function() {
                     "text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer",
                   attrs: { type: "button" },
                   on: {
-                    click: function($event) {
+                    click: function ($event) {
                       $event.preventDefault()
                       return _vm.toggleRecovery.apply(null, arguments)
-                    }
-                  }
+                    },
+                  },
                 },
                 [
                   !_vm.recovery
                     ? [_vm._v(" Use a recovery code ")]
-                    : [_vm._v(" Use an authentication code ")]
+                    : [_vm._v(" Use an authentication code ")],
                 ],
                 2
               ),
@@ -48542,15 +53148,15 @@ var render = function() {
                 {
                   staticClass: "ml-4",
                   class: { "opacity-25": _vm.form.processing },
-                  attrs: { disabled: _vm.form.processing }
+                  attrs: { disabled: _vm.form.processing },
                 },
                 [_vm._v(" Login ")]
-              )
+              ),
             ],
             1
-          )
+          ),
         ]
-      )
+      ),
     ],
     1
   )
@@ -48574,7 +53180,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -48584,19 +53190,19 @@ var render = function() {
       scopedSlots: _vm._u([
         {
           key: "logo",
-          fn: function() {
+          fn: function () {
             return [_c("jet-authentication-card-logo")]
           },
-          proxy: true
-        }
-      ])
+          proxy: true,
+        },
+      ]),
     },
     [
       _vm._v(" "),
       _c("div", { staticClass: "mb-4 text-sm text-gray-600" }, [
         _vm._v(
           "\n        Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you\n        another.\n    "
-        )
+        ),
       ]),
       _vm._v(" "),
       _vm.verificationLinkSent
@@ -48606,7 +53212,7 @@ var render = function() {
             [
               _vm._v(
                 "A new verification link has been sent to the email address you provided during registration."
-              )
+              ),
             ]
           )
         : _vm._e(),
@@ -48615,11 +53221,11 @@ var render = function() {
         "form",
         {
           on: {
-            submit: function($event) {
+            submit: function ($event) {
               $event.preventDefault()
               return _vm.submit.apply(null, arguments)
-            }
-          }
+            },
+          },
         },
         [
           _c(
@@ -48630,7 +53236,7 @@ var render = function() {
                 "jet-button",
                 {
                   class: { "opacity-25": _vm.form.processing },
-                  attrs: { disabled: _vm.form.processing }
+                  attrs: { disabled: _vm.form.processing },
                 },
                 [_vm._v(" Resend Verification Email ")]
               ),
@@ -48643,16 +53249,16 @@ var render = function() {
                   attrs: {
                     href: _vm.route("logout"),
                     method: "post",
-                    as: "button"
-                  }
+                    as: "button",
+                  },
                 },
                 [_vm._v("Logout")]
-              )
+              ),
             ],
             1
-          )
+          ),
         ]
-      )
+      ),
     ]
   )
 }
@@ -48675,7 +53281,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -48687,28 +53293,28 @@ var render = function() {
           countries: _vm.countries,
           categories: _vm.categories,
           userId: _vm.userId,
-          filters: _vm.filters
+          filters: _vm.filters,
         },
         model: {
           value: _vm.selectedKits,
-          callback: function($$v) {
+          callback: function ($$v) {
             _vm.selectedKits = $$v
           },
-          expression: "selectedKits"
-        }
+          expression: "selectedKits",
+        },
       }),
       _vm._v(" "),
       _c("div", { staticClass: "w-full" }, [
         _c("p", { staticClass: "text-2xl font-bold" }, [
-          _vm._v("Find " + _vm._s(_vm.data.length) + " jobs")
-        ])
+          _vm._v("Find " + _vm._s(_vm.jobsData.total) + " jobs"),
+        ]),
       ]),
       _vm._v(" "),
       !_vm.isReloading
         ? _c(
             "div",
             { staticClass: "flex flex-col space-y-4" },
-            _vm._l(_vm.data, function(job) {
+            _vm._l(_vm.data, function (job) {
               return _c("job-card", {
                 key: job.id,
                 staticClass: "w-8/12 py-7 px-8 border",
@@ -48734,14 +53340,14 @@ var render = function() {
                   jobsPosted: job.client_jobs_posted,
                   jobStatus: job.status,
                   duration: job.duration,
-                  avgRate: job.client_avg_rate
+                  avgRate: job.client_avg_rate,
                 },
-                on: { delete: _vm.onDelete, changeStatus: _vm.onChangeStatus }
+                on: { delete: _vm.onDelete, changeStatus: _vm.onChangeStatus },
               })
             }),
             1
           )
-        : _vm._e()
+        : _vm._e(),
     ],
     1
   )
@@ -48765,7 +53371,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -48782,17 +53388,17 @@ var render = function() {
                 "track-by": "id",
                 multiple: true,
                 taggable: true,
-                options: _vm.words
+                options: _vm.words,
               },
               on: { tag: _vm.addTag },
               model: {
                 value: _vm.wordsSearch,
-                callback: function($$v) {
+                callback: function ($$v) {
                   _vm.wordsSearch = $$v
                 },
-                expression: "wordsSearch"
-              }
-            })
+                expression: "wordsSearch",
+              },
+            }),
           ],
           1
         ),
@@ -48810,21 +53416,21 @@ var render = function() {
                 "group-select": true,
                 placeholder: "Type to search",
                 "track-by": "id",
-                label: "title"
+                label: "title",
               },
               model: {
                 value: _vm.categoriesSearch,
-                callback: function($$v) {
+                callback: function ($$v) {
                   _vm.categoriesSearch = $$v
                 },
-                expression: "categoriesSearch"
-              }
-            })
+                expression: "categoriesSearch",
+              },
+            }),
           ],
           1
-        )
-      ])
-    ])
+        ),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -48846,7 +53452,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -48861,11 +53467,11 @@ var render = function() {
           _c("div", {
             staticClass:
               "w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose",
-            domProps: { innerHTML: _vm._s(_vm.policy) }
-          })
+            domProps: { innerHTML: _vm._s(_vm.policy) },
+          }),
         ]
-      )
-    ])
+      ),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -48887,7 +53493,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -48895,26 +53501,26 @@ var render = function() {
     scopedSlots: _vm._u([
       {
         key: "title",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Delete Account ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "description",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Permanently delete your account. ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "content",
-        fn: function() {
+        fn: function () {
           return [
             _c("div", { staticClass: "max-w-xl text-sm text-gray-600" }, [
               _vm._v(
                 "\n            Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.\n        "
-              )
+              ),
             ]),
             _vm._v(" "),
             _c(
@@ -48925,13 +53531,13 @@ var render = function() {
                   "jet-danger-button",
                   {
                     nativeOn: {
-                      click: function($event) {
+                      click: function ($event) {
                         return _vm.confirmUserDeletion.apply(null, arguments)
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v(" Delete Account ")]
-                )
+                ),
               ],
               1
             ),
@@ -48942,14 +53548,14 @@ var render = function() {
               scopedSlots: _vm._u([
                 {
                   key: "title",
-                  fn: function() {
+                  fn: function () {
                     return [_vm._v(" Delete Account ")]
                   },
-                  proxy: true
+                  proxy: true,
                 },
                 {
                   key: "content",
-                  fn: function() {
+                  fn: function () {
                     return [
                       _vm._v(
                         "\n                Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you\n                would like to permanently delete your account.\n\n                "
@@ -48963,10 +53569,10 @@ var render = function() {
                             staticClass: "mt-1 block w-3/4",
                             attrs: {
                               type: "password",
-                              placeholder: "Password"
+                              placeholder: "Password",
                             },
                             nativeOn: {
-                              keyup: function($event) {
+                              keyup: function ($event) {
                                 if (
                                   !$event.type.indexOf("key") &&
                                   _vm._k(
@@ -48980,40 +53586,40 @@ var render = function() {
                                   return null
                                 }
                                 return _vm.deleteUser.apply(null, arguments)
-                              }
+                              },
                             },
                             model: {
                               value: _vm.form.password,
-                              callback: function($$v) {
+                              callback: function ($$v) {
                                 _vm.$set(_vm.form, "password", $$v)
                               },
-                              expression: "form.password"
-                            }
+                              expression: "form.password",
+                            },
                           }),
                           _vm._v(" "),
                           _c("jet-input-error", {
                             staticClass: "mt-2",
-                            attrs: { message: _vm.form.errors.password }
-                          })
+                            attrs: { message: _vm.form.errors.password },
+                          }),
                         ],
                         1
-                      )
+                      ),
                     ]
                   },
-                  proxy: true
+                  proxy: true,
                 },
                 {
                   key: "footer",
-                  fn: function() {
+                  fn: function () {
                     return [
                       _c(
                         "jet-secondary-button",
                         {
                           nativeOn: {
-                            click: function($event) {
+                            click: function ($event) {
                               return _vm.closeModal.apply(null, arguments)
-                            }
-                          }
+                            },
+                          },
                         },
                         [_vm._v(" Nevermind ")]
                       ),
@@ -49025,24 +53631,24 @@ var render = function() {
                           class: { "opacity-25": _vm.form.processing },
                           attrs: { disabled: _vm.form.processing },
                           nativeOn: {
-                            click: function($event) {
+                            click: function ($event) {
                               return _vm.deleteUser.apply(null, arguments)
-                            }
-                          }
+                            },
+                          },
                         },
                         [_vm._v(" Delete Account ")]
-                      )
+                      ),
                     ]
                   },
-                  proxy: true
-                }
-              ])
-            })
+                  proxy: true,
+                },
+              ]),
+            }),
           ]
         },
-        proxy: true
-      }
-    ])
+        proxy: true,
+      },
+    ]),
   })
 }
 var staticRenderFns = []
@@ -49064,7 +53670,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -49072,37 +53678,37 @@ var render = function() {
     scopedSlots: _vm._u([
       {
         key: "title",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Browser Sessions ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "description",
-        fn: function() {
+        fn: function () {
           return [
             _vm._v(
               " Manage and logout your active sessions on other browsers and devices. "
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "content",
-        fn: function() {
+        fn: function () {
           return [
             _c("div", { staticClass: "max-w-xl text-sm text-gray-600" }, [
               _vm._v(
                 "\n            If necessary, you may logout of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive.\n            If you feel your account has been compromised, you should also update your password.\n        "
-              )
+              ),
             ]),
             _vm._v(" "),
             _vm.sessions.length > 0
               ? _c(
                   "div",
                   { staticClass: "mt-5 space-y-6" },
-                  _vm._l(_vm.sessions, function(session, i) {
+                  _vm._l(_vm.sessions, function (session, i) {
                     return _c(
                       "div",
                       { key: i, staticClass: "flex items-center" },
@@ -49119,16 +53725,15 @@ var render = function() {
                                     "stroke-linejoin": "round",
                                     "stroke-width": "2",
                                     viewBox: "0 0 24 24",
-                                    stroke: "currentColor"
-                                  }
+                                    stroke: "currentColor",
+                                  },
                                 },
                                 [
                                   _c("path", {
                                     attrs: {
-                                      d:
-                                        "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                    }
-                                  })
+                                      d: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+                                    },
+                                  }),
                                 ]
                               )
                             : _c(
@@ -49142,15 +53747,15 @@ var render = function() {
                                     stroke: "currentColor",
                                     fill: "none",
                                     "stroke-linecap": "round",
-                                    "stroke-linejoin": "round"
-                                  }
+                                    "stroke-linejoin": "round",
+                                  },
                                 },
                                 [
                                   _c("path", {
                                     attrs: {
                                       d: "M0 0h24v24H0z",
-                                      stroke: "none"
-                                    }
+                                      stroke: "none",
+                                    },
                                   }),
                                   _vm._v(" "),
                                   _c("rect", {
@@ -49159,15 +53764,15 @@ var render = function() {
                                       y: "4",
                                       width: "10",
                                       height: "16",
-                                      rx: "1"
-                                    }
+                                      rx: "1",
+                                    },
                                   }),
                                   _vm._v(" "),
                                   _c("path", {
-                                    attrs: { d: "M11 5h2M12 17v.01" }
-                                  })
+                                    attrs: { d: "M11 5h2M12 17v.01" },
+                                  }),
                                 ]
-                              )
+                              ),
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "ml-3" }, [
@@ -49176,7 +53781,7 @@ var render = function() {
                               _vm._s(session.agent.platform) +
                                 " - " +
                                 _vm._s(session.agent.browser)
-                            )
+                            ),
                           ]),
                           _vm._v(" "),
                           _c("div", [
@@ -49194,7 +53799,7 @@ var render = function() {
                                       "span",
                                       {
                                         staticClass:
-                                          "text-green-500 font-semibold"
+                                          "text-green-500 font-semibold",
                                       },
                                       [_vm._v("This device")]
                                     )
@@ -49202,12 +53807,12 @@ var render = function() {
                                       _vm._v(
                                         "Last active " +
                                           _vm._s(session.last_active)
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                               ]
-                            )
-                          ])
-                        ])
+                            ),
+                          ]),
+                        ]),
                       ]
                     )
                   }),
@@ -49223,10 +53828,10 @@ var render = function() {
                   "jet-button",
                   {
                     nativeOn: {
-                      click: function($event) {
+                      click: function ($event) {
                         return _vm.confirmLogout.apply(null, arguments)
-                      }
-                    }
+                      },
+                    },
                   },
                   [_vm._v(" Logout Other Browser Sessions ")]
                 ),
@@ -49235,10 +53840,10 @@ var render = function() {
                   "jet-action-message",
                   {
                     staticClass: "ml-3",
-                    attrs: { on: _vm.form.recentlySuccessful }
+                    attrs: { on: _vm.form.recentlySuccessful },
                   },
                   [_vm._v(" Done. ")]
-                )
+                ),
               ],
               1
             ),
@@ -49249,14 +53854,14 @@ var render = function() {
               scopedSlots: _vm._u([
                 {
                   key: "title",
-                  fn: function() {
+                  fn: function () {
                     return [_vm._v(" Logout Other Browser Sessions ")]
                   },
-                  proxy: true
+                  proxy: true,
                 },
                 {
                   key: "content",
-                  fn: function() {
+                  fn: function () {
                     return [
                       _vm._v(
                         "\n                Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices.\n\n                "
@@ -49270,10 +53875,10 @@ var render = function() {
                             staticClass: "mt-1 block w-3/4",
                             attrs: {
                               type: "password",
-                              placeholder: "Password"
+                              placeholder: "Password",
                             },
                             nativeOn: {
-                              keyup: function($event) {
+                              keyup: function ($event) {
                                 if (
                                   !$event.type.indexOf("key") &&
                                   _vm._k(
@@ -49290,40 +53895,40 @@ var render = function() {
                                   null,
                                   arguments
                                 )
-                              }
+                              },
                             },
                             model: {
                               value: _vm.form.password,
-                              callback: function($$v) {
+                              callback: function ($$v) {
                                 _vm.$set(_vm.form, "password", $$v)
                               },
-                              expression: "form.password"
-                            }
+                              expression: "form.password",
+                            },
                           }),
                           _vm._v(" "),
                           _c("jet-input-error", {
                             staticClass: "mt-2",
-                            attrs: { message: _vm.form.errors.password }
-                          })
+                            attrs: { message: _vm.form.errors.password },
+                          }),
                         ],
                         1
-                      )
+                      ),
                     ]
                   },
-                  proxy: true
+                  proxy: true,
                 },
                 {
                   key: "footer",
-                  fn: function() {
+                  fn: function () {
                     return [
                       _c(
                         "jet-secondary-button",
                         {
                           nativeOn: {
-                            click: function($event) {
+                            click: function ($event) {
                               return _vm.closeModal.apply(null, arguments)
-                            }
-                          }
+                            },
+                          },
                         },
                         [_vm._v(" Nevermind ")]
                       ),
@@ -49335,31 +53940,31 @@ var render = function() {
                           class: { "opacity-25": _vm.form.processing },
                           attrs: { disabled: _vm.form.processing },
                           nativeOn: {
-                            click: function($event) {
+                            click: function ($event) {
                               return _vm.logoutOtherBrowserSessions.apply(
                                 null,
                                 arguments
                               )
-                            }
-                          }
+                            },
+                          },
                         },
                         [
                           _vm._v(
                             "\n                    Logout Other Browser Sessions\n                "
-                          )
+                          ),
                         ]
-                      )
+                      ),
                     ]
                   },
-                  proxy: true
-                }
-              ])
-            })
+                  proxy: true,
+                },
+              ]),
+            }),
           ]
         },
-        proxy: true
-      }
-    ])
+        proxy: true,
+      },
+    ]),
   })
 }
 var staticRenderFns = []
@@ -49381,7 +53986,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -49389,26 +53994,26 @@ var render = function() {
     scopedSlots: _vm._u([
       {
         key: "title",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Delete Account ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "description",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Permanently delete your account. ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "content",
-        fn: function() {
+        fn: function () {
           return [
             _c("div", { staticClass: "max-w-xl text-sm text-gray-600" }, [
               _vm._v(
                 "\n            Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.\n        "
-              )
+              ),
             ]),
             _vm._v(" "),
             _c(
@@ -49419,7 +54024,7 @@ var render = function() {
                   "jet-danger-button",
                   { on: { click: _vm.confirmUserDeletion } },
                   [_vm._v(" Delete Account ")]
-                )
+                ),
               ],
               1
             ),
@@ -49430,14 +54035,14 @@ var render = function() {
               scopedSlots: _vm._u([
                 {
                   key: "title",
-                  fn: function() {
+                  fn: function () {
                     return [_vm._v(" Delete Account ")]
                   },
-                  proxy: true
+                  proxy: true,
                 },
                 {
                   key: "content",
-                  fn: function() {
+                  fn: function () {
                     return [
                       _vm._v(
                         "\n                Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you\n                would like to permanently delete your account.\n\n                "
@@ -49451,10 +54056,10 @@ var render = function() {
                             staticClass: "mt-1 block w-3/4",
                             attrs: {
                               type: "password",
-                              placeholder: "Password"
+                              placeholder: "Password",
                             },
                             on: {
-                              keyup: function($event) {
+                              keyup: function ($event) {
                                 if (
                                   !$event.type.indexOf("key") &&
                                   _vm._k(
@@ -49468,31 +54073,31 @@ var render = function() {
                                   return null
                                 }
                                 return _vm.deleteUser.apply(null, arguments)
-                              }
+                              },
                             },
                             model: {
                               value: _vm.form.password,
-                              callback: function($$v) {
+                              callback: function ($$v) {
                                 _vm.$set(_vm.form, "password", $$v)
                               },
-                              expression: "form.password"
-                            }
+                              expression: "form.password",
+                            },
                           }),
                           _vm._v(" "),
                           _c("jet-input-error", {
                             staticClass: "mt-2",
-                            attrs: { message: _vm.form.errors.password }
-                          })
+                            attrs: { message: _vm.form.errors.password },
+                          }),
                         ],
                         1
-                      )
+                      ),
                     ]
                   },
-                  proxy: true
+                  proxy: true,
                 },
                 {
                   key: "footer",
-                  fn: function() {
+                  fn: function () {
                     return [
                       _c(
                         "jet-secondary-button",
@@ -49506,21 +54111,21 @@ var render = function() {
                           staticClass: "ml-2",
                           class: { "opacity-25": _vm.form.processing },
                           attrs: { disabled: _vm.form.processing },
-                          on: { click: _vm.deleteUser }
+                          on: { click: _vm.deleteUser },
                         },
                         [_vm._v(" Delete Account ")]
-                      )
+                      ),
                     ]
                   },
-                  proxy: true
-                }
-              ])
-            })
+                  proxy: true,
+                },
+              ]),
+            }),
           ]
         },
-        proxy: true
-      }
-    ])
+        proxy: true,
+      },
+    ]),
   })
 }
 var staticRenderFns = []
@@ -49542,7 +54147,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -49550,37 +54155,37 @@ var render = function() {
     scopedSlots: _vm._u([
       {
         key: "title",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Browser Sessions ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "description",
-        fn: function() {
+        fn: function () {
           return [
             _vm._v(
               " Manage and log out your active sessions on other browsers and devices. "
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "content",
-        fn: function() {
+        fn: function () {
           return [
             _c("div", { staticClass: "max-w-xl text-sm text-gray-600" }, [
               _vm._v(
                 "\n            If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive.\n            If you feel your account has been compromised, you should also update your password.\n        "
-              )
+              ),
             ]),
             _vm._v(" "),
             _vm.sessions.length > 0
               ? _c(
                   "div",
                   { staticClass: "mt-5 space-y-6" },
-                  _vm._l(_vm.sessions, function(session, i) {
+                  _vm._l(_vm.sessions, function (session, i) {
                     return _c(
                       "div",
                       { key: i, staticClass: "flex items-center" },
@@ -49597,16 +54202,15 @@ var render = function() {
                                     "stroke-linejoin": "round",
                                     "stroke-width": "2",
                                     viewBox: "0 0 24 24",
-                                    stroke: "currentColor"
-                                  }
+                                    stroke: "currentColor",
+                                  },
                                 },
                                 [
                                   _c("path", {
                                     attrs: {
-                                      d:
-                                        "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                    }
-                                  })
+                                      d: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+                                    },
+                                  }),
                                 ]
                               )
                             : _c(
@@ -49620,15 +54224,15 @@ var render = function() {
                                     stroke: "currentColor",
                                     fill: "none",
                                     "stroke-linecap": "round",
-                                    "stroke-linejoin": "round"
-                                  }
+                                    "stroke-linejoin": "round",
+                                  },
                                 },
                                 [
                                   _c("path", {
                                     attrs: {
                                       d: "M0 0h24v24H0z",
-                                      stroke: "none"
-                                    }
+                                      stroke: "none",
+                                    },
                                   }),
                                   _vm._v(" "),
                                   _c("rect", {
@@ -49637,15 +54241,15 @@ var render = function() {
                                       y: "4",
                                       width: "10",
                                       height: "16",
-                                      rx: "1"
-                                    }
+                                      rx: "1",
+                                    },
                                   }),
                                   _vm._v(" "),
                                   _c("path", {
-                                    attrs: { d: "M11 5h2M12 17v.01" }
-                                  })
+                                    attrs: { d: "M11 5h2M12 17v.01" },
+                                  }),
                                 ]
-                              )
+                              ),
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "ml-3" }, [
@@ -49654,7 +54258,7 @@ var render = function() {
                               _vm._s(session.agent.platform) +
                                 " - " +
                                 _vm._s(session.agent.browser)
-                            )
+                            ),
                           ]),
                           _vm._v(" "),
                           _c("div", [
@@ -49672,7 +54276,7 @@ var render = function() {
                                       "span",
                                       {
                                         staticClass:
-                                          "text-green-500 font-semibold"
+                                          "text-green-500 font-semibold",
                                       },
                                       [_vm._v("This device")]
                                     )
@@ -49680,12 +54284,12 @@ var render = function() {
                                       _vm._v(
                                         "Last active " +
                                           _vm._s(session.last_active)
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                               ]
-                            )
-                          ])
-                        ])
+                            ),
+                          ]),
+                        ]),
                       ]
                     )
                   }),
@@ -49698,17 +54302,17 @@ var render = function() {
               { staticClass: "flex items-center mt-5" },
               [
                 _c("jet-button", { on: { click: _vm.confirmLogout } }, [
-                  _vm._v(" Log Out Other Browser Sessions ")
+                  _vm._v(" Log Out Other Browser Sessions "),
                 ]),
                 _vm._v(" "),
                 _c(
                   "jet-action-message",
                   {
                     staticClass: "ml-3",
-                    attrs: { on: _vm.form.recentlySuccessful }
+                    attrs: { on: _vm.form.recentlySuccessful },
                   },
                   [_vm._v(" Done. ")]
-                )
+                ),
               ],
               1
             ),
@@ -49719,14 +54323,14 @@ var render = function() {
               scopedSlots: _vm._u([
                 {
                   key: "title",
-                  fn: function() {
+                  fn: function () {
                     return [_vm._v(" Log Out Other Browser Sessions ")]
                   },
-                  proxy: true
+                  proxy: true,
                 },
                 {
                   key: "content",
-                  fn: function() {
+                  fn: function () {
                     return [
                       _vm._v(
                         "\n                Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.\n\n                "
@@ -49740,10 +54344,10 @@ var render = function() {
                             staticClass: "mt-1 block w-3/4",
                             attrs: {
                               type: "password",
-                              placeholder: "Password"
+                              placeholder: "Password",
                             },
                             on: {
-                              keyup: function($event) {
+                              keyup: function ($event) {
                                 if (
                                   !$event.type.indexOf("key") &&
                                   _vm._k(
@@ -49760,31 +54364,31 @@ var render = function() {
                                   null,
                                   arguments
                                 )
-                              }
+                              },
                             },
                             model: {
                               value: _vm.form.password,
-                              callback: function($$v) {
+                              callback: function ($$v) {
                                 _vm.$set(_vm.form, "password", $$v)
                               },
-                              expression: "form.password"
-                            }
+                              expression: "form.password",
+                            },
                           }),
                           _vm._v(" "),
                           _c("jet-input-error", {
                             staticClass: "mt-2",
-                            attrs: { message: _vm.form.errors.password }
-                          })
+                            attrs: { message: _vm.form.errors.password },
+                          }),
                         ],
                         1
-                      )
+                      ),
                     ]
                   },
-                  proxy: true
+                  proxy: true,
                 },
                 {
                   key: "footer",
-                  fn: function() {
+                  fn: function () {
                     return [
                       _c(
                         "jet-secondary-button",
@@ -49798,21 +54402,21 @@ var render = function() {
                           staticClass: "ml-2",
                           class: { "opacity-25": _vm.form.processing },
                           attrs: { disabled: _vm.form.processing },
-                          on: { click: _vm.logoutOtherBrowserSessions }
+                          on: { click: _vm.logoutOtherBrowserSessions },
                         },
                         [_vm._v(" Log Out Other Browser Sessions ")]
-                      )
+                      ),
                     ]
                   },
-                  proxy: true
-                }
-              ])
-            })
+                  proxy: true,
+                },
+              ]),
+            }),
           ]
         },
-        proxy: true
-      }
-    ])
+        proxy: true,
+      },
+    ]),
   })
 }
 var staticRenderFns = []
@@ -49834,7 +54438,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -49842,40 +54446,40 @@ var render = function() {
     scopedSlots: _vm._u([
       {
         key: "title",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Two Factor Authentication ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "description",
-        fn: function() {
+        fn: function () {
           return [
             _vm._v(
               " Add additional security to your account using two factor authentication. "
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "content",
-        fn: function() {
+        fn: function () {
           return [
             _vm.twoFactorEnabled
               ? _c("h3", { staticClass: "text-lg font-medium text-gray-900" }, [
-                  _vm._v("You have enabled two factor authentication.")
+                  _vm._v("You have enabled two factor authentication."),
                 ])
               : _c("h3", { staticClass: "text-lg font-medium text-gray-900" }, [
-                  _vm._v("You have not enabled two factor authentication.")
+                  _vm._v("You have not enabled two factor authentication."),
                 ]),
             _vm._v(" "),
             _c("div", { staticClass: "mt-3 max-w-xl text-sm text-gray-600" }, [
               _c("p", [
                 _vm._v(
                   "\n                When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator\n                application.\n            "
-                )
-              ])
+                ),
+              ]),
             ]),
             _vm._v(" "),
             _vm.twoFactorEnabled
@@ -49885,21 +54489,21 @@ var render = function() {
                         _c(
                           "div",
                           {
-                            staticClass: "mt-4 max-w-xl text-sm text-gray-600"
+                            staticClass: "mt-4 max-w-xl text-sm text-gray-600",
                           },
                           [
                             _c("p", { staticClass: "font-semibold" }, [
                               _vm._v(
                                 "Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application."
-                              )
-                            ])
+                              ),
+                            ]),
                           ]
                         ),
                         _vm._v(" "),
                         _c("div", {
                           staticClass: "mt-4",
-                          domProps: { innerHTML: _vm._s(_vm.qrCode) }
-                        })
+                          domProps: { innerHTML: _vm._s(_vm.qrCode) },
+                        }),
                       ])
                     : _vm._e(),
                   _vm._v(" "),
@@ -49908,14 +54512,14 @@ var render = function() {
                         _c(
                           "div",
                           {
-                            staticClass: "mt-4 max-w-xl text-sm text-gray-600"
+                            staticClass: "mt-4 max-w-xl text-sm text-gray-600",
                           },
                           [
                             _c("p", { staticClass: "font-semibold" }, [
                               _vm._v(
                                 "\n                        Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.\n                    "
-                              )
-                            ])
+                              ),
+                            ]),
                           ]
                         ),
                         _vm._v(" "),
@@ -49923,21 +54527,21 @@ var render = function() {
                           "div",
                           {
                             staticClass:
-                              "grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 rounded-lg"
+                              "grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 rounded-lg",
                           },
-                          _vm._l(_vm.recoveryCodes, function(code) {
+                          _vm._l(_vm.recoveryCodes, function (code) {
                             return _c("div", { key: code }, [
                               _vm._v(
                                 "\n                        " +
                                   _vm._s(code) +
                                   "\n                    "
-                              )
+                              ),
                             ])
                           }),
                           0
-                        )
+                        ),
                       ])
-                    : _vm._e()
+                    : _vm._e(),
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -49949,20 +54553,20 @@ var render = function() {
                       _c(
                         "jet-confirms-password",
                         {
-                          on: { confirmed: _vm.enableTwoFactorAuthentication }
+                          on: { confirmed: _vm.enableTwoFactorAuthentication },
                         },
                         [
                           _c(
                             "jet-button",
                             {
                               class: { "opacity-25": _vm.enabling },
-                              attrs: { type: "button", disabled: _vm.enabling }
+                              attrs: { type: "button", disabled: _vm.enabling },
                             },
                             [_vm._v(" Enable ")]
-                          )
+                          ),
                         ],
                         1
-                      )
+                      ),
                     ],
                     1
                   )
@@ -49979,7 +54583,7 @@ var render = function() {
                                 { staticClass: "mr-3" },
                                 [_vm._v(" Regenerate Recovery Codes ")]
                               )
-                            : _vm._e()
+                            : _vm._e(),
                         ],
                         1
                       ),
@@ -49994,7 +54598,7 @@ var render = function() {
                                 { staticClass: "mr-3" },
                                 [_vm._v(" Show Recovery Codes ")]
                               )
-                            : _vm._e()
+                            : _vm._e(),
                         ],
                         1
                       ),
@@ -50002,29 +54606,29 @@ var render = function() {
                       _c(
                         "jet-confirms-password",
                         {
-                          on: { confirmed: _vm.disableTwoFactorAuthentication }
+                          on: { confirmed: _vm.disableTwoFactorAuthentication },
                         },
                         [
                           _c(
                             "jet-danger-button",
                             {
                               class: { "opacity-25": _vm.disabling },
-                              attrs: { disabled: _vm.disabling }
+                              attrs: { disabled: _vm.disabling },
                             },
                             [_vm._v(" Disable ")]
-                          )
+                          ),
                         ],
                         1
-                      )
+                      ),
                     ],
                     1
-                  )
-            ])
+                  ),
+            ]),
           ]
         },
-        proxy: true
-      }
-    ])
+        proxy: true,
+      },
+    ]),
   })
 }
 var staticRenderFns = []
@@ -50046,7 +54650,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -50055,32 +54659,32 @@ var render = function() {
     scopedSlots: _vm._u([
       {
         key: "title",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Update Password ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "description",
-        fn: function() {
+        fn: function () {
           return [
             _vm._v(
               " Ensure your account is using a long, random password to stay secure. "
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "form",
-        fn: function() {
+        fn: function () {
           return [
             _c(
               "div",
               { staticClass: "col-span-6 sm:col-span-4" },
               [
                 _c("jet-label", {
-                  attrs: { for: "current_password", value: "Current Password" }
+                  attrs: { for: "current_password", value: "Current Password" },
                 }),
                 _vm._v(" "),
                 _c("jet-input", {
@@ -50089,21 +54693,21 @@ var render = function() {
                   attrs: {
                     id: "current_password",
                     type: "password",
-                    autocomplete: "current-password"
+                    autocomplete: "current-password",
                   },
                   model: {
                     value: _vm.form.current_password,
-                    callback: function($$v) {
+                    callback: function ($$v) {
                       _vm.$set(_vm.form, "current_password", $$v)
                     },
-                    expression: "form.current_password"
-                  }
+                    expression: "form.current_password",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input-error", {
                   staticClass: "mt-2",
-                  attrs: { message: _vm.form.errors.current_password }
-                })
+                  attrs: { message: _vm.form.errors.current_password },
+                }),
               ],
               1
             ),
@@ -50113,7 +54717,7 @@ var render = function() {
               { staticClass: "col-span-6 sm:col-span-4" },
               [
                 _c("jet-label", {
-                  attrs: { for: "password", value: "New Password" }
+                  attrs: { for: "password", value: "New Password" },
                 }),
                 _vm._v(" "),
                 _c("jet-input", {
@@ -50122,21 +54726,21 @@ var render = function() {
                   attrs: {
                     id: "password",
                     type: "password",
-                    autocomplete: "new-password"
+                    autocomplete: "new-password",
                   },
                   model: {
                     value: _vm.form.password,
-                    callback: function($$v) {
+                    callback: function ($$v) {
                       _vm.$set(_vm.form, "password", $$v)
                     },
-                    expression: "form.password"
-                  }
+                    expression: "form.password",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input-error", {
                   staticClass: "mt-2",
-                  attrs: { message: _vm.form.errors.password }
-                })
+                  attrs: { message: _vm.form.errors.password },
+                }),
               ],
               1
             ),
@@ -50148,8 +54752,8 @@ var render = function() {
                 _c("jet-label", {
                   attrs: {
                     for: "password_confirmation",
-                    value: "Confirm Password"
-                  }
+                    value: "Confirm Password",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input", {
@@ -50157,37 +54761,37 @@ var render = function() {
                   attrs: {
                     id: "password_confirmation",
                     type: "password",
-                    autocomplete: "new-password"
+                    autocomplete: "new-password",
                   },
                   model: {
                     value: _vm.form.password_confirmation,
-                    callback: function($$v) {
+                    callback: function ($$v) {
                       _vm.$set(_vm.form, "password_confirmation", $$v)
                     },
-                    expression: "form.password_confirmation"
-                  }
+                    expression: "form.password_confirmation",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input-error", {
                   staticClass: "mt-2",
-                  attrs: { message: _vm.form.errors.password_confirmation }
-                })
+                  attrs: { message: _vm.form.errors.password_confirmation },
+                }),
               ],
               1
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "actions",
-        fn: function() {
+        fn: function () {
           return [
             _c(
               "jet-action-message",
               {
                 staticClass: "mr-3",
-                attrs: { on: _vm.form.recentlySuccessful }
+                attrs: { on: _vm.form.recentlySuccessful },
               },
               [_vm._v(" Saved. ")]
             ),
@@ -50196,15 +54800,15 @@ var render = function() {
               "jet-button",
               {
                 class: { "opacity-25": _vm.form.processing },
-                attrs: { disabled: _vm.form.processing }
+                attrs: { disabled: _vm.form.processing },
               },
               [_vm._v(" Save ")]
-            )
+            ),
           ]
         },
-        proxy: true
-      }
-    ])
+        proxy: true,
+      },
+    ]),
   })
 }
 var staticRenderFns = []
@@ -50226,7 +54830,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -50235,25 +54839,25 @@ var render = function() {
     scopedSlots: _vm._u([
       {
         key: "title",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Profile Information ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "description",
-        fn: function() {
+        fn: function () {
           return [
             _vm._v(
               " Update your account's profile information and email address. "
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "form",
-        fn: function() {
+        fn: function () {
           return [
             _vm.$page.props.jetstream.managesProfilePhotos
               ? _c(
@@ -50264,11 +54868,11 @@ var render = function() {
                       ref: "photo",
                       staticClass: "hidden",
                       attrs: { type: "file" },
-                      on: { change: _vm.updatePhotoPreview }
+                      on: { change: _vm.updatePhotoPreview },
                     }),
                     _vm._v(" "),
                     _c("jet-label", {
-                      attrs: { for: "photo", value: "Photo" }
+                      attrs: { for: "photo", value: "Photo" },
                     }),
                     _vm._v(" "),
                     _c(
@@ -50279,19 +54883,19 @@ var render = function() {
                             name: "show",
                             rawName: "v-show",
                             value: !_vm.photoPreview,
-                            expression: "!photoPreview"
-                          }
+                            expression: "!photoPreview",
+                          },
                         ],
-                        staticClass: "mt-2"
+                        staticClass: "mt-2",
                       },
                       [
                         _c("img", {
                           staticClass: "rounded-full h-20 w-20 object-cover",
                           attrs: {
                             src: _vm.user.profile_photo_url,
-                            alt: _vm.user.name
-                          }
-                        })
+                            alt: _vm.user.name,
+                          },
+                        }),
                       ]
                     ),
                     _vm._v(" "),
@@ -50303,10 +54907,10 @@ var render = function() {
                             name: "show",
                             rawName: "v-show",
                             value: _vm.photoPreview,
-                            expression: "photoPreview"
-                          }
+                            expression: "photoPreview",
+                          },
                         ],
-                        staticClass: "mt-2"
+                        staticClass: "mt-2",
                       },
                       [
                         _c("span", {
@@ -50314,8 +54918,8 @@ var render = function() {
                           style:
                             "background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('" +
                             _vm.photoPreview +
-                            "');"
-                        })
+                            "');",
+                        }),
                       ]
                     ),
                     _vm._v(" "),
@@ -50325,11 +54929,11 @@ var render = function() {
                         staticClass: "mt-2 mr-2",
                         attrs: { type: "button" },
                         on: {
-                          click: function($event) {
+                          click: function ($event) {
                             $event.preventDefault()
                             return _vm.selectNewPhoto.apply(null, arguments)
-                          }
-                        }
+                          },
+                        },
                       },
                       [_vm._v(" Select A New Photo ")]
                     ),
@@ -50341,11 +54945,11 @@ var render = function() {
                             staticClass: "mt-2",
                             attrs: { type: "button" },
                             on: {
-                              click: function($event) {
+                              click: function ($event) {
                                 $event.preventDefault()
                                 return _vm.deletePhoto.apply(null, arguments)
-                              }
-                            }
+                              },
+                            },
                           },
                           [_vm._v(" Remove Photo ")]
                         )
@@ -50353,8 +54957,8 @@ var render = function() {
                     _vm._v(" "),
                     _c("jet-input-error", {
                       staticClass: "mt-2",
-                      attrs: { message: _vm.form.errors.photo }
-                    })
+                      attrs: { message: _vm.form.errors.photo },
+                    }),
                   ],
                   1
                 )
@@ -50371,17 +54975,17 @@ var render = function() {
                   attrs: { id: "name", type: "text", autocomplete: "name" },
                   model: {
                     value: _vm.form.name,
-                    callback: function($$v) {
+                    callback: function ($$v) {
                       _vm.$set(_vm.form, "name", $$v)
                     },
-                    expression: "form.name"
-                  }
+                    expression: "form.name",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input-error", {
                   staticClass: "mt-2",
-                  attrs: { message: _vm.form.errors.name }
-                })
+                  attrs: { message: _vm.form.errors.name },
+                }),
               ],
               1
             ),
@@ -50397,33 +55001,33 @@ var render = function() {
                   attrs: { id: "email", type: "email" },
                   model: {
                     value: _vm.form.email,
-                    callback: function($$v) {
+                    callback: function ($$v) {
                       _vm.$set(_vm.form, "email", $$v)
                     },
-                    expression: "form.email"
-                  }
+                    expression: "form.email",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input-error", {
                   staticClass: "mt-2",
-                  attrs: { message: _vm.form.errors.email }
-                })
+                  attrs: { message: _vm.form.errors.email },
+                }),
               ],
               1
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "actions",
-        fn: function() {
+        fn: function () {
           return [
             _c(
               "jet-action-message",
               {
                 staticClass: "mr-3",
-                attrs: { on: _vm.form.recentlySuccessful }
+                attrs: { on: _vm.form.recentlySuccessful },
               },
               [_vm._v(" Saved. ")]
             ),
@@ -50432,15 +55036,15 @@ var render = function() {
               "jet-button",
               {
                 class: { "opacity-25": _vm.form.processing },
-                attrs: { disabled: _vm.form.processing }
+                attrs: { disabled: _vm.form.processing },
               },
               [_vm._v(" Save ")]
-            )
+            ),
           ]
         },
-        proxy: true
-      }
-    ])
+        proxy: true,
+      },
+    ]),
   })
 }
 var staticRenderFns = []
@@ -50462,7 +55066,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -50472,21 +55076,21 @@ var render = function() {
       scopedSlots: _vm._u([
         {
           key: "header",
-          fn: function() {
+          fn: function () {
             return [
               _c(
                 "h2",
                 {
                   staticClass:
-                    "font-semibold text-xl text-gray-800 leading-tight"
+                    "font-semibold text-xl text-gray-800 leading-tight",
                 },
                 [_vm._v("Profile")]
-              )
+              ),
             ]
           },
-          proxy: true
-        }
-      ])
+          proxy: true,
+        },
+      ]),
     },
     [
       _vm._v(" "),
@@ -50500,10 +55104,10 @@ var render = function() {
                   "div",
                   [
                     _c("update-profile-information-form", {
-                      attrs: { user: _vm.$page.props.user }
+                      attrs: { user: _vm.$page.props.user },
                     }),
                     _vm._v(" "),
-                    _c("jet-section-border")
+                    _c("jet-section-border"),
                   ],
                   1
                 )
@@ -50514,10 +55118,10 @@ var render = function() {
                   "div",
                   [
                     _c("update-password-form", {
-                      staticClass: "mt-10 sm:mt-0"
+                      staticClass: "mt-10 sm:mt-0",
                     }),
                     _vm._v(" "),
-                    _c("jet-section-border")
+                    _c("jet-section-border"),
                   ],
                   1
                 )
@@ -50528,10 +55132,10 @@ var render = function() {
                   "div",
                   [
                     _c("two-factor-authentication-form", {
-                      staticClass: "mt-10 sm:mt-0"
+                      staticClass: "mt-10 sm:mt-0",
                     }),
                     _vm._v(" "),
-                    _c("jet-section-border")
+                    _c("jet-section-border"),
                   ],
                   1
                 )
@@ -50539,20 +55143,20 @@ var render = function() {
             _vm._v(" "),
             _c("logout-other-browser-sessions-form", {
               staticClass: "mt-10 sm:mt-0",
-              attrs: { sessions: _vm.sessions }
+              attrs: { sessions: _vm.sessions },
             }),
             _vm._v(" "),
             _vm.$page.props.jetstream.hasAccountDeletionFeatures
               ? [
                   _c("jet-section-border"),
                   _vm._v(" "),
-                  _c("delete-user-form", { staticClass: "mt-10 sm:mt-0" })
+                  _c("delete-user-form", { staticClass: "mt-10 sm:mt-0" }),
                 ]
-              : _vm._e()
+              : _vm._e(),
           ],
           2
-        )
-      ])
+        ),
+      ]),
     ]
   )
 }
@@ -50575,7 +55179,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -50583,40 +55187,40 @@ var render = function() {
     scopedSlots: _vm._u([
       {
         key: "title",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Two Factor Authentication ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "description",
-        fn: function() {
+        fn: function () {
           return [
             _vm._v(
               " Add additional security to your account using two factor authentication. "
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "content",
-        fn: function() {
+        fn: function () {
           return [
             _vm.twoFactorEnabled
               ? _c("h3", { staticClass: "text-lg font-medium text-gray-900" }, [
-                  _vm._v("You have enabled two factor authentication.")
+                  _vm._v("You have enabled two factor authentication."),
                 ])
               : _c("h3", { staticClass: "text-lg font-medium text-gray-900" }, [
-                  _vm._v("You have not enabled two factor authentication.")
+                  _vm._v("You have not enabled two factor authentication."),
                 ]),
             _vm._v(" "),
             _c("div", { staticClass: "mt-3 max-w-xl text-sm text-gray-600" }, [
               _c("p", [
                 _vm._v(
                   "\n                When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator\n                application.\n            "
-                )
-              ])
+                ),
+              ]),
             ]),
             _vm._v(" "),
             _vm.twoFactorEnabled
@@ -50626,21 +55230,21 @@ var render = function() {
                         _c(
                           "div",
                           {
-                            staticClass: "mt-4 max-w-xl text-sm text-gray-600"
+                            staticClass: "mt-4 max-w-xl text-sm text-gray-600",
                           },
                           [
                             _c("p", { staticClass: "font-semibold" }, [
                               _vm._v(
                                 "Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application."
-                              )
-                            ])
+                              ),
+                            ]),
                           ]
                         ),
                         _vm._v(" "),
                         _c("div", {
                           staticClass: "mt-4 dark:p-4 dark:w-56 dark:bg-white",
-                          domProps: { innerHTML: _vm._s(_vm.qrCode) }
-                        })
+                          domProps: { innerHTML: _vm._s(_vm.qrCode) },
+                        }),
                       ])
                     : _vm._e(),
                   _vm._v(" "),
@@ -50649,14 +55253,14 @@ var render = function() {
                         _c(
                           "div",
                           {
-                            staticClass: "mt-4 max-w-xl text-sm text-gray-600"
+                            staticClass: "mt-4 max-w-xl text-sm text-gray-600",
                           },
                           [
                             _c("p", { staticClass: "font-semibold" }, [
                               _vm._v(
                                 "\n                        Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.\n                    "
-                              )
-                            ])
+                              ),
+                            ]),
                           ]
                         ),
                         _vm._v(" "),
@@ -50664,21 +55268,21 @@ var render = function() {
                           "div",
                           {
                             staticClass:
-                              "grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 rounded-lg"
+                              "grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 rounded-lg",
                           },
-                          _vm._l(_vm.recoveryCodes, function(code) {
+                          _vm._l(_vm.recoveryCodes, function (code) {
                             return _c("div", { key: code }, [
                               _vm._v(
                                 "\n                        " +
                                   _vm._s(code) +
                                   "\n                    "
-                              )
+                              ),
                             ])
                           }),
                           0
-                        )
+                        ),
                       ])
-                    : _vm._e()
+                    : _vm._e(),
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -50690,20 +55294,20 @@ var render = function() {
                       _c(
                         "jet-confirms-password",
                         {
-                          on: { confirmed: _vm.enableTwoFactorAuthentication }
+                          on: { confirmed: _vm.enableTwoFactorAuthentication },
                         },
                         [
                           _c(
                             "jet-button",
                             {
                               class: { "opacity-25": _vm.enabling },
-                              attrs: { type: "button", disabled: _vm.enabling }
+                              attrs: { type: "button", disabled: _vm.enabling },
                             },
                             [_vm._v(" Enable ")]
-                          )
+                          ),
                         ],
                         1
-                      )
+                      ),
                     ],
                     1
                   )
@@ -50720,7 +55324,7 @@ var render = function() {
                                 { staticClass: "mr-3" },
                                 [_vm._v(" Regenerate Recovery Codes ")]
                               )
-                            : _vm._e()
+                            : _vm._e(),
                         ],
                         1
                       ),
@@ -50735,7 +55339,7 @@ var render = function() {
                                 { staticClass: "mr-3" },
                                 [_vm._v(" Show Recovery Codes ")]
                               )
-                            : _vm._e()
+                            : _vm._e(),
                         ],
                         1
                       ),
@@ -50743,29 +55347,29 @@ var render = function() {
                       _c(
                         "jet-confirms-password",
                         {
-                          on: { confirmed: _vm.disableTwoFactorAuthentication }
+                          on: { confirmed: _vm.disableTwoFactorAuthentication },
                         },
                         [
                           _c(
                             "jet-danger-button",
                             {
                               class: { "opacity-25": _vm.disabling },
-                              attrs: { disabled: _vm.disabling }
+                              attrs: { disabled: _vm.disabling },
                             },
                             [_vm._v(" Disable ")]
-                          )
+                          ),
                         ],
                         1
-                      )
+                      ),
                     ],
                     1
-                  )
-            ])
+                  ),
+            ]),
           ]
         },
-        proxy: true
-      }
-    ])
+        proxy: true,
+      },
+    ]),
   })
 }
 var staticRenderFns = []
@@ -50787,7 +55391,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -50796,32 +55400,32 @@ var render = function() {
     scopedSlots: _vm._u([
       {
         key: "title",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Update Password ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "description",
-        fn: function() {
+        fn: function () {
           return [
             _vm._v(
               " Ensure your account is using a long, random password to stay secure. "
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "form",
-        fn: function() {
+        fn: function () {
           return [
             _c(
               "div",
               { staticClass: "col-span-6 sm:col-span-4" },
               [
                 _c("jet-label", {
-                  attrs: { for: "current_password", value: "Current Password" }
+                  attrs: { for: "current_password", value: "Current Password" },
                 }),
                 _vm._v(" "),
                 _c("jet-input", {
@@ -50830,21 +55434,21 @@ var render = function() {
                   attrs: {
                     id: "current_password",
                     type: "password",
-                    autocomplete: "current-password"
+                    autocomplete: "current-password",
                   },
                   model: {
                     value: _vm.form.current_password,
-                    callback: function($$v) {
+                    callback: function ($$v) {
                       _vm.$set(_vm.form, "current_password", $$v)
                     },
-                    expression: "form.current_password"
-                  }
+                    expression: "form.current_password",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input-error", {
                   staticClass: "mt-2",
-                  attrs: { message: _vm.form.errors.current_password }
-                })
+                  attrs: { message: _vm.form.errors.current_password },
+                }),
               ],
               1
             ),
@@ -50854,7 +55458,7 @@ var render = function() {
               { staticClass: "col-span-6 sm:col-span-4" },
               [
                 _c("jet-label", {
-                  attrs: { for: "password", value: "New Password" }
+                  attrs: { for: "password", value: "New Password" },
                 }),
                 _vm._v(" "),
                 _c("jet-input", {
@@ -50863,21 +55467,21 @@ var render = function() {
                   attrs: {
                     id: "password",
                     type: "password",
-                    autocomplete: "new-password"
+                    autocomplete: "new-password",
                   },
                   model: {
                     value: _vm.form.password,
-                    callback: function($$v) {
+                    callback: function ($$v) {
                       _vm.$set(_vm.form, "password", $$v)
                     },
-                    expression: "form.password"
-                  }
+                    expression: "form.password",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input-error", {
                   staticClass: "mt-2",
-                  attrs: { message: _vm.form.errors.password }
-                })
+                  attrs: { message: _vm.form.errors.password },
+                }),
               ],
               1
             ),
@@ -50889,8 +55493,8 @@ var render = function() {
                 _c("jet-label", {
                   attrs: {
                     for: "password_confirmation",
-                    value: "Confirm Password"
-                  }
+                    value: "Confirm Password",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input", {
@@ -50898,37 +55502,37 @@ var render = function() {
                   attrs: {
                     id: "password_confirmation",
                     type: "password",
-                    autocomplete: "new-password"
+                    autocomplete: "new-password",
                   },
                   model: {
                     value: _vm.form.password_confirmation,
-                    callback: function($$v) {
+                    callback: function ($$v) {
                       _vm.$set(_vm.form, "password_confirmation", $$v)
                     },
-                    expression: "form.password_confirmation"
-                  }
+                    expression: "form.password_confirmation",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input-error", {
                   staticClass: "mt-2",
-                  attrs: { message: _vm.form.errors.password_confirmation }
-                })
+                  attrs: { message: _vm.form.errors.password_confirmation },
+                }),
               ],
               1
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "actions",
-        fn: function() {
+        fn: function () {
           return [
             _c(
               "jet-action-message",
               {
                 staticClass: "mr-3",
-                attrs: { on: _vm.form.recentlySuccessful }
+                attrs: { on: _vm.form.recentlySuccessful },
               },
               [_vm._v(" Saved. ")]
             ),
@@ -50937,15 +55541,15 @@ var render = function() {
               "jet-button",
               {
                 class: { "opacity-25": _vm.form.processing },
-                attrs: { disabled: _vm.form.processing }
+                attrs: { disabled: _vm.form.processing },
               },
               [_vm._v(" Save ")]
-            )
+            ),
           ]
         },
-        proxy: true
-      }
-    ])
+        proxy: true,
+      },
+    ]),
   })
 }
 var staticRenderFns = []
@@ -50967,7 +55571,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -50976,25 +55580,25 @@ var render = function() {
     scopedSlots: _vm._u([
       {
         key: "title",
-        fn: function() {
+        fn: function () {
           return [_vm._v(" Profile Information ")]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "description",
-        fn: function() {
+        fn: function () {
           return [
             _vm._v(
               " Update your account's profile information and email address. "
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "form",
-        fn: function() {
+        fn: function () {
           return [
             _vm.$page.props.jetstream.managesProfilePhotos
               ? _c(
@@ -51005,11 +55609,11 @@ var render = function() {
                       ref: "photo",
                       staticClass: "hidden",
                       attrs: { type: "file" },
-                      on: { change: _vm.updatePhotoPreview }
+                      on: { change: _vm.updatePhotoPreview },
                     }),
                     _vm._v(" "),
                     _c("jet-label", {
-                      attrs: { for: "photo", value: "Photo" }
+                      attrs: { for: "photo", value: "Photo" },
                     }),
                     _vm._v(" "),
                     _c(
@@ -51020,19 +55624,19 @@ var render = function() {
                             name: "show",
                             rawName: "v-show",
                             value: !_vm.photoPreview,
-                            expression: "!photoPreview"
-                          }
+                            expression: "!photoPreview",
+                          },
                         ],
-                        staticClass: "mt-2"
+                        staticClass: "mt-2",
                       },
                       [
                         _c("img", {
                           staticClass: "rounded-full h-20 w-20 object-cover",
                           attrs: {
                             src: _vm.user.profile_photo_url,
-                            alt: _vm.user.name
-                          }
-                        })
+                            alt: _vm.user.name,
+                          },
+                        }),
                       ]
                     ),
                     _vm._v(" "),
@@ -51044,10 +55648,10 @@ var render = function() {
                             name: "show",
                             rawName: "v-show",
                             value: _vm.photoPreview,
-                            expression: "photoPreview"
-                          }
+                            expression: "photoPreview",
+                          },
                         ],
-                        staticClass: "mt-2"
+                        staticClass: "mt-2",
                       },
                       [
                         _c("span", {
@@ -51055,8 +55659,8 @@ var render = function() {
                           style:
                             "background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('" +
                             _vm.photoPreview +
-                            "');"
-                        })
+                            "');",
+                        }),
                       ]
                     ),
                     _vm._v(" "),
@@ -51066,11 +55670,11 @@ var render = function() {
                         staticClass: "mt-2 mr-2",
                         attrs: { type: "button" },
                         nativeOn: {
-                          click: function($event) {
+                          click: function ($event) {
                             $event.preventDefault()
                             return _vm.selectNewPhoto.apply(null, arguments)
-                          }
-                        }
+                          },
+                        },
                       },
                       [_vm._v(" Select A New Photo ")]
                     ),
@@ -51082,11 +55686,11 @@ var render = function() {
                             staticClass: "mt-2",
                             attrs: { type: "button" },
                             nativeOn: {
-                              click: function($event) {
+                              click: function ($event) {
                                 $event.preventDefault()
                                 return _vm.deletePhoto.apply(null, arguments)
-                              }
-                            }
+                              },
+                            },
                           },
                           [_vm._v(" Remove Photo ")]
                         )
@@ -51094,8 +55698,8 @@ var render = function() {
                     _vm._v(" "),
                     _c("jet-input-error", {
                       staticClass: "mt-2",
-                      attrs: { message: _vm.form.errors.photo }
-                    })
+                      attrs: { message: _vm.form.errors.photo },
+                    }),
                   ],
                   1
                 )
@@ -51112,17 +55716,17 @@ var render = function() {
                   attrs: { id: "name", type: "text", autocomplete: "name" },
                   model: {
                     value: _vm.form.name,
-                    callback: function($$v) {
+                    callback: function ($$v) {
                       _vm.$set(_vm.form, "name", $$v)
                     },
-                    expression: "form.name"
-                  }
+                    expression: "form.name",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input-error", {
                   staticClass: "mt-2",
-                  attrs: { message: _vm.form.errors.name }
-                })
+                  attrs: { message: _vm.form.errors.name },
+                }),
               ],
               1
             ),
@@ -51138,33 +55742,33 @@ var render = function() {
                   attrs: { id: "email", type: "email" },
                   model: {
                     value: _vm.form.email,
-                    callback: function($$v) {
+                    callback: function ($$v) {
                       _vm.$set(_vm.form, "email", $$v)
                     },
-                    expression: "form.email"
-                  }
+                    expression: "form.email",
+                  },
                 }),
                 _vm._v(" "),
                 _c("jet-input-error", {
                   staticClass: "mt-2",
-                  attrs: { message: _vm.form.errors.email }
-                })
+                  attrs: { message: _vm.form.errors.email },
+                }),
               ],
               1
-            )
+            ),
           ]
         },
-        proxy: true
+        proxy: true,
       },
       {
         key: "actions",
-        fn: function() {
+        fn: function () {
           return [
             _c(
               "jet-action-message",
               {
                 staticClass: "mr-3",
-                attrs: { on: _vm.form.recentlySuccessful }
+                attrs: { on: _vm.form.recentlySuccessful },
               },
               [_vm._v(" Saved. ")]
             ),
@@ -51173,15 +55777,15 @@ var render = function() {
               "jet-button",
               {
                 class: { "opacity-25": _vm.form.processing },
-                attrs: { disabled: _vm.form.processing }
+                attrs: { disabled: _vm.form.processing },
               },
               [_vm._v(" Save ")]
-            )
+            ),
           ]
         },
-        proxy: true
-      }
-    ])
+        proxy: true,
+      },
+    ]),
   })
 }
 var staticRenderFns = []
@@ -51203,7 +55807,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -51218,11 +55822,11 @@ var render = function() {
           _c("div", {
             staticClass:
               "w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose",
-            domProps: { innerHTML: _vm._s(_vm.terms) }
-          })
+            domProps: { innerHTML: _vm._s(_vm.terms) },
+          }),
         ]
-      )
-    ])
+      ),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -51244,7 +55848,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -51252,7 +55856,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0"
+        "relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0",
     },
     [
       _vm.canLogin
@@ -51265,7 +55869,7 @@ var render = function() {
                     "inertia-link",
                     {
                       staticClass: "text-sm text-gray-700 underline",
-                      attrs: { href: "/dashboard" }
+                      attrs: { href: "/dashboard" },
                     },
                     [_vm._v(" Dashboard ")]
                   )
@@ -51274,7 +55878,7 @@ var render = function() {
                       "inertia-link",
                       {
                         staticClass: "text-sm text-gray-700 underline",
-                        attrs: { href: _vm.route("login") }
+                        attrs: { href: _vm.route("login") },
                       },
                       [_vm._v(" Login ")]
                     ),
@@ -51284,12 +55888,12 @@ var render = function() {
                           "inertia-link",
                           {
                             staticClass: "ml-4 text-sm text-gray-700 underline",
-                            attrs: { href: _vm.route("register") }
+                            attrs: { href: _vm.route("register") },
                           },
                           [_vm._v(" Register ")]
                         )
-                      : _vm._e()
-                  ]
+                      : _vm._e(),
+                  ],
             ],
             2
           )
@@ -51307,8 +55911,8 @@ var render = function() {
                 attrs: {
                   viewBox: "0 0 651 192",
                   fill: "none",
-                  xmlns: "http://www.w3.org/2000/svg"
-                }
+                  xmlns: "http://www.w3.org/2000/svg",
+                },
               },
               [
                 _c(
@@ -51317,14 +55921,13 @@ var render = function() {
                   [
                     _c("path", {
                       attrs: {
-                        d:
-                          "M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z"
-                      }
-                    })
+                        d: "M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z",
+                      },
+                    }),
                   ]
-                )
+                ),
               ]
-            )
+            ),
           ]
         ),
         _vm._v(" "),
@@ -51332,7 +55935,7 @@ var render = function() {
           "div",
           {
             staticClass:
-              "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
+              "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg",
           },
           [
             _c("div", { staticClass: "grid grid-cols-1 md:grid-cols-2" }, [
@@ -51348,30 +55951,29 @@ var render = function() {
                         "stroke-linecap": "round",
                         "stroke-linejoin": "round",
                         "stroke-width": "2",
-                        viewBox: "0 0 24 24"
-                      }
+                        viewBox: "0 0 24 24",
+                      },
                     },
                     [
                       _c("path", {
                         attrs: {
-                          d:
-                            "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                        }
-                      })
+                          d: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+                        },
+                      }),
                     ]
                   ),
                   _vm._v(" "),
-                  _vm._m(0)
+                  _vm._m(0),
                 ]),
                 _vm._v(" "),
-                _vm._m(1)
+                _vm._m(1),
               ]),
               _vm._v(" "),
               _c(
                 "div",
                 {
                   staticClass:
-                    "p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l"
+                    "p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l",
                 },
                 [
                   _c("div", { staticClass: "flex items-center" }, [
@@ -51385,27 +55987,26 @@ var render = function() {
                           "stroke-linecap": "round",
                           "stroke-linejoin": "round",
                           "stroke-width": "2",
-                          viewBox: "0 0 24 24"
-                        }
+                          viewBox: "0 0 24 24",
+                        },
                       },
                       [
                         _c("path", {
                           attrs: {
-                            d:
-                              "M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                          }
+                            d: "M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z",
+                          },
                         }),
                         _vm._v(" "),
                         _c("path", {
-                          attrs: { d: "M15 13a3 3 0 11-6 0 3 3 0 016 0z" }
-                        })
+                          attrs: { d: "M15 13a3 3 0 11-6 0 3 3 0 016 0z" },
+                        }),
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(2)
+                    _vm._m(2),
                   ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(3),
                 ]
               ),
               _vm._v(" "),
@@ -51413,7 +56014,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "p-6 border-t border-gray-200 dark:border-gray-700"
+                    "p-6 border-t border-gray-200 dark:border-gray-700",
                 },
                 [
                   _c("div", { staticClass: "flex items-center" }, [
@@ -51427,23 +56028,22 @@ var render = function() {
                           "stroke-linecap": "round",
                           "stroke-linejoin": "round",
                           "stroke-width": "2",
-                          viewBox: "0 0 24 24"
-                        }
+                          viewBox: "0 0 24 24",
+                        },
                       },
                       [
                         _c("path", {
                           attrs: {
-                            d:
-                              "M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                          }
-                        })
+                            d: "M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z",
+                          },
+                        }),
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(4)
+                    _vm._m(4),
                   ]),
                   _vm._v(" "),
-                  _vm._m(5)
+                  _vm._m(5),
                 ]
               ),
               _vm._v(" "),
@@ -51451,7 +56051,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "p-6 border-t border-gray-200 dark:border-gray-700 md:border-l"
+                    "p-6 border-t border-gray-200 dark:border-gray-700 md:border-l",
                 },
                 [
                   _c("div", { staticClass: "flex items-center" }, [
@@ -51465,16 +56065,15 @@ var render = function() {
                           "stroke-linecap": "round",
                           "stroke-linejoin": "round",
                           "stroke-width": "2",
-                          viewBox: "0 0 24 24"
-                        }
+                          viewBox: "0 0 24 24",
+                        },
                       },
                       [
                         _c("path", {
                           attrs: {
-                            d:
-                              "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          }
-                        })
+                            d: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+                          },
+                        }),
                       ]
                     ),
                     _vm._v(" "),
@@ -51482,16 +56081,16 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white"
+                          "ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white",
                       },
                       [_vm._v("Vibrant Ecosystem")]
-                    )
+                    ),
                   ]),
                   _vm._v(" "),
-                  _vm._m(6)
+                  _vm._m(6),
                 ]
-              )
-            ])
+              ),
+            ]),
           ]
         ),
         _vm._v(" "),
@@ -51499,7 +56098,7 @@ var render = function() {
           "div",
           {
             staticClass:
-              "flex justify-center mt-4 sm:items-center sm:justify-between"
+              "flex justify-center mt-4 sm:items-center sm:justify-between",
           },
           [
             _c(
@@ -51517,16 +56116,15 @@ var render = function() {
                         "stroke-linejoin": "round",
                         "stroke-width": "2",
                         viewBox: "0 0 24 24",
-                        stroke: "currentColor"
-                      }
+                        stroke: "currentColor",
+                      },
                     },
                     [
                       _c("path", {
                         attrs: {
-                          d:
-                            "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                        }
-                      })
+                          d: "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z",
+                        },
+                      }),
                     ]
                   ),
                   _vm._v(" "),
@@ -51534,7 +56132,7 @@ var render = function() {
                     "a",
                     {
                       staticClass: "ml-1 underline",
-                      attrs: { href: "https://laravel.bigcartel.com" }
+                      attrs: { href: "https://laravel.bigcartel.com" },
                     },
                     [_vm._v(" Shop ")]
                   ),
@@ -51549,16 +56147,15 @@ var render = function() {
                         "stroke-linecap": "round",
                         "stroke-linejoin": "round",
                         "stroke-width": "2",
-                        viewBox: "0 0 24 24"
-                      }
+                        viewBox: "0 0 24 24",
+                      },
                     },
                     [
                       _c("path", {
                         attrs: {
-                          d:
-                            "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                        }
-                      })
+                          d: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+                        },
+                      }),
                     ]
                   ),
                   _vm._v(" "),
@@ -51567,12 +56164,12 @@ var render = function() {
                     {
                       staticClass: "ml-1 underline",
                       attrs: {
-                        href: "https://github.com/sponsors/taylorotwell"
-                      }
+                        href: "https://github.com/sponsors/taylorotwell",
+                      },
                     },
                     [_vm._v(" Sponsor ")]
-                  )
-                ])
+                  ),
+                ]),
               ]
             ),
             _vm._v(" "),
@@ -51580,7 +56177,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0"
+                  "ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0",
               },
               [
                 _vm._v(
@@ -51589,17 +56186,17 @@ var render = function() {
                     " (PHP v" +
                     _vm._s(_vm.phpVersion) +
                     ")"
-                )
+                ),
               ]
-            )
+            ),
           ]
-        )
-      ])
+        ),
+      ]),
     ]
   )
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -51608,13 +56205,13 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "underline text-gray-900 dark:text-white",
-          attrs: { href: "https://laravel.com/docs" }
+          attrs: { href: "https://laravel.com/docs" },
         },
         [_vm._v("Documentation")]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -51625,12 +56222,12 @@ var staticRenderFns = [
         [
           _vm._v(
             "\n                            Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we\n                            recommend reading all of the documentation from beginning to end.\n                        "
-          )
+          ),
         ]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -51639,13 +56236,13 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "underline text-gray-900 dark:text-white",
-          attrs: { href: "https://laracasts.com" }
+          attrs: { href: "https://laracasts.com" },
         },
         [_vm._v("Laracasts")]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -51656,12 +56253,12 @@ var staticRenderFns = [
         [
           _vm._v(
             "\n                            Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development\n                            skills in the process.\n                        "
-          )
+          ),
         ]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -51670,13 +56267,13 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "underline text-gray-900 dark:text-white",
-          attrs: { href: "https://laravel-news.com/" }
+          attrs: { href: "https://laravel-news.com/" },
         },
         [_vm._v("Laravel News")]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -51687,12 +56284,12 @@ var staticRenderFns = [
         [
           _vm._v(
             "\n                            Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases\n                            and tutorials.\n                        "
-          )
+          ),
         ]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -51708,7 +56305,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "underline",
-              attrs: { href: "https://forge.laravel.com" }
+              attrs: { href: "https://forge.laravel.com" },
             },
             [_vm._v("Forge")]
           ),
@@ -51717,7 +56314,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "underline",
-              attrs: { href: "https://vapor.laravel.com" }
+              attrs: { href: "https://vapor.laravel.com" },
             },
             [_vm._v("Vapor")]
           ),
@@ -51726,7 +56323,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "underline",
-              attrs: { href: "https://nova.laravel.com" }
+              attrs: { href: "https://nova.laravel.com" },
             },
             [_vm._v("Nova")]
           ),
@@ -51743,7 +56340,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "underline",
-              attrs: { href: "https://laravel.com/docs/billing" }
+              attrs: { href: "https://laravel.com/docs/billing" },
             },
             [_vm._v("Cashier")]
           ),
@@ -51752,7 +56349,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "underline",
-              attrs: { href: "https://laravel.com/docs/dusk" }
+              attrs: { href: "https://laravel.com/docs/dusk" },
             },
             [_vm._v("Dusk")]
           ),
@@ -51761,7 +56358,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "underline",
-              attrs: { href: "https://laravel.com/docs/broadcasting" }
+              attrs: { href: "https://laravel.com/docs/broadcasting" },
             },
             [_vm._v("Echo")]
           ),
@@ -51770,7 +56367,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "underline",
-              attrs: { href: "https://laravel.com/docs/horizon" }
+              attrs: { href: "https://laravel.com/docs/horizon" },
             },
             [_vm._v("Horizon")]
           ),
@@ -51779,7 +56376,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "underline",
-              attrs: { href: "https://laravel.com/docs/sanctum" }
+              attrs: { href: "https://laravel.com/docs/sanctum" },
             },
             [_vm._v("Sanctum")]
           ),
@@ -51788,15 +56385,15 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "underline",
-              attrs: { href: "https://laravel.com/docs/telescope" }
+              attrs: { href: "https://laravel.com/docs/telescope" },
             },
             [_vm._v("Telescope")]
           ),
-          _vm._v(", and more.\n                        ")
+          _vm._v(", and more.\n                        "),
         ]
-      )
+      ),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -65399,7 +69996,7 @@ webpackContext.id = "./resources/js/Pages sync recursive ^\\.\\/.*$";
 
 /***/ }),
 
-/***/ "?4f7e":
+/***/ "?2128":
 /*!********************************!*\
   !*** ./util.inspect (ignored) ***!
   \********************************/
@@ -65409,34 +70006,1829 @@ webpackContext.id = "./resources/js/Pages sync recursive ^\\.\\/.*$";
 
 /***/ }),
 
-/***/ "./node_modules/socket.io-client/build/index.js":
-/*!******************************************************!*\
-  !*** ./node_modules/socket.io-client/build/index.js ***!
-  \******************************************************/
-/***/ ((module, exports, __webpack_require__) => {
+/***/ "./node_modules/engine.io-client/build/cjs/globalThis.browser.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/cjs/globalThis.browser.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.io = exports.Socket = exports.Manager = exports.protocol = void 0;
-const url_1 = __webpack_require__(/*! ./url */ "./node_modules/socket.io-client/build/url.js");
-const manager_1 = __webpack_require__(/*! ./manager */ "./node_modules/socket.io-client/build/manager.js");
-const debug = __webpack_require__(/*! debug */ "./node_modules/socket.io-client/node_modules/debug/src/browser.js")("socket.io-client");
+exports["default"] = (() => {
+    if (typeof self !== "undefined") {
+        return self;
+    }
+    else if (typeof window !== "undefined") {
+        return window;
+    }
+    else {
+        return Function("return this")();
+    }
+})();
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/build/cjs/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/engine.io-client/build/cjs/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.installTimerFunctions = exports.transports = exports.Transport = exports.protocol = exports.Socket = void 0;
+const socket_js_1 = __webpack_require__(/*! ./socket.js */ "./node_modules/engine.io-client/build/cjs/socket.js");
+Object.defineProperty(exports, "Socket", ({ enumerable: true, get: function () { return socket_js_1.Socket; } }));
+exports.protocol = socket_js_1.Socket.protocol;
+var transport_js_1 = __webpack_require__(/*! ./transport.js */ "./node_modules/engine.io-client/build/cjs/transport.js");
+Object.defineProperty(exports, "Transport", ({ enumerable: true, get: function () { return transport_js_1.Transport; } }));
+var index_js_1 = __webpack_require__(/*! ./transports/index.js */ "./node_modules/engine.io-client/build/cjs/transports/index.js");
+Object.defineProperty(exports, "transports", ({ enumerable: true, get: function () { return index_js_1.transports; } }));
+var util_js_1 = __webpack_require__(/*! ./util.js */ "./node_modules/engine.io-client/build/cjs/util.js");
+Object.defineProperty(exports, "installTimerFunctions", ({ enumerable: true, get: function () { return util_js_1.installTimerFunctions; } }));
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/build/cjs/socket.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/engine.io-client/build/cjs/socket.js ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Socket = void 0;
+const index_js_1 = __webpack_require__(/*! ./transports/index.js */ "./node_modules/engine.io-client/build/cjs/transports/index.js");
+const util_js_1 = __webpack_require__(/*! ./util.js */ "./node_modules/engine.io-client/build/cjs/util.js");
+const parseqs_1 = __importDefault(__webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js"));
+const parseuri_1 = __importDefault(__webpack_require__(/*! parseuri */ "./node_modules/parseuri/index.js"));
+const debug_1 = __importDefault(__webpack_require__(/*! debug */ "./node_modules/engine.io-client/node_modules/debug/src/browser.js")); // debug()
+const component_emitter_1 = __webpack_require__(/*! @socket.io/component-emitter */ "./node_modules/@socket.io/component-emitter/index.js");
+const engine_io_parser_1 = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/build/cjs/index.js");
+const debug = (0, debug_1.default)("engine.io-client:socket"); // debug()
+class Socket extends component_emitter_1.Emitter {
+    /**
+     * Socket constructor.
+     *
+     * @param {String|Object} uri or options
+     * @param {Object} opts - options
+     * @api public
+     */
+    constructor(uri, opts = {}) {
+        super();
+        if (uri && "object" === typeof uri) {
+            opts = uri;
+            uri = null;
+        }
+        if (uri) {
+            uri = (0, parseuri_1.default)(uri);
+            opts.hostname = uri.host;
+            opts.secure = uri.protocol === "https" || uri.protocol === "wss";
+            opts.port = uri.port;
+            if (uri.query)
+                opts.query = uri.query;
+        }
+        else if (opts.host) {
+            opts.hostname = (0, parseuri_1.default)(opts.host).host;
+        }
+        (0, util_js_1.installTimerFunctions)(this, opts);
+        this.secure =
+            null != opts.secure
+                ? opts.secure
+                : typeof location !== "undefined" && "https:" === location.protocol;
+        if (opts.hostname && !opts.port) {
+            // if no port is specified manually, use the protocol default
+            opts.port = this.secure ? "443" : "80";
+        }
+        this.hostname =
+            opts.hostname ||
+                (typeof location !== "undefined" ? location.hostname : "localhost");
+        this.port =
+            opts.port ||
+                (typeof location !== "undefined" && location.port
+                    ? location.port
+                    : this.secure
+                        ? "443"
+                        : "80");
+        this.transports = opts.transports || ["polling", "websocket"];
+        this.readyState = "";
+        this.writeBuffer = [];
+        this.prevBufferLen = 0;
+        this.opts = Object.assign({
+            path: "/engine.io",
+            agent: false,
+            withCredentials: false,
+            upgrade: true,
+            timestampParam: "t",
+            rememberUpgrade: false,
+            rejectUnauthorized: true,
+            perMessageDeflate: {
+                threshold: 1024
+            },
+            transportOptions: {},
+            closeOnBeforeunload: true
+        }, opts);
+        this.opts.path = this.opts.path.replace(/\/$/, "") + "/";
+        if (typeof this.opts.query === "string") {
+            this.opts.query = parseqs_1.default.decode(this.opts.query);
+        }
+        // set on handshake
+        this.id = null;
+        this.upgrades = null;
+        this.pingInterval = null;
+        this.pingTimeout = null;
+        // set on heartbeat
+        this.pingTimeoutTimer = null;
+        if (typeof addEventListener === "function") {
+            if (this.opts.closeOnBeforeunload) {
+                // Firefox closes the connection when the "beforeunload" event is emitted but not Chrome. This event listener
+                // ensures every browser behaves the same (no "disconnect" event at the Socket.IO level when the page is
+                // closed/reloaded)
+                addEventListener("beforeunload", () => {
+                    if (this.transport) {
+                        // silently close the transport
+                        this.transport.removeAllListeners();
+                        this.transport.close();
+                    }
+                }, false);
+            }
+            if (this.hostname !== "localhost") {
+                this.offlineEventListener = () => {
+                    this.onClose("transport close");
+                };
+                addEventListener("offline", this.offlineEventListener, false);
+            }
+        }
+        this.open();
+    }
+    /**
+     * Creates transport of the given type.
+     *
+     * @param {String} transport name
+     * @return {Transport}
+     * @api private
+     */
+    createTransport(name) {
+        debug('creating transport "%s"', name);
+        const query = clone(this.opts.query);
+        // append engine.io protocol identifier
+        query.EIO = engine_io_parser_1.protocol;
+        // transport name
+        query.transport = name;
+        // session id if we already have one
+        if (this.id)
+            query.sid = this.id;
+        const opts = Object.assign({}, this.opts.transportOptions[name], this.opts, {
+            query,
+            socket: this,
+            hostname: this.hostname,
+            secure: this.secure,
+            port: this.port
+        });
+        debug("options: %j", opts);
+        return new index_js_1.transports[name](opts);
+    }
+    /**
+     * Initializes transport to use and starts probe.
+     *
+     * @api private
+     */
+    open() {
+        let transport;
+        if (this.opts.rememberUpgrade &&
+            Socket.priorWebsocketSuccess &&
+            this.transports.indexOf("websocket") !== -1) {
+            transport = "websocket";
+        }
+        else if (0 === this.transports.length) {
+            // Emit error on next tick so it can be listened to
+            this.setTimeoutFn(() => {
+                this.emitReserved("error", "No transports available");
+            }, 0);
+            return;
+        }
+        else {
+            transport = this.transports[0];
+        }
+        this.readyState = "opening";
+        // Retry with the next transport if the transport is disabled (jsonp: false)
+        try {
+            transport = this.createTransport(transport);
+        }
+        catch (e) {
+            debug("error while creating transport: %s", e);
+            this.transports.shift();
+            this.open();
+            return;
+        }
+        transport.open();
+        this.setTransport(transport);
+    }
+    /**
+     * Sets the current transport. Disables the existing one (if any).
+     *
+     * @api private
+     */
+    setTransport(transport) {
+        debug("setting transport %s", transport.name);
+        if (this.transport) {
+            debug("clearing existing transport %s", this.transport.name);
+            this.transport.removeAllListeners();
+        }
+        // set up transport
+        this.transport = transport;
+        // set up transport listeners
+        transport
+            .on("drain", this.onDrain.bind(this))
+            .on("packet", this.onPacket.bind(this))
+            .on("error", this.onError.bind(this))
+            .on("close", () => {
+            this.onClose("transport close");
+        });
+    }
+    /**
+     * Probes a transport.
+     *
+     * @param {String} transport name
+     * @api private
+     */
+    probe(name) {
+        debug('probing transport "%s"', name);
+        let transport = this.createTransport(name);
+        let failed = false;
+        Socket.priorWebsocketSuccess = false;
+        const onTransportOpen = () => {
+            if (failed)
+                return;
+            debug('probe transport "%s" opened', name);
+            transport.send([{ type: "ping", data: "probe" }]);
+            transport.once("packet", msg => {
+                if (failed)
+                    return;
+                if ("pong" === msg.type && "probe" === msg.data) {
+                    debug('probe transport "%s" pong', name);
+                    this.upgrading = true;
+                    this.emitReserved("upgrading", transport);
+                    if (!transport)
+                        return;
+                    Socket.priorWebsocketSuccess = "websocket" === transport.name;
+                    debug('pausing current transport "%s"', this.transport.name);
+                    this.transport.pause(() => {
+                        if (failed)
+                            return;
+                        if ("closed" === this.readyState)
+                            return;
+                        debug("changing transport and sending upgrade packet");
+                        cleanup();
+                        this.setTransport(transport);
+                        transport.send([{ type: "upgrade" }]);
+                        this.emitReserved("upgrade", transport);
+                        transport = null;
+                        this.upgrading = false;
+                        this.flush();
+                    });
+                }
+                else {
+                    debug('probe transport "%s" failed', name);
+                    const err = new Error("probe error");
+                    // @ts-ignore
+                    err.transport = transport.name;
+                    this.emitReserved("upgradeError", err);
+                }
+            });
+        };
+        function freezeTransport() {
+            if (failed)
+                return;
+            // Any callback called by transport should be ignored since now
+            failed = true;
+            cleanup();
+            transport.close();
+            transport = null;
+        }
+        // Handle any error that happens while probing
+        const onerror = err => {
+            const error = new Error("probe error: " + err);
+            // @ts-ignore
+            error.transport = transport.name;
+            freezeTransport();
+            debug('probe transport "%s" failed because of error: %s', name, err);
+            this.emitReserved("upgradeError", error);
+        };
+        function onTransportClose() {
+            onerror("transport closed");
+        }
+        // When the socket is closed while we're probing
+        function onclose() {
+            onerror("socket closed");
+        }
+        // When the socket is upgraded while we're probing
+        function onupgrade(to) {
+            if (transport && to.name !== transport.name) {
+                debug('"%s" works - aborting "%s"', to.name, transport.name);
+                freezeTransport();
+            }
+        }
+        // Remove all listeners on the transport and on self
+        const cleanup = () => {
+            transport.removeListener("open", onTransportOpen);
+            transport.removeListener("error", onerror);
+            transport.removeListener("close", onTransportClose);
+            this.off("close", onclose);
+            this.off("upgrading", onupgrade);
+        };
+        transport.once("open", onTransportOpen);
+        transport.once("error", onerror);
+        transport.once("close", onTransportClose);
+        this.once("close", onclose);
+        this.once("upgrading", onupgrade);
+        transport.open();
+    }
+    /**
+     * Called when connection is deemed open.
+     *
+     * @api private
+     */
+    onOpen() {
+        debug("socket open");
+        this.readyState = "open";
+        Socket.priorWebsocketSuccess = "websocket" === this.transport.name;
+        this.emitReserved("open");
+        this.flush();
+        // we check for `readyState` in case an `open`
+        // listener already closed the socket
+        if ("open" === this.readyState &&
+            this.opts.upgrade &&
+            this.transport.pause) {
+            debug("starting upgrade probes");
+            let i = 0;
+            const l = this.upgrades.length;
+            for (; i < l; i++) {
+                this.probe(this.upgrades[i]);
+            }
+        }
+    }
+    /**
+     * Handles a packet.
+     *
+     * @api private
+     */
+    onPacket(packet) {
+        if ("opening" === this.readyState ||
+            "open" === this.readyState ||
+            "closing" === this.readyState) {
+            debug('socket receive: type "%s", data "%s"', packet.type, packet.data);
+            this.emitReserved("packet", packet);
+            // Socket is live - any packet counts
+            this.emitReserved("heartbeat");
+            switch (packet.type) {
+                case "open":
+                    this.onHandshake(JSON.parse(packet.data));
+                    break;
+                case "ping":
+                    this.resetPingTimeout();
+                    this.sendPacket("pong");
+                    this.emitReserved("ping");
+                    this.emitReserved("pong");
+                    break;
+                case "error":
+                    const err = new Error("server error");
+                    // @ts-ignore
+                    err.code = packet.data;
+                    this.onError(err);
+                    break;
+                case "message":
+                    this.emitReserved("data", packet.data);
+                    this.emitReserved("message", packet.data);
+                    break;
+            }
+        }
+        else {
+            debug('packet received with socket readyState "%s"', this.readyState);
+        }
+    }
+    /**
+     * Called upon handshake completion.
+     *
+     * @param {Object} data - handshake obj
+     * @api private
+     */
+    onHandshake(data) {
+        this.emitReserved("handshake", data);
+        this.id = data.sid;
+        this.transport.query.sid = data.sid;
+        this.upgrades = this.filterUpgrades(data.upgrades);
+        this.pingInterval = data.pingInterval;
+        this.pingTimeout = data.pingTimeout;
+        this.onOpen();
+        // In case open handler closes socket
+        if ("closed" === this.readyState)
+            return;
+        this.resetPingTimeout();
+    }
+    /**
+     * Sets and resets ping timeout timer based on server pings.
+     *
+     * @api private
+     */
+    resetPingTimeout() {
+        this.clearTimeoutFn(this.pingTimeoutTimer);
+        this.pingTimeoutTimer = this.setTimeoutFn(() => {
+            this.onClose("ping timeout");
+        }, this.pingInterval + this.pingTimeout);
+        if (this.opts.autoUnref) {
+            this.pingTimeoutTimer.unref();
+        }
+    }
+    /**
+     * Called on `drain` event
+     *
+     * @api private
+     */
+    onDrain() {
+        this.writeBuffer.splice(0, this.prevBufferLen);
+        // setting prevBufferLen = 0 is very important
+        // for example, when upgrading, upgrade packet is sent over,
+        // and a nonzero prevBufferLen could cause problems on `drain`
+        this.prevBufferLen = 0;
+        if (0 === this.writeBuffer.length) {
+            this.emitReserved("drain");
+        }
+        else {
+            this.flush();
+        }
+    }
+    /**
+     * Flush write buffers.
+     *
+     * @api private
+     */
+    flush() {
+        if ("closed" !== this.readyState &&
+            this.transport.writable &&
+            !this.upgrading &&
+            this.writeBuffer.length) {
+            debug("flushing %d packets in socket", this.writeBuffer.length);
+            this.transport.send(this.writeBuffer);
+            // keep track of current length of writeBuffer
+            // splice writeBuffer and callbackBuffer on `drain`
+            this.prevBufferLen = this.writeBuffer.length;
+            this.emitReserved("flush");
+        }
+    }
+    /**
+     * Sends a message.
+     *
+     * @param {String} message.
+     * @param {Function} callback function.
+     * @param {Object} options.
+     * @return {Socket} for chaining.
+     * @api public
+     */
+    write(msg, options, fn) {
+        this.sendPacket("message", msg, options, fn);
+        return this;
+    }
+    send(msg, options, fn) {
+        this.sendPacket("message", msg, options, fn);
+        return this;
+    }
+    /**
+     * Sends a packet.
+     *
+     * @param {String} packet type.
+     * @param {String} data.
+     * @param {Object} options.
+     * @param {Function} callback function.
+     * @api private
+     */
+    sendPacket(type, data, options, fn) {
+        if ("function" === typeof data) {
+            fn = data;
+            data = undefined;
+        }
+        if ("function" === typeof options) {
+            fn = options;
+            options = null;
+        }
+        if ("closing" === this.readyState || "closed" === this.readyState) {
+            return;
+        }
+        options = options || {};
+        options.compress = false !== options.compress;
+        const packet = {
+            type: type,
+            data: data,
+            options: options
+        };
+        this.emitReserved("packetCreate", packet);
+        this.writeBuffer.push(packet);
+        if (fn)
+            this.once("flush", fn);
+        this.flush();
+    }
+    /**
+     * Closes the connection.
+     *
+     * @api public
+     */
+    close() {
+        const close = () => {
+            this.onClose("forced close");
+            debug("socket closing - telling transport to close");
+            this.transport.close();
+        };
+        const cleanupAndClose = () => {
+            this.off("upgrade", cleanupAndClose);
+            this.off("upgradeError", cleanupAndClose);
+            close();
+        };
+        const waitForUpgrade = () => {
+            // wait for upgrade to finish since we can't send packets while pausing a transport
+            this.once("upgrade", cleanupAndClose);
+            this.once("upgradeError", cleanupAndClose);
+        };
+        if ("opening" === this.readyState || "open" === this.readyState) {
+            this.readyState = "closing";
+            if (this.writeBuffer.length) {
+                this.once("drain", () => {
+                    if (this.upgrading) {
+                        waitForUpgrade();
+                    }
+                    else {
+                        close();
+                    }
+                });
+            }
+            else if (this.upgrading) {
+                waitForUpgrade();
+            }
+            else {
+                close();
+            }
+        }
+        return this;
+    }
+    /**
+     * Called upon transport error
+     *
+     * @api private
+     */
+    onError(err) {
+        debug("socket error %j", err);
+        Socket.priorWebsocketSuccess = false;
+        this.emitReserved("error", err);
+        this.onClose("transport error", err);
+    }
+    /**
+     * Called upon transport close.
+     *
+     * @api private
+     */
+    onClose(reason, desc) {
+        if ("opening" === this.readyState ||
+            "open" === this.readyState ||
+            "closing" === this.readyState) {
+            debug('socket close with reason: "%s"', reason);
+            // clear timers
+            this.clearTimeoutFn(this.pingTimeoutTimer);
+            // stop event from firing again for transport
+            this.transport.removeAllListeners("close");
+            // ensure transport won't stay open
+            this.transport.close();
+            // ignore further transport communication
+            this.transport.removeAllListeners();
+            if (typeof removeEventListener === "function") {
+                removeEventListener("offline", this.offlineEventListener, false);
+            }
+            // set ready state
+            this.readyState = "closed";
+            // clear session id
+            this.id = null;
+            // emit close event
+            this.emitReserved("close", reason, desc);
+            // clean buffers after, so users can still
+            // grab the buffers on `close` event
+            this.writeBuffer = [];
+            this.prevBufferLen = 0;
+        }
+    }
+    /**
+     * Filters upgrades, returning only those matching client transports.
+     *
+     * @param {Array} server upgrades
+     * @api private
+     *
+     */
+    filterUpgrades(upgrades) {
+        const filteredUpgrades = [];
+        let i = 0;
+        const j = upgrades.length;
+        for (; i < j; i++) {
+            if (~this.transports.indexOf(upgrades[i]))
+                filteredUpgrades.push(upgrades[i]);
+        }
+        return filteredUpgrades;
+    }
+}
+exports.Socket = Socket;
+Socket.protocol = engine_io_parser_1.protocol;
+function clone(obj) {
+    const o = {};
+    for (let i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            o[i] = obj[i];
+        }
+    }
+    return o;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/build/cjs/transport.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/cjs/transport.js ***!
+  \**************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Transport = void 0;
+const engine_io_parser_1 = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/build/cjs/index.js");
+const component_emitter_1 = __webpack_require__(/*! @socket.io/component-emitter */ "./node_modules/@socket.io/component-emitter/index.js");
+const util_js_1 = __webpack_require__(/*! ./util.js */ "./node_modules/engine.io-client/build/cjs/util.js");
+const debug_1 = __importDefault(__webpack_require__(/*! debug */ "./node_modules/engine.io-client/node_modules/debug/src/browser.js")); // debug()
+const debug = (0, debug_1.default)("engine.io-client:transport"); // debug()
+class Transport extends component_emitter_1.Emitter {
+    /**
+     * Transport abstract constructor.
+     *
+     * @param {Object} options.
+     * @api private
+     */
+    constructor(opts) {
+        super();
+        this.writable = false;
+        (0, util_js_1.installTimerFunctions)(this, opts);
+        this.opts = opts;
+        this.query = opts.query;
+        this.readyState = "";
+        this.socket = opts.socket;
+    }
+    /**
+     * Emits an error.
+     *
+     * @param {String} str
+     * @return {Transport} for chaining
+     * @api protected
+     */
+    onError(msg, desc) {
+        const err = new Error(msg);
+        // @ts-ignore
+        err.type = "TransportError";
+        // @ts-ignore
+        err.description = desc;
+        super.emit("error", err);
+        return this;
+    }
+    /**
+     * Opens the transport.
+     *
+     * @api public
+     */
+    open() {
+        if ("closed" === this.readyState || "" === this.readyState) {
+            this.readyState = "opening";
+            this.doOpen();
+        }
+        return this;
+    }
+    /**
+     * Closes the transport.
+     *
+     * @api public
+     */
+    close() {
+        if ("opening" === this.readyState || "open" === this.readyState) {
+            this.doClose();
+            this.onClose();
+        }
+        return this;
+    }
+    /**
+     * Sends multiple packets.
+     *
+     * @param {Array} packets
+     * @api public
+     */
+    send(packets) {
+        if ("open" === this.readyState) {
+            this.write(packets);
+        }
+        else {
+            // this might happen if the transport was silently closed in the beforeunload event handler
+            debug("transport is not open, discarding packets");
+        }
+    }
+    /**
+     * Called upon open
+     *
+     * @api protected
+     */
+    onOpen() {
+        this.readyState = "open";
+        this.writable = true;
+        super.emit("open");
+    }
+    /**
+     * Called with data.
+     *
+     * @param {String} data
+     * @api protected
+     */
+    onData(data) {
+        const packet = (0, engine_io_parser_1.decodePacket)(data, this.socket.binaryType);
+        this.onPacket(packet);
+    }
+    /**
+     * Called with a decoded packet.
+     *
+     * @api protected
+     */
+    onPacket(packet) {
+        super.emit("packet", packet);
+    }
+    /**
+     * Called upon close.
+     *
+     * @api protected
+     */
+    onClose() {
+        this.readyState = "closed";
+        super.emit("close");
+    }
+}
+exports.Transport = Transport;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/build/cjs/transports/index.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/cjs/transports/index.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transports = void 0;
+const polling_xhr_js_1 = __webpack_require__(/*! ./polling-xhr.js */ "./node_modules/engine.io-client/build/cjs/transports/polling-xhr.js");
+const websocket_js_1 = __webpack_require__(/*! ./websocket.js */ "./node_modules/engine.io-client/build/cjs/transports/websocket.js");
+exports.transports = {
+    websocket: websocket_js_1.WS,
+    polling: polling_xhr_js_1.XHR
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/build/cjs/transports/polling-xhr.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/cjs/transports/polling-xhr.js ***!
+  \***************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+/* global attachEvent */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Request = exports.XHR = void 0;
+const xmlhttprequest_js_1 = __importDefault(__webpack_require__(/*! ./xmlhttprequest.js */ "./node_modules/engine.io-client/build/cjs/transports/xmlhttprequest.browser.js"));
+const debug_1 = __importDefault(__webpack_require__(/*! debug */ "./node_modules/engine.io-client/node_modules/debug/src/browser.js")); // debug()
+const globalThis_js_1 = __importDefault(__webpack_require__(/*! ../globalThis.js */ "./node_modules/engine.io-client/build/cjs/globalThis.browser.js"));
+const util_js_1 = __webpack_require__(/*! ../util.js */ "./node_modules/engine.io-client/build/cjs/util.js");
+const component_emitter_1 = __webpack_require__(/*! @socket.io/component-emitter */ "./node_modules/@socket.io/component-emitter/index.js");
+const polling_js_1 = __webpack_require__(/*! ./polling.js */ "./node_modules/engine.io-client/build/cjs/transports/polling.js");
+const debug = (0, debug_1.default)("engine.io-client:polling-xhr"); // debug()
 /**
- * Module exports.
+ * Empty function
  */
-module.exports = exports = lookup;
+function empty() { }
+const hasXHR2 = (function () {
+    const xhr = new xmlhttprequest_js_1.default({
+        xdomain: false
+    });
+    return null != xhr.responseType;
+})();
+class XHR extends polling_js_1.Polling {
+    /**
+     * XHR Polling constructor.
+     *
+     * @param {Object} opts
+     * @api public
+     */
+    constructor(opts) {
+        super(opts);
+        if (typeof location !== "undefined") {
+            const isSSL = "https:" === location.protocol;
+            let port = location.port;
+            // some user agents have empty `location.port`
+            if (!port) {
+                port = isSSL ? "443" : "80";
+            }
+            this.xd =
+                (typeof location !== "undefined" &&
+                    opts.hostname !== location.hostname) ||
+                    port !== opts.port;
+            this.xs = opts.secure !== isSSL;
+        }
+        /**
+         * XHR supports binary
+         */
+        const forceBase64 = opts && opts.forceBase64;
+        this.supportsBinary = hasXHR2 && !forceBase64;
+    }
+    /**
+     * Creates a request.
+     *
+     * @param {String} method
+     * @api private
+     */
+    request(opts = {}) {
+        Object.assign(opts, { xd: this.xd, xs: this.xs }, this.opts);
+        return new Request(this.uri(), opts);
+    }
+    /**
+     * Sends data.
+     *
+     * @param {String} data to send.
+     * @param {Function} called upon flush.
+     * @api private
+     */
+    doWrite(data, fn) {
+        const req = this.request({
+            method: "POST",
+            data: data
+        });
+        req.on("success", fn);
+        req.on("error", err => {
+            this.onError("xhr post error", err);
+        });
+    }
+    /**
+     * Starts a poll cycle.
+     *
+     * @api private
+     */
+    doPoll() {
+        debug("xhr poll");
+        const req = this.request();
+        req.on("data", this.onData.bind(this));
+        req.on("error", err => {
+            this.onError("xhr poll error", err);
+        });
+        this.pollXhr = req;
+    }
+}
+exports.XHR = XHR;
+class Request extends component_emitter_1.Emitter {
+    /**
+     * Request constructor
+     *
+     * @param {Object} options
+     * @api public
+     */
+    constructor(uri, opts) {
+        super();
+        (0, util_js_1.installTimerFunctions)(this, opts);
+        this.opts = opts;
+        this.method = opts.method || "GET";
+        this.uri = uri;
+        this.async = false !== opts.async;
+        this.data = undefined !== opts.data ? opts.data : null;
+        this.create();
+    }
+    /**
+     * Creates the XHR object and sends the request.
+     *
+     * @api private
+     */
+    create() {
+        const opts = (0, util_js_1.pick)(this.opts, "agent", "pfx", "key", "passphrase", "cert", "ca", "ciphers", "rejectUnauthorized", "autoUnref");
+        opts.xdomain = !!this.opts.xd;
+        opts.xscheme = !!this.opts.xs;
+        const xhr = (this.xhr = new xmlhttprequest_js_1.default(opts));
+        try {
+            debug("xhr open %s: %s", this.method, this.uri);
+            xhr.open(this.method, this.uri, this.async);
+            try {
+                if (this.opts.extraHeaders) {
+                    xhr.setDisableHeaderCheck && xhr.setDisableHeaderCheck(true);
+                    for (let i in this.opts.extraHeaders) {
+                        if (this.opts.extraHeaders.hasOwnProperty(i)) {
+                            xhr.setRequestHeader(i, this.opts.extraHeaders[i]);
+                        }
+                    }
+                }
+            }
+            catch (e) { }
+            if ("POST" === this.method) {
+                try {
+                    xhr.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
+                }
+                catch (e) { }
+            }
+            try {
+                xhr.setRequestHeader("Accept", "*/*");
+            }
+            catch (e) { }
+            // ie6 check
+            if ("withCredentials" in xhr) {
+                xhr.withCredentials = this.opts.withCredentials;
+            }
+            if (this.opts.requestTimeout) {
+                xhr.timeout = this.opts.requestTimeout;
+            }
+            xhr.onreadystatechange = () => {
+                if (4 !== xhr.readyState)
+                    return;
+                if (200 === xhr.status || 1223 === xhr.status) {
+                    this.onLoad();
+                }
+                else {
+                    // make sure the `error` event handler that's user-set
+                    // does not throw in the same tick and gets caught here
+                    this.setTimeoutFn(() => {
+                        this.onError(typeof xhr.status === "number" ? xhr.status : 0);
+                    }, 0);
+                }
+            };
+            debug("xhr data %s", this.data);
+            xhr.send(this.data);
+        }
+        catch (e) {
+            // Need to defer since .create() is called directly from the constructor
+            // and thus the 'error' event can only be only bound *after* this exception
+            // occurs.  Therefore, also, we cannot throw here at all.
+            this.setTimeoutFn(() => {
+                this.onError(e);
+            }, 0);
+            return;
+        }
+        if (typeof document !== "undefined") {
+            this.index = Request.requestsCount++;
+            Request.requests[this.index] = this;
+        }
+    }
+    /**
+     * Called upon successful response.
+     *
+     * @api private
+     */
+    onSuccess() {
+        this.emit("success");
+        this.cleanup();
+    }
+    /**
+     * Called if we have data.
+     *
+     * @api private
+     */
+    onData(data) {
+        this.emit("data", data);
+        this.onSuccess();
+    }
+    /**
+     * Called upon error.
+     *
+     * @api private
+     */
+    onError(err) {
+        this.emit("error", err);
+        this.cleanup(true);
+    }
+    /**
+     * Cleans up house.
+     *
+     * @api private
+     */
+    cleanup(fromError) {
+        if ("undefined" === typeof this.xhr || null === this.xhr) {
+            return;
+        }
+        this.xhr.onreadystatechange = empty;
+        if (fromError) {
+            try {
+                this.xhr.abort();
+            }
+            catch (e) { }
+        }
+        if (typeof document !== "undefined") {
+            delete Request.requests[this.index];
+        }
+        this.xhr = null;
+    }
+    /**
+     * Called upon load.
+     *
+     * @api private
+     */
+    onLoad() {
+        const data = this.xhr.responseText;
+        if (data !== null) {
+            this.onData(data);
+        }
+    }
+    /**
+     * Aborts the request.
+     *
+     * @api public
+     */
+    abort() {
+        this.cleanup();
+    }
+}
+exports.Request = Request;
+Request.requestsCount = 0;
+Request.requests = {};
+/**
+ * Aborts pending requests when unloading the window. This is needed to prevent
+ * memory leaks (e.g. when using IE) and to ensure that no spurious error is
+ * emitted.
+ */
+if (typeof document !== "undefined") {
+    // @ts-ignore
+    if (typeof attachEvent === "function") {
+        // @ts-ignore
+        attachEvent("onunload", unloadHandler);
+    }
+    else if (typeof addEventListener === "function") {
+        const terminationEvent = "onpagehide" in globalThis_js_1.default ? "pagehide" : "unload";
+        addEventListener(terminationEvent, unloadHandler, false);
+    }
+}
+function unloadHandler() {
+    for (let i in Request.requests) {
+        if (Request.requests.hasOwnProperty(i)) {
+            Request.requests[i].abort();
+        }
+    }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/build/cjs/transports/polling.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/cjs/transports/polling.js ***!
+  \***********************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Polling = void 0;
+const transport_js_1 = __webpack_require__(/*! ../transport.js */ "./node_modules/engine.io-client/build/cjs/transport.js");
+const debug_1 = __importDefault(__webpack_require__(/*! debug */ "./node_modules/engine.io-client/node_modules/debug/src/browser.js")); // debug()
+const yeast_1 = __importDefault(__webpack_require__(/*! yeast */ "./node_modules/yeast/index.js"));
+const parseqs_1 = __importDefault(__webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js"));
+const engine_io_parser_1 = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/build/cjs/index.js");
+const debug = (0, debug_1.default)("engine.io-client:polling"); // debug()
+class Polling extends transport_js_1.Transport {
+    constructor() {
+        super(...arguments);
+        this.polling = false;
+    }
+    /**
+     * Transport name.
+     */
+    get name() {
+        return "polling";
+    }
+    /**
+     * Opens the socket (triggers polling). We write a PING message to determine
+     * when the transport is open.
+     *
+     * @api private
+     */
+    doOpen() {
+        this.poll();
+    }
+    /**
+     * Pauses polling.
+     *
+     * @param {Function} callback upon buffers are flushed and transport is paused
+     * @api private
+     */
+    pause(onPause) {
+        this.readyState = "pausing";
+        const pause = () => {
+            debug("paused");
+            this.readyState = "paused";
+            onPause();
+        };
+        if (this.polling || !this.writable) {
+            let total = 0;
+            if (this.polling) {
+                debug("we are currently polling - waiting to pause");
+                total++;
+                this.once("pollComplete", function () {
+                    debug("pre-pause polling complete");
+                    --total || pause();
+                });
+            }
+            if (!this.writable) {
+                debug("we are currently writing - waiting to pause");
+                total++;
+                this.once("drain", function () {
+                    debug("pre-pause writing complete");
+                    --total || pause();
+                });
+            }
+        }
+        else {
+            pause();
+        }
+    }
+    /**
+     * Starts polling cycle.
+     *
+     * @api public
+     */
+    poll() {
+        debug("polling");
+        this.polling = true;
+        this.doPoll();
+        this.emit("poll");
+    }
+    /**
+     * Overloads onData to detect payloads.
+     *
+     * @api private
+     */
+    onData(data) {
+        debug("polling got data %s", data);
+        const callback = packet => {
+            // if its the first message we consider the transport open
+            if ("opening" === this.readyState && packet.type === "open") {
+                this.onOpen();
+            }
+            // if its a close packet, we close the ongoing requests
+            if ("close" === packet.type) {
+                this.onClose();
+                return false;
+            }
+            // otherwise bypass onData and handle the message
+            this.onPacket(packet);
+        };
+        // decode payload
+        (0, engine_io_parser_1.decodePayload)(data, this.socket.binaryType).forEach(callback);
+        // if an event did not trigger closing
+        if ("closed" !== this.readyState) {
+            // if we got data we're not polling
+            this.polling = false;
+            this.emit("pollComplete");
+            if ("open" === this.readyState) {
+                this.poll();
+            }
+            else {
+                debug('ignoring poll - transport state "%s"', this.readyState);
+            }
+        }
+    }
+    /**
+     * For polling, send a close packet.
+     *
+     * @api private
+     */
+    doClose() {
+        const close = () => {
+            debug("writing close packet");
+            this.write([{ type: "close" }]);
+        };
+        if ("open" === this.readyState) {
+            debug("transport open - closing");
+            close();
+        }
+        else {
+            // in case we're trying to close while
+            // handshaking is in progress (GH-164)
+            debug("transport not open - deferring close");
+            this.once("open", close);
+        }
+    }
+    /**
+     * Writes a packets payload.
+     *
+     * @param {Array} data packets
+     * @param {Function} drain callback
+     * @api private
+     */
+    write(packets) {
+        this.writable = false;
+        (0, engine_io_parser_1.encodePayload)(packets, data => {
+            this.doWrite(data, () => {
+                this.writable = true;
+                this.emit("drain");
+            });
+        });
+    }
+    /**
+     * Generates uri for connection.
+     *
+     * @api private
+     */
+    uri() {
+        let query = this.query || {};
+        const schema = this.opts.secure ? "https" : "http";
+        let port = "";
+        // cache busting is forced
+        if (false !== this.opts.timestampRequests) {
+            query[this.opts.timestampParam] = (0, yeast_1.default)();
+        }
+        if (!this.supportsBinary && !query.sid) {
+            query.b64 = 1;
+        }
+        // avoid port if default for schema
+        if (this.opts.port &&
+            (("https" === schema && Number(this.opts.port) !== 443) ||
+                ("http" === schema && Number(this.opts.port) !== 80))) {
+            port = ":" + this.opts.port;
+        }
+        const encodedQuery = parseqs_1.default.encode(query);
+        const ipv6 = this.opts.hostname.indexOf(":") !== -1;
+        return (schema +
+            "://" +
+            (ipv6 ? "[" + this.opts.hostname + "]" : this.opts.hostname) +
+            port +
+            this.opts.path +
+            (encodedQuery.length ? "?" + encodedQuery : ""));
+    }
+}
+exports.Polling = Polling;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/build/cjs/transports/websocket-constructor.browser.js":
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/cjs/transports/websocket-constructor.browser.js ***!
+  \*********************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.defaultBinaryType = exports.usingBrowserWebSocket = exports.WebSocket = exports.nextTick = void 0;
+const globalThis_js_1 = __importDefault(__webpack_require__(/*! ../globalThis.js */ "./node_modules/engine.io-client/build/cjs/globalThis.browser.js"));
+exports.nextTick = (() => {
+    const isPromiseAvailable = typeof Promise === "function" && typeof Promise.resolve === "function";
+    if (isPromiseAvailable) {
+        return cb => Promise.resolve().then(cb);
+    }
+    else {
+        return (cb, setTimeoutFn) => setTimeoutFn(cb, 0);
+    }
+})();
+exports.WebSocket = globalThis_js_1.default.WebSocket || globalThis_js_1.default.MozWebSocket;
+exports.usingBrowserWebSocket = true;
+exports.defaultBinaryType = "arraybuffer";
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/build/cjs/transports/websocket.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/cjs/transports/websocket.js ***!
+  \*************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+/* provided dependency */ var Buffer = __webpack_require__(/*! buffer */ "./node_modules/buffer/index.js")["Buffer"];
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.WS = void 0;
+const transport_js_1 = __webpack_require__(/*! ../transport.js */ "./node_modules/engine.io-client/build/cjs/transport.js");
+const parseqs_1 = __importDefault(__webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js"));
+const yeast_1 = __importDefault(__webpack_require__(/*! yeast */ "./node_modules/yeast/index.js"));
+const util_js_1 = __webpack_require__(/*! ../util.js */ "./node_modules/engine.io-client/build/cjs/util.js");
+const websocket_constructor_js_1 = __webpack_require__(/*! ./websocket-constructor.js */ "./node_modules/engine.io-client/build/cjs/transports/websocket-constructor.browser.js");
+const debug_1 = __importDefault(__webpack_require__(/*! debug */ "./node_modules/engine.io-client/node_modules/debug/src/browser.js")); // debug()
+const engine_io_parser_1 = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/build/cjs/index.js");
+const debug = (0, debug_1.default)("engine.io-client:websocket"); // debug()
+// detect ReactNative environment
+const isReactNative = typeof navigator !== "undefined" &&
+    typeof navigator.product === "string" &&
+    navigator.product.toLowerCase() === "reactnative";
+class WS extends transport_js_1.Transport {
+    /**
+     * WebSocket transport constructor.
+     *
+     * @api {Object} connection options
+     * @api public
+     */
+    constructor(opts) {
+        super(opts);
+        this.supportsBinary = !opts.forceBase64;
+    }
+    /**
+     * Transport name.
+     *
+     * @api public
+     */
+    get name() {
+        return "websocket";
+    }
+    /**
+     * Opens socket.
+     *
+     * @api private
+     */
+    doOpen() {
+        if (!this.check()) {
+            // let probe timeout
+            return;
+        }
+        const uri = this.uri();
+        const protocols = this.opts.protocols;
+        // React Native only supports the 'headers' option, and will print a warning if anything else is passed
+        const opts = isReactNative
+            ? {}
+            : (0, util_js_1.pick)(this.opts, "agent", "perMessageDeflate", "pfx", "key", "passphrase", "cert", "ca", "ciphers", "rejectUnauthorized", "localAddress", "protocolVersion", "origin", "maxPayload", "family", "checkServerIdentity");
+        if (this.opts.extraHeaders) {
+            opts.headers = this.opts.extraHeaders;
+        }
+        try {
+            this.ws =
+                websocket_constructor_js_1.usingBrowserWebSocket && !isReactNative
+                    ? protocols
+                        ? new websocket_constructor_js_1.WebSocket(uri, protocols)
+                        : new websocket_constructor_js_1.WebSocket(uri)
+                    : new websocket_constructor_js_1.WebSocket(uri, protocols, opts);
+        }
+        catch (err) {
+            return this.emit("error", err);
+        }
+        this.ws.binaryType = this.socket.binaryType || websocket_constructor_js_1.defaultBinaryType;
+        this.addEventListeners();
+    }
+    /**
+     * Adds event listeners to the socket
+     *
+     * @api private
+     */
+    addEventListeners() {
+        this.ws.onopen = () => {
+            if (this.opts.autoUnref) {
+                this.ws._socket.unref();
+            }
+            this.onOpen();
+        };
+        this.ws.onclose = this.onClose.bind(this);
+        this.ws.onmessage = ev => this.onData(ev.data);
+        this.ws.onerror = e => this.onError("websocket error", e);
+    }
+    /**
+     * Writes data to socket.
+     *
+     * @param {Array} array of packets.
+     * @api private
+     */
+    write(packets) {
+        this.writable = false;
+        // encodePacket efficient as it uses WS framing
+        // no need for encodePayload
+        for (let i = 0; i < packets.length; i++) {
+            const packet = packets[i];
+            const lastPacket = i === packets.length - 1;
+            (0, engine_io_parser_1.encodePacket)(packet, this.supportsBinary, data => {
+                // always create a new object (GH-437)
+                const opts = {};
+                if (!websocket_constructor_js_1.usingBrowserWebSocket) {
+                    if (packet.options) {
+                        opts.compress = packet.options.compress;
+                    }
+                    if (this.opts.perMessageDeflate) {
+                        const len = "string" === typeof data ? Buffer.byteLength(data) : data.length;
+                        if (len < this.opts.perMessageDeflate.threshold) {
+                            opts.compress = false;
+                        }
+                    }
+                }
+                // Sometimes the websocket has already been closed but the browser didn't
+                // have a chance of informing us about it yet, in that case send will
+                // throw an error
+                try {
+                    if (websocket_constructor_js_1.usingBrowserWebSocket) {
+                        // TypeError is thrown when passing the second argument on Safari
+                        this.ws.send(data);
+                    }
+                    else {
+                        this.ws.send(data, opts);
+                    }
+                }
+                catch (e) {
+                    debug("websocket closed before onclose event");
+                }
+                if (lastPacket) {
+                    // fake drain
+                    // defer to next tick to allow Socket to clear writeBuffer
+                    (0, websocket_constructor_js_1.nextTick)(() => {
+                        this.writable = true;
+                        this.emit("drain");
+                    }, this.setTimeoutFn);
+                }
+            });
+        }
+    }
+    /**
+     * Closes socket.
+     *
+     * @api private
+     */
+    doClose() {
+        if (typeof this.ws !== "undefined") {
+            this.ws.close();
+            this.ws = null;
+        }
+    }
+    /**
+     * Generates uri for connection.
+     *
+     * @api private
+     */
+    uri() {
+        let query = this.query || {};
+        const schema = this.opts.secure ? "wss" : "ws";
+        let port = "";
+        // avoid port if default for schema
+        if (this.opts.port &&
+            (("wss" === schema && Number(this.opts.port) !== 443) ||
+                ("ws" === schema && Number(this.opts.port) !== 80))) {
+            port = ":" + this.opts.port;
+        }
+        // append timestamp to URI
+        if (this.opts.timestampRequests) {
+            query[this.opts.timestampParam] = (0, yeast_1.default)();
+        }
+        // communicate binary support capabilities
+        if (!this.supportsBinary) {
+            query.b64 = 1;
+        }
+        const encodedQuery = parseqs_1.default.encode(query);
+        const ipv6 = this.opts.hostname.indexOf(":") !== -1;
+        return (schema +
+            "://" +
+            (ipv6 ? "[" + this.opts.hostname + "]" : this.opts.hostname) +
+            port +
+            this.opts.path +
+            (encodedQuery.length ? "?" + encodedQuery : ""));
+    }
+    /**
+     * Feature detection for WebSocket.
+     *
+     * @return {Boolean} whether this transport is available.
+     * @api public
+     */
+    check() {
+        return (!!websocket_constructor_js_1.WebSocket &&
+            !("__initialize" in websocket_constructor_js_1.WebSocket && this.name === WS.prototype.name));
+    }
+}
+exports.WS = WS;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/build/cjs/transports/xmlhttprequest.browser.js":
+/*!**************************************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/cjs/transports/xmlhttprequest.browser.js ***!
+  \**************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+// browser shim for xmlhttprequest module
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const has_cors_1 = __importDefault(__webpack_require__(/*! has-cors */ "./node_modules/has-cors/index.js"));
+const globalThis_js_1 = __importDefault(__webpack_require__(/*! ../globalThis.js */ "./node_modules/engine.io-client/build/cjs/globalThis.browser.js"));
+function default_1(opts) {
+    const xdomain = opts.xdomain;
+    // XMLHttpRequest can be disabled on IE
+    try {
+        if ("undefined" !== typeof XMLHttpRequest && (!xdomain || has_cors_1.default)) {
+            return new XMLHttpRequest();
+        }
+    }
+    catch (e) { }
+    if (!xdomain) {
+        try {
+            return new globalThis_js_1.default[["Active"].concat("Object").join("X")]("Microsoft.XMLHTTP");
+        }
+        catch (e) { }
+    }
+}
+exports["default"] = default_1;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/build/cjs/util.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/engine.io-client/build/cjs/util.js ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.installTimerFunctions = exports.pick = void 0;
+const globalThis_js_1 = __importDefault(__webpack_require__(/*! ./globalThis.js */ "./node_modules/engine.io-client/build/cjs/globalThis.browser.js"));
+function pick(obj, ...attr) {
+    return attr.reduce((acc, k) => {
+        if (obj.hasOwnProperty(k)) {
+            acc[k] = obj[k];
+        }
+        return acc;
+    }, {});
+}
+exports.pick = pick;
+// Keep a reference to the real timeout functions so they can be used when overridden
+const NATIVE_SET_TIMEOUT = setTimeout;
+const NATIVE_CLEAR_TIMEOUT = clearTimeout;
+function installTimerFunctions(obj, opts) {
+    if (opts.useNativeTimers) {
+        obj.setTimeoutFn = NATIVE_SET_TIMEOUT.bind(globalThis_js_1.default);
+        obj.clearTimeoutFn = NATIVE_CLEAR_TIMEOUT.bind(globalThis_js_1.default);
+    }
+    else {
+        obj.setTimeoutFn = setTimeout.bind(globalThis_js_1.default);
+        obj.clearTimeoutFn = clearTimeout.bind(globalThis_js_1.default);
+    }
+}
+exports.installTimerFunctions = installTimerFunctions;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/build/cjs/commons.js":
+/*!************************************************************!*\
+  !*** ./node_modules/engine.io-parser/build/cjs/commons.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ERROR_PACKET = exports.PACKET_TYPES_REVERSE = exports.PACKET_TYPES = void 0;
+const PACKET_TYPES = Object.create(null); // no Map = no polyfill
+exports.PACKET_TYPES = PACKET_TYPES;
+PACKET_TYPES["open"] = "0";
+PACKET_TYPES["close"] = "1";
+PACKET_TYPES["ping"] = "2";
+PACKET_TYPES["pong"] = "3";
+PACKET_TYPES["message"] = "4";
+PACKET_TYPES["upgrade"] = "5";
+PACKET_TYPES["noop"] = "6";
+const PACKET_TYPES_REVERSE = Object.create(null);
+exports.PACKET_TYPES_REVERSE = PACKET_TYPES_REVERSE;
+Object.keys(PACKET_TYPES).forEach(key => {
+    PACKET_TYPES_REVERSE[PACKET_TYPES[key]] = key;
+});
+const ERROR_PACKET = { type: "error", data: "parser error" };
+exports.ERROR_PACKET = ERROR_PACKET;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/build/cjs/decodePacket.browser.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/engine.io-parser/build/cjs/decodePacket.browser.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const commons_js_1 = __webpack_require__(/*! ./commons.js */ "./node_modules/engine.io-parser/build/cjs/commons.js");
+const base64_arraybuffer_1 = __webpack_require__(/*! base64-arraybuffer */ "./node_modules/base64-arraybuffer/dist/base64-arraybuffer.es5.js");
+const withNativeArrayBuffer = typeof ArrayBuffer === "function";
+const decodePacket = (encodedPacket, binaryType) => {
+    if (typeof encodedPacket !== "string") {
+        return {
+            type: "message",
+            data: mapBinary(encodedPacket, binaryType)
+        };
+    }
+    const type = encodedPacket.charAt(0);
+    if (type === "b") {
+        return {
+            type: "message",
+            data: decodeBase64Packet(encodedPacket.substring(1), binaryType)
+        };
+    }
+    const packetType = commons_js_1.PACKET_TYPES_REVERSE[type];
+    if (!packetType) {
+        return commons_js_1.ERROR_PACKET;
+    }
+    return encodedPacket.length > 1
+        ? {
+            type: commons_js_1.PACKET_TYPES_REVERSE[type],
+            data: encodedPacket.substring(1)
+        }
+        : {
+            type: commons_js_1.PACKET_TYPES_REVERSE[type]
+        };
+};
+const decodeBase64Packet = (data, binaryType) => {
+    if (withNativeArrayBuffer) {
+        const decoded = (0, base64_arraybuffer_1.decode)(data);
+        return mapBinary(decoded, binaryType);
+    }
+    else {
+        return { base64: true, data }; // fallback for old browsers
+    }
+};
+const mapBinary = (data, binaryType) => {
+    switch (binaryType) {
+        case "blob":
+            return data instanceof ArrayBuffer ? new Blob([data]) : data;
+        case "arraybuffer":
+        default:
+            return data; // assuming the data is already an ArrayBuffer
+    }
+};
+exports["default"] = decodePacket;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/build/cjs/encodePacket.browser.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/engine.io-parser/build/cjs/encodePacket.browser.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const commons_js_1 = __webpack_require__(/*! ./commons.js */ "./node_modules/engine.io-parser/build/cjs/commons.js");
+const withNativeBlob = typeof Blob === "function" ||
+    (typeof Blob !== "undefined" &&
+        Object.prototype.toString.call(Blob) === "[object BlobConstructor]");
+const withNativeArrayBuffer = typeof ArrayBuffer === "function";
+// ArrayBuffer.isView method is not defined in IE10
+const isView = obj => {
+    return typeof ArrayBuffer.isView === "function"
+        ? ArrayBuffer.isView(obj)
+        : obj && obj.buffer instanceof ArrayBuffer;
+};
+const encodePacket = ({ type, data }, supportsBinary, callback) => {
+    if (withNativeBlob && data instanceof Blob) {
+        if (supportsBinary) {
+            return callback(data);
+        }
+        else {
+            return encodeBlobAsBase64(data, callback);
+        }
+    }
+    else if (withNativeArrayBuffer &&
+        (data instanceof ArrayBuffer || isView(data))) {
+        if (supportsBinary) {
+            return callback(data);
+        }
+        else {
+            return encodeBlobAsBase64(new Blob([data]), callback);
+        }
+    }
+    // plain string
+    return callback(commons_js_1.PACKET_TYPES[type] + (data || ""));
+};
+const encodeBlobAsBase64 = (data, callback) => {
+    const fileReader = new FileReader();
+    fileReader.onload = function () {
+        const content = fileReader.result.split(",")[1];
+        callback("b" + content);
+    };
+    return fileReader.readAsDataURL(data);
+};
+exports["default"] = encodePacket;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/build/cjs/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/engine.io-parser/build/cjs/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodePayload = exports.decodePacket = exports.encodePayload = exports.encodePacket = exports.protocol = void 0;
+const encodePacket_js_1 = __webpack_require__(/*! ./encodePacket.js */ "./node_modules/engine.io-parser/build/cjs/encodePacket.browser.js");
+exports.encodePacket = encodePacket_js_1.default;
+const decodePacket_js_1 = __webpack_require__(/*! ./decodePacket.js */ "./node_modules/engine.io-parser/build/cjs/decodePacket.browser.js");
+exports.decodePacket = decodePacket_js_1.default;
+const SEPARATOR = String.fromCharCode(30); // see https://en.wikipedia.org/wiki/Delimiter#ASCII_delimited_text
+const encodePayload = (packets, callback) => {
+    // some packets may be added to the array while encoding, so the initial length must be saved
+    const length = packets.length;
+    const encodedPackets = new Array(length);
+    let count = 0;
+    packets.forEach((packet, i) => {
+        // force base64 encoding for binary packets
+        (0, encodePacket_js_1.default)(packet, false, encodedPacket => {
+            encodedPackets[i] = encodedPacket;
+            if (++count === length) {
+                callback(encodedPackets.join(SEPARATOR));
+            }
+        });
+    });
+};
+exports.encodePayload = encodePayload;
+const decodePayload = (encodedPayload, binaryType) => {
+    const encodedPackets = encodedPayload.split(SEPARATOR);
+    const packets = [];
+    for (let i = 0; i < encodedPackets.length; i++) {
+        const decodedPacket = (0, decodePacket_js_1.default)(encodedPackets[i], binaryType);
+        packets.push(decodedPacket);
+        if (decodedPacket.type === "error") {
+            break;
+        }
+    }
+    return packets;
+};
+exports.decodePayload = decodePayload;
+exports.protocol = 4;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/cjs/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/socket.io-client/build/cjs/index.js ***!
+  \**********************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports["default"] = exports.connect = exports.io = exports.Socket = exports.Manager = exports.protocol = void 0;
+const url_js_1 = __webpack_require__(/*! ./url.js */ "./node_modules/socket.io-client/build/cjs/url.js");
+const manager_js_1 = __webpack_require__(/*! ./manager.js */ "./node_modules/socket.io-client/build/cjs/manager.js");
+Object.defineProperty(exports, "Manager", ({ enumerable: true, get: function () { return manager_js_1.Manager; } }));
+const socket_js_1 = __webpack_require__(/*! ./socket.js */ "./node_modules/socket.io-client/build/cjs/socket.js");
+Object.defineProperty(exports, "Socket", ({ enumerable: true, get: function () { return socket_js_1.Socket; } }));
+const debug_1 = __importDefault(__webpack_require__(/*! debug */ "./node_modules/socket.io-client/node_modules/debug/src/browser.js")); // debug()
+const debug = debug_1.default("socket.io-client"); // debug()
 /**
  * Managers cache.
  */
-const cache = (exports.managers = {});
+const cache = {};
 function lookup(uri, opts) {
     if (typeof uri === "object") {
         opts = uri;
         uri = undefined;
     }
     opts = opts || {};
-    const parsed = (0, url_1.url)(uri, opts.path || "/socket.io");
+    const parsed = url_js_1.url(uri, opts.path || "/socket.io");
     const source = parsed.source;
     const id = parsed.id;
     const path = parsed.path;
@@ -65448,12 +71840,12 @@ function lookup(uri, opts) {
     let io;
     if (newConnection) {
         debug("ignoring socket cache for %s", source);
-        io = new manager_1.Manager(source, opts);
+        io = new manager_js_1.Manager(source, opts);
     }
     else {
         if (!cache[id]) {
             debug("new io instance for %s", source);
-            cache[id] = new manager_1.Manager(source, opts);
+            cache[id] = new manager_js_1.Manager(source, opts);
         }
         io = cache[id];
     }
@@ -65463,53 +71855,70 @@ function lookup(uri, opts) {
     return io.socket(parsed.path, opts);
 }
 exports.io = lookup;
+exports.connect = lookup;
+exports["default"] = lookup;
+// so that "lookup" can be used both as a function (e.g. `io(...)`) and as a
+// namespace (e.g. `io.connect(...)`), for backward compatibility
+Object.assign(lookup, {
+    Manager: manager_js_1.Manager,
+    Socket: socket_js_1.Socket,
+    io: lookup,
+    connect: lookup,
+});
 /**
  * Protocol version.
  *
  * @public
  */
-var socket_io_parser_1 = __webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-parser/dist/index.js");
+var socket_io_parser_1 = __webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/index.js");
 Object.defineProperty(exports, "protocol", ({ enumerable: true, get: function () { return socket_io_parser_1.protocol; } }));
-/**
- * `connect`.
- *
- * @param {String} uri
- * @public
- */
-exports.connect = lookup;
-/**
- * Expose constructors for standalone build.
- *
- * @public
- */
-var manager_2 = __webpack_require__(/*! ./manager */ "./node_modules/socket.io-client/build/manager.js");
-Object.defineProperty(exports, "Manager", ({ enumerable: true, get: function () { return manager_2.Manager; } }));
-var socket_1 = __webpack_require__(/*! ./socket */ "./node_modules/socket.io-client/build/socket.js");
-Object.defineProperty(exports, "Socket", ({ enumerable: true, get: function () { return socket_1.Socket; } }));
-exports["default"] = lookup;
+
+module.exports = lookup;
 
 
 /***/ }),
 
-/***/ "./node_modules/socket.io-client/build/manager.js":
-/*!********************************************************!*\
-  !*** ./node_modules/socket.io-client/build/manager.js ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ "./node_modules/socket.io-client/build/cjs/manager.js":
+/*!************************************************************!*\
+  !*** ./node_modules/socket.io-client/build/cjs/manager.js ***!
+  \************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Manager = void 0;
-const eio = __webpack_require__(/*! engine.io-client */ "./node_modules/engine.io-client/lib/index.js");
-const util_1 = __webpack_require__(/*! engine.io-client/lib/util */ "./node_modules/engine.io-client/lib/util.js");
-const socket_1 = __webpack_require__(/*! ./socket */ "./node_modules/socket.io-client/build/socket.js");
-const parser = __webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-parser/dist/index.js");
-const on_1 = __webpack_require__(/*! ./on */ "./node_modules/socket.io-client/build/on.js");
-const Backoff = __webpack_require__(/*! backo2 */ "./node_modules/backo2/index.js");
-const typed_events_1 = __webpack_require__(/*! ./typed-events */ "./node_modules/socket.io-client/build/typed-events.js");
-const debug = __webpack_require__(/*! debug */ "./node_modules/socket.io-client/node_modules/debug/src/browser.js")("socket.io-client:manager");
-class Manager extends typed_events_1.StrictEventEmitter {
+const engine_io_client_1 = __webpack_require__(/*! engine.io-client */ "./node_modules/engine.io-client/build/cjs/index.js");
+const socket_js_1 = __webpack_require__(/*! ./socket.js */ "./node_modules/socket.io-client/build/cjs/socket.js");
+const parser = __importStar(__webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/index.js"));
+const on_js_1 = __webpack_require__(/*! ./on.js */ "./node_modules/socket.io-client/build/cjs/on.js");
+const backo2_1 = __importDefault(__webpack_require__(/*! backo2 */ "./node_modules/backo2/index.js"));
+const component_emitter_1 = __webpack_require__(/*! @socket.io/component-emitter */ "./node_modules/@socket.io/component-emitter/index.js");
+const debug_1 = __importDefault(__webpack_require__(/*! debug */ "./node_modules/socket.io-client/node_modules/debug/src/browser.js")); // debug()
+const debug = debug_1.default("socket.io-client:manager"); // debug()
+class Manager extends component_emitter_1.Emitter {
     constructor(uri, opts) {
         var _a;
         super();
@@ -65522,13 +71931,13 @@ class Manager extends typed_events_1.StrictEventEmitter {
         opts = opts || {};
         opts.path = opts.path || "/socket.io";
         this.opts = opts;
-        (0, util_1.installTimerFunctions)(this, opts);
+        engine_io_client_1.installTimerFunctions(this, opts);
         this.reconnection(opts.reconnection !== false);
         this.reconnectionAttempts(opts.reconnectionAttempts || Infinity);
         this.reconnectionDelay(opts.reconnectionDelay || 1000);
         this.reconnectionDelayMax(opts.reconnectionDelayMax || 5000);
         this.randomizationFactor((_a = opts.randomizationFactor) !== null && _a !== void 0 ? _a : 0.5);
-        this.backoff = new Backoff({
+        this.backoff = new backo2_1.default({
             min: this.reconnectionDelay(),
             max: this.reconnectionDelayMax(),
             jitter: this.randomizationFactor(),
@@ -65612,18 +72021,18 @@ class Manager extends typed_events_1.StrictEventEmitter {
         if (~this._readyState.indexOf("open"))
             return this;
         debug("opening %s", this.uri);
-        this.engine = eio(this.uri, this.opts);
+        this.engine = new engine_io_client_1.Socket(this.uri, this.opts);
         const socket = this.engine;
         const self = this;
         this._readyState = "opening";
         this.skipReconnect = false;
         // emit `open`
-        const openSubDestroy = (0, on_1.on)(socket, "open", function () {
+        const openSubDestroy = on_js_1.on(socket, "open", function () {
             self.onopen();
             fn && fn();
         });
         // emit `error`
-        const errorSub = (0, on_1.on)(socket, "error", (err) => {
+        const errorSub = on_js_1.on(socket, "error", (err) => {
             debug("error");
             self.cleanup();
             self._readyState = "closed";
@@ -65647,6 +72056,7 @@ class Manager extends typed_events_1.StrictEventEmitter {
                 debug("connect attempt timed out after %d", timeout);
                 openSubDestroy();
                 socket.close();
+                // @ts-ignore
                 socket.emit("error", new Error("timeout"));
             }, timeout);
             if (this.opts.autoUnref) {
@@ -65683,7 +72093,7 @@ class Manager extends typed_events_1.StrictEventEmitter {
         this.emitReserved("open");
         // add new subs
         const socket = this.engine;
-        this.subs.push((0, on_1.on)(socket, "ping", this.onping.bind(this)), (0, on_1.on)(socket, "data", this.ondata.bind(this)), (0, on_1.on)(socket, "error", this.onerror.bind(this)), (0, on_1.on)(socket, "close", this.onclose.bind(this)), (0, on_1.on)(this.decoder, "decoded", this.ondecoded.bind(this)));
+        this.subs.push(on_js_1.on(socket, "ping", this.onping.bind(this)), on_js_1.on(socket, "data", this.ondata.bind(this)), on_js_1.on(socket, "error", this.onerror.bind(this)), on_js_1.on(socket, "close", this.onclose.bind(this)), on_js_1.on(this.decoder, "decoded", this.ondecoded.bind(this)));
     }
     /**
      * Called upon a ping.
@@ -65727,7 +72137,7 @@ class Manager extends typed_events_1.StrictEventEmitter {
     socket(nsp, opts) {
         let socket = this.nsps[nsp];
         if (!socket) {
-            socket = new socket_1.Socket(this, nsp, opts);
+            socket = new socket_js_1.Socket(this, nsp, opts);
             this.nsps[nsp] = socket;
         }
         return socket;
@@ -65782,13 +72192,7 @@ class Manager extends typed_events_1.StrictEventEmitter {
         debug("disconnect");
         this.skipReconnect = true;
         this._reconnecting = false;
-        if ("opening" === this._readyState) {
-            // `onclose` will not fire because
-            // an open event never happened
-            this.cleanup();
-        }
-        this.backoff.reset();
-        this._readyState = "closed";
+        this.onclose("forced close");
         if (this.engine)
             this.engine.close();
     }
@@ -65806,7 +72210,7 @@ class Manager extends typed_events_1.StrictEventEmitter {
      * @private
      */
     onclose(reason) {
-        debug("onclose");
+        debug("closed due to %s", reason);
         this.cleanup();
         this.backoff.reset();
         this._readyState = "closed";
@@ -65880,10 +72284,10 @@ exports.Manager = Manager;
 
 /***/ }),
 
-/***/ "./node_modules/socket.io-client/build/on.js":
-/*!***************************************************!*\
-  !*** ./node_modules/socket.io-client/build/on.js ***!
-  \***************************************************/
+/***/ "./node_modules/socket.io-client/build/cjs/on.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/socket.io-client/build/cjs/on.js ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -65901,20 +72305,24 @@ exports.on = on;
 
 /***/ }),
 
-/***/ "./node_modules/socket.io-client/build/socket.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/socket.io-client/build/socket.js ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ "./node_modules/socket.io-client/build/cjs/socket.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/socket.io-client/build/cjs/socket.js ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Socket = void 0;
-const socket_io_parser_1 = __webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-parser/dist/index.js");
-const on_1 = __webpack_require__(/*! ./on */ "./node_modules/socket.io-client/build/on.js");
-const typed_events_1 = __webpack_require__(/*! ./typed-events */ "./node_modules/socket.io-client/build/typed-events.js");
-const debug = __webpack_require__(/*! debug */ "./node_modules/socket.io-client/node_modules/debug/src/browser.js")("socket.io-client:socket");
+const socket_io_parser_1 = __webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/index.js");
+const on_js_1 = __webpack_require__(/*! ./on.js */ "./node_modules/socket.io-client/build/cjs/on.js");
+const component_emitter_1 = __webpack_require__(/*! @socket.io/component-emitter */ "./node_modules/@socket.io/component-emitter/index.js");
+const debug_1 = __importDefault(__webpack_require__(/*! debug */ "./node_modules/socket.io-client/node_modules/debug/src/browser.js")); // debug()
+const debug = debug_1.default("socket.io-client:socket"); // debug()
 /**
  * Internal events.
  * These events can't be emitted by the user.
@@ -65928,7 +72336,7 @@ const RESERVED_EVENTS = Object.freeze({
     newListener: 1,
     removeListener: 1,
 });
-class Socket extends typed_events_1.StrictEventEmitter {
+class Socket extends component_emitter_1.Emitter {
     /**
      * `Socket` constructor.
      *
@@ -65961,10 +72369,10 @@ class Socket extends typed_events_1.StrictEventEmitter {
             return;
         const io = this.io;
         this.subs = [
-            (0, on_1.on)(io, "open", this.onopen.bind(this)),
-            (0, on_1.on)(io, "packet", this.onpacket.bind(this)),
-            (0, on_1.on)(io, "error", this.onerror.bind(this)),
-            (0, on_1.on)(io, "close", this.onclose.bind(this)),
+            on_js_1.on(io, "open", this.onopen.bind(this)),
+            on_js_1.on(io, "packet", this.onpacket.bind(this)),
+            on_js_1.on(io, "error", this.onerror.bind(this)),
+            on_js_1.on(io, "close", this.onclose.bind(this)),
         ];
     }
     /**
@@ -66025,9 +72433,11 @@ class Socket extends typed_events_1.StrictEventEmitter {
         packet.options.compress = this.flags.compress !== false;
         // event ack callback
         if ("function" === typeof args[args.length - 1]) {
-            debug("emitting packet with ack id %d", this.ids);
-            this.acks[this.ids] = args.pop();
-            packet.id = this.ids++;
+            const id = this.ids++;
+            debug("emitting packet with ack id %d", id);
+            const ack = args.pop();
+            this._registerAckCallback(id, ack);
+            packet.id = id;
         }
         const isTransportWritable = this.io.engine &&
             this.io.engine.transport &&
@@ -66044,6 +72454,33 @@ class Socket extends typed_events_1.StrictEventEmitter {
         }
         this.flags = {};
         return this;
+    }
+    /**
+     * @private
+     */
+    _registerAckCallback(id, ack) {
+        const timeout = this.flags.timeout;
+        if (timeout === undefined) {
+            this.acks[id] = ack;
+            return;
+        }
+        // @ts-ignore
+        const timer = this.io.setTimeoutFn(() => {
+            delete this.acks[id];
+            for (let i = 0; i < this.sendBuffer.length; i++) {
+                if (this.sendBuffer[i].id === id) {
+                    debug("removing packet with ack id %d from the buffer", id);
+                    this.sendBuffer.splice(i, 1);
+                }
+            }
+            debug("event with ack id %d has timed out after %d ms", id, timeout);
+            ack.call(this, new Error("operation has timed out"));
+        }, timeout);
+        this.acks[id] = (...args) => {
+            // @ts-ignore
+            this.io.clearTimeoutFn(timer);
+            ack.apply(this, [null, ...args]);
+        };
     }
     /**
      * Sends a packet.
@@ -66131,6 +72568,7 @@ class Socket extends typed_events_1.StrictEventEmitter {
                 this.ondisconnect();
                 break;
             case socket_io_parser_1.PacketType.CONNECT_ERROR:
+                this.destroy();
                 const err = new Error(packet.data.message);
                 // @ts-ignore
                 err.data = packet.data.data;
@@ -66305,6 +72743,25 @@ class Socket extends typed_events_1.StrictEventEmitter {
         return this;
     }
     /**
+     * Sets a modifier for a subsequent event emission that the callback will be called with an error when the
+     * given number of milliseconds have elapsed without an acknowledgement from the server:
+     *
+     * ```
+     * socket.timeout(5000).emit("my-event", (err) => {
+     *   if (err) {
+     *     // the server did not acknowledge the event in the given delay
+     *   }
+     * });
+     * ```
+     *
+     * @returns self
+     * @public
+     */
+    timeout(timeout) {
+        this.flags.timeout = timeout;
+        return this;
+    }
+    /**
      * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
      * callback.
      *
@@ -66367,101 +72824,22 @@ exports.Socket = Socket;
 
 /***/ }),
 
-/***/ "./node_modules/socket.io-client/build/typed-events.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/socket.io-client/build/typed-events.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ "./node_modules/socket.io-client/build/cjs/url.js":
+/*!********************************************************!*\
+  !*** ./node_modules/socket.io-client/build/cjs/url.js ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StrictEventEmitter = void 0;
-const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
-/**
- * Strictly typed version of an `EventEmitter`. A `TypedEventEmitter` takes type
- * parameters for mappings of event names to event data types, and strictly
- * types method calls to the `EventEmitter` according to these event maps.
- *
- * @typeParam ListenEvents - `EventsMap` of user-defined events that can be
- * listened to with `on` or `once`
- * @typeParam EmitEvents - `EventsMap` of user-defined events that can be
- * emitted with `emit`
- * @typeParam ReservedEvents - `EventsMap` of reserved events, that can be
- * emitted by socket.io with `emitReserved`, and can be listened to with
- * `listen`.
- */
-class StrictEventEmitter extends Emitter {
-    /**
-     * Adds the `listener` function as an event listener for `ev`.
-     *
-     * @param ev Name of the event
-     * @param listener Callback function
-     */
-    on(ev, listener) {
-        super.on(ev, listener);
-        return this;
-    }
-    /**
-     * Adds a one-time `listener` function as an event listener for `ev`.
-     *
-     * @param ev Name of the event
-     * @param listener Callback function
-     */
-    once(ev, listener) {
-        super.once(ev, listener);
-        return this;
-    }
-    /**
-     * Emits an event.
-     *
-     * @param ev Name of the event
-     * @param args Values to send to listeners of this event
-     */
-    emit(ev, ...args) {
-        super.emit(ev, ...args);
-        return this;
-    }
-    /**
-     * Emits a reserved event.
-     *
-     * This method is `protected`, so that only a class extending
-     * `StrictEventEmitter` can emit its own reserved events.
-     *
-     * @param ev Reserved event name
-     * @param args Arguments to emit along with the event
-     */
-    emitReserved(ev, ...args) {
-        super.emit(ev, ...args);
-        return this;
-    }
-    /**
-     * Returns the listeners listening to an event.
-     *
-     * @param event Event name
-     * @returns Array of listeners subscribed to `event`
-     */
-    listeners(event) {
-        return super.listeners(event);
-    }
-}
-exports.StrictEventEmitter = StrictEventEmitter;
-
-
-/***/ }),
-
-/***/ "./node_modules/socket.io-client/build/url.js":
-/*!****************************************************!*\
-  !*** ./node_modules/socket.io-client/build/url.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.url = void 0;
-const parseuri = __webpack_require__(/*! parseuri */ "./node_modules/parseuri/index.js");
-const debug = __webpack_require__(/*! debug */ "./node_modules/socket.io-client/node_modules/debug/src/browser.js")("socket.io-client:url");
+const parseuri_1 = __importDefault(__webpack_require__(/*! parseuri */ "./node_modules/parseuri/index.js"));
+const debug_1 = __importDefault(__webpack_require__(/*! debug */ "./node_modules/socket.io-client/node_modules/debug/src/browser.js")); // debug()
+const debug = debug_1.default("socket.io-client:url"); // debug()
 /**
  * URL parser.
  *
@@ -66498,7 +72876,7 @@ function url(uri, path = "", loc) {
         }
         // parse
         debug("parse %s", uri);
-        obj = parseuri(uri);
+        obj = parseuri_1.default(uri);
     }
     // make sure we treat `localhost:80` and `localhost` equally
     if (!obj.port) {
@@ -66527,6 +72905,455 @@ exports.url = url;
 
 /***/ }),
 
+/***/ "./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/binary.js":
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/binary.js ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.reconstructPacket = exports.deconstructPacket = void 0;
+const is_binary_js_1 = __webpack_require__(/*! ./is-binary.js */ "./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/is-binary.js");
+/**
+ * Replaces every Buffer | ArrayBuffer | Blob | File in packet with a numbered placeholder.
+ *
+ * @param {Object} packet - socket.io event packet
+ * @return {Object} with deconstructed packet and list of buffers
+ * @public
+ */
+function deconstructPacket(packet) {
+    const buffers = [];
+    const packetData = packet.data;
+    const pack = packet;
+    pack.data = _deconstructPacket(packetData, buffers);
+    pack.attachments = buffers.length; // number of binary 'attachments'
+    return { packet: pack, buffers: buffers };
+}
+exports.deconstructPacket = deconstructPacket;
+function _deconstructPacket(data, buffers) {
+    if (!data)
+        return data;
+    if (is_binary_js_1.isBinary(data)) {
+        const placeholder = { _placeholder: true, num: buffers.length };
+        buffers.push(data);
+        return placeholder;
+    }
+    else if (Array.isArray(data)) {
+        const newData = new Array(data.length);
+        for (let i = 0; i < data.length; i++) {
+            newData[i] = _deconstructPacket(data[i], buffers);
+        }
+        return newData;
+    }
+    else if (typeof data === "object" && !(data instanceof Date)) {
+        const newData = {};
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                newData[key] = _deconstructPacket(data[key], buffers);
+            }
+        }
+        return newData;
+    }
+    return data;
+}
+/**
+ * Reconstructs a binary packet from its placeholder packet and buffers
+ *
+ * @param {Object} packet - event packet with placeholders
+ * @param {Array} buffers - binary buffers to put in placeholder positions
+ * @return {Object} reconstructed packet
+ * @public
+ */
+function reconstructPacket(packet, buffers) {
+    packet.data = _reconstructPacket(packet.data, buffers);
+    packet.attachments = undefined; // no longer useful
+    return packet;
+}
+exports.reconstructPacket = reconstructPacket;
+function _reconstructPacket(data, buffers) {
+    if (!data)
+        return data;
+    if (data && data._placeholder) {
+        return buffers[data.num]; // appropriate buffer (should be natural order anyway)
+    }
+    else if (Array.isArray(data)) {
+        for (let i = 0; i < data.length; i++) {
+            data[i] = _reconstructPacket(data[i], buffers);
+        }
+    }
+    else if (typeof data === "object") {
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                data[key] = _reconstructPacket(data[key], buffers);
+            }
+        }
+    }
+    return data;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/index.js":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/index.js ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Decoder = exports.Encoder = exports.PacketType = exports.protocol = void 0;
+const component_emitter_1 = __webpack_require__(/*! @socket.io/component-emitter */ "./node_modules/@socket.io/component-emitter/index.js");
+const binary_js_1 = __webpack_require__(/*! ./binary.js */ "./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/binary.js");
+const is_binary_js_1 = __webpack_require__(/*! ./is-binary.js */ "./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/is-binary.js");
+const debug_1 = __webpack_require__(/*! debug */ "./node_modules/socket.io-client/node_modules/debug/src/browser.js"); // debug()
+const debug = debug_1.default("socket.io-parser"); // debug()
+/**
+ * Protocol version.
+ *
+ * @public
+ */
+exports.protocol = 5;
+var PacketType;
+(function (PacketType) {
+    PacketType[PacketType["CONNECT"] = 0] = "CONNECT";
+    PacketType[PacketType["DISCONNECT"] = 1] = "DISCONNECT";
+    PacketType[PacketType["EVENT"] = 2] = "EVENT";
+    PacketType[PacketType["ACK"] = 3] = "ACK";
+    PacketType[PacketType["CONNECT_ERROR"] = 4] = "CONNECT_ERROR";
+    PacketType[PacketType["BINARY_EVENT"] = 5] = "BINARY_EVENT";
+    PacketType[PacketType["BINARY_ACK"] = 6] = "BINARY_ACK";
+})(PacketType = exports.PacketType || (exports.PacketType = {}));
+/**
+ * A socket.io Encoder instance
+ */
+class Encoder {
+    /**
+     * Encode a packet as a single string if non-binary, or as a
+     * buffer sequence, depending on packet type.
+     *
+     * @param {Object} obj - packet object
+     */
+    encode(obj) {
+        debug("encoding packet %j", obj);
+        if (obj.type === PacketType.EVENT || obj.type === PacketType.ACK) {
+            if (is_binary_js_1.hasBinary(obj)) {
+                obj.type =
+                    obj.type === PacketType.EVENT
+                        ? PacketType.BINARY_EVENT
+                        : PacketType.BINARY_ACK;
+                return this.encodeAsBinary(obj);
+            }
+        }
+        return [this.encodeAsString(obj)];
+    }
+    /**
+     * Encode packet as string.
+     */
+    encodeAsString(obj) {
+        // first is type
+        let str = "" + obj.type;
+        // attachments if we have them
+        if (obj.type === PacketType.BINARY_EVENT ||
+            obj.type === PacketType.BINARY_ACK) {
+            str += obj.attachments + "-";
+        }
+        // if we have a namespace other than `/`
+        // we append it followed by a comma `,`
+        if (obj.nsp && "/" !== obj.nsp) {
+            str += obj.nsp + ",";
+        }
+        // immediately followed by the id
+        if (null != obj.id) {
+            str += obj.id;
+        }
+        // json data
+        if (null != obj.data) {
+            str += JSON.stringify(obj.data);
+        }
+        debug("encoded %j as %s", obj, str);
+        return str;
+    }
+    /**
+     * Encode packet as 'buffer sequence' by removing blobs, and
+     * deconstructing packet into object with placeholders and
+     * a list of buffers.
+     */
+    encodeAsBinary(obj) {
+        const deconstruction = binary_js_1.deconstructPacket(obj);
+        const pack = this.encodeAsString(deconstruction.packet);
+        const buffers = deconstruction.buffers;
+        buffers.unshift(pack); // add packet info to beginning of data list
+        return buffers; // write all the buffers
+    }
+}
+exports.Encoder = Encoder;
+/**
+ * A socket.io Decoder instance
+ *
+ * @return {Object} decoder
+ */
+class Decoder extends component_emitter_1.Emitter {
+    constructor() {
+        super();
+    }
+    /**
+     * Decodes an encoded packet string into packet JSON.
+     *
+     * @param {String} obj - encoded packet
+     */
+    add(obj) {
+        let packet;
+        if (typeof obj === "string") {
+            packet = this.decodeString(obj);
+            if (packet.type === PacketType.BINARY_EVENT ||
+                packet.type === PacketType.BINARY_ACK) {
+                // binary packet's json
+                this.reconstructor = new BinaryReconstructor(packet);
+                // no attachments, labeled binary but no binary data to follow
+                if (packet.attachments === 0) {
+                    super.emitReserved("decoded", packet);
+                }
+            }
+            else {
+                // non-binary full packet
+                super.emitReserved("decoded", packet);
+            }
+        }
+        else if (is_binary_js_1.isBinary(obj) || obj.base64) {
+            // raw binary data
+            if (!this.reconstructor) {
+                throw new Error("got binary data when not reconstructing a packet");
+            }
+            else {
+                packet = this.reconstructor.takeBinaryData(obj);
+                if (packet) {
+                    // received final buffer
+                    this.reconstructor = null;
+                    super.emitReserved("decoded", packet);
+                }
+            }
+        }
+        else {
+            throw new Error("Unknown type: " + obj);
+        }
+    }
+    /**
+     * Decode a packet String (JSON data)
+     *
+     * @param {String} str
+     * @return {Object} packet
+     */
+    decodeString(str) {
+        let i = 0;
+        // look up type
+        const p = {
+            type: Number(str.charAt(0)),
+        };
+        if (PacketType[p.type] === undefined) {
+            throw new Error("unknown packet type " + p.type);
+        }
+        // look up attachments if type binary
+        if (p.type === PacketType.BINARY_EVENT ||
+            p.type === PacketType.BINARY_ACK) {
+            const start = i + 1;
+            while (str.charAt(++i) !== "-" && i != str.length) { }
+            const buf = str.substring(start, i);
+            if (buf != Number(buf) || str.charAt(i) !== "-") {
+                throw new Error("Illegal attachments");
+            }
+            p.attachments = Number(buf);
+        }
+        // look up namespace (if any)
+        if ("/" === str.charAt(i + 1)) {
+            const start = i + 1;
+            while (++i) {
+                const c = str.charAt(i);
+                if ("," === c)
+                    break;
+                if (i === str.length)
+                    break;
+            }
+            p.nsp = str.substring(start, i);
+        }
+        else {
+            p.nsp = "/";
+        }
+        // look up id
+        const next = str.charAt(i + 1);
+        if ("" !== next && Number(next) == next) {
+            const start = i + 1;
+            while (++i) {
+                const c = str.charAt(i);
+                if (null == c || Number(c) != c) {
+                    --i;
+                    break;
+                }
+                if (i === str.length)
+                    break;
+            }
+            p.id = Number(str.substring(start, i + 1));
+        }
+        // look up json data
+        if (str.charAt(++i)) {
+            const payload = tryParse(str.substr(i));
+            if (Decoder.isPayloadValid(p.type, payload)) {
+                p.data = payload;
+            }
+            else {
+                throw new Error("invalid payload");
+            }
+        }
+        debug("decoded %s as %j", str, p);
+        return p;
+    }
+    static isPayloadValid(type, payload) {
+        switch (type) {
+            case PacketType.CONNECT:
+                return typeof payload === "object";
+            case PacketType.DISCONNECT:
+                return payload === undefined;
+            case PacketType.CONNECT_ERROR:
+                return typeof payload === "string" || typeof payload === "object";
+            case PacketType.EVENT:
+            case PacketType.BINARY_EVENT:
+                return Array.isArray(payload) && payload.length > 0;
+            case PacketType.ACK:
+            case PacketType.BINARY_ACK:
+                return Array.isArray(payload);
+        }
+    }
+    /**
+     * Deallocates a parser's resources
+     */
+    destroy() {
+        if (this.reconstructor) {
+            this.reconstructor.finishedReconstruction();
+        }
+    }
+}
+exports.Decoder = Decoder;
+function tryParse(str) {
+    try {
+        return JSON.parse(str);
+    }
+    catch (e) {
+        return false;
+    }
+}
+/**
+ * A manager of a binary event's 'buffer sequence'. Should
+ * be constructed whenever a packet of type BINARY_EVENT is
+ * decoded.
+ *
+ * @param {Object} packet
+ * @return {BinaryReconstructor} initialized reconstructor
+ */
+class BinaryReconstructor {
+    constructor(packet) {
+        this.packet = packet;
+        this.buffers = [];
+        this.reconPack = packet;
+    }
+    /**
+     * Method to be called when binary data received from connection
+     * after a BINARY_EVENT packet.
+     *
+     * @param {Buffer | ArrayBuffer} binData - the raw binary data received
+     * @return {null | Object} returns null if more binary data is expected or
+     *   a reconstructed packet object if all buffers have been received.
+     */
+    takeBinaryData(binData) {
+        this.buffers.push(binData);
+        if (this.buffers.length === this.reconPack.attachments) {
+            // done with buffer list
+            const packet = binary_js_1.reconstructPacket(this.reconPack, this.buffers);
+            this.finishedReconstruction();
+            return packet;
+        }
+        return null;
+    }
+    /**
+     * Cleans up binary packet reconstruction variables.
+     */
+    finishedReconstruction() {
+        this.reconPack = null;
+        this.buffers = [];
+    }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/is-binary.js":
+/*!********************************************************************************************!*\
+  !*** ./node_modules/socket.io-client/node_modules/socket.io-parser/build/cjs/is-binary.js ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.hasBinary = exports.isBinary = void 0;
+const withNativeArrayBuffer = typeof ArrayBuffer === "function";
+const isView = (obj) => {
+    return typeof ArrayBuffer.isView === "function"
+        ? ArrayBuffer.isView(obj)
+        : obj.buffer instanceof ArrayBuffer;
+};
+const toString = Object.prototype.toString;
+const withNativeBlob = typeof Blob === "function" ||
+    (typeof Blob !== "undefined" &&
+        toString.call(Blob) === "[object BlobConstructor]");
+const withNativeFile = typeof File === "function" ||
+    (typeof File !== "undefined" &&
+        toString.call(File) === "[object FileConstructor]");
+/**
+ * Returns true if obj is a Buffer, an ArrayBuffer, a Blob or a File.
+ *
+ * @private
+ */
+function isBinary(obj) {
+    return ((withNativeArrayBuffer && (obj instanceof ArrayBuffer || isView(obj))) ||
+        (withNativeBlob && obj instanceof Blob) ||
+        (withNativeFile && obj instanceof File));
+}
+exports.isBinary = isBinary;
+function hasBinary(obj, toJSON) {
+    if (!obj || typeof obj !== "object") {
+        return false;
+    }
+    if (Array.isArray(obj)) {
+        for (let i = 0, l = obj.length; i < l; i++) {
+            if (hasBinary(obj[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+    if (isBinary(obj)) {
+        return true;
+    }
+    if (obj.toJSON &&
+        typeof obj.toJSON === "function" &&
+        arguments.length === 1) {
+        return hasBinary(obj.toJSON(), true);
+    }
+    for (const key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key) && hasBinary(obj[key])) {
+            return true;
+        }
+    }
+    return false;
+}
+exports.hasBinary = hasBinary;
+
+
+/***/ }),
+
 /***/ "./node_modules/axios/package.json":
 /*!*****************************************!*\
   !*** ./node_modules/axios/package.json ***!
@@ -66534,7 +73361,7 @@ exports.url = url;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
+module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/","/@inertiajs/inertia"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"C:\\\\OpenServer\\\\domains\\\\pipedrive","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 

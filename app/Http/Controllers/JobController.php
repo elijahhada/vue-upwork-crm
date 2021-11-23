@@ -110,7 +110,7 @@ class JobController extends Controller
         if (!count($filters)) {
             $jobs = Job::query()
                 ->orderBy('date_created', 'desc')
-                ->paginate(20);
+                ->paginate(10);
             return $jobs;
         }
         $categories = $filters->pluck('categories_ids');
@@ -168,6 +168,6 @@ class JobController extends Controller
             }
         }
 
-        return $jobs->paginate(20);
+        return $jobs->paginate(10);
     }
 }

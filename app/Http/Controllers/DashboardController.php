@@ -17,7 +17,7 @@ class DashboardController extends Controller
             ->whereNull('status')
             ->orWhere('status', 2)
             ->orderBy('date_created', 'desc')
-            ->paginate(20);
+            ->paginate(10);
         $user = Auth::user();
 
         // go to Dashboard.vue->DashboardHeader.vue->CreateKit
