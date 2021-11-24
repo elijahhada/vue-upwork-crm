@@ -160,6 +160,7 @@ export default {
             this.exseptionWords.splice(i, 1);
         },
         saveKit() {
+            if (this.userId !== this.filter.user_id) return alert('Обновлять фильтр может только его создатель!');
             let countries = [];
             this.countries.forEach((item) => {
                 if (item.checked) countries.push(item.id);

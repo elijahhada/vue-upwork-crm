@@ -38,6 +38,7 @@
                         :class="{ 'bg-green-500 text-white': selectedKits.includes(filter.id) }">
                         <p class="mr-2 cursor-pointer" @click="toggleSelectedKits(filter.id)">{{ filter.title }}</p>
                         <button class="open-filters py-3 pl-3 pr-1 border-l border-gray-400 cursor-pointer" @click.stop="showFilterFrom(filter)">...</button>
+                        <button class="py-3 pl-3 pr-1 border-l border-gray-400 cursor-pointer" @click.stop="removeFilter(filter)">&times;</button>
                     </div>
                 </div>
             </div>
@@ -145,6 +146,17 @@ export default {
             document.body.classList.remove('overflow-y-hidden');
             if (event) this.filtersArr.push(event);
         },
+        removeFilter(filter) {
+            if (filter.user_id !== this.userId) return alert('Удалять фильтр может только его создатель!');
+
+            axios.post('/remove-filter', {
+                id: filter.id,
+                user_id: this.userId,
+            }).then(res => {
+                console.log(res);
+            });
+            return alert('Filter was removed!');
+        }
     },
 };
 </script>

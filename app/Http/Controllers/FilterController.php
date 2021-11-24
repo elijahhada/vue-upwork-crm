@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Filter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FilterController extends Controller
 {
@@ -91,11 +92,18 @@ class FilterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Filter  $filter
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Filter $filter)
+    public function destroy(Request $request)
     {
-        //
+        if($request->user_id !== Auth::id()) {
+            abort(403);
+        }
+        $filter = Filter::find($request->id);
+        $filter->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Filter was removed successfully'
+        ], 204);
     }
 }

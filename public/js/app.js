@@ -3631,6 +3631,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3734,6 +3735,16 @@ __webpack_require__.r(__webpack_exports__);
       this.showKit = !this.showKit;
       document.body.classList.remove('overflow-y-hidden');
       if (event) this.filtersArr.push(event);
+    },
+    removeFilter: function removeFilter(filter) {
+      if (filter.user_id !== this.userId) return alert('Удалять фильтр может только его создатель!');
+      axios.post('/remove-filter', {
+        id: filter.id,
+        user_id: this.userId
+      }).then(function (res) {
+        console.log(res);
+      });
+      return alert('Filter was removed!');
     }
   }
 });
@@ -4588,6 +4599,7 @@ __webpack_require__.r(__webpack_exports__);
       this.exseptionWords.splice(i, 1);
     },
     saveKit: function saveKit() {
+      if (this.userId !== this.filter.user_id) return alert('Обновлять фильтр может только его создатель!');
       var countries = [];
       this.countries.forEach(function (item) {
         if (item.checked) countries.push(item.id);
@@ -47655,6 +47667,21 @@ var render = function () {
                           },
                         },
                         [_vm._v("...")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "py-3 pl-3 pr-1 border-l border-gray-400 cursor-pointer",
+                          on: {
+                            click: function ($event) {
+                              $event.stopPropagation()
+                              return _vm.removeFilter(filter)
+                            },
+                          },
+                        },
+                        [_vm._v("×")]
                       ),
                     ]
                   ),

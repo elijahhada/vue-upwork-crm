@@ -15,15 +15,15 @@ class ChangeFiltersTable extends Migration
     {
         Schema::table('filters', function (Blueprint $table) {
             $table
-                ->string('countries_ids')
+                ->string('countries_ids', 999)
                 ->after('user_id')
                 ->nullable();
             $table
-                ->string('categories_ids')
+                ->string('categories_ids', 999)
                 ->after('user_id')
                 ->nullable();
             $table
-                ->string('exseption_words')
+                ->string('exseption_words', 3500)
                 ->after('user_id')
                 ->nullable();
         });
