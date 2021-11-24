@@ -7129,6 +7129,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _this.data = response.data.data.filter(function (j) {
           return j.status !== 1;
         });
+        _this.jobsData = response.data;
 
         _this.$forceUpdate();
 
@@ -7205,13 +7206,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       window.addEventListener('scroll', (0,lodash_function__WEBPACK_IMPORTED_MODULE_3__.debounce)(function (e) {
         var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
-        if (pixelsFromBottom < 600) {
+        if (pixelsFromBottom < 600 && _this3.jobsData.next_page_url !== null) {
           axios.post('/jobs/filter?page=' + _this3.jobsData.next_page_url.substr(_this3.jobsData.next_page_url.length - 1), {
             kits: _this3.selectedKits
           }).then(function (response) {
             var _this3$data;
-
-            console.log(response);
 
             (_this3$data = _this3.data).push.apply(_this3$data, _toConsumableArray(response.data.data.filter(function (j) {
               return j.status !== 1;
@@ -53306,7 +53305,7 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "w-full" }, [
         _c("p", { staticClass: "text-2xl font-bold" }, [
-          _vm._v("Find " + _vm._s(_vm.jobsData.total) + " jobs"),
+          _vm._v("Found " + _vm._s(_vm.jobsData.total) + " jobs"),
         ]),
       ]),
       _vm._v(" "),

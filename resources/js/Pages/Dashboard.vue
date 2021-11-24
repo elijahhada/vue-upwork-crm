@@ -2,7 +2,7 @@
     <app-layout>
         <dash-header :countries="countries" :categories="categories" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
         <div class="w-full">
-            <p class="text-2xl font-bold">Find {{ jobsData.total }} jobs</p>
+            <p class="text-2xl font-bold">Found {{ jobsData.total }} jobs</p>
         </div>
         <div class="flex flex-col space-y-4" v-if="!isReloading">
             <job-card
@@ -94,6 +94,7 @@ export default {
                 })
                 .then((response) => {
                     this.data = response.data.data.filter((j) => j.status !== 1);
+                    this.jobsData = response.data;
                     this.$forceUpdate();
                     this.isReloading = false;
                 });
@@ -142,13 +143,12 @@ export default {
             window.addEventListener('scroll', debounce((e) => {
                 let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
-                if(pixelsFromBottom < 600) {
+                if(pixelsFromBottom < 600 && this.jobsData.next_page_url !== null) {
                     axios
                         .post('/jobs/filter?page=' + this.jobsData.next_page_url.substr(this.jobsData.next_page_url.length - 1), {
                             kits: this.selectedKits,
                         })
                         .then((response) => {
-                            console.log(response)
                             this.data.push(...response.data.data.filter((j) => j.status !== 1));
                             this.jobsData = response.data;
                         });
