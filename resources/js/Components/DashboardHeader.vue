@@ -154,6 +154,7 @@ export default {
                 user_id: this.userId,
             }).then(res => {
                 console.log(res);
+                socket.emit('kits:speak', {});
             });
             return alert('Filter was removed!');
         }

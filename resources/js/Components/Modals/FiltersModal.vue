@@ -181,6 +181,8 @@ export default {
                 countries_ids: countries.join(','),
                 categories_ids: categories.join(','),
                 exseption_words: this.exseptionWords.join('_|_'),
+            }).then(res => {
+                socket.emit('kits:speak', {});
             });
             return alert('Filter was updated!');
         },

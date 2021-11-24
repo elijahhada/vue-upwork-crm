@@ -22,6 +22,10 @@ io.on('connection', (socket) => {
             console.log('calendar:speak', data);
             socket.broadcast.emit('calendar:listeners', data);
         })
+        .on('kits:speak', (data) => {
+            console.log('kits:speak', data);
+            socket.broadcast.emit('kits:listeners', data);
+        })
         .on('disconnect', () => {
             console.log(`← Socket disconnect`);
         });

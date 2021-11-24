@@ -162,6 +162,7 @@ export default {
                 })
                 .then((response) => {
                     this.filter = response.data;
+                    socket.emit('kits:speak', {});
                 });
 
             this.createdKitTitle = '';

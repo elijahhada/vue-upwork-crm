@@ -34,6 +34,7 @@
                 :duration="job.duration"
                 :avgRate="job.client_avg_rate"></job-card>
         </div>
+        <Toast message="Фильтры изменились, обновите страницу!" :show="showToast" @hide="showToast = false" type="warning" title="Warning" position="top-right" />
     </app-layout>
 </template>
 
@@ -42,6 +43,7 @@ import AppLayout from '@/Layouts/AppLayout';
 import JobCard from '../Components/Jobs/JobCard';
 import DashHeader from '../Components/DashboardHeader';
 import {debounce} from "lodash/function";
+import Toast from "../Components/Toast/Toast";
 
 export default {
     props: {
@@ -72,18 +74,21 @@ export default {
             isReloading: false,
             selectedKits: [],
             jobsData: Object,
+            showToast: false,
         };
     },
     components: {
         JobCard,
         AppLayout,
         DashHeader,
+        Toast
     },
     mounted() {
         this.data = this.jobs.data;
         this.jobsData = this.jobs;
         this.jobListen();
         this.loadMoreOnScroll();
+        this.kitsListen();
     },
     watch: {
         selectedKits(kits) {
@@ -154,7 +159,13 @@ export default {
                         });
                 }
             },300))
-        }
+        },
+        kitsListen() {
+            socket.on('kits:listeners', () => {
+                this.showToast = true;
+                console.log('something in kits have been changed');
+            });
+        },
     },
 };
 </script>
