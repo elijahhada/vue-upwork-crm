@@ -3631,7 +3631,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3735,17 +3734,6 @@ __webpack_require__.r(__webpack_exports__);
       this.showKit = !this.showKit;
       document.body.classList.remove('overflow-y-hidden');
       if (event) this.filtersArr.push(event);
-    },
-    removeFilter: function removeFilter(filter) {
-      if (filter.user_id !== this.userId) return alert('Удалять фильтр может только его создатель!');
-      axios.post('/remove-filter', {
-        id: filter.id,
-        user_id: this.userId
-      }).then(function (res) {
-        console.log(res);
-        socket.emit('kits:speak', {});
-      });
-      return alert('Filter was removed!');
     }
   }
 });
@@ -4514,6 +4502,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     filter: {
@@ -4634,6 +4623,18 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.$forceUpdate();
       this.$emit('disable-filter', this.filter);
+    },
+    removeFilter: function removeFilter(filter) {
+      if (filter.user_id !== this.userId) return alert('Удалять фильтр может только его создатель!');
+      if (!confirm('Are you sure?')) return;
+      axios.post('/remove-filter', {
+        id: filter.id,
+        user_id: this.userId
+      }).then(function (res) {
+        console.log(res);
+        socket.emit('kits:speak', {});
+      });
+      return alert('Filter was removed!');
     }
   },
   computed: {
@@ -48056,7 +48057,7 @@ var render = function () {
                     "div",
                     {
                       staticClass:
-                        "bg-gray-200 text-black rounded px-3 font-normal mr-6 hover:bg-green-500 hover:text-white flex items-center",
+                        "bg-gray-200 text-black rounded font-normal mr-6 flex items-center",
                       class: {
                         "bg-green-500 text-white": _vm.selectedKits.includes(
                           filter.id
@@ -48067,7 +48068,8 @@ var render = function () {
                       _c(
                         "p",
                         {
-                          staticClass: "mr-2 cursor-pointer",
+                          staticClass:
+                            "rounded-l py-3 px-3 cursor-pointer hover:bg-green-500 hover:text-white",
                           on: {
                             click: function ($event) {
                               return _vm.toggleSelectedKits(filter.id)
@@ -48081,7 +48083,7 @@ var render = function () {
                         "button",
                         {
                           staticClass:
-                            "open-filters py-3 pl-3 pr-1 border-l border-gray-400 cursor-pointer",
+                            "rounded-r open-filters py-3 px-3 border-l border-gray-400 cursor-pointer hover:bg-green-500 hover:text-white",
                           on: {
                             click: function ($event) {
                               $event.stopPropagation()
@@ -48090,21 +48092,6 @@ var render = function () {
                           },
                         },
                         [_vm._v("...")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "py-3 pl-3 pr-1 border-l border-gray-400 cursor-pointer",
-                          on: {
-                            click: function ($event) {
-                              $event.stopPropagation()
-                              return _vm.removeFilter(filter)
-                            },
-                          },
-                        },
-                        [_vm._v("×")]
                       ),
                     ]
                   ),
@@ -49326,7 +49313,7 @@ var render = function () {
       attrs: { id: "manager-filters" },
     },
     [
-      _c("div", { staticClass: "flex justify-between items-center mb-8" }, [
+      _c("div", { staticClass: "flex justify-between items-center mb-2" }, [
         _c("p", { staticClass: "text-2xl text-black font-bold" }, [
           _vm._v(_vm._s(_vm.filter.title)),
         ]),
@@ -49345,6 +49332,20 @@ var render = function () {
           [_vm._v("×")]
         ),
       ]),
+      _vm._v(" "),
+      _c(
+        "p",
+        {
+          staticClass:
+            "cursor-pointer hover:bg-red-500 hover:text-white bg-gray-200 text-black rounded py-1 px-4 font-normal inline-block mb-2",
+          on: {
+            click: function ($event) {
+              return _vm.removeFilter(_vm.filter)
+            },
+          },
+        },
+        [_vm._v("delete kit")]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "mb-10" }, [
         _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [

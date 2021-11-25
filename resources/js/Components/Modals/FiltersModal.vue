@@ -1,9 +1,10 @@
 <template>
     <section id="manager-filters" class="w-full overflow-y-scroll bg-white p-8 h-screen z-50 fixed top-0 left-0 right-0">
-        <div class="flex justify-between items-center mb-8">
+        <div class="flex justify-between items-center mb-2">
             <p class="text-2xl text-black font-bold">{{ filter.title }}</p>
             <p class="text-black text-5xl close-kit cursor-pointer hover:text-red-500" @click="closeFilter()">×</p>
         </div>
+        <p class="cursor-pointer hover:bg-red-500 hover:text-white bg-gray-200 text-black rounded py-1 px-4 font-normal inline-block mb-2" @click="removeFilter(filter)">delete kit</p>
         <div class="mb-10">
             <p class="text-lg font-bold text-black mb-3">Countries</p>
             <div class="flex flex-wrap justify-content-start items-start">
@@ -197,6 +198,19 @@ export default {
             this.$forceUpdate();
             this.$emit('disable-filter', this.filter);
         },
+        removeFilter(filter) {
+            if (filter.user_id !== this.userId) return alert('Удалять фильтр может только его создатель!');
+
+            if (!confirm('Are you sure?')) return;
+            axios.post('/remove-filter', {
+                id: filter.id,
+                user_id: this.userId,
+            }).then(res => {
+                console.log(res);
+                socket.emit('kits:speak', {});
+            });
+            return alert('Filter was removed!');
+        }
     },
     computed: {
         allCheck(obj, val) {

@@ -34,11 +34,10 @@
                 <button class="create-kid rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7" @click.stop="showKitForm()">Create Kit</button>
                 <div class="relative" v-for="filter in filtersArr">
                     <div
-                        class="bg-gray-200 text-black rounded px-3 font-normal mr-6 hover:bg-green-500 hover:text-white flex items-center"
+                        class="bg-gray-200 text-black rounded font-normal mr-6 flex items-center"
                         :class="{ 'bg-green-500 text-white': selectedKits.includes(filter.id) }">
-                        <p class="mr-2 cursor-pointer" @click="toggleSelectedKits(filter.id)">{{ filter.title }}</p>
-                        <button class="open-filters py-3 pl-3 pr-1 border-l border-gray-400 cursor-pointer" @click.stop="showFilterFrom(filter)">...</button>
-                        <button class="py-3 pl-3 pr-1 border-l border-gray-400 cursor-pointer" @click.stop="removeFilter(filter)">&times;</button>
+                        <p class="rounded-l py-3 px-3 cursor-pointer hover:bg-green-500 hover:text-white" @click="toggleSelectedKits(filter.id)">{{ filter.title }}</p>
+                        <button class="rounded-r open-filters py-3 px-3 border-l border-gray-400 cursor-pointer hover:bg-green-500 hover:text-white" @click.stop="showFilterFrom(filter)">...</button>
                     </div>
                 </div>
             </div>
@@ -145,18 +144,6 @@ export default {
             this.showKit = !this.showKit;
             document.body.classList.remove('overflow-y-hidden');
             if (event) this.filtersArr.push(event);
-        },
-        removeFilter(filter) {
-            if (filter.user_id !== this.userId) return alert('Удалять фильтр может только его создатель!');
-
-            axios.post('/remove-filter', {
-                id: filter.id,
-                user_id: this.userId,
-            }).then(res => {
-                console.log(res);
-                socket.emit('kits:speak', {});
-            });
-            return alert('Filter was removed!');
         }
     },
 };
