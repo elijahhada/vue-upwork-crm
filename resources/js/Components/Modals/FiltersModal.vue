@@ -55,6 +55,31 @@
             </div>
         </div>
 
+        <div class="mb-10">
+            <p class="text-lg font-bold text-black mb-3">Key Words</p>
+            <div class="flex flex-wrap justify-content-start items-start">
+                <button
+                    class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button"
+                    @click.stop="
+                        chooseAllItems(keyWords);
+                        $forceUpdate();
+                    "
+                    :class="{ 'bg-green-500 text-white': allKeyWordsChecked }">
+                    All Key Words
+                </button>
+                <button
+                    v-for="word in keyWords"
+                    class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button"
+                    :class="{ 'bg-green-500 text-white': word.checked }"
+                    @click.stop="
+                        word.checked = !word.checked;
+                        $forceUpdate();
+                    ">
+                    {{ word.title }}
+                </button>
+            </div>
+        </div>
+
         <div class="mb-7">
             <p class="text-lg font-bold text-black mb-3">Exception words</p>
             <div class="flex flex-wrap justify-content-start items-start">
@@ -92,6 +117,9 @@ export default {
         filterCategories: {
             type: Array,
         },
+        filterKeyWords: {
+            type: Array,
+        },
         userId: {
             type: Number,
         },
@@ -103,8 +131,10 @@ export default {
             newWord: '',
             countries: Object.seal(this.filterCountries),
             categories: Object.seal(this.filterCategories),
+            keyWords: Object.seal(this.filterKeyWords),
             allCountriesChecked: false,
             allCategoriesChecked: false,
+            allKeyWordsChecked: false,
         };
     },
     mounted() {
@@ -119,6 +149,11 @@ export default {
                 if (filter.categories_ids.split(',').map(Number).includes(item.id)) item.checked = !item.checked;
             });
         }
+        if (filter.key_words_ids) {
+            this.keyWords.forEach((item) => {
+                if (filter.key_words_ids.split(',').map(Number).includes(item.id)) item.checked = !item.checked;
+            });
+        }
         if (filter.exseption_words) {
             filter.exseption_words.split('_|_').forEach((item) => {
                 this.exseptionWords.push(item);
@@ -126,6 +161,7 @@ export default {
         }
         this.createdKitTitle = filter.title;
         this.$forceUpdate();
+        console.log(filter);
     },
     methods: {
         chooseAllItems(obj) {
@@ -137,6 +173,10 @@ export default {
                 case this.categories:
                     this.allCategoriesChecked ? this.allCheck(obj, false) : this.allCheck(obj, true);
                     this.allCategoriesChecked = !this.allCategoriesChecked;
+                    break;
+                case this.keyWords:
+                    this.allKeyWordsChecked ? this.allCheck(obj, false) : this.allCheck(obj, true);
+                    this.allKeyWordsChecked = !this.allKeyWordsChecked;
                     break;
             }
         },
@@ -172,8 +212,13 @@ export default {
                 if (item.checked) categories.push(item.id);
             });
 
+            let keyWords = [];
+            this.keyWords.forEach((item) => {
+                if (item.checked) keyWords.push(item.id);
+            });
+
             if (!this.createdKitTitle) return alert('Введите название фильтра!');
-            if (!countries.length && !categories.length && !this.exseptionWords.length) return alert('Введите параметр(ы) фильтра!');
+            if (!countries.length && !categories.length && !keyWords.length && !this.exseptionWords.length) return alert('Введите параметр(ы) фильтра!');
 
             axios.post('/update-filter', {
                 id: this.filter.id,
@@ -181,6 +226,7 @@ export default {
                 title: this.createdKitTitle,
                 countries_ids: countries.join(','),
                 categories_ids: categories.join(','),
+                key_words_ids: keyWords.join(','),
                 exseption_words: this.exseptionWords.join('_|_'),
             }).then(res => {
                 socket.emit('kits:speak', {});

@@ -42,8 +42,8 @@
                 </div>
             </div>
         </div>
-        <kit-modal v-if="showKit" v-on:disable-kit="closeKit" :countries="countries" :categories="categories" :userId="userId"></kit-modal>
-        <filter-modal v-if="FiltersVisibility" v-on:disable-filter="closeFilter" :filter="SelectedFilter" :filterCountries="countries" :filterCategories="categories" :userId="userId"></filter-modal>
+        <kit-modal v-if="showKit" v-on:disable-kit="closeKit" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId"></kit-modal>
+        <filter-modal v-if="FiltersVisibility" v-on:disable-filter="closeFilter" :filter="SelectedFilter" :filterCountries="countries" :filterCategories="categories" :filterKeyWords="keyWords" :userId="userId"></filter-modal>
     </div>
 </template>
 
@@ -62,6 +62,10 @@ export default {
             required: true,
         },
         categories: {
+            type: Array,
+            required: true,
+        },
+        keyWords: {
             type: Array,
             required: true,
         },

@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <dash-header :countries="countries" :categories="categories" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
+        <dash-header :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
         <div class="w-full">
             <p class="text-2xl font-bold">Found {{ jobsData.total }} jobs</p>
         </div>
@@ -60,6 +60,10 @@ export default {
             required: true,
         },
         categories: {
+            type: Array,
+            required: true,
+        },
+        keyWords: {
             type: Array,
             required: true,
         },

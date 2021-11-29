@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
         $schedule
             ->job(new CreateJobsFromUpwork(User::find(2)))
             ->timezone('Europe/Moscow')
-            ->everySixHours();
+            ->everyFifteenMinutes();
     }
 
     /**

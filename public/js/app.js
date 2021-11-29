@@ -3647,6 +3647,10 @@ __webpack_require__.r(__webpack_exports__);
       type: Array,
       required: true
     },
+    keyWords: {
+      type: Array,
+      required: true
+    },
     userId: {
       type: Number
     },
@@ -4308,12 +4312,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     countries: {
       type: Array
     },
     categories: {
+      type: Array
+    },
+    keyWords: {
       type: Array
     },
     userId: {
@@ -4327,6 +4360,7 @@ __webpack_require__.r(__webpack_exports__);
       newWord: '',
       allCountriesChecked: false,
       allCategoriesChecked: false,
+      allKeyWordsChecked: false,
       filter: null
     };
   },
@@ -4341,6 +4375,11 @@ __webpack_require__.r(__webpack_exports__);
         case this.categories:
           this.allCategoriesChecked ? this.allCheck(obj, false) : this.allCheck(obj, true);
           this.allCategoriesChecked = !this.allCategoriesChecked;
+          break;
+
+        case this.keyWords:
+          this.allKeyWordsChecked ? this.allCheck(obj, false) : this.allCheck(obj, true);
+          this.allKeyWordsChecked = !this.allKeyWordsChecked;
           break;
       }
     },
@@ -4375,13 +4414,18 @@ __webpack_require__.r(__webpack_exports__);
       this.categories.forEach(function (item) {
         if (item.checked) categories.push(item.id);
       });
+      var keyWords = [];
+      this.keyWords.forEach(function (item) {
+        if (item.checked) keyWords.push(item.id);
+      });
       if (!this.createdKitTitle) return alert('Введите название фильтра!');
-      if (!countries.length && !categories.length && !this.exseptionWords.length) return alert('Введите параметр(ы) фильтра!');
+      if (!countries.length && !categories.length && !keyWords.length && !this.exseptionWords.length) return alert('Введите параметр(ы) фильтра!');
       axios.post('/add-filter', {
         user_id: this.userId,
         title: this.createdKitTitle,
         countries_ids: countries.join(','),
         categories_ids: categories.join(','),
+        key_words_ids: keyWords.join(','),
         exseption_words: this.exseptionWords.join('_|_')
       }).then(function (response) {
         _this.filter = response.data;
@@ -4503,6 +4547,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     filter: {
@@ -4512,6 +4581,9 @@ __webpack_require__.r(__webpack_exports__);
       type: Array
     },
     filterCategories: {
+      type: Array
+    },
+    filterKeyWords: {
       type: Array
     },
     userId: {
@@ -4525,8 +4597,10 @@ __webpack_require__.r(__webpack_exports__);
       newWord: '',
       countries: Object.seal(this.filterCountries),
       categories: Object.seal(this.filterCategories),
+      keyWords: Object.seal(this.filterKeyWords),
       allCountriesChecked: false,
-      allCategoriesChecked: false
+      allCategoriesChecked: false,
+      allKeyWordsChecked: false
     };
   },
   mounted: function mounted() {
@@ -4546,6 +4620,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
 
+    if (filter.key_words_ids) {
+      this.keyWords.forEach(function (item) {
+        if (filter.key_words_ids.split(',').map(Number).includes(item.id)) item.checked = !item.checked;
+      });
+    }
+
     if (filter.exseption_words) {
       filter.exseption_words.split('_|_').forEach(function (item) {
         _this.exseptionWords.push(item);
@@ -4554,6 +4634,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.createdKitTitle = filter.title;
     this.$forceUpdate();
+    console.log(filter);
   },
   methods: {
     chooseAllItems: function chooseAllItems(obj) {
@@ -4566,6 +4647,11 @@ __webpack_require__.r(__webpack_exports__);
         case this.categories:
           this.allCategoriesChecked ? this.allCheck(obj, false) : this.allCheck(obj, true);
           this.allCategoriesChecked = !this.allCategoriesChecked;
+          break;
+
+        case this.keyWords:
+          this.allKeyWordsChecked ? this.allCheck(obj, false) : this.allCheck(obj, true);
+          this.allKeyWordsChecked = !this.allKeyWordsChecked;
           break;
       }
     },
@@ -4599,14 +4685,19 @@ __webpack_require__.r(__webpack_exports__);
       this.categories.forEach(function (item) {
         if (item.checked) categories.push(item.id);
       });
+      var keyWords = [];
+      this.keyWords.forEach(function (item) {
+        if (item.checked) keyWords.push(item.id);
+      });
       if (!this.createdKitTitle) return alert('Введите название фильтра!');
-      if (!countries.length && !categories.length && !this.exseptionWords.length) return alert('Введите параметр(ы) фильтра!');
+      if (!countries.length && !categories.length && !keyWords.length && !this.exseptionWords.length) return alert('Введите параметр(ы) фильтра!');
       axios.post('/update-filter', {
         id: this.filter.id,
         user_id: this.userId,
         title: this.createdKitTitle,
         countries_ids: countries.join(','),
         categories_ids: categories.join(','),
+        key_words_ids: keyWords.join(','),
         exseption_words: this.exseptionWords.join('_|_')
       }).then(function (res) {
         socket.emit('kits:speak', {});
@@ -7213,6 +7304,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       required: true
     },
     categories: {
+      type: Array,
+      required: true
+    },
+    keyWords: {
       type: Array,
       required: true
     },
@@ -48108,6 +48203,7 @@ var render = function () {
             attrs: {
               countries: _vm.countries,
               categories: _vm.categories,
+              keyWords: _vm.keyWords,
               userId: _vm.userId,
             },
             on: { "disable-kit": _vm.closeKit },
@@ -48120,6 +48216,7 @@ var render = function () {
               filter: _vm.SelectedFilter,
               filterCountries: _vm.countries,
               filterCategories: _vm.categories,
+              filterKeyWords: _vm.keyWords,
               userId: _vm.userId,
             },
             on: { "disable-filter": _vm.closeFilter },
@@ -49130,6 +49227,62 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
+        _c("div", { staticClass: "mb-10" }, [
+          _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+            _vm._v("Key Words"),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex flex-wrap justify-content-start items-start" },
+            [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                  class: { "bg-green-500 text-white": _vm.allKeyWordsChecked },
+                  on: {
+                    click: function ($event) {
+                      $event.stopPropagation()
+                      _vm.chooseAllItems(_vm.keyWords)
+                      _vm.$forceUpdate()
+                    },
+                  },
+                },
+                [_vm._v("\n                    All keyWords\n                ")]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.keyWords, function (word) {
+                return _c(
+                  "button",
+                  {
+                    key: word.index,
+                    staticClass:
+                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                    class: { "bg-green-500 text-white": word.checked },
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        word.checked = !word.checked
+                        _vm.$forceUpdate()
+                      },
+                    },
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(word.title) +
+                        "\n                "
+                    ),
+                  ]
+                )
+              }),
+            ],
+            2
+          ),
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "mb-7" }, [
           _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
             _vm._v("Exception words"),
@@ -49449,6 +49602,59 @@ var render = function () {
                     "\n                " +
                       _vm._s(category.title) +
                       "\n            "
+                  ),
+                ]
+              )
+            }),
+          ],
+          2
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-10" }, [
+        _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+          _vm._v("Key Words"),
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "flex flex-wrap justify-content-start items-start" },
+          [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                class: { "bg-green-500 text-white": _vm.allKeyWordsChecked },
+                on: {
+                  click: function ($event) {
+                    $event.stopPropagation()
+                    _vm.chooseAllItems(_vm.keyWords)
+                    _vm.$forceUpdate()
+                  },
+                },
+              },
+              [_vm._v("\n                All Key Words\n            ")]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.keyWords, function (word) {
+              return _c(
+                "button",
+                {
+                  staticClass:
+                    "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                  class: { "bg-green-500 text-white": word.checked },
+                  on: {
+                    click: function ($event) {
+                      $event.stopPropagation()
+                      word.checked = !word.checked
+                      _vm.$forceUpdate()
+                    },
+                  },
+                },
+                [
+                  _vm._v(
+                    "\n                " + _vm._s(word.title) + "\n            "
                   ),
                 ]
               )
@@ -53941,6 +54147,7 @@ var render = function () {
         attrs: {
           countries: _vm.countries,
           categories: _vm.categories,
+          keyWords: _vm.keyWords,
           userId: _vm.userId,
           filters: _vm.filters,
         },

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Country;
 use App\Models\Filter;
 use App\Models\Job;
+use App\Models\KeyWord;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -125,6 +126,10 @@ class JobController extends Controller
         $exceptionWords = $exceptionWords->filter(fn($value) => !is_null($value));
         $filterWords = collect();
 
+        $keyWords = $filters->pluck('key_words_ids');
+        $keyWords = $keyWords->filter(fn($value) => !is_null($value));
+        $filterKeyWords = collect();
+
         if (count($categories)) {
             foreach ($categories as $category) {
                 foreach (explode(',', $category) as $item) {
@@ -144,6 +149,16 @@ class JobController extends Controller
             $filterCountries->unique();
         }
         $filterCountries = Country::find($filterCountries)->pluck('title');
+
+        if (count($keyWords)) {
+            foreach ($keyWords as $word) {
+                foreach (explode(',', $word) as $item) {
+                    $filterKeyWords->push($item);
+                }
+            }
+            $filterKeyWords->unique();
+        }
+        $filterKeyWords = KeyWord::find($filterKeyWords)->pluck('title');
 
         if (count($exceptionWords)) {
             foreach ($exceptionWords as $exceptionWord) {
@@ -165,6 +180,13 @@ class JobController extends Controller
         if (count($filterWords)) {
             foreach ($filterWords as $word) {
                 $jobs->where('title', 'not like', "%$word%")->where('excerpt', 'not like', "%$word%");
+            }
+        }
+
+        if (count($filterKeyWords)) {
+            foreach ($filterKeyWords as $word) {
+                $jobs->where('title', 'like', "%$word%")
+                     ->orWhere('excerpt', 'like', "%$word%");
             }
         }
 
