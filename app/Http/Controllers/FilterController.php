@@ -32,6 +32,7 @@ class FilterController extends Controller
         $filters->categories_ids = $request->categories_ids;
         $filters->key_words_ids = $request->key_words_ids;
         $filters->exseption_words = $request->exseption_words;
+        $filters->custom_key_words = $request->custom_key_words;
 
         $filters->save();
 
@@ -87,6 +88,7 @@ class FilterController extends Controller
         $filters->categories_ids = $request->categories_ids;
         $filters->key_words_ids = $request->key_words_ids;
         $filters->exseption_words = $request->exseption_words;
+        $filters->custom_key_words = $request->custom_key_words;
 
         $filters->save();
     }

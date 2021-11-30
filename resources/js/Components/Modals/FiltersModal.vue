@@ -68,9 +68,9 @@
                     All Key Words
                 </button>
                 <button
-                    v-for="word in keyWords"
+                    v-for="(word, index) in sortedKeyWords"
                     class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button"
-                    :class="{ 'bg-green-500 text-white': word.checked }"
+                    :class="{ 'bg-green-500 text-white': word.checked, 'font-bold': word.is_primary, 'mr-12': sortedKeyWords[index + 1] !== undefined && sortedKeyWords[index + 1].is_primary }"
                     @click.stop="
                         word.checked = !word.checked;
                         $forceUpdate();
@@ -78,6 +78,24 @@
                     {{ word.title }}
                 </button>
             </div>
+        </div>
+
+        <div class="mb-7">
+            <p class="text-lg font-bold text-black mb-3">Custom Key Words</p>
+            <div class="flex flex-wrap justify-content-start items-start">
+                <button
+                    class="cursor-pointer bg-gray-200 text-black rounded px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
+                    v-for="(word, index) in customKeyWords">
+                    <p class="mr-2">{{ word }}</p>
+                    <p class="py-2 pl-3 pr-1 border-l border-gray-400 exception-key-words text-2xl hover:text-red-500" title="Delete word" @click="deleteKeyWord(index)">×</p>
+                </button>
+            </div>
+        </div>
+        <div class="mb-12 flex nowrap">
+            <input type="text" placeholder="New word" class="input-key-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none" v-model="newWord" />
+            <button class="rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-key-word" @click.stop="openAddKeyWord()">+ Add word</button>
+            <button class="rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-key-word-input hidden mr-4" @click.stop="saveKeyWord()">Save</button>
+            <button class="rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 close-key-word-input hidden" @click.stop="closeAddKeyWord()">Close</button>
         </div>
 
         <div class="mb-7">
@@ -128,7 +146,9 @@ export default {
         return {
             createdKitTitle: '',
             exseptionWords: [],
+            customKeyWords: [],
             newWord: '',
+            newKeyWord: '',
             countries: Object.seal(this.filterCountries),
             categories: Object.seal(this.filterCategories),
             keyWords: Object.seal(this.filterKeyWords),
@@ -157,6 +177,11 @@ export default {
         if (filter.exseption_words) {
             filter.exseption_words.split('_|_').forEach((item) => {
                 this.exseptionWords.push(item);
+            });
+        }
+        if (filter.custom_key_words) {
+            filter.custom_key_words.split(',').forEach((item) => {
+                this.customKeyWords.push(item);
             });
         }
         this.createdKitTitle = filter.title;
@@ -200,6 +225,26 @@ export default {
         deleteWord(i) {
             this.exseptionWords.splice(i, 1);
         },
+        openAddKeyWord() {
+            document.querySelector('.add-key-word').classList.add('hidden');
+            document.querySelector('.input-key-word').classList.remove('hidden');
+            document.querySelector('.close-key-word-input').classList.remove('hidden');
+            document.querySelector('.save-key-word-input').classList.remove('hidden');
+        },
+        closeAddKeyWord() {
+            document.querySelector('.add-key-word').classList.remove('hidden');
+            document.querySelector('.input-key-word').classList.add('hidden');
+            document.querySelector('.close-key-word-input').classList.add('hidden');
+            document.querySelector('.save-key-word-input').classList.add('hidden');
+        },
+        saveKeyWord() {
+            if (this.newKeyWord != false) this.customKeyWords.push(this.newKeyWord.trim());
+            this.newKeyWord = '';
+            this.closeAddKeyWord();
+        },
+        deleteKeyWord(i) {
+            this.customKeyWords.splice(i, 1);
+        },
         saveKit() {
             if (this.userId !== this.filter.user_id) return alert('Обновлять фильтр может только его создатель!');
             let countries = [];
@@ -228,6 +273,7 @@ export default {
                 categories_ids: categories.join(','),
                 key_words_ids: keyWords.join(','),
                 exseption_words: this.exseptionWords.join('_|_'),
+                custom_key_words: this.customKeyWords.join(','),
             }).then(res => {
                 socket.emit('kits:speak', {});
             });
@@ -266,6 +312,21 @@ export default {
                 });
             };
         },
+        sortedKeyWords() {
+            let primaryKeyWords = this.keyWords.filter((item) =>{
+                return item.is_primary;
+            });
+            let sortedKeyWords = [];
+            for(const primaryWord of primaryKeyWords){
+                sortedKeyWords.push(primaryWord);
+                for(const word of this.keyWords){
+                    if(primaryWord.id === word.parent_id){
+                        sortedKeyWords.push(word);
+                    }
+                }
+            }
+            return sortedKeyWords;
+        }
     },
 };
 </script>

@@ -4228,6 +4228,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4357,7 +4380,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       createdKitTitle: '',
       exseptionWords: [],
+      customKeyWords: [],
       newWord: '',
+      newKeyWord: '',
       allCountriesChecked: false,
       allCategoriesChecked: false,
       allKeyWordsChecked: false,
@@ -4403,6 +4428,26 @@ __webpack_require__.r(__webpack_exports__);
     deleteWord: function deleteWord(i) {
       this.exseptionWords.splice(i, 1);
     },
+    openAddKeyWord: function openAddKeyWord() {
+      document.querySelector('.add-key-word').classList.add('hidden');
+      document.querySelector('.input-key-word').classList.remove('hidden');
+      document.querySelector('.close-key-word-input').classList.remove('hidden');
+      document.querySelector('.save-key-word-input').classList.remove('hidden');
+    },
+    closeAddKeyWord: function closeAddKeyWord() {
+      document.querySelector('.add-key-word').classList.remove('hidden');
+      document.querySelector('.input-key-word').classList.add('hidden');
+      document.querySelector('.close-key-word-input').classList.add('hidden');
+      document.querySelector('.save-key-word-input').classList.add('hidden');
+    },
+    saveKeyWord: function saveKeyWord() {
+      if (this.newKeyWord != false) this.customKeyWords.push(this.newKeyWord.trim());
+      this.newKeyWord = '';
+      this.closeAddKeyWord();
+    },
+    deleteKeyWord: function deleteKeyWord(i) {
+      this.customKeyWords.splice(i, 1);
+    },
     saveKit: function saveKit() {
       var _this = this;
 
@@ -4426,7 +4471,8 @@ __webpack_require__.r(__webpack_exports__);
         countries_ids: countries.join(','),
         categories_ids: categories.join(','),
         key_words_ids: keyWords.join(','),
-        exseption_words: this.exseptionWords.join('_|_')
+        exseption_words: this.exseptionWords.join('_|_'),
+        custom_key_words: this.customKeyWords.join(',')
       }).then(function (response) {
         _this.filter = response.data;
         socket.emit('kits:speak', {});
@@ -4448,6 +4494,45 @@ __webpack_require__.r(__webpack_exports__);
           item.checked = val;
         });
       };
+    },
+    sortedKeyWords: function sortedKeyWords() {
+      var primaryKeyWords = this.keyWords.filter(function (item) {
+        return item.is_primary;
+      });
+      var sortedKeyWords = [];
+
+      var _iterator = _createForOfIteratorHelper(primaryKeyWords),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var primaryWord = _step.value;
+          sortedKeyWords.push(primaryWord);
+
+          var _iterator2 = _createForOfIteratorHelper(this.keyWords),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var word = _step2.value;
+
+              if (primaryWord.id === word.parent_id) {
+                sortedKeyWords.push(word);
+              }
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return sortedKeyWords;
     }
   }
 });
@@ -4465,6 +4550,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4594,7 +4703,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       createdKitTitle: '',
       exseptionWords: [],
+      customKeyWords: [],
       newWord: '',
+      newKeyWord: '',
       countries: Object.seal(this.filterCountries),
       categories: Object.seal(this.filterCategories),
       keyWords: Object.seal(this.filterKeyWords),
@@ -4629,6 +4740,12 @@ __webpack_require__.r(__webpack_exports__);
     if (filter.exseption_words) {
       filter.exseption_words.split('_|_').forEach(function (item) {
         _this.exseptionWords.push(item);
+      });
+    }
+
+    if (filter.custom_key_words) {
+      filter.custom_key_words.split(',').forEach(function (item) {
+        _this.customKeyWords.push(item);
       });
     }
 
@@ -4675,6 +4792,26 @@ __webpack_require__.r(__webpack_exports__);
     deleteWord: function deleteWord(i) {
       this.exseptionWords.splice(i, 1);
     },
+    openAddKeyWord: function openAddKeyWord() {
+      document.querySelector('.add-key-word').classList.add('hidden');
+      document.querySelector('.input-key-word').classList.remove('hidden');
+      document.querySelector('.close-key-word-input').classList.remove('hidden');
+      document.querySelector('.save-key-word-input').classList.remove('hidden');
+    },
+    closeAddKeyWord: function closeAddKeyWord() {
+      document.querySelector('.add-key-word').classList.remove('hidden');
+      document.querySelector('.input-key-word').classList.add('hidden');
+      document.querySelector('.close-key-word-input').classList.add('hidden');
+      document.querySelector('.save-key-word-input').classList.add('hidden');
+    },
+    saveKeyWord: function saveKeyWord() {
+      if (this.newKeyWord != false) this.customKeyWords.push(this.newKeyWord.trim());
+      this.newKeyWord = '';
+      this.closeAddKeyWord();
+    },
+    deleteKeyWord: function deleteKeyWord(i) {
+      this.customKeyWords.splice(i, 1);
+    },
     saveKit: function saveKit() {
       if (this.userId !== this.filter.user_id) return alert('Обновлять фильтр может только его создатель!');
       var countries = [];
@@ -4698,7 +4835,8 @@ __webpack_require__.r(__webpack_exports__);
         countries_ids: countries.join(','),
         categories_ids: categories.join(','),
         key_words_ids: keyWords.join(','),
-        exseption_words: this.exseptionWords.join('_|_')
+        exseption_words: this.exseptionWords.join('_|_'),
+        custom_key_words: this.customKeyWords.join(',')
       }).then(function (res) {
         socket.emit('kits:speak', {});
       });
@@ -4735,6 +4873,45 @@ __webpack_require__.r(__webpack_exports__);
           item.checked = val;
         });
       };
+    },
+    sortedKeyWords: function sortedKeyWords() {
+      var primaryKeyWords = this.keyWords.filter(function (item) {
+        return item.is_primary;
+      });
+      var sortedKeyWords = [];
+
+      var _iterator = _createForOfIteratorHelper(primaryKeyWords),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var primaryWord = _step.value;
+          sortedKeyWords.push(primaryWord);
+
+          var _iterator2 = _createForOfIteratorHelper(this.keyWords),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var word = _step2.value;
+
+              if (primaryWord.id === word.parent_id) {
+                sortedKeyWords.push(word);
+              }
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return sortedKeyWords;
     }
   }
 });
@@ -49253,14 +49430,20 @@ var render = function () {
                 [_vm._v("\n                    All keyWords\n                ")]
               ),
               _vm._v(" "),
-              _vm._l(_vm.keyWords, function (word) {
+              _vm._l(_vm.sortedKeyWords, function (word, index) {
                 return _c(
                   "button",
                   {
                     key: word.index,
                     staticClass:
                       "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
-                    class: { "bg-green-500 text-white": word.checked },
+                    class: {
+                      "bg-green-500 text-white": word.checked,
+                      "font-bold": word.is_primary,
+                      "mr-12":
+                        _vm.sortedKeyWords[index + 1] !== undefined &&
+                        _vm.sortedKeyWords[index + 1].is_primary,
+                    },
                     on: {
                       click: function ($event) {
                         $event.stopPropagation()
@@ -49280,6 +49463,115 @@ var render = function () {
               }),
             ],
             2
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-7" }, [
+          _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+            _vm._v("Custom Key Words"),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex flex-wrap justify-content-start items-start" },
+            _vm._l(_vm.customKeyWords, function (word, index) {
+              return _c(
+                "button",
+                {
+                  staticClass:
+                    "cursor-pointer bg-gray-200 text-black rounded px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button",
+                },
+                [
+                  _c("p", { staticClass: "mr-2" }, [_vm._v(_vm._s(word))]),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass:
+                        "py-2 pl-3 pr-1 border-l border-gray-400 exception-key-words text-2xl hover:text-red-500",
+                      attrs: { title: "Delete word" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.deleteKeyWord(index)
+                        },
+                      },
+                    },
+                    [_vm._v("×")]
+                  ),
+                ]
+              )
+            }),
+            0
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-12 flex nowrap" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.newKeyWord,
+                expression: "newKeyWord",
+              },
+            ],
+            staticClass:
+              "input-key-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+            attrs: { type: "text", placeholder: "New word" },
+            domProps: { value: _vm.newKeyWord },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.newKeyWord = $event.target.value
+              },
+            },
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-key-word",
+              on: {
+                click: function ($event) {
+                  $event.stopPropagation()
+                  return _vm.openAddKeyWord()
+                },
+              },
+            },
+            [_vm._v("+ Add word")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-key-word-input hidden mr-4",
+              on: {
+                click: function ($event) {
+                  $event.stopPropagation()
+                  return _vm.saveKeyWord()
+                },
+              },
+            },
+            [_vm._v("Save")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 close-key-word-input hidden",
+              on: {
+                click: function ($event) {
+                  $event.stopPropagation()
+                  return _vm.closeAddKeyWord()
+                },
+              },
+            },
+            [_vm._v("Close")]
           ),
         ]),
         _vm._v(" "),
@@ -49637,13 +49929,19 @@ var render = function () {
               [_vm._v("\n                All Key Words\n            ")]
             ),
             _vm._v(" "),
-            _vm._l(_vm.keyWords, function (word) {
+            _vm._l(_vm.sortedKeyWords, function (word, index) {
               return _c(
                 "button",
                 {
                   staticClass:
                     "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
-                  class: { "bg-green-500 text-white": word.checked },
+                  class: {
+                    "bg-green-500 text-white": word.checked,
+                    "font-bold": word.is_primary,
+                    "mr-12":
+                      _vm.sortedKeyWords[index + 1] !== undefined &&
+                      _vm.sortedKeyWords[index + 1].is_primary,
+                  },
                   on: {
                     click: function ($event) {
                       $event.stopPropagation()
@@ -49661,6 +49959,115 @@ var render = function () {
             }),
           ],
           2
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-7" }, [
+        _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+          _vm._v("Custom Key Words"),
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "flex flex-wrap justify-content-start items-start" },
+          _vm._l(_vm.customKeyWords, function (word, index) {
+            return _c(
+              "button",
+              {
+                staticClass:
+                  "cursor-pointer bg-gray-200 text-black rounded px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button",
+              },
+              [
+                _c("p", { staticClass: "mr-2" }, [_vm._v(_vm._s(word))]),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass:
+                      "py-2 pl-3 pr-1 border-l border-gray-400 exception-key-words text-2xl hover:text-red-500",
+                    attrs: { title: "Delete word" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.deleteKeyWord(index)
+                      },
+                    },
+                  },
+                  [_vm._v("×")]
+                ),
+              ]
+            )
+          }),
+          0
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-12 flex nowrap" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.newWord,
+              expression: "newWord",
+            },
+          ],
+          staticClass:
+            "input-key-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+          attrs: { type: "text", placeholder: "New word" },
+          domProps: { value: _vm.newWord },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.newWord = $event.target.value
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-key-word",
+            on: {
+              click: function ($event) {
+                $event.stopPropagation()
+                return _vm.openAddKeyWord()
+              },
+            },
+          },
+          [_vm._v("+ Add word")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-key-word-input hidden mr-4",
+            on: {
+              click: function ($event) {
+                $event.stopPropagation()
+                return _vm.saveKeyWord()
+              },
+            },
+          },
+          [_vm._v("Save")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 close-key-word-input hidden",
+            on: {
+              click: function ($event) {
+                $event.stopPropagation()
+                return _vm.closeAddKeyWord()
+              },
+            },
+          },
+          [_vm._v("Close")]
         ),
       ]),
       _vm._v(" "),

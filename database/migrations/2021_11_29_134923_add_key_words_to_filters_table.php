@@ -18,6 +18,10 @@ class AddKeyWordsToFiltersTable extends Migration
                 ->string('key_words_ids', 999)
                 ->after('countries_ids')
                 ->nullable();
+            $table
+                ->string('custom_key_words', 999)
+                ->after('exseption_words')
+                ->nullable();
         });
     }
 
@@ -29,7 +33,7 @@ class AddKeyWordsToFiltersTable extends Migration
     public function down()
     {
         Schema::table('filters', function (Blueprint $table) {
-            //
+            $table->dropColumn('key_words_ids');
         });
     }
 }

@@ -130,6 +130,10 @@ class JobController extends Controller
         $keyWords = $keyWords->filter(fn($value) => !is_null($value));
         $filterKeyWords = collect();
 
+        $customKeyWords = $filters->pluck('custom_key_words');
+        $customKeyWords = $customKeyWords->filter(fn($value) => !is_null($value));
+        $filterCustomKeyWords = collect();
+
         if (count($categories)) {
             foreach ($categories as $category) {
                 foreach (explode(',', $category) as $item) {
@@ -168,6 +172,15 @@ class JobController extends Controller
             }
             $filterWords->unique();
         }
+
+        if (count($customKeyWords)) {
+            foreach ($customKeyWords as $customKeyWord) {
+                foreach (explode(',', $customKeyWord) as $item) {
+                    $filterCustomKeyWords->push($item);
+                }
+            }
+            $filterCustomKeyWords->unique();
+        }
         $jobs = Job::query()->orderBy('date_created', 'desc');
         if (count($filterCategories)) {
             $jobs = $jobs->whereIn('subcategory2', $filterCategories);
@@ -180,6 +193,13 @@ class JobController extends Controller
         if (count($filterWords)) {
             foreach ($filterWords as $word) {
                 $jobs->where('title', 'not like', "%$word%")->where('excerpt', 'not like', "%$word%");
+            }
+        }
+
+        if (count($filterCustomKeyWords)) {
+            foreach ($filterCustomKeyWords as $word) {
+                $jobs->where('title', 'like', "%$word%")
+                    ->orWhere('excerpt', 'like', "%$word%");
             }
         }
 
