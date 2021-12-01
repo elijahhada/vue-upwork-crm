@@ -3924,7 +3924,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showModal: function showModal() {
       console.log('worked');
-      this.$inertia.get(this.route('pipedrive.deal.add'));
+      this.route('pipedrive.deal.add'); // this.$inertia.get(this.route('pipedrive.deal.add'));
+
       this.$modal.show(_Modals_AddDeal__WEBPACK_IMPORTED_MODULE_0__["default"]);
     },
     changeStatus: function changeStatus(status) {
