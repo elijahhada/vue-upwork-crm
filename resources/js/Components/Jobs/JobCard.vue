@@ -165,7 +165,8 @@ export default {
     methods: {
         showModal() {
             console.log('worked');
-            this.$inertia.get(this.route('pipedrive.deal.add'));
+            this.route('pipedrive.deal.add')
+            // this.$inertia.get(this.route('pipedrive.deal.add'));
             this.$modal.show(AddDeal);
         },
         changeStatus(status, showModal = false) {
