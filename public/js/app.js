@@ -3924,7 +3924,11 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showModal: function showModal() {
       console.log('worked');
-      this.route('pipedrive.deal.add'); // this.$inertia.get(this.route('pipedrive.deal.add'));
+      axios.get('/pipedrive/deal/add').then(function (res) {
+        return console.log(res);
+      })["catch"](function (error) {
+        return console.log(error);
+      }); // this.$inertia.get(this.route('pipedrive.deal.add'));
 
       this.$modal.show(_Modals_AddDeal__WEBPACK_IMPORTED_MODULE_0__["default"]);
     },

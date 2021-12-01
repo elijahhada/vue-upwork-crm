@@ -165,7 +165,9 @@ export default {
     methods: {
         showModal() {
             console.log('worked');
-            this.route('pipedrive.deal.add')
+            axios.get('/pipedrive/deal/add').
+            then(res => console.log(res))
+            .catch(error => console.log(error));
             // this.$inertia.get(this.route('pipedrive.deal.add'));
             this.$modal.show(AddDeal);
         },

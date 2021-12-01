@@ -18,7 +18,6 @@ class PipedriveAuthService implements OAuthable
         $pipedrive_token = $user->pipedrive_token;
         $access_token = json_decode($pipedrive_token, true)['access_token'];
         Session::put('pipedrive_token', $access_token);
-        dd($access_token);
         $this->setOAuthToken($access_token);
         $this->client = new Client(config('pipedrive.client_id'), config('pipedrive.client_secret'), url('/') . '/auth/pipedrive/callback');
     }
