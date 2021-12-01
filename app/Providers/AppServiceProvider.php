@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Configuration::$oAuthTokenUpdateCallback = function ($token) {
-            session()->put('pipedrive_token', $token);
+            session()->put('pipedrive_token', '10061094.11350968.54a3a03737ebf3bda4f79b6fc52f9937e3a57e18');
         };
     }
 }
