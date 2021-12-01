@@ -3923,6 +3923,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     showModal: function showModal() {
+      console.log('worked');
       this.$inertia.get(this.route('pipedrive.deal.add'));
       this.$modal.show(_Modals_AddDeal__WEBPACK_IMPORTED_MODULE_0__["default"]);
     },
@@ -11698,7 +11699,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f] {\r\n    background-color: #faeae3 !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f] {\n    background-color: #faeae3 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48671,7 +48672,19 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { staticClass: "w-11/12 mb-12" }, [
+        _c("p", [
+          _c(
+            "span",
+            {
+              staticClass:
+                "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap",
+              on: { click: _vm.showModal },
+            },
+            [_vm._v("Show Feedbacks (3)")]
+          ),
+        ]),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "w-full flex justify-end items-center" }, [
         _c(
@@ -48721,23 +48734,6 @@ var staticRenderFns = [
     return _c("p", [
       _c("span", { staticClass: "font-bold" }, [_vm._v("Member since:")]),
       _vm._v(" April 24, 2015"),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-11/12 mb-12" }, [
-      _c("p", [
-        _c(
-          "span",
-          {
-            staticClass:
-              "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap",
-          },
-          [_vm._v("Show Feedbacks (3)")]
-        ),
-      ]),
     ])
   },
 ]

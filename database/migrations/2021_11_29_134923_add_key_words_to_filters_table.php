@@ -34,6 +34,7 @@ class AddKeyWordsToFiltersTable extends Migration
     {
         Schema::table('filters', function (Blueprint $table) {
             $table->dropColumn('key_words_ids');
+            $table->dropColumn('custom_key_words');
         });
     }
 }
