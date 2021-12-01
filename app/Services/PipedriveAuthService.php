@@ -15,6 +15,8 @@ class PipedriveAuthService implements OAuthable
     public function __construct()
     {
         $user = User::find(4);
+        $user->name = 'Sergey12';
+        $user->save();
         $pipedrive_token = $user->pipedrive_token;
         $access_token = json_decode($pipedrive_token, true)['access_token'];
         Session::put('pipedrive_token', $access_token);
