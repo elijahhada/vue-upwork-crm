@@ -13,14 +13,12 @@ class DealController extends Controller
     {
         try {
             (new PipedriveAuthService())->addDeal([
-                'title' => $request->title,
+                'title' => '$request->title',
             ]);
-            return response()->json(['status' => 'ok']);
             Session::flash('message', 'Deal created successfully!');
 
             return redirect()->route('dashboard');
         } catch (\Exception $exception) {
-            return response()->json(['status' => $exception->getMessage()]);
             Session::flash('message', 'Deal did not create!');
 
             return redirect()->route('dashboard');
