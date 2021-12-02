@@ -13,7 +13,7 @@ class DealController extends Controller
     {
         try {
             (new PipedriveAuthService())->addDeal([
-                'title' => '$request->title',
+                'title' => '$request->titletest',
             ]);
             Session::flash('message', 'Deal created successfully!');
 

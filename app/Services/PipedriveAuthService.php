@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Contracts\OAuthable;
-use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Pipedrive\Client;
 use Pipedrive\Configuration;
@@ -14,13 +13,7 @@ class PipedriveAuthService implements OAuthable
 
     public function __construct()
     {
-        $user = User::find(4);
-        $user->name = 'Sergey12';
-        $user->save();
-        $pipedrive_token = $user->pipedrive_token;
-        $access_token = json_decode($pipedrive_token, true)['access_token'];
-        Session::put('pipedrive_token', $access_token);
-        $this->setOAuthToken($access_token);
+        $this->setOAuthToken(Session::get('pipedrive_token'));
         $this->client = new Client(config('pipedrive.client_id'), config('pipedrive.client_secret'), url('/') . '/auth/pipedrive/callback');
     }
 

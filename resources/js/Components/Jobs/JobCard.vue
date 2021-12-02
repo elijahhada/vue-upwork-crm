@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="w-11/12 mb-12">
-            <p><span class="text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap" @click="showModal">Show Feedbacks (3)</span></p>
+            <p><span class="text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap">Show Feedbacks (3)</span></p>
         </div>
         <div class="w-full flex justify-end items-center">
             <button class="open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7" @click.stop="changeStatus(1, true)">Take</button>
@@ -164,11 +164,7 @@ export default {
     },
     methods: {
         showModal() {
-            console.log('worked');
-            axios.get('/pipedrive/deal/add').
-            then(res => console.log(res))
-            .catch(error => console.log(error));
-            // this.$inertia.get(this.route('pipedrive.deal.add'));
+            this.$inertia.get(this.route('pipedrive.deal.add'));
             this.$modal.show(AddDeal);
         },
         changeStatus(status, showModal = false) {

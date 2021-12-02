@@ -20,7 +20,6 @@ class PipedriveController extends Controller
 
     public function index()
     {
-//        dd($this->service->buildAuthUrl());
         return redirect()->to($this->service->buildAuthUrl());
     }
 
