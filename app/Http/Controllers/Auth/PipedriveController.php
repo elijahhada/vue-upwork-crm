@@ -32,6 +32,8 @@ class PipedriveController extends Controller
         $user = User::query()
             ->where('email', $userInfo->data->email)
             ->first();
+        $user->pipedrive_token = $this->service->getOAuthToken();
+        $user->save();
 
         if (!$user) {
             $user = (new CreateNewUser())->create([
