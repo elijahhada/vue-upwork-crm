@@ -6,7 +6,6 @@ use App\Contracts\OAuthable;
 use Illuminate\Support\Facades\Session;
 use Pipedrive\Client;
 use Pipedrive\Configuration;
-use Pipedrive\Models\OAuthToken;
 
 class PipedriveAuthService implements OAuthable
 {
@@ -14,7 +13,6 @@ class PipedriveAuthService implements OAuthable
 
     public function __construct()
     {
-        dd(Session::get('pipedrive_token'));
         $this->setOAuthToken(Session::get('pipedrive_token'));
         $this->client = new Client(config('pipedrive.client_id'), config('pipedrive.client_secret'), url('/') . '/auth/pipedrive/callback');
     }
