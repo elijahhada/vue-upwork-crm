@@ -6,6 +6,7 @@ use App\Actions\Upwork\CalculateClientScore;
 use App\Contracts\OAuthable;
 use App\Http\Controllers\Auth\PipedriveController;
 use App\Http\Controllers\Auth\UpworkController;
+use App\Http\Controllers\Pipedrive\DealController;
 use App\Services\PipedriveAuthService;
 use App\Services\UpworkAuthService;
 use Illuminate\Support\Facades\URL;
@@ -28,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app
             ->when(PipedriveController::class)
+            ->needs(OAuthable::class)
+            ->give(PipedriveAuthService::class);
+
+        $this->app
+            ->when(DealController::class)
             ->needs(OAuthable::class)
             ->give(PipedriveAuthService::class);
     }
