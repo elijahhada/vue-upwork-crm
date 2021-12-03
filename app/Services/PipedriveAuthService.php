@@ -32,12 +32,12 @@ class PipedriveAuthService implements OAuthable
     public function setOAuthToken($token)
     {
         Session::put('pipedrive_token', $token);
-        Configuration::$oAuthToken->accessToken = $token->accessToken;
-        Configuration::$oAuthToken->tokenType = $token->tokenType;
-        Configuration::$oAuthToken->expiresIn = $token->expiresIn;
-        Configuration::$oAuthToken = $token->scope;
-        Configuration::$oAuthToken->scope = $token->expiry;
-        Configuration::$oAuthToken->refreshToken = $token->refreshToken;
+        Configuration::$oAuthToken->accessToken = '10061094:11350968:b19c8db49d677d7501b6adc7b4d4fada1c4ce5d4';
+        Configuration::$oAuthToken->tokenType = 'Bearer';
+        Configuration::$oAuthToken->expiresIn = 3599;
+        Configuration::$oAuthToken = 'base,deals:full,leads:full';
+        Configuration::$oAuthToken->scope = 1638524650;
+        Configuration::$oAuthToken->refreshToken = '10061094:11350968:e09b788649b6dca57d571b5a5a9178d637b6b650';
 //        Configuration::$oAuthToken = $token;
     }
 
