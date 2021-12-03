@@ -16,6 +16,7 @@ class PipedriveAuthService implements OAuthable
         var_dump(Session::get('pipedrive_token'));
         $this->setOAuthToken(Session::get('pipedrive_token'));
         $this->client = new Client(config('pipedrive.client_id'), config('pipedrive.client_secret'), url('/') . '/auth/pipedrive/callback');
+        $this->client->auth()->authorize('10061094.11350968.aca66c57b577c37487a6c8e38377b6f05397141c');
     }
 
     public function buildAuthUrl()
