@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\PipedriveController;
 use App\Http\Controllers\Auth\UpworkController;
 use App\Services\PipedriveAuthService;
 use App\Services\UpworkAuthService;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Pipedrive\Configuration;
@@ -45,6 +46,8 @@ class AppServiceProvider extends ServiceProvider
 
         Configuration::$oAuthTokenUpdateCallback = function ($token) {
             session()->put('pipedrive_token', $token);
+            Log::info('service provider has been touched');
+            Configuration::$oAuthToken = $token;
         };
     }
 }
