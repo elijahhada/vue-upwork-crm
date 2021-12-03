@@ -20,12 +20,11 @@ class PipedriveController extends Controller
 
     public function index()
     {
-        dd($this->service->buildAuthUrl());
         return redirect()->to($this->service->buildAuthUrl());
     }
 
     public function callback(Request $request)
-    {
+    {dd($request);
         $userInfo = $this->service->authorize($request->code)->getUserInfo();
 
         abort_if(!$userInfo, 404, 'Whoops, we get an error!');
