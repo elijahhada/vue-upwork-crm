@@ -26,7 +26,6 @@ class PipedriveController extends Controller
     public function callback(Request $request)
     {
         $userInfo = $this->service->authorize($request->code)->getUserInfo();
-        dd($userInfo);
 
         abort_if(!$userInfo, 404, 'Whoops, we get an error!');
 
