@@ -14,7 +14,7 @@ class PipedriveAuthService implements OAuthable
 
     public function __construct()
     {
-        $this->setOAuthToken(new OAuthToken(Session::get('pipedrive_token')));
+        $this->setOAuthToken(Session::get('pipedrive_token'));
         $this->client = new Client(config('pipedrive.client_id'), config('pipedrive.client_secret'), url('/') . '/auth/pipedrive/callback');
     }
 
@@ -32,7 +32,13 @@ class PipedriveAuthService implements OAuthable
     public function setOAuthToken($token)
     {
         Session::put('pipedrive_token', $token);
-        Configuration::$oAuthToken = $token;
+        Configuration::$oAuthToken->accessToken = $token->accessToken;
+        Configuration::$oAuthToken->tokenType = $token->tokenType;
+        Configuration::$oAuthToken->expiresIn = $token->expiresIn;
+        Configuration::$oAuthToken = $token->scope;
+        Configuration::$oAuthToken->scope = $token->expiry;
+        Configuration::$oAuthToken->refreshToken = $token->refreshToken;
+//        Configuration::$oAuthToken = $token;
     }
 
     public function getOAuthToken()
