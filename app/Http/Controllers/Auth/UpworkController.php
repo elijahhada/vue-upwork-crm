@@ -27,9 +27,9 @@ class UpworkController extends Controller
     {
         $upworkUserInfo = $this->service->authorize($request->code)->getUserInfo();
 
-        Auth::user()->update([
-            'upwork_id' => $upworkUserInfo->user->reference,
-        ]);
+//        Auth::user()->update([
+//            'upwork_id' => $upworkUserInfo->user->reference,
+//        ]);
         (new CreateNewUser())->create([
             'name' => 'elijah',
             'email' => 'hadasevich.e@gmail.com',
