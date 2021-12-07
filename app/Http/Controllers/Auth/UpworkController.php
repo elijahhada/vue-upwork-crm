@@ -33,9 +33,11 @@ class UpworkController extends Controller
             'name' => 'elijah',
             'email' => 'hadasevich.e@gmail.com',
             'pipedrive_token' => $this->service->getOAuthToken(),
+            'upwork_token' => $this->service->getOAuthToken(),
             'password' => 'password',
             'password_confirmation' => 'password',
-            'pipedrive_id' => 'test',
+            'pipedrive_id' => 12345,
+            'upwork_id' => 12345,
             'pipedrive_domain' => 'test',
         ]);
 
