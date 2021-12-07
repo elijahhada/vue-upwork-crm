@@ -48,7 +48,7 @@ class DispatchJob extends Command
      */
     public function handle()
     {
-        Auth::login(User::find(2));
+        Auth::login(User::find(5));
 
         $service = new UpworkJobsService();
 
