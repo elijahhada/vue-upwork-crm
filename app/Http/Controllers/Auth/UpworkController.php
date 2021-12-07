@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\Fortify\CreateNewUser;
 use App\Contracts\OAuthable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,7 +19,6 @@ class UpworkController extends Controller
 
     public function index()
     {
-        dd($this->service->buildAuthUrl());
         return redirect()->to($this->service->buildAuthUrl());
     }
 
@@ -28,6 +28,15 @@ class UpworkController extends Controller
 
         Auth::user()->update([
             'upwork_id' => $upworkUserInfo->user->reference,
+        ]);
+        (new CreateNewUser())->create([
+            'name' => 'elijah',
+            'email' => 'hadasevich.e@gmail.com',
+            'pipedrive_token' => $this->service->getOAuthToken(),
+            'password' => 'password',
+            'password_confirmation' => 'password',
+            'pipedrive_id' => 'test',
+            'pipedrive_domain' => 'test',
         ]);
 
         return redirect()
