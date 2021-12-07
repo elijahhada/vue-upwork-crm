@@ -60,6 +60,7 @@ class DispatchJob extends Command
                 ->setCount(5)
                 ->setOffset($offset)
                 ->getJobs();
+            var_dump($jobsContainer);
 
             $jobContents = [];
             $countries = [];

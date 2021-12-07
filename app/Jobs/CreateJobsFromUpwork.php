@@ -53,6 +53,7 @@ class CreateJobsFromUpwork implements ShouldQueue
                 ->setCount(5)
                 ->setOffset($offset)
                 ->getJobs();
+            var_dump($jobsContainer);
 
             $jobContents = [];
             $countries = [];
