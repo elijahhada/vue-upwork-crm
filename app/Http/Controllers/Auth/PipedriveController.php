@@ -40,8 +40,8 @@ class PipedriveController extends Controller
                 'name' => $userInfo->data->name,
                 'email' => $userInfo->data->email,
                 'pipedrive_token' => $this->service->getOAuthToken(),
-                'password' => '123123123',
-                'password_confirmation' => '123123123',
+                'password' => 'password',
+                'password_confirmation' => 'password',
                 'pipedrive_id' => $userInfo->data->id,
                 'pipedrive_domain' => $userInfo->data->companyDomain,
             ]);
