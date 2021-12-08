@@ -36,7 +36,7 @@
                     <div
                         class="bg-gray-200 text-black rounded font-normal mr-6 flex items-center"
                         :class="{ 'bg-green-500 text-white': selectedKits.includes(filter.id) }">
-                        <p class="rounded-l py-3 px-3 cursor-pointer hover:bg-green-500 hover:text-white" @click="toggleSelectedKits(filter.id)">{{ filter.title }}</p>
+                        <p class="rounded-l py-3 px-3 cursor-pointer hover:bg-green-500 hover:text-white w-max" @click="toggleSelectedKits(filter.id)">{{ filter.title }}</p>
                         <button class="rounded-r open-filters py-3 px-3 border-l border-gray-400 cursor-pointer hover:bg-green-500 hover:text-white" @click.stop="showFilterFrom(filter)">...</button>
                     </div>
                 </div>

@@ -4159,9 +4159,6 @@ __webpack_require__.r(__webpack_exports__);
       this.dropdownTechs();
     },
     addTech: function addTech(i, el) {
-      console.log(i);
-      console.log(el);
-
       if (this.selectedTechsList.length > 0) {
         this.techsList.push(this.selectedTechsList[0]);
         this.selectedTechsList = [];
@@ -48353,7 +48350,7 @@ var render = function () {
                         "p",
                         {
                           staticClass:
-                            "rounded-l py-3 px-3 cursor-pointer hover:bg-green-500 hover:text-white",
+                            "rounded-l py-3 px-3 cursor-pointer hover:bg-green-500 hover:text-white w-max",
                           on: {
                             click: function ($event) {
                               return _vm.toggleSelectedKits(filter.id)
@@ -48703,7 +48700,7 @@ var render = function () {
               ],
             },
           },
-          [_vm._v("Take" + _vm._s(_vm.id))]
+          [_vm._v("Take")]
         ),
         _vm._v(" "),
         _c(

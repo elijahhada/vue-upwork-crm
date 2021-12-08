@@ -166,8 +166,6 @@ export default {
             this.dropdownTechs();
         },
         addTech(i, el) {
-            console.log(i);
-            console.log(el);
             if(this.selectedTechsList.length > 0) {
                 this.techsList.push(this.selectedTechsList[0]);
                 this.selectedTechsList = [];
