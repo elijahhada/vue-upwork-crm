@@ -3923,17 +3923,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     showModal: function showModal() {
-      console.log('worked');
-      axios.get('/pipedrive/deal/add').then(function (res) {
-        return console.log(res);
-      })["catch"](function (error) {
-        return console.log(error);
-      }); // this.$inertia.get(this.route('pipedrive.deal.add'));
-
+      this.$inertia.get(this.route('pipedrive.deal.add'));
       this.$modal.show(_Modals_AddDeal__WEBPACK_IMPORTED_MODULE_0__["default"]);
     },
-    changeStatus: function changeStatus(status) {
+    loadJobToStore: function loadJobToStore(jobId) {
       var _this = this;
+
+      axios.get('/jobs/get-job/' + jobId).then(function (res) {
+        _this.$store.state.DealData = res.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    changeStatus: function changeStatus(status) {
+      var _this2 = this;
 
       var showModal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -3948,7 +3951,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         var action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
         socket.emit('job:speak', {
-          id: _this.id,
+          id: _this2.id,
           action: action
         });
       });
@@ -3958,13 +3961,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteJob: function deleteJob() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post('/jobs/delete', {
         id: this.id
       }).then(function (res) {
         socket.emit('job:speak', {
-          id: _this2.id,
+          id: _this3.id,
           action: 'delete'
         });
       });
@@ -4112,60 +4115,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  created: function created() {
+    this.loadPipedriveInfo();
+  },
   data: function data() {
     return {
-      techsList: [{
-        name: 'Laravel',
-        color: 'green'
-      }, {
-        name: 'Vue',
-        color: 'yellow'
-      }, {
-        name: 'Tailwind',
-        color: 'red'
-      }],
-      selectedTechsList: [{
-        name: 'PHP',
-        color: 'red'
-      }, {
-        name: 'JavaScript',
-        color: 'green'
-      }, {
-        name: 'Bootstarp',
-        color: 'yellow'
-      }],
+      profileId: null,
+      pipedriveInfo: null,
+      techsList: [],
+      selectedTechsList: [],
       isTechDroped: false
     };
   },
   methods: {
+    saveBid: function saveBid() {
+      var data = {
+        title: this.title,
+        owner_id: this.pipedriveInfo.currentUser.id,
+        person_id: this.profileId,
+        label_ids: this.selectedTechsList.map(function (item) {
+          return item.id;
+        })
+      };
+      axios.post('/pipedrive/store-deal', data).then(function (res) {})["catch"](function (error) {
+        console.log(error);
+      });
+      this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
+    },
     closeModalJob: function closeModalJob() {
       this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
       this.isTechDroped = false;
@@ -4182,17 +4159,44 @@ __webpack_require__.r(__webpack_exports__);
       this.dropdownTechs();
     },
     addTech: function addTech(i, el) {
+      console.log(i);
+      console.log(el);
+
+      if (this.selectedTechsList.length > 0) {
+        this.techsList.push(this.selectedTechsList[0]);
+        this.selectedTechsList = [];
+      }
+
       this.selectedTechsList.push(el);
       this.techsList.splice(i, 1);
 
       if (this.techsList.length == 0) {
         this.isTechDroped = false;
       }
+    },
+    loadPipedriveInfo: function loadPipedriveInfo() {
+      var _this = this;
+
+      axios.get('/pipedrive/user-info').then(function (res) {
+        _this.pipedriveInfo = res.data;
+        _this.techsList = res.data.labels;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   computed: {
     ModalJobSwitched: function ModalJobSwitched() {
       return this.$store.state.ModalJobSwitched;
+    },
+    title: function title() {
+      return this.$store.state.DealData.title;
+    },
+    date_created: function date_created() {
+      return this.$store.state.DealData.date_created;
+    },
+    url: function url() {
+      return this.$store.state.DealData.url;
     }
   }
 });
@@ -9450,7 +9454,9 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
   state: {
     ModalJobSwitched: false,
     GlobalCalendarSwitched: true,
-    GlobalCalendarUpdate: false
+    GlobalCalendarUpdate: false,
+    DealData: Object,
+    PipedriveInfo: Object
   },
   getters: {}
 }));
@@ -11728,7 +11734,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.parent-tech.focused[data-v-563a65ec] {\r\n    --tw-ring-color: #2563eb;\r\n    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\r\n    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\r\n    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\r\n    border-color: #2563eb;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.parent-tech.focused[data-v-563a65ec] {\n    --tw-ring-color: #2563eb;\n    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n    border-color: #2563eb;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11752,7 +11758,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.toast[data-v-02b1f7a4] {\n    width: 300px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 1rem;\n    box-shadow: 1px 5px 10px -5px rgba(0, 0, 0, 0.2);\n    position: relative;\n    z-index: 31;\n}\n.toast[data-v-02b1f7a4]::before {\n    content: \"\";\n    width: 4px;\n    height: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n.toast-icon[data-v-02b1f7a4] {\n    width: 16px;\n    height: 16px;\n    border-radius: 50%;\n    padding: 7px;\n}\n.toast-success .toast-icon svg[data-v-02b1f7a4] {\n    fill: #ecfdf5;\n    position: relative;\n    top: -7px;\n    left: -7px;\n}\n.toast-success[data-v-02b1f7a4] {\n    background: #ecfdf5;\n}\n.toast-success[data-v-02b1f7a4]::before, .toast-success .toast-icon[data-v-02b1f7a4] {\n    background: #34d399;\n}\n.toast-warning .toast-icon svg[data-v-02b1f7a4] {\n    fill: #fffbeb;\n    position: relative;\n    top: -7px;\n    left: -7px;\n}\n.toast-warning[data-v-02b1f7a4] {\n    background: #fffbeb;\n}\n.toast-warning[data-v-02b1f7a4]::before, .toast-warning .toast-icon[data-v-02b1f7a4] {\n    background: #f59e0b;\n}\n.toast-error .toast-icon svg[data-v-02b1f7a4] {\n    fill: #fef2f2;\n    position: relative;\n    top: -7px;\n    left: -7px;\n}\n.toast-error[data-v-02b1f7a4] {\n    background: #fef2f2;\n}\n.toast-error[data-v-02b1f7a4]::before, .toast-error .toast-icon[data-v-02b1f7a4] {\n    background: #ef4444;\n}\n.toast-content[data-v-02b1f7a4] {\n    flex-grow: 1;\n    margin: 0 1rem;\n}\n.toast-title[data-v-02b1f7a4] {\n    font-weight: 700;\n    margin-bottom: 0.5rem;\n}\n.toast-message[data-v-02b1f7a4] {\n    font-size: 14px;\n    color: #6b7280;\n}\n.toast-button[data-v-02b1f7a4] {\n    width: 1.5em;\n    height: 1.5em;\n    border: none;\n    padding: 0;\n    color: #9ca3af;\n    opacity: 0.7;\n    background: transparent;\n    cursor: pointer;\n    font-size: 1em;\n}\n.toast-button[data-v-02b1f7a4]:hover {\n    opacity: 1;\n}\n.bottom-left[data-v-02b1f7a4] {\n    position: fixed;\n    bottom: 20px;\n    left: 20px;\n}\n.top-left[data-v-02b1f7a4] {\n    position: fixed;\n    top: 20px;\n    left: 20px;\n}\n.bottom-right[data-v-02b1f7a4] {\n    position: fixed;\n    bottom: 20px;\n    right: 20px;\n}\n.top-right[data-v-02b1f7a4] {\n    position: fixed;\n    top: 20px;\n    right: 20px;\n}\n.rtl-enter-active[data-v-02b1f7a4],\n.rtl-leave-active[data-v-02b1f7a4] {\n    transition: all 0.5s ease-in-out;\n}\n.rtl-enter-from[data-v-02b1f7a4],\n.rtl-leave-to[data-v-02b1f7a4] {\n    transform: translateX(100%);\n}\n.rtl-leave-to[data-v-02b1f7a4] {\n    opacity: 0;\n}\n.ltr-enter-active[data-v-02b1f7a4],\n.ltr-leave-active[data-v-02b1f7a4] {\n    transition: all 0.5s ease-in-out;\n}\n.ltr-enter-from[data-v-02b1f7a4],\n.ltr-leave-to[data-v-02b1f7a4] {\n    transform: translateX(-100%);\n}\n.ltr-leave-to[data-v-02b1f7a4] {\n    opacity: 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.toast[data-v-02b1f7a4] {\r\n    width: 300px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 1rem;\r\n    box-shadow: 1px 5px 10px -5px rgba(0, 0, 0, 0.2);\r\n    position: relative;\r\n    z-index: 31;\n}\n.toast[data-v-02b1f7a4]::before {\r\n    content: \"\";\r\n    width: 4px;\r\n    height: 100%;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\n}\n.toast-icon[data-v-02b1f7a4] {\r\n    width: 16px;\r\n    height: 16px;\r\n    border-radius: 50%;\r\n    padding: 7px;\n}\n.toast-success .toast-icon svg[data-v-02b1f7a4] {\r\n    fill: #ecfdf5;\r\n    position: relative;\r\n    top: -7px;\r\n    left: -7px;\n}\n.toast-success[data-v-02b1f7a4] {\r\n    background: #ecfdf5;\n}\n.toast-success[data-v-02b1f7a4]::before, .toast-success .toast-icon[data-v-02b1f7a4] {\r\n    background: #34d399;\n}\n.toast-warning .toast-icon svg[data-v-02b1f7a4] {\r\n    fill: #fffbeb;\r\n    position: relative;\r\n    top: -7px;\r\n    left: -7px;\n}\n.toast-warning[data-v-02b1f7a4] {\r\n    background: #fffbeb;\n}\n.toast-warning[data-v-02b1f7a4]::before, .toast-warning .toast-icon[data-v-02b1f7a4] {\r\n    background: #f59e0b;\n}\n.toast-error .toast-icon svg[data-v-02b1f7a4] {\r\n    fill: #fef2f2;\r\n    position: relative;\r\n    top: -7px;\r\n    left: -7px;\n}\n.toast-error[data-v-02b1f7a4] {\r\n    background: #fef2f2;\n}\n.toast-error[data-v-02b1f7a4]::before, .toast-error .toast-icon[data-v-02b1f7a4] {\r\n    background: #ef4444;\n}\n.toast-content[data-v-02b1f7a4] {\r\n    flex-grow: 1;\r\n    margin: 0 1rem;\n}\n.toast-title[data-v-02b1f7a4] {\r\n    font-weight: 700;\r\n    margin-bottom: 0.5rem;\n}\n.toast-message[data-v-02b1f7a4] {\r\n    font-size: 14px;\r\n    color: #6b7280;\n}\n.toast-button[data-v-02b1f7a4] {\r\n    width: 1.5em;\r\n    height: 1.5em;\r\n    border: none;\r\n    padding: 0;\r\n    color: #9ca3af;\r\n    opacity: 0.7;\r\n    background: transparent;\r\n    cursor: pointer;\r\n    font-size: 1em;\n}\n.toast-button[data-v-02b1f7a4]:hover {\r\n    opacity: 1;\n}\n.bottom-left[data-v-02b1f7a4] {\r\n    position: fixed;\r\n    bottom: 20px;\r\n    left: 20px;\n}\n.top-left[data-v-02b1f7a4] {\r\n    position: fixed;\r\n    top: 20px;\r\n    left: 20px;\n}\n.bottom-right[data-v-02b1f7a4] {\r\n    position: fixed;\r\n    bottom: 20px;\r\n    right: 20px;\n}\n.top-right[data-v-02b1f7a4] {\r\n    position: fixed;\r\n    top: 20px;\r\n    right: 20px;\n}\n.rtl-enter-active[data-v-02b1f7a4],\r\n.rtl-leave-active[data-v-02b1f7a4] {\r\n    transition: all 0.5s ease-in-out;\n}\n.rtl-enter-from[data-v-02b1f7a4],\r\n.rtl-leave-to[data-v-02b1f7a4] {\r\n    transform: translateX(100%);\n}\n.rtl-leave-to[data-v-02b1f7a4] {\r\n    opacity: 0;\n}\n.ltr-enter-active[data-v-02b1f7a4],\r\n.ltr-leave-active[data-v-02b1f7a4] {\r\n    transition: all 0.5s ease-in-out;\n}\n.ltr-enter-from[data-v-02b1f7a4],\r\n.ltr-leave-to[data-v-02b1f7a4] {\r\n    transform: translateX(-100%);\n}\n.ltr-leave-to[data-v-02b1f7a4] {\r\n    opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11777,7 +11783,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*@import '../../css/style.css';*/\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*@import '../../css/style.css';*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48677,19 +48683,7 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "w-11/12 mb-12" }, [
-        _c("p", [
-          _c(
-            "span",
-            {
-              staticClass:
-                "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap",
-              on: { click: _vm.showModal },
-            },
-            [_vm._v("Show Feedbacks (3)")]
-          ),
-        ]),
-      ]),
+      _vm._m(1),
       _vm._v(" "),
       _c("div", { staticClass: "w-full flex justify-end items-center" }, [
         _c(
@@ -48698,13 +48692,18 @@ var render = function () {
             staticClass:
               "open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7",
             on: {
-              click: function ($event) {
-                $event.stopPropagation()
-                return _vm.changeStatus(1, true)
-              },
+              click: [
+                function ($event) {
+                  return _vm.loadJobToStore(_vm.id)
+                },
+                function ($event) {
+                  $event.stopPropagation()
+                  return _vm.changeStatus(1, true)
+                },
+              ],
             },
           },
-          [_vm._v("Take")]
+          [_vm._v("Take" + _vm._s(_vm.id))]
         ),
         _vm._v(" "),
         _c(
@@ -48741,6 +48740,23 @@ var staticRenderFns = [
       _vm._v(" April 24, 2015"),
     ])
   },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-11/12 mb-12" }, [
+      _c("p", [
+        _c(
+          "span",
+          {
+            staticClass:
+              "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap",
+          },
+          [_vm._v("Show Feedbacks (3)")]
+        ),
+      ]),
+    ])
+  },
 ]
 render._withStripped = true
 
@@ -48764,256 +48780,277 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    {
-      staticClass:
-        "fixed bg-white py-5 px-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-300 flex flex-col justify-between",
-      class: { hidden: !_vm.ModalJobSwitched },
-      attrs: { id: "take" },
-    },
-    [
-      _c(
-        "div",
+  return _vm.pipedriveInfo !== null
+    ? _c(
+        "section",
         {
           staticClass:
-            "f-full space-x-6 flex flex-nowrap justify-between items-start",
+            "fixed bg-white py-5 px-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-300 flex flex-col justify-between",
+          class: { hidden: !_vm.ModalJobSwitched },
+          attrs: { id: "take" },
         },
         [
           _c(
             "div",
             {
               staticClass:
-                "w-full h-full flex flex-col justify-start items-start",
+                "f-full space-x-6 flex flex-nowrap justify-between items-start",
             },
             [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-full mb-3 relative" }, [
-                _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-                  _vm._v("Technologies"),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "relative parent-tech w-full p-2 border border-gray-300 rounded-md focus:outline-none text-white flex flex-wrap justify-start items-center wrap",
-                    class: { focused: _vm.isTechDroped },
-                    on: {
-                      click: function ($event) {
-                        return _vm.dropdownTechs()
-                      },
-                    },
-                  },
-                  [
-                    _vm._l(_vm.selectedTechsList, function (item, index) {
-                      return _c(
-                        "p",
-                        {
-                          key: index,
-                          staticClass:
-                            "parent-button px-1 rounded-sm cursor-pointer mr-1.5 align-middle select-none",
-                          class: "bg-" + item.color + "-500",
-                          on: {
-                            click: function ($event) {
-                              return _vm.removeTech(index, item)
-                            },
-                          },
-                        },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(item.name) +
-                              " ×\n                        "
-                          ),
-                        ]
-                      )
-                    }),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "w-full h-full flex flex-col justify-start items-start",
+                },
+                [
+                  _c("div", { staticClass: "w-full mb-3" }, [
+                    _c(
+                      "p",
+                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      [_vm._v("Organization")]
+                    ),
                     _vm._v(" "),
-                    _c("img", {
+                    _c("input", {
                       staticClass:
-                        "open-drop-tech-menu mt-1 absolute right-3.5 top-4 select-none",
-                      attrs: {
-                        src: "/images/arrow-down-section.svg",
-                        alt: "arrow down",
-                      },
+                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200",
+                      attrs: { type: "text", disabled: "disabled" },
+                      domProps: { value: _vm.pipedriveInfo.currentUser.name },
                     }),
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  {
-                    staticClass:
-                      "\n                            absolute\n                            mt-2\n                            overflow-y-auto\n                            drop-menu-technologies\n                            bg-white\n                            w-full\n                            border border-gray-300\n                            rounded-md\n                            focus:outline-none\n                            text-white\n                            flex flex-col\n                            justify-start\n                            items-start\n                            wrap\n                            space-y-2\n                            shadow-lg\n                        ",
-                    class: { hidden: !_vm.isTechDroped },
-                  },
-                  _vm._l(_vm.techsList, function (item, index) {
-                    return _c(
-                      "li",
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-full mb-3" }, [
+                    _c(
+                      "p",
+                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      [_vm._v("Title")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass:
+                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.title },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-full mb-3 relative" }, [
+                    _c(
+                      "p",
+                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      [_vm._v("Technologies")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
                       {
-                        key: index,
                         staticClass:
-                          "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1",
+                          "relative parent-tech w-full p-2 border border-gray-300 rounded-md focus:outline-none text-white flex flex-wrap justify-start items-center wrap",
+                        class: { focused: _vm.isTechDroped },
                         on: {
                           click: function ($event) {
-                            return _vm.addTech(index, item)
+                            return _vm.dropdownTechs()
                           },
                         },
                       },
                       [
-                        _c(
-                          "span",
-                          {
-                            staticClass: "px-1 rounded-sm select-none",
-                            class: "bg-" + item.color + "-500",
+                        _vm._l(_vm.selectedTechsList, function (item, index) {
+                          return _c(
+                            "p",
+                            {
+                              key: index,
+                              staticClass:
+                                "parent-button px-1 rounded-sm cursor-pointer mr-1.5 align-middle select-none",
+                              class: "bg-" + item.color + "-500",
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(item.name) +
+                                  "\n                        "
+                              ),
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c("img", {
+                          staticClass:
+                            "open-drop-tech-menu mt-1 absolute right-3.5 top-4 select-none",
+                          attrs: {
+                            src: "/images/arrow-down-section.svg",
+                            alt: "arrow down",
                           },
-                          [_vm._v(_vm._s(item.name))]
-                        ),
-                      ]
-                    )
-                  }),
-                  0
-                ),
-              ]),
+                        }),
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      {
+                        staticClass:
+                          "\n                            absolute\n                            mt-2\n                            overflow-y-auto\n                            drop-menu-technologies\n                            bg-white\n                            w-full\n                            border border-gray-300\n                            rounded-md\n                            focus:outline-none\n                            text-white\n                            flex flex-col\n                            justify-start\n                            items-start\n                            wrap\n                            space-y-2\n                            shadow-lg\n                        ",
+                        class: { hidden: !_vm.isTechDroped },
+                      },
+                      _vm._l(_vm.techsList, function (item, index) {
+                        return _c(
+                          "li",
+                          {
+                            key: index,
+                            staticClass:
+                              "tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1",
+                            on: {
+                              click: function ($event) {
+                                return _vm.addTech(index, item)
+                              },
+                            },
+                          },
+                          [
+                            _c(
+                              "span",
+                              {
+                                staticClass: "px-1 rounded-sm select-none",
+                                class: "bg-" + item.color + "-500",
+                              },
+                              [_vm._v(_vm._s(item.name))]
+                            ),
+                          ]
+                        )
+                      }),
+                      0
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-full mb-3" }, [
+                    _c(
+                      "p",
+                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      [_vm._v("Time of job creation")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass:
+                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200",
+                      attrs: { type: "text", disabled: "disabled" },
+                      domProps: { value: _vm.date_created },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-full mb-3" }, [
+                    _c(
+                      "p",
+                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      [_vm._v("Bid profile")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.profileId,
+                            expression: "profileId",
+                          },
+                        ],
+                        staticClass:
+                          "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+                        attrs: { name: "", id: "" },
+                        on: {
+                          change: function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.profileId = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                        },
+                      },
+                      _vm._l(
+                        _vm.pipedriveInfo.bidOwners,
+                        function (owner, key) {
+                          return _c(
+                            "option",
+                            { key: key, domProps: { value: owner.id } },
+                            [_vm._v(_vm._s(owner.name))]
+                          )
+                        }
+                      ),
+                      0
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-full mb-3" }, [
+                    _c(
+                      "p",
+                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      [_vm._v("Job posting")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass:
+                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200",
+                      attrs: { type: "text", disabled: "disabled" },
+                      domProps: { value: _vm.url },
+                    }),
+                  ]),
+                ]
+              ),
               _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _vm._m(4),
-              _vm._v(" "),
-              _vm._m(5),
-              _vm._v(" "),
-              _vm._m(6),
+              _vm._m(1),
             ]
           ),
           _vm._v(" "),
-          _vm._m(7),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "w-full h-full mt-4 flex justify-end items-start" },
-        [
-          _c("div", { staticClass: "flex space-x-4" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "close-take rounded-full border border-gray-300 px-12 py-3 text-black hover:bg-green-500 hover:text-white hover:border-green-500",
-                on: {
-                  click: function ($event) {
-                    $event.stopPropagation()
-                    return _vm.closeModalJob.apply(null, arguments)
+          _c(
+            "div",
+            { staticClass: "w-full h-full mt-4 flex justify-end items-start" },
+            [
+              _c("div", { staticClass: "flex space-x-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "close-take rounded-full border border-gray-300 px-12 py-3 text-black hover:bg-green-500 hover:text-white hover:border-green-500",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.closeModalJob.apply(null, arguments)
+                      },
+                    },
                   },
-                },
-              },
-              [_vm._v("\n                    Cancel\n                ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "rounded-full border border-green-500 bg-green-500 px-12 py-3 text-white hover:bg-white hover:text-black",
-              },
-              [_vm._v("Save")]
-            ),
-          ]),
+                  [_vm._v("\n                    Cancel\n                ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "rounded-full border border-green-500 bg-green-500 px-12 py-3 text-white hover:bg-white hover:text-black",
+                    on: {
+                      click: function ($event) {
+                        return _vm.saveBid()
+                      },
+                    },
+                  },
+                  [_vm._v("Save")]
+                ),
+              ]),
+            ]
+          ),
         ]
-      ),
-    ]
-  )
+      )
+    : _vm._e()
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mb-3" }, [
-      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Organization"),
-      ]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass:
-            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-        },
-        [
-          _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("Vasterra"),
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Company name")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Company name")]),
-        ]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mb-3" }, [
-      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Title"),
-      ]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass:
-            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-        },
-        [
-          _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("Mobile Desktop responsive UI UX redes"),
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")]),
-        ]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mb-3" }, [
-      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Owner"),
-      ]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass:
-            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-          attrs: { name: "", id: "" },
-        },
-        [
-          _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("Artem M (You)"),
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Name2")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Name3")]),
-        ]
-      ),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -49023,107 +49060,15 @@ var staticRenderFns = [
         _vm._v("Time of bid"),
       ]),
       _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass:
-            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-          attrs: { name: "", id: "" },
+      _c("input", {
+        staticClass:
+          "p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200",
+        attrs: {
+          type: "text",
+          value: "will be set as current time",
+          disabled: "disabled",
         },
-        [
-          _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("15:15"),
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("15:16")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("15:17")]),
-        ]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mb-3" }, [
-      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Time after job creation"),
-      ]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass:
-            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-          attrs: { name: "", id: "" },
-        },
-        [
-          _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("15:45"),
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("15:55")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("17:45")]),
-        ]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mb-3" }, [
-      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Bid profile"),
-      ]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass:
-            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-          attrs: { name: "", id: "" },
-        },
-        [
-          _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("Artem Mazurchak"),
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")]),
-        ]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mb-3" }, [
-      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Job posting"),
-      ]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass:
-            "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-          attrs: { name: "", id: "" },
-        },
-        [
-          _c("option", { attrs: { value: "", selected: "" } }, [
-            _vm._v("https://docs.google.com/document/d/1xxs"),
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Title2")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("Title3")]),
-        ]
-      ),
+      }),
     ])
   },
   function () {
@@ -49139,23 +49084,11 @@ var staticRenderFns = [
             _vm._v("Task link"),
           ]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
-              staticClass:
-                "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-              attrs: { name: "", id: "" },
-            },
-            [
-              _c("option", { attrs: { value: "", selected: "" } }, [
-                _vm._v("https://ac.vasterra.com/projects/663?modal=Taskс"),
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "" } }, [_vm._v("link 2")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "" } }, [_vm._v("link3")]),
-            ]
-          ),
+          _c("input", {
+            staticClass:
+              "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+            attrs: { type: "text" },
+          }),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-full mb-3" }, [

@@ -68,3 +68,6 @@ Route::get('/auth/pipedrive', [\App\Http\Controllers\Auth\PipedriveController::c
 Route::get('/auth/pipedrive/callback', [\App\Http\Controllers\Auth\PipedriveController::class, 'callback'])
     ->name('auth.pipedrive.callback')
     ->middleware('guest');
+Route::get('/pipedrive/user-info', [\App\Http\Controllers\JobController::class, 'info']);
+Route::get('/jobs/get-job/{id}', [\App\Http\Controllers\JobController::class, 'getJob']);
+Route::post('/pipedrive/store-deal', [\App\Http\Controllers\JobController::class, 'storeDeal']);

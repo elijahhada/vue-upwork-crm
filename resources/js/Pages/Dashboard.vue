@@ -169,7 +169,7 @@ export default {
                 this.showToast = true;
                 console.log('something in kits have been changed');
             });
-        },
+        }
     },
 };
 </script>

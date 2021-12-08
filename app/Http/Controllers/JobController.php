@@ -8,6 +8,8 @@ use App\Models\Country;
 use App\Models\Filter;
 use App\Models\Job;
 use App\Models\KeyWord;
+use Carbon\Carbon;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -211,5 +213,89 @@ class JobController extends Controller
         }
 
         return $jobs->paginate(10);
+    }
+
+    public function info()
+    {
+        $client = new Client();
+        $user = Auth::user();
+
+        if(Carbon::now()->diffInMinutes(Carbon::parse($user->updated_at)->toDateTimeString()) > 55) {
+            $auth = [
+                config('pipedrive.client_id'),
+                config('pipedrive.client_secret')
+            ];
+            $formParams = [
+                'grant_type' => 'refresh_token',
+                'refresh_token' => $user['pipedrive_token']['refresh_token']
+            ];
+            $updateTokenResponse = $client->request('POST', 'https://oauth.pipedrive.com/oauth/token', ['auth' => $auth, 'form_params' => $formParams]);
+            $user->pipedrive_token = json_decode($updateTokenResponse->getBody()->getContents(), true);
+            $user->save();
+        }
+        $bearer = $user['pipedrive_token']['access_token'];
+
+        $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/users', ['headers' => ['Authorization' => 'Bearer ' . $bearer]])
+            ->getBody()
+            ->getContents();
+        $usersData = json_decode($response, true);
+        $result = [];
+        if ($usersData['success']){
+            $result['bidOwners'] = [];
+            foreach ($usersData['data'] as $userItem){
+                if($user->email == $userItem['email']){
+                    $result['currentUser'] = $userItem;
+                }
+                if($userItem['email'] == 'artem.mazurchak@gmail.com'){
+                    array_push($result['bidOwners'], $userItem);
+                }
+            }
+        }
+        $labelsResponse = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/leadLabels', ['headers' => ['Authorization' => 'Bearer ' . $bearer]])
+            ->getBody()
+            ->getContents();
+        $result['labels'] = json_decode($labelsResponse, true)['data'];
+
+        return $result;
+    }
+
+    public function getJob($id)
+    {
+        return Job::find(['id'=>$id])->first();
+    }
+
+    public function storeDeal(Request $request)
+    {
+        try {
+            $client = new Client();
+            $user = Auth::user();
+            if(Carbon::now()->diffInMinutes(Carbon::parse($user->updated_at)->toDateTimeString()) > 55) {
+                $auth = [
+                    config('pipedrive.client_id'),
+                    config('pipedrive.client_secret')
+                ];
+                $formParams = [
+                    'grant_type' => 'refresh_token',
+                    'refresh_token' => $user['pipedrive_token']['refresh_token']
+                ];
+                $updateTokenResponse = $client->request('POST', 'https://oauth.pipedrive.com/oauth/token', ['auth' => $auth, 'form_params' => $formParams]);
+                $user->pipedrive_token = json_decode($updateTokenResponse->getBody()->getContents(), true);
+                $user->save();
+            }
+            $bearer = $user['pipedrive_token']['access_token'];
+
+            $data = [
+                'title' => $request->title,
+                'owner_id' => $request->owner_id,
+                'person_id' => 1,
+                'label_ids' => $request->label_ids,
+            ];
+            $response = $client->request('POST', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/leads', ['headers' => ['Authorization' => 'Bearer ' . $bearer], 'json' => $data])->getBody()->getContents();
+            $result = json_decode($response, true);
+        } catch (\Exception $exception) {
+            $result = $exception->getMessage();
+        }
+
+        return response()->json(['data' => $result]);
     }
 }

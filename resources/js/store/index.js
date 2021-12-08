@@ -7,7 +7,9 @@ export default new Vuex.Store({
     state: {
         ModalJobSwitched: false,
         GlobalCalendarSwitched: true,
-        GlobalCalendarUpdate: false
+        GlobalCalendarUpdate: false,
+        DealData: Object,
+        PipedriveInfo: Object,
     },
     getters: {}
 });

@@ -35,11 +35,6 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
-        'pipedrive_id',
-        'pipedrive_token',
-        'pipedrive_domain',
-        'upwork_id',
-        'upwork_token',
     ];
 
     /**

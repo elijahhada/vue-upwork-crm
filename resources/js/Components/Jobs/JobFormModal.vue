@@ -1,5 +1,6 @@
 <template>
     <section
+        v-if="pipedriveInfo !== null"
         id="take"
         class="fixed bg-white py-5 px-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-300 flex flex-col justify-between"
         :class="{ hidden: !ModalJobSwitched }">
@@ -7,20 +8,18 @@
             <div class="w-full h-full flex flex-col justify-start items-start">
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Organization</p>
-                    <select class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
-                        <option value="" selected>Vasterra</option>
-                        <option value="">Company name</option>
-                        <option value="">Company name</option>
-                    </select>
+                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200" :value="pipedriveInfo.currentUser.name" disabled="disabled">
                 </div>
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Title</p>
-                    <select class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
-                        <option value="" selected>Mobile Desktop responsive UI UX redes</option>
-                        <option value="">Title2</option>
-                        <option value="">Title3</option>
-                    </select>
+                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none" :value="title">
                 </div>
+<!--                <div class="w-full mb-3 relative">-->
+<!--                    <p class="text-xs pl-2 text-gray-300 mb-1">Technologies</p>-->
+<!--                    <select id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">-->
+<!--                        <option v-for="(label, key) in pipedriveInfo.labels" :key="key" value="" :class="'bg-' + label.color + '-500'">{{label.name}}</option>-->
+<!--                    </select>-->
+<!--                </div>-->
                 <div class="w-full mb-3 relative">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Technologies</p>
                     <div
@@ -32,8 +31,8 @@
                             :key="index"
                             class="parent-button px-1 rounded-sm cursor-pointer mr-1.5 align-middle select-none"
                             :class="'bg-' + item.color + '-500'"
-                            @click="removeTech(index, item)">
-                            {{ item.name }} ×
+                            >
+                            {{ item.name }}
                         </p>
                         <img class="open-drop-tech-menu mt-1 absolute right-3.5 top-4 select-none" src="/images/arrow-down-section.svg" alt="arrow down" />
                     </div>
@@ -64,54 +63,28 @@
                 </div>
 
                 <div class="w-full mb-3">
-                    <p class="text-xs pl-2 text-gray-300 mb-1">Owner</p>
-                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
-                        <option value="" selected>Artem M (You)</option>
-                        <option value="">Name2</option>
-                        <option value="">Name3</option>
-                    </select>
-                </div>
-                <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Time of bid</p>
-                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
-                        <option value="" selected>15:15</option>
-                        <option value="">15:16</option>
-                        <option value="">15:17</option>
-                    </select>
+                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200" value="will be set as current time" disabled="disabled">
                 </div>
                 <div class="w-full mb-3">
-                    <p class="text-xs pl-2 text-gray-300 mb-1">Time after job creation</p>
-                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
-                        <option value="" selected>15:45</option>
-                        <option value="">15:55</option>
-                        <option value="">17:45</option>
-                    </select>
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Time of job creation</p>
+                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200" :value="date_created" disabled="disabled">
                 </div>
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Bid profile</p>
-                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
-                        <option value="" selected>Artem Mazurchak</option>
-                        <option value="">Title2</option>
-                        <option value="">Title3</option>
+                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none" v-model="profileId">
+                        <option v-for="(owner, key) in pipedriveInfo.bidOwners" :key="key" :value="owner.id">{{owner.name}}</option>
                     </select>
                 </div>
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Job posting</p>
-                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
-                        <option value="" selected>https://docs.google.com/document/d/1xxs</option>
-                        <option value="">Title2</option>
-                        <option value="">Title3</option>
-                    </select>
+                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200" :value="url" disabled="disabled">
                 </div>
             </div>
             <div class="w-full h-full flex flex-col justify-start items-start">
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Task link</p>
-                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
-                        <option value="" selected>https://ac.vasterra.com/projects/663?modal=Taskс</option>
-                        <option value="">link 2</option>
-                        <option value="">link3</option>
-                    </select>
+                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
                 </div>
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Invite</p>
@@ -143,7 +116,7 @@ Best regards, Artem
                 <button class="close-take rounded-full border border-gray-300 px-12 py-3 text-black hover:bg-green-500 hover:text-white hover:border-green-500" @click.stop="closeModalJob">
                     Cancel
                 </button>
-                <button class="rounded-full border border-green-500 bg-green-500 px-12 py-3 text-white hover:bg-white hover:text-black">Save</button>
+                <button class="rounded-full border border-green-500 bg-green-500 px-12 py-3 text-white hover:bg-white hover:text-black" @click="saveBid()">Save</button>
             </div>
         </div>
     </section>
@@ -151,40 +124,32 @@ Best regards, Artem
 
 <script>
 export default {
+    created() {
+      this.loadPipedriveInfo();
+    },
     data() {
         return {
-            techsList: [
-                {
-                    name: 'Laravel',
-                    color: 'green',
-                },
-                {
-                    name: 'Vue',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Tailwind',
-                    color: 'red',
-                },
-            ],
-            selectedTechsList: [
-                {
-                    name: 'PHP',
-                    color: 'red',
-                },
-                {
-                    name: 'JavaScript',
-                    color: 'green',
-                },
-                {
-                    name: 'Bootstarp',
-                    color: 'yellow',
-                },
-            ],
+            profileId: null,
+            pipedriveInfo: null,
+            techsList: [],
+            selectedTechsList: [],
             isTechDroped: false,
         };
     },
     methods: {
+        saveBid() {
+            const data = {
+                title: this.title,
+                owner_id: this.pipedriveInfo.currentUser.id,
+                person_id: this.profileId,
+                label_ids: this.selectedTechsList.map(item => item.id),
+            };
+            axios.post('/pipedrive/store-deal', data).then(res => {
+            }).catch(error => {
+                console.log(error);
+            })
+            this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
+        },
         closeModalJob() {
             this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
             this.isTechDroped = false;
@@ -201,16 +166,39 @@ export default {
             this.dropdownTechs();
         },
         addTech(i, el) {
+            console.log(i);
+            console.log(el);
+            if(this.selectedTechsList.length > 0) {
+                this.techsList.push(this.selectedTechsList[0]);
+                this.selectedTechsList = [];
+            }
             this.selectedTechsList.push(el);
             this.techsList.splice(i, 1);
             if (this.techsList.length == 0) {
                 this.isTechDroped = false;
             }
         },
+        loadPipedriveInfo() {
+            axios.get('/pipedrive/user-info').then(res => {
+                this.pipedriveInfo = res.data;
+                this.techsList = res.data.labels;
+            }).catch(error => {
+                console.log(error);
+            })
+        },
     },
     computed: {
         ModalJobSwitched() {
             return this.$store.state.ModalJobSwitched;
+        },
+        title() {
+            return this.$store.state.DealData.title;
+        },
+        date_created() {
+            return this.$store.state.DealData.date_created;
+        },
+        url() {
+            return this.$store.state.DealData.url;
         },
     },
 };

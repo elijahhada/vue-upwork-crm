@@ -46,7 +46,7 @@
             <p><span class="text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap">Show Feedbacks (3)</span></p>
         </div>
         <div class="w-full flex justify-end items-center">
-            <button class="open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7" @click.stop="changeStatus(1, true)">Take</button>
+            <button class="open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7" @click="loadJobToStore(id)" @click.stop="changeStatus(1, true)">Take{{id}}</button>
             <button class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white" @click.stop="changeStatus(isThinking ? null : 2)">
                 {{ isThinking ? 'Reconsider' : 'Think' }}
             </button>
@@ -166,6 +166,13 @@ export default {
         showModal() {
             this.$inertia.get(this.route('pipedrive.deal.add'));
             this.$modal.show(AddDeal);
+        },
+        loadJobToStore(jobId) {
+            axios.get('/jobs/get-job/' + jobId).then(res => {
+                this.$store.state.DealData = res.data;
+            }).catch(error => {
+                console.log(error);
+            })
         },
         changeStatus(status, showModal = false) {
             if (showModal) {
