@@ -102,11 +102,14 @@ export default {
                     kits: kits,
                 })
                 .then((response) => {
+                    console.log(response);
                     this.data = response.data.data.filter((j) => j.status !== 1);
                     this.jobsData = response.data;
                     this.$forceUpdate();
                     this.isReloading = false;
-                });
+                }).catch(error => {
+                    console.log(error);
+            });
         },
     },
     methods: {

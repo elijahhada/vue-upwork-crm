@@ -104,7 +104,7 @@
                 <div class="flex flex-wrap justify-content-start items-start">
                     <button
                         class="cursor-pointer bg-gray-200 text-black rounded px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
-                        v-for="(word, index) in exseptionWords">
+                        v-for="(word, index) in exceptionWords">
                         <p class="mr-2">{{ word }}</p>
                         <p class="py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500" title="Delete word" @click="deleteWord(index)">×</p>
                     </button>
@@ -144,7 +144,7 @@ export default {
     data() {
         return {
             createdKitTitle: '',
-            exseptionWords: [],
+            exceptionWords: [],
             customKeyWords: [],
             newWord: '',
             newKeyWord: '',
@@ -184,12 +184,12 @@ export default {
             document.querySelector('.save-word-input').classList.add('hidden');
         },
         saveWord() {
-            if (this.newWord != false) this.exseptionWords.push(this.newWord.trim());
+            if (this.newWord != false) this.exceptionWords.push(this.newWord.trim());
             this.newWord = '';
             this.closeAddWord();
         },
         deleteWord(i) {
-            this.exseptionWords.splice(i, 1);
+            this.exceptionWords.splice(i, 1);
         },
         openAddKeyWord() {
             document.querySelector('.add-key-word').classList.add('hidden');
@@ -228,7 +228,7 @@ export default {
             });
 
             if (!this.createdKitTitle) return alert('Введите название фильтра!');
-            if (!countries.length && !categories.length && !keyWords.length && !this.exseptionWords.length) return alert('Введите параметр(ы) фильтра!');
+            if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length) return alert('Введите параметр(ы) фильтра!');
 
             axios
                 .post('/add-filter', {
@@ -237,18 +237,21 @@ export default {
                     countries_ids: countries.join(','),
                     categories_ids: categories.join(','),
                     key_words_ids: keyWords.join(','),
-                    exseption_words: this.exseptionWords.join('_|_'),
-                    custom_key_words: this.customKeyWords.join(','),
+                    exception_words_ids: this.exceptionWords.join(','),
+                    custom_key_words_ids: this.customKeyWords.join(','),
                 })
                 .then((response) => {
+                    console.log(response);
                     this.filter = response.data;
                     socket.emit('kits:speak', {});
+                }).catch(error => {
+                    console.log(error);
                 });
 
             this.createdKitTitle = '';
             this.allCheck(this.countries, false);
             this.allCheck(this.categories, false);
-            this.exseptionWords = [];
+            this.exceptionWords = [];
             return alert('Success!');
         },
         closeKit() {

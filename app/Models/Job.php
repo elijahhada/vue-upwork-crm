@@ -58,6 +58,21 @@ class Job extends Model
         return $this->belongsTo(User::class, 'blocked_user_id', 'id');
     }
 
+    public function exceptionWords()
+    {
+        return $this->belongsToMany(ExceptionWord::class,'exception_word_job', 'job_id', 'exception_word_id');
+    }
+
+    public function keyWords()
+    {
+        return $this->belongsToMany(KeyWord::class,'key_word_job', 'job_id', 'key_word_id');
+    }
+
+    public function customKeyWords()
+    {
+        return $this->belongsToMany(CustomKeyWord::class,'custom_key_word_job', 'job_id', 'custom_key_word_id');
+    }
+
     public function getClientFeedbackAttribute($value)
     {
         return number_format($value, 2);

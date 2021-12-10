@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class KeyWord extends Model
+class CustomKeyWord extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,6 @@ class KeyWord extends Model
 
     public function jobs()
     {
-        return $this->belongsToMany(Job::class,'key_word_job', 'key_word_id', 'job_id');
+        return $this->belongsToMany(Job::class,'custom_key_word_job', 'custom_key_word_id', 'job_id');
     }
 }

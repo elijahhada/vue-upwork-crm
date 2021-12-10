@@ -92,7 +92,7 @@
             </div>
         </div>
         <div class="mb-12 flex nowrap">
-            <input type="text" placeholder="New word" class="input-key-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none" v-model="newWord" />
+            <input type="text" placeholder="New word" class="input-key-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none" v-model="newKeyWord" />
             <button class="rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 add-key-word" @click.stop="openAddKeyWord()">+ Add word</button>
             <button class="rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 save-key-word-input hidden mr-4" @click.stop="saveKeyWord()">Save</button>
             <button class="rounded rounded-full bg-gray-500 text-white py-3 px-5 hover:bg-gray-700 close-key-word-input hidden" @click.stop="closeAddKeyWord()">Close</button>
@@ -103,7 +103,7 @@
             <div class="flex flex-wrap justify-content-start items-start">
                 <button
                     class="cursor-pointer bg-gray-200 text-black rounded px-3 font-normal mr-4 hover:bg-green-500 hover:text-white flex items-center active-button"
-                    v-for="(word, index) in exseptionWords">
+                    v-for="(word, index) in exceptionWords">
                     <p class="mr-2">{{ word }}</p>
                     <p class="py-2 pl-3 pr-1 border-l border-gray-400 exception-words text-2xl hover:text-red-500" title="Delete word" @click="deleteWord(index)">×</p>
                 </button>
@@ -145,7 +145,7 @@ export default {
     data() {
         return {
             createdKitTitle: '',
-            exseptionWords: [],
+            exceptionWords: [],
             customKeyWords: [],
             newWord: '',
             newKeyWord: '',
@@ -174,13 +174,13 @@ export default {
                 if (filter.key_words_ids.split(',').map(Number).includes(item.id)) item.checked = !item.checked;
             });
         }
-        if (filter.exseption_words) {
-            filter.exseption_words.split('_|_').forEach((item) => {
-                this.exseptionWords.push(item);
+        if (filter.exception_words_ids) {
+            filter.exception_words_ids.split(',').forEach((item) => {
+                this.exceptionWords.push(item);
             });
         }
-        if (filter.custom_key_words) {
-            filter.custom_key_words.split(',').forEach((item) => {
+        if (filter.custom_key_words_ids) {
+            filter.custom_key_words_ids.split(',').forEach((item) => {
                 this.customKeyWords.push(item);
             });
         }
@@ -218,12 +218,12 @@ export default {
             document.querySelector('.save-word-input').classList.add('hidden');
         },
         saveWord() {
-            if (this.newWord != false) this.exseptionWords.push(this.newWord.trim());
+            if (this.newWord != false) this.exceptionWords.push(this.newWord.trim());
             this.newWord = '';
             this.closeAddWord();
         },
         deleteWord(i) {
-            this.exseptionWords.splice(i, 1);
+            this.exceptionWords.splice(i, 1);
         },
         openAddKeyWord() {
             document.querySelector('.add-key-word').classList.add('hidden');
@@ -263,7 +263,7 @@ export default {
             });
 
             if (!this.createdKitTitle) return alert('Введите название фильтра!');
-            if (!countries.length && !categories.length && !keyWords.length && !this.exseptionWords.length) return alert('Введите параметр(ы) фильтра!');
+            if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length) return alert('Введите параметр(ы) фильтра!');
 
             axios.post('/update-filter', {
                 id: this.filter.id,
@@ -272,8 +272,8 @@ export default {
                 countries_ids: countries.join(','),
                 categories_ids: categories.join(','),
                 key_words_ids: keyWords.join(','),
-                exseption_words: this.exseptionWords.join('_|_'),
-                custom_key_words: this.customKeyWords.join(','),
+                exception_words_ids: this.exceptionWords.join(','),
+                custom_key_words_ids: this.customKeyWords.join(','),
             }).then(res => {
                 socket.emit('kits:speak', {});
             });

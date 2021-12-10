@@ -7,13 +7,10 @@ use App\Models\Category;
 use App\Models\Country;
 use App\Models\Filter;
 use App\Models\Job;
-use App\Models\KeyWord;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Upwork\API\Routers\Hr\Jobs;
 
 class JobController extends Controller
 {
@@ -109,110 +106,73 @@ class JobController extends Controller
 
     public function filter(Request $request)
     {
-        $filters = Filter::find($request->kits);
-        if (!count($filters)) {
-            $jobs = Job::query()
-                ->orderBy('date_created', 'desc')
-                ->paginate(10);
-            return $jobs;
-        }
-        $categories = $filters->pluck('categories_ids');
-        $categories = $categories->filter(fn($value) => !is_null($value));
-        $filterCategories = collect();
+        try {
+            $filters = Filter::find($request->kits);
+            if (!count($filters)) {
+                $jobs = Job::query()
+                    ->orderBy('date_created', 'desc')
+                    ->paginate(10);
+                return $jobs;
+            }
+            $categories = $filters->pluck('categories_ids');
+            $categories = $categories->filter(fn($value) => !is_null($value));
+            $filterCategories = collect();
 
-        $countries = $filters->pluck('countries_ids');
-        $countries = $countries->filter(fn($value) => !is_null($value));
-        $filterCountries = collect();
+            $countries = $filters->pluck('countries_ids');
+            $countries = $countries->filter(fn($value) => !is_null($value));
+            $filterCountries = collect();
 
-        $exceptionWords = $filters->pluck('exseption_words');
-        $exceptionWords = $exceptionWords->filter(fn($value) => !is_null($value));
-        $filterWords = collect();
+            $exceptionWords = $filters->pluck('exception_words_ids');
 
-        $keyWords = $filters->pluck('key_words_ids');
-        $keyWords = $keyWords->filter(fn($value) => !is_null($value));
-        $filterKeyWords = collect();
+            $keyWords = $filters->pluck('key_words_ids');
 
-        $customKeyWords = $filters->pluck('custom_key_words');
-        $customKeyWords = $customKeyWords->filter(fn($value) => !is_null($value));
-        $filterCustomKeyWords = collect();
+            $customKeyWords = $filters->pluck('custom_key_words_ids');
 
-        if (count($categories)) {
-            foreach ($categories as $category) {
-                foreach (explode(',', $category) as $item) {
-                    $filterCategories->push($item);
+            if (count($categories)) {
+                foreach ($categories as $category) {
+                    foreach (explode(',', $category) as $item) {
+                        $filterCategories->push($item);
+                    }
                 }
+                $filterCategories->unique();
             }
-            $filterCategories->unique();
-        }
-        $filterCategories = Category::find($filterCategories)->pluck('title');
+            $filterCategories = Category::find($filterCategories)->pluck('title');
 
-        if (count($countries)) {
-            foreach ($countries as $country) {
-                foreach (explode(',', $country) as $item) {
-                    $filterCountries->push($item);
+            if (count($countries)) {
+                foreach ($countries as $country) {
+                    foreach (explode(',', $country) as $item) {
+                        $filterCountries->push($item);
+                    }
                 }
+                $filterCountries->unique();
             }
-            $filterCountries->unique();
-        }
-        $filterCountries = Country::find($filterCountries)->pluck('title');
+            $filterCountries = Country::find($filterCountries)->pluck('title');
 
-        if (count($keyWords)) {
-            foreach ($keyWords as $word) {
-                foreach (explode(',', $word) as $item) {
-                    $filterKeyWords->push($item);
-                }
+            $jobs = Job::query()->orderBy('date_created', 'desc');
+            if (count($filterCategories)) {
+                $jobs = $jobs->whereIn('subcategory2', $filterCategories);
             }
-            $filterKeyWords->unique();
-        }
-        $filterKeyWords = KeyWord::find($filterKeyWords)->pluck('title');
 
-        if (count($exceptionWords)) {
-            foreach ($exceptionWords as $exceptionWord) {
-                foreach (explode('_|_', $exceptionWord) as $item) {
-                    $filterWords->push($item);
-                }
+            if (count($filterCountries)) {
+                $jobs = $jobs->whereIn('client_country', $filterCountries);
             }
-            $filterWords->unique();
-        }
 
-        if (count($customKeyWords)) {
-            foreach ($customKeyWords as $customKeyWord) {
-                foreach (explode(',', $customKeyWord) as $item) {
-                    $filterCustomKeyWords->push($item);
-                }
-            }
-            $filterCustomKeyWords->unique();
-        }
-        $jobs = Job::query()->orderBy('date_created', 'desc');
-        if (count($filterCategories)) {
-            $jobs = $jobs->whereIn('subcategory2', $filterCategories);
-        }
+            $jobs->whereDoesntHave('exceptionWords', function ($query) use ($exceptionWords){
+                $query->whereIn('exception_word_job.exception_word_id', $exceptionWords);
+            });
 
-        if (count($filterCountries)) {
-            $jobs = $jobs->whereIn('client_country', $filterCountries);
-        }
+            $jobs->whereHas('keyWords', function ($query) use ($keyWords){
+                $query->whereIn('key_word_job.key_word_id', $keyWords);
+            });
 
-        if (count($filterWords)) {
-            foreach ($filterWords as $word) {
-                $jobs->where('title', 'not like', "%$word%")->where('excerpt', 'not like', "%$word%");
-            }
-        }
+            $jobs->whereHas('customKeyWords', function ($query) use ($customKeyWords){
+                $query->whereIn('custom_key_word_job.custom_key_word_id', $customKeyWords);
+            });
 
-        if (count($filterCustomKeyWords)) {
-            foreach ($filterCustomKeyWords as $word) {
-                $jobs->where('title', 'like', "%$word%")
-                    ->orWhere('excerpt', 'like', "%$word%");
-            }
+            return $jobs->paginate(10);
+        } catch (\Exception $exception) {
+            return response()->json(['data' => $exception->getMessage()]);
         }
-
-        if (count($filterKeyWords)) {
-            foreach ($filterKeyWords as $word) {
-                $jobs->where('title', 'like', "%$word%")
-                     ->orWhere('excerpt', 'like', "%$word%");
-            }
-        }
-
-        return $jobs->paginate(10);
     }
 
     public function info()

@@ -4386,7 +4386,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   data: function data() {
     return {
       createdKitTitle: '',
-      exseptionWords: [],
+      exceptionWords: [],
       customKeyWords: [],
       newWord: '',
       newKeyWord: '',
@@ -4428,12 +4428,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       document.querySelector('.save-word-input').classList.add('hidden');
     },
     saveWord: function saveWord() {
-      if (this.newWord != false) this.exseptionWords.push(this.newWord.trim());
+      if (this.newWord != false) this.exceptionWords.push(this.newWord.trim());
       this.newWord = '';
       this.closeAddWord();
     },
     deleteWord: function deleteWord(i) {
-      this.exseptionWords.splice(i, 1);
+      this.exceptionWords.splice(i, 1);
     },
     openAddKeyWord: function openAddKeyWord() {
       document.querySelector('.add-key-word').classList.add('hidden');
@@ -4471,23 +4471,26 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         if (item.checked) keyWords.push(item.id);
       });
       if (!this.createdKitTitle) return alert('Введите название фильтра!');
-      if (!countries.length && !categories.length && !keyWords.length && !this.exseptionWords.length) return alert('Введите параметр(ы) фильтра!');
+      if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length) return alert('Введите параметр(ы) фильтра!');
       axios.post('/add-filter', {
         user_id: this.userId,
         title: this.createdKitTitle,
         countries_ids: countries.join(','),
         categories_ids: categories.join(','),
         key_words_ids: keyWords.join(','),
-        exseption_words: this.exseptionWords.join('_|_'),
-        custom_key_words: this.customKeyWords.join(',')
+        exception_words_ids: this.exceptionWords.join(','),
+        custom_key_words_ids: this.customKeyWords.join(',')
       }).then(function (response) {
+        console.log(response);
         _this.filter = response.data;
         socket.emit('kits:speak', {});
+      })["catch"](function (error) {
+        console.log(error);
       });
       this.createdKitTitle = '';
       this.allCheck(this.countries, false);
       this.allCheck(this.categories, false);
-      this.exseptionWords = [];
+      this.exceptionWords = [];
       return alert('Success!');
     },
     closeKit: function closeKit() {
@@ -4709,7 +4712,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   data: function data() {
     return {
       createdKitTitle: '',
-      exseptionWords: [],
+      exceptionWords: [],
       customKeyWords: [],
       newWord: '',
       newKeyWord: '',
@@ -4744,14 +4747,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       });
     }
 
-    if (filter.exseption_words) {
-      filter.exseption_words.split('_|_').forEach(function (item) {
-        _this.exseptionWords.push(item);
+    if (filter.exception_words_ids) {
+      filter.exception_words_ids.split(',').forEach(function (item) {
+        _this.exceptionWords.push(item);
       });
     }
 
-    if (filter.custom_key_words) {
-      filter.custom_key_words.split(',').forEach(function (item) {
+    if (filter.custom_key_words_ids) {
+      filter.custom_key_words_ids.split(',').forEach(function (item) {
         _this.customKeyWords.push(item);
       });
     }
@@ -4792,12 +4795,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       document.querySelector('.save-word-input').classList.add('hidden');
     },
     saveWord: function saveWord() {
-      if (this.newWord != false) this.exseptionWords.push(this.newWord.trim());
+      if (this.newWord != false) this.exceptionWords.push(this.newWord.trim());
       this.newWord = '';
       this.closeAddWord();
     },
     deleteWord: function deleteWord(i) {
-      this.exseptionWords.splice(i, 1);
+      this.exceptionWords.splice(i, 1);
     },
     openAddKeyWord: function openAddKeyWord() {
       document.querySelector('.add-key-word').classList.add('hidden');
@@ -4834,7 +4837,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         if (item.checked) keyWords.push(item.id);
       });
       if (!this.createdKitTitle) return alert('Введите название фильтра!');
-      if (!countries.length && !categories.length && !keyWords.length && !this.exseptionWords.length) return alert('Введите параметр(ы) фильтра!');
+      if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length) return alert('Введите параметр(ы) фильтра!');
       axios.post('/update-filter', {
         id: this.filter.id,
         user_id: this.userId,
@@ -4842,8 +4845,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         countries_ids: countries.join(','),
         categories_ids: categories.join(','),
         key_words_ids: keyWords.join(','),
-        exseption_words: this.exseptionWords.join('_|_'),
-        custom_key_words: this.customKeyWords.join(',')
+        exception_words_ids: this.exceptionWords.join(','),
+        custom_key_words_ids: this.customKeyWords.join(',')
       }).then(function (res) {
         socket.emit('kits:speak', {});
       });
@@ -7530,6 +7533,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       axios.post('/jobs/filter', {
         kits: kits
       }).then(function (response) {
+        console.log(response);
         _this.data = response.data.data.filter(function (j) {
           return j.status !== 1;
         });
@@ -7538,6 +7542,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _this.$forceUpdate();
 
         _this.isReloading = false;
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   },
@@ -49514,7 +49520,7 @@ var render = function () {
           _c(
             "div",
             { staticClass: "flex flex-wrap justify-content-start items-start" },
-            _vm._l(_vm.exseptionWords, function (word, index) {
+            _vm._l(_vm.exceptionWords, function (word, index) {
               return _c(
                 "button",
                 {
@@ -49938,20 +49944,20 @@ var render = function () {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.newWord,
-              expression: "newWord",
+              value: _vm.newKeyWord,
+              expression: "newKeyWord",
             },
           ],
           staticClass:
             "input-key-word hidden border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
           attrs: { type: "text", placeholder: "New word" },
-          domProps: { value: _vm.newWord },
+          domProps: { value: _vm.newKeyWord },
           on: {
             input: function ($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.newWord = $event.target.value
+              _vm.newKeyWord = $event.target.value
             },
           },
         }),
@@ -50010,7 +50016,7 @@ var render = function () {
         _c(
           "div",
           { staticClass: "flex flex-wrap justify-content-start items-start" },
-          _vm._l(_vm.exseptionWords, function (word, index) {
+          _vm._l(_vm.exceptionWords, function (word, index) {
             return _c(
               "button",
               {
