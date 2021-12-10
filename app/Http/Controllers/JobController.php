@@ -160,10 +160,10 @@ class JobController extends Controller
             $jobs->whereDoesntHave('exceptionWords', function ($query) use ($exceptionWords){
                 $query->whereIn('exception_word_job.exception_word_id', $exceptionWords);
             });
-
-            $jobs->whereHas('keyWords', function ($query) use ($keyWords){
-                $query->whereIn('key_word_job.key_word_id', $keyWords);
-            });
+//            temporary commented, uncomment after db reloading
+//            $jobs->whereHas('keyWords', function ($query) use ($keyWords){
+//                $query->whereIn('key_word_job.key_word_id', $keyWords);
+//            });
 
             $jobs->whereHas('customKeyWords', function ($query) use ($customKeyWords){
                 $query->whereIn('custom_key_word_job.custom_key_word_id', $customKeyWords);
