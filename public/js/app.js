@@ -4471,7 +4471,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         if (item.checked) keyWords.push(item.id);
       });
       if (!this.createdKitTitle) return alert('Введите название фильтра!');
-      if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length) return alert('Введите параметр(ы) фильтра!');
+      if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length && !this.customKeyWords.length) return alert('Введите параметр(ы) фильтра!');
       axios.post('/add-filter', {
         user_id: this.userId,
         title: this.createdKitTitle,
@@ -4837,7 +4837,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         if (item.checked) keyWords.push(item.id);
       });
       if (!this.createdKitTitle) return alert('Введите название фильтра!');
-      if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length) return alert('Введите параметр(ы) фильтра!');
+      if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length && !this.customKeyWords.length) return alert('Введите параметр(ы) фильтра!');
       axios.post('/update-filter', {
         id: this.filter.id,
         user_id: this.userId,

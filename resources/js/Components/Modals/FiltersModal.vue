@@ -263,7 +263,7 @@ export default {
             });
 
             if (!this.createdKitTitle) return alert('Введите название фильтра!');
-            if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length) return alert('Введите параметр(ы) фильтра!');
+            if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length && !this.customKeyWords.length) return alert('Введите параметр(ы) фильтра!');
 
             axios.post('/update-filter', {
                 id: this.filter.id,
