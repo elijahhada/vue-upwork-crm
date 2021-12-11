@@ -2,20 +2,22 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\CreateJobsFromUpwork;
+use App\Actions\Upwork\AttachWordsToJobs;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Job;
+use App\Models\KeyWord;
 use App\Models\UpworkJob;
 use App\Models\User;
 use App\Services\UpworkJobsProfileService;
 use App\Services\UpworkJobsService;
+use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-class DispatchJob extends Command
+class GetJobs extends Command
 {
     /**
      * The name and signature of the console command.
@@ -50,8 +52,20 @@ class DispatchJob extends Command
     {
         Auth::login(User::find(1));
 
-        $service = new UpworkJobsService();
+        $client = new Client();
+        $user = Auth::user();
+        $formParams = [
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $user['upwork_token']['refresh_token'],
+            'client_id' => config('upwork.client_id'),
+        ];
+        $updateTokenResponse = $client->request('POST', 'https://www.upwork.com/api/v3/oauth2/token', ['form_params' => $formParams]);
+        $token = $user->upwork_token;
+        $token['access_token'] = json_decode($updateTokenResponse->getBody()->getContents(), true)['access_token'];
+        $user->upwork_token = $token;
+        $user->save();
 
+        $service = new UpworkJobsService();
         $flag = false;
         $offset = 0;
 
@@ -60,8 +74,9 @@ class DispatchJob extends Command
                 ->setCount(5)
                 ->setOffset($offset)
                 ->getJobs();
-            var_dump($jobsContainer);
-
+            if($offset + 5 > $jobsContainer->paging->total) {
+                $flag = true;
+            }
             $jobContents = [];
             $countries = [];
             $categories = [];
@@ -74,7 +89,6 @@ class DispatchJob extends Command
 
             foreach ($jobsContainer->jobs as $upworkJob) {
                 $upworkJob = new UpworkJob($upworkJob);
-
                 $jobContents[$upworkJob->upwork_id] = $upworkJob;
 
                 if ($upworkJob->client->country) {
@@ -90,8 +104,12 @@ class DispatchJob extends Command
                     ];
                 }
             }
+            $jobsFromDB = Job::query()->whereIn('upwork_id', collect($jobContents)->pluck('upwork_id'))->get();
 
             foreach ($jobContents as $index => $job) {
+                if(in_array($job->upwork_id, $jobsFromDB->toArray())) {
+                    continue;
+                }
                 $jobProfile = (new UpworkJobsProfileService())->getJobProfiles($job->upwork_id);
                 if (isset($jobProfile->profile)) {
                     $job->setExtraFields($jobProfile->profile);
@@ -102,12 +120,15 @@ class DispatchJob extends Command
                 $jobContents[$index] = $job->toArray();
                 sleep(2);
             }
-
-            $jobsFromDB = Job::query()->whereIn('upwork_id', collect($jobContents)->flatten()->pluck('upwork_id'))->get();
-            $jobsFromDB->isEmpty() ? ($offset += 5) : ($flag = true);
+            if(empty($jobContents)) {
+                sleep(10);
+                continue;
+            }
+            $offset += 5;
             Job::upsert($jobContents, ['upwork_id']);
             Country::upsert($countries, ['title']);
             Category::upsert($categories, ['title']);
+            (new AttachWordsToJobs(collect($jobContents)->pluck('upwork_id')->toArray()))->attach();
             sleep(10);
         };
 

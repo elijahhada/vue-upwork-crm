@@ -21,11 +21,13 @@ class UpworkJob implements Arrayable
     public $status;
     public $client;
     public $date_created;
+    public $skills;
 
     public function __construct($job)
     {
         $this->title = $job->title;
         $this->excerpt = $job->snippet;
+        $this->skills = implode(',', $job->skills);
         $this->upwork_id = $job->id;
         $this->url = $job->url;
         $this->category2 = $job->category2;
