@@ -40,7 +40,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('/jobs/change-status', [JobController::class, 'changeStatus'])->name('jobs.change-status');
     Route::post('/jobs/delete', [JobController::class, 'delete'])->name('jobs.delete');
     Route::post('/jobs/filter', [JobController::class, 'filter'])->name('jobs.filter');
-    Route::get('/pipedrive/deal/add', [\App\Http\Controllers\Pipedrive\DealController::class, 'add'])->name('pipedrive.deal.add');
+    Route::get('/pipedrive/user-info', [\App\Http\Controllers\JobController::class, 'info']);
+    Route::post('/pipedrive/store-deal', [\App\Http\Controllers\JobController::class, 'storeDeal']);
     Route::get('/auth/upwork', [\App\Http\Controllers\Auth\UpworkController::class, 'index'])->name('auth.upwork');
     Route::get('/auth/callback', [\App\Http\Controllers\Auth\UpworkController::class, 'callback'])->name('auth.upwork.callback');
     Route::get('/auth/callback/console', [\App\Http\Controllers\Auth\UpworkController::class, 'console'])->name('auth.upwork.callback.console');
@@ -69,6 +70,4 @@ Route::get('/auth/pipedrive', [\App\Http\Controllers\Auth\PipedriveController::c
 Route::get('/auth/pipedrive/callback', [\App\Http\Controllers\Auth\PipedriveController::class, 'callback'])
     ->name('auth.pipedrive.callback')
     ->middleware('guest');
-Route::get('/pipedrive/user-info', [\App\Http\Controllers\JobController::class, 'info']);
 Route::get('/jobs/get-job/{id}', [\App\Http\Controllers\JobController::class, 'getJob']);
-Route::post('/pipedrive/store-deal', [\App\Http\Controllers\JobController::class, 'storeDeal']);
