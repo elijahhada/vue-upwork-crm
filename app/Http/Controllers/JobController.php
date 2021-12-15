@@ -194,27 +194,30 @@ class JobController extends Controller
             $user->save();
         }
         $bearer = $user['pipedrive_token']['access_token'];
-
+        $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/dealFields', ['headers' => ['Authorization' => 'Bearer ' . $bearer]])
+            ->getBody()
+            ->getContents();
+        $dealFields = json_decode($response, true);
+        $result = [];
+        foreach ($dealFields['data'] as $field) {
+            if($field['name'] === 'Bid profile') {
+                $result['bidProfiles'] = $field['options'];
+            }
+            if($field['name'] === 'Label') {
+                $result['labels'] = $field['options'];
+            }
+        }
         $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/users', ['headers' => ['Authorization' => 'Bearer ' . $bearer]])
             ->getBody()
             ->getContents();
         $usersData = json_decode($response, true);
-        $result = [];
         if ($usersData['success']){
-            $result['bidOwners'] = [];
             foreach ($usersData['data'] as $userItem){
                 if($user->email == $userItem['email']){
                     $result['currentUser'] = $userItem;
                 }
-                if($userItem['email'] == 'artem.mazurchak@gmail.com'){
-                    array_push($result['bidOwners'], $userItem);
-                }
             }
         }
-        $labelsResponse = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/leadLabels', ['headers' => ['Authorization' => 'Bearer ' . $bearer]])
-            ->getBody()
-            ->getContents();
-        $result['labels'] = json_decode($labelsResponse, true)['data'];
 
         return $result;
     }
@@ -244,13 +247,47 @@ class JobController extends Controller
             }
             $bearer = $user['pipedrive_token']['access_token'];
 
+            $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/dealFields', ['headers' => ['Authorization' => 'Bearer ' . $bearer]])
+                ->getBody()
+                ->getContents();
+            $dealFields = json_decode($response, true);
+            $fieldsIds = [];
+            $inviteId = null;
+            foreach ($dealFields['data'] as $field) {
+                if($field['name'] === 'Time of bid') {
+                    $fieldsIds['timeOfBid'] = $field['key'];
+                }
+                if($field['name'] === 'Time of job creation' || $field['name'] === 'Time after job creation') {
+                    $fieldsIds['timeOfJobCreation'] = $field['key'];
+                }
+                if($field['name'] === 'Bid profile') {
+                    $fieldsIds['bidProfile'] = $field['key'];
+                }
+                if($field['name'] === 'Job posting') {
+                    $fieldsIds['jobPosting'] = $field['key'];
+                }
+                if($field['name'] === 'Proposal link') {
+                    $fieldsIds['proposalLink'] = $field['key'];
+                }
+                if($field['name'] === 'Invite') {
+                    $fieldsIds['invite'] = $field['key'];
+                    $inviteId = $field['options'][0]['id'];
+                }
+            }
+            $jobCreationDate = strtotime($request->timeOfJob);
+            $formattedDate = Carbon::parse($jobCreationDate)->format('Y-m-d H:i');
             $data = [
                 'title' => $request->title,
-                'owner_id' => $request->owner_id,
-                'person_id' => 1,
-                'label_ids' => $request->label_ids,
+                'user_id' => $request->userId,
+                'label' => $request->label,
+                $fieldsIds['timeOfBid'] => Carbon::now()->format('H:m'),
+                $fieldsIds['timeOfJobCreation'] => $formattedDate,
+                $fieldsIds['bidProfile'] => $request->bidProfile,
+                $fieldsIds['jobPosting'] => $request->jobPosting,
+                $fieldsIds['proposalLink'] => $request->taskLink,
+                $fieldsIds['invite'] => $request->invite == true ? $inviteId : null,
             ];
-            $response = $client->request('POST', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/leads', ['headers' => ['Authorization' => 'Bearer ' . $bearer], 'json' => $data])->getBody()->getContents();
+            $response = $client->request('POST', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/deals', ['headers' => ['Authorization' => 'Bearer ' . $bearer], 'json' => $data])->getBody()->getContents();
             $result = json_decode($response, true);
         } catch (\Exception $exception) {
             $result = $exception->getMessage();

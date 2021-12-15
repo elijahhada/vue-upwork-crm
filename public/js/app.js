@@ -4107,50 +4107,82 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     this.loadPipedriveInfo();
+    this.dropdownTechs();
   },
   data: function data() {
     return {
-      profileId: null,
       pipedriveInfo: null,
       techsList: [],
+      bidProfile: null,
+      invite: false,
       selectedTechsList: [],
-      isTechDroped: false
+      isTechDropped: false,
+      taskLink: ''
     };
   },
   methods: {
+    swapInvite: function swapInvite(option) {
+      if (option === 1) {
+        document.querySelector('.invite-none').classList.remove('bg-gray-200');
+        document.querySelector('.invite-none').classList.remove('text-black');
+        document.querySelector('.invite-none').classList.add('bg-green-500');
+        document.querySelector('.invite-none').classList.add('text-white');
+        document.querySelector('.invite-yes').classList.remove('bg-green-500');
+        document.querySelector('.invite-yes').classList.remove('text-white');
+        document.querySelector('.invite-yes').classList.add('bg-gray-200');
+        document.querySelector('.invite-yes').classList.add('text-black');
+        this.invite = false;
+      }
+
+      if (option === 2) {
+        document.querySelector('.invite-none').classList.remove('bg-green-500');
+        document.querySelector('.invite-none').classList.remove('text-white');
+        document.querySelector('.invite-none').classList.add('bg-gray-200');
+        document.querySelector('.invite-none').classList.add('text-black');
+        document.querySelector('.invite-yes').classList.remove('bg-gray-200');
+        document.querySelector('.invite-yes').classList.remove('text-black');
+        document.querySelector('.invite-yes').classList.add('bg-green-500');
+        document.querySelector('.invite-yes').classList.add('text-white');
+        this.invite = true;
+      }
+    },
     saveBid: function saveBid() {
+      if (this.title.length < 1 || this.selectedTechsList.length < 1 || this.bidProfile == null || this.taskLink.length < 1) {
+        alert('Необходимо заполнить все поля');
+        return;
+      }
+
       var data = {
         title: this.title,
-        owner_id: this.pipedriveInfo.currentUser.id,
-        person_id: this.profileId,
-        label_ids: this.selectedTechsList.map(function (item) {
+        userId: this.pipedriveInfo.currentUser.id,
+        label: this.selectedTechsList.map(function (item) {
           return item.id;
-        })
-      };
-      axios.post('/pipedrive/store-deal', data).then(function (res) {})["catch"](function (error) {
+        })[0],
+        timeOfJob: this.date_created,
+        bidProfile: this.bidProfile,
+        jobPosting: this.url,
+        taskLink: this.taskLink,
+        invite: this.invite
+      }; // console.log(data);
+
+      axios.post('/pipedrive/store-deal', data).then(function (res) {
+        console.log(res);
+      })["catch"](function (error) {
         console.log(error);
       });
       this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
     },
     closeModalJob: function closeModalJob() {
       this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
-      this.isTechDroped = false;
+      this.isTechDropped = false;
       document.body.classList.remove('overflow-y-hidden');
     },
     dropdownTechs: function dropdownTechs() {
       if (this.techsList.length != 0) {
-        this.isTechDroped = !this.isTechDroped;
+        this.isTechDropped = !this.isTechDropped;
       }
     },
     removeTech: function removeTech(i, el) {
@@ -4167,8 +4199,8 @@ __webpack_require__.r(__webpack_exports__);
       this.selectedTechsList.push(el);
       this.techsList.splice(i, 1);
 
-      if (this.techsList.length == 0) {
-        this.isTechDroped = false;
+      if (this.techsList.length != 0) {
+        this.isTechDropped = false;
       }
     },
     loadPipedriveInfo: function loadPipedriveInfo() {
@@ -11713,7 +11745,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f] {\n    background-color: #faeae3 !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f] {\r\n    background-color: #faeae3 !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48849,7 +48881,7 @@ var render = function () {
                       {
                         staticClass:
                           "relative parent-tech w-full p-2 border border-gray-300 rounded-md focus:outline-none text-white flex flex-wrap justify-start items-center wrap",
-                        class: { focused: _vm.isTechDroped },
+                        class: { focused: _vm.isTechDropped },
                         on: {
                           click: function ($event) {
                             return _vm.dropdownTechs()
@@ -48869,7 +48901,7 @@ var render = function () {
                             [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(item.name) +
+                                  _vm._s(item.label) +
                                   "\n                        "
                               ),
                             ]
@@ -48893,7 +48925,7 @@ var render = function () {
                       {
                         staticClass:
                           "\n                            absolute\n                            mt-2\n                            overflow-y-auto\n                            drop-menu-technologies\n                            bg-white\n                            w-full\n                            border border-gray-300\n                            rounded-md\n                            focus:outline-none\n                            text-white\n                            flex flex-col\n                            justify-start\n                            items-start\n                            wrap\n                            space-y-2\n                            shadow-lg\n                        ",
-                        class: { hidden: !_vm.isTechDroped },
+                        class: { hidden: !_vm.isTechDropped },
                       },
                       _vm._l(_vm.techsList, function (item, index) {
                         return _c(
@@ -48915,7 +48947,7 @@ var render = function () {
                                 staticClass: "px-1 rounded-sm select-none",
                                 class: "bg-" + item.color + "-500",
                               },
-                              [_vm._v(_vm._s(item.name))]
+                              [_vm._v(_vm._s(item.label))]
                             ),
                           ]
                         )
@@ -48955,8 +48987,8 @@ var render = function () {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.profileId,
-                            expression: "profileId",
+                            value: _vm.bidProfile,
+                            expression: "bidProfile",
                           },
                         ],
                         staticClass:
@@ -48972,19 +49004,19 @@ var render = function () {
                                 var val = "_value" in o ? o._value : o.value
                                 return val
                               })
-                            _vm.profileId = $event.target.multiple
+                            _vm.bidProfile = $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
                           },
                         },
                       },
                       _vm._l(
-                        _vm.pipedriveInfo.bidOwners,
-                        function (owner, key) {
+                        _vm.pipedriveInfo.bidProfiles,
+                        function (profile, key) {
                           return _c(
                             "option",
-                            { key: key, domProps: { value: owner.id } },
-                            [_vm._v(_vm._s(owner.name))]
+                            { key: key, domProps: { value: profile.id } },
+                            [_vm._v(_vm._s(profile.label))]
                           )
                         }
                       ),
@@ -49009,7 +49041,85 @@ var render = function () {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(1),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "w-full h-full flex flex-col justify-start items-start",
+                },
+                [
+                  _c("div", { staticClass: "w-full mb-3" }, [
+                    _c(
+                      "p",
+                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      [_vm._v("Task link")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.taskLink,
+                          expression: "taskLink",
+                        },
+                      ],
+                      staticClass:
+                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.taskLink },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.taskLink = $event.target.value
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-full mb-3" }, [
+                    _c(
+                      "p",
+                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      [_vm._v("Invite")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "space-x-3" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "px-3 py-2 bg-green-500 rounded-sm text-base text-black hover:bg-green-500 hover:text-white invite-none",
+                          on: {
+                            click: function ($event) {
+                              return _vm.swapInvite(1)
+                            },
+                          },
+                        },
+                        [_vm._v("None")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "px-3 py-2 bg-gray-200 rounded-sm text-base text-white hover:bg-green-500 hover:text-white invite-yes",
+                          on: {
+                            click: function ($event) {
+                              return _vm.swapInvite(2)
+                            },
+                          },
+                        },
+                        [_vm._v("Yes, invite")]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1),
+                ]
+              ),
             ]
           ),
           _vm._v(" "),
@@ -49078,71 +49188,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "w-full h-full flex flex-col justify-start items-start" },
-      [
-        _c("div", { staticClass: "w-full mb-3" }, [
-          _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-            _vm._v("Task link"),
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass:
-              "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
-            attrs: { type: "text" },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-full mb-3" }, [
-          _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-            _vm._v("Invite"),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "space-x-3" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "px-3 py-2 bg-gray-200 rounded-sm text-base text-black hover:bg-green-500 hover:text-white",
-              },
-              [_vm._v("None")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "px-3 py-2 bg-green-500 rounded-sm text-base text-white hover:bg-gray-200 hover:text-black",
-              },
-              [_vm._v("Yes, invite")]
-            ),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-full mb-3" }, [
-          _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-            _vm._v("Bid"),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "space-x-3" }, [
-            _c(
-              "textarea",
-              {
-                staticClass:
-                  "textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non",
-                attrs: { name: "", id: "" },
-              },
-              [
-                _vm._v(
-                  "Hi! I’d hope to create an Airbnb-like mobile app, as I built a counterpart of the Airbnb website and it was an amazing experience that I want to repeat with you.\nHere you can check this project we built with my team https://www.biz-cen.ru/. This platform is specifically designed for the office segment of commercial real estate.\nVisitors to the site can view a city’s commercial districts with a list of vacant premises including floor plans, and register for a preview directly online.\nYou can see more information here https://vasterra.com/biz-cen.\nYes, it was a web project, but of course I have strong expertise in mobile development. For example, here I worked on a Booking app for workplaces designed for Colliers International real estate company - https://play.google.com/store/apps/details?id=com.calcey.colliers&hl=en\nI’d like to go to the next stage and give you an estimation of your project, are there any other details that you can share?\n\nBest regards, Artem\n                    "
-                ),
-              ]
-            ),
-          ]),
-        ]),
-      ]
-    )
+    return _c("div", { staticClass: "w-full mb-3" }, [
+      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
+        _vm._v("Bid"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "space-x-3" }, [
+        _c("textarea", {
+          staticClass:
+            "textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non",
+          attrs: { name: "", id: "" },
+        }),
+      ]),
+    ])
   },
 ]
 render._withStripped = true

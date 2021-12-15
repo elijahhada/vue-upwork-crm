@@ -24,7 +24,7 @@
                     <p class="text-xs pl-2 text-gray-300 mb-1">Technologies</p>
                     <div
                         class="relative parent-tech w-full p-2 border border-gray-300 rounded-md focus:outline-none text-white flex flex-wrap justify-start items-center wrap"
-                        :class="{ 'focused': isTechDroped }"
+                        :class="{ 'focused': isTechDropped }"
                         @click="dropdownTechs()">
                         <p
                             v-for="(item, index) in selectedTechsList"
@@ -32,7 +32,7 @@
                             class="parent-button px-1 rounded-sm cursor-pointer mr-1.5 align-middle select-none"
                             :class="'bg-' + item.color + '-500'"
                             >
-                            {{ item.name }}
+                            {{ item.label }}
                         </p>
                         <img class="open-drop-tech-menu mt-1 absolute right-3.5 top-4 select-none" src="/images/arrow-down-section.svg" alt="arrow down" />
                     </div>
@@ -55,9 +55,9 @@
                             space-y-2
                             shadow-lg
                         "
-                        :class="{ 'hidden': !isTechDroped }">
+                        :class="{ 'hidden': !isTechDropped }">
                         <li v-for="(item, index) in techsList" :key="index" class="tech-button w-full hover:bg-gray-100 py-2 pl-2 mt-1" @click="addTech(index, item)">
-                            <span class="px-1 rounded-sm select-none" :class="'bg-' + item.color + '-500'">{{ item.name }}</span>
+                            <span class="px-1 rounded-sm select-none" :class="'bg-' + item.color + '-500'">{{ item.label }}</span>
                         </li>
                     </ul>
                 </div>
@@ -72,8 +72,8 @@
                 </div>
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Bid profile</p>
-                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none" v-model="profileId">
-                        <option v-for="(owner, key) in pipedriveInfo.bidOwners" :key="key" :value="owner.id">{{owner.name}}</option>
+                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none" v-model="bidProfile">
+                        <option v-for="(profile, key) in pipedriveInfo.bidProfiles" :key="key" :value="profile.id">{{profile.label}}</option>
                     </select>
                 </div>
                 <div class="w-full mb-3">
@@ -84,29 +84,21 @@
             <div class="w-full h-full flex flex-col justify-start items-start">
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Task link</p>
-                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none">
+                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none" v-model="taskLink">
                 </div>
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Invite</p>
                     <div class="space-x-3">
-                        <button class="px-3 py-2 bg-gray-200 rounded-sm text-base text-black hover:bg-green-500 hover:text-white">None</button>
-                        <button class="px-3 py-2 bg-green-500 rounded-sm text-base text-white hover:bg-gray-200 hover:text-black">Yes, invite</button>
+                        <button class="px-3 py-2 bg-green-500 rounded-sm text-base text-black hover:bg-green-500 hover:text-white invite-none" @click="swapInvite(1)">None</button>
+                        <button class="px-3 py-2 bg-gray-200 rounded-sm text-base text-white hover:bg-green-500 hover:text-white invite-yes" @click="swapInvite(2)">Yes, invite</button>
                     </div>
                 </div>
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Bid</p>
                     <div class="space-x-3">
                         <textarea name="" id="" class="textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non">
-Hi! I’d hope to create an Airbnb-like mobile app, as I built a counterpart of the Airbnb website and it was an amazing experience that I want to repeat with you.
-Here you can check this project we built with my team https://www.biz-cen.ru/. This platform is specifically designed for the office segment of commercial real estate.
-Visitors to the site can view a city’s commercial districts with a list of vacant premises including floor plans, and register for a preview directly online.
-You can see more information here https://vasterra.com/biz-cen.
-Yes, it was a web project, but of course I have strong expertise in mobile development. For example, here I worked on a Booking app for workplaces designed for Colliers International real estate company - https://play.google.com/store/apps/details?id=com.calcey.colliers&hl=en
-I’d like to go to the next stage and give you an estimation of your project, are there any other details that you can share?
 
-Best regards, Artem
-                    </textarea
-                        >
+                        </textarea>
                     </div>
                 </div>
             </div>
@@ -126,25 +118,62 @@ Best regards, Artem
 export default {
     created() {
       this.loadPipedriveInfo();
+      this.dropdownTechs();
     },
     data() {
         return {
-            profileId: null,
             pipedriveInfo: null,
             techsList: [],
+            bidProfile: null,
+            invite: false,
             selectedTechsList: [],
-            isTechDroped: false,
+            isTechDropped: false,
+            taskLink: ''
         };
     },
     methods: {
+        swapInvite(option){
+            if(option === 1){
+                document.querySelector('.invite-none').classList.remove('bg-gray-200');
+                document.querySelector('.invite-none').classList.remove('text-black');
+                document.querySelector('.invite-none').classList.add('bg-green-500');
+                document.querySelector('.invite-none').classList.add('text-white');
+                document.querySelector('.invite-yes').classList.remove('bg-green-500');
+                document.querySelector('.invite-yes').classList.remove('text-white');
+                document.querySelector('.invite-yes').classList.add('bg-gray-200');
+                document.querySelector('.invite-yes').classList.add('text-black');
+                this.invite = false;
+            }
+            if(option === 2){
+                document.querySelector('.invite-none').classList.remove('bg-green-500');
+                document.querySelector('.invite-none').classList.remove('text-white');
+                document.querySelector('.invite-none').classList.add('bg-gray-200');
+                document.querySelector('.invite-none').classList.add('text-black');
+                document.querySelector('.invite-yes').classList.remove('bg-gray-200');
+                document.querySelector('.invite-yes').classList.remove('text-black');
+                document.querySelector('.invite-yes').classList.add('bg-green-500');
+                document.querySelector('.invite-yes').classList.add('text-white');
+                this.invite = true;
+            }
+        },
         saveBid() {
+            if(this.title.length < 1 || this.selectedTechsList.length < 1 || this.bidProfile == null || this.taskLink.length < 1){
+                alert('Необходимо заполнить все поля');
+                return;
+            }
             const data = {
                 title: this.title,
-                owner_id: this.pipedriveInfo.currentUser.id,
-                person_id: this.profileId,
-                label_ids: this.selectedTechsList.map(item => item.id),
+                userId: this.pipedriveInfo.currentUser.id,
+                label: this.selectedTechsList.map(item => item.id)[0],
+                timeOfJob: this.date_created,
+                bidProfile: this.bidProfile,
+                jobPosting: this.url,
+                taskLink: this.taskLink,
+                invite: this.invite
             };
+            // console.log(data);
             axios.post('/pipedrive/store-deal', data).then(res => {
+                console.log(res);
             }).catch(error => {
                 console.log(error);
             })
@@ -152,12 +181,12 @@ export default {
         },
         closeModalJob() {
             this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
-            this.isTechDroped = false;
+            this.isTechDropped = false;
             document.body.classList.remove('overflow-y-hidden');
         },
         dropdownTechs() {
             if (this.techsList.length != 0) {
-                this.isTechDroped = !this.isTechDroped;
+                this.isTechDropped = !this.isTechDropped;
             }
         },
         removeTech(i, el) {
@@ -172,8 +201,8 @@ export default {
             }
             this.selectedTechsList.push(el);
             this.techsList.splice(i, 1);
-            if (this.techsList.length == 0) {
-                this.isTechDroped = false;
+            if (this.techsList.length != 0) {
+                this.isTechDropped = false;
             }
         },
         loadPipedriveInfo() {
