@@ -4120,7 +4120,8 @@ __webpack_require__.r(__webpack_exports__);
       invite: false,
       selectedTechsList: [],
       isTechDropped: false,
-      taskLink: ''
+      taskLink: '',
+      bidText: ''
     };
   },
   methods: {
@@ -4165,9 +4166,14 @@ __webpack_require__.r(__webpack_exports__);
         bidProfile: this.bidProfile,
         jobPosting: this.url,
         taskLink: this.taskLink,
-        invite: this.invite
-      }; // console.log(data);
-
+        invite: this.invite,
+        jobId: this.jobId,
+        owner: this.pipedriveInfo.currentUser.name,
+        technologies: this.selectedTechsList.map(function (item) {
+          return item.label;
+        })[0],
+        bidMessage: this.bidText
+      };
       axios.post('/pipedrive/store-deal', data).then(function (res) {
         console.log(res);
       })["catch"](function (error) {
@@ -4226,6 +4232,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     url: function url() {
       return this.$store.state.DealData.url;
+    },
+    jobId: function jobId() {
+      return this.$store.state.DealData.id;
     }
   }
 });
@@ -49015,7 +49024,7 @@ var render = function () {
                         function (profile, key) {
                           return _c(
                             "option",
-                            { key: key, domProps: { value: profile.id } },
+                            { key: key, domProps: { value: profile } },
                             [_vm._v(_vm._s(profile.label))]
                           )
                         }
@@ -49117,7 +49126,38 @@ var render = function () {
                     ]),
                   ]),
                   _vm._v(" "),
-                  _vm._m(1),
+                  _c("div", { staticClass: "w-full mb-3" }, [
+                    _c(
+                      "p",
+                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      [_vm._v("Bid")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "space-x-3" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.bidText,
+                            expression: "bidText",
+                          },
+                        ],
+                        staticClass:
+                          "textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non",
+                        attrs: { name: "", id: "" },
+                        domProps: { value: _vm.bidText },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.bidText = $event.target.value
+                          },
+                        },
+                      }),
+                    ]),
+                  ]),
                 ]
               ),
             ]
@@ -49182,24 +49222,6 @@ var staticRenderFns = [
           disabled: "disabled",
         },
       }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mb-3" }, [
-      _c("p", { staticClass: "text-xs pl-2 text-gray-300 mb-1" }, [
-        _vm._v("Bid"),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "space-x-3" }, [
-        _c("textarea", {
-          staticClass:
-            "textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non",
-          attrs: { name: "", id: "" },
-        }),
-      ]),
     ])
   },
 ]

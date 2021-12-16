@@ -73,7 +73,7 @@
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Bid profile</p>
                     <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none" v-model="bidProfile">
-                        <option v-for="(profile, key) in pipedriveInfo.bidProfiles" :key="key" :value="profile.id">{{profile.label}}</option>
+                        <option v-for="(profile, key) in pipedriveInfo.bidProfiles" :key="key" :value="profile">{{profile.label}}</option>
                     </select>
                 </div>
                 <div class="w-full mb-3">
@@ -96,7 +96,7 @@
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Bid</p>
                     <div class="space-x-3">
-                        <textarea name="" id="" class="textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non">
+                        <textarea name="" id="" class="textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non" v-model="bidText">
 
                         </textarea>
                     </div>
@@ -128,7 +128,8 @@ export default {
             invite: false,
             selectedTechsList: [],
             isTechDropped: false,
-            taskLink: ''
+            taskLink: '',
+            bidText: ''
         };
     },
     methods: {
@@ -169,9 +170,12 @@ export default {
                 bidProfile: this.bidProfile,
                 jobPosting: this.url,
                 taskLink: this.taskLink,
-                invite: this.invite
+                invite: this.invite,
+                jobId: this.jobId,
+                owner: this.pipedriveInfo.currentUser.name,
+                technologies: this.selectedTechsList.map(item => item.label)[0],
+                bidMessage: this.bidText
             };
-            // console.log(data);
             axios.post('/pipedrive/store-deal', data).then(res => {
                 console.log(res);
             }).catch(error => {
@@ -227,6 +231,9 @@ export default {
         url() {
             return this.$store.state.DealData.url;
         },
+        jobId() {
+            return this.$store.state.DealData.id;
+        }
     },
 };
 </script>

@@ -12,18 +12,30 @@ class UpworkJobsService extends Upwork
     private $offset = 0;
     private $category2;
     private $subcategory2;
+    private $days_posted;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->client->auth();
+    }
 
     public function getJobs()
     {
-        $this->client->auth();
-
         return (new Search($this->client))->find([
             'q' => $this->query,
             'title' => $this->title,
             'paging' => $this->offset . ';' . $this->count,
             'category2' => $this->category2,
             'subcategory2' => $this->subcategory2,
+            'days_posted' => $this->days_posted,
         ]);
+    }
+
+    public function setDatePosted($days)
+    {
+        $this->days_posted = $days;
+        return $this;
     }
 
     public function setQuery($q)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\JobDeleted;
+use App\Models\Bid;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Filter;
@@ -230,6 +231,21 @@ class JobController extends Controller
     public function storeDeal(Request $request)
     {
         try {
+            $job = Job::find($request->jobId);
+            $job->is_taken = true;
+            $job->save();
+
+            $newBid = new Bid();
+            $newBid->owner = $request->owner;
+            $newBid->technologies = $request->technologies;
+            $newBid->creation_time = Carbon::now()->format('Y-m-d H:i:s');
+            $newBid->bid_profile = $request->bidProfile['label'];
+            $newBid->task_link = $request->taskLink;
+            $newBid->is_invite = $request->invite == 'true';
+            $newBid->message = $request->bidMessage;
+            $newBid->job_id = $request->jobId;
+            $newBid->save();
+
             $client = new Client();
             $user = Auth::user();
             if(Carbon::now()->diffInMinutes(Carbon::parse($user->updated_at)->toDateTimeString()) > 55) {
@@ -280,7 +296,7 @@ class JobController extends Controller
                 'title' => $request->title,
                 'user_id' => $request->userId,
                 'label' => $request->label,
-                $fieldsIds['timeOfBid'] => Carbon::now()->format('H:m'),
+                $fieldsIds['timeOfBid'] => Carbon::now()->format('H:i'),
                 $fieldsIds['timeOfJobCreation'] => $formattedDate,
                 $fieldsIds['bidProfile'] => $request->bidProfile,
                 $fieldsIds['jobPosting'] => $request->jobPosting,

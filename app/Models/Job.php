@@ -73,6 +73,11 @@ class Job extends Model
         return $this->belongsToMany(CustomKeyWord::class,'custom_key_word_job', 'job_id', 'custom_key_word_id');
     }
 
+    public function bid()
+    {
+        return $this->hasOne(Bid::class,'job_id','id');
+    }
+
     public function getClientFeedbackAttribute($value)
     {
         return number_format($value, 2);

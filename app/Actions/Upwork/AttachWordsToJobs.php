@@ -28,7 +28,7 @@ class AttachWordsToJobs
                 })
                 ->get()->pluck('id');
             if(!empty($currentJobsIdsForKeyWord)) {
-                $word->jobs()->attach($currentJobsIdsForKeyWord);
+                $word->jobs()->syncWithoutDetaching($currentJobsIdsForKeyWord);
             }
         }
         $customKeyWords = CustomKeyWord::all();
@@ -41,7 +41,7 @@ class AttachWordsToJobs
                 })
                 ->get()->pluck('id');
             if(!empty($currentJobsIdsForCustomWord)) {
-                $word->jobs()->attach($currentJobsIdsForCustomWord);
+                $word->jobs()->syncWithoutDetaching($currentJobsIdsForCustomWord);
             }
         }
         $exceptionWords = ExceptionWord::all();
@@ -54,7 +54,7 @@ class AttachWordsToJobs
                 })
                 ->get()->pluck('id');
             if(!empty($currentJobsIdsForExceptionWord)) {
-                $word->jobs()->attach($currentJobsIdsForExceptionWord);
+                $word->jobs()->syncWithoutDetaching($currentJobsIdsForExceptionWord);
             }
         }
     }
