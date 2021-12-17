@@ -7512,6 +7512,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7589,6 +7596,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   methods: {
+    showKits: function showKits() {
+      console.log(this.selectedKits);
+    },
     onDelete: function onDelete(_ref) {
       var id = _ref.id;
       var index = this.data.findIndex(function (p) {
@@ -54643,6 +54653,40 @@ var render = function () {
           },
         },
       }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center",
+        },
+        [
+          _c("div", { staticClass: "flex justify-around items-center" }, [
+            _c("p", { staticClass: "text-white mr-12 ml-20" }, [
+              _vm._v("За последние 15 минут появилось 5 jobs"),
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "bg-gray-300 text-black rounded rounded-full py-3 px-9 hover:bg-gray-700 hover:text-white",
+                on: { click: _vm.showKits },
+              },
+              [_vm._v("Обновить")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              staticClass:
+                "mr-80 text-white text-3xl cursor-pointer hover:text-red-500",
+            },
+            [_vm._v("X")]
+          ),
+        ]
+      ),
     ],
     1
   )

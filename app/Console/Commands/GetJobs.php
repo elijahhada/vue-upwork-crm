@@ -6,14 +6,12 @@ use App\Actions\Upwork\AttachWordsToJobs;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Job;
-use App\Models\KeyWord;
 use App\Models\UpworkJob;
 use App\Models\User;
-use App\Services\UpworkJobsProfileService;
 use App\Services\UpworkJobsService;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -66,72 +64,68 @@ class GetJobs extends Command
         $user->save();
 
         $service = new UpworkJobsService();
-        $flag = false;
-        $offset = 0;
 
-        while (!$flag) {
-            $jobsContainer = $service
-                ->setCount(5)
-                ->setOffset($offset)
-                ->getJobs();
-            if($offset + 5 > $jobsContainer->paging->total) {
-                $flag = true;
+        $jobsContainer = $service
+            ->setCount(100)
+            ->setOffset(0)
+            ->setDatePosted(1)
+            ->getJobs();
+        $jobContents = [];
+        $countries = [];
+        $categories = [];
+        $newJobContents = [];
+
+        if (!isset($jobsContainer->jobs)) {
+            Log::alert('Jobs list error: '.json_encode($jobsContainer));
+        }
+
+        foreach ($jobsContainer->jobs as $upworkJob) {
+            $upworkJob = new UpworkJob($upworkJob);
+            $jobContents[$upworkJob->upwork_id] = $upworkJob;
+
+            if ($upworkJob->client->country) {
+                $countries[] = [
+                    'title' => $upworkJob->client->country,
+                ];
             }
-            $jobContents = [];
-            $countries = [];
-            $categories = [];
-
-            if (!isset($jobsContainer->jobs)) {
-                Log::alert('Jobs list error: '.json_encode($jobsContainer));
-                $flag = true;
-                continue;
+            if ($upworkJob->subcategory2) {
+                $categories[] = [
+                    'title' => $upworkJob->subcategory2,
+                    'upwork_id' => 1,
+                ];
             }
+        }
+        $jobsFromDB = Job::query()->whereIn('upwork_id', collect($jobContents)->pluck('upwork_id'))->pluck('upwork_id');
+        $jobsExistCount = Job::query()->whereIn('upwork_id', collect($jobContents)->pluck('upwork_id'))->count();
+        Log::channel('upwork_jobs_info')->info('Jobs exist=' . $jobsExistCount);
+        $addedJobs = 100 - $jobsExistCount;
+        Log::channel('upwork_jobs_info')->info('Jobs added=' . $addedJobs . ' at ' . Carbon::now()->format('Y-m-d H:i:s'));
 
-            foreach ($jobsContainer->jobs as $upworkJob) {
-                $upworkJob = new UpworkJob($upworkJob);
-                $jobContents[$upworkJob->upwork_id] = $upworkJob;
+        $jobContents = array_filter($jobContents, function ($key) use($jobsFromDB) {
+            return !in_array($key, $jobsFromDB->toArray());
+        }, ARRAY_FILTER_USE_KEY);
 
-                if ($upworkJob->client->country) {
-                    $countries[] = [
-                        'title' => $upworkJob->client->country,
-                    ];
+        foreach (array_chunk($jobContents, 20, true) as $chunk) {
+            $jobProfiles = $service->getJobProfiles(implode(';', array_keys($chunk)));
+            var_dump('every chunk');
+            foreach ($chunk as $index => $job) {
+                foreach ($jobProfiles->profiles->profile as $profile) {
+                    if($index == $profile->ciphertext) {
+                        $job->setExtraFields($profile);
+                        $job->calculateClientScore();
+                        $newJobContents[$index] = $job->toArray();
+                    }
                 }
-
-                if ($upworkJob->subcategory2) {
-                    $categories[] = [
-                        'title' => $upworkJob->subcategory2,
-                        'upwork_id' => 1,
-                    ];
-                }
             }
-            $jobsFromDB = Job::query()->whereIn('upwork_id', collect($jobContents)->pluck('upwork_id'))->get();
-
-            foreach ($jobContents as $index => $job) {
-                if(in_array($job->upwork_id, $jobsFromDB->toArray())) {
-                    continue;
-                }
-                $jobProfile = (new UpworkJobsProfileService())->getJobProfiles($job->upwork_id);
-                if (isset($jobProfile->profile)) {
-                    $job->setExtraFields($jobProfile->profile);
-                } else {
-                    Log::alert('Jobs profile error on '.$index.': '.json_encode($jobProfile));
-                }
-                $job->calculateClientScore();
-                $jobContents[$index] = $job->toArray();
-                sleep(2);
-            }
-            if(empty($jobContents)) {
-                sleep(10);
-                continue;
-            }
-            $offset += 5;
-            Job::upsert($jobContents, ['upwork_id']);
-            Country::upsert($countries, ['title']);
-            Category::upsert($categories, ['title']);
-            (new AttachWordsToJobs(collect($jobContents)->pluck('upwork_id')->toArray()))->attach();
-            sleep(10);
-        };
-
+            sleep(5);
+        }
+        Job::upsert($newJobContents, ['upwork_id']);
+        Country::upsert($countries, ['title']);
+        Category::upsert($categories, ['title']);
+        (new AttachWordsToJobs(collect($newJobContents)->pluck('upwork_id')->toArray()))->attach();
+        Log::channel('upwork_jobs_info')->info('really added');
+        Log::channel('upwork_jobs_info')->info(count($newJobContents));
+        sleep(5);
         return 0;
     }
 }

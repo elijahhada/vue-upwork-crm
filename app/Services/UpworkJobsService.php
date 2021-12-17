@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Upwork\API\Routers\Jobs\Profile;
 use Upwork\API\Routers\Jobs\Search;
 
 class UpworkJobsService extends Upwork
@@ -30,6 +31,11 @@ class UpworkJobsService extends Upwork
             'subcategory2' => $this->subcategory2,
             'days_posted' => $this->days_posted,
         ]);
+    }
+
+    public function getJobProfiles($id)
+    {
+        return (new Profile($this->client))->getSpecific($id);
     }
 
     public function setDatePosted($days)

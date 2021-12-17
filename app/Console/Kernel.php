@@ -24,10 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule
-            ->job(new CreateJobsFromUpwork(User::find(2)))
-            ->timezone('Europe/Moscow')
-            ->everyFifteenMinutes();
+        $schedule->command('get:jobs')->everyMinute()->withoutOverlapping();
     }
 
     /**

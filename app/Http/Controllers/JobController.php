@@ -182,6 +182,7 @@ class JobController extends Controller
         $user = Auth::user();
 
         if(Carbon::now()->diffInMinutes(Carbon::parse($user->updated_at)->toDateTimeString()) > 55) {
+
             $auth = [
                 config('pipedrive.client_id'),
                 config('pipedrive.client_secret')

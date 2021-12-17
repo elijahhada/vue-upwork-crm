@@ -35,6 +35,13 @@
                 :avgRate="job.client_avg_rate"></job-card>
         </div>
         <Toast message="Фильтры изменились, обновите страницу!" :show="showToast" @hide="showToast = false" type="warning" title="Warning" position="top-right" />
+        <div class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center">
+            <div class="flex justify-around items-center">
+                <p class="text-white mr-12 ml-20">За последние 15 минут появилось 5 jobs</p>
+                <button class="bg-gray-300 text-black rounded rounded-full py-3 px-9 hover:bg-gray-700 hover:text-white" @click="showKits">Обновить</button>
+            </div>
+            <p class="mr-80 text-white text-3xl cursor-pointer hover:text-red-500">X</p>
+        </div>
     </app-layout>
 </template>
 
@@ -113,6 +120,9 @@ export default {
         },
     },
     methods: {
+        showKits() {
+            console.log(this.selectedKits);
+        },
         onDelete({ id }) {
             const index = this.data.findIndex((p) => p.id == id);
             if (index === -1) return;
