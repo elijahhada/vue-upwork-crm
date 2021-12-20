@@ -180,21 +180,17 @@ class JobController extends Controller
     {
         $client = new Client();
         $user = Auth::user();
-
-        if(Carbon::now()->diffInMinutes(Carbon::parse($user->updated_at)->toDateTimeString()) > 55) {
-
-            $auth = [
-                config('pipedrive.client_id'),
-                config('pipedrive.client_secret')
-            ];
-            $formParams = [
-                'grant_type' => 'refresh_token',
-                'refresh_token' => $user['pipedrive_token']['refresh_token']
-            ];
-            $updateTokenResponse = $client->request('POST', 'https://oauth.pipedrive.com/oauth/token', ['auth' => $auth, 'form_params' => $formParams]);
-            $user->pipedrive_token = json_decode($updateTokenResponse->getBody()->getContents(), true);
-            $user->save();
-        }
+        $auth = [
+            config('pipedrive.client_id'),
+            config('pipedrive.client_secret')
+        ];
+        $formParams = [
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $user['pipedrive_token']['refresh_token']
+        ];
+        $updateTokenResponse = $client->request('POST', 'https://oauth.pipedrive.com/oauth/token', ['auth' => $auth, 'form_params' => $formParams]);
+        $user->pipedrive_token = json_decode($updateTokenResponse->getBody()->getContents(), true);
+        $user->save();
         $bearer = $user['pipedrive_token']['access_token'];
         $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/dealFields', ['headers' => ['Authorization' => 'Bearer ' . $bearer]])
             ->getBody()
