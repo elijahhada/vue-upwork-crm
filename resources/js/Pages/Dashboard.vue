@@ -35,10 +35,10 @@
                 :avgRate="job.client_avg_rate"></job-card>
         </div>
         <Toast message="Фильтры изменились, обновите страницу!" :show="showToast" @hide="showToast = false" type="warning" title="Warning" position="top-right" />
-        <div class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center">
+        <div v-if="showNewJobsCount" class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center">
             <div class="flex justify-around items-center">
-                <p class="text-white mr-12 ml-20">За последние 15 минут появилось 5 jobs</p>
-                <button class="bg-gray-300 text-black rounded rounded-full py-3 px-9 hover:bg-gray-700 hover:text-white" @click="showKits">Обновить</button>
+                <p class="text-white mr-12 ml-20">За последние 15 минут появилось {{ newJobsCount }} jobs</p>
+                <button class="bg-gray-300 text-black rounded rounded-full py-3 px-9 hover:bg-gray-700 hover:text-white" @click="refreshJobs">Обновить</button>
             </div>
             <p class="mr-80 text-white text-3xl cursor-pointer hover:text-red-500">X</p>
         </div>
@@ -86,6 +86,8 @@ export default {
             selectedKits: [],
             jobsData: Object,
             showToast: false,
+            showNewJobsCount: false,
+            newJobsCount: 0,
         };
     },
     components: {
@@ -100,6 +102,7 @@ export default {
         this.jobListen();
         this.loadMoreOnScroll();
         this.kitsListen();
+        this.checkNewJobsCount();
     },
     watch: {
         selectedKits(kits) {
@@ -110,7 +113,7 @@ export default {
                 })
                 .then((response) => {
                     console.log(response);
-                    this.data = response.data.data.filter((j) => j.status !== 1);
+                    this.data = response.data.data;
                     this.jobsData = response.data;
                     this.$forceUpdate();
                     this.isReloading = false;
@@ -120,8 +123,38 @@ export default {
         },
     },
     methods: {
-        showKits() {
-            console.log(this.selectedKits);
+        refreshJobs() {
+            axios
+                .post('/jobs/filter', {
+                    kits: this.selectedKits,
+                })
+                .then((response) => {
+                    console.log(response);
+                    this.data = response.data.data;
+                    this.jobsData = response.data;
+                    this.$forceUpdate();
+                    this.isReloading = false;
+                    this.showNewJobsCount = false;
+                }).catch(error => {
+                console.log(error);
+            });
+        },
+        checkNewJobsCount() {
+            axios
+                .post('/jobs/filter', {
+                    kits: this.selectedKits,
+                    checkNewJobsCount: true
+                })
+                .then((response) => {
+                    console.log(response);
+                    if(response.data > 0) {
+                        this.newJobsCount = response.data;
+                        this.showNewJobsCount = true;
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
+            setTimeout(this.checkNewJobsCount, 30000);
         },
         onDelete({ id }) {
             const index = this.data.findIndex((p) => p.id == id);

@@ -7557,7 +7557,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       isReloading: false,
       selectedKits: [],
       jobsData: Object,
-      showToast: false
+      showToast: false,
+      showNewJobsCount: false,
+      newJobsCount: 0
     };
   },
   components: {
@@ -7572,6 +7574,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.jobListen();
     this.loadMoreOnScroll();
     this.kitsListen();
+    this.checkNewJobsCount();
   },
   watch: {
     selectedKits: function selectedKits(kits) {
@@ -7582,9 +7585,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         kits: kits
       }).then(function (response) {
         console.log(response);
-        _this.data = response.data.data.filter(function (j) {
-          return j.status !== 1;
-        });
+        _this.data = response.data.data;
         _this.jobsData = response.data;
 
         _this.$forceUpdate();
@@ -7596,8 +7597,41 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   methods: {
-    showKits: function showKits() {
-      console.log(this.selectedKits);
+    refreshJobs: function refreshJobs() {
+      var _this2 = this;
+
+      axios.post('/jobs/filter', {
+        kits: this.selectedKits
+      }).then(function (response) {
+        console.log(response);
+        _this2.data = response.data.data;
+        _this2.jobsData = response.data;
+
+        _this2.$forceUpdate();
+
+        _this2.isReloading = false;
+        _this2.showNewJobsCount = false;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    checkNewJobsCount: function checkNewJobsCount() {
+      var _this3 = this;
+
+      axios.post('/jobs/filter', {
+        kits: this.selectedKits,
+        checkNewJobsCount: true
+      }).then(function (response) {
+        console.log(response);
+
+        if (response.data > 0) {
+          _this3.newJobsCount = response.data;
+          _this3.showNewJobsCount = true;
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      setTimeout(this.checkNewJobsCount, 30000);
     },
     onDelete: function onDelete(_ref) {
       var id = _ref.id;
@@ -7621,72 +7655,72 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
     },
     jobListen: function jobListen() {
-      var _this2 = this;
+      var _this4 = this;
 
       socket.on('job:listeners', function (_ref3) {
         var id = _ref3.id,
             action = _ref3.action;
 
-        var index = _this2.data.findIndex(function (p) {
+        var index = _this4.data.findIndex(function (p) {
           return p.id == id;
         });
 
         if (index === -1) return;
-        var currentItem = _this2.data[index];
+        var currentItem = _this4.data[index];
 
         switch (action) {
           case 'delete':
-            _this2.data.splice(index, 1);
+            _this4.data.splice(index, 1);
 
             break;
 
           case 'book':
-            _this2.data.splice(index, 1);
+            _this4.data.splice(index, 1);
 
             break;
 
           case 'think':
             currentItem.status = 2;
 
-            _this2.$set(_this2.data, index, currentItem);
+            _this4.$set(_this4.data, index, currentItem);
 
             break;
 
           case 'reconsider':
             currentItem.status = null;
 
-            _this2.$set(_this2.data, index, currentItem);
+            _this4.$set(_this4.data, index, currentItem);
 
             break;
         }
       });
     },
     loadMoreOnScroll: function loadMoreOnScroll() {
-      var _this3 = this;
+      var _this5 = this;
 
       window.addEventListener('scroll', (0,lodash_function__WEBPACK_IMPORTED_MODULE_3__.debounce)(function (e) {
         var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
-        if (pixelsFromBottom < 600 && _this3.jobsData.next_page_url !== null) {
-          axios.post('/jobs/filter?page=' + _this3.jobsData.next_page_url.substr(_this3.jobsData.next_page_url.length - 1), {
-            kits: _this3.selectedKits
+        if (pixelsFromBottom < 600 && _this5.jobsData.next_page_url !== null) {
+          axios.post('/jobs/filter?page=' + _this5.jobsData.next_page_url.substr(_this5.jobsData.next_page_url.length - 1), {
+            kits: _this5.selectedKits
           }).then(function (response) {
-            var _this3$data;
+            var _this5$data;
 
-            (_this3$data = _this3.data).push.apply(_this3$data, _toConsumableArray(response.data.data.filter(function (j) {
+            (_this5$data = _this5.data).push.apply(_this5$data, _toConsumableArray(response.data.data.filter(function (j) {
               return j.status !== 1;
             })));
 
-            _this3.jobsData = response.data;
+            _this5.jobsData = response.data;
           });
         }
       }, 300));
     },
     kitsListen: function kitsListen() {
-      var _this4 = this;
+      var _this6 = this;
 
       socket.on('kits:listeners', function () {
-        _this4.showToast = true;
+        _this6.showToast = true;
         console.log('something in kits have been changed');
       });
     }
@@ -54654,39 +54688,45 @@ var render = function () {
         },
       }),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center",
-        },
-        [
-          _c("div", { staticClass: "flex justify-around items-center" }, [
-            _c("p", { staticClass: "text-white mr-12 ml-20" }, [
-              _vm._v("За последние 15 минут появилось 5 jobs"),
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "bg-gray-300 text-black rounded rounded-full py-3 px-9 hover:bg-gray-700 hover:text-white",
-                on: { click: _vm.showKits },
-              },
-              [_vm._v("Обновить")]
-            ),
-          ]),
-          _vm._v(" "),
-          _c(
-            "p",
+      _vm.showNewJobsCount
+        ? _c(
+            "div",
             {
               staticClass:
-                "mr-80 text-white text-3xl cursor-pointer hover:text-red-500",
+                "w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center",
             },
-            [_vm._v("X")]
-          ),
-        ]
-      ),
+            [
+              _c("div", { staticClass: "flex justify-around items-center" }, [
+                _c("p", { staticClass: "text-white mr-12 ml-20" }, [
+                  _vm._v(
+                    "За последние 15 минут появилось " +
+                      _vm._s(_vm.newJobsCount) +
+                      " jobs"
+                  ),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "bg-gray-300 text-black rounded rounded-full py-3 px-9 hover:bg-gray-700 hover:text-white",
+                    on: { click: _vm.refreshJobs },
+                  },
+                  [_vm._v("Обновить")]
+                ),
+              ]),
+              _vm._v(" "),
+              _c(
+                "p",
+                {
+                  staticClass:
+                    "mr-80 text-white text-3xl cursor-pointer hover:text-red-500",
+                },
+                [_vm._v("X")]
+              ),
+            ]
+          )
+        : _vm._e(),
     ],
     1
   )

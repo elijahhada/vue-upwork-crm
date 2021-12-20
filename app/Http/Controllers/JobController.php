@@ -161,14 +161,18 @@ class JobController extends Controller
             $jobs->whereDoesntHave('exceptionWords', function ($query) use ($exceptionWords){
                 $query->whereIn('exception_word_job.exception_word_id', $exceptionWords);
             });
-//            temporary commented, uncomment after db reloading
-//            $jobs->whereHas('keyWords', function ($query) use ($keyWords){
-//                $query->whereIn('key_word_job.key_word_id', $keyWords);
-//            });
-
-            $jobs->whereHas('customKeyWords', function ($query) use ($customKeyWords){
-                $query->whereIn('custom_key_word_job.custom_key_word_id', $customKeyWords);
+            $jobs->where(function($query) use($keyWords, $customKeyWords) {
+                $query->whereHas('keyWords', function ($subQuery) use ($keyWords){
+                    $subQuery->whereIn('key_word_job.key_word_id', $keyWords);
+                });
+                $query->orWhereHas('customKeyWords', function ($subQuery) use ($customKeyWords){
+                    $subQuery->whereIn('custom_key_word_job.custom_key_word_id', $customKeyWords);
+                });
             });
+            if($request->checkNewJobsCount) {
+                $jobs->where('created_at', '>', Carbon::now()->subMinutes(15)->toDateTimeString());
+                return $jobs->count();
+            }
 
             return $jobs->paginate(10);
         } catch (\Exception $exception) {
