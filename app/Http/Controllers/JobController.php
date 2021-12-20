@@ -111,6 +111,7 @@ class JobController extends Controller
             $filters = Filter::find($request->kits);
             if (!count($filters)) {
                 $jobs = Job::query()
+                    ->where('is_taken', false)
                     ->orderBy('date_created', 'desc')
                     ->paginate(10);
                 return $jobs;
@@ -171,10 +172,10 @@ class JobController extends Controller
             });
             if($request->checkNewJobsCount) {
                 $jobs->where('created_at', '>', Carbon::now()->subMinutes(15)->toDateTimeString());
-                return $jobs->count();
+                return $jobs->where('is_taken', false)->count();
             }
 
-            return $jobs->paginate(10);
+            return $jobs->where('is_taken', false)->paginate(10);
         } catch (\Exception $exception) {
             return response()->json(['data' => $exception->getMessage()]);
         }
@@ -299,11 +300,12 @@ class JobController extends Controller
                 'label' => $request->label,
                 $fieldsIds['timeOfBid'] => Carbon::now()->format('H:i'),
                 $fieldsIds['timeOfJobCreation'] => $formattedDate,
-                $fieldsIds['bidProfile'] => $request->bidProfile,
+                $fieldsIds['bidProfile'] => $request->bidProfile['id'],
                 $fieldsIds['jobPosting'] => $request->jobPosting,
                 $fieldsIds['proposalLink'] => $request->taskLink,
                 $fieldsIds['invite'] => $request->invite == true ? $inviteId : null,
             ];
+//            return response()->json(['data' => $data]);
             $response = $client->request('POST', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/deals', ['headers' => ['Authorization' => 'Bearer ' . $bearer], 'json' => $data])->getBody()->getContents();
             $result = json_decode($response, true);
         } catch (\Exception $exception) {

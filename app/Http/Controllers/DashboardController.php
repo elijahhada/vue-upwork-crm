@@ -16,6 +16,7 @@ class DashboardController extends Controller
     public function index()
     {
         $jobs = Job::query()
+            ->where('is_taken', false)
             ->orderBy('date_created', 'desc')
             ->paginate(10);
         $user = Auth::user();

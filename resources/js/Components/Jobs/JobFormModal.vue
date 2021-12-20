@@ -182,6 +182,8 @@ export default {
                 console.log(error);
             })
             this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
+            document.body.classList.remove('overflow-y-hidden');
+            this.$store.state.jobToRemove = this.$store.state.DealData.id;
         },
         closeModalJob() {
             this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;

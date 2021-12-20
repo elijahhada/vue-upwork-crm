@@ -105,6 +105,10 @@ export default {
         this.checkNewJobsCount();
     },
     watch: {
+        jobToRemove(id) {
+            const index = this.data.findIndex((p) => p.id == id);
+            this.data.splice(index, 1);
+        },
         selectedKits(kits) {
             this.isReloading = true;
             axios
@@ -217,5 +221,10 @@ export default {
             });
         }
     },
+    computed: {
+        jobToRemove() {
+            return this.$store.state.jobToRemove;
+        }
+    }
 };
 </script>

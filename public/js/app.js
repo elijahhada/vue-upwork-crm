@@ -4180,6 +4180,8 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
       this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
+      document.body.classList.remove('overflow-y-hidden');
+      this.$store.state.jobToRemove = this.$store.state.DealData.id;
     },
     closeModalJob: function closeModalJob() {
       this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
@@ -7577,6 +7579,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.checkNewJobsCount();
   },
   watch: {
+    jobToRemove: function jobToRemove(id) {
+      var index = this.data.findIndex(function (p) {
+        return p.id == id;
+      });
+      this.data.splice(index, 1);
+    },
     selectedKits: function selectedKits(kits) {
       var _this = this;
 
@@ -7723,6 +7731,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _this6.showToast = true;
         console.log('something in kits have been changed');
       });
+    }
+  },
+  computed: {
+    jobToRemove: function jobToRemove() {
+      return this.$store.state.jobToRemove;
     }
   }
 });
@@ -9544,7 +9557,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
     GlobalCalendarSwitched: true,
     GlobalCalendarUpdate: false,
     DealData: Object,
-    PipedriveInfo: Object
+    PipedriveInfo: Object,
+    jobToRemove: Number
   },
   getters: {}
 }));
@@ -11798,7 +11812,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f] {\r\n    background-color: #faeae3 !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f] {\n    background-color: #faeae3 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

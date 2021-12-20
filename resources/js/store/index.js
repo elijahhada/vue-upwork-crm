@@ -10,6 +10,7 @@ export default new Vuex.Store({
         GlobalCalendarUpdate: false,
         DealData: Object,
         PipedriveInfo: Object,
+        jobToRemove: Number,
     },
     getters: {}
 });
