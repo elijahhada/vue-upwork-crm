@@ -186,6 +186,12 @@ export default {
             this.$store.state.jobToRemove = this.$store.state.DealData.id;
         },
         closeModalJob() {
+            const status = null;
+            axios.post('/jobs/change-status', { id: this.jobId, status }).then((res) => {
+                let action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
+                socket.emit('job:speak', { id: this.jobId, action });
+            });
+            this.$emit('changeStatus', { id: this.jobId, status });
             this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
             this.isTechDropped = false;
             document.body.classList.remove('overflow-y-hidden');

@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full p-7 border border-gray-300 rounded-md my-6 relative" :class="{ 'bg-yellow': isThinking }">
+    <div class="w-full p-7 border border-gray-300 rounded-md my-6 relative" :class="{ 'bg-yellow': isThinking, 'bg-light-red': isTaken }">
         <p class="text-black text-3xl cursor-pointer hover:text-red-500 absolute top-6 right-6" @click="deleteJob">×</p>
         <div class="w-11/12 mb-7 flex justify-between items-center">
             <p>
@@ -46,8 +46,8 @@
             <p><span class="text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap">Show Feedbacks (3)</span></p>
         </div>
         <div class="w-full flex justify-end items-center">
-            <button class="open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7" @click="loadJobToStore(id)" @click.stop="changeStatus(1, true)">Take</button>
-            <button class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white" @click.stop="changeStatus(isThinking ? null : 2)">
+            <button :disabled="isTaken" class="open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 mr-7" :class="{'hover:bg-green-500': !isTaken, 'hover:text-white': !isTaken}" @click="loadJobToStore(id)" @click.stop="changeStatus(1, true)">Take</button>
+            <button :disabled="isTaken" class="rounded rounded-full bg-gray-300 text-black py-3 px-9" :class="{'hover:bg-green-500': !isTaken, 'hover:text-white': !isTaken}" @click.stop="changeStatus(isThinking ? null : 2)">
                 {{ isThinking ? 'Reconsider' : 'Think' }}
             </button>
         </div>
@@ -158,6 +158,9 @@ export default {
         isThinking() {
             return this.jobStatus == 2;
         },
+        isTaken() {
+            return this.jobStatus == 1;
+        },
         truncatedExcerpt: function () {
             return this.excerpt.substring(0, this.truncatedLength);
         },
@@ -179,7 +182,6 @@ export default {
                 this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
                 document.body.classList.add('overflow-y-hidden');
             }
-
             axios.post('/jobs/change-status', { id: this.id, status }).then((res) => {
                 let action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
                 socket.emit('job:speak', { id: this.id, action });
@@ -199,5 +201,8 @@ export default {
 <style scoped>
 .bg-yellow {
     background-color: #faeae3 !important;
+}
+.bg-light-red {
+    background-color: #F84D4D !important;
 }
 </style>

@@ -168,7 +168,7 @@ export default {
         onChangeStatus({ id, status }) {
             const index = this.data.findIndex((p) => p.id == id);
             if (index === -1) return;
-            if (status == 1) this.data.splice(index, 1);
+            if (status == 1) {}
             else {
                 const currentItem = this.data[index];
                 currentItem.status = status;
@@ -185,7 +185,8 @@ export default {
                         this.data.splice(index, 1);
                         break;
                     case 'book':
-                        this.data.splice(index, 1);
+                        currentItem.status = 1;
+                        this.$set(this.data, index, currentItem);
                         break;
                     case 'think':
                         currentItem.status = 2;

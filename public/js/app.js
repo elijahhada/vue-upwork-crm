@@ -3917,6 +3917,9 @@ __webpack_require__.r(__webpack_exports__);
     isThinking: function isThinking() {
       return this.jobStatus == 2;
     },
+    isTaken: function isTaken() {
+      return this.jobStatus == 1;
+    },
     truncatedExcerpt: function truncatedExcerpt() {
       return this.excerpt.substring(0, this.truncatedLength);
     }
@@ -4184,6 +4187,23 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.state.jobToRemove = this.$store.state.DealData.id;
     },
     closeModalJob: function closeModalJob() {
+      var _this = this;
+
+      var status = null;
+      axios.post('/jobs/change-status', {
+        id: this.jobId,
+        status: status
+      }).then(function (res) {
+        var action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
+        socket.emit('job:speak', {
+          id: _this.jobId,
+          action: action
+        });
+      });
+      this.$emit('changeStatus', {
+        id: this.jobId,
+        status: status
+      });
       this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
       this.isTechDropped = false;
       document.body.classList.remove('overflow-y-hidden');
@@ -4212,11 +4232,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     loadPipedriveInfo: function loadPipedriveInfo() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/pipedrive/user-info').then(function (res) {
-        _this.pipedriveInfo = res.data;
-        _this.techsList = res.data.labels;
+        _this2.pipedriveInfo = res.data;
+        _this2.techsList = res.data.labels;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -7656,7 +7676,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         return p.id == id;
       });
       if (index === -1) return;
-      if (status == 1) this.data.splice(index, 1);else {
+
+      if (status == 1) {} else {
         var currentItem = this.data[index];
         currentItem.status = status;
         this.$set(this.data, index, currentItem);
@@ -7683,7 +7704,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             break;
 
           case 'book':
-            _this4.data.splice(index, 1);
+            currentItem.status = 1;
+
+            _this4.$set(_this4.data, index, currentItem);
 
             break;
 
@@ -11812,7 +11835,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f] {\n    background-color: #faeae3 !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-5e15d15f] {\n    background-color: #faeae3 !important;\n}\n.bg-light-red[data-v-5e15d15f] {\n    background-color: #F84D4D !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48616,7 +48639,7 @@ var render = function () {
     "div",
     {
       staticClass: "w-full p-7 border border-gray-300 rounded-md my-6 relative",
-      class: { "bg-yellow": _vm.isThinking },
+      class: { "bg-yellow": _vm.isThinking, "bg-light-red": _vm.isTaken },
     },
     [
       _c(
@@ -48792,7 +48815,12 @@ var render = function () {
           "button",
           {
             staticClass:
-              "open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white mr-7",
+              "open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 mr-7",
+            class: {
+              "hover:bg-green-500": !_vm.isTaken,
+              "hover:text-white": !_vm.isTaken,
+            },
+            attrs: { disabled: _vm.isTaken },
             on: {
               click: [
                 function ($event) {
@@ -48812,7 +48840,12 @@ var render = function () {
           "button",
           {
             staticClass:
-              "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white",
+              "rounded rounded-full bg-gray-300 text-black py-3 px-9",
+            class: {
+              "hover:bg-green-500": !_vm.isTaken,
+              "hover:text-white": !_vm.isTaken,
+            },
+            attrs: { disabled: _vm.isTaken },
             on: {
               click: function ($event) {
                 $event.stopPropagation()
