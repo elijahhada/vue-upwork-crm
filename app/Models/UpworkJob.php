@@ -37,7 +37,7 @@ class UpworkJob implements Arrayable
         $this->duration = $job->duration;
         $this->workload = $job->workload;
         $this->status = $job->job_status;
-        $this->date_created = Carbon::createFromFormat('Y-m-d\TH:i:s+', $job->date_created);
+        $this->date_created = Carbon::createFromFormat('Y-m-d\TH:i:s+', $job->date_created)->addHours(3);
 
         $this->client = new UpworkClient($job);
     }
