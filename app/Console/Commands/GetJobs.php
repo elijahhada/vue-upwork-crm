@@ -49,7 +49,6 @@ class GetJobs extends Command
     public function handle()
     {
         Auth::login(User::find(1));
-
         $client = new Client();
         $user = Auth::user();
         $formParams = [
@@ -74,10 +73,6 @@ class GetJobs extends Command
         $countries = [];
         $categories = [];
         $newJobContents = [];
-
-        if (!isset($jobsContainer->jobs)) {
-            Log::alert('Jobs list error: '.json_encode($jobsContainer));
-        }
 
         foreach ($jobsContainer->jobs as $upworkJob) {
             $upworkJob = new UpworkJob($upworkJob);
