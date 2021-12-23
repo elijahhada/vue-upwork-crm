@@ -14,10 +14,11 @@
                                 <div class="parent-search-block flex-nowrap w-full flex justify-end items-center" ref="parent_search_block">
                                     <div class="w-0 overflow-hidden flex justify-between search-block" ref="search_block">
                                         <input
+                                            v-model="searchInput"
                                             type="text"
                                             placeholder="Job id, URL,Title or key word"
                                             class="w-11/12 search-input border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300" />
-                                        <button class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white">Search</button>
+                                        <button class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white" @click="callSearch">Search</button>
                                         <p class="ml-4 search-button text-black text-5xl cursor-pointer hover:text-red-500" @click="closeSearch()" title="Close search panel">×</p>
                                     </div>
                                     <svg
@@ -118,9 +119,17 @@ export default {
     data() {
         return {
             showingNavigationDropdown: false,
+            searchInput: ''
         };
     },
     methods: {
+        callSearch() {
+            if(this.searchInput.length < 2) {
+                alert('Длина запроса должна быть минимум 2 символа');
+                return;
+            }
+            this.$emit('callSearch', this.searchInput);
+        },
         showSearch() {
             this.$refs.search_block.classList.remove('w-0');
             this.$refs.search_block.classList.add('w-full');

@@ -1,10 +1,10 @@
 <template>
-    <app-layout>
-        <dash-header :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
-        <div class="w-full">
+    <app-layout @callSearch="searchBids">
+        <dash-header v-if="this.data.length > 0" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
+        <div v-if="this.data.length > 0" class="w-full">
             <p class="text-2xl font-bold">Found {{ jobsData.total }} jobs</p>
         </div>
-        <div class="flex flex-col space-y-4" v-if="!isReloading">
+        <div class="flex flex-col space-y-4" v-if="!isReloading && this.data.length > 0">
             <job-card
                 class="w-8/12 py-7 px-8 border"
                 v-for="job in data"
@@ -35,7 +35,7 @@
                 :avgRate="job.client_avg_rate"></job-card>
         </div>
         <Toast message="Фильтры изменились, обновите страницу!" :show="showToast" @hide="showToast = false" type="warning" title="Warning" position="top-right" />
-        <div v-if="showNewJobsCount" class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center">
+        <div v-if="showNewJobsCount && this.data.length > 0" class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center">
             <div class="flex justify-around items-center">
                 <p class="text-white mr-12 ml-20">За последние 15 минут появилось {{ newJobsCount }} jobs</p>
                 <button class="bg-gray-300 text-black rounded rounded-full py-3 px-9 hover:bg-gray-700 hover:text-white" @click="refreshJobs">Обновить</button>
@@ -127,6 +127,18 @@ export default {
         },
     },
     methods: {
+        searchBids(query) {
+            this.data = [];
+            axios
+                .post('/jobs/with-bids', {
+                    query: query
+                })
+                .then((res) => {
+                    console.log(res);
+                }).catch(error => {
+                console.log(error);
+            });
+        },
         refreshJobs() {
             axios
                 .post('/jobs/filter', {

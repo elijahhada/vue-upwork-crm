@@ -6235,6 +6235,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -6258,10 +6259,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      showingNavigationDropdown: false
+      showingNavigationDropdown: false,
+      searchInput: ''
     };
   },
   methods: {
+    callSearch: function callSearch() {
+      if (this.searchInput.length < 2) {
+        alert('Длина запроса должна быть минимум 2 символа');
+        return;
+      }
+
+      this.$emit('callSearch', this.searchInput);
+    },
     showSearch: function showSearch() {
       var _this = this;
 
@@ -7625,6 +7635,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   methods: {
+    searchBids: function searchBids(query) {
+      this.data = [];
+      axios.post('/jobs/with-bids', {
+        query: query
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     refreshJobs: function refreshJobs() {
       var _this2 = this;
 
@@ -11908,7 +11928,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*@import '../../css/style.css';*/\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*@import '../../css/style.css';*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52208,12 +52228,29 @@ var render = function () {
                                 },
                                 [
                                   _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.searchInput,
+                                        expression: "searchInput",
+                                      },
+                                    ],
                                     staticClass:
                                       "w-11/12 search-input border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300",
                                     attrs: {
                                       type: "text",
                                       placeholder:
                                         "Job id, URL,Title or key word",
+                                    },
+                                    domProps: { value: _vm.searchInput },
+                                    on: {
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.searchInput = $event.target.value
+                                      },
                                     },
                                   }),
                                   _vm._v(" "),
@@ -52222,6 +52259,7 @@ var render = function () {
                                     {
                                       staticClass:
                                         "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white",
+                                      on: { click: _vm.callSearch },
                                     },
                                     [_vm._v("Search")]
                                   ),
@@ -54657,31 +54695,36 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "app-layout",
+    { on: { callSearch: _vm.searchBids } },
     [
-      _c("dash-header", {
-        attrs: {
-          countries: _vm.countries,
-          categories: _vm.categories,
-          keyWords: _vm.keyWords,
-          userId: _vm.userId,
-          filters: _vm.filters,
-        },
-        model: {
-          value: _vm.selectedKits,
-          callback: function ($$v) {
-            _vm.selectedKits = $$v
-          },
-          expression: "selectedKits",
-        },
-      }),
+      this.data.length > 0
+        ? _c("dash-header", {
+            attrs: {
+              countries: _vm.countries,
+              categories: _vm.categories,
+              keyWords: _vm.keyWords,
+              userId: _vm.userId,
+              filters: _vm.filters,
+            },
+            model: {
+              value: _vm.selectedKits,
+              callback: function ($$v) {
+                _vm.selectedKits = $$v
+              },
+              expression: "selectedKits",
+            },
+          })
+        : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "w-full" }, [
-        _c("p", { staticClass: "text-2xl font-bold" }, [
-          _vm._v("Found " + _vm._s(_vm.jobsData.total) + " jobs"),
-        ]),
-      ]),
+      this.data.length > 0
+        ? _c("div", { staticClass: "w-full" }, [
+            _c("p", { staticClass: "text-2xl font-bold" }, [
+              _vm._v("Found " + _vm._s(_vm.jobsData.total) + " jobs"),
+            ]),
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      !_vm.isReloading
+      !_vm.isReloading && this.data.length > 0
         ? _c(
             "div",
             { staticClass: "flex flex-col space-y-4" },
@@ -54735,7 +54778,7 @@ var render = function () {
         },
       }),
       _vm._v(" "),
-      _vm.showNewJobsCount
+      _vm.showNewJobsCount && this.data.length > 0
         ? _c(
             "div",
             {
