@@ -185,19 +185,7 @@ class JobController extends Controller
     {
         $client = new Client();
         $user = Auth::user();
-        $auth = [
-            config('pipedrive.client_id'),
-            config('pipedrive.client_secret')
-        ];
-        $formParams = [
-            'grant_type' => 'refresh_token',
-            'refresh_token' => $user['pipedrive_token']['refresh_token']
-        ];
-        $updateTokenResponse = $client->request('POST', 'https://oauth.pipedrive.com/oauth/token', ['auth' => $auth, 'form_params' => $formParams]);
-        $user->pipedrive_token = json_decode($updateTokenResponse->getBody()->getContents(), true);
-        $user->save();
-        $bearer = $user['pipedrive_token']['access_token'];
-        $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/dealFields', ['headers' => ['Authorization' => 'Bearer ' . $bearer]])
+        $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/dealFields', ['query' => ['api_token' => config('pipedrive.api_token')]])
             ->getBody()
             ->getContents();
         $dealFields = json_decode($response, true);
@@ -210,7 +198,7 @@ class JobController extends Controller
                 $result['labels'] = $field['options'];
             }
         }
-        $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/users', ['headers' => ['Authorization' => 'Bearer ' . $bearer]])
+        $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/users', ['query' => ['api_token' => config('pipedrive.api_token')]])
             ->getBody()
             ->getContents();
         $usersData = json_decode($response, true);
@@ -250,22 +238,7 @@ class JobController extends Controller
 
             $client = new Client();
             $user = Auth::user();
-            if(Carbon::now()->diffInMinutes(Carbon::parse($user->updated_at)->toDateTimeString()) > 55) {
-                $auth = [
-                    config('pipedrive.client_id'),
-                    config('pipedrive.client_secret')
-                ];
-                $formParams = [
-                    'grant_type' => 'refresh_token',
-                    'refresh_token' => $user['pipedrive_token']['refresh_token']
-                ];
-                $updateTokenResponse = $client->request('POST', 'https://oauth.pipedrive.com/oauth/token', ['auth' => $auth, 'form_params' => $formParams]);
-                $user->pipedrive_token = json_decode($updateTokenResponse->getBody()->getContents(), true);
-                $user->save();
-            }
-            $bearer = $user['pipedrive_token']['access_token'];
-
-            $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/dealFields', ['headers' => ['Authorization' => 'Bearer ' . $bearer]])
+            $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/dealFields', ['query' => ['api_token' => config('pipedrive.api_token')]])
                 ->getBody()
                 ->getContents();
             $dealFields = json_decode($response, true);
@@ -305,8 +278,9 @@ class JobController extends Controller
                 $fieldsIds['proposalLink'] => $request->taskLink,
                 $fieldsIds['invite'] => $request->invite == true ? $inviteId : null,
             ];
-//            return response()->json(['data' => $data]);
-            $response = $client->request('POST', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/deals', ['headers' => ['Authorization' => 'Bearer ' . $bearer], 'json' => $data])->getBody()->getContents();
+            $response = $client->request('POST', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/deals', ['query' => ['api_token' => config('pipedrive.api_token')], 'json' => $data])
+                ->getBody()
+                ->getContents();
             $result = json_decode($response, true);
         } catch (\Exception $exception) {
             $result = $exception->getMessage();
