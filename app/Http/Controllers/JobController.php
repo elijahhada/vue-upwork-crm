@@ -314,4 +314,24 @@ class JobController extends Controller
 
         return response()->json(['data' => $result]);
     }
+
+    public function jobWithBid(Request $request)
+    {
+        try {
+            $searchString = $request->input('query');
+            $jobs = Job::query()->orderBy('date_created', 'desc');
+            $jobs =  $jobs->has('bid');
+            $jobs = $jobs->where(function($query) use($searchString) {
+                $query->whereHas('bid', function ($subQuery) use($searchString) {
+                    $subQuery->where('message', 'like', '%' . strtolower($searchString) . '%');
+                });
+                $query->orWhere('title', 'like', '%' . strtolower($searchString) . '%');
+                $query->orWhere('excerpt', 'like', '%' . strtolower($searchString) . '%');
+                $query->orWhere('skills', 'like', '%' . strtolower($searchString) . '%');
+            });
+            return $jobs->with('bid')->paginate(3);
+        } catch (\Exception $exception) {
+            return response()->json(['data' => $exception->getMessage()]);
+        }
+    }
 }
