@@ -128,6 +128,7 @@ export default {
                 alert('Длина запроса должна быть минимум 2 символа');
                 return;
             }
+            this.closeSearch();
             this.$emit('callSearch', this.searchInput);
         },
         showSearch() {

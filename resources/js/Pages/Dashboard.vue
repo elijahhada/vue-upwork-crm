@@ -1,10 +1,10 @@
 <template>
     <app-layout @callSearch="searchBids">
-        <dash-header v-if="this.data.length > 0" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
-        <div v-if="this.data.length > 0" class="w-full">
+        <dash-header v-if="!isShownBids" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
+        <div v-if="!isShownBids" class="w-full">
             <p class="text-2xl font-bold">Found {{ jobsData.total }} jobs</p>
         </div>
-        <div class="flex flex-col space-y-4" v-if="!isReloading && this.data.length > 0">
+        <div class="flex flex-col space-y-4" v-if="!isReloading && !isShownBids">
             <job-card
                 class="w-8/12 py-7 px-8 border"
                 v-for="job in data"
@@ -35,12 +35,44 @@
                 :avgRate="job.client_avg_rate"></job-card>
         </div>
         <Toast message="Фильтры изменились, обновите страницу!" :show="showToast" @hide="showToast = false" type="warning" title="Warning" position="top-right" />
-        <div v-if="showNewJobsCount && this.data.length > 0" class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center">
+        <div v-if="showNewJobsCount && !isShownBids" class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center">
             <div class="flex justify-around items-center">
                 <p class="text-white mr-12 ml-20">За последние 15 минут появилось {{ newJobsCount }} jobs</p>
                 <button class="bg-gray-300 text-black rounded rounded-full py-3 px-9 hover:bg-gray-700 hover:text-white" @click="refreshJobs">Обновить</button>
             </div>
             <p class="mr-80 text-white text-3xl cursor-pointer hover:text-red-500">X</p>
+        </div>
+        <div class="flex flex-col my-10">
+            <bid-card
+                class="w-8/12 py-7 px-8 border"
+                v-for="job in bids"
+                :key="job.id"
+                @delete="onDelete"
+                @changeStatus="onChangeStatus"
+                :id="job.id"
+                :title="job.title"
+                :excerpt="job.excerpt"
+                :score="job.client_score"
+                :feedback="job.client_feedback"
+                :country="job.client_country"
+                :dateCreated="job.date_created"
+                :diffHuman="job.human_date_created"
+                :category="job.category2"
+                :subCategory="job.subcategory2"
+                :jobType="job.job_type"
+                :verification="job.client_payment_verification"
+                :budget="job.budget"
+                :url="job.url"
+                :hires="job.client_past_hires"
+                :totalCharge="job.client_total_charge"
+                :hireRate="job.client_hire_rate"
+                :feedbacksCount="job.client_reviews_count"
+                :jobsPosted="job.client_jobs_posted"
+                :jobStatus="job.status"
+                :duration="job.duration"
+                :avgRate="job.client_avg_rate"
+                :bid="job.bid">
+            </bid-card>
         </div>
     </app-layout>
 </template>
@@ -48,6 +80,7 @@
 <script>
 import AppLayout from '@/Layouts/AppLayout';
 import JobCard from '../Components/Jobs/JobCard';
+import BidCard from '../Components/Jobs/BidCard';
 import DashHeader from '../Components/DashboardHeader';
 import {debounce} from "lodash/function";
 import Toast from "../Components/Toast/Toast";
@@ -82,16 +115,21 @@ export default {
     data() {
         return {
             data: [],
+            bids: [],
             isReloading: false,
             selectedKits: [],
             jobsData: Object,
+            bidsData: Object,
             showToast: false,
             showNewJobsCount: false,
             newJobsCount: 0,
+            isShownBids: false,
+            searchQuery: ''
         };
     },
     components: {
         JobCard,
+        BidCard,
         AppLayout,
         DashHeader,
         Toast
@@ -128,13 +166,16 @@ export default {
     },
     methods: {
         searchBids(query) {
-            this.data = [];
+            this.searchQuery = query;
+            this.isShownBids = true;
+            this.loadMoreBidsOnScroll();
             axios
                 .post('/jobs/with-bids', {
                     query: query
                 })
                 .then((res) => {
-                    console.log(res);
+                    this.bidsData = res.data;
+                    this.bids = res.data.data;
                 }).catch(error => {
                 console.log(error);
             });
@@ -212,6 +253,9 @@ export default {
             });
         },
         loadMoreOnScroll() {
+            if(this.isShownBids) {
+                return;
+            }
             window.addEventListener('scroll', debounce((e) => {
                 let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
@@ -223,6 +267,26 @@ export default {
                         .then((response) => {
                             this.data.push(...response.data.data.filter((j) => j.status !== 1));
                             this.jobsData = response.data;
+                        });
+                }
+            },300))
+        },
+        loadMoreBidsOnScroll() {
+            if(!this.isShownBids) {
+                return;
+            }
+            window.addEventListener('scroll', debounce((e) => {
+                let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
+
+                if(pixelsFromBottom < 600 && this.bidsData.next_page_url !== null) {
+                    console.log('is working');
+                    axios
+                        .post('/jobs/with-bids?page=' + this.bidsData.next_page_url.substr(this.bidsData.next_page_url.length - 1), {
+                            query: this.searchQuery
+                        })
+                        .then((response) => {
+                            this.bids.push(...response.data.data);
+                            this.bidsData = response.data;
                         });
                 }
             },300))

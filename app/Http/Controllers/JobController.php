@@ -320,11 +320,16 @@ class JobController extends Controller
         try {
             $searchString = $request->input('query');
             $jobs = Job::query()->orderBy('date_created', 'desc');
-            $jobs =  $jobs->whereHas('bid', function ($query) use($searchString) {
-                $query->where('message', 'like', '%' . strtolower($searchString) . '%');
+            $jobs =  $jobs->has('bid');
+            $jobs = $jobs->where(function($query) use($searchString) {
+                $query->whereHas('bid', function ($subQuery) use($searchString) {
+                    $subQuery->where('message', 'like', '%' . strtolower($searchString) . '%');
+                });
+                $query->orWhere('title', 'like', '%' . strtolower($searchString) . '%');
+                $query->orWhere('excerpt', 'like', '%' . strtolower($searchString) . '%');
+                $query->orWhere('skills', 'like', '%' . strtolower($searchString) . '%');
             });
-            $jobs = $jobs->with('bid')->paginate(10);
-            return $jobs;
+            return $jobs->with('bid')->paginate(3);
         } catch (\Exception $exception) {
             return response()->json(['data' => $exception->getMessage()]);
         }
