@@ -279,7 +279,6 @@ export default {
                 let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
                 if(pixelsFromBottom < 600 && this.bidsData.next_page_url !== null) {
-                    console.log('is working');
                     axios
                         .post('/jobs/with-bids?page=' + this.bidsData.next_page_url.substr(this.bidsData.next_page_url.length - 1), {
                             query: this.searchQuery

@@ -1,4 +1,4 @@
-const HOST = 'http://localhost';
+const HOST = 'https://localhost';
 const PORT = 3000;
 const hostname = `${HOST}:${PORT}`;
 
