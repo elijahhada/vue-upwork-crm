@@ -30,43 +30,52 @@ class FilterController extends Controller
     public function create(Request $request)
     {
         try {
-            $exceptionWords = explode(',', $request->exception_words_ids);
             $exceptionWordsIds = [];
-            foreach ($exceptionWords as $word){
-                $item = ExceptionWord::where('title', strtolower($word))->first();
-                if($item){
-                    array_push($exceptionWordsIds, $item->id);
-                }else{
-                    $newExceptionWord = new ExceptionWord();
-                    $newExceptionWord->title = strtolower($word);
-                    $newExceptionWord->save();
-                    array_push($exceptionWordsIds, $newExceptionWord->id);
+            if(!empty($request->exception_words_ids)) {
+                $exceptionWords = explode(',', $request->exception_words_ids);
+                foreach ($exceptionWords as $word){
+                    $item = ExceptionWord::where('title', strtolower($word))->first();
+                    if($item){
+                        array_push($exceptionWordsIds, $item->id);
+                    }else{
+                        $newExceptionWord = new ExceptionWord();
+                        $newExceptionWord->title = strtolower($word);
+                        $newExceptionWord->save();
+                        array_push($exceptionWordsIds, $newExceptionWord->id);
+                    }
                 }
+                AttachExceptionWordToJobs::dispatch($exceptionWords);
             }
-            AttachExceptionWordToJobs::dispatch($exceptionWords);
-
-            $customKeyWords = explode(',', $request->custom_key_words_ids);
             $customKeyWordsIds = [];
-            foreach ($customKeyWords as $word){
-                $item = CustomKeyWord::where('title', strtolower($word))->first();
-                if($item){
-                    array_push($customKeyWordsIds, $item->id);
-                }else{
-                    $newCustomKeyWord = new CustomKeyWord();
-                    $newCustomKeyWord->title = strtolower($word);
-                    $newCustomKeyWord->save();
-                    array_push($customKeyWordsIds, $newCustomKeyWord->id);
+            if(!empty($request->custom_key_words_ids)) {
+                $customKeyWords = explode(',', $request->custom_key_words_ids);
+                foreach ($customKeyWords as $word){
+                    $item = CustomKeyWord::where('title', strtolower($word))->first();
+                    if($item){
+                        array_push($customKeyWordsIds, $item->id);
+                    }else{
+                        $newCustomKeyWord = new CustomKeyWord();
+                        $newCustomKeyWord->title = strtolower($word);
+                        $newCustomKeyWord->save();
+                        array_push($customKeyWordsIds, $newCustomKeyWord->id);
+                    }
                 }
+                AttachCustomKeyWordToJobs::dispatch($customKeyWords);
             }
-            AttachCustomKeyWordToJobs::dispatch($customKeyWords);
             $filters = new Filter();
             $filters->user_id = $request->user_id;
             $filters->title = $request->title;
             $filters->countries_ids = $request->countries_ids;
             $filters->categories_ids = $request->categories_ids;
             $filters->key_words_ids = $request->key_words_ids;
-            $filters->exception_words_ids = implode(',', $exceptionWordsIds);
-            $filters->custom_key_words_ids = implode(',', $customKeyWordsIds);
+            $filters->exception_words_ids = !empty($exceptionWordsIds) ? implode(',', $exceptionWordsIds) : null;
+            $filters->custom_key_words_ids = !empty($customKeyWordsIds) ? implode(',', $customKeyWordsIds) : null;
+            $filters->is_hourly = $request->is_hourly;
+            $filters->hourly_min = $request->hourly_min;
+            $filters->hourly_max = $request->hourly_max;
+            $filters->is_fixed = $request->is_fixed;
+            $filters->fixed_min = $request->fixed_min;
+            $filters->fixed_max = $request->fixed_max;
             $filters->save();
             return response()->json(['data' => 'all ok']);
         } catch (\Exception $exception) {
@@ -117,44 +126,52 @@ class FilterController extends Controller
     public function update(Request $request, Filter $filter)
     {
         try {
-            $exceptionWords = explode(',', $request->exception_words_ids);
             $exceptionWordsIds = [];
-            foreach ($exceptionWords as $word){
-                $item = ExceptionWord::where('title', strtolower($word))->first();
-                if($item){
-                    array_push($exceptionWordsIds, $item->id);
-                }else{
-                    $newExceptionWord = new ExceptionWord();
-                    $newExceptionWord->title = strtolower($word);
-                    $newExceptionWord->save();
-                    array_push($exceptionWordsIds, $newExceptionWord->id);
+            if(!empty($request->exception_words_ids)) {
+                $exceptionWords = explode(',', $request->exception_words_ids);
+                foreach ($exceptionWords as $word){
+                    $item = ExceptionWord::where('title', strtolower($word))->first();
+                    if($item){
+                        array_push($exceptionWordsIds, $item->id);
+                    }else{
+                        $newExceptionWord = new ExceptionWord();
+                        $newExceptionWord->title = strtolower($word);
+                        $newExceptionWord->save();
+                        array_push($exceptionWordsIds, $newExceptionWord->id);
+                    }
                 }
+                AttachExceptionWordToJobs::dispatch($exceptionWords);
             }
-            AttachExceptionWordToJobs::dispatch($exceptionWords);
-
-            $customKeyWords = explode(',', $request->custom_key_words_ids);
             $customKeyWordsIds = [];
-            foreach ($customKeyWords as $word){
-                $item = CustomKeyWord::where('title', strtolower($word))->first();
-                if($item){
-                    array_push($customKeyWordsIds, $item->id);
-                }else{
-                    $newCustomKeyWord = new CustomKeyWord();
-                    $newCustomKeyWord->title = strtolower($word);
-                    $newCustomKeyWord->save();
-                    array_push($customKeyWordsIds, $newCustomKeyWord->id);
+            if(!empty($request->custom_key_words_ids)) {
+                $customKeyWords = explode(',', $request->custom_key_words_ids);
+                foreach ($customKeyWords as $word){
+                    $item = CustomKeyWord::where('title', strtolower($word))->first();
+                    if($item){
+                        array_push($customKeyWordsIds, $item->id);
+                    }else{
+                        $newCustomKeyWord = new CustomKeyWord();
+                        $newCustomKeyWord->title = strtolower($word);
+                        $newCustomKeyWord->save();
+                        array_push($customKeyWordsIds, $newCustomKeyWord->id);
+                    }
                 }
+                AttachCustomKeyWordToJobs::dispatch($customKeyWords);
             }
-            AttachCustomKeyWordToJobs::dispatch($customKeyWords);
-
             $filters = Filter::find($request->id);
             $filters->user_id = $request->user_id;
             $filters->title = $request->title;
             $filters->countries_ids = $request->countries_ids;
             $filters->categories_ids = $request->categories_ids;
             $filters->key_words_ids = $request->key_words_ids;
-            $filters->exception_words_ids = implode(',', $exceptionWordsIds);
-            $filters->custom_key_words_ids = implode(',', $customKeyWordsIds);
+            $filters->exception_words_ids = !empty($exceptionWordsIds) ? implode(',', $exceptionWordsIds) : null;
+            $filters->custom_key_words_ids = !empty($customKeyWordsIds) ? implode(',', $customKeyWordsIds) : null;
+            $filters->is_hourly = $request->is_hourly;
+            $filters->hourly_min = $request->hourly_min;
+            $filters->hourly_max = $request->hourly_max;
+            $filters->is_fixed = $request->is_fixed;
+            $filters->fixed_min = $request->fixed_min;
+            $filters->fixed_max = $request->fixed_max;
             $filters->save();
 
             return response()->json(['data' => 'all ok']);

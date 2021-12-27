@@ -44,6 +44,8 @@ class Job extends Model
     protected $casts = [
         'client_assignments' => 'array',
         'date_created' => 'datetime:d.m.Y H:i:s',
+        'is_hourly' => 'boolean',
+        'is_fixed' => 'boolean',
     ];
 
     protected $appends = ['human_date_created', 'client_hire_rate'];

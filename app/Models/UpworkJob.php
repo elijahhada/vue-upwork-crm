@@ -16,6 +16,8 @@ class UpworkJob implements Arrayable
     public $subcategory2;
     public $job_type;
     public $budget;
+    public $hourly_min;
+    public $hourly_max;
     public $duration;
     public $workload;
     public $status;
@@ -44,6 +46,8 @@ class UpworkJob implements Arrayable
 
     public function setExtraFields($data)
     {
+        $this->hourly_min = $data->op_pref_hourly_rate_min;
+        $this->hourly_max = $data->op_pref_hourly_rate_max;
         $this->client
             ->setClientAssignments(
                 isset($data->assignments->assignment) ? (is_array($data->assignments->assignment) ? $data->assignments->assignment : [$data->assignments->assignment]) : null,

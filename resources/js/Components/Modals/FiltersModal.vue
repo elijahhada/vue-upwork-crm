@@ -6,6 +6,29 @@
         </div>
         <p class="cursor-pointer hover:bg-red-500 hover:text-white bg-gray-200 text-black rounded py-1 px-4 font-normal inline-block mb-2" @click="removeFilter(filter)">delete kit</p>
         <div class="mb-10">
+            <p class="text-lg font-bold text-black mb-3">Job type</p>
+            <div class="flex items-center justify-between w-2/5">
+                <div class="flex">
+                    <input type="checkbox" class="mr-4 border rounded border-gray-400 p-4" v-model="is_hourly">
+                    <span class="mr-4">Hourly</span>
+                </div>
+                <div class="flex">
+                    <input type="text" v-model="hourly_min" :disabled="!is_hourly" :class="{ 'bg-gray-200': !is_hourly }" class="border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none" placeholder="min">
+                    <input type="text" v-model="hourly_max" :disabled="!is_hourly" :class="{ 'bg-gray-200': !is_hourly }" class="border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none" placeholder="max">
+                </div>
+            </div>
+            <div class="flex items-center justify-between w-2/5 mt-2">
+                <div class="flex">
+                    <input type="checkbox" class="mr-4 border rounded border-gray-400 p-4" v-model="is_fixed">
+                    <span class="mr-4">Fixed-Price</span>
+                </div>
+                <div class="flex">
+                    <input type="text" v-model="fixed_min" :disabled="!is_fixed" :class="{ 'bg-gray-200': !is_fixed }" class="border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none" placeholder="min">
+                    <input type="text" v-model="fixed_max" :disabled="!is_fixed" :class="{ 'bg-gray-200': !is_fixed }" class="border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none" placeholder="max">
+                </div>
+            </div>
+        </div>
+        <div class="mb-10">
             <p class="text-lg font-bold text-black mb-3">Countries</p>
             <div class="flex flex-wrap justify-content-start items-start">
                 <button
@@ -155,9 +178,21 @@ export default {
             allCountriesChecked: false,
             allCategoriesChecked: false,
             allKeyWordsChecked: false,
+            is_hourly: false,
+            hourly_min: 0,
+            hourly_max: 0,
+            is_fixed: false,
+            fixed_min: 0,
+            fixed_max: 0
         };
     },
     mounted() {
+        this.is_hourly = this.filter.is_hourly;
+        this.hourly_min = this.filter.hourly_min;
+        this.hourly_max = this.filter.hourly_max;
+        this.is_fixed = this.filter.is_fixed;
+        this.fixed_min = this.filter.fixed_min;
+        this.fixed_max = this.filter.fixed_max;
         let filter = this.filter;
         if (filter.countries_ids) {
             this.countries.forEach((item) => {
@@ -218,7 +253,7 @@ export default {
             document.querySelector('.save-word-input').classList.add('hidden');
         },
         saveWord() {
-            if (this.newWord != false) this.exceptionWords.push(this.newWord.trim());
+            if (this.newWord != false && this.newWord.length > 0) this.exceptionWords.push(this.newWord.trim());
             this.newWord = '';
             this.closeAddWord();
         },
@@ -238,7 +273,7 @@ export default {
             document.querySelector('.save-key-word-input').classList.add('hidden');
         },
         saveKeyWord() {
-            if (this.newKeyWord != false) this.customKeyWords.push(this.newKeyWord.trim());
+            if (this.newKeyWord != false && this.newKeyWord.length > 0) this.customKeyWords.push(this.newKeyWord.trim());
             this.newKeyWord = '';
             this.closeAddKeyWord();
         },
@@ -263,9 +298,10 @@ export default {
             });
 
             if (!this.createdKitTitle) return alert('Введите название фильтра!');
-            if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length && !this.customKeyWords.length) return alert('Введите параметр(ы) фильтра!');
+            if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length
+                && !this.customKeyWords.length && this.hourly_min < 1 && this.hourly_max < 1 && this.fixed_min < 1 && this.fixed_max < 1) return alert('Введите параметр(ы) фильтра!');
 
-            axios.post('/update-filter', {
+            const data = {
                 id: this.filter.id,
                 user_id: this.userId,
                 title: this.createdKitTitle,
@@ -274,7 +310,14 @@ export default {
                 key_words_ids: keyWords.join(','),
                 exception_words_ids: this.exceptionWords.join(','),
                 custom_key_words_ids: this.customKeyWords.join(','),
-            }).then(res => {
+                is_hourly: this.is_hourly,
+                hourly_min: this.hourly_min,
+                hourly_max: this.hourly_max,
+                is_fixed: this.is_fixed,
+                fixed_min: this.fixed_min,
+                fixed_max: this.fixed_max,
+            }
+            axios.post('/update-filter', data).then(res => {
                 socket.emit('kits:speak', {});
             });
             return alert('Filter was updated!');

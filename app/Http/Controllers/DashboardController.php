@@ -25,9 +25,9 @@ class DashboardController extends Controller
         $countries = Country::select('id', 'title')->get();
         $categories = Category::select('id', 'title')->get();
         $keyWords = KeyWord::select('id', 'title', 'is_primary', 'parent_id')->get();
-        $filters = Filter::select('id', 'title', 'user_id', 'categories_ids', 'countries_ids', 'key_words_ids', 'exception_words_ids', 'custom_key_words_ids')->get();
-        $exceptionWords = [];
-        foreach ($filters as $filter){
+        $filters = Filter::select('id', 'title', 'user_id', 'categories_ids', 'countries_ids', 'key_words_ids', 'exception_words_ids', 'custom_key_words_ids', 'is_hourly', 'hourly_min', 'hourly_max', 'is_fixed', 'fixed_min', 'fixed_max')->get();
+        $filters->map(function($filter) {
+            $exceptionWords = [];
             foreach (explode(',', $filter['exception_words_ids']) as $wordId){
                 $item = ExceptionWord::find($wordId);
                 if($item){
@@ -35,9 +35,7 @@ class DashboardController extends Controller
                 }
             }
             $filter['exception_words_ids'] = implode(',', $exceptionWords);
-        }
-        $customKeyWords = [];
-        foreach ($filters as $filter){
+            $customKeyWords = [];
             foreach (explode(',', $filter['custom_key_words_ids']) as $wordId){
                 $item = CustomKeyWord::find($wordId);
                 if($item){
@@ -45,7 +43,8 @@ class DashboardController extends Controller
                 }
             }
             $filter['custom_key_words_ids'] = implode(',', $customKeyWords);
-        }
+            return $filter;
+        });
 
         return inertia('Dashboard', [
             'jobs' => $jobs,

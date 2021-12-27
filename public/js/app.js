@@ -4672,6 +4672,29 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     countries: {
@@ -4697,7 +4720,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       allCountriesChecked: false,
       allCategoriesChecked: false,
       allKeyWordsChecked: false,
-      filter: null
+      filter: null,
+      is_hourly: false,
+      hourly_min: 0,
+      hourly_max: 0,
+      is_fixed: false,
+      fixed_min: 0,
+      fixed_max: 0
     };
   },
   methods: {
@@ -4732,7 +4761,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       document.querySelector('.save-word-input').classList.add('hidden');
     },
     saveWord: function saveWord() {
-      if (this.newWord != false) this.exceptionWords.push(this.newWord.trim());
+      if (this.newWord != false && this.newWord.length > 0) this.exceptionWords.push(this.newWord.trim());
       this.newWord = '';
       this.closeAddWord();
     },
@@ -4752,7 +4781,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       document.querySelector('.save-key-word-input').classList.add('hidden');
     },
     saveKeyWord: function saveKeyWord() {
-      if (this.newKeyWord != false) this.customKeyWords.push(this.newKeyWord.trim());
+      if (this.newKeyWord != false && this.newKeyWord.length > 0) this.customKeyWords.push(this.newKeyWord.trim());
       this.newKeyWord = '';
       this.closeAddKeyWord();
     },
@@ -4775,16 +4804,23 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         if (item.checked) keyWords.push(item.id);
       });
       if (!this.createdKitTitle) return alert('Введите название фильтра!');
-      if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length && !this.customKeyWords.length) return alert('Введите параметр(ы) фильтра!');
-      axios.post('/add-filter', {
+      if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length && !this.customKeyWords.length && this.hourly_min < 1 && this.hourly_max < 1 && this.fixed_min < 1 && this.fixed_max < 1) return alert('Введите параметр(ы) фильтра!');
+      var data = {
         user_id: this.userId,
         title: this.createdKitTitle,
         countries_ids: countries.join(','),
         categories_ids: categories.join(','),
         key_words_ids: keyWords.join(','),
         exception_words_ids: this.exceptionWords.join(','),
-        custom_key_words_ids: this.customKeyWords.join(',')
-      }).then(function (response) {
+        custom_key_words_ids: this.customKeyWords.join(','),
+        is_hourly: this.is_hourly,
+        hourly_min: this.hourly_min,
+        hourly_max: this.hourly_max,
+        is_fixed: this.is_fixed,
+        fixed_min: this.fixed_min,
+        fixed_max: this.fixed_max
+      };
+      axios.post('/add-filter', data).then(function (response) {
         console.log(response);
         _this.filter = response.data;
         socket.emit('kits:speak', {});
@@ -4995,6 +5031,29 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     filter: {
@@ -5025,12 +5084,24 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       keyWords: Object.seal(this.filterKeyWords),
       allCountriesChecked: false,
       allCategoriesChecked: false,
-      allKeyWordsChecked: false
+      allKeyWordsChecked: false,
+      is_hourly: false,
+      hourly_min: 0,
+      hourly_max: 0,
+      is_fixed: false,
+      fixed_min: 0,
+      fixed_max: 0
     };
   },
   mounted: function mounted() {
     var _this = this;
 
+    this.is_hourly = this.filter.is_hourly;
+    this.hourly_min = this.filter.hourly_min;
+    this.hourly_max = this.filter.hourly_max;
+    this.is_fixed = this.filter.is_fixed;
+    this.fixed_min = this.filter.fixed_min;
+    this.fixed_max = this.filter.fixed_max;
     var filter = this.filter;
 
     if (filter.countries_ids) {
@@ -5099,7 +5170,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       document.querySelector('.save-word-input').classList.add('hidden');
     },
     saveWord: function saveWord() {
-      if (this.newWord != false) this.exceptionWords.push(this.newWord.trim());
+      if (this.newWord != false && this.newWord.length > 0) this.exceptionWords.push(this.newWord.trim());
       this.newWord = '';
       this.closeAddWord();
     },
@@ -5119,7 +5190,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       document.querySelector('.save-key-word-input').classList.add('hidden');
     },
     saveKeyWord: function saveKeyWord() {
-      if (this.newKeyWord != false) this.customKeyWords.push(this.newKeyWord.trim());
+      if (this.newKeyWord != false && this.newKeyWord.length > 0) this.customKeyWords.push(this.newKeyWord.trim());
       this.newKeyWord = '';
       this.closeAddKeyWord();
     },
@@ -5141,8 +5212,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         if (item.checked) keyWords.push(item.id);
       });
       if (!this.createdKitTitle) return alert('Введите название фильтра!');
-      if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length && !this.customKeyWords.length) return alert('Введите параметр(ы) фильтра!');
-      axios.post('/update-filter', {
+      if (!countries.length && !categories.length && !keyWords.length && !this.exceptionWords.length && !this.customKeyWords.length && this.hourly_min < 1 && this.hourly_max < 1 && this.fixed_min < 1 && this.fixed_max < 1) return alert('Введите параметр(ы) фильтра!');
+      var data = {
         id: this.filter.id,
         user_id: this.userId,
         title: this.createdKitTitle,
@@ -5150,8 +5221,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         categories_ids: categories.join(','),
         key_words_ids: keyWords.join(','),
         exception_words_ids: this.exceptionWords.join(','),
-        custom_key_words_ids: this.customKeyWords.join(',')
-      }).then(function (res) {
+        custom_key_words_ids: this.customKeyWords.join(','),
+        is_hourly: this.is_hourly,
+        hourly_min: this.hourly_min,
+        hourly_max: this.hourly_max,
+        is_fixed: this.is_fixed,
+        fixed_min: this.fixed_min,
+        fixed_max: this.fixed_max
+      };
+      axios.post('/update-filter', data).then(function (res) {
         socket.emit('kits:speak', {});
       });
       return alert('Filter was updated!');
@@ -50108,6 +50186,226 @@ var render = function () {
         _vm._v(" "),
         _c("div", { staticClass: "mb-10" }, [
           _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+            _vm._v("Job type"),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex items-center justify-between w-2/5" },
+            [
+              _c("div", { staticClass: "flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.is_hourly,
+                      expression: "is_hourly",
+                    },
+                  ],
+                  staticClass: "mr-4 border rounded border-gray-400 p-4",
+                  attrs: { type: "checkbox" },
+                  domProps: {
+                    checked: Array.isArray(_vm.is_hourly)
+                      ? _vm._i(_vm.is_hourly, null) > -1
+                      : _vm.is_hourly,
+                  },
+                  on: {
+                    change: function ($event) {
+                      var $$a = _vm.is_hourly,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.is_hourly = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.is_hourly = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.is_hourly = $$c
+                      }
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "mr-4" }, [_vm._v("Hourly")]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.hourly_min,
+                      expression: "hourly_min",
+                    },
+                  ],
+                  staticClass:
+                    "border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+                  class: { "bg-gray-200": !_vm.is_hourly },
+                  attrs: {
+                    type: "text",
+                    disabled: !_vm.is_hourly,
+                    placeholder: "min",
+                  },
+                  domProps: { value: _vm.hourly_min },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.hourly_min = $event.target.value
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.hourly_max,
+                      expression: "hourly_max",
+                    },
+                  ],
+                  staticClass:
+                    "border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+                  class: { "bg-gray-200": !_vm.is_hourly },
+                  attrs: {
+                    type: "text",
+                    disabled: !_vm.is_hourly,
+                    placeholder: "max",
+                  },
+                  domProps: { value: _vm.hourly_max },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.hourly_max = $event.target.value
+                    },
+                  },
+                }),
+              ]),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex items-center justify-between w-2/5 mt-2" },
+            [
+              _c("div", { staticClass: "flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.is_fixed,
+                      expression: "is_fixed",
+                    },
+                  ],
+                  staticClass: "mr-4 border rounded border-gray-400 p-4",
+                  attrs: { type: "checkbox" },
+                  domProps: {
+                    checked: Array.isArray(_vm.is_fixed)
+                      ? _vm._i(_vm.is_fixed, null) > -1
+                      : _vm.is_fixed,
+                  },
+                  on: {
+                    change: function ($event) {
+                      var $$a = _vm.is_fixed,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.is_fixed = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.is_fixed = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.is_fixed = $$c
+                      }
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "mr-4" }, [_vm._v("Fixed-Price")]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.fixed_min,
+                      expression: "fixed_min",
+                    },
+                  ],
+                  staticClass:
+                    "border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+                  class: { "bg-gray-200": !_vm.is_fixed },
+                  attrs: {
+                    type: "text",
+                    disabled: !_vm.is_fixed,
+                    placeholder: "min",
+                  },
+                  domProps: { value: _vm.fixed_min },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.fixed_min = $event.target.value
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.fixed_max,
+                      expression: "fixed_max",
+                    },
+                  ],
+                  staticClass:
+                    "border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+                  class: { "bg-gray-200": !_vm.is_fixed },
+                  attrs: {
+                    type: "text",
+                    disabled: !_vm.is_fixed,
+                    placeholder: "max",
+                  },
+                  domProps: { value: _vm.fixed_max },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.fixed_max = $event.target.value
+                    },
+                  },
+                }),
+              ]),
+            ]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-10" }, [
+          _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
             _vm._v("Countries"),
           ]),
           _vm._v(" "),
@@ -50611,6 +50909,222 @@ var render = function () {
         },
         [_vm._v("delete kit")]
       ),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-10" }, [
+        _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
+          _vm._v("Job type"),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex items-center justify-between w-2/5" }, [
+          _c("div", { staticClass: "flex" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.is_hourly,
+                  expression: "is_hourly",
+                },
+              ],
+              staticClass: "mr-4 border rounded border-gray-400 p-4",
+              attrs: { type: "checkbox" },
+              domProps: {
+                checked: Array.isArray(_vm.is_hourly)
+                  ? _vm._i(_vm.is_hourly, null) > -1
+                  : _vm.is_hourly,
+              },
+              on: {
+                change: function ($event) {
+                  var $$a = _vm.is_hourly,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.is_hourly = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.is_hourly = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.is_hourly = $$c
+                  }
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "mr-4" }, [_vm._v("Hourly")]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.hourly_min,
+                  expression: "hourly_min",
+                },
+              ],
+              staticClass:
+                "border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+              class: { "bg-gray-200": !_vm.is_hourly },
+              attrs: {
+                type: "text",
+                disabled: !_vm.is_hourly,
+                placeholder: "min",
+              },
+              domProps: { value: _vm.hourly_min },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.hourly_min = $event.target.value
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.hourly_max,
+                  expression: "hourly_max",
+                },
+              ],
+              staticClass:
+                "border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+              class: { "bg-gray-200": !_vm.is_hourly },
+              attrs: {
+                type: "text",
+                disabled: !_vm.is_hourly,
+                placeholder: "max",
+              },
+              domProps: { value: _vm.hourly_max },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.hourly_max = $event.target.value
+                },
+              },
+            }),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "flex items-center justify-between w-2/5 mt-2" },
+          [
+            _c("div", { staticClass: "flex" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.is_fixed,
+                    expression: "is_fixed",
+                  },
+                ],
+                staticClass: "mr-4 border rounded border-gray-400 p-4",
+                attrs: { type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.is_fixed)
+                    ? _vm._i(_vm.is_fixed, null) > -1
+                    : _vm.is_fixed,
+                },
+                on: {
+                  change: function ($event) {
+                    var $$a = _vm.is_fixed,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.is_fixed = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.is_fixed = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.is_fixed = $$c
+                    }
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "mr-4" }, [_vm._v("Fixed-Price")]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fixed_min,
+                    expression: "fixed_min",
+                  },
+                ],
+                staticClass:
+                  "border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+                class: { "bg-gray-200": !_vm.is_fixed },
+                attrs: {
+                  type: "text",
+                  disabled: !_vm.is_fixed,
+                  placeholder: "min",
+                },
+                domProps: { value: _vm.fixed_min },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.fixed_min = $event.target.value
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fixed_max,
+                    expression: "fixed_max",
+                  },
+                ],
+                staticClass:
+                  "border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+                class: { "bg-gray-200": !_vm.is_fixed },
+                attrs: {
+                  type: "text",
+                  disabled: !_vm.is_fixed,
+                  placeholder: "max",
+                },
+                domProps: { value: _vm.fixed_max },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.fixed_max = $event.target.value
+                  },
+                },
+              }),
+            ]),
+          ]
+        ),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "mb-10" }, [
         _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
