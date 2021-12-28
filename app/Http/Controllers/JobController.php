@@ -161,23 +161,42 @@ class JobController extends Controller
                 $jobs = $jobs->whereIn('client_country', $filterCountries);
             }
             if(count($exceptionWords)) {
-                $jobs->whereHas('exceptionWords', function ($query) use ($exceptionWords){
-                    $query->whereNotIn('exception_word_job.exception_word_id', $exceptionWords);
+                $jobs->whereDoesntHave('exceptionWords', function ($query) use ($exceptionWords){
+                    $query->whereIn('exception_word_job.exception_word_id', $exceptionWords);
                 });
             }
             if(count($customKeyWords)) {
+                $jobs->whereHas('customKeyWords', function ($subQuery) use ($customKeyWords){
+                    $subQuery->whereIn('custom_key_word_job.custom_key_word_id', $customKeyWords);
+                });
+            }
+            if(count($keyWords)) {
                 $jobs->whereHas('keyWords', function ($subQuery) use ($keyWords){
                     $subQuery->whereIn('key_word_job.key_word_id', $keyWords);
                 });
             }
-            if(count($customKeyWords)) {
-                $jobs->orWhereHas('customKeyWords', function ($subQuery) use ($customKeyWords){
-                    $subQuery->whereIn('custom_key_word_job.custom_key_word_id', $customKeyWords);
+            if($filters->pluck('is_hourly')[0] == 1 && $filters->pluck('is_fixed')[0] == 1) {
+                $jobs->where(function($topQuery) use($filters) {
+                    $topQuery->where(function($query) use($filters) {
+                        if((integer)$filters->pluck('hourly_min')[0] > 0) {
+                            $query->where('hourly_min', '>=', (integer)$filters->pluck('hourly_min')[0]);
+                        }
+                        if((integer)$filters->pluck('hourly_max')[0] > 0) {
+                            $query->where('hourly_max', '<=', (integer)$filters->pluck('hourly_max')[0]);
+                        }
+                    });
+                    $topQuery->orWhere(function($query) use($filters) {
+                        if((integer)$filters->pluck('fixed_min')[0] > 0) {
+                            $query->where('budget', '>=', (integer)$filters->pluck('fixed_min')[0]);
+                        }
+                        if((integer)$filters->pluck('fixed_max')[0] > 0) {
+                            $query->where('budget', '<=', (integer)$filters->pluck('fixed_max')[0]);
+                        }
+                    });
                 });
             }
-            if($filters->pluck('is_hourly')[0] == 1) {
+            if($filters->pluck('is_hourly')[0] == 1 && $filters->pluck('is_fixed')[0] != 1) {
                 $jobs->where(function($query) use($filters) {
-                    $query->where('job_type', 'Hourly');
                     if((integer)$filters->pluck('hourly_min')[0] > 0) {
                         $query->where('hourly_min', '>=', (integer)$filters->pluck('hourly_min')[0]);
                     }
@@ -186,9 +205,8 @@ class JobController extends Controller
                     }
                 });
             }
-            if($filters->pluck('is_fixed')[0] == 1) {
+            if($filters->pluck('is_fixed')[0] == 1 && $filters->pluck('is_hourly')[0] != 1) {
                 $jobs->where(function($query) use($filters) {
-                    $query->where('job_type', 'Fixed');
                     if((integer)$filters->pluck('fixed_min')[0] > 0) {
                         $query->where('budget', '>=', (integer)$filters->pluck('fixed_min')[0]);
                     }
