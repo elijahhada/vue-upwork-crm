@@ -109,6 +109,7 @@ class JobController extends Controller
     {
         try {
             $filters = Filter::find($request->kits);
+
             if (!count($filters)) {
                 $jobs = Job::query()
                     ->where('is_taken', false)
@@ -125,10 +126,13 @@ class JobController extends Controller
             $filterCountries = collect();
 
             $exceptionWords = $filters->pluck('exception_words_ids');
+            $exceptionWords = $exceptionWords->filter(fn($value) => !is_null($value));
 
             $keyWords = $filters->pluck('key_words_ids');
+            $keyWords = $keyWords->filter(fn($value) => !is_null($value));
 
             $customKeyWords = $filters->pluck('custom_key_words_ids');
+            $customKeyWords = $customKeyWords->filter(fn($value) => !is_null($value));
 
             if (count($categories)) {
                 foreach ($categories as $category) {
@@ -139,7 +143,6 @@ class JobController extends Controller
                 $filterCategories->unique();
             }
             $filterCategories = Category::find($filterCategories)->pluck('title');
-
             if (count($countries)) {
                 foreach ($countries as $country) {
                     foreach (explode(',', $country) as $item) {
@@ -155,21 +158,25 @@ class JobController extends Controller
                 $jobs = $jobs->whereIn('subcategory2', $filterCategories);
             }
             if (count($filterCountries)) {
-                $jobs = $jobs->orWhereIn('client_country', $filterCountries);
+                $jobs = $jobs->whereIn('client_country', $filterCountries);
             }
-            $jobs->whereHas('exceptionWords', function ($query) use ($exceptionWords){
-                $query->whereNotIn('exception_word_job.exception_word_id', $exceptionWords);
-            });
-            $jobs->orWhere(function($query) use($keyWords, $customKeyWords) {
-                $query->whereHas('keyWords', function ($subQuery) use ($keyWords){
+            if(count($exceptionWords)) {
+                $jobs->whereHas('exceptionWords', function ($query) use ($exceptionWords){
+                    $query->whereNotIn('exception_word_job.exception_word_id', $exceptionWords);
+                });
+            }
+            if(count($customKeyWords)) {
+                $jobs->whereHas('keyWords', function ($subQuery) use ($keyWords){
                     $subQuery->whereIn('key_word_job.key_word_id', $keyWords);
                 });
-                $query->orWhereHas('customKeyWords', function ($subQuery) use ($customKeyWords){
+            }
+            if(count($customKeyWords)) {
+                $jobs->orWhereHas('customKeyWords', function ($subQuery) use ($customKeyWords){
                     $subQuery->whereIn('custom_key_word_job.custom_key_word_id', $customKeyWords);
                 });
-            });
+            }
             if($filters->pluck('is_hourly')[0] == 1) {
-                $jobs->orWhere(function($query) use($filters) {
+                $jobs->where(function($query) use($filters) {
                     $query->where('job_type', 'Hourly');
                     if((integer)$filters->pluck('hourly_min')[0] > 0) {
                         $query->where('hourly_min', '>=', (integer)$filters->pluck('hourly_min')[0]);
@@ -180,7 +187,7 @@ class JobController extends Controller
                 });
             }
             if($filters->pluck('is_fixed')[0] == 1) {
-                $jobs->orWhere(function($query) use($filters) {
+                $jobs->where(function($query) use($filters) {
                     $query->where('job_type', 'Fixed');
                     if((integer)$filters->pluck('fixed_min')[0] > 0) {
                         $query->where('budget', '>=', (integer)$filters->pluck('fixed_min')[0]);
