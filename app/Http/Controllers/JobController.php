@@ -127,12 +127,22 @@ class JobController extends Controller
 
             $exceptionWords = $filters->pluck('exception_words_ids');
             $exceptionWords = $exceptionWords->filter(fn($value) => !is_null($value));
-
+            $exceptionWords = $exceptionWords->toArray();
+            if(count($exceptionWords)) {
+                $exceptionWords = explode(',', $exceptionWords[0]);
+            }
             $keyWords = $filters->pluck('key_words_ids');
             $keyWords = $keyWords->filter(fn($value) => !is_null($value));
-
+            $keyWords = $keyWords->toArray();
+            if(count($keyWords)) {
+                $keyWords = explode(',', $keyWords[0]);
+            }
             $customKeyWords = $filters->pluck('custom_key_words_ids');
             $customKeyWords = $customKeyWords->filter(fn($value) => !is_null($value));
+            $customKeyWords = $customKeyWords->toArray();
+            if(count($customKeyWords)) {
+                $customKeyWords = explode(',', $customKeyWords->toArray()[0]);
+            }
 
             if (count($categories)) {
                 foreach ($categories as $category) {
