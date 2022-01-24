@@ -39,6 +39,8 @@ class Job extends Model
         'client_avg_rate',
         'client_avg_charge',
         'client_bad_feedbacks_count',
+        "hourly_min",
+        "hourly_max",
     ];
 
     protected $casts = [

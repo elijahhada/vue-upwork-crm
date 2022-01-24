@@ -4053,6 +4053,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -4105,6 +4108,12 @@ __webpack_require__.r(__webpack_exports__);
     budget: {
       required: true,
       type: String
+    },
+    hourlyMin: {
+      required: true
+    },
+    hourlyMax: {
+      required: true
     },
     url: {
       required: true,
@@ -7825,6 +7834,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//
+//
 //
 //
 //
@@ -49534,6 +49545,47 @@ var render = function () {
                 ]),
                 _vm._v(" " + _vm._s(_vm.jobsPosted)),
               ]),
+              _vm._v(" "),
+              _vm.jobType === "Fixed"
+                ? _c("p", [
+                    _c("span", { staticClass: "font-bold" }, [
+                      _vm._v(_vm._s(_vm.jobType) + ":"),
+                    ]),
+                    _vm._v(" " + _vm._s(_vm.budget) + "$"),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.jobType === "Hourly" &&
+              _vm.hourlyMin !== "0" &&
+              _vm.hourlyMin !== null &&
+              _vm.hourlyMax !== "0" &&
+              _vm.hourlyMax !== null
+                ? _c("p", [
+                    _c("span", { staticClass: "font-bold" }, [
+                      _vm._v(_vm._s(_vm.jobType) + ":"),
+                    ]),
+                    _vm._v(
+                      " from " +
+                        _vm._s(_vm.hourlyMin) +
+                        "$ to " +
+                        _vm._s(_vm.hourlyMax) +
+                        "$"
+                    ),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.jobType === "Hourly" &&
+              (_vm.hourlyMin === "0" ||
+                _vm.hourlyMin == null ||
+                _vm.hourlyMax === "0" ||
+                _vm.hourlyMax == null)
+                ? _c("p", [
+                    _c("span", { staticClass: "font-bold" }, [
+                      _vm._v(_vm._s(_vm.jobType) + ":"),
+                    ]),
+                    _vm._v(" client has not specified any price"),
+                  ])
+                : _vm._e(),
             ]
           ),
           _vm._v(" "),
@@ -55961,6 +56013,8 @@ var render = function () {
                   jobStatus: job.status,
                   duration: job.duration,
                   avgRate: job.client_avg_rate,
+                  hourlyMin: job.hourly_min,
+                  hourlyMax: job.hourly_max,
                 },
                 on: { delete: _vm.onDelete, changeStatus: _vm.onChangeStatus },
               })

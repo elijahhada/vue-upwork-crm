@@ -28,6 +28,9 @@
                 <p><span class="font-bold">Category:</span> {{ category }}</p>
                 <p><span class="font-bold">Payment Verified:</span> {{ verification }}</p>
                 <p><span class="font-bold">Jobs posted:</span> {{ jobsPosted }}</p>
+                <p v-if="jobType === 'Fixed'"><span class="font-bold">{{ jobType }}:</span> {{ budget }}$</p>
+                <p v-if="jobType === 'Hourly' && hourlyMin !== '0' && hourlyMin !== null && hourlyMax !== '0' && hourlyMax !== null"><span class="font-bold">{{ jobType }}:</span> from {{ hourlyMin }}$ to {{ hourlyMax }}$</p>
+                <p v-if="jobType === 'Hourly' && (hourlyMin === '0' || hourlyMin == null || hourlyMax === '0' || hourlyMax == null)"><span class="font-bold">{{ jobType }}:</span> client has not specified any price</p>
             </div>
             <div class="w-4/12 flex flex-col justify-start items-start">
                 <p><span class="font-bold">Hires:</span> {{ hires }}</p>
@@ -108,6 +111,12 @@ export default {
         budget: {
             required: true,
             type: String,
+        },
+        hourlyMin: {
+            required: true,
+        },
+        hourlyMax: {
+            required: true,
         },
         url: {
             required: true,

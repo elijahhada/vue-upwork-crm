@@ -32,7 +32,9 @@
                 :jobsPosted="job.client_jobs_posted"
                 :jobStatus="job.status"
                 :duration="job.duration"
-                :avgRate="job.client_avg_rate"></job-card>
+                :avgRate="job.client_avg_rate"
+                :hourlyMin="job.hourly_min"
+                :hourlyMax="job.hourly_max"></job-card>
         </div>
         <Toast message="Фильтры изменились, обновите страницу!" :show="showToast" @hide="showToast = false" type="warning" title="Warning" position="top-right" />
         <div v-if="showNewJobsCount && !isShownBids" class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center">

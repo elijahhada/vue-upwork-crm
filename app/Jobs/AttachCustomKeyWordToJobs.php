@@ -36,7 +36,7 @@ class AttachCustomKeyWordToJobs implements ShouldQueue
     {
         foreach ($this->words as $word){
             $word = strtolower($word);
-            $jobs = Job::where('title', 'like', "%$word%")->orWhere('excerpt', 'like', "%$word%")->get()->pluck('id');
+            $jobs = Job::where('title', 'like', "%$word%")->orWhere('excerpt', 'like', "%$word%")->orWhere('skills', 'like', "%$word%")->get()->pluck('id');
             $word = CustomKeyWord::where('title', $word)->first();
             $word->jobs()->attach($jobs);
         }
