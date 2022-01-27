@@ -69,7 +69,7 @@
                     </main>
                 </div>
                 <div class="w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30">
-                    <CalendarSidebar></CalendarSidebar>
+                    <CalendarSidebar @switchCalendar="switchCalendar"></CalendarSidebar>
                 </div>
             </div>
         </section>
@@ -123,6 +123,9 @@ export default {
         };
     },
     methods: {
+        switchCalendar(isSwitched) {
+            this.$emit('switchCalendar', isSwitched);
+        },
         callSearch() {
             if(this.searchInput.length < 2) {
                 alert('Длина запроса должна быть минимум 2 символа');

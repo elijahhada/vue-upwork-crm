@@ -50,7 +50,7 @@ class Job extends Model
         'is_fixed' => 'boolean',
     ];
 
-    protected $appends = ['human_date_created', 'client_hire_rate'];
+    protected $appends = ['human_date_created', 'client_hire_rate', 'feedbacks'];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
@@ -105,5 +105,29 @@ class Job extends Model
     public function getClientHireRateAttribute()
     {
         return number_format(($this->client_past_hires / ($this->client_jobs_posted + 1)) * 100, 2) . '%';
+    }
+
+    public function getFeedbacksAttribute()
+    {
+        $feedbacks = [];
+        if(isset($this->client_assignments) && !empty($this->client_assignments)) {
+            foreach ($this->client_assignments as $assignment) {
+                if(isset($assignment['feedback'])) {
+                    if(isset($assignment['feedback']['scores'])) {
+                        if(isset($assignment['feedback']['scores']['score']) && !empty($assignment['feedback']['scores']['score'])) {
+                            foreach ($assignment['feedback']['scores']['score'] as $index => $score) {
+                                if(isset($score['description'])) {
+                                    $data = [];
+                                    $data['id'] = uniqid($index);
+                                    $data['description'] = $score['description'];
+                                    array_push($feedbacks, $data);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $feedbacks;
     }
 }

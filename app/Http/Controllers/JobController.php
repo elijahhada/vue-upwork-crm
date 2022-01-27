@@ -189,10 +189,10 @@ class JobController extends Controller
                 $jobs->where(function($topQuery) use($filters) {
                     $topQuery->where(function($query) use($filters) {
                         if((integer)$filters->pluck('hourly_min')[0] > 0) {
-                            $query->where('hourly_min', '>=', (integer)$filters->pluck('hourly_min')[0]);
+                            $query->where('hourly_min', '<=', (integer)$filters->pluck('hourly_max')[0]);
                         }
                         if((integer)$filters->pluck('hourly_max')[0] > 0) {
-                            $query->where('hourly_max', '<=', (integer)$filters->pluck('hourly_max')[0]);
+                            $query->where('hourly_max', '>=', (integer)$filters->pluck('hourly_min')[0]);
                         }
                     });
                     $topQuery->orWhere(function($query) use($filters) {
@@ -208,10 +208,10 @@ class JobController extends Controller
             if($filters->pluck('is_hourly')[0] == 1 && $filters->pluck('is_fixed')[0] != 1) {
                 $jobs->where(function($query) use($filters) {
                     if((integer)$filters->pluck('hourly_min')[0] > 0) {
-                        $query->where('hourly_min', '>=', (integer)$filters->pluck('hourly_min')[0]);
+                        $query->where('hourly_min', '<=', (integer)$filters->pluck('hourly_max')[0]);
                     }
                     if((integer)$filters->pluck('hourly_max')[0] > 0) {
-                        $query->where('hourly_max', '<=', (integer)$filters->pluck('hourly_max')[0]);
+                        $query->where('hourly_max', '>=', (integer)$filters->pluck('hourly_min')[0]);
                     }
                 });
             }
@@ -226,7 +226,7 @@ class JobController extends Controller
                 });
             }
             if($request->checkNewJobsCount) {
-                $jobs->where('created_at', '>', Carbon::now()->subMinutes(15)->toDateTimeString());
+                $jobs->where('created_at', '>', $request->createdAt);
                 return $jobs->where('is_taken', false)->count();
             }
 

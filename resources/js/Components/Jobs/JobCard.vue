@@ -4,7 +4,7 @@
         <div class="w-11/12 mb-7 flex justify-between items-center">
             <p>
                 <a :href="url"
-                    ><span class="text-green-500 font-bold text-2xl mr-4 border-b border-gray-300">{{ title }}</span></a
+                    ><span class="text-green-500 font-bold text-2xl mr-4 border-b border-gray-300 hover:text-green-700">{{ title }}</span></a
                 >
                 <span class="text-black font-bold text-2xl">Score: {{ score }}%</span>
             </p>
@@ -46,7 +46,10 @@
             </div>
         </div>
         <div class="w-11/12 mb-12">
-            <p><span class="text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap">Show Feedbacks (3)</span></p>
+            <p><span class="text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap hover:text-green-700" @click="showFeedbacks = !showFeedbacks">Show Feedbacks ({{ feedbacks.length }})</span></p>
+            <div v-if="feedbacks.length > 0" class="mt-3" :class="{'hidden': !showFeedbacks}">
+                <p v-for="(feedback, key) of feedbacks" :key="feedback.id">{{ key+1 + ' ' + feedback.description }}</p>
+            </div>
         </div>
         <div class="w-full flex justify-end items-center">
             <button :disabled="isTaken" class="open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 mr-7" :class="{'hover:bg-green-500': !isTaken, 'hover:text-white': !isTaken}" @click="loadJobToStore(id)" @click.stop="changeStatus(1, true)">Take</button>
@@ -80,6 +83,10 @@ export default {
         feedback: {
             required: true,
             type: String,
+        },
+        feedbacks: {
+            required: true,
+            type: Array,
         },
         country: {
             required: true,
@@ -161,6 +168,7 @@ export default {
             }),
             truncatedLength: 300,
             truncated: true,
+            showFeedbacks: false,
         };
     },
     computed: {

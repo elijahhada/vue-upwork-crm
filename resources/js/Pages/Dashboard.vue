@@ -1,12 +1,12 @@
 <template>
-    <app-layout @callSearch="searchBids">
+    <app-layout @callSearch="searchBids" @switchCalendar="switchCalendar">
         <dash-header v-if="!isShownBids" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
         <div v-if="!isShownBids" class="w-full">
             <p class="text-2xl font-bold">Found {{ jobsData.total }} jobs</p>
         </div>
         <div class="flex flex-col space-y-4" v-if="!isReloading && !isShownBids">
             <job-card
-                class="w-8/12 py-7 px-8 border"
+                class="w-8/12 py-7 px-8 border" :class="{'job-card-stretched': !isCalendarOn}" style="max-width: 1500px!important;"
                 v-for="job in data"
                 :key="job.id"
                 @delete="onDelete"
@@ -16,6 +16,7 @@
                 :excerpt="job.excerpt"
                 :score="job.client_score"
                 :feedback="job.client_feedback"
+                :feedbacks="job.feedbacks"
                 :country="job.client_country"
                 :dateCreated="job.date_created"
                 :diffHuman="job.human_date_created"
@@ -39,8 +40,8 @@
         <Toast message="Фильтры изменились, обновите страницу!" :show="showToast" @hide="showToast = false" type="warning" title="Warning" position="top-right" />
         <div v-if="showNewJobsCount && !isShownBids" class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center">
             <div class="flex justify-around items-center">
-                <p class="text-white mr-12 ml-20">За последние 15 минут появилось {{ newJobsCount }} jobs</p>
-                <button class="bg-gray-300 text-black rounded rounded-full py-3 px-9 hover:bg-gray-700 hover:text-white" @click="refreshJobs">Обновить</button>
+                <p class="text-white mr-12 ml-20">Recently for your filters appeared {{ newJobsCount }} new jobs</p>
+                <button class="bg-gray-300 text-black rounded rounded-full py-3 px-9 hover:bg-gray-700 hover:text-white" @click="refreshJobs">Refresh</button>
             </div>
             <p class="mr-80 text-white text-3xl cursor-pointer hover:text-red-500">X</p>
         </div>
@@ -126,7 +127,8 @@ export default {
             showNewJobsCount: false,
             newJobsCount: 0,
             isShownBids: false,
-            searchQuery: ''
+            searchQuery: '',
+            isCalendarOn: true,
         };
     },
     components: {
@@ -202,10 +204,10 @@ export default {
             axios
                 .post('/jobs/filter', {
                     kits: this.selectedKits,
-                    checkNewJobsCount: true
+                    checkNewJobsCount: true,
+                    createdAt: this.data[0].created_at
                 })
                 .then((response) => {
-                    console.log(response);
                     if(response.data > 0) {
                         this.newJobsCount = response.data;
                         this.showNewJobsCount = true;
@@ -297,6 +299,9 @@ export default {
                 this.showToast = true;
                 console.log('something in kits have been changed');
             });
+        },
+        switchCalendar(isSwitched) {
+            this.isCalendarOn = isSwitched
         }
     },
     computed: {
@@ -306,3 +311,10 @@ export default {
     }
 };
 </script>
+<style scoped>
+@media only screen and (max-width: 1535px) {
+    .job-card-stretched {
+        width: 135%;
+    }
+}
+</style>

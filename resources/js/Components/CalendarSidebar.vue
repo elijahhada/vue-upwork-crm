@@ -71,6 +71,7 @@ export default {
                 document.querySelector('.topmenu').querySelector('.user-block').classList.remove('w-5/12');
                 document.querySelector('.topmenu').querySelector('.user-block').classList.add('w-8/12');
                 this.switched = !this.switched;
+                this.$emit('switchCalendar', this.switched);
             } else {
                 document.querySelector('.calendar-block').style.cssText = 'animation: width100 .3s linear;';
                 document.querySelector('.calendar').classList.remove('hidden');
@@ -89,6 +90,7 @@ export default {
                 document.querySelector('.topmenu').querySelector('.user-block').classList.add('w-5/12');
                 document.querySelector('.topmenu').querySelector('.user-block').classList.remove('w-8/12');
                 this.switched = !this.switched;
+                this.$emit('switchCalendar', this.switched);
             }
         },
         overGreen() {
