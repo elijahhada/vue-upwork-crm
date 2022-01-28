@@ -49743,36 +49743,45 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "w-11/12 mb-12" }, [
-        _c("p", [
-          _c(
-            "span",
-            {
-              staticClass:
-                "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap hover:text-green-700",
-              on: {
-                click: function ($event) {
-                  _vm.showFeedbacks = !_vm.showFeedbacks
+      _vm.feedbacks.length > 0
+        ? _c("div", { staticClass: "w-11/12 mb-12" }, [
+            _c("p", [
+              _c(
+                "span",
+                {
+                  staticClass:
+                    "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap hover:text-green-700",
+                  on: {
+                    click: function ($event) {
+                      _vm.showFeedbacks = !_vm.showFeedbacks
+                    },
+                  },
                 },
-              },
-            },
-            [_vm._v("Show Feedbacks (" + _vm._s(_vm.feedbacks.length) + ")")]
-          ),
-        ]),
-        _vm._v(" "),
-        _vm.feedbacks.length > 0
-          ? _c(
-              "div",
-              { staticClass: "mt-3", class: { hidden: !_vm.showFeedbacks } },
-              _vm._l(_vm.feedbacks, function (feedback, key) {
-                return _c("p", { key: feedback.id }, [
-                  _vm._v(_vm._s(key + 1 + " " + feedback.description)),
-                ])
-              }),
-              0
-            )
-          : _vm._e(),
-      ]),
+                [
+                  _vm._v(
+                    "Show Feedbacks (" + _vm._s(_vm.feedbacks.length) + ")"
+                  ),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _vm.feedbacks.length > 0
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "mt-3",
+                    class: { hidden: !_vm.showFeedbacks },
+                  },
+                  _vm._l(_vm.feedbacks, function (feedback, key) {
+                    return _c("p", { key: feedback.id }, [
+                      _vm._v(_vm._s(key + 1 + " " + feedback.description)),
+                    ])
+                  }),
+                  0
+                )
+              : _vm._e(),
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "w-full flex justify-end items-center" }, [
         _c(

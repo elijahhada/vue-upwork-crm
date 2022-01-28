@@ -45,7 +45,7 @@
                 <p><span class="font-bold">Member since:</span> April 24, 2015</p>
             </div>
         </div>
-        <div class="w-11/12 mb-12">
+        <div class="w-11/12 mb-12" v-if="feedbacks.length > 0">
             <p><span class="text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap hover:text-green-700" @click="showFeedbacks = !showFeedbacks">Show Feedbacks ({{ feedbacks.length }})</span></p>
             <div v-if="feedbacks.length > 0" class="mt-3" :class="{'hidden': !showFeedbacks}">
                 <p v-for="(feedback, key) of feedbacks" :key="feedback.id">{{ key+1 + ' ' + feedback.description }}</p>

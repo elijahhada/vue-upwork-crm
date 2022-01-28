@@ -113,7 +113,7 @@ class Job extends Model
         if(isset($this->client_assignments) && !empty($this->client_assignments)) {
             foreach ($this->client_assignments as $index => $assignment) {
                 if(isset($assignment['feedback'])) {
-                    if(isset($assignment['feedback']['comment'])) {
+                    if(isset($assignment['feedback']['comment']) && !empty($assignment['feedback']['comment'])) {
                         $data = [];
                         $data['id'] = uniqid($index);
                         $data['description'] = $assignment['feedback']['comment'];
