@@ -9,6 +9,7 @@ use App\Models\ExceptionWord;
 use App\Models\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FilterController extends Controller
 {
@@ -190,6 +191,14 @@ class FilterController extends Controller
             abort(403);
         }
         $filter = Filter::find($request->id);
+        $exceptionWordsIdsAsArray = explode(',', $filter->exception_words_ids);
+        DB::table('exception_word_job')->whereIn('exception_word_id', $exceptionWordsIdsAsArray)->delete();
+        ExceptionWord::whereIn('id', $exceptionWordsIdsAsArray)->delete();
+        $customWordsIdsAsArray = explode(',', $filter->custom_key_words_ids);
+        DB::table('custom_key_word_job')->whereIn('custom_key_word_id', $customWordsIdsAsArray)->delete();
+        CustomKeyWord::whereIn('id', $customWordsIdsAsArray)->delete();
+        $keyWordsIdsAsArray = explode(',', $filter->key_words_ids);
+        DB::table('key_word_job')->whereIn('key_word_id', $keyWordsIdsAsArray)->delete();
         $filter->delete();
 
         return response()->json([
