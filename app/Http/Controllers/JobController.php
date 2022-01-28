@@ -114,6 +114,7 @@ class JobController extends Controller
                 $jobs = Job::query()
                     ->where('is_taken', false)
                     ->orderBy('date_created', 'desc')
+                    ->orderBy('id', 'desc')
                     ->paginate(10);
                 return $jobs;
             }
@@ -163,7 +164,9 @@ class JobController extends Controller
             }
             $filterCountries = Country::find($filterCountries)->pluck('title');
 
-            $jobs = Job::query()->orderBy('date_created', 'desc');
+            $jobs = Job::query()
+                ->orderBy('date_created', 'desc')
+                ->orderBy('id', 'desc');
             if (count($filterCategories)) {
                 $jobs = $jobs->whereIn('subcategory2', $filterCategories);
             }

@@ -8146,10 +8146,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
         if (pixelsFromBottom < 600 && _this6.jobsData.next_page_url !== null) {
-          axios.post('/jobs/filter?page=' + _this6.jobsData.next_page_url.substr(_this6.jobsData.next_page_url.length - 1), {
+          var nextPageNumber = _this6.jobsData.next_page_url.slice(_this6.jobsData.next_page_url.indexOf('=') + 1);
+
+          axios.post('/jobs/filter?page=' + nextPageNumber, {
             kits: _this6.selectedKits
           }).then(function (response) {
             var _this6$data;
+
+            console.log(response.data);
+            console.log(response.data.data);
 
             (_this6$data = _this6.data).push.apply(_this6$data, _toConsumableArray(response.data.data.filter(function (j) {
               return j.status !== 1;
@@ -8171,7 +8176,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
         if (pixelsFromBottom < 600 && _this7.bidsData.next_page_url !== null) {
-          axios.post('/jobs/with-bids?page=' + _this7.bidsData.next_page_url.substr(_this7.bidsData.next_page_url.length - 1), {
+          var nextPageNumber = _this7.bidsData.next_page_url.slice(_this7.bidsData.next_page_url.indexOf('=') + 1);
+
+          axios.post('/jobs/with-bids?page=' + nextPageNumber, {
             query: _this7.searchQuery
           }).then(function (response) {
             var _this7$bids;

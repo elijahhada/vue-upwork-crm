@@ -2,9 +2,16 @@ const HOST = 'https://localhost';
 const PORT = 3000;
 const hostname = `${HOST}:${PORT}`;
 
+const fs = require('fs');
+const https = require('https');
 const express = require('express');
 const app = express();
-const server = require('http').createServer(app);
+
+const options = {
+    key: fs.readFileSync('../ssl/file.pem'),
+    cert: fs.readFileSync('../ssl/file.crt')
+}
+const server = https.createServer(options, app);
 
 const io = require('socket.io')(server, {
     cors: { origin: '*' },

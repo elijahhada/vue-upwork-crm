@@ -264,11 +264,15 @@ export default {
                 let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
                 if(pixelsFromBottom < 600 && this.jobsData.next_page_url !== null) {
+                    let nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1)
                     axios
-                        .post('/jobs/filter?page=' + this.jobsData.next_page_url.substr(this.jobsData.next_page_url.length - 1), {
+                        .post('/jobs/filter?page=' + nextPageNumber, {
                             kits: this.selectedKits,
                         })
                         .then((response) => {
+                            console.log(response.data)
+                            console.log(response.data.data)
+
                             this.data.push(...response.data.data.filter((j) => j.status !== 1));
                             this.jobsData = response.data;
                         });
@@ -283,8 +287,9 @@ export default {
                 let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
                 if(pixelsFromBottom < 600 && this.bidsData.next_page_url !== null) {
+                    let nextPageNumber = this.bidsData.next_page_url.slice(this.bidsData.next_page_url.indexOf('=') + 1)
                     axios
-                        .post('/jobs/with-bids?page=' + this.bidsData.next_page_url.substr(this.bidsData.next_page_url.length - 1), {
+                        .post('/jobs/with-bids?page=' + nextPageNumber, {
                             query: this.searchQuery
                         })
                         .then((response) => {

@@ -111,19 +111,13 @@ class Job extends Model
     {
         $feedbacks = [];
         if(isset($this->client_assignments) && !empty($this->client_assignments)) {
-            foreach ($this->client_assignments as $assignment) {
+            foreach ($this->client_assignments as $index => $assignment) {
                 if(isset($assignment['feedback'])) {
-                    if(isset($assignment['feedback']['scores'])) {
-                        if(isset($assignment['feedback']['scores']['score']) && !empty($assignment['feedback']['scores']['score'])) {
-                            foreach ($assignment['feedback']['scores']['score'] as $index => $score) {
-                                if(isset($score['description'])) {
-                                    $data = [];
-                                    $data['id'] = uniqid($index);
-                                    $data['description'] = $score['description'];
-                                    array_push($feedbacks, $data);
-                                }
-                            }
-                        }
+                    if(isset($assignment['feedback']['comment'])) {
+                        $data = [];
+                        $data['id'] = uniqid($index);
+                        $data['description'] = $assignment['feedback']['comment'];
+                        array_push($feedbacks, $data);
                     }
                 }
             }
