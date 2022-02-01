@@ -112,6 +112,7 @@ class JobController extends Controller
 
             if (!count($filters)) {
                 $jobs = Job::query()
+                    ->where('date_created', '<', Carbon::now()->subDays(4)->toDateTimeString())
                     ->where('is_taken', false)
                     ->orderBy('date_created', 'desc')
                     ->orderBy('id', 'desc')
@@ -165,6 +166,7 @@ class JobController extends Controller
             $filterCountries = Country::find($filterCountries)->pluck('title');
 
             $jobs = Job::query()
+                ->where('date_created', '<', Carbon::now()->subDays(14)->toDateTimeString())
                 ->orderBy('date_created', 'desc')
                 ->orderBy('id', 'desc');
             if (count($filterCategories)) {
