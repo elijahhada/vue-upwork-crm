@@ -17,6 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
         $jobs = Job::query()
+            ->where('is_old', false)
             ->where('is_taken', false)
             ->orderBy('date_created', 'desc')
             ->orderBy('id', 'desc')

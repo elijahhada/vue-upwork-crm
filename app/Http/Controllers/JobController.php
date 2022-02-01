@@ -112,6 +112,7 @@ class JobController extends Controller
 
             if (!count($filters)) {
                 $jobs = Job::query()
+                    ->where('is_old', false)
                     ->where('is_taken', false)
                     ->orderBy('date_created', 'desc')
                     ->orderBy('id', 'desc')
@@ -165,6 +166,8 @@ class JobController extends Controller
             $filterCountries = Country::find($filterCountries)->pluck('title');
 
             $jobs = Job::query()
+                ->where('is_old', false)
+                ->where('is_taken', false)
                 ->orderBy('date_created', 'desc')
                 ->orderBy('id', 'desc');
             if (count($filterCategories)) {
@@ -230,10 +233,10 @@ class JobController extends Controller
             }
             if($request->checkNewJobsCount) {
                 $jobs->where('created_at', '>', $request->createdAt);
-                return $jobs->where('is_taken', false)->count();
+                return $jobs->count();
             }
 
-            return $jobs->where('is_taken', false)->paginate(10);
+            return $jobs->paginate(10);
         } catch (\Exception $exception) {
             return response()->json(['data' => $exception->getMessage()]);
         }
