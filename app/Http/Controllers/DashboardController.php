@@ -17,7 +17,6 @@ class DashboardController extends Controller
     public function index()
     {
         $jobs = Job::query()
-            ->where('date_created', '<', Carbon::now()->subDays(14)->toDateTimeString())
             ->where('is_taken', false)
             ->orderBy('date_created', 'desc')
             ->orderBy('id', 'desc')
