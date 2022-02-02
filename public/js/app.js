@@ -10000,9 +10000,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 // const fs = require('fs');
 
-window.io = (__webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/build/cjs/index.js").connect)({
-  secure: true
-});
+window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/build/cjs/index.js");
 window.socket = io("".concat(window.location.hostname, ":3000"), {
   transports: ['websocket'],
   rejectUnauthorized: false
