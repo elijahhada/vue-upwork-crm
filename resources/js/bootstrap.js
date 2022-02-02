@@ -16,4 +16,4 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 window.io = require('socket.io-client');
-window.socket = io(`${window.location.hostname}:3000`);
+window.socket = io(`${window.location.hostname}:3000`, { transports: ['websocket'], rejectUnauthorized: false });
