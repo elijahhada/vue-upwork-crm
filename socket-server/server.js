@@ -16,6 +16,7 @@ const server = https.createServer(options, app);
 
 const io = require('socket.io')(server, {
     cors: { origin: '*' },
+    rejectUnauthorized: false
 }).listen(PORT);
 
 io.on('connection', (socket) => {
