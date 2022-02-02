@@ -15,6 +15,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 // const fs = require('fs');
-window.io = require('socket.io-client');
+window.io = require('socket.io-client').connect({secure: true});
 window.socket = io(`${window.location.hostname}:3000`, { transports: ['websocket'], rejectUnauthorized: false });
 // window.socket = io(`${window.location.hostname}:3000`, { ca: [fs.readFileSync('')], rejectUnauthorized: false });
