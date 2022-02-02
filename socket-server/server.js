@@ -3,7 +3,8 @@ const PORT = 3000;
 const hostname = `${HOST}:${PORT}`;
 
 const fs = require('fs');
-const https = require('https').globalAgent.options.rejectUnauthorized = false;
+const https = require('https');
+// .globalAgent.options.rejectUnauthorized = false;
 const express = require('express');
 const app = express();
 

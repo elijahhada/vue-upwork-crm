@@ -14,6 +14,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
-
+// const fs = require('fs');
 window.io = require('socket.io-client');
-window.socket = io(`${window.location.hostname}:3000`, { rejectUnauthorized: false });
+window.socket = io(`${window.location.hostname}:3000`, { transports: ['websocket'], rejectUnauthorized: false });
+// window.socket = io(`${window.location.hostname}:3000`, { ca: [fs.readFileSync('')], rejectUnauthorized: false });
