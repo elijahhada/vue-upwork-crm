@@ -9,7 +9,7 @@ const app = express();
 
 const options = {
     key: fs.readFileSync('../ssl/file.pem'),
-    cert: fs.readFileSync('../ssl/file.crt')
+    cert: fs.readFileSync('../ssl/csr.pem')
 }
 const server = https.createServer(options, app);
 
