@@ -354,7 +354,9 @@ class JobController extends Controller
     {
         try {
             $searchString = $request->input('query');
-            $jobs = Job::query()->orderBy('date_created', 'desc');
+            $jobs = Job::query()
+                ->orderBy('date_created', 'desc')
+                ->orderBy('id', 'desc');
             $jobs =  $jobs->has('bid');
             $jobs = $jobs->where(function($query) use($searchString) {
                 $query->whereHas('bid', function ($subQuery) use($searchString) {
@@ -364,7 +366,30 @@ class JobController extends Controller
                 $query->orWhere('excerpt', 'like', '%' . strtolower($searchString) . '%');
                 $query->orWhere('skills', 'like', '%' . strtolower($searchString) . '%');
             });
-            return $jobs->with('bid')->paginate(3);
+            return $jobs->with('bid')->with('user')->paginate(2);
+        } catch (\Exception $exception) {
+            return response()->json(['data' => $exception->getMessage()]);
+        }
+    }
+
+    public function jobSearch(Request $request)
+    {
+        try {
+            $searchString = $request->input('query');
+            $searchString = strtolower($searchString);
+            $jobs = Job::query()
+                ->orderBy('date_created', 'desc')
+                ->orderBy('id', 'desc');
+            if(strlen($searchString) === 19 && str_contains($searchString, '~')) {
+                $jobs->where('upwork_id', '=', $searchString);
+            } elseif (strlen($searchString) === 46 && str_contains($searchString, '://')) {
+                $jobs->where('url', '=', $searchString);
+            } else {
+                $jobs->where('title', 'like', '%'. $searchString .'%')
+                    ->orWhere('excerpt', 'like', '%'. $searchString .'%')
+                    ->orWhere('skills', 'like', '%'. $searchString .'%');
+            }
+            return $jobs->paginate(2);
         } catch (\Exception $exception) {
             return response()->json(['data' => $exception->getMessage()]);
         }

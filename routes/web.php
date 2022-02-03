@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('/jobs/delete', [JobController::class, 'delete'])->name('jobs.delete');
     Route::post('/jobs/filter', [JobController::class, 'filter'])->name('jobs.filter');
     Route::post('/jobs/with-bids', [JobController::class, 'jobWithBid'])->name('jobs.bids');
+    Route::post('/jobs/search', [JobController::class, 'jobSearch'])->name('jobs.search');
     Route::get('/pipedrive/user-info', [\App\Http\Controllers\JobController::class, 'info']);
     Route::post('/pipedrive/store-deal', [\App\Http\Controllers\JobController::class, 'storeDeal']);
     Route::get('/auth/upwork', [\App\Http\Controllers\Auth\UpworkController::class, 'index'])->name('auth.upwork');

@@ -1,6 +1,6 @@
 <template>
     <div class="w-full p-7 border border-gray-300 rounded-md my-6 relative">
-        <p class="text-black text-3xl cursor-pointer hover:text-red-500 absolute top-6 right-6" @click="deleteJob">×</p>
+<!--        <p class="text-black text-3xl cursor-pointer hover:text-red-500 absolute top-6 right-6" @click="deleteJob">×</p>-->
         <div class="w-11/12 mb-7 flex justify-between items-center">
             <p>
                 <a :href="url"
@@ -39,14 +39,16 @@
                 <p><span class="font-bold">Spent:</span> {{ totalCharge }}</p>
                 <p><span class="font-bold">Hours:</span> {{ duration }}</p>
                 <p><span class="font-bold">Avg Rate (based on last 6 month):</span> {{ avgRate ? '$' + avgRate + '/h' : '' }}</p>
-                <p><span class="font-bold">Member since:</span> April 24, 2015</p>
+                <p><span class="font-bold">Member since:</span> {{ memberSince ? memberSince : 'not specified' }}</p>
             </div>
         </div>
-        <div class="w-11/12 mb-12">
+        <div class="w-11/12 mb-12 flex justify-between items-center">
             <p><span class="text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap" @click="showBidMessage = !showBidMessage">View bid</span></p>
+            <p><span class="text-gray-500 text-lg whitespace-nowrap">Лидген {{ user.name }}</span></p>
         </div>
-        <div class="w-full" :class="{'hidden': !showBidMessage}">
-            <textarea cols="80" rows="9" :value="bid.message" class="border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300"></textarea>
+        <div class="w-full mt-3" :class="{'hidden': !showBidMessage}">
+            <p class="text-lg text-black font-bold">Bid text</p>
+            <p class="text-black">{{ bid.message }}</p>
         </div>
     </div>
 </template>
@@ -144,6 +146,13 @@ export default {
         bid: {
             required: true,
             type: Object
+        },
+        user: {
+            required: true,
+            type: Object
+        },
+        memberSince: {
+            required: true,
         }
     },
     data() {

@@ -3811,6 +3811,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -3902,6 +3904,13 @@ __webpack_require__.r(__webpack_exports__);
     bid: {
       required: true,
       type: Object
+    },
+    user: {
+      required: true,
+      type: Object
+    },
+    memberSince: {
+      required: true
     }
   },
   data: function data() {
@@ -4157,6 +4166,9 @@ __webpack_require__.r(__webpack_exports__);
       type: Number
     },
     jobStatus: {
+      required: true
+    },
+    memberSince: {
       required: true
     }
   },
@@ -6574,6 +6586,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -6598,7 +6611,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       showingNavigationDropdown: false,
-      searchInput: ''
+      searchInput: '',
+      showSearchText: true
     };
   },
   methods: {
@@ -6617,6 +6631,7 @@ __webpack_require__.r(__webpack_exports__);
     showSearch: function showSearch() {
       var _this = this;
 
+      this.showSearchText = false;
       this.$refs.search_block.classList.remove('w-0');
       this.$refs.search_block.classList.add('w-full');
       this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
@@ -6636,6 +6651,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.$refs.search.classList.remove('hidden');
       }, 10);
+      this.showSearchText = true;
     },
     switchToTeam: function switchToTeam(team) {
       this.$inertia.put(route('current-team.update'), {
@@ -7929,6 +7945,43 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7975,7 +8028,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       newJobsCount: 0,
       isShownBids: false,
       searchQuery: '',
-      isCalendarOn: true
+      isCalendarOn: true,
+      showSearchText: true,
+      searchInput: '',
+      isShowSearchJobs: false
     };
   },
   components: {
@@ -7989,7 +8045,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.data = this.jobs.data;
     this.jobsData = this.jobs;
     this.jobListen();
-    this.loadMoreOnScroll();
+    this.addLoadOnScrollEventListener();
     this.kitsListen();
     this.checkNewJobsCount();
   },
@@ -8135,71 +8191,148 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }
       });
     },
-    loadMoreOnScroll: function loadMoreOnScroll() {
+    addLoadOnScrollEventListener: function addLoadOnScrollEventListener() {
       var _this6 = this;
 
-      if (this.isShownBids) {
-        return;
-      }
-
       window.addEventListener('scroll', (0,lodash_function__WEBPACK_IMPORTED_MODULE_4__.debounce)(function (e) {
-        var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
+        if (!_this6.isShownBids && !_this6.isShowSearchJobs) {
+          _this6.loadMoreOnScroll();
+        }
 
-        if (pixelsFromBottom < 600 && _this6.jobsData.next_page_url !== null) {
-          var nextPageNumber = _this6.jobsData.next_page_url.slice(_this6.jobsData.next_page_url.indexOf('=') + 1);
+        if (_this6.isShownBids) {
+          _this6.loadMoreBidsOnScroll();
+        }
 
-          axios.post('/jobs/filter?page=' + nextPageNumber, {
-            kits: _this6.selectedKits
-          }).then(function (response) {
-            var _this6$data;
-
-            console.log(response.data);
-            console.log(response.data.data);
-
-            (_this6$data = _this6.data).push.apply(_this6$data, _toConsumableArray(response.data.data.filter(function (j) {
-              return j.status !== 1;
-            })));
-
-            _this6.jobsData = response.data;
-          });
+        if (_this6.isShowSearchJobs) {
+          _this6.loadMoreSearchJobsOnScroll();
         }
       }, 300));
     },
-    loadMoreBidsOnScroll: function loadMoreBidsOnScroll() {
+    loadMoreOnScroll: function loadMoreOnScroll() {
       var _this7 = this;
 
-      if (!this.isShownBids) {
-        return;
+      var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
+
+      if (pixelsFromBottom < 600 && this.jobsData.next_page_url !== null) {
+        console.log('loadMoreOnScroll');
+        var nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1);
+        axios.post('/jobs/filter?page=' + nextPageNumber, {
+          kits: this.selectedKits
+        }).then(function (response) {
+          var _this7$data;
+
+          console.log(response.data);
+          console.log(response.data.data);
+
+          (_this7$data = _this7.data).push.apply(_this7$data, _toConsumableArray(response.data.data.filter(function (j) {
+            return j.status !== 1;
+          })));
+
+          _this7.jobsData = response.data;
+        })["catch"](function (error) {
+          console.log(error);
+        });
       }
-
-      window.addEventListener('scroll', (0,lodash_function__WEBPACK_IMPORTED_MODULE_4__.debounce)(function (e) {
-        var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-
-        if (pixelsFromBottom < 600 && _this7.bidsData.next_page_url !== null) {
-          var nextPageNumber = _this7.bidsData.next_page_url.slice(_this7.bidsData.next_page_url.indexOf('=') + 1);
-
-          axios.post('/jobs/with-bids?page=' + nextPageNumber, {
-            query: _this7.searchQuery
-          }).then(function (response) {
-            var _this7$bids;
-
-            (_this7$bids = _this7.bids).push.apply(_this7$bids, _toConsumableArray(response.data.data));
-
-            _this7.bidsData = response.data;
-          });
-        }
-      }, 300));
     },
-    kitsListen: function kitsListen() {
+    loadMoreBidsOnScroll: function loadMoreBidsOnScroll() {
       var _this8 = this;
 
+      var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
+
+      if (pixelsFromBottom < 600 && this.bidsData.next_page_url !== null) {
+        console.log('loadMoreBidsOnScroll');
+        var nextPageNumber = this.bidsData.next_page_url.slice(this.bidsData.next_page_url.indexOf('=') + 1);
+        axios.post('/jobs/with-bids?page=' + nextPageNumber, {
+          query: this.searchQuery
+        }).then(function (response) {
+          var _this8$bids;
+
+          console.log(response.data);
+          console.log(response.data.data);
+
+          (_this8$bids = _this8.bids).push.apply(_this8$bids, _toConsumableArray(response.data.data));
+
+          _this8.bidsData = response.data;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    loadMoreSearchJobsOnScroll: function loadMoreSearchJobsOnScroll() {
+      var _this9 = this;
+
+      var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
+
+      if (pixelsFromBottom < 600 && this.jobsData.next_page_url !== null) {
+        console.log('loadMoreSearchJobsOnScroll');
+        var nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1);
+        axios.post('/jobs/search?page=' + nextPageNumber, {
+          query: this.searchInput
+        }).then(function (response) {
+          var _this9$data;
+
+          console.log(response.data);
+          console.log(response.data.data);
+
+          (_this9$data = _this9.data).push.apply(_this9$data, _toConsumableArray(response.data.data));
+
+          _this9.jobsData = response.data;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    kitsListen: function kitsListen() {
+      var _this10 = this;
+
       socket.on('kits:listeners', function () {
-        _this8.showToast = true;
+        _this10.showToast = true;
         console.log('something in kits have been changed');
       });
     },
     switchCalendar: function switchCalendar(isSwitched) {
       this.isCalendarOn = isSwitched;
+    },
+    showSearch: function showSearch() {
+      var _this11 = this;
+
+      this.showSearchText = false;
+      this.$refs.search_block.classList.remove('w-0');
+      this.$refs.search_block.classList.add('w-full');
+      this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
+      setTimeout(function () {
+        _this11.$refs.search_block.classList.add('w-full');
+      }, 280);
+      this.$refs.search.classList.add('hidden');
+    },
+    closeSearch: function closeSearch() {
+      var _this12 = this;
+
+      this.$refs.search_block.cssText = 'animation: width0 .3s linear';
+      setTimeout(function () {
+        _this12.$refs.search_block.classList.remove('w-full');
+
+        _this12.$refs.search_block.classList.add('w-0');
+
+        _this12.$refs.search.classList.remove('hidden');
+      }, 10);
+      this.showSearchText = true;
+    },
+    searchJobs: function searchJobs() {
+      var _this13 = this;
+
+      this.isShowSearchJobs = true;
+      axios.post('/jobs/search', {
+        query: this.searchInput
+      }).then(function (res) {
+        console.log(res);
+        _this13.data = res.data.data;
+        _this13.jobsData = res.data;
+
+        _this13.closeSearch();
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   computed: {
@@ -12285,7 +12418,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-25c0729f] {\r\n    background-color: #faeae3 !important;\n}\n.bg-light-red[data-v-25c0729f] {\r\n    background-color: #F84D4D !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-yellow[data-v-25c0729f] {\n    background-color: #faeae3 !important;\n}\n.bg-light-red[data-v-25c0729f] {\n    background-color: #F84D4D !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12382,7 +12515,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*@import '../../css/style.css';*/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*@import '../../css/style.css';*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49302,16 +49435,6 @@ var render = function () {
     },
     [
       _c(
-        "p",
-        {
-          staticClass:
-            "text-black text-3xl cursor-pointer hover:text-red-500 absolute top-6 right-6",
-          on: { click: _vm.deleteJob },
-        },
-        [_vm._v("×")]
-      ),
-      _vm._v(" "),
-      _c(
         "div",
         { staticClass: "w-11/12 mb-7 flex justify-between items-center" },
         [
@@ -49343,7 +49466,9 @@ var render = function () {
       _c("div", { staticClass: "w-11/12 mb-5" }, [
         _c("p", { staticClass: "leading-7 text-base font-normal" }, [
           _vm._v(
-            "\n            " + _vm._s(_vm.truncatedExcerpt) + "\n        "
+            "\n                " +
+              _vm._s(_vm.truncatedExcerpt) +
+              "\n            "
           ),
         ]),
       ]),
@@ -49461,56 +49586,67 @@ var render = function () {
                 ),
               ]),
               _vm._v(" "),
-              _vm._m(0),
+              _c("p", [
+                _c("span", { staticClass: "font-bold" }, [
+                  _vm._v("Member since:"),
+                ]),
+                _vm._v(
+                  " " +
+                    _vm._s(_vm.memberSince ? _vm.memberSince : "not specified")
+                ),
+              ]),
             ]
           ),
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "w-11/12 mb-12" }, [
-        _c("p", [
-          _c(
-            "span",
-            {
-              staticClass:
-                "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap",
-              on: {
-                click: function ($event) {
-                  _vm.showBidMessage = !_vm.showBidMessage
+      _c(
+        "div",
+        { staticClass: "w-11/12 mb-12 flex justify-between items-center" },
+        [
+          _c("p", [
+            _c(
+              "span",
+              {
+                staticClass:
+                  "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap",
+                on: {
+                  click: function ($event) {
+                    _vm.showBidMessage = !_vm.showBidMessage
+                  },
                 },
               },
-            },
-            [_vm._v("View bid")]
-          ),
-        ]),
-      ]),
+              [_vm._v("View bid")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _c(
+              "span",
+              { staticClass: "text-gray-500 text-lg whitespace-nowrap" },
+              [_vm._v("Лидген " + _vm._s(_vm.user.name))]
+            ),
+          ]),
+        ]
+      ),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "w-full", class: { hidden: !_vm.showBidMessage } },
+        { staticClass: "w-full mt-3", class: { hidden: !_vm.showBidMessage } },
         [
-          _c("textarea", {
-            staticClass:
-              "border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300",
-            attrs: { cols: "80", rows: "9" },
-            domProps: { value: _vm.bid.message },
-          }),
+          _c("p", { staticClass: "text-lg text-black font-bold" }, [
+            _vm._v("Bid text"),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-black" }, [
+            _vm._v(_vm._s(_vm.bid.message)),
+          ]),
         ]
       ),
     ]
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _c("span", { staticClass: "font-bold" }, [_vm._v("Member since:")]),
-      _vm._v(" April 24, 2015"),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49741,7 +49877,15 @@ var render = function () {
                 ),
               ]),
               _vm._v(" "),
-              _vm._m(0),
+              _c("p", [
+                _c("span", { staticClass: "font-bold" }, [
+                  _vm._v("Member since:"),
+                ]),
+                _vm._v(
+                  " " +
+                    _vm._s(_vm.memberSince ? _vm.memberSince : "not specified")
+                ),
+              ]),
             ]
           ),
         ]
@@ -49842,17 +49986,7 @@ var render = function () {
     ]
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _c("span", { staticClass: "font-bold" }, [_vm._v("Member since:")]),
-      _vm._v(" April 24, 2015"),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -53616,8 +53750,7 @@ var render = function () {
                                       "w-11/12 search-input border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300",
                                     attrs: {
                                       type: "text",
-                                      placeholder:
-                                        "Job id, URL,Title or key word",
+                                      placeholder: "Search bids by key word",
                                     },
                                     domProps: { value: _vm.searchInput },
                                     on: {
@@ -53688,6 +53821,14 @@ var render = function () {
                                   }),
                                 ]
                               ),
+                              _vm._v(" "),
+                              _vm.showSearchText
+                                ? _c(
+                                    "span",
+                                    { staticClass: "text-gray-500 ml-2" },
+                                    [_vm._v("Search bids")]
+                                  )
+                                : _vm._e(),
                             ]
                           ),
                         ]),
@@ -56097,11 +56238,123 @@ var render = function () {
         : _vm._e(),
       _vm._v(" "),
       !_vm.isShownBids
-        ? _c("div", { staticClass: "w-full" }, [
-            _c("p", { staticClass: "text-2xl font-bold" }, [
-              _vm._v("Found " + _vm._s(_vm.jobsData.total) + " jobs"),
-            ]),
-          ])
+        ? _c(
+            "div",
+            { staticClass: "w-full flex items-center justify-between" },
+            [
+              _c("p", { staticClass: "text-2xl font-bold" }, [
+                _vm._v("Found " + _vm._s(_vm.jobsData.total) + " jobs"),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "flex items-center max-w-full justify-end",
+                  staticStyle: { width: "490px" },
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      ref: "search_block",
+                      staticClass:
+                        "w-0 overflow-hidden flex justify-between search-block",
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.searchInput,
+                            expression: "searchInput",
+                          },
+                        ],
+                        staticClass:
+                          "w-11/12 search-input border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300",
+                        attrs: {
+                          type: "text",
+                          placeholder: "Job id, URL,Title or key word",
+                        },
+                        domProps: { value: _vm.searchInput },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.searchInput = $event.target.value
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white",
+                          on: { click: _vm.searchJobs },
+                        },
+                        [_vm._v("Search")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass:
+                            "ml-4 search-button text-black text-5xl cursor-pointer hover:text-red-500",
+                          attrs: { title: "Close search panel" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.closeSearch()
+                            },
+                          },
+                        },
+                        [_vm._v("×")]
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "svg",
+                    {
+                      ref: "search",
+                      staticClass: "cursor-pointer search",
+                      attrs: {
+                        width: "24",
+                        height: "24",
+                        viewBox: "0 0 24 24",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg",
+                        title: "Open search panel",
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.showSearch()
+                        },
+                      },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          id: "search-svg",
+                          "fill-rule": "evenodd",
+                          "clip-rule": "evenodd",
+                          d: "M14.618 16.032C13.0243 17.309 11.0422 18.0033 9 18C6.61305 18 4.32387 17.0518 2.63604 15.364C0.948211 13.6761 0 11.3869 0 9C0 6.61305 0.948211 4.32387 2.63604 2.63604C4.32387 0.948211 6.61305 0 9 0C11.3869 0 13.6761 0.948211 15.364 2.63604C17.0518 4.32387 18 6.61305 18 9C18.0033 11.0422 17.309 13.0243 16.032 14.618L24 22.586L22.586 24L14.618 16.032ZM9 2C12.86 2 16 5.14 16 9C16 12.86 12.86 16 9 16C5.14 16 2 12.86 2 9C2 5.14 5.14 2 9 2Z",
+                          fill: "black",
+                        },
+                      }),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.showSearchText
+                    ? _c("span", { staticClass: "text-gray-500 ml-2" }, [
+                        _vm._v("Search jobs"),
+                      ])
+                    : _vm._e(),
+                ]
+              ),
+            ]
+          )
         : _vm._e(),
       _vm._v(" "),
       !_vm.isReloading && !_vm.isShownBids
@@ -56140,6 +56393,7 @@ var render = function () {
                   avgRate: job.client_avg_rate,
                   hourlyMin: job.hourly_min,
                   hourlyMax: job.hourly_max,
+                  memberSince: job.member_since,
                 },
                 on: { delete: _vm.onDelete, changeStatus: _vm.onChangeStatus },
               })
@@ -56205,40 +56459,75 @@ var render = function () {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "flex flex-col my-10" },
-        _vm._l(_vm.bids, function (job) {
-          return _c("bid-card", {
-            key: job.id,
-            staticClass: "w-8/12 py-7 px-8 border",
-            attrs: {
-              id: job.id,
-              title: job.title,
-              excerpt: job.excerpt,
-              score: job.client_score,
-              feedback: job.client_feedback,
-              country: job.client_country,
-              dateCreated: job.date_created,
-              diffHuman: job.human_date_created,
-              category: job.category2,
-              subCategory: job.subcategory2,
-              jobType: job.job_type,
-              verification: job.client_payment_verification,
-              budget: job.budget,
-              url: job.url,
-              hires: job.client_past_hires,
-              totalCharge: job.client_total_charge,
-              hireRate: job.client_hire_rate,
-              feedbacksCount: job.client_reviews_count,
-              jobsPosted: job.client_jobs_posted,
-              jobStatus: job.status,
-              duration: job.duration,
-              avgRate: job.client_avg_rate,
-              bid: job.bid,
-            },
-            on: { delete: _vm.onDelete, changeStatus: _vm.onChangeStatus },
-          })
-        }),
-        1
+        { staticClass: "flex flex-col my-12" },
+        [
+          _vm.isShownBids
+            ? _c("div", { staticClass: "flex items-center" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                  },
+                  [_vm._v("All")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                  },
+                  [_vm._v("With answers")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                  },
+                  [_vm._v("Without answers")]
+                ),
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.bids, function (job) {
+            return _c("bid-card", {
+              key: job.id,
+              staticClass: "w-8/12 py-7 px-8 border",
+              attrs: {
+                id: job.id,
+                title: job.title,
+                excerpt: job.excerpt,
+                score: job.client_score,
+                feedback: job.client_feedback,
+                country: job.client_country,
+                dateCreated: job.date_created,
+                diffHuman: job.human_date_created,
+                category: job.category2,
+                subCategory: job.subcategory2,
+                jobType: job.job_type,
+                verification: job.client_payment_verification,
+                budget: job.budget,
+                url: job.url,
+                hires: job.client_past_hires,
+                totalCharge: job.client_total_charge,
+                hireRate: job.client_hire_rate,
+                feedbacksCount: job.client_reviews_count,
+                jobsPosted: job.client_jobs_posted,
+                jobStatus: job.status,
+                duration: job.duration,
+                avgRate: job.client_avg_rate,
+                bid: job.bid,
+                user: job.user,
+                memberSince: job.member_since,
+              },
+              on: { delete: _vm.onDelete, changeStatus: _vm.onChangeStatus },
+            })
+          }),
+        ],
+        2
       ),
     ],
     1

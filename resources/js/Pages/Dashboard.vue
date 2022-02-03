@@ -1,8 +1,37 @@
 <template>
     <app-layout @callSearch="searchBids" @switchCalendar="switchCalendar">
         <dash-header v-if="!isShownBids" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
-        <div v-if="!isShownBids" class="w-full">
+        <div v-if="!isShownBids" class="w-full flex items-center justify-between">
             <p class="text-2xl font-bold">Found {{ jobsData.total }} jobs</p>
+            <div class="flex items-center max-w-full justify-end" style="width: 490px;">
+                <div class="w-0 overflow-hidden flex justify-between search-block" ref="search_block">
+                    <input
+                        v-model="searchInput"
+                        type="text"
+                        placeholder="Job id, URL,Title or key word"
+                        class="w-11/12 search-input border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300" />
+                    <button class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white" @click="searchJobs">Search</button>
+                    <p class="ml-4 search-button text-black text-5xl cursor-pointer hover:text-red-500" @click="closeSearch()" title="Close search panel">×</p>
+                </div>
+                <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="cursor-pointer search"
+                    title="Open search panel"
+                    @click="showSearch()"
+                    ref="search">
+                    <path
+                        id="search-svg"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M14.618 16.032C13.0243 17.309 11.0422 18.0033 9 18C6.61305 18 4.32387 17.0518 2.63604 15.364C0.948211 13.6761 0 11.3869 0 9C0 6.61305 0.948211 4.32387 2.63604 2.63604C4.32387 0.948211 6.61305 0 9 0C11.3869 0 13.6761 0.948211 15.364 2.63604C17.0518 4.32387 18 6.61305 18 9C18.0033 11.0422 17.309 13.0243 16.032 14.618L24 22.586L22.586 24L14.618 16.032ZM9 2C12.86 2 16 5.14 16 9C16 12.86 12.86 16 9 16C5.14 16 2 12.86 2 9C2 5.14 5.14 2 9 2Z"
+                        fill="black" />
+                </svg>
+                <span v-if="showSearchText" class="text-gray-500 ml-2">Search jobs</span>
+            </div>
         </div>
         <div class="flex flex-col space-y-4" v-if="!isReloading && !isShownBids">
             <job-card
@@ -35,7 +64,8 @@
                 :duration="job.duration"
                 :avgRate="job.client_avg_rate"
                 :hourlyMin="job.hourly_min"
-                :hourlyMax="job.hourly_max"></job-card>
+                :hourlyMax="job.hourly_max"
+                :memberSince="job.member_since"></job-card>
         </div>
         <Toast message="Фильтры изменились, обновите страницу!" :show="showToast" @hide="showToast = false" type="warning" title="Warning" position="top-right" />
         <div v-if="showNewJobsCount && !isShownBids" class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center">
@@ -45,7 +75,12 @@
             </div>
             <p class="mr-80 text-white text-3xl cursor-pointer hover:text-red-500">X</p>
         </div>
-        <div class="flex flex-col my-10">
+        <div class="flex flex-col my-12">
+            <div v-if="isShownBids" class="flex items-center">
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button">All</button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button">With answers</button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button">Without answers</button>
+            </div>
             <bid-card
                 class="w-8/12 py-7 px-8 border"
                 v-for="job in bids"
@@ -74,7 +109,9 @@
                 :jobStatus="job.status"
                 :duration="job.duration"
                 :avgRate="job.client_avg_rate"
-                :bid="job.bid">
+                :bid="job.bid"
+                :user="job.user"
+                :memberSince="job.member_since">
             </bid-card>
         </div>
     </app-layout>
@@ -129,6 +166,9 @@ export default {
             isShownBids: false,
             searchQuery: '',
             isCalendarOn: true,
+            showSearchText: true,
+            searchInput: '',
+            isShowSearchJobs: false,
         };
     },
     components: {
@@ -142,7 +182,7 @@ export default {
         this.data = this.jobs.data;
         this.jobsData = this.jobs;
         this.jobListen();
-        this.loadMoreOnScroll();
+        this.addLoadOnScrollEventListener();
         this.kitsListen();
         this.checkNewJobsCount();
     },
@@ -256,48 +296,75 @@ export default {
                 }
             });
         },
-        loadMoreOnScroll() {
-            if(this.isShownBids) {
-                return;
-            }
+        addLoadOnScrollEventListener() {
             window.addEventListener('scroll', debounce((e) => {
-                let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-
-                if(pixelsFromBottom < 600 && this.jobsData.next_page_url !== null) {
-                    let nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1)
-                    axios
-                        .post('/jobs/filter?page=' + nextPageNumber, {
-                            kits: this.selectedKits,
-                        })
-                        .then((response) => {
-                            console.log(response.data)
-                            console.log(response.data.data)
-
-                            this.data.push(...response.data.data.filter((j) => j.status !== 1));
-                            this.jobsData = response.data;
-                        });
+                if(!this.isShownBids && !this.isShowSearchJobs) {
+                    this.loadMoreOnScroll();
                 }
-            },300))
+                if(this.isShownBids) {
+                    this.loadMoreBidsOnScroll();
+                }
+                if(this.isShowSearchJobs) {
+                    this.loadMoreSearchJobsOnScroll();
+                }
+            }, 300))
+        },
+        loadMoreOnScroll() {
+            let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
+            if(pixelsFromBottom < 600 && this.jobsData.next_page_url !== null) {
+                console.log('loadMoreOnScroll');
+                let nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1)
+                axios
+                    .post('/jobs/filter?page=' + nextPageNumber, {
+                        kits: this.selectedKits,
+                    })
+                    .then((response) => {
+                        console.log(response.data)
+                        console.log(response.data.data)
+                        this.data.push(...response.data.data.filter((j) => j.status !== 1));
+                        this.jobsData = response.data;
+                    }).catch(error => {
+                        console.log(error);
+                    });
+            }
         },
         loadMoreBidsOnScroll() {
-            if(!this.isShownBids) {
-                return;
+            let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
+            if(pixelsFromBottom < 600 && this.bidsData.next_page_url !== null) {
+                console.log('loadMoreBidsOnScroll');
+                let nextPageNumber = this.bidsData.next_page_url.slice(this.bidsData.next_page_url.indexOf('=') + 1)
+                axios
+                    .post('/jobs/with-bids?page=' + nextPageNumber, {
+                        query: this.searchQuery
+                    })
+                    .then((response) => {
+                        console.log(response.data)
+                        console.log(response.data.data)
+                        this.bids.push(...response.data.data);
+                        this.bidsData = response.data;
+                    }).catch(error => {
+                        console.log(error);
+                    });
             }
-            window.addEventListener('scroll', debounce((e) => {
-                let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-
-                if(pixelsFromBottom < 600 && this.bidsData.next_page_url !== null) {
-                    let nextPageNumber = this.bidsData.next_page_url.slice(this.bidsData.next_page_url.indexOf('=') + 1)
-                    axios
-                        .post('/jobs/with-bids?page=' + nextPageNumber, {
-                            query: this.searchQuery
-                        })
-                        .then((response) => {
-                            this.bids.push(...response.data.data);
-                            this.bidsData = response.data;
-                        });
-                }
-            },300))
+        },
+        loadMoreSearchJobsOnScroll() {
+            let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
+            if(pixelsFromBottom < 600 && this.jobsData.next_page_url !== null) {
+                console.log('loadMoreSearchJobsOnScroll');
+                let nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1)
+                axios
+                    .post('/jobs/search?page=' + nextPageNumber, {
+                        query: this.searchInput
+                    })
+                    .then((response) => {
+                        console.log(response.data)
+                        console.log(response.data.data)
+                        this.data.push(...response.data.data);
+                        this.jobsData = response.data;
+                    }).catch(error => {
+                        console.log(error);
+                    });
+            }
         },
         kitsListen() {
             socket.on('kits:listeners', () => {
@@ -307,6 +374,41 @@ export default {
         },
         switchCalendar(isSwitched) {
             this.isCalendarOn = isSwitched
+        },
+        showSearch() {
+            this.showSearchText = false;
+            this.$refs.search_block.classList.remove('w-0');
+            this.$refs.search_block.classList.add('w-full');
+            this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
+            setTimeout(() => {
+                this.$refs.search_block.classList.add('w-full');
+            }, 280);
+
+            this.$refs.search.classList.add('hidden');
+        },
+        closeSearch() {
+            this.$refs.search_block.cssText = 'animation: width0 .3s linear';
+            setTimeout(() => {
+                this.$refs.search_block.classList.remove('w-full');
+                this.$refs.search_block.classList.add('w-0');
+                this.$refs.search.classList.remove('hidden');
+            }, 10);
+            this.showSearchText = true;
+        },
+        searchJobs() {
+            this.isShowSearchJobs = true;
+            axios
+                .post('/jobs/search', {
+                    query: this.searchInput
+                })
+                .then((res) => {
+                    console.log(res);
+                    this.data = res.data.data;
+                    this.jobsData = res.data;
+                    this.closeSearch();
+                }).catch(error => {
+                console.log(error);
+            });
         }
     },
     computed: {

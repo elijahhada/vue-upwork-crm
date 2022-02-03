@@ -42,7 +42,7 @@
                 <p><span class="font-bold">Spent:</span> {{ totalCharge }}</p>
                 <p><span class="font-bold">Hours:</span> {{ duration }}</p>
                 <p><span class="font-bold">Avg Rate (based on last 6 month):</span> {{ avgRate ? '$' + avgRate + '/h' : '' }}</p>
-                <p><span class="font-bold">Member since:</span> April 24, 2015</p>
+                <p><span class="font-bold">Member since:</span> {{ memberSince ? memberSince : 'not specified' }}</p>
             </div>
         </div>
         <div class="w-11/12 mb-12" v-if="feedbacks.length > 0">
@@ -160,6 +160,9 @@ export default {
         jobStatus: {
             required: true,
         },
+        memberSince: {
+            required: true,
+        }
     },
     data() {
         return {

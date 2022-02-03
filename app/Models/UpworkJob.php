@@ -24,6 +24,7 @@ class UpworkJob implements Arrayable
     public $client;
     public $date_created;
     public $skills;
+    public $member_since;
 
     public function __construct($job)
     {
@@ -48,6 +49,7 @@ class UpworkJob implements Arrayable
     {
         $this->hourly_min = $data->op_pref_hourly_rate_min;
         $this->hourly_max = $data->op_pref_hourly_rate_max;
+        $this->member_since = $data->buyer->op_contract_date;
         $this->client
             ->setClientAssignments(
                 isset($data->assignments->assignment) ? (is_array($data->assignments->assignment) ? $data->assignments->assignment : [$data->assignments->assignment]) : null,
