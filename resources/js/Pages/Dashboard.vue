@@ -6,7 +6,6 @@
             <div class="flex items-center max-w-full justify-end" style="width: 490px;">
                 <div class="w-0 overflow-hidden flex justify-between search-block" ref="search_block">
                     <input
-                        @change="repeatSearchFromStart"
                         v-model="searchInput"
                         type="text"
                         placeholder="Job id, URL,Title or key word"

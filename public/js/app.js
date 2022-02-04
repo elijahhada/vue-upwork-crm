@@ -7982,7 +7982,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
 
 
 
@@ -56302,7 +56301,6 @@ var render = function () {
                         },
                         domProps: { value: _vm.searchInput },
                         on: {
-                          change: _vm.repeatSearchFromStart,
                           input: function ($event) {
                             if ($event.target.composing) {
                               return
