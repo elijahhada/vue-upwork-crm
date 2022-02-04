@@ -7982,6 +7982,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
 
 
 
@@ -8031,7 +8032,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       isCalendarOn: true,
       showSearchText: true,
       searchInput: '',
-      isShowSearchJobs: false
+      isShowSearchJobs: false,
+      isJobsOnScrollAvailable: true,
+      isSearchBidsOnScrollAvailable: true,
+      isSearchJobsOnScrollAvailable: true,
+      isSearchJobsButtonAvailable: true,
+      jobsSearchContainer: '',
+      bidsSearchContainer: ''
     };
   },
   components: {
@@ -8213,14 +8220,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
-      if (pixelsFromBottom < 600 && this.jobsData.next_page_url !== null) {
+      if (pixelsFromBottom < 600 && this.jobsData.next_page_url !== null && this.isJobsOnScrollAvailable) {
         console.log('loadMoreOnScroll');
+        this.isJobsOnScrollAvailable = false;
         var nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1);
         axios.post('/jobs/filter?page=' + nextPageNumber, {
           kits: this.selectedKits
         }).then(function (response) {
           var _this7$data;
 
+          _this7.isJobsOnScrollAvailable = true;
           console.log(response.data);
           console.log(response.data.data);
 
@@ -8239,14 +8248,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
-      if (pixelsFromBottom < 600 && this.bidsData.next_page_url !== null) {
+      if (pixelsFromBottom < 600 && this.bidsData.next_page_url !== null && this.isSearchBidsOnScrollAvailable) {
         console.log('loadMoreBidsOnScroll');
+        this.isSearchBidsOnScrollAvailable = false;
         var nextPageNumber = this.bidsData.next_page_url.slice(this.bidsData.next_page_url.indexOf('=') + 1);
         axios.post('/jobs/with-bids?page=' + nextPageNumber, {
           query: this.searchQuery
         }).then(function (response) {
           var _this8$bids;
 
+          _this8.isSearchBidsOnScrollAvailable = true;
           console.log(response.data);
           console.log(response.data.data);
 
@@ -8263,14 +8274,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
 
-      if (pixelsFromBottom < 600 && this.jobsData.next_page_url !== null) {
+      if (pixelsFromBottom < 600 && this.jobsData.next_page_url !== null && this.isSearchJobsOnScrollAvailable) {
         console.log('loadMoreSearchJobsOnScroll');
+        this.isSearchJobsOnScrollAvailable = false;
         var nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1);
         axios.post('/jobs/search?page=' + nextPageNumber, {
-          query: this.searchInput
+          query: this.jobsSearchContainer
         }).then(function (response) {
           var _this9$data;
 
+          _this9.isSearchJobsOnScrollAvailable = true;
           console.log(response.data);
           console.log(response.data.data);
 
@@ -8321,18 +8334,25 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     searchJobs: function searchJobs() {
       var _this13 = this;
 
-      this.isShowSearchJobs = true;
-      axios.post('/jobs/search', {
-        query: this.searchInput
-      }).then(function (res) {
-        console.log(res);
-        _this13.data = res.data.data;
-        _this13.jobsData = res.data;
+      this.closeSearch();
+      this.jobsSearchContainer = this.searchInput; // holds value until search button is pushed
 
-        _this13.closeSearch();
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      this.isShowSearchJobs = true;
+
+      if (this.isSearchJobsButtonAvailable) {
+        axios.post('/jobs/search', {
+          query: this.searchInput
+        }).then(function (res) {
+          _this13.isSearchJobsButtonAvailable = true;
+          console.log(res);
+          _this13.data = res.data.data;
+          _this13.jobsData = res.data;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+
+      this.isSearchJobsButtonAvailable = false;
     }
   },
   computed: {
@@ -56240,7 +56260,11 @@ var render = function () {
       !_vm.isShownBids
         ? _c(
             "div",
-            { staticClass: "w-full flex items-center justify-between" },
+            {
+              staticClass: "w-full flex items-center justify-between",
+              class: { "job-card-stretched": !_vm.isCalendarOn },
+              staticStyle: { "max-width": "1500px!important" },
+            },
             [
               _c("p", { staticClass: "text-2xl font-bold" }, [
                 _vm._v("Found " + _vm._s(_vm.jobsData.total) + " jobs"),
@@ -56278,6 +56302,7 @@ var render = function () {
                         },
                         domProps: { value: _vm.searchInput },
                         on: {
+                          change: _vm.repeatSearchFromStart,
                           input: function ($event) {
                             if ($event.target.composing) {
                               return
@@ -56292,6 +56317,7 @@ var render = function () {
                         {
                           staticClass:
                             "rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white",
+                          staticStyle: { "z-index": "100" },
                           on: { click: _vm.searchJobs },
                         },
                         [_vm._v("Search")]
@@ -56302,6 +56328,7 @@ var render = function () {
                         {
                           staticClass:
                             "ml-4 search-button text-black text-5xl cursor-pointer hover:text-red-500",
+                          staticStyle: { "z-index": "100" },
                           attrs: { title: "Close search panel" },
                           on: {
                             click: function ($event) {
@@ -56319,6 +56346,7 @@ var render = function () {
                     {
                       ref: "search",
                       staticClass: "cursor-pointer search",
+                      staticStyle: { "z-index": "100" },
                       attrs: {
                         width: "24",
                         height: "24",
@@ -56345,12 +56373,6 @@ var render = function () {
                       }),
                     ]
                   ),
-                  _vm._v(" "),
-                  _vm.showSearchText
-                    ? _c("span", { staticClass: "text-gray-500 ml-2" }, [
-                        _vm._v("Search jobs"),
-                      ])
-                    : _vm._e(),
                 ]
               ),
             ]

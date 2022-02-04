@@ -1,19 +1,20 @@
 <template>
     <app-layout @callSearch="searchBids" @switchCalendar="switchCalendar">
         <dash-header v-if="!isShownBids" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
-        <div v-if="!isShownBids" class="w-full flex items-center justify-between">
+        <div v-if="!isShownBids" class="w-full flex items-center justify-between" :class="{'job-card-stretched': !isCalendarOn}" style="max-width: 1500px!important;">
             <p class="text-2xl font-bold">Found {{ jobsData.total }} jobs</p>
             <div class="flex items-center max-w-full justify-end" style="width: 490px;">
                 <div class="w-0 overflow-hidden flex justify-between search-block" ref="search_block">
                     <input
+                        @change="repeatSearchFromStart"
                         v-model="searchInput"
                         type="text"
                         placeholder="Job id, URL,Title or key word"
                         class="w-11/12 search-input border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none placeholder-gray-300" />
-                    <button class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white" @click="searchJobs">Search</button>
-                    <p class="ml-4 search-button text-black text-5xl cursor-pointer hover:text-red-500" @click="closeSearch()" title="Close search panel">×</p>
+                    <button class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white" @click="searchJobs" style="z-index: 100;!important;">Search</button>
+                    <p class="ml-4 search-button text-black text-5xl cursor-pointer hover:text-red-500" @click="closeSearch()" title="Close search panel" style="z-index: 100;!important;">×</p>
                 </div>
-                <svg
+                <svg style="z-index: 100;!important;"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -30,7 +31,7 @@
                         d="M14.618 16.032C13.0243 17.309 11.0422 18.0033 9 18C6.61305 18 4.32387 17.0518 2.63604 15.364C0.948211 13.6761 0 11.3869 0 9C0 6.61305 0.948211 4.32387 2.63604 2.63604C4.32387 0.948211 6.61305 0 9 0C11.3869 0 13.6761 0.948211 15.364 2.63604C17.0518 4.32387 18 6.61305 18 9C18.0033 11.0422 17.309 13.0243 16.032 14.618L24 22.586L22.586 24L14.618 16.032ZM9 2C12.86 2 16 5.14 16 9C16 12.86 12.86 16 9 16C5.14 16 2 12.86 2 9C2 5.14 5.14 2 9 2Z"
                         fill="black" />
                 </svg>
-                <span v-if="showSearchText" class="text-gray-500 ml-2">Search jobs</span>
+<!--                <span v-if="showSearchText" class="text-gray-500 ml-2">Search jobs</span>-->
             </div>
         </div>
         <div class="flex flex-col space-y-4" v-if="!isReloading && !isShownBids">
@@ -169,6 +170,12 @@ export default {
             showSearchText: true,
             searchInput: '',
             isShowSearchJobs: false,
+            isJobsOnScrollAvailable: true,
+            isSearchBidsOnScrollAvailable: true,
+            isSearchJobsOnScrollAvailable: true,
+            isSearchJobsButtonAvailable: true,
+            jobsSearchContainer: '',
+            bidsSearchContainer: '',
         };
     },
     components: {
@@ -311,14 +318,16 @@ export default {
         },
         loadMoreOnScroll() {
             let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-            if(pixelsFromBottom < 600 && this.jobsData.next_page_url !== null) {
+            if(pixelsFromBottom < 600 && this.jobsData.next_page_url !== null && this.isJobsOnScrollAvailable) {
                 console.log('loadMoreOnScroll');
+                this.isJobsOnScrollAvailable = false;
                 let nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1)
                 axios
                     .post('/jobs/filter?page=' + nextPageNumber, {
                         kits: this.selectedKits,
                     })
                     .then((response) => {
+                        this.isJobsOnScrollAvailable = true;
                         console.log(response.data)
                         console.log(response.data.data)
                         this.data.push(...response.data.data.filter((j) => j.status !== 1));
@@ -330,14 +339,16 @@ export default {
         },
         loadMoreBidsOnScroll() {
             let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-            if(pixelsFromBottom < 600 && this.bidsData.next_page_url !== null) {
+            if(pixelsFromBottom < 600 && this.bidsData.next_page_url !== null && this.isSearchBidsOnScrollAvailable) {
                 console.log('loadMoreBidsOnScroll');
+                this.isSearchBidsOnScrollAvailable = false;
                 let nextPageNumber = this.bidsData.next_page_url.slice(this.bidsData.next_page_url.indexOf('=') + 1)
                 axios
                     .post('/jobs/with-bids?page=' + nextPageNumber, {
                         query: this.searchQuery
                     })
                     .then((response) => {
+                        this.isSearchBidsOnScrollAvailable = true;
                         console.log(response.data)
                         console.log(response.data.data)
                         this.bids.push(...response.data.data);
@@ -349,14 +360,16 @@ export default {
         },
         loadMoreSearchJobsOnScroll() {
             let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-            if(pixelsFromBottom < 600 && this.jobsData.next_page_url !== null) {
+            if(pixelsFromBottom < 600 && this.jobsData.next_page_url !== null && this.isSearchJobsOnScrollAvailable) {
                 console.log('loadMoreSearchJobsOnScroll');
+                this.isSearchJobsOnScrollAvailable = false;
                 let nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1)
                 axios
                     .post('/jobs/search?page=' + nextPageNumber, {
-                        query: this.searchInput
+                        query: this.jobsSearchContainer
                     })
                     .then((response) => {
+                        this.isSearchJobsOnScrollAvailable = true;
                         console.log(response.data)
                         console.log(response.data.data)
                         this.data.push(...response.data.data);
@@ -396,20 +409,25 @@ export default {
             this.showSearchText = true;
         },
         searchJobs() {
+            this.closeSearch();
+            this.jobsSearchContainer = this.searchInput; // holds value until search button is pushed
             this.isShowSearchJobs = true;
-            axios
-                .post('/jobs/search', {
-                    query: this.searchInput
-                })
-                .then((res) => {
-                    console.log(res);
-                    this.data = res.data.data;
-                    this.jobsData = res.data;
-                    this.closeSearch();
-                }).catch(error => {
-                console.log(error);
-            });
-        }
+            if(this.isSearchJobsButtonAvailable) {
+                axios
+                    .post('/jobs/search', {
+                        query: this.searchInput
+                    })
+                    .then((res) => {
+                        this.isSearchJobsButtonAvailable = true;
+                        console.log(res);
+                        this.data = res.data.data;
+                        this.jobsData = res.data;
+                    }).catch(error => {
+                    console.log(error);
+                });
+            }
+            this.isSearchJobsButtonAvailable = false;
+        },
     },
     computed: {
         jobToRemove() {
