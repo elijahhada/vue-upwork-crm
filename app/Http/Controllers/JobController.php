@@ -171,7 +171,7 @@ class JobController extends Controller
                 ->orderBy('date_created', 'desc')
                 ->orderBy('id', 'desc');
             if (count($filterCategories)) {
-                $jobs = $jobs->whereIn('subcategory2', $filterCategories);
+                $jobs = $jobs->whereIn('category2', $filterCategories);
             }
             if (count($filterCountries)) {
                 $jobs = $jobs->whereIn('client_country', $filterCountries);

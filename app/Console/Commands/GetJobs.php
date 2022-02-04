@@ -83,9 +83,9 @@ class GetJobs extends Command
                     'title' => $upworkJob->client->country,
                 ];
             }
-            if ($upworkJob->subcategory2) {
+            if ($upworkJob->category2) {
                 $categories[] = [
-                    'title' => $upworkJob->subcategory2,
+                    'title' => $upworkJob->category2,
                     'upwork_id' => 1,
                 ];
             }
