@@ -56371,6 +56371,12 @@ var render = function () {
                       }),
                     ]
                   ),
+                  _vm._v(" "),
+                  _vm.showSearchText
+                    ? _c("span", { staticClass: "text-gray-500 ml-2" }, [
+                        _vm._v("Search jobs"),
+                      ])
+                    : _vm._e(),
                 ]
               ),
             ]
