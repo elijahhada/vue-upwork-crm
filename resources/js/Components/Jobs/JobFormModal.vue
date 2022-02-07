@@ -77,13 +77,23 @@
                     </select>
                 </div>
                 <div class="w-full mb-3">
-                    <p class="text-xs pl-2 text-gray-300 mb-1">Job posting</p>
-                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200" :value="url" disabled="disabled">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Country</p>
+                    <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none" v-model="country">
+                        <option v-for="(country, key) in pipedriveInfo.countries" :key="key" :value="country">{{country.label}}</option>
+                    </select>
+                </div>
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">"Other" Country</p>
+                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none" :class="{'bg-gray-200': country === null || country.id !== 86 }" v-model="otherCountry" :disabled="country === null || country.id !== 86">
                 </div>
             </div>
             <div class="w-full h-full flex flex-col justify-start items-start">
                 <div class="w-full mb-3">
-                    <p class="text-xs pl-2 text-gray-300 mb-1">Task link</p>
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Job posting</p>
+                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200" :value="url" disabled="disabled">
+                </div>
+                <div class="w-full mb-3">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Proposal link</p>
                     <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none" v-model="taskLink">
                 </div>
                 <div class="w-full mb-3">
@@ -129,7 +139,9 @@ export default {
             selectedTechsList: [],
             isTechDropped: false,
             taskLink: '',
-            bidText: ''
+            bidText: '',
+            country: null,
+            otherCountry: ''
         };
     },
     methods: {
@@ -158,7 +170,7 @@ export default {
             }
         },
         saveBid() {
-            if(this.title.length < 1 || this.selectedTechsList.length < 1 || this.bidProfile == null || this.taskLink.length < 1){
+            if(this.title.length < 1 || this.selectedTechsList.length < 1 || this.bidProfile == null || this.taskLink.length < 1 || this.country == null || (this.country.id === 86 && this.otherCountry.length < 1)){
                 alert('Необходимо заполнить все поля');
                 return;
             }
@@ -174,7 +186,9 @@ export default {
                 jobId: this.jobId,
                 owner: this.pipedriveInfo.currentUser.name,
                 technologies: this.selectedTechsList.map(item => item.label)[0],
-                bidMessage: this.bidText
+                bidMessage: this.bidText,
+                country: this.country,
+                otherCountry: this.otherCountry,
             };
             axios.post('/pipedrive/store-deal', data).then(res => {
                 console.log(res);

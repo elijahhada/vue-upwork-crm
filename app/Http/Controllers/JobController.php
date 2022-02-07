@@ -258,6 +258,9 @@ class JobController extends Controller
             if($field['name'] === 'Label') {
                 $result['labels'] = $field['options'];
             }
+            if($field['name'] === 'Country') {
+                $result['countries'] = $field['options'];
+            }
         }
         $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/users', ['query' => ['api_token' => config('pipedrive.api_token')]])
             ->getBody()
@@ -325,6 +328,12 @@ class JobController extends Controller
                     $fieldsIds['invite'] = $field['key'];
                     $inviteId = $field['options'][0]['id'];
                 }
+                if($field['name'] === 'Country') {
+                    $fieldsIds['country'] = $field['key'];
+                }
+                if($field['name'] === '"Other" Country') {
+                    $fieldsIds['otherCountry'] = $field['key'];
+                }
             }
             $jobCreationDate = strtotime($request->timeOfJob);
             $formattedDate = Carbon::parse($jobCreationDate)->format('Y-m-d H:i');
@@ -338,6 +347,8 @@ class JobController extends Controller
                 $fieldsIds['jobPosting'] => $request->jobPosting,
                 $fieldsIds['proposalLink'] => $request->taskLink,
                 $fieldsIds['invite'] => $request->invite == true ? $inviteId : null,
+                $fieldsIds['country'] => $request->country['id'],
+                $fieldsIds['otherCountry'] => $request->otherCountry,
             ];
             $response = $client->request('POST', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/deals', ['query' => ['api_token' => config('pipedrive.api_token')], 'json' => $data])
                 ->getBody()

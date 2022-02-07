@@ -4382,6 +4382,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     this.loadPipedriveInfo();
@@ -4396,7 +4406,9 @@ __webpack_require__.r(__webpack_exports__);
       selectedTechsList: [],
       isTechDropped: false,
       taskLink: '',
-      bidText: ''
+      bidText: '',
+      country: null,
+      otherCountry: ''
     };
   },
   methods: {
@@ -4426,7 +4438,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     saveBid: function saveBid() {
-      if (this.title.length < 1 || this.selectedTechsList.length < 1 || this.bidProfile == null || this.taskLink.length < 1) {
+      if (this.title.length < 1 || this.selectedTechsList.length < 1 || this.bidProfile == null || this.taskLink.length < 1 || this.country == null || this.country.id === 86 && this.otherCountry.length < 1) {
         alert('Необходимо заполнить все поля');
         return;
       }
@@ -4447,7 +4459,9 @@ __webpack_require__.r(__webpack_exports__);
         technologies: this.selectedTechsList.map(function (item) {
           return item.label;
         })[0],
-        bidMessage: this.bidText
+        bidMessage: this.bidText,
+        country: this.country,
+        otherCountry: this.otherCountry
       };
       axios.post('/pipedrive/store-deal', data).then(function (res) {
         console.log(res);
@@ -50241,14 +50255,88 @@ var render = function () {
                     _c(
                       "p",
                       { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
-                      [_vm._v("Job posting")]
+                      [_vm._v("Country")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.country,
+                            expression: "country",
+                          },
+                        ],
+                        staticClass:
+                          "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+                        attrs: { name: "", id: "" },
+                        on: {
+                          change: function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.country = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                        },
+                      },
+                      _vm._l(
+                        _vm.pipedriveInfo.countries,
+                        function (country, key) {
+                          return _c(
+                            "option",
+                            { key: key, domProps: { value: country } },
+                            [_vm._v(_vm._s(country.label))]
+                          )
+                        }
+                      ),
+                      0
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-full mb-3" }, [
+                    _c(
+                      "p",
+                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      [_vm._v('"Other" Country')]
                     ),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.otherCountry,
+                          expression: "otherCountry",
+                        },
+                      ],
                       staticClass:
-                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200",
-                      attrs: { type: "text", disabled: "disabled" },
-                      domProps: { value: _vm.url },
+                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none",
+                      class: {
+                        "bg-gray-200":
+                          _vm.country === null || _vm.country.id !== 86,
+                      },
+                      attrs: {
+                        type: "text",
+                        disabled: _vm.country === null || _vm.country.id !== 86,
+                      },
+                      domProps: { value: _vm.otherCountry },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.otherCountry = $event.target.value
+                        },
+                      },
                     }),
                   ]),
                 ]
@@ -50265,7 +50353,22 @@ var render = function () {
                     _c(
                       "p",
                       { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
-                      [_vm._v("Task link")]
+                      [_vm._v("Job posting")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass:
+                        "p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200",
+                      attrs: { type: "text", disabled: "disabled" },
+                      domProps: { value: _vm.url },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-full mb-3" }, [
+                    _c(
+                      "p",
+                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      [_vm._v("Proposal link")]
                     ),
                     _vm._v(" "),
                     _c("input", {
