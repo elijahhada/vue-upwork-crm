@@ -1,45 +1,52 @@
-const HOST = 'https://upwork.vasterra.com';
-const PORT = 3000;
-const hostname = `${HOST}:${PORT}`;
+const { readFileSync } = require('fs');
+const { join } = require('path');
 
-const fs = require('fs');
+const http = require('http');
 const https = require('https');
-// .globalAgent.options.rejectUnauthorized = false;
-const express = require('express');
-const app = express();
 
-const options = {
-    key: fs.readFileSync('../ssl/file.pem'),
-    cert: fs.readFileSync('../ssl/csr.pem')
-}
-const server = https.createServer(options, app);
+const httpPort = 444;
+const httpsPort = 443;
 
-const io = require('socket.io')(server, {
-    cors: { origin: '*' },
-    rejectUnauthorized: false
-}).listen(PORT);
-
-io.on('connection', (socket) => {
-    socket.connected && console.log(`→ Socket connected`);
-
-    socket
-        .on('job:speak', (data) => {
-            console.log('job:speak', data);
-            socket.broadcast.emit('job:listeners', data);
-        })
-        .on('calendar:speak', (data) => {
-            console.log('calendar:speak', data);
-            socket.broadcast.emit('calendar:listeners', data);
-        })
-        .on('kits:speak', (data) => {
-            console.log('kits:speak', data);
-            socket.broadcast.emit('kits:listeners', data);
-        })
-        .on('disconnect', () => {
-            console.log(`← Socket disconnect`);
-        });
+const httpServer = http.createServer();
+const httpsServer = https.createServer({
+    key: readFileSync(join(__dirname, '..', 'ssl', 'key.pem')),
+    cert: readFileSync(join(__dirname, '..', 'ssl', 'csr.pem')),
+    ca: readFileSync(join(__dirname, '..', 'ssl', 'ca.pem')),
+    requestCert: false,
+    rejectUnauthorized: false,
 });
 
-server.listen(PORT, 'https://upwork.vasterra.com', () => {
-    console.log(`WS Server running on ${hostname}\n`);
+httpServer.listen(httpPort, function () {
+    console.log(`Listening HTTP on ${httpPort}`);
+});
+
+httpsServer.listen(httpsPort, function () {
+    console.log(`Listening HTTPS on ${httpsPort}`);
+});
+
+[httpServer, httpsServer].forEach((server) => {
+    const io = require('socket.io')(server, {
+        cors: { origin: '*' },
+    });
+
+    io.on('connection', (socket) => {
+        socket.connected && console.log(`→ Socket connected`);
+
+        socket
+            .on('job:speak', (data) => {
+                console.log('job:speak', data);
+                socket.broadcast.emit('job:listeners', data);
+            })
+            .on('calendar:speak', (data) => {
+                console.log('calendar:speak', data);
+                socket.broadcast.emit('calendar:listeners', data);
+            })
+            .on('kits:speak', (data) => {
+                console.log('kits:speak', data);
+                socket.broadcast.emit('kits:listeners', data);
+            })
+            .on('disconnect', () => {
+                console.log(`← Socket disconnect`);
+            });
+    });
 });
