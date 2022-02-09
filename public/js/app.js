@@ -9339,7 +9339,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/build/cjs/index.js");
-window.socket = io("".concat(window.location.hostname, ":").concat(window.location.protocol == 'https:' ? '445' : '444'));
+window.socket = io("".concat(window.location.hostname, ":").concat(window.location.protocol == 'https:' ? '445' : '444'), {
+  rejectUnauthorized: false,
+  secure: true,
+  reconnection: true
+});
 
 /***/ }),
 

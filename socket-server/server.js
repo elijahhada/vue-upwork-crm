@@ -12,17 +12,17 @@ const httpsServer = https.createServer({
     key: readFileSync(join(__dirname, '..', 'ssl', 'key.pem')),
     cert: readFileSync(join(__dirname, '..', 'ssl', 'csr.pem')),
     ca: readFileSync(join(__dirname, '..', 'ssl', 'ca.pem')),
-    requestCert: false,
-    rejectUnauthorized: false,
+    // requestCert: false,
+    // rejectUnauthorized: false,
 });
 
-httpServer.listen(httpPort, function () {
-    console.log(`Listening HTTP on ${httpPort}`);
-});
-
-httpsServer.listen(httpsPort, function () {
-    console.log(`Listening HTTPS on ${httpsPort}`);
-});
+// httpServer.listen(httpPort, function () {
+//     console.log(`Listening HTTP on ${httpPort}`);
+// });
+//
+// httpsServer.listen(httpsPort, function () {
+//     console.log(`Listening HTTPS on ${httpsPort}`);
+// });
 
 [httpServer, httpsServer].forEach((server) => {
     const io = require('socket.io')(server, {
