@@ -16,17 +16,21 @@ const httpsServer = https.createServer({
     // rejectUnauthorized: false,
 });
 
-// httpServer.listen(httpPort, function () {
-//     console.log(`Listening HTTP on ${httpPort}`);
-// });
-//
-// httpsServer.listen(httpsPort, function () {
-//     console.log(`Listening HTTPS on ${httpsPort}`);
-// });
+httpServer.listen(httpPort, function () {
+    console.log(`Listening HTTP on ${httpPort}`);
+});
+
+httpsServer.listen(httpsPort, function () {
+    console.log(`Listening HTTPS on ${httpsPort}`);
+});
 
 [httpServer, httpsServer].forEach((server) => {
     const io = require('socket.io')(server, {
         cors: { origin: '*' },
+    });
+
+    io.on('reconnect', (event)=> {
+        console.log('Reconnection appeared!');
     });
 
     io.on('connection', (socket) => {
