@@ -12,8 +12,6 @@ const httpsServer = https.createServer({
     key: readFileSync(join(__dirname, '..', 'ssl', 'key.pem')),
     cert: readFileSync(join(__dirname, '..', 'ssl', 'csr.pem')),
     ca: readFileSync(join(__dirname, '..', 'ssl', 'ca.pem')),
-    // requestCert: false,
-    // rejectUnauthorized: false,
 });
 
 httpServer.listen(httpPort, function () {
@@ -27,10 +25,6 @@ httpsServer.listen(httpsPort, function () {
 [httpServer, httpsServer].forEach((server) => {
     const io = require('socket.io')(server, {
         cors: { origin: '*' },
-    });
-
-    io.on('reconnect', (event)=> {
-        console.log('Reconnection appeared!');
     });
 
     io.on('connection', (socket) => {

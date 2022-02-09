@@ -108,9 +108,9 @@ class JobController extends Controller
     public function filter(Request $request)
     {
         try {
-            $filters = Filter::find($request->kits);
+            $filters = Filter::find($request->kits)->first();
 
-            if (!count($filters)) {
+            if (empty($filters)) {
                 $jobs = Job::query()
                     ->where('is_old', false)
                     ->where('is_taken', false)
@@ -127,23 +127,22 @@ class JobController extends Controller
             $countries = $countries->filter(fn($value) => !is_null($value));
             $filterCountries = collect();
 
-            $exceptionWords = $filters->pluck('exception_words_ids');
-            $exceptionWords = $exceptionWords->filter(fn($value) => !is_null($value));
-            $exceptionWords = $exceptionWords->toArray();
-            if(count($exceptionWords)) {
-                $exceptionWords = explode(',', $exceptionWords[0]);
+            $exceptionWords = [];
+            if(!empty($filters->exception_words_ids)) {
+                $exceptionWords = $filters->pluck('exception_words_ids');
+                $exceptionWords = explode(',', $exceptionWords);
             }
-            $keyWords = $filters->pluck('key_words_ids');
-            $keyWords = $keyWords->filter(fn($value) => !is_null($value));
-            $keyWords = $keyWords->toArray();
-            if(count($keyWords)) {
-                $keyWords = explode(',', $keyWords[0]);
+
+            $keyWords = [];
+            if(!empty($filters->key_words_ids)) {
+                $keyWords = $filters->pluck('key_words_ids');
+                $keyWords = explode(',', $keyWords);
             }
-            $customKeyWords = $filters->pluck('custom_key_words_ids');
-            $customKeyWords = $customKeyWords->filter(fn($value) => !is_null($value));
-            $customKeyWords = $customKeyWords->toArray();
-            if(count($customKeyWords)) {
-                $customKeyWords = explode(',', $customKeyWords->toArray()[0]);
+
+            $customKeyWords = [];
+            if(!empty($filters->custom_key_words_ids)) {
+                $customKeyWords = $filters->pluck('custom_key_words_ids');
+                $customKeyWords = explode(',', $customKeyWords);
             }
 
             if (count($categories)) {
