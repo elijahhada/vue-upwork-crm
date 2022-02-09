@@ -6,7 +6,8 @@ const https = require('https');
 
 const httpPort = 444;
 const httpsPort = 443;
-
+console.log('join');
+console.log(join(__dirname, '..', 'ssl', 'key.pem'));
 const httpServer = http.createServer();
 const httpsServer = https.createServer({
     key: readFileSync(join(__dirname, '..', 'ssl', 'key.pem')),
