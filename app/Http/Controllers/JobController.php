@@ -287,8 +287,9 @@ class JobController extends Controller
             $job = Job::find($request->jobId);
             $job->is_taken = true;
             $job->save();
-
+            $user = Auth::user();
             $newBid = new Bid();
+            $newBid->title = $request->title;
             $newBid->owner = $request->owner;
             $newBid->technologies = $request->technologies;
             $newBid->creation_time = Carbon::now()->format('Y-m-d H:i:s');
@@ -297,10 +298,11 @@ class JobController extends Controller
             $newBid->is_invite = $request->invite == 'true';
             $newBid->message = $request->bidMessage;
             $newBid->job_id = $request->jobId;
+            $newBid->user_id = $user->id;
+            $newBid->has_answer = false;
             $newBid->save();
 
             $client = new Client();
-            $user = Auth::user();
             $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/dealFields', ['query' => ['api_token' => config('pipedrive.api_token')]])
                 ->getBody()
                 ->getContents();
@@ -334,13 +336,12 @@ class JobController extends Controller
                     $fieldsIds['otherCountry'] = $field['key'];
                 }
             }
-            $jobCreationDate = strtotime($request->timeOfJob);
-            $formattedDate = Carbon::parse($jobCreationDate)->format('Y-m-d H:i');
+            $formattedDate = Carbon::now()->timezone('Europe/Moscow')->diff(Carbon::parse($request->timeOfJob))->format('%H:%i');
             $data = [
                 'title' => $request->title,
                 'user_id' => $request->userId,
                 'label' => $request->label,
-                $fieldsIds['timeOfBid'] => Carbon::now()->format('H:i'),
+                $fieldsIds['timeOfBid'] => Carbon::now()->timezone('Europe/Moscow')->format('H:i'),
                 $fieldsIds['timeOfJobCreation'] => $formattedDate,
                 $fieldsIds['bidProfile'] => $request->bidProfile['id'],
                 $fieldsIds['jobPosting'] => $request->jobPosting,

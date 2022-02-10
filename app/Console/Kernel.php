@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('get:jobs')->everyMinute()->withoutOverlapping();
         $schedule->command('move:jobs')->dailyAt('03:00')->timezone('Europe/Moscow')->withoutOverlapping();
+        $schedule->command('deals:answers')->everyFiveMinutes()->withoutOverlapping();
     }
 
     /**
