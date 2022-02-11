@@ -284,23 +284,7 @@ class JobController extends Controller
     public function storeDeal(Request $request)
     {
         try {
-            $job = Job::find($request->jobId);
-            $job->is_taken = true;
-            $job->save();
             $user = Auth::user();
-            $newBid = new Bid();
-            $newBid->title = $request->title;
-            $newBid->owner = $request->owner;
-            $newBid->technologies = $request->technologies;
-            $newBid->creation_time = Carbon::now()->format('Y-m-d H:i:s');
-            $newBid->bid_profile = $request->bidProfile['label'];
-            $newBid->task_link = $request->taskLink;
-            $newBid->is_invite = $request->invite == 'true';
-            $newBid->message = $request->bidMessage;
-            $newBid->job_id = $request->jobId;
-            $newBid->user_id = $user->id;
-            $newBid->has_answer = false;
-            $newBid->save();
 
             $client = new Client();
             $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/dealFields', ['query' => ['api_token' => config('pipedrive.api_token')]])
@@ -354,6 +338,24 @@ class JobController extends Controller
                 ->getBody()
                 ->getContents();
             $result = json_decode($response, true);
+
+            $job = Job::find($request->jobId);
+            $job->is_taken = true;
+            $job->save();
+            $newBid = new Bid();
+            $newBid->title = $request->title;
+            $newBid->owner = $request->owner;
+            $newBid->technologies = $request->technologies;
+            $newBid->creation_time = Carbon::now()->format('Y-m-d H:i:s');
+            $newBid->bid_profile = $request->bidProfile['label'];
+            $newBid->task_link = $request->taskLink;
+            $newBid->is_invite = $request->invite == 'true';
+            $newBid->message = $request->bidMessage;
+            $newBid->job_id = $request->jobId;
+            $newBid->user_id = $user->id;
+            $newBid->has_answer = false;
+            $newBid->pipedrive_id = $result['data']['id'];
+            $newBid->save();
         } catch (\Exception $exception) {
             $result = $exception->getMessage();
         }
