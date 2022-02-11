@@ -6,13 +6,14 @@
                     <div class="w-full flex justify-between fixed top-0 left-0 z-30 bg-white pb-2 topmenu topmenu-width" style="padding-left: 5vw">
                         <div class="w-2/12 flex justify-start items-start">
                             <img class="relative mt-2 fill-current text-green-500" src="/images/vasterra-logo.svg" alt="vasterra-logo" />
-                            <a :href="route('dashboard')" class="mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500">Jobs</a>
-                            <a href="#" class="pt-1 mt-2 text-black border-white border-b-4 hover:border-green-500">Lidgens</a>
+                            <a :href="route('dashboard')" class="mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500 cursor-pointer">Jobs</a>
+                            <a @click="switchToBids" class="mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500 cursor-pointer">Bids</a>
+                            <a :href="route('dashboard')" class="mx-4 pt-1 mt-2 mb-2 text-black border-white border-b-4 hover:border-green-500 cursor-pointer">Lidgens</a>
                         </div>
                         <div class="w-7/12 flex justify-end items-center mr-9 user-block">
-                            <div class="w-full mr-4">
-                                <div class="parent-search-block flex-nowrap w-full flex justify-end items-center" ref="parent_search_block">
-                                    <div class="w-0 overflow-hidden flex justify-between search-block" ref="search_block">
+                            <div class="w-full mr-4 flex">
+                                <div class="parent-search-block flex-nowrap w-full flex justify-end items-center mt-1" ref="parent_search_block">
+                                    <div :class="{ 'hidden': showSearchText }" class="flex justify-between search-block" ref="search_block" style="width: 450px;">
                                         <input
                                             v-model="searchInput"
                                             type="text"
@@ -30,6 +31,7 @@
                                         class="cursor-pointer search"
                                         title="Open search panel"
                                         @click="showSearch()"
+                                        :class="{ 'hidden': !showSearchText }"
                                         ref="search">
                                         <path
                                             id="search-svg"
@@ -128,6 +130,9 @@ export default {
         switchCalendar(isSwitched) {
             this.$emit('switchCalendar', isSwitched);
         },
+        switchToBids() {
+            this.$emit('switchToBids');
+        },
         callSearch() {
             if(this.searchInput.length < 2) {
                 alert('Длина запроса должна быть минимум 2 символа');
@@ -138,22 +143,22 @@ export default {
         },
         showSearch() {
             this.showSearchText = false;
-            this.$refs.search_block.classList.remove('w-0');
-            this.$refs.search_block.classList.add('w-full');
-            this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
-            setTimeout(() => {
-                this.$refs.search_block.classList.add('w-full');
-            }, 280);
-
-            this.$refs.search.classList.add('hidden');
+            // this.$refs.search_block.classList.remove('w-0');
+            // this.$refs.search_block.classList.add('w-full');
+            // this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
+            // setTimeout(() => {
+            //     this.$refs.search_block.classList.add('w-full');
+            // }, 280);
+            //
+            // this.$refs.search.classList.add('hidden');
         },
         closeSearch() {
-            this.$refs.search_block.cssText = 'animation: width0 .3s linear';
-            setTimeout(() => {
-                this.$refs.search_block.classList.remove('w-full');
-                this.$refs.search_block.classList.add('w-0');
-                this.$refs.search.classList.remove('hidden');
-            }, 10);
+            // this.$refs.search_block.cssText = 'animation: width0 .3s linear';
+            // setTimeout(() => {
+            //     this.$refs.search_block.classList.remove('w-full');
+            //     this.$refs.search_block.classList.add('w-0');
+            //     this.$refs.search.classList.remove('hidden');
+            // }, 10);
             this.showSearchText = true;
         },
         switchToTeam(team) {

@@ -371,6 +371,18 @@ class JobController extends Controller
                 ->orderBy('date_created', 'desc')
                 ->orderBy('id', 'desc');
             $jobs =  $jobs->has('bid');
+            $filter = $request->input('filter');
+            $jobs = $jobs->whereHas('bid', function ($subQuery) use($filter) {
+                if($filter === 1) {
+                    $subQuery->where('has_answer', true);
+                }
+                if($filter === 2) {
+                    $subQuery->where('has_answer', false);
+                }
+            });
+            if(empty($searchString)) {
+                return $jobs->with('bid')->with('user')->paginate(2);
+            }
             $jobs = $jobs->where(function($query) use($searchString) {
                 $query->whereHas('bid', function ($subQuery) use($searchString) {
                     $subQuery->where('message', 'like', '%' . strtolower($searchString) . '%');

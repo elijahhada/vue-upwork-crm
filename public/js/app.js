@@ -5774,6 +5774,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -5806,6 +5808,9 @@ __webpack_require__.r(__webpack_exports__);
     switchCalendar: function switchCalendar(isSwitched) {
       this.$emit('switchCalendar', isSwitched);
     },
+    switchToBids: function switchToBids() {
+      this.$emit('switchToBids');
+    },
     callSearch: function callSearch() {
       if (this.searchInput.length < 2) {
         alert('Длина запроса должна быть минимум 2 символа');
@@ -5816,28 +5821,22 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('callSearch', this.searchInput);
     },
     showSearch: function showSearch() {
-      var _this = this;
-
-      this.showSearchText = false;
-      this.$refs.search_block.classList.remove('w-0');
-      this.$refs.search_block.classList.add('w-full');
-      this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
-      setTimeout(function () {
-        _this.$refs.search_block.classList.add('w-full');
-      }, 280);
-      this.$refs.search.classList.add('hidden');
+      this.showSearchText = false; // this.$refs.search_block.classList.remove('w-0');
+      // this.$refs.search_block.classList.add('w-full');
+      // this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
+      // setTimeout(() => {
+      //     this.$refs.search_block.classList.add('w-full');
+      // }, 280);
+      //
+      // this.$refs.search.classList.add('hidden');
     },
     closeSearch: function closeSearch() {
-      var _this2 = this;
-
-      this.$refs.search_block.cssText = 'animation: width0 .3s linear';
-      setTimeout(function () {
-        _this2.$refs.search_block.classList.remove('w-full');
-
-        _this2.$refs.search_block.classList.add('w-0');
-
-        _this2.$refs.search.classList.remove('hidden');
-      }, 10);
+      // this.$refs.search_block.cssText = 'animation: width0 .3s linear';
+      // setTimeout(() => {
+      //     this.$refs.search_block.classList.remove('w-full');
+      //     this.$refs.search_block.classList.add('w-0');
+      //     this.$refs.search.classList.remove('hidden');
+      // }, 10);
       this.showSearchText = true;
     },
     switchToTeam: function switchToTeam(team) {
@@ -7169,6 +7168,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
 
 
 
@@ -7224,7 +7224,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       isSearchJobsOnScrollAvailable: true,
       isSearchJobsButtonAvailable: true,
       jobsSearchContainer: '',
-      bidsSearchContainer: ''
+      bidsSearchContainer: '',
+      bidsFilter: 0
     };
   },
   components: {
@@ -7269,6 +7270,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   methods: {
+    switchToBids: function switchToBids() {
+      this.searchBids('');
+    },
+    filterBids: function filterBids(filter) {
+      this.bidsFilter = filter;
+      this.searchBids(this.searchQuery);
+    },
     searchBids: function searchBids(query) {
       var _this2 = this;
 
@@ -7276,7 +7284,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.isShownBids = true;
       this.loadMoreBidsOnScroll();
       axios.post('/jobs/with-bids', {
-        query: query
+        query: query,
+        filter: this.bidsFilter
       }).then(function (res) {
         _this2.bidsData = res.data;
         _this2.bids = res.data.data;
@@ -7439,7 +7448,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         this.isSearchBidsOnScrollAvailable = false;
         var nextPageNumber = this.bidsData.next_page_url.slice(this.bidsData.next_page_url.indexOf('=') + 1);
         axios.post('/jobs/with-bids?page=' + nextPageNumber, {
-          query: this.searchQuery
+          query: this.searchQuery,
+          filter: this.bidsFilter
         }).then(function (response) {
           var _this8$bids;
 
@@ -7493,46 +7503,51 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.isCalendarOn = isSwitched;
     },
     showSearch: function showSearch() {
-      var _this11 = this;
-
-      this.showSearchText = false;
-      this.$refs.search_block.classList.remove('w-0');
-      this.$refs.search_block.classList.add('w-full');
-      this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
-      setTimeout(function () {
-        _this11.$refs.search_block.classList.add('w-full');
-      }, 280);
-      this.$refs.search.classList.add('hidden');
+      this.showSearchText = false; // this.$refs.search_block.classList.remove('w-0');
+      // this.$refs.search_block.classList.add('w-full');
+      // this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
+      // setTimeout(() => {
+      //     this.$refs.search_block.classList.add('w-full');
+      // }, 280);
+      //
+      // this.$refs.search.classList.add('hidden');
     },
     closeSearch: function closeSearch() {
-      var _this12 = this;
-
-      this.$refs.search_block.cssText = 'animation: width0 .3s linear';
-      setTimeout(function () {
-        _this12.$refs.search_block.classList.remove('w-full');
-
-        _this12.$refs.search_block.classList.add('w-0');
-
-        _this12.$refs.search.classList.remove('hidden');
-      }, 10);
+      // this.$refs.search_block.cssText = 'animation: width0 .3s linear';
+      // setTimeout(() => {
+      //     this.$refs.search_block.classList.remove('w-full');
+      //     this.$refs.search_block.classList.add('w-0');
+      //     this.$refs.search.classList.remove('hidden');
+      // }, 10);
       this.showSearchText = true;
     },
     searchJobs: function searchJobs() {
-      var _this13 = this;
+      var _this11 = this;
+
+      if (this.searchInput.length < 2) {
+        alert('Query string is empty, it must be at least 2 symbols, please fill it up');
+        this.closeSearch();
+        this.isSearchJobsOnScrollAvailable = false;
+        this.isJobsOnScrollAvailable = true;
+        this.isShowSearchJobs = false;
+        this.refreshJobs();
+        return;
+      }
 
       this.closeSearch();
       this.jobsSearchContainer = this.searchInput; // holds value until search button is pushed
 
       this.isShowSearchJobs = true;
+      this.isSearchJobsOnScrollAvailable = true;
 
       if (this.isSearchJobsButtonAvailable) {
         axios.post('/jobs/search', {
           query: this.searchInput
         }).then(function (res) {
-          _this13.isSearchJobsButtonAvailable = true;
+          _this11.isSearchJobsButtonAvailable = true;
           console.log(res);
-          _this13.data = res.data.data;
-          _this13.jobsData = res.data;
+          _this11.data = res.data.data;
+          _this11.jobsData = res.data;
         })["catch"](function (error) {
           console.log(error);
         });
@@ -11570,7 +11585,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*@import '../../css/style.css';*/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*@import '../../css/style.css';*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52588,7 +52603,7 @@ var render = function () {
                           "a",
                           {
                             staticClass:
-                              "mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500",
+                              "mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500 cursor-pointer",
                             attrs: { href: _vm.route("dashboard") },
                           },
                           [_vm._v("Jobs")]
@@ -52598,8 +52613,18 @@ var render = function () {
                           "a",
                           {
                             staticClass:
-                              "pt-1 mt-2 text-black border-white border-b-4 hover:border-green-500",
-                            attrs: { href: "#" },
+                              "mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500 cursor-pointer",
+                            on: { click: _vm.switchToBids },
+                          },
+                          [_vm._v("Bids")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "mx-4 pt-1 mt-2 mb-2 text-black border-white border-b-4 hover:border-green-500 cursor-pointer",
+                            attrs: { href: _vm.route("dashboard") },
                           },
                           [_vm._v("Lidgens")]
                         ),
@@ -52613,13 +52638,13 @@ var render = function () {
                           "w-7/12 flex justify-end items-center mr-9 user-block",
                       },
                       [
-                        _c("div", { staticClass: "w-full mr-4" }, [
+                        _c("div", { staticClass: "w-full mr-4 flex" }, [
                           _c(
                             "div",
                             {
                               ref: "parent_search_block",
                               staticClass:
-                                "parent-search-block flex-nowrap w-full flex justify-end items-center",
+                                "parent-search-block flex-nowrap w-full flex justify-end items-center mt-1",
                             },
                             [
                               _c(
@@ -52627,7 +52652,9 @@ var render = function () {
                                 {
                                   ref: "search_block",
                                   staticClass:
-                                    "w-0 overflow-hidden flex justify-between search-block",
+                                    "flex justify-between search-block",
+                                  class: { hidden: _vm.showSearchText },
+                                  staticStyle: { width: "450px" },
                                 },
                                 [
                                   _c("input", {
@@ -52688,6 +52715,7 @@ var render = function () {
                                 {
                                   ref: "search",
                                   staticClass: "cursor-pointer search",
+                                  class: { hidden: !_vm.showSearchText },
                                   attrs: {
                                     width: "24",
                                     height: "24",
@@ -55109,7 +55137,13 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "app-layout",
-    { on: { callSearch: _vm.searchBids, switchCalendar: _vm.switchCalendar } },
+    {
+      on: {
+        callSearch: _vm.searchBids,
+        switchCalendar: _vm.switchCalendar,
+        switchToBids: _vm.switchToBids,
+      },
+    },
     [
       !_vm.isShownBids
         ? _c("dash-header", {
@@ -55145,17 +55179,15 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "div",
-                {
-                  staticClass: "flex items-center max-w-full justify-end",
-                  staticStyle: { width: "490px" },
-                },
+                { staticClass: "flex items-center max-w-full justify-end" },
                 [
                   _c(
                     "div",
                     {
                       ref: "search_block",
-                      staticClass:
-                        "w-0 overflow-hidden flex justify-between search-block",
+                      staticClass: "flex justify-between search-block",
+                      class: { hidden: _vm.showSearchText },
+                      staticStyle: { width: "450px" },
                     },
                     [
                       _c("input", {
@@ -55218,7 +55250,8 @@ var render = function () {
                     {
                       ref: "search",
                       staticClass: "cursor-pointer search",
-                      staticStyle: { "z-index": "100" },
+                      class: { hidden: !_vm.showSearchText },
+                      staticStyle: { "z-index": "45" },
                       attrs: {
                         width: "24",
                         height: "24",
@@ -55323,6 +55356,7 @@ var render = function () {
             {
               staticClass:
                 "w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center",
+              class: { hidden: !_vm.showNewJobsCount },
             },
             [
               _c("div", { staticClass: "flex justify-around items-center" }, [
@@ -55350,6 +55384,11 @@ var render = function () {
                 {
                   staticClass:
                     "mr-80 text-white text-3xl cursor-pointer hover:text-red-500",
+                  on: {
+                    click: function ($event) {
+                      _vm.showNewJobsCount = false
+                    },
+                  },
                 },
                 [_vm._v("X")]
               ),
@@ -55368,6 +55407,12 @@ var render = function () {
                   {
                     staticClass:
                       "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                    class: { "bg-green-500 text-white": _vm.bidsFilter === 0 },
+                    on: {
+                      click: function ($event) {
+                        return _vm.filterBids(0)
+                      },
+                    },
                   },
                   [_vm._v("All")]
                 ),
@@ -55377,6 +55422,12 @@ var render = function () {
                   {
                     staticClass:
                       "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                    class: { "bg-green-500 text-white": _vm.bidsFilter === 1 },
+                    on: {
+                      click: function ($event) {
+                        return _vm.filterBids(1)
+                      },
+                    },
                   },
                   [_vm._v("With answers")]
                 ),
@@ -55386,6 +55437,12 @@ var render = function () {
                   {
                     staticClass:
                       "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                    class: { "bg-green-500 text-white": _vm.bidsFilter === 2 },
+                    on: {
+                      click: function ($event) {
+                        return _vm.filterBids(2)
+                      },
+                    },
                   },
                   [_vm._v("Without answers")]
                 ),

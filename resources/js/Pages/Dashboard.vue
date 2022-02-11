@@ -1,10 +1,10 @@
 <template>
-    <app-layout @callSearch="searchBids" @switchCalendar="switchCalendar">
+    <app-layout @callSearch="searchBids" @switchCalendar="switchCalendar" @switchToBids="switchToBids">
         <dash-header v-if="!isShownBids" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
         <div v-if="!isShownBids" class="w-full flex items-center justify-between" :class="{'job-card-stretched': !isCalendarOn}" style="max-width: 1500px!important;">
             <p class="text-2xl font-bold">Found {{ jobsData.total }} jobs</p>
-            <div class="flex items-center max-w-full justify-end" style="width: 490px;">
-                <div class="w-0 overflow-hidden flex justify-between search-block" ref="search_block">
+            <div class="flex items-center max-w-full justify-end">
+                <div class="flex justify-between search-block" ref="search_block" :class="{ 'hidden': showSearchText }" style="width: 450px;">
                     <input
                         v-model="searchInput"
                         type="text"
@@ -13,7 +13,7 @@
                     <button class="rounded rounded-full bg-gray-300 text-black py-3 px-9 hover:bg-green-500 hover:text-white" @click="searchJobs" style="z-index: 100;!important;">Search</button>
                     <p class="ml-4 search-button text-black text-5xl cursor-pointer hover:text-red-500" @click="closeSearch()" title="Close search panel" style="z-index: 100;!important;">×</p>
                 </div>
-                <svg style="z-index: 100;!important;"
+                <svg style="z-index: 45;!important;"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -22,6 +22,7 @@
                     class="cursor-pointer search"
                     title="Open search panel"
                     @click="showSearch()"
+                    :class="{ 'hidden': !showSearchText }"
                     ref="search">
                     <path
                         id="search-svg"
@@ -68,18 +69,18 @@
                 :memberSince="job.member_since"></job-card>
         </div>
         <Toast message="Фильтры изменились, обновите страницу!" :show="showToast" @hide="showToast = false" type="warning" title="Warning" position="top-right" />
-        <div v-if="showNewJobsCount && !isShownBids" class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center">
+        <div v-if="showNewJobsCount && !isShownBids" class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center" :class="{ 'hidden': !showNewJobsCount }">
             <div class="flex justify-around items-center">
                 <p class="text-white mr-12 ml-20">Recently for your filters appeared {{ newJobsCount }} new jobs</p>
                 <button class="bg-gray-300 text-black rounded rounded-full py-3 px-9 hover:bg-gray-700 hover:text-white" @click="refreshJobs">Refresh</button>
             </div>
-            <p class="mr-80 text-white text-3xl cursor-pointer hover:text-red-500">X</p>
+            <p class="mr-80 text-white text-3xl cursor-pointer hover:text-red-500" @click="showNewJobsCount = false">X</p>
         </div>
         <div class="flex flex-col my-12">
             <div v-if="isShownBids" class="flex items-center">
-                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button">All</button>
-                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button">With answers</button>
-                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button">Without answers</button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 0 }" @click="filterBids(0)">All</button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 1 }" @click="filterBids(1)">With answers</button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 2 }" @click="filterBids(2)">Without answers</button>
             </div>
             <bid-card
                 class="w-8/12 py-7 px-8 border"
@@ -175,6 +176,7 @@ export default {
             isSearchJobsButtonAvailable: true,
             jobsSearchContainer: '',
             bidsSearchContainer: '',
+            bidsFilter: 0,
         };
     },
     components: {
@@ -215,13 +217,21 @@ export default {
         },
     },
     methods: {
+        switchToBids() {
+            this.searchBids('');
+        },
+        filterBids(filter) {
+            this.bidsFilter = filter;
+            this.searchBids(this.searchQuery);
+        },
         searchBids(query) {
             this.searchQuery = query;
             this.isShownBids = true;
             this.loadMoreBidsOnScroll();
             axios
                 .post('/jobs/with-bids', {
-                    query: query
+                    query: query,
+                    filter: this.bidsFilter,
                 })
                 .then((res) => {
                     this.bidsData = res.data;
@@ -344,7 +354,8 @@ export default {
                 let nextPageNumber = this.bidsData.next_page_url.slice(this.bidsData.next_page_url.indexOf('=') + 1)
                 axios
                     .post('/jobs/with-bids?page=' + nextPageNumber, {
-                        query: this.searchQuery
+                        query: this.searchQuery,
+                        filter: this.bidsFilter,
                     })
                     .then((response) => {
                         this.isSearchBidsOnScrollAvailable = true;
@@ -389,28 +400,38 @@ export default {
         },
         showSearch() {
             this.showSearchText = false;
-            this.$refs.search_block.classList.remove('w-0');
-            this.$refs.search_block.classList.add('w-full');
-            this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
-            setTimeout(() => {
-                this.$refs.search_block.classList.add('w-full');
-            }, 280);
-
-            this.$refs.search.classList.add('hidden');
+            // this.$refs.search_block.classList.remove('w-0');
+            // this.$refs.search_block.classList.add('w-full');
+            // this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
+            // setTimeout(() => {
+            //     this.$refs.search_block.classList.add('w-full');
+            // }, 280);
+            //
+            // this.$refs.search.classList.add('hidden');
         },
         closeSearch() {
-            this.$refs.search_block.cssText = 'animation: width0 .3s linear';
-            setTimeout(() => {
-                this.$refs.search_block.classList.remove('w-full');
-                this.$refs.search_block.classList.add('w-0');
-                this.$refs.search.classList.remove('hidden');
-            }, 10);
+            // this.$refs.search_block.cssText = 'animation: width0 .3s linear';
+            // setTimeout(() => {
+            //     this.$refs.search_block.classList.remove('w-full');
+            //     this.$refs.search_block.classList.add('w-0');
+            //     this.$refs.search.classList.remove('hidden');
+            // }, 10);
             this.showSearchText = true;
         },
         searchJobs() {
+            if(this.searchInput.length < 2) {
+                alert('Query string is empty, it must be at least 2 symbols, please fill it up');
+                this.closeSearch();
+                this.isSearchJobsOnScrollAvailable = false;
+                this.isJobsOnScrollAvailable = true;
+                this.isShowSearchJobs = false;
+                this.refreshJobs();
+                return;
+            }
             this.closeSearch();
             this.jobsSearchContainer = this.searchInput; // holds value until search button is pushed
             this.isShowSearchJobs = true;
+            this.isSearchJobsOnScrollAvailable = true;
             if(this.isSearchJobsButtonAvailable) {
                 axios
                     .post('/jobs/search', {
