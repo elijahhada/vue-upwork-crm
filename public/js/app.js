@@ -3243,6 +3243,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -3256,6 +3257,10 @@ __webpack_require__.r(__webpack_exports__);
     excerpt: {
       required: true,
       type: String
+    },
+    skills: {
+      required: true,
+      type: Array
     },
     score: {
       required: true,
@@ -3355,7 +3360,8 @@ __webpack_require__.r(__webpack_exports__);
       }),
       truncatedLength: 300,
       truncated: true,
-      showFeedbacks: false
+      showFeedbacks: false,
+      showFullExcerpt: false
     };
   },
   computed: {
@@ -3366,7 +3372,16 @@ __webpack_require__.r(__webpack_exports__);
       return this.jobStatus == 1;
     },
     truncatedExcerpt: function truncatedExcerpt() {
-      return this.excerpt.substring(0, this.truncatedLength);
+      var result;
+
+      if (this.showFullExcerpt) {
+        result = this.excerpt;
+      } else {
+        var last = this.excerpt.indexOf(" ", this.truncatedLength - 1);
+        result = this.excerpt.length < 300 ? this.excerpt : last !== -1 ? this.excerpt.substring(0, last) : this.excerpt;
+      }
+
+      return result;
     }
   },
   methods: {
@@ -7049,6 +7064,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//
 //
 //
 //
@@ -48537,25 +48553,45 @@ var render = function () {
       _c("div", { staticClass: "w-11/12 mb-5" }, [
         _c("p", { staticClass: "leading-7 text-base font-normal" }, [
           _vm._v(
-            "\n            " + _vm._s(_vm.truncatedExcerpt) + "\n        "
+            "\n            " + _vm._s(_vm.truncatedExcerpt) + "\n            "
           ),
+          _vm.excerpt.length > 300
+            ? _c(
+                "span",
+                {
+                  staticClass:
+                    "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap hover:text-green-700",
+                  on: {
+                    click: function ($event) {
+                      _vm.showFullExcerpt = !_vm.showFullExcerpt
+                    },
+                  },
+                },
+                [_vm._v(_vm._s(_vm.showFullExcerpt ? "less" : "more"))]
+              )
+            : _vm._e(),
         ]),
       ]),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "w-11/12 mb-8 flex justify-start items-center" },
-        _vm._l(_vm.categories, function (cat) {
+        {
+          staticClass:
+            "w-11/12 mb-8 flex justify-start items-center flex-wrap gap-y-3",
+          staticStyle: { "min-height": "fit-content" },
+        },
+        _vm._l(_vm.skills, function (skill) {
           return _c(
             "p",
             {
-              key: cat.id,
+              key: skill.id,
               staticClass:
                 "bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4",
+              staticStyle: { "min-width": "fit-content" },
             },
             [
               _c("span", { staticClass: "py-2 px-3" }, [
-                _vm._v(_vm._s(cat.name)),
+                _vm._v(_vm._s(skill.title)),
               ]),
             ]
           )
@@ -55304,6 +55340,7 @@ var render = function () {
                   id: job.id,
                   title: job.title,
                   excerpt: job.excerpt,
+                  skills: job.tags,
                   score: job.client_score,
                   feedback: job.client_feedback,
                   feedbacks: job.feedbacks,

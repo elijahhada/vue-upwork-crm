@@ -15,11 +15,12 @@
         <div class="w-11/12 mb-5">
             <p class="leading-7 text-base font-normal">
                 {{ truncatedExcerpt }}
+                <span v-if="excerpt.length > 300" class="text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap hover:text-green-700" @click="showFullExcerpt = !showFullExcerpt">{{ showFullExcerpt ? 'less' : 'more' }}</span>
             </p>
         </div>
-        <div class="w-11/12 mb-8 flex justify-start items-center">
-            <p v-for="cat in categories" :key="cat.id" class="bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4">
-                <span class="py-2 px-3">{{ cat.name }}</span>
+        <div class="w-11/12 mb-8 flex justify-start items-center flex-wrap gap-y-3" style="min-height: fit-content;">
+            <p v-for="skill in skills" :key="skill.id" class="bg-gray-200 text-black rounded py-3 px-2 font-normal mr-4" style="min-width: fit-content;">
+                <span class="py-2 px-3">{{ skill.title }}</span>
             </p>
         </div>
         <div class="w-11/12 mb-8 flex nowrap justify-start items-start text-md leading-6">
@@ -75,6 +76,10 @@ export default {
         excerpt: {
             required: true,
             type: String,
+        },
+        skills: {
+            required: true,
+            type: Array,
         },
         score: {
             required: true,
@@ -172,6 +177,7 @@ export default {
             truncatedLength: 300,
             truncated: true,
             showFeedbacks: false,
+            showFullExcerpt: false,
         };
     },
     computed: {
@@ -182,7 +188,14 @@ export default {
             return this.jobStatus == 1;
         },
         truncatedExcerpt: function () {
-            return this.excerpt.substring(0, this.truncatedLength);
+            let result;
+            if(this.showFullExcerpt) {
+                result = this.excerpt;
+            } else {
+                let last = this.excerpt.indexOf(" ", this.truncatedLength - 1);
+                result = this.excerpt.length < 300 ? this.excerpt : last !== -1 ? this.excerpt.substring(0, last) : this.excerpt;
+            }
+            return result;
         },
     },
     methods: {

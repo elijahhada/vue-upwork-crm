@@ -50,7 +50,7 @@ class Job extends Model
         'is_fixed' => 'boolean',
     ];
 
-    protected $appends = ['human_date_created', 'client_hire_rate', 'feedbacks'];
+    protected $appends = ['human_date_created', 'client_hire_rate', 'feedbacks', 'tags'];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
@@ -123,5 +123,17 @@ class Job extends Model
             }
         }
         return $feedbacks;
+    }
+
+    public function getTagsAttribute()
+    {
+        $skills = [];
+        foreach (explode(',', $this->skills) as $index => $skill) {
+            $data = [];
+            $data['id'] = uniqid($index);
+            $data['title'] = $skill;
+            array_push($skills, $data);
+        }
+        return $skills;
     }
 }

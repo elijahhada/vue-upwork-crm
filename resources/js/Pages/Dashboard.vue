@@ -44,6 +44,7 @@
                 :id="job.id"
                 :title="job.title"
                 :excerpt="job.excerpt"
+                :skills="job.tags"
                 :score="job.client_score"
                 :feedback="job.client_feedback"
                 :feedbacks="job.feedbacks"
