@@ -50,7 +50,7 @@ class Job extends Model
         'is_fixed' => 'boolean',
     ];
 
-    protected $appends = ['human_date_created', 'client_hire_rate', 'feedbacks', 'tags'];
+    protected $appends = ['human_date_created', 'client_hire_rate', 'feedbacks', 'tags', 'time_after_job_creation'];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
@@ -135,5 +135,13 @@ class Job extends Model
             array_push($skills, $data);
         }
         return $skills;
+    }
+
+    public function getTimeAfterJobCreationAttribute()
+    {
+        $now = Carbon::now()->timezone('Europe/Moscow');
+        return $now->diff(Carbon::parse($this->date_created))->d . ' days '
+            . $now->diff(Carbon::parse($this->date_created))->h . ' hours '
+            . $now->diff(Carbon::parse($this->date_created))->i . ' minutes';
     }
 }

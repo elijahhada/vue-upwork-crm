@@ -67,8 +67,8 @@
                     <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200" value="will be set as current time" disabled="disabled">
                 </div>
                 <div class="w-full mb-3">
-                    <p class="text-xs pl-2 text-gray-300 mb-1">Time of job creation</p>
-                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200" :value="date_created" disabled="disabled">
+                    <p class="text-xs pl-2 text-gray-300 mb-1">Time after job creation</p>
+                    <input type="text" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200" :value="time_after_job_creation" disabled="disabled">
                 </div>
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Bid profile</p>
@@ -106,7 +106,7 @@
                 <div class="w-full mb-3">
                     <p class="text-xs pl-2 text-gray-300 mb-1">Bid</p>
                     <div class="space-x-3">
-                        <textarea name="" id="" class="textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non" v-model="bidText">
+                        <textarea style="white-space: pre-wrap;" name="" id="" class="textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non" v-model="bidText">
 
                         </textarea>
                     </div>
@@ -145,6 +145,14 @@ export default {
         };
     },
     methods: {
+        refreshBidData() {
+            this.bidProfile = null;
+            this.selectedTechsList = [];
+            this.country = null;
+            this.otherCountry = '';
+            this.taskLink = '';
+            this.bidText = '';
+        },
         swapInvite(option){
             if(option === 1){
                 document.querySelector('.invite-none').classList.remove('bg-gray-200');
@@ -179,6 +187,7 @@ export default {
                 userId: this.pipedriveInfo.currentUser.id,
                 label: this.selectedTechsList.map(item => item.id)[0],
                 timeOfJob: this.date_created,
+                timeAfterJobCreation: this.time_after_job_creation,
                 bidProfile: this.bidProfile,
                 jobPosting: this.url,
                 taskLink: this.taskLink,
@@ -195,6 +204,8 @@ export default {
             }).catch(error => {
                 console.log(error);
             })
+            this.refreshBidData();
+            this.loadPipedriveInfo();
             this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
             document.body.classList.remove('overflow-y-hidden');
             this.$store.state.jobToRemove = this.$store.state.DealData.id;
@@ -205,6 +216,8 @@ export default {
                 let action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
                 socket.emit('job:speak', { id: this.jobId, action });
             });
+            this.refreshBidData();
+            this.loadPipedriveInfo();
             this.$emit('changeStatus', { id: this.jobId, status });
             this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
             this.isTechDropped = false;
@@ -249,6 +262,9 @@ export default {
         },
         date_created() {
             return this.$store.state.DealData.date_created;
+        },
+        time_after_job_creation() {
+            return this.$store.state.DealData.time_after_job_creation;
         },
         url() {
             return this.$store.state.DealData.url;

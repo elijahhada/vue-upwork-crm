@@ -300,6 +300,9 @@ class JobController extends Controller
                 if($field['name'] === 'Time of job creation' || $field['name'] === 'Time after job creation') {
                     $fieldsIds['timeOfJobCreation'] = $field['key'];
                 }
+                if($field['name'] === 'Time after job creation with days') {
+                    $fieldsIds['timeAfterJobCreationWithDays'] = $field['key'];
+                }
                 if($field['name'] === 'Bid profile') {
                     $fieldsIds['bidProfile'] = $field['key'];
                 }
@@ -327,6 +330,7 @@ class JobController extends Controller
                 'label' => $request->label,
                 $fieldsIds['timeOfBid'] => Carbon::now()->timezone('Europe/Moscow')->format('H:i'),
                 $fieldsIds['timeOfJobCreation'] => $formattedDate,
+                $fieldsIds['timeAfterJobCreationWithDays'] => $request->timeAfterJobCreation,
                 $fieldsIds['bidProfile'] => $request->bidProfile['id'],
                 $fieldsIds['jobPosting'] => $request->jobPosting,
                 $fieldsIds['proposalLink'] => $request->taskLink,

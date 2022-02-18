@@ -2986,6 +2986,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -3096,7 +3097,8 @@ __webpack_require__.r(__webpack_exports__);
       }),
       truncatedLength: 300,
       truncated: true,
-      showBidMessage: false
+      showBidMessage: false,
+      showFullExcerpt: false
     };
   },
   computed: {
@@ -3107,7 +3109,16 @@ __webpack_require__.r(__webpack_exports__);
       return this.jobStatus == 1;
     },
     truncatedExcerpt: function truncatedExcerpt() {
-      return this.excerpt.substring(0, this.truncatedLength);
+      var result;
+
+      if (this.showFullExcerpt) {
+        result = this.excerpt;
+      } else {
+        var last = this.excerpt.indexOf(" ", this.truncatedLength - 1);
+        result = this.excerpt.length < 300 ? this.excerpt : last !== -1 ? this.excerpt.substring(0, last) : this.excerpt;
+      }
+
+      return result;
     }
   },
   methods: {
@@ -3600,6 +3611,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    refreshBidData: function refreshBidData() {
+      this.bidProfile = null;
+      this.selectedTechsList = [];
+      this.country = null;
+      this.otherCountry = '';
+      this.taskLink = '';
+      this.bidText = '';
+    },
     swapInvite: function swapInvite(option) {
       if (option === 1) {
         document.querySelector('.invite-none').classList.remove('bg-gray-200');
@@ -3638,6 +3657,7 @@ __webpack_require__.r(__webpack_exports__);
           return item.id;
         })[0],
         timeOfJob: this.date_created,
+        timeAfterJobCreation: this.time_after_job_creation,
         bidProfile: this.bidProfile,
         jobPosting: this.url,
         taskLink: this.taskLink,
@@ -3656,6 +3676,8 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+      this.refreshBidData();
+      this.loadPipedriveInfo();
       this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
       document.body.classList.remove('overflow-y-hidden');
       this.$store.state.jobToRemove = this.$store.state.DealData.id;
@@ -3674,6 +3696,8 @@ __webpack_require__.r(__webpack_exports__);
           action: action
         });
       });
+      this.refreshBidData();
+      this.loadPipedriveInfo();
       this.$emit('changeStatus', {
         id: this.jobId,
         status: status
@@ -3725,6 +3749,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     date_created: function date_created() {
       return this.$store.state.DealData.date_created;
+    },
+    time_after_job_creation: function time_after_job_creation() {
+      return this.$store.state.DealData.time_after_job_creation;
     },
     url: function url() {
       return this.$store.state.DealData.url;
@@ -48303,8 +48330,23 @@ var render = function () {
           _vm._v(
             "\n                " +
               _vm._s(_vm.truncatedExcerpt) +
-              "\n            "
+              "\n                "
           ),
+          _vm.excerpt.length > 300
+            ? _c(
+                "span",
+                {
+                  staticClass:
+                    "text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap hover:text-green-700",
+                  on: {
+                    click: function ($event) {
+                      _vm.showFullExcerpt = !_vm.showFullExcerpt
+                    },
+                  },
+                },
+                [_vm._v(_vm._s(_vm.showFullExcerpt ? "less" : "more"))]
+              )
+            : _vm._e(),
         ]),
       ]),
       _vm._v(" "),
@@ -48473,9 +48515,14 @@ var render = function () {
             _vm._v("Bid text"),
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "text-black" }, [
-            _vm._v(_vm._s(_vm.bid.message)),
-          ]),
+          _c(
+            "p",
+            {
+              staticClass: "text-black",
+              staticStyle: { "white-space": "pre-wrap" },
+            },
+            [_vm._v(_vm._s(_vm.bid.message))]
+          ),
         ]
       ),
     ]
@@ -49011,14 +49058,14 @@ var render = function () {
                     _c(
                       "p",
                       { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
-                      [_vm._v("Time of job creation")]
+                      [_vm._v("Time after job creation")]
                     ),
                     _vm._v(" "),
                     _c("input", {
                       staticClass:
                         "p-2 w-full border border-gray-300 rounded-md focus:outline-none bg-gray-200",
                       attrs: { type: "text", disabled: "disabled" },
-                      domProps: { value: _vm.date_created },
+                      domProps: { value: _vm.time_after_job_creation },
                     }),
                   ]),
                   _vm._v(" "),
@@ -49274,6 +49321,7 @@ var render = function () {
                         ],
                         staticClass:
                           "textarea-form p-2 w-full h-full border border-gray-300 rounded-md focus:outline-non",
+                        staticStyle: { "white-space": "pre-wrap" },
                         attrs: { name: "", id: "" },
                         domProps: { value: _vm.bidText },
                         on: {

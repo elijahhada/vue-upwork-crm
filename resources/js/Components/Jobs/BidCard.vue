@@ -15,6 +15,7 @@
         <div class="w-11/12 mb-5">
             <p class="leading-7 text-base font-normal">
                 {{ truncatedExcerpt }}
+                <span v-if="excerpt.length > 300" class="text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap hover:text-green-700" @click="showFullExcerpt = !showFullExcerpt">{{ showFullExcerpt ? 'less' : 'more' }}</span>
             </p>
         </div>
         <div class="w-11/12 mb-8 flex justify-start items-center">
@@ -48,7 +49,7 @@
         </div>
         <div class="w-full mt-3" :class="{'hidden': !showBidMessage}">
             <p class="text-lg text-black font-bold">Bid text</p>
-            <p class="text-black">{{ bid.message }}</p>
+            <p class="text-black" style="white-space: pre-wrap;">{{ bid.message }}</p>
         </div>
     </div>
 </template>
@@ -162,7 +163,8 @@ export default {
             }),
             truncatedLength: 300,
             truncated: true,
-            showBidMessage: false
+            showBidMessage: false,
+            showFullExcerpt: false,
         };
     },
     computed: {
@@ -173,7 +175,14 @@ export default {
             return this.jobStatus == 1;
         },
         truncatedExcerpt: function () {
-            return this.excerpt.substring(0, this.truncatedLength);
+            let result;
+            if(this.showFullExcerpt) {
+                result = this.excerpt;
+            } else {
+                let last = this.excerpt.indexOf(" ", this.truncatedLength - 1);
+                result = this.excerpt.length < 300 ? this.excerpt : last !== -1 ? this.excerpt.substring(0, last) : this.excerpt;
+            }
+            return result;
         },
     },
     methods: {
