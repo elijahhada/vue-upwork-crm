@@ -116,7 +116,7 @@ class JobController extends Controller
                     ->where('is_taken', false)
                     ->orderBy('date_created', 'desc')
                     ->orderBy('id', 'desc')
-                    ->paginate(10);
+                    ->paginate($request->onPage);
                 return $jobs;
             }
             $categories = $filters->pluck('categories_ids');
@@ -235,7 +235,7 @@ class JobController extends Controller
                 return $jobs->count();
             }
 
-            return $jobs->paginate(10);
+            return $jobs->paginate($request->onPage);
         } catch (\Exception $exception) {
             return response()->json(['data' => $exception->getMessage()]);
         }
@@ -385,7 +385,7 @@ class JobController extends Controller
                 }
             });
             if(empty($searchString)) {
-                return $jobs->with('bid')->with('user')->paginate(2);
+                return $jobs->with('bid')->with('user')->paginate($request->onPage);
             }
             $jobs = $jobs->where(function($query) use($searchString) {
                 $query->whereHas('bid', function ($subQuery) use($searchString) {
@@ -395,7 +395,7 @@ class JobController extends Controller
                 $query->orWhere('excerpt', 'like', '%' . strtolower($searchString) . '%');
                 $query->orWhere('skills', 'like', '%' . strtolower($searchString) . '%');
             });
-            return $jobs->with('bid')->with('user')->paginate(2);
+            return $jobs->with('bid')->with('user')->paginate($request->onPage);
         } catch (\Exception $exception) {
             return response()->json(['data' => $exception->getMessage()]);
         }
@@ -418,7 +418,7 @@ class JobController extends Controller
                     ->orWhere('excerpt', 'like', '%'. $searchString .'%')
                     ->orWhere('skills', 'like', '%'. $searchString .'%');
             }
-            return $jobs->paginate(2);
+            return $jobs->paginate($request->onPage);
         } catch (\Exception $exception) {
             return response()->json(['data' => $exception->getMessage()]);
         }

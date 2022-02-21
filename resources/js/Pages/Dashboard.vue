@@ -34,6 +34,7 @@
                 <span v-if="showSearchText" class="text-gray-500 ml-2">Search jobs</span>
             </div>
         </div>
+        <Pagination v-if="!isShownBids" @change-page="changePage($event)" :data="paginationDataJobs"></Pagination>
         <div class="flex flex-col space-y-4" v-if="!isReloading && !isShownBids">
             <job-card
                 class="w-8/12 py-7 px-8 border" :class="{'job-card-stretched': !isCalendarOn}" style="max-width: 1500px!important;"
@@ -78,11 +79,12 @@
             <p class="mr-80 text-white text-3xl cursor-pointer hover:text-red-500" @click="showNewJobsCount = false">X</p>
         </div>
         <div class="flex flex-col my-12">
-            <div v-if="isShownBids" class="flex items-center">
-                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 0 }" @click="filterBids(0)">All</button>
-                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 1 }" @click="filterBids(1)">With answers</button>
-                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 2 }" @click="filterBids(2)">Without answers</button>
+            <div v-if="isShownBids" class="flex items-center mb-2">
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 mr-4 font-normal active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 0 }" @click="filterBids(0)">All</button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 mr-4 font-normal active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 1 }" @click="filterBids(1)">With answers</button>
+                <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 mr-4 font-normal active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 2 }" @click="filterBids(2)">Without answers</button>
             </div>
+            <Pagination v-if="isShownBids" @change-page="changePage($event)" :data="paginationDataBids"></Pagination>
             <bid-card
                 class="w-8/12 py-7 px-8 border"
                 v-for="job in bids"
@@ -126,6 +128,7 @@ import BidCard from '../Components/Jobs/BidCard';
 import DashHeader from '../Components/DashboardHeader';
 import {debounce} from "lodash/function";
 import Toast from "../Components/Toast/Toast";
+import Pagination from "../Components/Pagination/Pagination";
 
 export default {
     props: {
@@ -178,6 +181,8 @@ export default {
             jobsSearchContainer: '',
             bidsSearchContainer: '',
             bidsFilter: 0,
+            onPageForBids: 10,
+            onPageForJobs: 10,
         };
     },
     components: {
@@ -185,13 +190,13 @@ export default {
         BidCard,
         AppLayout,
         DashHeader,
-        Toast
+        Toast,
+        Pagination,
     },
     mounted() {
         this.data = this.jobs.data;
         this.jobsData = this.jobs;
         this.jobListen();
-        this.addLoadOnScrollEventListener();
         this.kitsListen();
         this.checkNewJobsCount();
     },
@@ -218,21 +223,25 @@ export default {
         },
     },
     methods: {
+        removePropFromObject(obj, prop) {
+            const { [prop]: _, ...rest } = obj
+            return { ...rest }
+        },
         switchToBids() {
             this.searchBids('');
         },
         filterBids(filter) {
             this.bidsFilter = filter;
-            this.searchBids(this.searchQuery);
+            this.paginateBids(1, this.onPageForBids);
         },
         searchBids(query) {
             this.searchQuery = query;
             this.isShownBids = true;
-            this.loadMoreBidsOnScroll();
             axios
                 .post('/jobs/with-bids', {
                     query: query,
                     filter: this.bidsFilter,
+                    onPage: 10,
                 })
                 .then((res) => {
                     this.bidsData = res.data;
@@ -313,82 +322,66 @@ export default {
                 }
             });
         },
-        addLoadOnScrollEventListener() {
-            window.addEventListener('scroll', debounce((e) => {
-                if(!this.isShownBids && !this.isShowSearchJobs) {
-                    this.loadMoreOnScroll();
-                }
-                if(this.isShownBids) {
-                    this.loadMoreBidsOnScroll();
-                }
-                if(this.isShowSearchJobs) {
-                    this.loadMoreSearchJobsOnScroll();
-                }
-            }, 300))
-        },
-        loadMoreOnScroll() {
-            let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-            if(pixelsFromBottom < 600 && this.jobsData.next_page_url !== null && this.isJobsOnScrollAvailable) {
-                console.log('loadMoreOnScroll');
-                this.isJobsOnScrollAvailable = false;
-                let nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1)
-                axios
-                    .post('/jobs/filter?page=' + nextPageNumber, {
-                        kits: this.selectedKits,
-                    })
-                    .then((response) => {
-                        this.isJobsOnScrollAvailable = true;
-                        console.log(response.data)
-                        console.log(response.data.data)
-                        this.data.push(...response.data.data.filter((j) => j.status !== 1));
-                        this.jobsData = response.data;
-                    }).catch(error => {
-                        console.log(error);
-                    });
+        changePage(data) {
+            if(!this.isShownBids && !this.isShowSearchJobs) {
+                this.paginateJobs(data.page, data.onPage);
+            }
+            if(this.isShownBids) {
+                this.paginateBids(data.page, data.onPage);
+            }
+            if(this.isShowSearchJobs) {
+                this.paginateSearchJobs(data.page, data.onPage);
             }
         },
-        loadMoreBidsOnScroll() {
-            let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-            if(pixelsFromBottom < 600 && this.bidsData.next_page_url !== null && this.isSearchBidsOnScrollAvailable) {
-                console.log('loadMoreBidsOnScroll');
-                this.isSearchBidsOnScrollAvailable = false;
-                let nextPageNumber = this.bidsData.next_page_url.slice(this.bidsData.next_page_url.indexOf('=') + 1)
-                axios
-                    .post('/jobs/with-bids?page=' + nextPageNumber, {
-                        query: this.searchQuery,
-                        filter: this.bidsFilter,
-                    })
-                    .then((response) => {
-                        this.isSearchBidsOnScrollAvailable = true;
-                        console.log(response.data)
-                        console.log(response.data.data)
-                        this.bids.push(...response.data.data);
-                        this.bidsData = response.data;
-                    }).catch(error => {
-                        console.log(error);
-                    });
-            }
+        paginateJobs(page, onPage) {
+            this.onPageForJobs = onPage;
+            axios
+                .post('/jobs/filter?page=' + page, {
+                    kits: this.selectedKits,
+                    onPage: onPage,
+                })
+                .then((response) => {
+                    this.isJobsOnScrollAvailable = true;
+                    console.log(response.data)
+                    console.log(response.data.data)
+                    this.data = response.data.data.filter((j) => j.status !== 1);
+                    this.jobsData = response.data;
+                }).catch(error => {
+                    console.log(error);
+                });
         },
-        loadMoreSearchJobsOnScroll() {
-            let pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-            if(pixelsFromBottom < 600 && this.jobsData.next_page_url !== null && this.isSearchJobsOnScrollAvailable) {
-                console.log('loadMoreSearchJobsOnScroll');
-                this.isSearchJobsOnScrollAvailable = false;
-                let nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1)
-                axios
-                    .post('/jobs/search?page=' + nextPageNumber, {
-                        query: this.jobsSearchContainer
-                    })
-                    .then((response) => {
-                        this.isSearchJobsOnScrollAvailable = true;
-                        console.log(response.data)
-                        console.log(response.data.data)
-                        this.data.push(...response.data.data);
-                        this.jobsData = response.data;
-                    }).catch(error => {
-                        console.log(error);
-                    });
-            }
+        paginateBids(page, onPage) {
+            this.onPageForBids = onPage;
+            axios
+                .post('/jobs/with-bids?page=' + page, {
+                    query: this.searchQuery,
+                    filter: this.bidsFilter,
+                    onPage: onPage,
+                })
+                .then((response) => {
+                    console.log(response.data)
+                    console.log(response.data.data)
+                    this.bids = response.data.data;
+                    this.bidsData = response.data;
+                }).catch(error => {
+                    console.log(error);
+                });
+        },
+        paginateSearchJobs(page, onPage) {
+            this.onPageForJobs = onPage;
+            axios
+                .post('/jobs/search?page=' + page, {
+                    query: this.jobsSearchContainer,
+                    onPage: onPage,
+                })
+                .then((response) => {
+                    console.log(response.data)
+                    console.log(response.data.data)
+                    this.data = response.data.data;
+                    this.jobsData = response.data;
+                }).catch(error => {
+                    console.log(error);
+                });
         },
         kitsListen() {
             socket.on('kits:listeners', () => {
@@ -401,22 +394,8 @@ export default {
         },
         showSearch() {
             this.showSearchText = false;
-            // this.$refs.search_block.classList.remove('w-0');
-            // this.$refs.search_block.classList.add('w-full');
-            // this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
-            // setTimeout(() => {
-            //     this.$refs.search_block.classList.add('w-full');
-            // }, 280);
-            //
-            // this.$refs.search.classList.add('hidden');
         },
         closeSearch() {
-            // this.$refs.search_block.cssText = 'animation: width0 .3s linear';
-            // setTimeout(() => {
-            //     this.$refs.search_block.classList.remove('w-full');
-            //     this.$refs.search_block.classList.add('w-0');
-            //     this.$refs.search.classList.remove('hidden');
-            // }, 10);
             this.showSearchText = true;
         },
         searchJobs() {
@@ -432,14 +411,13 @@ export default {
             this.closeSearch();
             this.jobsSearchContainer = this.searchInput; // holds value until search button is pushed
             this.isShowSearchJobs = true;
-            this.isSearchJobsOnScrollAvailable = true;
             if(this.isSearchJobsButtonAvailable) {
                 axios
                     .post('/jobs/search', {
-                        query: this.searchInput
+                        query: this.searchInput,
+                        onPage: this.onPageForJobs,
                     })
                     .then((res) => {
-                        this.isSearchJobsButtonAvailable = true;
                         console.log(res);
                         this.data = res.data.data;
                         this.jobsData = res.data;
@@ -447,12 +425,17 @@ export default {
                     console.log(error);
                 });
             }
-            this.isSearchJobsButtonAvailable = false;
         },
     },
     computed: {
         jobToRemove() {
             return this.$store.state.jobToRemove;
+        },
+        paginationDataJobs() {
+            return this.removePropFromObject(this.jobsData, 'data');
+        },
+        paginationDataBids() {
+            return this.removePropFromObject(this.bidsData, 'data');
         }
     }
 };

@@ -4570,6 +4570,101 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Pagination/Pagination.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Pagination/Pagination.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "Pagination",
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
+  mounted: function mounted() {},
+  data: function data() {
+    return {
+      goTo: 1,
+      onPage: 10
+    };
+  },
+  methods: {
+    changeOnPage: function changeOnPage() {
+      this.changePage(1);
+    },
+    changePage: function changePage(page) {
+      this.$emit('change-page', {
+        page: page,
+        onPage: this.onPage
+      });
+    }
+  },
+  computed: {
+    computedPages: function computedPages() {
+      var start = this.data.current_page <= 3 ? 1 : this.data.current_page - 2;
+      var end = this.data.last_page - this.data.current_page > 2 ? this.data.current_page + 2 : this.data.last_page;
+      var range = [];
+
+      for (var i = start; i <= end; i++) {
+        range.push(i);
+      }
+
+      return range;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Toast/Toast.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Toast/Toast.vue?vue&type=script&lang=js& ***!
@@ -7079,17 +7174,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_function__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash/function */ "./node_modules/lodash/function.js");
 /* harmony import */ var lodash_function__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash_function__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _Components_Toast_Toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/Toast/Toast */ "./resources/js/Components/Toast/Toast.vue");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+/* harmony import */ var _Components_Pagination_Pagination__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Components/Pagination/Pagination */ "./resources/js/Components/Pagination/Pagination.vue");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 //
 //
@@ -7212,6 +7312,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+
 
 
 
@@ -7268,7 +7371,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       isSearchJobsButtonAvailable: true,
       jobsSearchContainer: '',
       bidsSearchContainer: '',
-      bidsFilter: 0
+      bidsFilter: 0,
+      onPageForBids: 10,
+      onPageForJobs: 10
     };
   },
   components: {
@@ -7276,13 +7381,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     BidCard: _Components_Jobs_BidCard__WEBPACK_IMPORTED_MODULE_2__["default"],
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     DashHeader: _Components_DashboardHeader__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Toast: _Components_Toast_Toast__WEBPACK_IMPORTED_MODULE_5__["default"]
+    Toast: _Components_Toast_Toast__WEBPACK_IMPORTED_MODULE_5__["default"],
+    Pagination: _Components_Pagination_Pagination__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
   mounted: function mounted() {
     this.data = this.jobs.data;
     this.jobsData = this.jobs;
     this.jobListen();
-    this.addLoadOnScrollEventListener();
     this.kitsListen();
     this.checkNewJobsCount();
   },
@@ -7313,22 +7418,28 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   methods: {
+    removePropFromObject: function removePropFromObject(obj, prop) {
+      var _ = obj[prop],
+          rest = _objectWithoutProperties(obj, [prop].map(_toPropertyKey));
+
+      return _objectSpread({}, rest);
+    },
     switchToBids: function switchToBids() {
       this.searchBids('');
     },
     filterBids: function filterBids(filter) {
       this.bidsFilter = filter;
-      this.searchBids(this.searchQuery);
+      this.paginateBids(1, this.onPageForBids);
     },
     searchBids: function searchBids(query) {
       var _this2 = this;
 
       this.searchQuery = query;
       this.isShownBids = true;
-      this.loadMoreBidsOnScroll();
       axios.post('/jobs/with-bids', {
         query: query,
-        filter: this.bidsFilter
+        filter: this.bidsFilter,
+        onPage: 10
       }).then(function (res) {
         _this2.bidsData = res.data;
         _this2.bids = res.data.data;
@@ -7436,109 +7547,76 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }
       });
     },
-    addLoadOnScrollEventListener: function addLoadOnScrollEventListener() {
+    changePage: function changePage(data) {
+      if (!this.isShownBids && !this.isShowSearchJobs) {
+        this.paginateJobs(data.page, data.onPage);
+      }
+
+      if (this.isShownBids) {
+        this.paginateBids(data.page, data.onPage);
+      }
+
+      if (this.isShowSearchJobs) {
+        this.paginateSearchJobs(data.page, data.onPage);
+      }
+    },
+    paginateJobs: function paginateJobs(page, onPage) {
       var _this6 = this;
 
-      window.addEventListener('scroll', (0,lodash_function__WEBPACK_IMPORTED_MODULE_4__.debounce)(function (e) {
-        if (!_this6.isShownBids && !_this6.isShowSearchJobs) {
-          _this6.loadMoreOnScroll();
-        }
-
-        if (_this6.isShownBids) {
-          _this6.loadMoreBidsOnScroll();
-        }
-
-        if (_this6.isShowSearchJobs) {
-          _this6.loadMoreSearchJobsOnScroll();
-        }
-      }, 300));
+      this.onPageForJobs = onPage;
+      axios.post('/jobs/filter?page=' + page, {
+        kits: this.selectedKits,
+        onPage: onPage
+      }).then(function (response) {
+        _this6.isJobsOnScrollAvailable = true;
+        console.log(response.data);
+        console.log(response.data.data);
+        _this6.data = response.data.data.filter(function (j) {
+          return j.status !== 1;
+        });
+        _this6.jobsData = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
-    loadMoreOnScroll: function loadMoreOnScroll() {
+    paginateBids: function paginateBids(page, onPage) {
       var _this7 = this;
 
-      var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-
-      if (pixelsFromBottom < 600 && this.jobsData.next_page_url !== null && this.isJobsOnScrollAvailable) {
-        console.log('loadMoreOnScroll');
-        this.isJobsOnScrollAvailable = false;
-        var nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1);
-        axios.post('/jobs/filter?page=' + nextPageNumber, {
-          kits: this.selectedKits
-        }).then(function (response) {
-          var _this7$data;
-
-          _this7.isJobsOnScrollAvailable = true;
-          console.log(response.data);
-          console.log(response.data.data);
-
-          (_this7$data = _this7.data).push.apply(_this7$data, _toConsumableArray(response.data.data.filter(function (j) {
-            return j.status !== 1;
-          })));
-
-          _this7.jobsData = response.data;
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      }
+      this.onPageForBids = onPage;
+      axios.post('/jobs/with-bids?page=' + page, {
+        query: this.searchQuery,
+        filter: this.bidsFilter,
+        onPage: onPage
+      }).then(function (response) {
+        console.log(response.data);
+        console.log(response.data.data);
+        _this7.bids = response.data.data;
+        _this7.bidsData = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
-    loadMoreBidsOnScroll: function loadMoreBidsOnScroll() {
+    paginateSearchJobs: function paginateSearchJobs(page, onPage) {
       var _this8 = this;
 
-      var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-
-      if (pixelsFromBottom < 600 && this.bidsData.next_page_url !== null && this.isSearchBidsOnScrollAvailable) {
-        console.log('loadMoreBidsOnScroll');
-        this.isSearchBidsOnScrollAvailable = false;
-        var nextPageNumber = this.bidsData.next_page_url.slice(this.bidsData.next_page_url.indexOf('=') + 1);
-        axios.post('/jobs/with-bids?page=' + nextPageNumber, {
-          query: this.searchQuery,
-          filter: this.bidsFilter
-        }).then(function (response) {
-          var _this8$bids;
-
-          _this8.isSearchBidsOnScrollAvailable = true;
-          console.log(response.data);
-          console.log(response.data.data);
-
-          (_this8$bids = _this8.bids).push.apply(_this8$bids, _toConsumableArray(response.data.data));
-
-          _this8.bidsData = response.data;
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      }
-    },
-    loadMoreSearchJobsOnScroll: function loadMoreSearchJobsOnScroll() {
-      var _this9 = this;
-
-      var pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
-
-      if (pixelsFromBottom < 600 && this.jobsData.next_page_url !== null && this.isSearchJobsOnScrollAvailable) {
-        console.log('loadMoreSearchJobsOnScroll');
-        this.isSearchJobsOnScrollAvailable = false;
-        var nextPageNumber = this.jobsData.next_page_url.slice(this.jobsData.next_page_url.indexOf('=') + 1);
-        axios.post('/jobs/search?page=' + nextPageNumber, {
-          query: this.jobsSearchContainer
-        }).then(function (response) {
-          var _this9$data;
-
-          _this9.isSearchJobsOnScrollAvailable = true;
-          console.log(response.data);
-          console.log(response.data.data);
-
-          (_this9$data = _this9.data).push.apply(_this9$data, _toConsumableArray(response.data.data));
-
-          _this9.jobsData = response.data;
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      }
+      this.onPageForJobs = onPage;
+      axios.post('/jobs/search?page=' + page, {
+        query: this.jobsSearchContainer,
+        onPage: onPage
+      }).then(function (response) {
+        console.log(response.data);
+        console.log(response.data.data);
+        _this8.data = response.data.data;
+        _this8.jobsData = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
     kitsListen: function kitsListen() {
-      var _this10 = this;
+      var _this9 = this;
 
       socket.on('kits:listeners', function () {
-        _this10.showToast = true;
+        _this9.showToast = true;
         console.log('something in kits have been changed');
       });
     },
@@ -7546,26 +7624,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.isCalendarOn = isSwitched;
     },
     showSearch: function showSearch() {
-      this.showSearchText = false; // this.$refs.search_block.classList.remove('w-0');
-      // this.$refs.search_block.classList.add('w-full');
-      // this.$refs.search_block.style.cssText = 'animation: width100 .3s linear';
-      // setTimeout(() => {
-      //     this.$refs.search_block.classList.add('w-full');
-      // }, 280);
-      //
-      // this.$refs.search.classList.add('hidden');
+      this.showSearchText = false;
     },
     closeSearch: function closeSearch() {
-      // this.$refs.search_block.cssText = 'animation: width0 .3s linear';
-      // setTimeout(() => {
-      //     this.$refs.search_block.classList.remove('w-full');
-      //     this.$refs.search_block.classList.add('w-0');
-      //     this.$refs.search.classList.remove('hidden');
-      // }, 10);
       this.showSearchText = true;
     },
     searchJobs: function searchJobs() {
-      var _this11 = this;
+      var _this10 = this;
 
       if (this.searchInput.length < 2) {
         alert('Query string is empty, it must be at least 2 symbols, please fill it up');
@@ -7581,27 +7646,30 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.jobsSearchContainer = this.searchInput; // holds value until search button is pushed
 
       this.isShowSearchJobs = true;
-      this.isSearchJobsOnScrollAvailable = true;
 
       if (this.isSearchJobsButtonAvailable) {
         axios.post('/jobs/search', {
-          query: this.searchInput
+          query: this.searchInput,
+          onPage: this.onPageForJobs
         }).then(function (res) {
-          _this11.isSearchJobsButtonAvailable = true;
           console.log(res);
-          _this11.data = res.data.data;
-          _this11.jobsData = res.data;
+          _this10.data = res.data.data;
+          _this10.jobsData = res.data;
         })["catch"](function (error) {
           console.log(error);
         });
       }
-
-      this.isSearchJobsButtonAvailable = false;
     }
   },
   computed: {
     jobToRemove: function jobToRemove() {
       return this.$store.state.jobToRemove;
+    },
+    paginationDataJobs: function paginationDataJobs() {
+      return this.removePropFromObject(this.jobsData, 'data');
+    },
+    paginationDataBids: function paginationDataBids() {
+      return this.removePropFromObject(this.bidsData, 'data');
     }
   }
 });
@@ -43303,6 +43371,45 @@ component.options.__file = "resources/js/Components/Modals/FiltersModal.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Components/Pagination/Pagination.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/Components/Pagination/Pagination.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Pagination_vue_vue_type_template_id_be6786d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pagination.vue?vue&type=template&id=be6786d8&scoped=true& */ "./resources/js/Components/Pagination/Pagination.vue?vue&type=template&id=be6786d8&scoped=true&");
+/* harmony import */ var _Pagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pagination.vue?vue&type=script&lang=js& */ "./resources/js/Components/Pagination/Pagination.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Pagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Pagination_vue_vue_type_template_id_be6786d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Pagination_vue_vue_type_template_id_be6786d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "be6786d8",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Pagination/Pagination.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Components/Toast/IconError.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/Components/Toast/IconError.vue ***!
@@ -45655,6 +45762,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Pagination/Pagination.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/Components/Pagination/Pagination.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Pagination.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Pagination/Pagination.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/Components/Toast/Toast.vue?vue&type=script&lang=js&":
 /*!**************************************************************************!*\
   !*** ./resources/js/Components/Toast/Toast.vue?vue&type=script&lang=js& ***!
@@ -46697,6 +46820,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FiltersModal_vue_vue_type_template_id_20b9a020___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FiltersModal_vue_vue_type_template_id_20b9a020___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FiltersModal.vue?vue&type=template&id=20b9a020& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Modals/FiltersModal.vue?vue&type=template&id=20b9a020&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Pagination/Pagination.vue?vue&type=template&id=be6786d8&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/Components/Pagination/Pagination.vue?vue&type=template&id=be6786d8&scoped=true& ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_template_id_be6786d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_template_id_be6786d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_template_id_be6786d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Pagination.vue?vue&type=template&id=be6786d8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Pagination/Pagination.vue?vue&type=template&id=be6786d8&scoped=true&");
 
 
 /***/ }),
@@ -50850,6 +50990,188 @@ var render = function () {
         ),
       ]),
     ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Pagination/Pagination.vue?vue&type=template&id=be6786d8&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Pagination/Pagination.vue?vue&type=template&id=be6786d8&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "ul",
+    { staticClass: "flex flex-wrap items-center" },
+    [
+      _c("li", { staticClass: "mt-2" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal active-button",
+            attrs: { disabled: _vm.data.current_page === 1 },
+            on: {
+              click: function ($event) {
+                return _vm.changePage(
+                  _vm.data.current_page !== 1 ? _vm.data.current_page - 1 : 1
+                )
+              },
+            },
+          },
+          [_vm._v("« Prev")]
+        ),
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.computedPages, function (page) {
+        return _c("li", { key: page, staticClass: "mt-2 ml-2" }, [
+          _c(
+            "button",
+            {
+              staticClass:
+                "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal active-button",
+              class: {
+                "bg-green-500 text-white": _vm.data.current_page === page,
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.changePage(page)
+                },
+              },
+            },
+            [_vm._v(_vm._s(page))]
+          ),
+        ])
+      }),
+      _vm._v(" "),
+      _c("li", { staticClass: "mt-2 ml-2" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal active-button",
+            attrs: { disabled: _vm.data.current_page === _vm.data.last_page },
+            on: {
+              click: function ($event) {
+                return _vm.changePage(
+                  _vm.data.current_page !== _vm.data.last_page
+                    ? _vm.data.current_page + 1
+                    : _vm.data.last_page
+                )
+              },
+            },
+          },
+          [_vm._v("Next »")]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "flex mt-2 ml-4" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded-l py-3 px-4 font-normal active-button",
+            on: {
+              click: function ($event) {
+                return _vm.changePage(_vm.goTo)
+              },
+            },
+          },
+          [_vm._v("Go to")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.goTo,
+              expression: "goTo",
+            },
+          ],
+          staticClass:
+            "p-2 border border-gray-300 rounded-r focus:outline-none",
+          staticStyle: { width: "47px" },
+          attrs: { type: "text" },
+          domProps: { value: _vm.goTo },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.goTo = $event.target.value
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "flex items-center" }, [
+          _c("span", [_vm._v("last: " + _vm._s(_vm.data.last_page))]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "mt-2 ml-2" }, [
+        _c("span", [_vm._v("On page")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.onPage,
+                expression: "onPage",
+              },
+            ],
+            staticClass:
+              "p-2 border border-gray-300 rounded-md focus:outline-none",
+            staticStyle: { width: "60px" },
+            attrs: { name: "", id: "" },
+            on: {
+              change: [
+                function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.onPage = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                _vm.changeOnPage,
+              ],
+            },
+          },
+          [
+            _c("option", { domProps: { value: 10 } }, [_vm._v("10")]),
+            _vm._v(" "),
+            _c("option", { domProps: { value: 20 } }, [_vm._v("20")]),
+            _vm._v(" "),
+            _c("option", { domProps: { value: 30 } }, [_vm._v("30")]),
+          ]
+        ),
+      ]),
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -55374,6 +55696,17 @@ var render = function () {
           )
         : _vm._e(),
       _vm._v(" "),
+      !_vm.isShownBids
+        ? _c("Pagination", {
+            attrs: { data: _vm.paginationDataJobs },
+            on: {
+              "change-page": function ($event) {
+                return _vm.changePage($event)
+              },
+            },
+          })
+        : _vm._e(),
+      _vm._v(" "),
       !_vm.isReloading && !_vm.isShownBids
         ? _c(
             "div",
@@ -55486,12 +55819,12 @@ var render = function () {
         { staticClass: "flex flex-col my-12" },
         [
           _vm.isShownBids
-            ? _c("div", { staticClass: "flex items-center" }, [
+            ? _c("div", { staticClass: "flex items-center mb-2" }, [
                 _c(
                   "button",
                   {
                     staticClass:
-                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 mr-4 font-normal active-button",
                     class: { "bg-green-500 text-white": _vm.bidsFilter === 0 },
                     on: {
                       click: function ($event) {
@@ -55506,7 +55839,7 @@ var render = function () {
                   "button",
                   {
                     staticClass:
-                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 mr-4 font-normal active-button",
                     class: { "bg-green-500 text-white": _vm.bidsFilter === 1 },
                     on: {
                       click: function ($event) {
@@ -55521,7 +55854,7 @@ var render = function () {
                   "button",
                   {
                     staticClass:
-                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 font-normal m-2 active-button",
+                      "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 mr-4 font-normal active-button",
                     class: { "bg-green-500 text-white": _vm.bidsFilter === 2 },
                     on: {
                       click: function ($event) {
@@ -55532,6 +55865,17 @@ var render = function () {
                   [_vm._v("Without answers")]
                 ),
               ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isShownBids
+            ? _c("Pagination", {
+                attrs: { data: _vm.paginationDataBids },
+                on: {
+                  "change-page": function ($event) {
+                    return _vm.changePage($event)
+                  },
+                },
+              })
             : _vm._e(),
           _vm._v(" "),
           _vm._l(_vm.bids, function (job) {
