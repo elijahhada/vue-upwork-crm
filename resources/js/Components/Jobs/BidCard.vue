@@ -1,7 +1,7 @@
 <template>
     <div class="w-full p-7 border border-gray-300 rounded-md my-6 relative">
 <!--        <p class="text-black text-3xl cursor-pointer hover:text-red-500 absolute top-6 right-6" @click="deleteJob">×</p>-->
-        <div class="w-11/12 mb-7 flex justify-between items-center">
+        <div class="w-11/12 flex justify-between items-center">
             <p>
                 <a :href="url"
                     ><span class="text-green-500 font-bold text-2xl mr-4 border-b border-gray-300">{{ title }}</span></a
@@ -13,9 +13,9 @@
             </p>
         </div>
         <div class="w-11/12 mb-5">
-            <p class="leading-7 text-base font-normal">
+            <p class="text-base font-normal" style="white-space: pre-line;">
                 {{ truncatedExcerpt }}
-                <span v-if="excerpt.length > 300" class="text-green-500 text-lg border-b-2 border-green-500 border-dotted cursor-pointer whitespace-nowrap hover:text-green-700" @click="showFullExcerpt = !showFullExcerpt">{{ showFullExcerpt ? 'less' : 'more' }}</span>
+                <span v-if="excerpt.length > 300" class="text-green-500 text-lg border-b-2 border-green-500 border-dotted hover:border-green-700 cursor-pointer whitespace-nowrap hover:text-green-700" @click="showFullExcerpt = !showFullExcerpt">{{ showFullExcerpt ? 'less' : 'more' }}</span>
             </p>
         </div>
         <div class="w-11/12 mb-8 flex justify-start items-center">

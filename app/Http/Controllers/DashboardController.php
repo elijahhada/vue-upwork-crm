@@ -9,6 +9,7 @@ use App\Models\ExceptionWord;
 use App\Models\Filter;
 use App\Models\Job;
 use App\Models\KeyWord;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,6 +49,27 @@ class DashboardController extends Controller
             $filter['custom_key_words_ids'] = implode(',', $customKeyWords);
             return $filter;
         });
+        $fromWeekStart = Carbon::now()->subDays(Carbon::now()->dayOfWeek)->toDateTimeString();
+        $usersForStatistics = User::whereNotIn('email', ['artem.mazurchak@gmail.com', 'hadasevich.e@gmail.com'])
+            ->with(['bids' => function($query) use($fromWeekStart) {
+                $query->where('created_at', '>=', $fromWeekStart);
+            }])
+            ->get();
+        $usersForStatistics = $usersForStatistics->map(function ($user) {
+            $result = [];
+            $result['id'] = $user->id;
+            $result['name'] = $user->name;
+            $result['total'] = 0;
+            $result['answers'] = 0;
+            foreach ($user->bids as $bid) {
+                $result['total']++;
+                if($bid->has_answer) {
+                    $result['answers']++;
+                }
+            }
+            $result['conversion'] = round($result['answers'] / $result['total'] * 100);
+            return $result;
+        })->sortByDesc('conversion')->values()->take(4);
 
         return inertia('Dashboard', [
             'jobs' => $jobs,
@@ -56,6 +78,7 @@ class DashboardController extends Controller
             'keyWords' => $keyWords,
             'userId' => $user->id,
             'filters' => $filters,
+            'usersResults' => $usersForStatistics,
         ]);
     }
 }

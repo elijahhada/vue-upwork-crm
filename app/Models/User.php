@@ -70,6 +70,11 @@ class User extends Authenticatable
         return $this->hasMany(Job::class);
     }
 
+    public function bids()
+    {
+        return $this->hasMany(Bid::class,'user_id','id');
+    }
+
     public function blockedJobs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Job::class, 'blocked_user_id', 'id');

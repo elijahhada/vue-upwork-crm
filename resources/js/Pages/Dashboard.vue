@@ -1,8 +1,11 @@
 <template>
     <app-layout @callSearch="searchBids" @switchCalendar="switchCalendar" @switchToBids="switchToBids">
-        <dash-header v-if="!isShownBids" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" v-model="selectedKits"></dash-header>
+        <dash-header v-if="!isShownBids" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" :usersResults="usersResults" v-model="selectedKits"></dash-header>
         <div v-if="!isShownBids" class="w-full flex items-center justify-between" :class="{'job-card-stretched': !isCalendarOn}" style="max-width: 1500px!important;">
-            <p class="text-2xl font-bold">Found {{ jobsData.total }} jobs</p>
+            <div class="flex items-center">
+                <p class="text-2xl font-bold mr-3">Found {{ jobsData.total }} jobs</p>
+                <button @click="getSelectedJobs" class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 mr-4 font-normal active-button" :class="{ 'bg-green-500 text-white': selectedJobsChecked }">Selected</button>
+            </div>
             <div class="flex items-center max-w-full justify-end">
                 <div class="flex justify-between search-block" ref="search_block" :class="{ 'hidden': showSearchText }" style="width: 450px;">
                     <input
@@ -34,7 +37,6 @@
                 <span v-if="showSearchText" class="text-gray-500 ml-2">Search jobs</span>
             </div>
         </div>
-        <Pagination v-if="!isShownBids" @change-page="changePage($event)" :data="paginationDataJobs"></Pagination>
         <div class="flex flex-col space-y-4" v-if="!isReloading && !isShownBids">
             <job-card
                 class="w-8/12 py-7 px-8 border" :class="{'job-card-stretched': !isCalendarOn}" style="max-width: 1500px!important;"
@@ -70,6 +72,7 @@
                 :hourlyMax="job.hourly_max"
                 :memberSince="job.member_since"></job-card>
         </div>
+        <Pagination class="mt-4" v-if="!isShownBids" @change-page="changePage($event)" :data="paginationDataJobs"></Pagination>
         <Toast message="Фильтры изменились, обновите страницу!" :show="showToast" @hide="showToast = false" type="warning" title="Warning" position="top-right" />
         <div v-if="showNewJobsCount && !isShownBids" class="w-full h-20 fixed bottom-0 left-0 bg-green-500 flex justify-between items-center" :class="{ 'hidden': !showNewJobsCount }">
             <div class="flex justify-around items-center">
@@ -78,13 +81,12 @@
             </div>
             <p class="mr-80 text-white text-3xl cursor-pointer hover:text-red-500" @click="showNewJobsCount = false">X</p>
         </div>
-        <div class="flex flex-col my-12">
+        <div class="flex flex-col mt-12">
             <div v-if="isShownBids" class="flex items-center mb-2">
                 <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 mr-4 font-normal active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 0 }" @click="filterBids(0)">All</button>
                 <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 mr-4 font-normal active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 1 }" @click="filterBids(1)">With answers</button>
                 <button class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-3 px-4 mr-4 font-normal active-button" :class="{ 'bg-green-500 text-white': bidsFilter === 2 }" @click="filterBids(2)">Without answers</button>
             </div>
-            <Pagination v-if="isShownBids" @change-page="changePage($event)" :data="paginationDataBids"></Pagination>
             <bid-card
                 class="w-8/12 py-7 px-8 border"
                 v-for="job in bids"
@@ -118,6 +120,7 @@
                 :memberSince="job.member_since">
             </bid-card>
         </div>
+        <Pagination class="mt-4" v-if="isShownBids" @change-page="changePage($event)" :data="paginationDataBids"></Pagination>
     </app-layout>
 </template>
 
@@ -156,6 +159,10 @@ export default {
             type: Number,
             required: true,
         },
+        usersResults: {
+            type: Array,
+            required: true,
+        },
     },
     data() {
         return {
@@ -183,6 +190,8 @@ export default {
             bidsFilter: 0,
             onPageForBids: 10,
             onPageForJobs: 10,
+            createdAtForRefreshJobs: '',
+            selectedJobsChecked: false,
         };
     },
     components: {
@@ -196,6 +205,7 @@ export default {
     mounted() {
         this.data = this.jobs.data;
         this.jobsData = this.jobs;
+        this.createdAtForRefreshJobs = this.jobs.data[0].created_at;
         this.jobListen();
         this.kitsListen();
         this.checkNewJobsCount();
@@ -215,6 +225,7 @@ export default {
                     console.log(response);
                     this.data = response.data.data;
                     this.jobsData = response.data;
+                    this.createdAtForRefreshJobs = response.data.data[0].created_at;
                     this.$forceUpdate();
                     this.isReloading = false;
                 }).catch(error => {
@@ -254,12 +265,15 @@ export default {
             axios
                 .post('/jobs/filter', {
                     kits: this.selectedKits,
+                    onPage: this.onPageForJobs,
                 })
                 .then((response) => {
                     console.log(response);
                     this.data = response.data.data;
                     this.jobsData = response.data;
-                    this.$forceUpdate();
+                    this.createdAtForRefreshJobs = response.data.data[0].created_at;
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                    // this.$forceUpdate();
                     this.isReloading = false;
                     this.showNewJobsCount = false;
                 }).catch(error => {
@@ -271,7 +285,7 @@ export default {
                 .post('/jobs/filter', {
                     kits: this.selectedKits,
                     checkNewJobsCount: true,
-                    createdAt: this.data[0].created_at
+                    createdAt: this.createdAtForRefreshJobs,
                 })
                 .then((response) => {
                     if(response.data > 0) {
@@ -323,7 +337,7 @@ export default {
             });
         },
         changePage(data) {
-            if(!this.isShownBids && !this.isShowSearchJobs) {
+            if(!this.isShownBids && !this.isShowSearchJobs && !this.selectedJobsChecked) {
                 this.paginateJobs(data.page, data.onPage);
             }
             if(this.isShownBids) {
@@ -331,6 +345,9 @@ export default {
             }
             if(this.isShowSearchJobs) {
                 this.paginateSearchJobs(data.page, data.onPage);
+            }
+            if(this.selectedJobsChecked) {
+                this.paginateSelectedJobs(data.page, data.onPage);
             }
         },
         paginateJobs(page, onPage) {
@@ -346,6 +363,7 @@ export default {
                     console.log(response.data.data)
                     this.data = response.data.data.filter((j) => j.status !== 1);
                     this.jobsData = response.data;
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }).catch(error => {
                     console.log(error);
                 });
@@ -363,6 +381,7 @@ export default {
                     console.log(response.data.data)
                     this.bids = response.data.data;
                     this.bidsData = response.data;
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }).catch(error => {
                     console.log(error);
                 });
@@ -379,9 +398,26 @@ export default {
                     console.log(response.data.data)
                     this.data = response.data.data;
                     this.jobsData = response.data;
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }).catch(error => {
                     console.log(error);
                 });
+        },
+        paginateSelectedJobs(page, onPage) {
+            this.onPageForJobs = onPage;
+            axios
+                .post('/jobs/selected?page=' + page, {
+                    onPage: onPage,
+                })
+                .then((response) => {
+                    console.log(response.data)
+                    console.log(response.data.data)
+                    this.data = response.data.data;
+                    this.jobsData = response.data;
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                }).catch(error => {
+                console.log(error);
+            });
         },
         kitsListen() {
             socket.on('kits:listeners', () => {
@@ -426,6 +462,14 @@ export default {
                 });
             }
         },
+        getSelectedJobs() {
+            this.selectedJobsChecked = !this.selectedJobsChecked;
+            if(this.selectedJobsChecked) {
+                this.paginateSelectedJobs(1, this.onPageForJobs);
+            } else {
+                this.paginateJobs(1, this.onPageForJobs);
+            }
+        }
     },
     computed: {
         jobToRemove() {

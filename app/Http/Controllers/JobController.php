@@ -423,4 +423,20 @@ class JobController extends Controller
             return response()->json(['data' => $exception->getMessage()]);
         }
     }
+
+    public function jobsSelected(Request $request)
+    {
+        try {
+            $jobs = Job::query()
+                ->where('is_old', false)
+                ->where('is_taken', false)
+                ->where('status', '=', 2)
+                ->orderBy('date_created', 'desc')
+                ->orderBy('id', 'desc')
+                ->paginate($request->onPage);
+            return $jobs;
+        } catch (\Exception $exception) {
+            return response()->json(['data' => $exception->getMessage()]);
+        }
+    }
 }

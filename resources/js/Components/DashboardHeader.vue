@@ -1,30 +1,15 @@
 <template>
     <div>
         <div class="w-full flex nowrap mb-8 mt-20">
-            <div class="w-4/12 xl:w-3/12">
+            <div v-for="(user, key) in usersResults" :key="user.id" class="w-3/12 xl:w-3/12">
                 <div class="flex justify-start items-start">
-                    <img src="/images/star-gold.svg" alt="gold" />
+                    <img
+                        :class="{ 'metal-badge': key === 3 }"
+                        :src="key === 0 ? '/images/star-gold.svg' : key === 1 ? '/images/star-silver.svg' : key === 2 ? '/images/star-bronze.svg' : '/images/star-bronze.svg'"
+                        alt="gold" />
                     <div class="flex flex-col items-start">
-                        <p class="ml-2 font-bold mt-1">Artem</p>
-                        <p class="ml-2 mt-2 text-sm flex items-center"><span>112</span><span> → </span> <span>75%</span><span> → </span><span>84</span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="w-4/12 xl:w-3/12">
-                <div class="flex justify-start items-start">
-                    <img src="/images/star-silver.svg" alt="silver" />
-                    <div class="flex flex-col items-start">
-                        <p class="ml-2 font-bold mt-1">Olga</p>
-                        <p class="ml-2 mt-2 text-sm flex items-center"><span>87</span><span> → </span> <span>66,7%</span><span> → </span><span>58</span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="w-4/12 xl:w-3/12">
-                <div class="flex justify-start items-start">
-                    <img src="/images/star-bronze.svg" alt="bronze" />
-                    <div class="flex flex-col items-start">
-                        <p class="ml-2 font-bold mt-1">Stepan</p>
-                        <p class="ml-2 mt-2 text-sm flex items-center p-0"><span>57</span><span> → </span> <span>56,1%</span><span> → </span><span>32</span></p>
+                        <p class="ml-2 font-bold mt-1">{{ user.name }}</p>
+                        <p class="ml-2 mt-2 text-sm flex items-center"><span>{{ user.total }}</span><span> → </span> <span>{{ user.conversion }}%</span><span> → </span><span>{{ user.answers }}</span></p>
                     </div>
                 </div>
             </div>
@@ -73,6 +58,10 @@ export default {
             type: Number,
         },
         selectedKits: {
+            type: Array,
+            required: true,
+        },
+        usersResults: {
             type: Array,
             required: true,
         },
@@ -152,3 +141,8 @@ export default {
     },
 };
 </script>
+<style scoped>
+.metal-badge {
+    filter: invert(72%) sepia(26%) saturate(1025%) hue-rotate(350deg) brightness(85%) contrast(83%);
+}
+</style>
