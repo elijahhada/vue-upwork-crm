@@ -51,17 +51,20 @@ class GetJobs extends Command
         Auth::login(User::find(1));
         $client = new Client();
         $user = Auth::user();
-        $formParams = [
-            'grant_type' => 'refresh_token',
-            'refresh_token' => $user['upwork_token']['refresh_token'],
-            'client_id' => config('upwork.client_id'),
-        ];
-        $updateTokenResponse = $client->request('POST', 'https://www.upwork.com/api/v3/oauth2/token', ['form_params' => $formParams]);
-        $token = $user->upwork_token;
-        $token['access_token'] = json_decode($updateTokenResponse->getBody()->getContents(), true)['access_token'];
-        $user->upwork_token = $token;
-        $user->save();
-
+        $hoursPassed = Carbon::now()->diffInHours(Carbon::parse($user->last_upwork_token_update));
+        if($hoursPassed > 10) {
+            $formParams = [
+                'grant_type' => 'refresh_token',
+                'refresh_token' => $user['upwork_token']['refresh_token'],
+                'client_id' => config('upwork.client_id'),
+            ];
+            $updateTokenResponse = $client->request('POST', 'https://www.upwork.com/api/v3/oauth2/token', ['form_params' => $formParams]);
+            $token = $user->upwork_token;
+            $token['access_token'] = json_decode($updateTokenResponse->getBody()->getContents(), true)['access_token'];
+            $user->upwork_token = $token;
+            $user->last_upwork_token_update = Carbon::now()->toDateTimeString();
+            $user->save();
+        }
         $service = new UpworkJobsService();
 
         $jobsContainer = $service
