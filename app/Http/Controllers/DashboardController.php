@@ -67,7 +67,7 @@ class DashboardController extends Controller
                     $result['answers']++;
                 }
             }
-            $result['conversion'] = round($result['answers'] / $result['total'] * 100);
+            $result['conversion'] = $result['total'] > 0 ? round($result['answers'] / $result['total'] * 100) : 0;
             return $result;
         })->sortByDesc('conversion')->values()->take(4);
 
