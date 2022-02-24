@@ -84,18 +84,28 @@ class JobController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Job  $job
-     * @return \Illuminate\Http\Response
      */
 
     public function changeStatus(Request $request)
     {
+        $user = Auth::user();
+        $job = Job::where('id', '=', $request->input('id'))->first();
+        if($job->user_id !== null && $job->user_id !== $user->id) {
+            return response()->json(['message' => 'wrong_user']);
+        }
+        $jobsCount = Job::where('user_id', '=', $user->id)->where('status', '=', 2)->count();
+        if($jobsCount == 5 && $request->input('status') == 2) {
+            return response()->json(['counter' => 6]);
+        }
         $job = Job::where('id', $request->input('id'))->first();
         $job->status = $request->input('status');
-        if ($request->input('status') == 1) {
-            $job->user_id = Auth::user()->id;
+        $job->user_id = null;
+        if ($request->input('status') == 1 || $request->input('status') == 2) {
+            $job->user_id = $user->id;
         }
         $job->save();
-        return Auth::user();
+        $jobsCount = Job::where('user_id', '=', $user->id)->where('status', '=', 2)->count();
+        return response()->json(['counter' => $jobsCount]);
     }
 
     public function delete(Request $request)
@@ -338,7 +348,7 @@ class JobController extends Controller
                 $fieldsIds['country'] => $request->country['id'],
                 $fieldsIds['otherCountry'] => $request->otherCountry,
             ];
-            $response = $client->request('POST', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/deals', ['query' => ['api_token' => config('pipedrive.api_token')], 'json' => $data])
+            $response = $client->request('POST', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/deals', ['query' => ['api_token' => $user['pipedrive_personal_api_token']], 'json' => $data])
                 ->getBody()
                 ->getContents();
             $result = json_decode($response, true);
@@ -427,10 +437,12 @@ class JobController extends Controller
     public function jobsSelected(Request $request)
     {
         try {
+            $user = Auth::user();
             $jobs = Job::query()
                 ->where('is_old', false)
                 ->where('is_taken', false)
                 ->where('status', '=', 2)
+                ->where('user_id', '=', $user->id)
                 ->orderBy('date_created', 'desc')
                 ->orderBy('id', 'desc')
                 ->paginate($request->onPage);

@@ -216,6 +216,7 @@ export default {
             this.data.splice(index, 1);
         },
         selectedKits(kits) {
+            this.selectedJobsChecked = false;
             this.isReloading = true;
             axios
                 .post('/jobs/filter', {

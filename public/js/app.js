@@ -3412,15 +3412,28 @@ __webpack_require__.r(__webpack_exports__);
         id: this.id,
         status: status
       }).then(function (res) {
+        console.log(res);
+
+        if (res.data.message === 'wrong_user') {
+          alert("You can not reconsider different user's job.");
+          return;
+        }
+
+        if (res.data.counter === 6) {
+          alert('You can not think more than 5 jobs.');
+          return;
+        }
+
         var action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
         socket.emit('job:speak', {
           id: _this2.id,
           action: action
         });
-      });
-      this.$emit('changeStatus', {
-        id: this.id,
-        status: status
+
+        _this2.$emit('changeStatus', {
+          id: _this2.id,
+          status: status
+        });
       });
     },
     deleteJob: function deleteJob() {
@@ -7400,6 +7413,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     selectedKits: function selectedKits(kits) {
       var _this = this;
 
+      this.selectedJobsChecked = false;
       this.isReloading = true;
       axios.post('/jobs/filter', {
         kits: kits

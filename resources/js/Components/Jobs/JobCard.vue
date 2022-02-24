@@ -216,10 +216,19 @@ export default {
                 document.body.classList.add('overflow-y-hidden');
             }
             axios.post('/jobs/change-status', { id: this.id, status }).then((res) => {
+                console.log(res);
+                if(res.data.message === 'wrong_user') {
+                    alert("You can not reconsider different user's job.");
+                    return;
+                }
+                if(res.data.counter === 6) {
+                    alert('You can not think more than 5 jobs.');
+                    return;
+                }
                 let action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
                 socket.emit('job:speak', { id: this.id, action });
+                this.$emit('changeStatus', { id: this.id, status });
             });
-            this.$emit('changeStatus', { id: this.id, status });
         },
         deleteJob() {
             axios.post('/jobs/delete', { id: this.id }).then((res) => {
