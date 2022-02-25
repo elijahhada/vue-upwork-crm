@@ -333,10 +333,21 @@ class JobController extends Controller
                     $fieldsIds['otherCountry'] = $field['key'];
                 }
             }
+            $response = $client->request('GET', 'https://' . $user['pipedrive_domain'] . '.pipedrive.com/api/v1/organizations', ['query' => ['api_token' => config('pipedrive.api_token')]])
+                ->getBody()
+                ->getContents();
+            $organizations = json_decode($response, true);
+            $organizationId = null;
+            foreach ($organizations['data'] as $organization) {
+                if($organization['owner_id']['email'] === $user->email) {
+                    $organizationId = $organization['id'];
+                }
+            }
             $formattedDate = Carbon::now()->timezone('Europe/Moscow')->diff(Carbon::parse($request->timeOfJob))->format('%H:%i');
             $data = [
                 'title' => $request->title,
                 'user_id' => $request->userId,
+                'org_id' => $organizationId,
                 'label' => $request->label,
                 $fieldsIds['timeOfBid'] => Carbon::now()->timezone('Europe/Moscow')->format('H:i'),
                 $fieldsIds['timeOfJobCreation'] => $formattedDate,
