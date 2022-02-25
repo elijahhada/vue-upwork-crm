@@ -64,6 +64,7 @@ class GetJobs extends Command
             $user->upwork_token = $token;
             $user->last_upwork_token_update = Carbon::now()->toDateTimeString();
             $user->save();
+            Auth::login(User::find(1));
         }
         $service = new UpworkJobsService();
 
