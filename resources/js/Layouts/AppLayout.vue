@@ -4,15 +4,16 @@
             <div class="container min-w-full flex justify-between">
                 <div class="w-9/12 py-4 pl-6 pr-4 2xl:mr-0 mr-8" style="padding-left: 5vw">
                     <div class="w-full flex justify-between fixed top-0 left-0 z-30 bg-white pb-2 topmenu topmenu-width" style="padding-left: 5vw">
-                        <div class="w-2/12 flex justify-start items-start">
+                        <div class="w-2/12 flex justify-start items-start z-10">
                             <img class="relative mt-2 fill-current text-green-500" src="/images/vasterra-logo.svg" alt="vasterra-logo" />
                             <a :href="route('dashboard')" class="mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500 cursor-pointer">Jobs</a>
                             <a @click="switchToBids" class="mx-4 pt-1 text-black mt-2 mb-2 border-white border-b-4 hover:border-green-500 cursor-pointer">Bids</a>
                             <a :href="route('dashboard')" class="mx-4 pt-1 mt-2 mb-2 text-black border-white border-b-4 hover:border-green-500 cursor-pointer">Lidgens</a>
+                            <a :href="route('analytics.index')" class="mx-4 pt-1 mt-2 mb-2 text-black border-white border-b-4 hover:border-green-500 cursor-pointer">Analytics</a>
                         </div>
                         <div class="w-7/12 flex justify-end items-center mr-9 user-block">
                             <div class="w-full mr-4 flex">
-                                <div class="parent-search-block flex-nowrap w-full flex justify-end items-center mt-1" ref="parent_search_block">
+                                <div class="parent-search-block flex-nowrap w-full flex justify-end items-center mt-1" ref="parent_search_block" :class="{ 'z-20': !showSearchText }">
                                     <div :class="{ 'hidden': showSearchText }" class="flex justify-between search-block" ref="search_block" style="width: 450px;">
                                         <input
                                             v-model="searchInput"
