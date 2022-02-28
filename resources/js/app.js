@@ -8,11 +8,13 @@ import PortalVue from 'portal-vue';
 import Vue from 'vue';
 import VueJSModal from 'vue-js-modal';
 import store from './store';
+import { ClientTable, ServerTable } from 'vue-tables-2-premium';
 
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaPlugin);
 Vue.use(PortalVue);
 Vue.use(VueJSModal);
+Vue.use(ClientTable, {}, false, 'tailwind');
 
 const app = document.getElementById('app');
 

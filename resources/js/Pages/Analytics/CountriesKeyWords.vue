@@ -5,19 +5,35 @@
                 <img class="inline relative text-green-500" src="/images/vasterra-logo.svg" alt="vasterra-logo" />
             </a>
         </div>
-        <div class="flex items-center justify-start">
-            <DateRangePicker class="mt-4"
-                v-model="dateRange"
-                @select="isDateRangeSelected = true"
-            >
-            </DateRangePicker>
+        <div class="flex items-center justify-start mt-6">
             <button
                 class="set-kid ml-4 rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700"
                 @click="isModalPicked = !isModalPicked">Set Kit</button>
             <button
                 class="set-kid ml-4 rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7"
                 @click="buildAnalytics">Build</button>
+            <DateRangePicker class="mt-4"
+                             v-model="dateRange"
+                             @select="isDateRangeSelected = true"
+            >
+            </DateRangePicker>
         </div>
+        <div class="mt-6" v-if="isBuildingInProgress">
+            <h3 class="text-green-600">Building in progress, please wait...</h3>
+        </div>
+        <div v-if="data.length > 0" class="mt-8">
+            <table>
+                <tr>
+                    <th></th>
+                    <th v-for="innerItem in data[0].words" :key="innerItem.unique_id">{{ innerItem.word }}</th>
+                </tr>
+                <tr v-for="outerItem in data" :key="outerItem.unique_id" class="nth-child-1">
+                    <td>{{ outerItem.country }}</td>
+                    <td v-for="innerItem in outerItem.words" :key="innerItem.unique_id">{{ innerItem.count }}</td>
+                </tr>
+            </table>
+        </div>
+
         <div class="min-w-full min-h-full z-10 bg-white absolute top-0 left-0 overflow-y-scroll p-8" :class="{ 'hidden': !isModalPicked }">
             <div class="flex justify-end items-center mb-2">
                 <p class="text-black text-5xl close-kit cursor-pointer hover:text-red-500" @click="isModalPicked = false">×</p>
@@ -115,10 +131,13 @@ export default {
             customKeyWords: [],
             newKeyWord: '',
             isDateRangeSelected: false,
+            data: [],
+            isBuildingInProgress: false,
         }
     },
     methods: {
         buildAnalytics() {
+            this.isBuildingInProgress = true;
             let keyWords = [];
             this.keyWords.forEach((item) => {
                 if (item.checked) keyWords.push(item.id);
@@ -139,6 +158,8 @@ export default {
                     customKeyWords: this.customKeyWords,
                 })
                 .then((res) => {
+                    this.isBuildingInProgress = false;
+                    this.data = res.data.data;
                     console.log(res);
                 }).catch(error => {
                     console.log(error);
@@ -214,5 +235,18 @@ export default {
 <style scoped>
 .set-kid {
     min-width: 120px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table th {
+    padding: 10px;
+}
+
+table td {
+    padding: 10px;
 }
 </style>
