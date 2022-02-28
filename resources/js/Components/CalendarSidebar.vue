@@ -24,7 +24,7 @@
                 {{ currentDate }}
             </button>
         </div>
-        <div class="fixed bottom-2 ml-1 w-full text-black z-50 calendar-button">
+        <div class="fixed bottom-2 ml-1 w-full text-black z-10 calendar-button">
             <button class="hover:bg-opacity-100 open-big-calendar rounded rounded-full text-white text-lg py-3 px-6 bg-gray-500 bg-opacity-80" @click.stop="switchGlobal()">All calendar</button>
         </div>
     </div>

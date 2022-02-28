@@ -48745,7 +48745,7 @@ var render = function () {
         "div",
         {
           staticClass:
-            "fixed bottom-2 ml-1 w-full text-black z-50 calendar-button",
+            "fixed bottom-2 ml-1 w-full text-black z-10 calendar-button",
         },
         [
           _c(
@@ -53816,6 +53816,7 @@ var render = function () {
                 class: {
                   "w-3/12": _vm.isCalendarOn,
                   "2xl:w-2/12": _vm.isCalendarOn,
+                  "z-50": _vm.isCalendarOn,
                 },
               },
               [

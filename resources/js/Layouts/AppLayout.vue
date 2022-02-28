@@ -72,7 +72,7 @@
                         <slot></slot>
                     </main>
                 </div>
-                <div class="calendar-block relative min-h-full" :class="{ 'w-3/12': isCalendarOn, '2xl:w-2/12': isCalendarOn }">
+                <div class="calendar-block relative min-h-full" :class="{ 'w-3/12': isCalendarOn, '2xl:w-2/12': isCalendarOn, 'z-50': isCalendarOn }">
                     <CalendarSidebar @switchCalendar="switchCalendar"></CalendarSidebar>
                 </div>
             </div>
