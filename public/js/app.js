@@ -48818,7 +48818,7 @@ var render = function () {
             {
               ref: "block_kit",
               staticClass:
-                "block-kit flex justify-start items-center nowrap w-6/12 flex-shrink",
+                "block-kit flex justify-start items-center nowrap w-6/12 flex-shrink z-50",
             },
             [
               _c(
@@ -49206,7 +49206,8 @@ var render = function () {
   return _c(
     "div",
     {
-      staticClass: "w-full p-7 border border-gray-300 rounded-md my-6 relative",
+      staticClass:
+        "w-full p-7 border border-gray-300 rounded-md my-6 relative z-50",
       class: { "bg-yellow": _vm.isThinking, "bg-light-red": _vm.isTaken },
     },
     [

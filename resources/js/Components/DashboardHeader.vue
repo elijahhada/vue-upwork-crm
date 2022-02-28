@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="w-full my-12 flex justify-between items-center nowrap">
-            <div class="block-kit flex justify-start items-center nowrap w-6/12 flex-shrink" ref="block_kit">
+            <div class="block-kit flex justify-start items-center nowrap w-6/12 flex-shrink z-50" ref="block_kit">
                 <button class="create-kid rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7" @click.stop="showKitForm()">Create Kit</button>
                 <div class="relative" v-for="filter in filtersArr">
                     <div
