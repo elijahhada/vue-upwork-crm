@@ -8,11 +8,15 @@
         <div class="flex items-center justify-start">
             <DateRangePicker class="mt-4"
                 v-model="dateRange"
+                @select="isDateRangeSelected = true"
             >
             </DateRangePicker>
             <button
-                class="set-kid ml-4 rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7"
+                class="set-kid ml-4 rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700"
                 @click="isModalPicked = !isModalPicked">Set Kit</button>
+            <button
+                class="set-kid ml-4 rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7"
+                @click="buildAnalytics">Build</button>
         </div>
         <div class="min-w-full min-h-full z-10 bg-white absolute top-0 left-0 overflow-y-scroll p-8" :class="{ 'hidden': !isModalPicked }">
             <div class="flex justify-end items-center mb-2">
@@ -110,9 +114,36 @@ export default {
             allKeyWordsChecked: false,
             customKeyWords: [],
             newKeyWord: '',
+            isDateRangeSelected: false,
         }
     },
     methods: {
+        buildAnalytics() {
+            let keyWords = [];
+            this.keyWords.forEach((item) => {
+                if (item.checked) keyWords.push(item.id);
+            });
+            let countries = [];
+            this.countries.forEach((item) => {
+                if (item.checked) countries.push(item.id);
+            });
+            if(!this.isDateRangeSelected || (keyWords.length < 1 && this.customKeyWords.length < 1) || countries.length < 1) {
+                alert('You must pick date range and at least 1 country and 1 word.');
+                return;
+            }
+            axios
+                .post('/analytics/countries-key-words', {
+                    dateRange: this.dateRange,
+                    countries: countries,
+                    keyWordsIds: keyWords,
+                    customKeyWords: this.customKeyWords,
+                })
+                .then((res) => {
+                    console.log(res);
+                }).catch(error => {
+                    console.log(error);
+                });
+        },
         resetAll() {
             this.customKeyWords = [];
             this.allCountriesChecked = false;

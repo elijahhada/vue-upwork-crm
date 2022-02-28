@@ -1,5 +1,5 @@
 <template>
-    <div class="w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30">
+    <div class="w-3/12 2xl:w-2/12 calendar-block relative min-h-full">
         <div class="w-3/12 2xl:w-2/12 calendar bg-gray-200 text-white fixed top-0 overflow-y-scroll max-h-screen" style="width: inherit">
             <CalendarDay type-calendar="local" :data-day="currentDateFull"></CalendarDay>
         </div>

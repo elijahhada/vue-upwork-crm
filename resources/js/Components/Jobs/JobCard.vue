@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full p-7 border border-gray-300 rounded-md my-6 relative z-50" :class="{ 'bg-yellow': isThinking, 'bg-light-red': isTaken }">
+    <div class="w-full p-7 border border-gray-300 rounded-md my-6 relative" :class="{ 'bg-yellow': isThinking, 'bg-light-red': isTaken }">
         <p class="text-black text-3xl cursor-pointer hover:text-red-500 absolute top-6 right-6" @click="deleteJob">×</p>
         <div class="w-11/12 flex justify-between items-center">
             <p>

@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::prefix('analytics')->name('analytics.')->group(function () {
         Route::get('/', [AnalyticsController::class, 'index'])->name('index');
+        Route::post('/countries-key-words', [AnalyticsController::class, 'countriesKeyWords'])->name('countriesKeyWords');
     });
     //    Route::get('/dashboard/socket-event', [DashboardController::class, 'deleteJob']);
 

@@ -5941,11 +5941,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       showingNavigationDropdown: false,
       searchInput: '',
-      showSearchText: true
+      showSearchText: true,
+      isCalendarOn: true
     };
   },
   methods: {
     switchCalendar: function switchCalendar(isSwitched) {
+      this.isCalendarOn = isSwitched;
       this.$emit('switchCalendar', isSwitched);
     },
     switchToBids: function switchToBids() {
@@ -6616,6 +6618,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6643,10 +6649,37 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       allCountriesChecked: false,
       allKeyWordsChecked: false,
       customKeyWords: [],
-      newKeyWord: ''
+      newKeyWord: '',
+      isDateRangeSelected: false
     };
   },
   methods: {
+    buildAnalytics: function buildAnalytics() {
+      var keyWords = [];
+      this.keyWords.forEach(function (item) {
+        if (item.checked) keyWords.push(item.id);
+      });
+      var countries = [];
+      this.countries.forEach(function (item) {
+        if (item.checked) countries.push(item.id);
+      });
+
+      if (!this.isDateRangeSelected || keyWords.length < 1 && this.customKeyWords.length < 1 || countries.length < 1) {
+        alert('You must pick date range and at least 1 country and 1 word.');
+        return;
+      }
+
+      axios.post('/analytics/countries-key-words', {
+        dateRange: this.dateRange,
+        countries: countries,
+        keyWordsIds: keyWords,
+        customKeyWords: this.customKeyWords
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     resetAll: function resetAll() {
       this.customKeyWords = [];
       this.allCountriesChecked = false;
@@ -12018,7 +12051,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*@import '../../css/style.css';*/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*@import '../../css/style.css';*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48648,9 +48681,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30",
-    },
+    { staticClass: "w-3/12 2xl:w-2/12 calendar-block relative min-h-full" },
     [
       _c(
         "div",
@@ -49206,8 +49237,7 @@ var render = function () {
   return _c(
     "div",
     {
-      staticClass:
-        "w-full p-7 border border-gray-300 rounded-md my-6 relative z-50",
+      staticClass: "w-full p-7 border border-gray-300 rounded-md my-6 relative",
       class: { "bg-yellow": _vm.isThinking, "bg-light-red": _vm.isTaken },
     },
     [
@@ -53782,8 +53812,11 @@ var render = function () {
             _c(
               "div",
               {
-                staticClass:
-                  "w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30",
+                staticClass: "calendar-block relative min-h-full",
+                class: {
+                  "w-3/12": _vm.isCalendarOn,
+                  "2xl:w-2/12": _vm.isCalendarOn,
+                },
               },
               [
                 _c("CalendarSidebar", {
@@ -55012,6 +55045,11 @@ var render = function () {
       [
         _c("DateRangePicker", {
           staticClass: "mt-4",
+          on: {
+            select: function ($event) {
+              _vm.isDateRangeSelected = true
+            },
+          },
           model: {
             value: _vm.dateRange,
             callback: function ($$v) {
@@ -55025,7 +55063,7 @@ var render = function () {
           "button",
           {
             staticClass:
-              "set-kid ml-4 rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7",
+              "set-kid ml-4 rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700",
             on: {
               click: function ($event) {
                 _vm.isModalPicked = !_vm.isModalPicked
@@ -55033,6 +55071,16 @@ var render = function () {
             },
           },
           [_vm._v("Set Kit")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "set-kid ml-4 rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7",
+            on: { click: _vm.buildAnalytics },
+          },
+          [_vm._v("Build")]
         ),
       ],
       1

@@ -72,7 +72,7 @@
                         <slot></slot>
                     </main>
                 </div>
-                <div class="w-3/12 2xl:w-2/12 calendar-block relative min-h-full z-30">
+                <div class="calendar-block relative min-h-full" :class="{ 'w-3/12': isCalendarOn, '2xl:w-2/12': isCalendarOn }">
                     <CalendarSidebar @switchCalendar="switchCalendar"></CalendarSidebar>
                 </div>
             </div>
@@ -125,10 +125,12 @@ export default {
             showingNavigationDropdown: false,
             searchInput: '',
             showSearchText: true,
+            isCalendarOn: true,
         };
     },
     methods: {
         switchCalendar(isSwitched) {
+            this.isCalendarOn = isSwitched;
             this.$emit('switchCalendar', isSwitched);
         },
         switchToBids() {
