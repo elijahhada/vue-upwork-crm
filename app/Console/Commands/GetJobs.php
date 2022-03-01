@@ -100,28 +100,36 @@ class GetJobs extends Command
         $addedJobs = 100 - $jobsExistCount;
         Log::channel('upwork_jobs_info')->info('Jobs added=' . $addedJobs . ' at ' . Carbon::now()->format('Y-m-d H:i:s'));
 
-        $jobContents = array_filter($jobContents, function ($key) use($jobsFromDB) {
-            return !in_array($key, $jobsFromDB->toArray());
-        }, ARRAY_FILTER_USE_KEY);
+        try {
+            $jobContents = array_filter($jobContents, function ($key) use($jobsFromDB) {
+                return !in_array($key, $jobsFromDB->toArray());
+            }, ARRAY_FILTER_USE_KEY);
 
-        foreach (array_chunk($jobContents, 20, true) as $chunk) {
-            $jobProfiles = $service->getJobProfiles(implode(';', array_keys($chunk)));
-            var_dump('every chunk');
-            foreach ($chunk as $index => $job) {
-                foreach ($jobProfiles->profiles->profile as $profile) {
-                    if($index == $profile->ciphertext) {
-                        $job->setExtraFields($profile);
-                        $job->calculateClientScore();
-                        $newJobContents[$index] = $job->toArray();
+            foreach (array_chunk($jobContents, 20, true) as $chunk) {
+                $jobProfiles = $service->getJobProfiles(implode(';', array_keys($chunk)));
+                var_dump('every chunk');
+                foreach ($chunk as $index => $job) {
+                    foreach ($jobProfiles->profiles->profile as $profile) {
+                        if($index == $profile->ciphertext) {
+                            $job->setExtraFields($profile);
+                            $job->calculateClientScore();
+                            $newJobContents[$index] = $job->toArray();
+                        }
                     }
                 }
+                sleep(5);
             }
-            sleep(5);
+            Job::upsert($newJobContents, ['upwork_id']);
+            Country::upsert($countries, ['title']);
+            Category::upsert($categories, ['title']);
+            (new AttachWordsToJobs(collect($newJobContents)->pluck('upwork_id')->toArray()))->attach();
+        } catch (\Exception $exception) {
+            Log::channel('upwork_jobs_error')->info('Exception detected');
+            Log::channel('upwork_jobs_error')->info($exception->getMessage());
+        } catch (\Error $error) {
+            Log::channel('upwork_jobs_error')->info('Error detected');
+            Log::channel('upwork_jobs_error')->info($error->getMessage());
         }
-        Job::upsert($newJobContents, ['upwork_id']);
-        Country::upsert($countries, ['title']);
-        Category::upsert($categories, ['title']);
-        (new AttachWordsToJobs(collect($newJobContents)->pluck('upwork_id')->toArray()))->attach();
         Log::channel('upwork_jobs_info')->info('really added');
         Log::channel('upwork_jobs_info')->info(count($newJobContents));
         sleep(5);

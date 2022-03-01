@@ -53,6 +53,12 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
+        'upwork_jobs_error' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/jobs_error.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
