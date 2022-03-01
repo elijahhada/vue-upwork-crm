@@ -67,7 +67,6 @@ class GetJobs extends Command
             Auth::login(User::find(1));
         }
         $service = new UpworkJobsService();
-
         $jobsContainer = $service
             ->setCount(100)
             ->setOffset(0)
@@ -105,24 +104,15 @@ class GetJobs extends Command
                 return !in_array($key, $jobsFromDB->toArray());
             }, ARRAY_FILTER_USE_KEY);
 
-            foreach (array_chunk($jobContents, 20, true) as $chunk) {
-                $jobProfiles = $service->getJobProfiles(implode(';', array_keys($chunk)));
-                var_dump('every chunk');
-                foreach ($chunk as $index => $job) {
-                    if(property_exists($jobProfiles, 'profiles')) {
-                        foreach ($jobProfiles->profiles->profile as $profile) {
-                            if($index == $profile->ciphertext) {
-                                $job->setExtraFields($profile);
-                                $job->calculateClientScore();
-                                $newJobContents[$index] = $job->toArray();
-                            }
-                        }
-                    } else {
-                        Log::channel('upwork_jobs_error')->info('Profiles id chunk');
-                        Log::channel('upwork_jobs_error')->info(implode(';', array_keys($chunk)));
+            foreach ($jobContents as $index => $job) {
+                $jobProfile = $service->getJobProfiles($index);
+                if(property_exists($jobProfile, 'profiles')) {
+                    if($index == $jobProfile->profiles->profile->ciphertext) {
+                        $job->setExtraFields($jobProfile->profiles->profile);
+                        $job->calculateClientScore();
+                        $newJobContents[$index] = $job->toArray();
                     }
                 }
-                sleep(5);
             }
             Job::upsert($newJobContents, ['upwork_id']);
             Country::upsert($countries, ['title']);
