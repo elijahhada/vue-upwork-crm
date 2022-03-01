@@ -139,7 +139,7 @@ class Job extends Model
 
     public function getTimeAfterJobCreationAttribute()
     {
-        $now = Carbon::now()->timezone('Europe/Moscow');
+        $now = Carbon::now()->addHours(3);
         return $now->diff(Carbon::parse($this->date_created))->d . ' days '
             . $now->diff(Carbon::parse($this->date_created))->h . ' hours '
             . $now->diff(Carbon::parse($this->date_created))->i . ' minutes';
