@@ -129,49 +129,32 @@ class JobController extends Controller
                     ->paginate($request->onPage);
                 return $jobs;
             }
-            $categories = $filters->pluck('categories_ids');
-            $categories = $categories->filter(fn($value) => !is_null($value));
-            $filterCategories = collect();
+            $filterCategories = [];
+            if(!empty($filters->categories_ids)) {
+                $filterCategories = explode(',', $filters->categories_ids);
+            }
 
-            $countries = $filters->pluck('countries_ids');
-            $countries = $countries->filter(fn($value) => !is_null($value));
-            $filterCountries = collect();
+            $filterCountries = [];
+            if(!empty($filters->countries_ids)) {
+                $filterCountries = explode(',', $filters->countries_ids);
+            }
 
             $exceptionWords = [];
             if(!empty($filters->exception_words_ids)) {
-                $exceptionWords = $filters->pluck('exception_words_ids');
-                $exceptionWords = explode(',', $exceptionWords);
+                $exceptionWords = explode(',', $filters->exception_words_ids);
             }
 
             $keyWords = [];
             if(!empty($filters->key_words_ids)) {
-                $keyWords = $filters->pluck('key_words_ids');
-                $keyWords = explode(',', $keyWords);
+                $keyWords = explode(',', $filters->key_words_ids);
             }
 
             $customKeyWords = [];
             if(!empty($filters->custom_key_words_ids)) {
-                $customKeyWords = $filters->pluck('custom_key_words_ids');
-                $customKeyWords = explode(',', $customKeyWords);
+                $customKeyWords = explode(',', $filters->custom_key_words_ids);
             }
 
-            if (count($categories)) {
-                foreach ($categories as $category) {
-                    foreach (explode(',', $category) as $item) {
-                        $filterCategories->push($item);
-                    }
-                }
-                $filterCategories->unique();
-            }
             $filterCategories = Category::find($filterCategories)->pluck('title');
-            if (count($countries)) {
-                foreach ($countries as $country) {
-                    foreach (explode(',', $country) as $item) {
-                        $filterCountries->push($item);
-                    }
-                }
-                $filterCountries->unique();
-            }
             $filterCountries = Country::find($filterCountries)->pluck('title');
 
             $jobs = Job::query()
