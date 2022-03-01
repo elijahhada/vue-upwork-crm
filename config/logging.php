@@ -59,6 +59,12 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
+        'look_for_diff' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/look_for_diff.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),

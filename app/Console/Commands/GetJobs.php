@@ -117,6 +117,11 @@ class GetJobs extends Command
             Job::upsert($newJobContents, ['upwork_id']);
             Country::upsert($countries, ['title']);
             Category::upsert($categories, ['title']);
+            if($addedJobs - count($newJobContents) > 0) {
+                $diff = $addedJobs - count($newJobContents);
+                Log::channel('look_for_diff')->info('Difference appeared');
+                Log::channel('look_for_diff')->info('Difference = ' . $diff);
+            }
             (new AttachWordsToJobs(collect($newJobContents)->pluck('upwork_id')->toArray()))->attach();
         } catch (\Exception $exception) {
             Log::channel('upwork_jobs_error')->info('Exception detected');
