@@ -107,16 +107,19 @@ class GetJobs extends Command
 
             foreach (array_chunk($jobContents, 20, true) as $chunk) {
                 $jobProfiles = $service->getJobProfiles(implode(';', array_keys($chunk)));
-                Log::channel('upwork_jobs_error')->info('Profiles id chunk');
-                Log::channel('upwork_jobs_error')->info($chunk);
                 var_dump('every chunk');
                 foreach ($chunk as $index => $job) {
-                    foreach ($jobProfiles->profiles->profile as $profile) {
-                        if($index == $profile->ciphertext) {
-                            $job->setExtraFields($profile);
-                            $job->calculateClientScore();
-                            $newJobContents[$index] = $job->toArray();
+                    if(property_exists($jobProfiles, 'profiles')) {
+                        foreach ($jobProfiles->profiles->profile as $profile) {
+                            if($index == $profile->ciphertext) {
+                                $job->setExtraFields($profile);
+                                $job->calculateClientScore();
+                                $newJobContents[$index] = $job->toArray();
+                            }
                         }
+                    } else {
+                        Log::channel('upwork_jobs_error')->info('Profiles id chunk');
+                        Log::channel('upwork_jobs_error')->info(implode(';', array_keys($chunk)));
                     }
                 }
                 sleep(5);
@@ -128,7 +131,6 @@ class GetJobs extends Command
         } catch (\Exception $exception) {
             Log::channel('upwork_jobs_error')->info('Exception detected');
             Log::channel('upwork_jobs_error')->info($exception->getMessage());
-            Log::channel('upwork_jobs_error')->info($jobProfiles);
         } catch (\Error $error) {
             Log::channel('upwork_jobs_error')->info('Error detected');
             Log::channel('upwork_jobs_error')->info($error->getMessage());
