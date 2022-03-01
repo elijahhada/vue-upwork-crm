@@ -108,6 +108,7 @@ class GetJobs extends Command
                 $jobProfile = $service->getJobProfiles($index);
                 if(property_exists($jobProfile, 'profiles')) {
                     if($index == $jobProfile->profiles->profile->ciphertext) {
+                        Log::channel('upwork_jobs_info')->info('added with id = ' . $index . PHP_EOL);
                         $job->setExtraFields($jobProfile->profiles->profile);
                         $job->calculateClientScore();
                         $newJobContents[$index] = $job->toArray();
