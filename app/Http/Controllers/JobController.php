@@ -422,7 +422,7 @@ class JobController extends Controller
                     ->orWhere('excerpt', 'like', '%'. $searchString .'%')
                     ->orWhere('skills', 'like', '%'. $searchString .'%');
             }
-            return $jobs->paginate($request->onPage);
+            return $jobs->withTrashed()->paginate($request->onPage);
         } catch (\Exception $exception) {
             return response()->json(['data' => $exception->getMessage()]);
         }
