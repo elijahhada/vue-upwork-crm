@@ -280,7 +280,7 @@ export default {
                 .post('/add-filter', data)
                 .then((response) => {
                     console.log(response);
-                    this.filter = response.data;
+                    this.$emit('refresh-filters');
                     socket.emit('kits:speak', {});
                 }).catch(error => {
                     console.log(error);

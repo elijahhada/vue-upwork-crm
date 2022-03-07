@@ -35,6 +35,7 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/get-all-filters', [DashboardController::class, 'getAllFilters'])->name('getAllFilters');
     Route::prefix('analytics')->name('analytics.')->group(function () {
         Route::get('/', [AnalyticsController::class, 'index'])->name('index');
         Route::post('/countries-key-words', [AnalyticsController::class, 'countriesKeyWords'])->name('countriesKeyWords');
@@ -64,6 +65,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('/add-filter', [FilterController::class, 'create']);
     Route::post('/update-filter', [FilterController::class, 'update']);
     Route::post('/remove-filter', [FilterController::class, 'destroy']);
+    Route::post('/copy-filter', [FilterController::class, 'copy']);
 
     Route::get('/calendar/dayTimes/{day?}', [TimetableController::class, 'dayTimes']);
     Route::get('/calendar/dayUsers/{day?}', [TimetableController::class, 'dayUsers']);

@@ -81,4 +81,9 @@ class DashboardController extends Controller
             'usersResults' => $usersForStatistics,
         ]);
     }
+
+    public function getAllFilters()
+    {
+        return Filter::select('id', 'title', 'user_id', 'categories_ids', 'countries_ids', 'key_words_ids', 'exception_words_ids', 'custom_key_words_ids', 'is_hourly', 'hourly_min', 'hourly_max', 'is_fixed', 'fixed_min', 'fixed_max')->get();
+    }
 }

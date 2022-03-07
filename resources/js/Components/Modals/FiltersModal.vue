@@ -5,6 +5,8 @@
             <p class="text-black text-5xl close-kit cursor-pointer hover:text-red-500" @click="closeFilter()">×</p>
         </div>
         <p class="cursor-pointer hover:bg-red-500 hover:text-white bg-gray-200 text-black rounded py-1 px-4 font-normal inline-block mb-2" @click="removeFilter(filter)">delete kit</p>
+        <p class="cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-1 px-4 font-normal inline-block mb-2 ml-4" @click="copyFilter">copy kit</p>
+        <input type="text" v-model="newTitle" class="border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none" placeholder="pick title">
         <div class="mb-10">
             <p class="text-lg font-bold text-black mb-3">Job type</p>
             <div class="flex items-center justify-between w-2/5">
@@ -183,7 +185,8 @@ export default {
             hourly_max: 0,
             is_fixed: false,
             fixed_min: 0,
-            fixed_max: 0
+            fixed_max: 0,
+            newTitle: 'pick new title',
         };
     },
     mounted() {
@@ -218,6 +221,15 @@ export default {
             filter.custom_key_words_ids.split(',').forEach((item) => {
                 this.customKeyWords.push(item);
             });
+        }
+        if(this.countries.every(v => v.checked)) {
+            this.allCountriesChecked = true;
+        }
+        if(this.categories.every(v => v.checked)) {
+            this.allCategoriesChecked = true;
+        }
+        if(this.keyWords.every(v => v.checked)) {
+            this.allKeyWordsChecked = true;
         }
         this.createdKitTitle = filter.title;
         this.$forceUpdate();
@@ -345,6 +357,20 @@ export default {
                 socket.emit('kits:speak', {});
             });
             return alert('Filter was removed!');
+        },
+        copyFilter() {
+            if (!confirm('Are you sure?')) return;
+            axios.post('/copy-filter', {
+                id: this.filter.id,
+                user_id: this.userId,
+                title: this.newTitle,
+            }).then(res => {
+                console.log(res);
+                alert('Filter was duplicated successfully.');
+                this.$emit('refresh-filters');
+            }).catch(error => {
+                console.log(error);
+            });
         }
     },
     computed: {

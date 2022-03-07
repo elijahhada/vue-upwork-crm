@@ -77,9 +77,9 @@
                     </select>
                 </div>
                 <div class="w-full mb-3">
-                    <p class="text-xs pl-2 text-gray-300 mb-1">Country</p>
+                    <p class="text-xs pl-2 text-gray-300 mb-1" :datatype="clientCountry">Country</p>
                     <select name="" id="" class="p-2 w-full border border-gray-300 rounded-md focus:outline-none" v-model="country">
-                        <option v-for="(country, key) in pipedriveInfo.countries" :key="key" :value="country">{{country.label}}</option>
+                        <option v-for="(countryItem, key) in pipedriveInfo.countries" :key="key" :value="countryItem">{{countryItem.label}}</option>
                     </select>
                 </div>
                 <div class="w-full mb-3">
@@ -127,8 +127,10 @@
 <script>
 export default {
     created() {
-      this.loadPipedriveInfo();
-      this.dropdownTechs();
+        this.dropdownTechs();
+    },
+    mounted() {
+        this.loadPipedriveInfo();
     },
     data() {
         return {
@@ -200,6 +202,7 @@ export default {
                 otherCountry: this.otherCountry,
             };
             axios.post('/pipedrive/store-deal', data).then(res => {
+                this.changeStatus();
                 console.log(res);
             }).catch(error => {
                 console.log(error);
@@ -212,7 +215,11 @@ export default {
         },
         closeModalJob() {
             const status = null;
-            axios.post('/jobs/change-status', { id: this.jobId, status }).then((res) => {
+            axios.post('/jobs/change-status', { id: this.jobId, status, keep_in_think: true }).then((res) => {
+                if(res.data.message === 'job is in thinking, reconsider or take please.') {
+                    console.log('keep in thinking');
+                    return;
+                }
                 let action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
                 socket.emit('job:speak', { id: this.jobId, action });
             });
@@ -252,6 +259,15 @@ export default {
                 console.log(error);
             })
         },
+        changeStatus() {
+            axios.post('/jobs/change-status', { id: this.jobId, status: 1 }).then((res) => {
+                console.log(res);
+                let action = 'book';
+                socket.emit('job:speak', { id: this.jobId, action });
+            }).catch(error => {
+                console.log(error);
+            });
+        }
     },
     computed: {
         ModalJobSwitched() {
@@ -271,6 +287,53 @@ export default {
         },
         jobId() {
             return this.$store.state.DealData.id;
+        },
+        //This is very bad crunch, this is for auto completing countries. clientCountry is triggered on datatype attribute
+        clientCountry() {
+            if(this.$store.state.DealData.client_country === 'United States') {
+                this.country = this.pipedriveInfo.countries.find(c => c.label === 'US');
+                this.otherCountry = '';
+                return 'US';
+            } else if(this.$store.state.DealData.client_country === 'United Kingdom') {
+                this.country = this.pipedriveInfo.countries.find(c => c.label === 'UK');
+                this.otherCountry = '';
+                return 'UK';
+            } else if(this.$store.state.DealData.client_country === 'Canada') {
+                this.country = this.pipedriveInfo.countries.find(c => c.label === 'Canada');
+                this.otherCountry = '';
+                return this.$store.state.DealData.client_country;
+            } else if(this.$store.state.DealData.client_country === 'Netherlands') {
+                this.country = this.pipedriveInfo.countries.find(c => c.label === 'Netherlands');
+                this.otherCountry = '';
+                return this.$store.state.DealData.client_country;
+            } else if(this.$store.state.DealData.client_country === 'France') {
+                this.country = this.pipedriveInfo.countries.find(c => c.label === 'France');
+                this.otherCountry = '';
+                return this.$store.state.DealData.client_country;
+            } else if(this.$store.state.DealData.client_country === 'Germany') {
+                this.country = this.pipedriveInfo.countries.find(c => c.label === 'Germany');
+                this.otherCountry = '';
+                return this.$store.state.DealData.client_country;
+            } else if(this.$store.state.DealData.client_country === 'Spain') {
+                this.country = this.pipedriveInfo.countries.find(c => c.label === 'Spain');
+                this.otherCountry = '';
+                return this.$store.state.DealData.client_country;
+            } else if(this.$store.state.DealData.client_country === 'Austria') {
+                this.country = this.pipedriveInfo.countries.find(c => c.label === 'Austria');
+                this.otherCountry = '';
+                return this.$store.state.DealData.client_country;
+            } else if(this.$store.state.DealData.client_country === 'Italy') {
+                this.country = this.pipedriveInfo.countries.find(c => c.label === 'Italy');
+                this.otherCountry = '';
+                return this.$store.state.DealData.client_country;
+            } else if(this.$store.state.DealData.client_country === 'Australia') {
+                this.country = this.pipedriveInfo.countries.find(c => c.label === 'Australia');
+                this.otherCountry = '';
+                return this.$store.state.DealData.client_country;
+            }
+            this.country = this.pipedriveInfo.countries.find(c => c.label === 'Other');
+            this.otherCountry = this.$store.state.DealData.client_country ? this.$store.state.DealData.client_country : '';
+            return this.$store.state.DealData.client_country;
         }
     },
 };

@@ -206,4 +206,29 @@ class FilterController extends Controller
             'message' => 'Filter was removed successfully'
         ], 204);
     }
+
+    public function copy(Request $request)
+    {
+        $filter = Filter::find($request->id);
+        $newFilter = new Filter();
+        $newFilter->user_id = $request->user_id;
+        $newFilter->title = $request->title;
+        $newFilter->countries_ids = $filter->countries_ids;
+        $newFilter->categories_ids = $filter->categories_ids;
+        $newFilter->key_words_ids = $filter->key_words_ids;
+        $newFilter->exception_words_ids = $filter->exception_words_ids;
+        $newFilter->custom_key_words_ids = $filter->custom_key_words_ids;
+        $newFilter->is_hourly = $filter->is_hourly;
+        $newFilter->hourly_min = $filter->hourly_min;
+        $newFilter->hourly_max = $filter->hourly_max;
+        $newFilter->is_fixed = $filter->is_fixed;
+        $newFilter->fixed_min = $filter->fixed_min;
+        $newFilter->fixed_max = $filter->fixed_max;
+        $newFilter->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Filter was copied successfully'
+        ], 204);
+    }
 }

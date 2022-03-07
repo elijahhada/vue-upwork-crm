@@ -90,6 +90,9 @@ class JobController extends Controller
     {
         $user = Auth::user();
         $job = Job::where('id', '=', $request->input('id'))->first();
+        if($request->input('keep_in_think')) {
+            return response()->json(['message' => 'job is in thinking, reconsider or take please.']);
+        }
         if($job->user_id !== null && $job->user_id !== $user->id) {
             return response()->json(['message' => 'wrong_user']);
         }
@@ -415,8 +418,8 @@ class JobController extends Controller
                 ->orderBy('id', 'desc');
             if(strlen($searchString) === 19 && str_contains($searchString, '~')) {
                 $jobs->where('upwork_id', '=', $searchString);
-            } elseif (strlen($searchString) === 46 && str_contains($searchString, '://')) {
-                $jobs->where('url', '=', $searchString);
+            } elseif (str_contains($searchString, '://')) {
+                $jobs->where('upwork_id', '=', substr($searchString, strpos($searchString, '~'), 19));
             } else {
                 $jobs->where('title', 'like', '%'. $searchString .'%')
                     ->orWhere('excerpt', 'like', '%'. $searchString .'%')

@@ -14,8 +14,8 @@
                 </div>
             </div>
         </div>
-        <div class="w-full my-12 flex justify-between items-center nowrap">
-            <div class="block-kit flex justify-start items-center nowrap w-6/12 flex-shrink z-50" ref="block_kit">
+        <div class="w-full my-12 flex justify-between items-center">
+            <div class="block-kit flex items-center flex-wrap gap-y-3 flex-shrink z-50" ref="block_kit">
                 <button class="create-kid rounded rounded-full bg-gray-500 text-white py-3 px-4 hover:bg-gray-700 mr-7" @click.stop="showKitForm()">Create Kit</button>
                 <div class="relative" v-for="filter in filtersArr">
                     <div
@@ -27,8 +27,8 @@
                 </div>
             </div>
         </div>
-        <kit-modal v-if="showKit" v-on:disable-kit="closeKit" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId"></kit-modal>
-        <filter-modal v-if="FiltersVisibility" v-on:disable-filter="closeFilter" :filter="SelectedFilter" :filterCountries="countries" :filterCategories="categories" :filterKeyWords="keyWords" :userId="userId"></filter-modal>
+        <kit-modal @refresh-filters="$emit('refresh-filters')" v-if="showKit" v-on:disable-kit="closeKit" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId"></kit-modal>
+        <filter-modal @refresh-filters="$emit('refresh-filters')" v-if="FiltersVisibility" v-on:disable-filter="closeFilter" :filter="SelectedFilter" :filterCountries="countries" :filterCategories="categories" :filterKeyWords="keyWords" :userId="userId"></filter-modal>
     </div>
 </template>
 
@@ -74,7 +74,6 @@ export default {
         return {
             showKit: false,
             FiltersVisibility: false,
-            filtersArr: this.filters,
             SelectedFilter: null,
             dataSelectedKits: [],
         };
@@ -139,6 +138,11 @@ export default {
             if (event) this.filtersArr.push(event);
         }
     },
+    computed: {
+        filtersArr() {
+            return this.filters;
+        }
+    }
 };
 </script>
 <style scoped>

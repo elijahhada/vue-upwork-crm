@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="w-full flex justify-end items-center">
-            <button :disabled="isTaken" class="open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 mr-7" :class="{'hover:bg-green-500': !isTaken, 'hover:text-white': !isTaken}" @click="loadJobToStore(id)" @click.stop="changeStatus(1, true)">Take</button>
+            <button :disabled="isTaken" class="open-take rounded rounded-full bg-gray-300 text-black py-3 px-9 mr-7" :class="{'hover:bg-green-500': !isTaken, 'hover:text-white': !isTaken}" @click="loadJobToStore(id)" @click.stop="changeStatus(2, true)">Take</button>
             <button :disabled="isTaken" class="rounded rounded-full bg-gray-300 text-black py-3 px-9" :class="{'hover:bg-green-500': !isTaken, 'hover:text-white': !isTaken}" @click.stop="changeStatus(isThinking ? null : 2)">
                 {{ isThinking ? 'Reconsider' : 'Think' }}
             </button>
@@ -211,19 +211,19 @@ export default {
             })
         },
         changeStatus(status, showModal = false) {
-            if (showModal) {
-                this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
-                document.body.classList.add('overflow-y-hidden');
-            }
             axios.post('/jobs/change-status', { id: this.id, status }).then((res) => {
                 console.log(res);
                 if(res.data.message === 'wrong_user') {
-                    alert("You can not reconsider different user's job.");
+                    alert("You can not reconsider or take different user's job.");
                     return;
                 }
                 if(res.data.counter === 6) {
                     alert('You can not think more than 5 jobs.');
                     return;
+                }
+                if(showModal) {
+                    this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
+                    document.body.classList.add('overflow-y-hidden');
                 }
                 let action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
                 socket.emit('job:speak', { id: this.id, action });

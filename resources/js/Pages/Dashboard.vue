@@ -1,6 +1,6 @@
 <template>
-    <app-layout @callSearch="searchBids" @switchCalendar="switchCalendar" @switchToBids="switchToBids">
-        <dash-header v-if="!isShownBids" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filters" :usersResults="usersResults" v-model="selectedKits"></dash-header>
+    <app-layout @callSearch="searchBids" @switchCalendar="switchCalendar" @switchToBids="switchToBids" @changeStatus="clearStatus($event.data)">
+        <dash-header @refresh-filters="refreshAllFilters" v-if="!isShownBids" :countries="countries" :categories="categories" :keyWords="keyWords" :userId="userId" :filters="filtersArray" :usersResults="usersResults" v-model="selectedKits"></dash-header>
         <div v-if="!isShownBids" class="w-full flex items-center justify-between" :class="{'job-card-stretched': !isCalendarOn}" style="max-width: 1500px!important;">
             <div class="flex items-center">
                 <p class="text-2xl font-bold mr-3">Found {{ jobsData.total }} jobs</p>
@@ -192,6 +192,7 @@ export default {
             onPageForJobs: 10,
             createdAtForRefreshJobs: '',
             selectedJobsChecked: false,
+            filtersArray: this.filters,
         };
     },
     components: {
@@ -470,6 +471,15 @@ export default {
             } else {
                 this.paginateJobs(1, this.onPageForJobs);
             }
+        },
+        refreshAllFilters() {
+            axios.get('/get-all-filters')
+                .then(res => {
+                    console.log(res);
+                    this.filtersArray = res.data;
+                }).catch(error => {
+                    console.log(error);
+                });
         }
     },
     computed: {

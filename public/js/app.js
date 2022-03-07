@@ -2919,7 +2919,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       showKit: false,
       FiltersVisibility: false,
-      filtersArr: this.filters,
       SelectedFilter: null,
       dataSelectedKits: []
     };
@@ -2990,6 +2989,11 @@ __webpack_require__.r(__webpack_exports__);
       this.showKit = !this.showKit;
       document.body.classList.remove('overflow-y-hidden');
       if (event) this.filtersArr.push(event);
+    }
+  },
+  computed: {
+    filtersArr: function filtersArr() {
+      return this.filters;
     }
   }
 });
@@ -3490,12 +3494,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var showModal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-      if (showModal) {
-        this.$store.state.ModalJobSwitched = !this.$store.state.ModalJobSwitched;
-        document.body.classList.add('overflow-y-hidden');
-      }
-
       axios.post('/jobs/change-status', {
         id: this.id,
         status: status
@@ -3503,13 +3501,18 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res);
 
         if (res.data.message === 'wrong_user') {
-          alert("You can not reconsider different user's job.");
+          alert("You can not reconsider or take different user's job.");
           return;
         }
 
         if (res.data.counter === 6) {
           alert('You can not think more than 5 jobs.');
           return;
+        }
+
+        if (showModal) {
+          _this2.$store.state.ModalJobSwitched = !_this2.$store.state.ModalJobSwitched;
+          document.body.classList.add('overflow-y-hidden');
         }
 
         var action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
@@ -3683,8 +3686,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
-    this.loadPipedriveInfo();
     this.dropdownTechs();
+  },
+  mounted: function mounted() {
+    this.loadPipedriveInfo();
   },
   data: function data() {
     return {
@@ -3735,6 +3740,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     saveBid: function saveBid() {
+      var _this = this;
+
       if (this.title.length < 1 || this.selectedTechsList.length < 1 || this.bidProfile == null || this.taskLink.length < 1 || this.country == null || this.country.id === 86 && this.otherCountry.length < 1) {
         alert('Необходимо заполнить все поля');
         return;
@@ -3762,6 +3769,8 @@ __webpack_require__.r(__webpack_exports__);
         otherCountry: this.otherCountry
       };
       axios.post('/pipedrive/store-deal', data).then(function (res) {
+        _this.changeStatus();
+
         console.log(res);
       })["catch"](function (error) {
         console.log(error);
@@ -3773,16 +3782,22 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.state.jobToRemove = this.$store.state.DealData.id;
     },
     closeModalJob: function closeModalJob() {
-      var _this = this;
+      var _this2 = this;
 
       var status = null;
       axios.post('/jobs/change-status', {
         id: this.jobId,
-        status: status
+        status: status,
+        keep_in_think: true
       }).then(function (res) {
+        if (res.data.message === 'job is in thinking, reconsider or take please.') {
+          console.log('keep in thinking');
+          return;
+        }
+
         var action = status === 1 ? 'book' : status === 2 ? 'think' : 'reconsider';
         socket.emit('job:speak', {
-          id: _this.jobId,
+          id: _this2.jobId,
           action: action
         });
       });
@@ -3820,11 +3835,28 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     loadPipedriveInfo: function loadPipedriveInfo() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('/pipedrive/user-info').then(function (res) {
-        _this2.pipedriveInfo = res.data;
-        _this2.techsList = res.data.labels;
+        _this3.pipedriveInfo = res.data;
+        _this3.techsList = res.data.labels;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    changeStatus: function changeStatus() {
+      var _this4 = this;
+
+      axios.post('/jobs/change-status', {
+        id: this.jobId,
+        status: 1
+      }).then(function (res) {
+        console.log(res);
+        var action = 'book';
+        socket.emit('job:speak', {
+          id: _this4.jobId,
+          action: action
+        });
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3848,6 +3880,76 @@ __webpack_require__.r(__webpack_exports__);
     },
     jobId: function jobId() {
       return this.$store.state.DealData.id;
+    },
+    //This is very bad crunch, this is for auto completing countries. clientCountry is triggered on datatype attribute
+    clientCountry: function clientCountry() {
+      if (this.$store.state.DealData.client_country === 'United States') {
+        this.country = this.pipedriveInfo.countries.find(function (c) {
+          return c.label === 'US';
+        });
+        this.otherCountry = '';
+        return 'US';
+      } else if (this.$store.state.DealData.client_country === 'United Kingdom') {
+        this.country = this.pipedriveInfo.countries.find(function (c) {
+          return c.label === 'UK';
+        });
+        this.otherCountry = '';
+        return 'UK';
+      } else if (this.$store.state.DealData.client_country === 'Canada') {
+        this.country = this.pipedriveInfo.countries.find(function (c) {
+          return c.label === 'Canada';
+        });
+        this.otherCountry = '';
+        return this.$store.state.DealData.client_country;
+      } else if (this.$store.state.DealData.client_country === 'Netherlands') {
+        this.country = this.pipedriveInfo.countries.find(function (c) {
+          return c.label === 'Netherlands';
+        });
+        this.otherCountry = '';
+        return this.$store.state.DealData.client_country;
+      } else if (this.$store.state.DealData.client_country === 'France') {
+        this.country = this.pipedriveInfo.countries.find(function (c) {
+          return c.label === 'France';
+        });
+        this.otherCountry = '';
+        return this.$store.state.DealData.client_country;
+      } else if (this.$store.state.DealData.client_country === 'Germany') {
+        this.country = this.pipedriveInfo.countries.find(function (c) {
+          return c.label === 'Germany';
+        });
+        this.otherCountry = '';
+        return this.$store.state.DealData.client_country;
+      } else if (this.$store.state.DealData.client_country === 'Spain') {
+        this.country = this.pipedriveInfo.countries.find(function (c) {
+          return c.label === 'Spain';
+        });
+        this.otherCountry = '';
+        return this.$store.state.DealData.client_country;
+      } else if (this.$store.state.DealData.client_country === 'Austria') {
+        this.country = this.pipedriveInfo.countries.find(function (c) {
+          return c.label === 'Austria';
+        });
+        this.otherCountry = '';
+        return this.$store.state.DealData.client_country;
+      } else if (this.$store.state.DealData.client_country === 'Italy') {
+        this.country = this.pipedriveInfo.countries.find(function (c) {
+          return c.label === 'Italy';
+        });
+        this.otherCountry = '';
+        return this.$store.state.DealData.client_country;
+      } else if (this.$store.state.DealData.client_country === 'Australia') {
+        this.country = this.pipedriveInfo.countries.find(function (c) {
+          return c.label === 'Australia';
+        });
+        this.otherCountry = '';
+        return this.$store.state.DealData.client_country;
+      }
+
+      this.country = this.pipedriveInfo.countries.find(function (c) {
+        return c.label === 'Other';
+      });
+      this.otherCountry = this.$store.state.DealData.client_country ? this.$store.state.DealData.client_country : '';
+      return this.$store.state.DealData.client_country;
     }
   }
 });
@@ -4172,7 +4274,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       };
       axios.post('/add-filter', data).then(function (response) {
         console.log(response);
-        _this.filter = response.data;
+
+        _this.$emit('refresh-filters');
+
         socket.emit('kits:speak', {});
       })["catch"](function (error) {
         console.log(error);
@@ -4404,6 +4508,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     filter: {
@@ -4440,7 +4546,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       hourly_max: 0,
       is_fixed: false,
       fixed_min: 0,
-      fixed_max: 0
+      fixed_max: 0,
+      newTitle: 'pick new title'
     };
   },
   mounted: function mounted() {
@@ -4482,6 +4589,24 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       filter.custom_key_words_ids.split(',').forEach(function (item) {
         _this.customKeyWords.push(item);
       });
+    }
+
+    if (this.countries.every(function (v) {
+      return v.checked;
+    })) {
+      this.allCountriesChecked = true;
+    }
+
+    if (this.categories.every(function (v) {
+      return v.checked;
+    })) {
+      this.allCategoriesChecked = true;
+    }
+
+    if (this.keyWords.every(function (v) {
+      return v.checked;
+    })) {
+      this.allKeyWordsChecked = true;
     }
 
     this.createdKitTitle = filter.title;
@@ -4606,6 +4731,23 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         socket.emit('kits:speak', {});
       });
       return alert('Filter was removed!');
+    },
+    copyFilter: function copyFilter() {
+      var _this2 = this;
+
+      if (!confirm('Are you sure?')) return;
+      axios.post('/copy-filter', {
+        id: this.filter.id,
+        user_id: this.userId,
+        title: this.newTitle
+      }).then(function (res) {
+        console.log(res);
+        alert('Filter was duplicated successfully.');
+
+        _this2.$emit('refresh-filters');
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   computed: {
@@ -7755,7 +7897,8 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       onPageForBids: 10,
       onPageForJobs: 10,
       createdAtForRefreshJobs: '',
-      selectedJobsChecked: false
+      selectedJobsChecked: false,
+      filtersArray: this.filters
     };
   },
   components: {
@@ -8077,6 +8220,16 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       } else {
         this.paginateJobs(1, this.onPageForJobs);
       }
+    },
+    refreshAllFilters: function refreshAllFilters() {
+      var _this12 = this;
+
+      axios.get('/get-all-filters').then(function (res) {
+        console.log(res);
+        _this12.filtersArray = res.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   computed: {
@@ -49129,16 +49282,14 @@ var render = function () {
       _vm._v(" "),
       _c(
         "div",
-        {
-          staticClass: "w-full my-12 flex justify-between items-center nowrap",
-        },
+        { staticClass: "w-full my-12 flex justify-between items-center" },
         [
           _c(
             "div",
             {
               ref: "block_kit",
               staticClass:
-                "block-kit flex justify-start items-center nowrap w-6/12 flex-shrink z-50",
+                "block-kit flex items-center flex-wrap gap-y-3 flex-shrink z-50",
             },
             [
               _c(
@@ -49216,7 +49367,12 @@ var render = function () {
               keyWords: _vm.keyWords,
               userId: _vm.userId,
             },
-            on: { "disable-kit": _vm.closeKit },
+            on: {
+              "refresh-filters": function ($event) {
+                return _vm.$emit("refresh-filters")
+              },
+              "disable-kit": _vm.closeKit,
+            },
           })
         : _vm._e(),
       _vm._v(" "),
@@ -49229,7 +49385,12 @@ var render = function () {
               filterKeyWords: _vm.keyWords,
               userId: _vm.userId,
             },
-            on: { "disable-filter": _vm.closeFilter },
+            on: {
+              "refresh-filters": function ($event) {
+                return _vm.$emit("refresh-filters")
+              },
+              "disable-filter": _vm.closeFilter,
+            },
           })
         : _vm._e(),
     ],
@@ -49826,7 +49987,7 @@ var render = function () {
                 },
                 function ($event) {
                   $event.stopPropagation()
-                  return _vm.changeStatus(1, true)
+                  return _vm.changeStatus(2, true)
                 },
               ],
             },
@@ -50098,7 +50259,10 @@ var render = function () {
                   _c("div", { staticClass: "w-full mb-3" }, [
                     _c(
                       "p",
-                      { staticClass: "text-xs pl-2 text-gray-300 mb-1" },
+                      {
+                        staticClass: "text-xs pl-2 text-gray-300 mb-1",
+                        attrs: { datatype: _vm.clientCountry },
+                      },
                       [_vm._v("Country")]
                     ),
                     _vm._v(" "),
@@ -50134,11 +50298,11 @@ var render = function () {
                       },
                       _vm._l(
                         _vm.pipedriveInfo.countries,
-                        function (country, key) {
+                        function (countryItem, key) {
                           return _c(
                             "option",
-                            { key: key, domProps: { value: country } },
-                            [_vm._v(_vm._s(country.label))]
+                            { key: key, domProps: { value: countryItem } },
+                            [_vm._v(_vm._s(countryItem.label))]
                           )
                         }
                       ),
@@ -51180,6 +51344,39 @@ var render = function () {
         },
         [_vm._v("delete kit")]
       ),
+      _vm._v(" "),
+      _c(
+        "p",
+        {
+          staticClass:
+            "cursor-pointer hover:bg-green-500 hover:text-white bg-gray-200 text-black rounded py-1 px-4 font-normal inline-block mb-2 ml-4",
+          on: { click: _vm.copyFilter },
+        },
+        [_vm._v("copy kit")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.newTitle,
+            expression: "newTitle",
+          },
+        ],
+        staticClass:
+          "border rounded-lg border-gray-400 text-black p-2 mr-4 outline-none",
+        attrs: { type: "text", placeholder: "pick title" },
+        domProps: { value: _vm.newTitle },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.newTitle = $event.target.value
+          },
+        },
+      }),
       _vm._v(" "),
       _c("div", { staticClass: "mb-10" }, [
         _c("p", { staticClass: "text-lg font-bold text-black mb-3" }, [
@@ -56819,6 +57016,9 @@ var render = function () {
         callSearch: _vm.searchBids,
         switchCalendar: _vm.switchCalendar,
         switchToBids: _vm.switchToBids,
+        changeStatus: function ($event) {
+          return _vm.clearStatus($event.data)
+        },
       },
     },
     [
@@ -56829,9 +57029,10 @@ var render = function () {
               categories: _vm.categories,
               keyWords: _vm.keyWords,
               userId: _vm.userId,
-              filters: _vm.filters,
+              filters: _vm.filtersArray,
               usersResults: _vm.usersResults,
             },
+            on: { "refresh-filters": _vm.refreshAllFilters },
             model: {
               value: _vm.selectedKits,
               callback: function ($$v) {
