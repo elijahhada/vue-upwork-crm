@@ -51,7 +51,7 @@ class GetJobs extends Command
         Auth::login(User::find(1));
         $client = new Client();
         $user = Auth::user();
-        $hoursPassed = Carbon::now()->diffInHours(Carbon::parse($user->last_upwork_token_update));
+        $hoursPassed = Carbon::now()->addHours(3)->diffInHours(Carbon::parse($user->last_upwork_token_update));
         if($hoursPassed > 10) {
             $formParams = [
                 'grant_type' => 'refresh_token',
